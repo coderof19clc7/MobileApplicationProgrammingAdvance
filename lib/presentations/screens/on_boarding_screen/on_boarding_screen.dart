@@ -3,6 +3,7 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
+import 'package:one_one_learn/presentations/widgets/textfield/textfield_current_widget.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -48,6 +49,7 @@ class OnBoardingScreen extends StatelessWidget {
                 ),
               ),
             ),
+            TextFieldCurrentWidget(),
           ],
         ),
       ),
