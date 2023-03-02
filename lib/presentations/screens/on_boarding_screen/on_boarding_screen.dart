@@ -37,7 +37,7 @@ class OnBoardingScreen extends StatelessWidget {
             SizedBox(height: Dimens.getProportionalScreenHeight(context, 40)),
             PrimaryFillButton(
               onTap: () {},
-              width: Dimens.getScreenWidth(context) - Dimens.getProportionalScreenWidth(context, 120),
+              width: Dimens.getScreenWidth(context) - Dimens.getProportionalScreenWidth(context, 100),
               paddingVertical: Dimens.getProportionalScreenHeight(context, 16),
               borderRadiusValue: Dimens.getScreenWidth(context),
               child: Text(

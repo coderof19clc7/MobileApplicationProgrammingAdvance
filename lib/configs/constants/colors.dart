@@ -27,6 +27,8 @@ class AppColors {
   static const black = Colors.black; // #000000
 
   static final primaryBlue100 = HexColor.fromHex('#E0EAFF');
+  static final primaryBlue200 = HexColor.fromHex('#E3EFFD');
+  static final primaryBlue300 = HexColor.fromHex('#B7D4FF');
   static final primaryBlue400 = HexColor.fromHex('#2381EF');
   static final primaryBlue500 = HexColor.fromHex('#0F68D0');
 

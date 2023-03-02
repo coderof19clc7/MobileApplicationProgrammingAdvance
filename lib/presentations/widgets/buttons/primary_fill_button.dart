@@ -3,12 +3,13 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 
 class PrimaryFillButton extends StatelessWidget {
   const PrimaryFillButton({
-    super.key, this.onTap,
     required this.child,
+    super.key, this.onTap,
     this.width = 160, this.height,
     this.splashColor = Colors.white38,
     this.customBorder,
     this.preferGradient = true,
+    this.hasShadow = true,
     this.bgLinearGradient,
     this.bgColor,
     this.borderRadiusValue = 8,
@@ -22,6 +23,7 @@ class PrimaryFillButton extends StatelessWidget {
   final Color? splashColor;
   final ShapeBorder? customBorder;
   final bool preferGradient;
+  final bool hasShadow;
   final LinearGradient? bgLinearGradient;
   final Color? bgColor;
   final double borderRadiusValue;
@@ -45,6 +47,7 @@ class PrimaryFillButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadiusValue),
         color: color,
         gradient: gradient,
+        boxShadow: hasShadow ? [Effects.primaryShadow] : null,
       ),
       child: Material(
         color: Colors.transparent,
