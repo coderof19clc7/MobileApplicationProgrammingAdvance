@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
+import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_fill.dart';
 import 'package:one_one_learn/utils/ui_helper.dart';
@@ -15,16 +16,18 @@ class SignUpScreen extends StatelessWidget {
         UIHelper.hideKeyboard(context);
       },
       child: Scaffold(
+        appBar: const SimpleTransparentAppBar(),
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: Dimens.getProportionalScreenWidth(context, 60),
+            padding: EdgeInsets.only(
+              left: Dimens.getProportionalScreenWidth(context, 60),
+              right: Dimens.getProportionalScreenWidth(context, 60),
+              top: Dimens.getScreenHeight(context) * 0.15,
             ),
             width: Dimens.getScreenWidth(context),
             height: Dimens.getScreenHeight(context),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
               children:[
                 // sign in title field
                 SizedBox(
