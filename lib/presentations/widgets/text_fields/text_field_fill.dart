@@ -61,7 +61,6 @@ class _TextFieldFillState extends State<TextFieldFill> {
           },
           child: Icon(
             _obscureText ? Icons.visibility_off : Icons.visibility,
-            color: _obscureText ? Colors.grey : Colors.blue,
           ),
         ) : widget.rightWidget,
       ),
