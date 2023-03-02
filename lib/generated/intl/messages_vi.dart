@@ -22,8 +22,26 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "get_started": MessageLookupByLibrary.simpleMessage("Bắt Đầu"),
-        "introducing_text": MessageLookupByLibrary.simpleMessage(
-            "Cải thiện bản thân với các gia sư tuyệt vời")
+        "confirmPassword":
+            MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
+        "dontHaveAccount":
+            MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
+        "getStarted": MessageLookupByLibrary.simpleMessage("Bắt Đầu"),
+        "introducingText": MessageLookupByLibrary.simpleMessage(
+            "Cải thiện bản thân với các gia sư tuyệt vời"),
+        "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "loginTitle":
+            MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản"),
+        "orContinueWith":
+            MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
+        "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "resetPassword":
+            MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
+        "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
+            "Điền email ứng với tài khoản muốn đặt lại mật khẩu."),
+        "signUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản")
       };
 }

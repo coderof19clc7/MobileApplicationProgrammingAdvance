@@ -3,8 +3,8 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 
 class PrimaryFillButton extends StatelessWidget {
   const PrimaryFillButton({
-    required this.child,
     super.key, this.onTap,
+    required this.child,
     this.width = 160, this.height,
     this.splashColor = Colors.white38,
     this.customBorder,

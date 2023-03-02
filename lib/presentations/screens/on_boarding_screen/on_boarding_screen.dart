@@ -3,7 +3,6 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
-import 'package:one_one_learn/presentations/widgets/textfield/textfield_current_widget.dart';
 
 class OnBoardingScreen extends StatelessWidget {
   const OnBoardingScreen({super.key});
@@ -26,7 +25,7 @@ class OnBoardingScreen extends StatelessWidget {
             ),
             SizedBox(height: Dimens.getProportionalScreenHeight(context, 40)),
             Text(
-              S.current.introducing_text,
+              S.current.introducingText,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: AppColors.black,
@@ -41,7 +40,7 @@ class OnBoardingScreen extends StatelessWidget {
               paddingVertical: Dimens.getProportionalScreenHeight(context, 16),
               borderRadiusValue: Dimens.getScreenWidth(context),
               child: Text(
-                S.current.get_started,
+                S.current.getStarted,
                 style: TextStyle(
                   color: AppColors.white,
                   fontSize: Dimens.getProportionalScreenWidth(context, 16),
@@ -49,7 +48,6 @@ class OnBoardingScreen extends StatelessWidget {
                 ),
               ),
             ),
-            TextFieldCurrentWidget(),
           ],
         ),
       ),

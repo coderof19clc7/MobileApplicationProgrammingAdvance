@@ -1,4 +1,16 @@
 {
-  "introducing_text": "Cải thiện bản thân với các gia sư tuyệt vời",
-  "get_started": "Bắt Đầu"
+  "introducingText": "Cải thiện bản thân với các gia sư tuyệt vời",
+  "getStarted": "Bắt Đầu",
+  "loginTitle": "Đăng nhập tài khoản",
+  "login": "Đăng nhập",
+  "email": "Email",
+  "password": "Mật khẩu",
+  "confirmPassword": "Xác nhận mật khẩu",
+  "forgotPassword": "Quên mật khẩu",
+  "orContinueWith": "Hoặc tiếp tục với",
+  "dontHaveAccount": "Don't have an account?",
+  "signUp": "Đăng ký",
+  "signUpTitle": "Tạo tài khoản",
+  "resetPassword": "Đặt lại mật khẩu",
+  "resetPasswordRequirement": "Điền email ứng với tài khoản muốn đặt lại mật khẩu."
 }
