@@ -12,6 +12,14 @@ class Dimens {
     return MediaQuery.of(context).size.height;
   }
 
+  static double getTopSafeAreaHeight(BuildContext context) {
+    return MediaQuery.of(context).padding.top;
+  }
+
+  static double getBottomSafeAreaHeight(BuildContext context) {
+    return MediaQuery.of(context).padding.bottom;
+  }
+
   static double getProportionalScreenWidth(BuildContext context, double width) {
     return (width / figmaWidth) * MediaQuery.of(context).size.width;
   }
@@ -19,4 +27,5 @@ class Dimens {
   static double getProportionalScreenHeight(BuildContext context, double height) {
     return (height / figmaHeight) * MediaQuery.of(context).size.height;
   }
+
 }

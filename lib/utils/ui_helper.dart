@@ -12,4 +12,12 @@ class UIHelper {
   static void hideKeyboardNoContext() {
     SystemChannels.textInput.invokeMethod('TextInput.hide');
   }
+
+  static String getIconFromNationalityCode(String? code) {
+    if (code == null) {
+      return '🏳️‍🌈';
+    }
+    return String.fromCharCode(code.codeUnitAt(0) + 0x1F1A5) +
+        String.fromCharCode(code.codeUnitAt(1) + 0x1F1A5);
+  }
 }

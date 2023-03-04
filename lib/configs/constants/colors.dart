@@ -56,7 +56,7 @@ class Effects {
   );
   static final normalShadow = BoxShadow(
     offset: const Offset(-2, 5),
-    blurRadius: 30,
+    blurRadius: 5,
     color: AppColors.black.withOpacity(0.08),
   );
 }
