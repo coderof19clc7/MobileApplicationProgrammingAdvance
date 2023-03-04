@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/forgot_password_screen/forgot_password_screen.dart';
-import 'package:one_one_learn/presentations/screens/login_screen/login_screen.dart';
-import 'package:one_one_learn/presentations/screens/on_boarding_screen/on_boarding_screen.dart';
-import 'package:one_one_learn/presentations/screens/sign_up_screen/sign_up_screen.dart';
+import 'package:one_one_learn/presentations/screens/tutors_screen/tutors_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +24,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: const ForgotPasswordScreen(),
+      home: const TutorsScreen(),
     );
   }
 }

@@ -22,6 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "all": MessageLookupByLibrary.simpleMessage("all"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "dontHaveAccount":
@@ -41,8 +42,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Enter the email associated with your account to reset password."),
+        "searchHintTutor": MessageLookupByLibrary.simpleMessage("Find a tutor"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signUpTitle":
-            MessageLookupByLibrary.simpleMessage("Create your account")
+            MessageLookupByLibrary.simpleMessage("Create your account"),
+        "sortFavoriteFromHighest":
+            MessageLookupByLibrary.simpleMessage("from most favorited"),
+        "sortFavoriteFromLowest":
+            MessageLookupByLibrary.simpleMessage("from least favorited"),
+        "sortRatingFromHighest":
+            MessageLookupByLibrary.simpleMessage("from highest rating"),
+        "sortRatingFromLowest":
+            MessageLookupByLibrary.simpleMessage("from lowest rating")
       };
 }

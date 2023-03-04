@@ -12,5 +12,11 @@
   "signUp": "Đăng ký",
   "signUpTitle": "Tạo tài khoản",
   "resetPassword": "Đặt lại mật khẩu",
-  "resetPasswordRequirement": "Điền email ứng với tài khoản muốn đặt lại mật khẩu."
+  "resetPasswordRequirement": "Điền email ứng với tài khoản muốn đặt lại mật khẩu.",
+  "sortRatingFromHighest": "từ đánh giá cao",
+  "sortRatingFromLowest": "từ đánh giá thấp",
+  "sortFavoriteFromHighest": "nhiều lượt thích nhất",
+  "sortFavoriteFromLowest": "ít lượt thích nhất",
+  "searchHintTutor": "Tìm gia sư",
+  "all": "tất cả"
 }

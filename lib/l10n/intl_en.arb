@@ -12,5 +12,11 @@
   "signUp": "Sign Up",
   "signUpTitle": "Create your account",
   "resetPassword": "Reset password",
-  "resetPasswordRequirement": "Enter the email associated with your account to reset password."
+  "resetPasswordRequirement": "Enter the email associated with your account to reset password.",
+  "sortRatingFromHighest": "from highest rating",
+  "sortRatingFromLowest": "from lowest rating",
+  "sortFavoriteFromHighest": "from most favorited",
+  "sortFavoriteFromLowest": "from least favorited",
+  "searchHintTutor": "Find a tutor",
+  "all": "all"
 }

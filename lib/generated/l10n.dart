@@ -189,6 +189,66 @@ class S {
       args: [],
     );
   }
+
+  /// `from highest rating`
+  String get sortRatingFromHighest {
+    return Intl.message(
+      'from highest rating',
+      name: 'sortRatingFromHighest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `from lowest rating`
+  String get sortRatingFromLowest {
+    return Intl.message(
+      'from lowest rating',
+      name: 'sortRatingFromLowest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `from most favorited`
+  String get sortFavoriteFromHighest {
+    return Intl.message(
+      'from most favorited',
+      name: 'sortFavoriteFromHighest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `from least favorited`
+  String get sortFavoriteFromLowest {
+    return Intl.message(
+      'from least favorited',
+      name: 'sortFavoriteFromLowest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Find a tutor`
+  String get searchHintTutor {
+    return Intl.message(
+      'Find a tutor',
+      name: 'searchHintTutor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `all`
+  String get all {
+    return Intl.message(
+      'all',
+      name: 'all',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
