@@ -37,8 +37,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "hours": MessageLookupByLibrary.simpleMessage("hours"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Improve yourself with great tutors!"),
+        "labelAbout": MessageLookupByLibrary.simpleMessage("About"),
+        "labelTopics": MessageLookupByLibrary.simpleMessage("Topics"),
         "labelTotalLessonTime":
             MessageLookupByLibrary.simpleMessage("Your total lesson time is"),
+        "labelWhatAbleDo": MessageLookupByLibrary.simpleMessage(
+            "What will you be able to do?"),
+        "labelWhyTakeCourse": MessageLookupByLibrary.simpleMessage(
+            "Why should you take this course?"),
         "lesson": MessageLookupByLibrary.simpleMessage("lesson"),
         "lessonHistory": MessageLookupByLibrary.simpleMessage("Lesson History"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -68,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("from lowest rating"),
         "swipeToCancelClass": MessageLookupByLibrary.simpleMessage(
             "Swipe left to cancel a class"),
+        "tutor": MessageLookupByLibrary.simpleMessage("tutor"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }

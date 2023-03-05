@@ -29,5 +29,10 @@
   "yes": "Yes",
   "no": "No",
   "searchHintCourse": "Find a course",
-  "lesson": "lesson"
+  "lesson": "lesson",
+  "tutor": "tutor",
+  "labelAbout": "About",
+  "labelTopics": "Topics",
+  "labelWhyTakeCourse": "Why should you take this course?",
+  "labelWhatAbleDo": "What will you be able to do?"
 }

@@ -36,8 +36,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "hours": MessageLookupByLibrary.simpleMessage("tiếng"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Cải thiện bản thân với các gia sư tuyệt vời"),
+        "labelAbout": MessageLookupByLibrary.simpleMessage("Tổng quan"),
+        "labelTopics": MessageLookupByLibrary.simpleMessage("Danh sách chủ đề"),
         "labelTotalLessonTime": MessageLookupByLibrary.simpleMessage(
             "Tổng thời gian học của bạn là"),
+        "labelWhatAbleDo":
+            MessageLookupByLibrary.simpleMessage("Bạn có thể làm gì"),
+        "labelWhyTakeCourse": MessageLookupByLibrary.simpleMessage(
+            "Tại sao bạn nên học khóa học này"),
         "lesson": MessageLookupByLibrary.simpleMessage("bài học"),
         "lessonHistory":
             MessageLookupByLibrary.simpleMessage("Lịch sử buổi học"),
@@ -68,6 +74,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("từ đánh giá thấp"),
         "swipeToCancelClass":
             MessageLookupByLibrary.simpleMessage("Vuốt trái để hủy buổi học"),
+        "tutor": MessageLookupByLibrary.simpleMessage("gia sư"),
         "yes": MessageLookupByLibrary.simpleMessage("Có")
       };
 }

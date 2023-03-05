@@ -29,5 +29,10 @@
   "yes": "Có",
   "no": "Đéch",
   "searchHintCourse": "Tìm khóa học",
-  "lesson": "bài học"
+  "lesson": "bài học",
+  "tutor": "gia sư",
+  "labelAbout": "Tổng quan",
+  "labelTopics": "Danh sách chủ đề",
+  "labelWhyTakeCourse": "Tại sao bạn nên học khóa học này",
+  "labelWhatAbleDo": "Bạn có thể làm gì"
 }
