@@ -65,7 +65,7 @@ class CourseInformationScreen extends StatelessWidget {
                       style: TextStyle(
                         color: AppColors.black,
                         fontSize:
-                            Dimens.getProportionalScreenHeight(context, 20),
+                            Dimens.getProportionalScreenHeight(context, 21),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -99,7 +99,7 @@ class CourseInformationScreen extends StatelessWidget {
                           '|',
                           style: TextStyle(
                             fontSize:
-                                Dimens.getProportionalScreenHeight(context, 13),
+                                Dimens.getProportionalScreenHeight(context, 14),
                             fontWeight: FontWeight.w300,
                           ),
                         ),
@@ -147,7 +147,7 @@ class CourseInformationScreen extends StatelessWidget {
                           style: TextStyle(
                             color: AppColors.primaryBlue400,
                             fontSize:
-                                Dimens.getProportionalScreenHeight(context, 13),
+                                Dimens.getProportionalScreenHeight(context, 15),
                             fontWeight: FontWeight.w500,
                           ),
                         )
@@ -178,7 +178,7 @@ class CourseInformationScreen extends StatelessWidget {
                           style: TextStyle(
                             color: AppColors.primaryBlue400,
                             fontSize:
-                                Dimens.getProportionalScreenHeight(context, 13),
+                                Dimens.getProportionalScreenHeight(context, 15),
                             fontWeight: FontWeight.w500,
                           ),
                         )
@@ -230,7 +230,7 @@ class CourseInformationScreen extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-        fontSize: Dimens.getProportionalScreenHeight(context, 12),
+        fontSize: Dimens.getProportionalScreenHeight(context, 14),
         fontWeight: FontWeight.w300,
       ),
     );
@@ -268,7 +268,7 @@ class CourseInformationScreen extends StatelessWidget {
               color: AppColors.primaryBlue400,
               fontSize: Dimens.getProportionalScreenHeight(
                 context,
-                12,
+                14,
               ),
             ),
           ),
@@ -293,7 +293,7 @@ class CourseInformationScreen extends StatelessWidget {
         Text(
           text,
           style: TextStyle(
-            fontSize: Dimens.getProportionalScreenHeight(context, 13),
+            fontSize: Dimens.getProportionalScreenHeight(context, 14),
             fontWeight: FontWeight.w300,
           ),
         )
