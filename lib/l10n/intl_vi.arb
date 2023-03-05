@@ -36,5 +36,15 @@
   "labelWhyTakeCourse": "Tại sao bạn nên học khóa học này",
   "labelWhatAbleDo": "Bạn có thể làm gì",
   "isMarked": "Đã chấm điểm",
-  "isNotMarked": "Chưa chấm điểm"
+  "isNotMarked": "Chưa chấm điểm",
+  "bookClass": "Đặt lịch",
+  "report": "Báo cáo",
+  "demo": "Demo",
+  "chat": "Nhắn tin",
+  "about": "Về tôi",
+  "language": "Ngôn ngữ",
+  "interest": "Sở thích",
+  "specialties": "Chuyên môn",
+  "review": "Đánh giá",
+  "viewAll": "Xem tất cả"
 }

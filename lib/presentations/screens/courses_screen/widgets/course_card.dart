@@ -3,6 +3,7 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
+import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
 
 class CourseCard extends BaseCard {
   const CourseCard({
@@ -127,31 +128,12 @@ class CourseCard extends BaseCard {
           itemBuilder: (context, index) {
             // category
             return Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: Dimens.getProportionalScreenWidth(context, 10),
-                vertical: Dimens.getProportionalScreenHeight(context, 2),
-              ),
               margin: EdgeInsets.only(
                 right: Dimens.getProportionalScreenWidth(
                   context, index == categories.length - 1 ? 0 : itemDistance,
                 ),
               ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  Dimens.getScreenWidth(context),
-                ),
-                color: AppColors.primaryBlue200,
-              ),
-              child: Text(
-                categories[index], maxLines: 2,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  color: AppColors.primaryBlue400,
-                  fontSize: Dimens.getProportionalScreenHeight(
-                    context, 12,
-                  ),
-                ),
-              ),
+              child: FakeChip(text: categories[index]),
             );
           },
         ),

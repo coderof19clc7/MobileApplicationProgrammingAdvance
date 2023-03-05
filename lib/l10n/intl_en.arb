@@ -36,5 +36,15 @@
   "labelWhyTakeCourse": "Why should you take this course?",
   "labelWhatAbleDo": "What will you be able to do?",
   "isMarked": "Marked",
-  "isNotMarked": "Not marked"
+  "isNotMarked": "Not marked",
+  "bookClass": "Book class",
+  "report": "Report",
+  "demo": "Demo",
+  "chat": "Chat",
+  "about": "About",
+  "language": "Language",
+  "interest": "Interest",
+  "specialties": "Specialties",
+  "review": "Review",
+  "viewAll": "View all"
 }

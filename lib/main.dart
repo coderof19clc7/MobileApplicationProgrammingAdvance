@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:one_one_learn/generated/l10n.dart';
+import 'package:one_one_learn/presentations/screens/course_information_screen/course_information_screen.dart';
+import 'package:one_one_learn/presentations/screens/courses_screen/courses_screen.dart';
+import 'package:one_one_learn/presentations/screens/tutor_information_screen/tutor_information_screen.dart';
 import 'package:one_one_learn/presentations/screens/tutors_screen/tutors_screen.dart';
+import 'package:one_one_learn/presentations/screens/upcoming_classes_screen/upcoming_classes_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,7 +28,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: const TutorsScreen(),
+      home: const UpcomingClassesScreen(),
     );
   }
 }

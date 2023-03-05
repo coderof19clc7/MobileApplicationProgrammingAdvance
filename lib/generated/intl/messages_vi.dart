@@ -22,11 +22,15 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "about": MessageLookupByLibrary.simpleMessage("Về tôi"),
         "all": MessageLookupByLibrary.simpleMessage("tất cả"),
+        "bookClass": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
+        "chat": MessageLookupByLibrary.simpleMessage("Nhắn tin"),
         "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn hủy lớp này?"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
+        "demo": MessageLookupByLibrary.simpleMessage("Demo"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -34,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Bắt Đầu"),
         "hours": MessageLookupByLibrary.simpleMessage("tiếng"),
+        "interest": MessageLookupByLibrary.simpleMessage("Sở thích"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Cải thiện bản thân với các gia sư tuyệt vời"),
         "isMarked": MessageLookupByLibrary.simpleMessage("Đã chấm điểm"),
@@ -46,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bạn có thể làm gì"),
         "labelWhyTakeCourse": MessageLookupByLibrary.simpleMessage(
             "Tại sao bạn nên học khóa học này"),
+        "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "lesson": MessageLookupByLibrary.simpleMessage("bài học"),
         "lessonHistory":
             MessageLookupByLibrary.simpleMessage("Lịch sử buổi học"),
@@ -57,10 +63,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "report": MessageLookupByLibrary.simpleMessage("Báo cáo"),
         "resetPassword":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Điền email ứng với tài khoản muốn đặt lại mật khẩu."),
+        "review": MessageLookupByLibrary.simpleMessage("Đánh giá"),
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Tìm khóa học"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Tìm gia sư"),
@@ -74,9 +82,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("từ đánh giá cao"),
         "sortRatingFromLowest":
             MessageLookupByLibrary.simpleMessage("từ đánh giá thấp"),
+        "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),
         "swipeToCancelClass":
             MessageLookupByLibrary.simpleMessage("Vuốt trái để hủy buổi học"),
         "tutor": MessageLookupByLibrary.simpleMessage("gia sư"),
+        "viewAll": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "yes": MessageLookupByLibrary.simpleMessage("Có")
       };
 }

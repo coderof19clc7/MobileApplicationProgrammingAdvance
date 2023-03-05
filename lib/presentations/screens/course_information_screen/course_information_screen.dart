@@ -4,6 +4,7 @@ import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/course_information_screen/widgets/course_appbar.dart';
 import 'package:one_one_learn/presentations/screens/course_information_screen/widgets/topic_container.dart';
+import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class CourseInformationScreen extends StatelessWidget {
@@ -241,38 +242,7 @@ class CourseInformationScreen extends StatelessWidget {
       runSpacing: Dimens.getProportionalScreenWidth(context, 8),
       spacing: Dimens.getProportionalScreenWidth(context, 10),
       children: categories.map((category) {
-        return Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: Dimens.getProportionalScreenWidth(context, 10),
-            vertical: Dimens.getProportionalScreenHeight(context, 2),
-          ),
-          margin: EdgeInsets.only(
-            right: Dimens.getProportionalScreenWidth(
-              context,
-              categories.indexOf(category) == categories.length - 1
-                  ? 0
-                  : Dimens.getProportionalScreenWidth(context, 10),
-            ),
-          ),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              Dimens.getScreenWidth(context),
-            ),
-            color: AppColors.primaryBlue200,
-          ),
-          child: Text(
-            category,
-            maxLines: 2,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppColors.primaryBlue400,
-              fontSize: Dimens.getProportionalScreenHeight(
-                context,
-                14,
-              ),
-            ),
-          ),
-        );
+        return FakeChip(text: category);
       }).toList(),
     );
   }
