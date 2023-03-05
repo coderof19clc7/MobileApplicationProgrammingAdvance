@@ -34,5 +34,7 @@
   "labelAbout": "About",
   "labelTopics": "Topics",
   "labelWhyTakeCourse": "Why should you take this course?",
-  "labelWhatAbleDo": "What will you be able to do?"
+  "labelWhatAbleDo": "What will you be able to do?",
+  "isMarked": "Marked",
+  "isNotMarked": "Not marked"
 }

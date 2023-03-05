@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hours": MessageLookupByLibrary.simpleMessage("hours"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Improve yourself with great tutors!"),
+        "isMarked": MessageLookupByLibrary.simpleMessage("Marked"),
+        "isNotMarked": MessageLookupByLibrary.simpleMessage("Not marked"),
         "labelAbout": MessageLookupByLibrary.simpleMessage("About"),
         "labelTopics": MessageLookupByLibrary.simpleMessage("Topics"),
         "labelTotalLessonTime":

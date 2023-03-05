@@ -34,5 +34,7 @@
   "labelAbout": "Tổng quan",
   "labelTopics": "Danh sách chủ đề",
   "labelWhyTakeCourse": "Tại sao bạn nên học khóa học này",
-  "labelWhatAbleDo": "Bạn có thể làm gì"
+  "labelWhatAbleDo": "Bạn có thể làm gì",
+  "isMarked": "Đã chấm điểm",
+  "isNotMarked": "Chưa chấm điểm"
 }

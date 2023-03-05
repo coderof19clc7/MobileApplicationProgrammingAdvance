@@ -409,6 +409,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Marked`
+  String get isMarked {
+    return Intl.message(
+      'Marked',
+      name: 'isMarked',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not marked`
+  String get isNotMarked {
+    return Intl.message(
+      'Not marked',
+      name: 'isNotMarked',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -36,6 +36,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "hours": MessageLookupByLibrary.simpleMessage("tiếng"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Cải thiện bản thân với các gia sư tuyệt vời"),
+        "isMarked": MessageLookupByLibrary.simpleMessage("Đã chấm điểm"),
+        "isNotMarked": MessageLookupByLibrary.simpleMessage("Chưa chấm điểm"),
         "labelAbout": MessageLookupByLibrary.simpleMessage("Tổng quan"),
         "labelTopics": MessageLookupByLibrary.simpleMessage("Danh sách chủ đề"),
         "labelTotalLessonTime": MessageLookupByLibrary.simpleMessage(
