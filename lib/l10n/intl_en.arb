@@ -27,5 +27,7 @@
   "enterRoom": "Enter room",
   "confirmCancelClass": "Are you sure you want to cancel this class?",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "searchHintCourse": "Find a course",
+  "lesson": "lesson"
 }

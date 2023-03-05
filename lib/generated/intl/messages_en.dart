@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Improve yourself with great tutors!"),
         "labelTotalLessonTime":
             MessageLookupByLibrary.simpleMessage("Your total lesson time is"),
+        "lesson": MessageLookupByLibrary.simpleMessage("lesson"),
         "lessonHistory": MessageLookupByLibrary.simpleMessage("Lesson History"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginTitle":
@@ -51,6 +52,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Enter the email associated with your account to reset password."),
+        "searchHintCourse":
+            MessageLookupByLibrary.simpleMessage("Find a course"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Find a tutor"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signUpTitle":

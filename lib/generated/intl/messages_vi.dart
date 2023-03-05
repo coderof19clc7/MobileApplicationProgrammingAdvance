@@ -38,6 +38,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Cải thiện bản thân với các gia sư tuyệt vời"),
         "labelTotalLessonTime": MessageLookupByLibrary.simpleMessage(
             "Tổng thời gian học của bạn là"),
+        "lesson": MessageLookupByLibrary.simpleMessage("bài học"),
         "lessonHistory":
             MessageLookupByLibrary.simpleMessage("Lịch sử buổi học"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
@@ -52,6 +53,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Điền email ứng với tài khoản muốn đặt lại mật khẩu."),
+        "searchHintCourse":
+            MessageLookupByLibrary.simpleMessage("Tìm khóa học"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Tìm gia sư"),
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),

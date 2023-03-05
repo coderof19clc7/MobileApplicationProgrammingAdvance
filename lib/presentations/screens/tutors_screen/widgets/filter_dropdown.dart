@@ -6,7 +6,7 @@ class FilterDropDown<T> extends StatelessWidget {
   const FilterDropDown({
     super.key, this.value, required this.data,
     this.selectedItemBuilder, required this.itemBuilder,
-    this.leadingIcon, this.width,
+    this.leadingIcon,
   });
 
   final T? value;
@@ -14,7 +14,6 @@ class FilterDropDown<T> extends StatelessWidget {
   final List<Widget> Function(BuildContext)? selectedItemBuilder;
   final DropdownMenuItem<T> Function(T item) itemBuilder;
   final Widget? leadingIcon;
-  final double? width;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,6 @@ class FilterDropDown<T> extends StatelessWidget {
         horizontal: Dimens.getProportionalScreenWidth(context, 10),
       ),
       height: Dimens.getProportionalScreenHeight(context, 36),
-      width: width,
       child: Row(
         children: [
           leadingIcon ?? const SizedBox.shrink(),

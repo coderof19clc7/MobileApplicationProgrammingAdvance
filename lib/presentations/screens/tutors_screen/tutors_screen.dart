@@ -75,7 +75,6 @@ class TutorsScreen extends StatelessWidget {
                         isSelected: index.isEven,
                         onSelected: (value) {
                           // update state
-                          print('isSelected: $value');
                         },
                       ),
                     );
@@ -91,10 +90,15 @@ class TutorsScreen extends StatelessWidget {
                   FilterDropDown<String>(
                     value: nationalityCodes.first,
                     data: nationalityCodes,
-                    width: Dimens.getProportionalScreenWidth(context, 70),
                     selectedItemBuilder: (context) {
                       return nationalityCodes.map((code) {
-                        return Center(
+                        return Container(
+                          alignment: Alignment.center,
+                          margin: EdgeInsets.only(
+                            right: Dimens.getProportionalScreenWidth(
+                              context, 10,
+                            ),
+                          ),
                           child: Text(
                             UIHelper.getIconFromNationalityCode(code),
                           ),
@@ -159,6 +163,7 @@ class TutorsScreen extends StatelessWidget {
                   itemBuilder: (context, index) {
                     // tutor card
                     return TutorCard(
+                      nationality: UIHelper.getIconFromNationalityCode('DE'),
                       name: 'Haylee Caillier', rating: 4.5,
                       description:  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pulvinar ante...',
                       categories: const [

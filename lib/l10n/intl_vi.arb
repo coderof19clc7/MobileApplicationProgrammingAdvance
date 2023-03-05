@@ -27,5 +27,7 @@
   "enterRoom": "Vào lớp",
   "confirmCancelClass": "Bạn có chắc chắn muốn hủy lớp này?",
   "yes": "Có",
-  "no": "Đéch"
+  "no": "Đéch",
+  "searchHintCourse": "Tìm khóa học",
+  "lesson": "bài học"
 }

@@ -339,6 +339,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Find a course`
+  String get searchHintCourse {
+    return Intl.message(
+      'Find a course',
+      name: 'searchHintCourse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `lesson`
+  String get lesson {
+    return Intl.message(
+      'lesson',
+      name: 'lesson',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
