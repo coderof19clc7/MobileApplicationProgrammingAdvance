@@ -6,6 +6,7 @@ import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/upcoming_classes_screen/widgets/total_lesson_time_banner.dart';
 import 'package:one_one_learn/presentations/screens/upcoming_classes_screen/widgets/upcoming_class_card.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class UpcomingClassesScreen extends StatefulWidget {
   const UpcomingClassesScreen({super.key});
@@ -82,11 +83,7 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                 ],
               ),
             ),
-
-            SizedBox(
-              height: Dimens.getProportionalScreenHeight(context, 10),
-            ),
-
+            const EmptyProportionalSpace(height: 10),
             // upcoming classes list
             Expanded(
               child: ListView.builder(
@@ -104,8 +101,9 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                   final endTime = time.add(const Duration(hours: 2));
 
                   // upcoming class card
-                  return UpcomingClassCard(
-                    valueKey: ValueKey(tempList[index]),
+                  return Dismissible(
+                    key: ValueKey(tempList[index]),
+                    direction: DismissDirection.endToStart,
                     onDismissed: (_) {
                       // remove class from list
                       setState(() {
@@ -134,17 +132,33 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                         },
                       );
                     },
-                    onTap: () {},
-                    tutorName: tempList[index],
-                    buttonLabel: S.current.enterRoom,
-                    lessonDateTime: time,
-                    lessonEndTime: endTime,
-                    lessonDateFormat: 'EEE, MMM d, yyyy',
-                    lessonDurationFormat: 'HH:mm',
-                    margin: EdgeInsets.only(
-                      bottom: Dimens.getProportionalScreenHeight(context, 15),
-                      left: Dimens.getScreenWidth(context) * 0.03,
-                      right: Dimens.getScreenWidth(context) * 0.03,
+                    child: UpcomingClassCard(
+                      onTap: () {},
+                      tutorName: tempList[index],
+                      buttonLabel: S.current.enterRoom,
+                      lessonDateTime: time,
+                      lessonEndTime: endTime,
+                      lessonDateFormat: 'EEE, MMM d, yyyy',
+                      lessonDurationFormat: 'HH:mm',
+                      firstChild: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: AppColors.neutralBlue500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      margin: EdgeInsets.only(
+                        bottom: Dimens.getProportionalScreenHeight(context, 15),
+                        left: Dimens.getScreenWidth(context) * 0.03,
+                        right: Dimens.getScreenWidth(context) * 0.03,
+                      ),
                     ),
                   );
                 },
