@@ -23,19 +23,28 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "all": MessageLookupByLibrary.simpleMessage("all"),
+        "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
+            "Are you sure you want to cancel this class?"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "enterRoom": MessageLookupByLibrary.simpleMessage("Enter room"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+        "hours": MessageLookupByLibrary.simpleMessage("hours"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Improve yourself with great tutors!"),
+        "labelTotalLessonTime":
+            MessageLookupByLibrary.simpleMessage("Your total lesson time is"),
+        "lessonHistory": MessageLookupByLibrary.simpleMessage("Lesson History"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Login to your account"),
+        "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
+        "no": MessageLookupByLibrary.simpleMessage("No"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Or continue with"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
@@ -53,6 +62,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sortRatingFromHighest":
             MessageLookupByLibrary.simpleMessage("from highest rating"),
         "sortRatingFromLowest":
-            MessageLookupByLibrary.simpleMessage("from lowest rating")
+            MessageLookupByLibrary.simpleMessage("from lowest rating"),
+        "swipeToCancelClass": MessageLookupByLibrary.simpleMessage(
+            "Swipe left to cancel a class"),
+        "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }

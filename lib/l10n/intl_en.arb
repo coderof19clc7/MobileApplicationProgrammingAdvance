@@ -18,5 +18,14 @@
   "sortFavoriteFromHighest": "from most favorited",
   "sortFavoriteFromLowest": "from least favorited",
   "searchHintTutor": "Find a tutor",
-  "all": "all"
+  "all": "all",
+  "labelTotalLessonTime": "Your total lesson time is",
+  "hours": "hours",
+  "minutes": "minutes",
+  "lessonHistory": "Lesson History",
+  "swipeToCancelClass": "Swipe left to cancel a class",
+  "enterRoom": "Enter room",
+  "confirmCancelClass": "Are you sure you want to cancel this class?",
+  "yes": "Yes",
+  "no": "No"
 }

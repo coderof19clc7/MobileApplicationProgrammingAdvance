@@ -249,6 +249,96 @@ class S {
       args: [],
     );
   }
+
+  /// `Your total lesson time is`
+  String get labelTotalLessonTime {
+    return Intl.message(
+      'Your total lesson time is',
+      name: 'labelTotalLessonTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `hours`
+  String get hours {
+    return Intl.message(
+      'hours',
+      name: 'hours',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `minutes`
+  String get minutes {
+    return Intl.message(
+      'minutes',
+      name: 'minutes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lesson History`
+  String get lessonHistory {
+    return Intl.message(
+      'Lesson History',
+      name: 'lessonHistory',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Swipe left to cancel a class`
+  String get swipeToCancelClass {
+    return Intl.message(
+      'Swipe left to cancel a class',
+      name: 'swipeToCancelClass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Enter room`
+  String get enterRoom {
+    return Intl.message(
+      'Enter room',
+      name: 'enterRoom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Are you sure you want to cancel this class?`
+  String get confirmCancelClass {
+    return Intl.message(
+      'Are you sure you want to cancel this class?',
+      name: 'confirmCancelClass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Yes`
+  String get yes {
+    return Intl.message(
+      'Yes',
+      name: 'yes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No`
+  String get no {
+    return Intl.message(
+      'No',
+      name: 'no',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

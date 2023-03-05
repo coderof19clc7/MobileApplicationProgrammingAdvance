@@ -18,5 +18,14 @@
   "sortFavoriteFromHighest": "nhiều lượt thích nhất",
   "sortFavoriteFromLowest": "ít lượt thích nhất",
   "searchHintTutor": "Tìm gia sư",
-  "all": "tất cả"
+  "all": "tất cả",
+  "labelTotalLessonTime": "Tổng thời gian học của bạn là",
+  "hours": "tiếng",
+  "minutes": "phút",
+  "lessonHistory": "Lịch sử buổi học",
+  "swipeToCancelClass": "Vuốt trái để hủy buổi học",
+  "enterRoom": "Vào lớp",
+  "confirmCancelClass": "Bạn có chắc chắn muốn hủy lớp này?",
+  "yes": "Có",
+  "no": "Đéch"
 }

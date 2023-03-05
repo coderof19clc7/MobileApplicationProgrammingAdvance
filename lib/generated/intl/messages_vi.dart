@@ -23,18 +23,28 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "all": MessageLookupByLibrary.simpleMessage("tất cả"),
+        "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
+            "Bạn có chắc chắn muốn hủy lớp này?"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "enterRoom": MessageLookupByLibrary.simpleMessage("Vào lớp"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Bắt Đầu"),
+        "hours": MessageLookupByLibrary.simpleMessage("tiếng"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Cải thiện bản thân với các gia sư tuyệt vời"),
+        "labelTotalLessonTime": MessageLookupByLibrary.simpleMessage(
+            "Tổng thời gian học của bạn là"),
+        "lessonHistory":
+            MessageLookupByLibrary.simpleMessage("Lịch sử buổi học"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản"),
+        "minutes": MessageLookupByLibrary.simpleMessage("phút"),
+        "no": MessageLookupByLibrary.simpleMessage("Đéch"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
@@ -52,6 +62,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "sortRatingFromHighest":
             MessageLookupByLibrary.simpleMessage("từ đánh giá cao"),
         "sortRatingFromLowest":
-            MessageLookupByLibrary.simpleMessage("từ đánh giá thấp")
+            MessageLookupByLibrary.simpleMessage("từ đánh giá thấp"),
+        "swipeToCancelClass":
+            MessageLookupByLibrary.simpleMessage("Vuốt trái để hủy buổi học"),
+        "yes": MessageLookupByLibrary.simpleMessage("Có")
       };
 }

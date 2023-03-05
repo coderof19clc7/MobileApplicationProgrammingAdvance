@@ -38,13 +38,12 @@ class AppColors {
 
   static final red400 = HexColor.fromHex('#EF2323');
   static final red700 = HexColor.fromHex('#CF8D8D');
-  
+
   static final grey = HexColor.fromHex('#C0C5CA');
 
   static final primaryGradient = LinearGradient(
     colors: [primaryBlue400, primaryBlue500],
   );
-
 }
 
 class Effects {
@@ -58,5 +57,10 @@ class Effects {
     offset: const Offset(-2, 5),
     blurRadius: 5,
     color: AppColors.black.withOpacity(0.08),
+  );
+  static final onPrimaryShadow = BoxShadow(
+    offset: const Offset(-2, 5),
+    blurRadius: 13,
+    color: AppColors.black.withOpacity(0.07),
   );
 }
