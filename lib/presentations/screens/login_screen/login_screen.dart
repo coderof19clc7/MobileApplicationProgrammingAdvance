@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
@@ -138,6 +139,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: ' ${S.current.signUp}',
+                        recognizer: TapGestureRecognizer()..onTap = () {},
                         style: TextStyle(
                           color: AppColors.primaryBlue400,
                           fontSize: Dimens.getProportionalScreenWidth(context, 17),
