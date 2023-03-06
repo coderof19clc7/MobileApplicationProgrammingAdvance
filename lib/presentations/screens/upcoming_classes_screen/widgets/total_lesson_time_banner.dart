@@ -12,11 +12,10 @@ class TotalLessonTimeBanner extends StatelessWidget {
     required this.buttonLabel,
     required this.onTap,
     required this.width,
-    required this.height,
   });
 
   final String topLabel, totalTime, buttonLabel;
-  final double width, height;
+  final double width;
   final Function() onTap;
 
   @override
@@ -25,7 +24,9 @@ class TotalLessonTimeBanner extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: AppColors.primaryGradient,
       ),
-      height: height,
+      padding: EdgeInsets.symmetric(
+        vertical: Dimens.getProportionalScreenWidth(context, 28),
+      ),
       width: width,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -34,7 +35,7 @@ class TotalLessonTimeBanner extends StatelessWidget {
             topLabel,
             style: TextStyle(
               color: AppColors.white,
-              fontSize: Dimens.getProportionalScreenHeight(context, 15),
+              fontSize: Dimens.getProportionalScreenWidth(context, 15),
             ),
           ),
           const EmptyProportionalSpace(height: 15),
@@ -43,31 +44,31 @@ class TotalLessonTimeBanner extends StatelessWidget {
             style: TextStyle(
               color: AppColors.white,
               fontWeight: FontWeight.w600,
-              fontSize: Dimens.getProportionalScreenHeight(context, 19),
+              fontSize: Dimens.getProportionalScreenWidth(context, 24),
             ),
           ),
           const EmptyProportionalSpace(height: 15),
           PrimaryFillButton(
-            width: Dimens.getProportionalScreenWidth(context, 145),
+            width: Dimens.getProportionalScreenWidth(context, 160),
             bgColor: AppColors.primaryBlue200,
             preferGradient: false,
             borderRadiusValue: Dimens.getScreenWidth(context),
             onTap: onTap,
-            paddingVertical: Dimens.getProportionalScreenHeight(context, 2),
+            paddingVertical: Dimens.getProportionalScreenWidth(context, 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.menu_book_rounded,
                   color: AppColors.primaryBlue500,
-                  size: Dimens.getProportionalScreenHeight(context, 18),
+                  size: Dimens.getProportionalScreenWidth(context, 17),
                 ),
                 SizedBox(width: Dimens.getProportionalScreenWidth(context, 5)),
                 Text(
                   buttonLabel,
                   style: TextStyle(
                     color: AppColors.primaryBlue500,
-                    fontSize: Dimens.getProportionalScreenHeight(context, 11),
+                    fontSize: Dimens.getProportionalScreenWidth(context, 14),
                   ),
                 ),
               ],

@@ -40,9 +40,11 @@ class GeneralInformation extends StatelessWidget {
               Positioned(
                 right: 0, bottom: 0,
                 child: SvgPicture.string(
-                  isFavorite
-                      ? SvgIcons.favoriteFullColorFromFigma
-                      : SvgIcons.favoriteOutlineFromFigma,
+                  SvgIcons.getIcon(
+                    SvgIconEnum.favorite,
+                    fillColor: isFavorite
+                        ? AppColors.primaryBlue400 : AppColors.white,
+                  ),
                   width: Dimens.getProportionalScreenHeight(context, 40),
                   height: Dimens.getProportionalScreenHeight(context, 40),
                 ),
@@ -133,7 +135,8 @@ class GeneralInformation extends StatelessWidget {
   }
 
   Widget buildButtonField(BuildContext context) {
-    const iconSize = 16.0;
+    const iconSize = 20.0, verticalSpace = 4.0;
+    const fontSize = 14.0, fontWeight = FontWeight.w600;
     return SizedBox(
       width: Dimens.getScreenWidth(context) * 0.75,
       child: Column(
@@ -149,11 +152,13 @@ class GeneralInformation extends StatelessWidget {
                   Icons.calendar_today_rounded, color: AppColors.white,
                   size: Dimens.getProportionalScreenWidth(context, iconSize),
                 ),
-                const EmptyProportionalSpace(height: 4),
+                const EmptyProportionalSpace(height: verticalSpace),
                 Text(
                   S.current.bookClass, style: TextStyle(
-                    color: AppColors.white, fontWeight: FontWeight.w600,
-                    fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                    color: AppColors.white, fontWeight: fontWeight,
+                    fontSize: Dimens.getProportionalScreenWidth(
+                      context, fontSize + 2,
+                    ),
                   ),
                 ),
               ],
@@ -174,12 +179,18 @@ class GeneralInformation extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.report_rounded, color: AppColors.primaryBlue400,
-                        size: Dimens.getProportionalScreenWidth(context, iconSize),
+                        size: Dimens.getProportionalScreenWidth(
+                          context, iconSize,
+                        ),
                       ),
+                      const EmptyProportionalSpace(height: verticalSpace),
                       Text(
                         S.current.report, style: TextStyle(
                         color: AppColors.primaryBlue400,
-                        fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                        fontWeight: fontWeight,
+                        fontSize: Dimens.getProportionalScreenWidth(
+                          context, fontSize,
+                        ),
                       ),
                       ),
                     ],
@@ -198,12 +209,17 @@ class GeneralInformation extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.videocam_rounded, color: AppColors.primaryBlue400,
-                        size: Dimens.getProportionalScreenWidth(context, iconSize),
+                        size: Dimens.getProportionalScreenWidth(
+                          context, iconSize + 4,
+                        ),
                       ),
                       Text(
                         S.current.demo, style: TextStyle(
                         color: AppColors.primaryBlue400,
-                        fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                        fontWeight: fontWeight,
+                        fontSize: Dimens.getProportionalScreenWidth(
+                          context, fontSize,
+                        ),
                       ),
                       ),
                     ],
@@ -222,11 +238,15 @@ class GeneralInformation extends StatelessWidget {
                     children: [
                       Icon(
                         Icons.message_rounded, color: AppColors.primaryBlue400,
-                        size: Dimens.getProportionalScreenWidth(context, iconSize),
+                        size: Dimens.getProportionalScreenWidth(
+                          context, iconSize,
+                        ),
                       ),
+                      const EmptyProportionalSpace(height: verticalSpace),
                       Text(
                         S.current.chat, style: TextStyle(
                         color: AppColors.primaryBlue400,
+                        fontWeight: fontWeight,
                         fontSize: Dimens.getProportionalScreenWidth(context, 14),
                       ),
                       ),

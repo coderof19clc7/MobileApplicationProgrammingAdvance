@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
 
@@ -21,6 +23,7 @@ class TutorCard extends BaseCard {
     // tutor information
     return Expanded(
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // name & favorite
@@ -33,7 +36,7 @@ class TutorCard extends BaseCard {
                   '$nationality $name', overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: AppColors.black, fontWeight: FontWeight.w700,
-                    fontSize: Dimens.getProportionalScreenHeight(context, 15),
+                    fontSize: Dimens.getProportionalScreenWidth(context, 15),
                   ),
                 ),
               ),
@@ -42,12 +45,14 @@ class TutorCard extends BaseCard {
               )),
               InkWell(
                 onTap: () {},
-                child: Icon(
-                  isFavorite
-                      ? Icons.favorite_rounded
-                      : Icons.favorite_outline_rounded,
-                  color: AppColors.primaryBlue400,
-                  size: Dimens.getProportionalScreenHeight(context, 25),
+                child: SvgPicture.string(
+                  SvgIcons.getIcon(
+                    SvgIconEnum.favorite,
+                    fillColor: isFavorite
+                        ? AppColors.primaryBlue400 : AppColors.white,
+                  ),
+                  width: Dimens.getProportionalScreenHeight(context, 25),
+                  height: Dimens.getProportionalScreenHeight(context, 25),
                 ),
               ),
             ],
@@ -71,13 +76,11 @@ class TutorCard extends BaseCard {
                 size: Dimens.getProportionalScreenWidth(context, 14),
                 color: AppColors.primaryBlue400,
               ),
-              SizedBox(width: Dimens.getProportionalScreenWidth(
-                context, 7,
-              )),
+              SizedBox(width: Dimens.getProportionalScreenWidth(context, 4)),
               Text(
                 '$rating/5', style: TextStyle(
                 color: AppColors.neutralBlue500,
-                fontSize: 12,
+                fontSize: Dimens.getProportionalScreenWidth(context, 12),
               ),
               ),
             ],
@@ -92,7 +95,7 @@ class TutorCard extends BaseCard {
             softWrap: true, maxLines: 2,
             style: TextStyle(
               color: AppColors.neutralBlue500,
-              fontSize: 12,
+              fontSize: Dimens.getProportionalScreenWidth(context, 12),
             ),
           ),
         ],
@@ -104,7 +107,7 @@ class TutorCard extends BaseCard {
     BuildContext context, double secondChildItemsDistance
   ) {
     return SizedBox(
-      height: Dimens.getScreenHeight(context,) * 0.0237,
+      height: Dimens.getScreenHeight(context,) * 0.037,
       child: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
           return true;
@@ -118,7 +121,8 @@ class TutorCard extends BaseCard {
             return Container(
               margin: EdgeInsets.only(
                 right: Dimens.getProportionalScreenWidth(
-                  context, index == categories.length - 1 ? 0 : secondChildItemsDistance,
+                  context, index == categories.length - 1
+                    ? 0 : secondChildItemsDistance,
                 ),
               ),
               child: FakeChip(text: categories[index]),

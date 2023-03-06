@@ -35,7 +35,7 @@ class CourseCard extends BaseCard {
             name, overflow: TextOverflow.ellipsis,
             style: TextStyle(
               color: AppColors.black, fontWeight: FontWeight.w700,
-              fontSize: Dimens.getProportionalScreenHeight(context, 17),
+              fontSize: Dimens.getProportionalScreenWidth(context, 17),
             ),
           ),
           SizedBox(
@@ -58,7 +58,7 @@ class CourseCard extends BaseCard {
             children: [
               Icon(
                 Icons.signal_cellular_alt_rounded,
-                size: Dimens.getProportionalScreenWidth(context, fontSize + 2),
+                size: Dimens.getProportionalScreenWidth(context, fontSize + 6),
                 color: AppColors.primaryBlue400,
               ),
               SizedBox(width: Dimens.getProportionalScreenWidth(
@@ -67,7 +67,7 @@ class CourseCard extends BaseCard {
               Text(
                 level, style: TextStyle(
                 color: AppColors.neutralBlue500,
-                fontSize: fontSize,
+                fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
               ),),
               SizedBox(width: Dimens.getProportionalScreenWidth(
                 context, 7,
@@ -75,20 +75,20 @@ class CourseCard extends BaseCard {
               Text(
                 '|', style: TextStyle(
                 color: AppColors.neutralBlue500,
-                fontSize: fontSize,
+                fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
               ),),
               SizedBox(width: Dimens.getProportionalScreenWidth(
                 context, 7,
               )),
               Icon(
                 Icons.book_rounded,
-                size: Dimens.getProportionalScreenWidth(context, fontSize + 2),
+                size: Dimens.getProportionalScreenWidth(context, fontSize + 6),
                 color: AppColors.primaryBlue400,
               ),
               Text(
                 '$lessons ${S.current.lesson}', style: TextStyle(
                 color: AppColors.neutralBlue500,
-                fontSize: fontSize,
+                fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
               ),),
             ],
           ),
@@ -104,7 +104,7 @@ class CourseCard extends BaseCard {
             softWrap: true, maxLines: 2,
             style: TextStyle(
               color: AppColors.neutralBlue500,
-              fontSize: fontSize,
+              fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
             ),
           ),
         ],
@@ -116,7 +116,7 @@ class CourseCard extends BaseCard {
       BuildContext context, double itemDistance
       ) {
     return SizedBox(
-      height: Dimens.getScreenHeight(context,) * 0.0237,
+      height: Dimens.getScreenHeight(context,) * 0.037,
       child: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
           return true;

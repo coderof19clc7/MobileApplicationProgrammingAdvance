@@ -11,6 +11,7 @@ class UpcomingClassCard extends BaseCard {
     super.firstChild,
     super.secondChildItemsDistance = 10,
     super.margin,
+    super.crossAxisAlignment,
     required this.onTap,
     required this.tutorName,
     required this.buttonLabel,
@@ -31,68 +32,65 @@ class UpcomingClassCard extends BaseCard {
     final endTime = DateFormat(lessonDurationFormat).format(lessonEndTime);
 
     return Expanded(
-      child: SizedBox(
-        height: Dimens.getProportionalScreenWidth(context, 90),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Wrap(
-              direction: Axis.vertical,
-              alignment: WrapAlignment.center,
-              spacing: Dimens.getProportionalScreenHeight(context, 10),
-              children: [
-                buildInformationRow(
-                  context: context,
-                  icon: Icons.calendar_month_rounded,
-                  text: DateFormat(lessonDateFormat).format(lessonDateTime),
-                  isPilled: false,
-                ),
-                buildInformationRow(
-                  context: context,
-                  icon: Icons.access_time_rounded,
-                  text: '$startTime - $endTime',
-                  isPilled: true,
-                ),
-                buildInformationRow(
-                  context: context,
-                  icon: Icons.person_rounded,
-                  text: tutorName,
-                  isPilled: false,
-                ),
-              ],
-            ),
-            SizedBox(
-              height: Dimens.getProportionalScreenWidth(context, 90) * 0.4,
-              child: PrimaryOutlineButton(
-                width: Dimens.getProportionalScreenWidth(context, 94),
-                paddingVertical: Dimens.getProportionalScreenHeight(context, 5),
-                onTap: onTap,
-                splashColor: AppColors.primaryBlue400,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.login_rounded,
-                      size: Dimens.getProportionalScreenHeight(context, 14),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Wrap(
+            direction: Axis.vertical,
+            alignment: WrapAlignment.center,
+            spacing: Dimens.getProportionalScreenHeight(context, 10),
+            children: [
+              buildInformationRow(
+                context: context,
+                icon: Icons.calendar_month_rounded,
+                text: DateFormat(lessonDateFormat).format(lessonDateTime),
+                isPilled: false,
+              ),
+              buildInformationRow(
+                context: context,
+                icon: Icons.access_time_rounded,
+                text: '$startTime - $endTime',
+                isPilled: true,
+              ),
+              buildInformationRow(
+                context: context,
+                icon: Icons.person_rounded,
+                text: tutorName,
+                isPilled: false,
+              ),
+            ],
+          ),
+          SizedBox(
+            child: PrimaryOutlineButton(
+              width: Dimens.getProportionalScreenWidth(context, 90),
+              borderRadiusValue: Dimens.getProportionalScreenWidth(context, 12),
+              paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
+              onTap: onTap,
+              splashColor: AppColors.primaryBlue100,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.login_rounded,
+                    size: Dimens.getProportionalScreenWidth(context, 16),
+                    color: AppColors.primaryBlue400,
+                  ),
+                  SizedBox(
+                    width: Dimens.getProportionalScreenWidth(context, 5),
+                  ),
+                  Text(
+                    buttonLabel,
+                    style: TextStyle(
                       color: AppColors.primaryBlue400,
+                      fontSize:
+                          Dimens.getProportionalScreenWidth(context, 12),
                     ),
-                    SizedBox(
-                      width: Dimens.getProportionalScreenWidth(context, 5),
-                    ),
-                    Text(
-                      buttonLabel,
-                      style: TextStyle(
-                        color: AppColors.primaryBlue400,
-                        fontSize:
-                            Dimens.getProportionalScreenHeight(context, 11),
-                      ),
-                    )
-                  ],
-                ),
+                  )
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -108,7 +106,7 @@ class UpcomingClassCard extends BaseCard {
       children: [
         Icon(
           icon,
-          size: Dimens.getProportionalScreenHeight(context, 14),
+          size: Dimens.getProportionalScreenWidth(context, 14),
           color: AppColors.primaryBlue400,
         ),
         Container(
@@ -127,7 +125,7 @@ class UpcomingClassCard extends BaseCard {
             text,
             style: TextStyle(
               color: isPilled ? AppColors.white : AppColors.black,
-              fontSize: Dimens.getProportionalScreenHeight(context, 11),
+              fontSize: Dimens.getProportionalScreenWidth(context, 12),
             ),
           ),
         )

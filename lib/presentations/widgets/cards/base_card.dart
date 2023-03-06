@@ -6,9 +6,15 @@ enum CardDirection { row, column }
 
 abstract class BaseCard extends StatelessWidget {
   const BaseCard({
-    super.key, this.padding, this.margin, this.width,
-    this.firstSecondDistance = 12, this.secondChildItemsDistance = 10,
-    this.firstChild, this.direction = CardDirection.row,
+    super.key,
+    this.padding,
+    this.margin,
+    this.width,
+    this.firstSecondDistance = 12,
+    this.secondChildItemsDistance = 10,
+    this.firstChild,
+    this.direction = CardDirection.row,
+    this.crossAxisAlignment,
   });
 
   final EdgeInsetsGeometry? padding, margin;
@@ -16,6 +22,7 @@ abstract class BaseCard extends StatelessWidget {
   final double firstSecondDistance, secondChildItemsDistance;
   final Widget? firstChild;
   final CardDirection direction;
+  final CrossAxisAlignment? crossAxisAlignment;
 
   Widget buildFirstChild(BuildContext context) {
     return SizedBox(
@@ -37,7 +44,7 @@ abstract class BaseCard extends StatelessWidget {
 
   Widget buildRowLayout(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
       children: [
         buildFirstChild(context),
         SizedBox(width: Dimens.getProportionalScreenWidth(
@@ -50,7 +57,7 @@ abstract class BaseCard extends StatelessWidget {
 
   Widget buildColumnLayout(BuildContext context) {
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
+      crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.stretch,
       children: [
         buildFirstChild(context),
         SizedBox(height: Dimens.getProportionalScreenHeight(

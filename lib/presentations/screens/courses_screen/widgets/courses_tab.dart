@@ -52,7 +52,7 @@ class _CoursesTabState extends State<CoursesTab>
 
           // category filters
           SizedBox(
-            height: Dimens.getProportionalScreenHeight(context, 30),
+            height: Dimens.getScreenHeight(context) * 0.045,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: 15,

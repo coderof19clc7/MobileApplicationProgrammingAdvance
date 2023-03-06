@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
+import 'package:one_one_learn/generated/assets.gen.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
@@ -103,8 +104,7 @@ class LoginScreen extends StatelessWidget {
                       paddingVertical: Dimens.getProportionalScreenHeight(context, 17),
                       preferGradient: false,
                       splashColor: AppColors.grey.withOpacity(0.5),
-                      child: SvgPicture.string(
-                        SvgIcons.googleFullColor,
+                      child: Assets.icons.googleColorfull.svg(
                         width: Dimens.getProportionalScreenWidth(context, 24),
                         height: Dimens.getProportionalScreenWidth(context, 24),
                       ),
@@ -117,8 +117,7 @@ class LoginScreen extends StatelessWidget {
                       paddingVertical: Dimens.getProportionalScreenHeight(context, 17),
                       preferGradient: false,
                       splashColor: AppColors.grey.withOpacity(0.5),
-                      child: SvgPicture.string(
-                        SvgIcons.facebookFullColor,
+                      child: Assets.icons.facebookColorfull.svg(
                         width: Dimens.getProportionalScreenWidth(context, 24),
                         height: Dimens.getProportionalScreenWidth(context, 24),
                       ),

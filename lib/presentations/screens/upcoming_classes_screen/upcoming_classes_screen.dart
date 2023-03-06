@@ -48,7 +48,6 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
             // total lesson time
             TotalLessonTimeBanner(
               width: Dimens.getScreenWidth(context),
-              height: Dimens.getScreenHeight(context) * 0.16,
               topLabel: S.current.labelTotalLessonTime,
               totalTime:
                   '$hour ${S.current.hours} $minute ${S.current.minutes}',
@@ -67,7 +66,7 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                   Icon(
                     Icons.info_outline_rounded,
                     color: AppColors.neutralBlue500,
-                    size: Dimens.getProportionalScreenHeight(context, 16),
+                    size: Dimens.getProportionalScreenWidth(context, 16),
                   ),
                   SizedBox(
                     width: Dimens.getProportionalScreenWidth(context, 5),
@@ -76,7 +75,7 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                     S.current.swipeToCancelClass,
                     style: TextStyle(
                       color: AppColors.neutralBlue500,
-                      fontSize: Dimens.getProportionalScreenHeight(context, 12),
+                      fontSize: Dimens.getProportionalScreenWidth(context, 12),
                       fontWeight: FontWeight.w500,
                     ),
                   )
@@ -140,20 +139,7 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                       lessonEndTime: endTime,
                       lessonDateFormat: 'EEE, MMM d, yyyy',
                       lessonDurationFormat: 'HH:mm',
-                      firstChild: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                                color: AppColors.neutralBlue500,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       margin: EdgeInsets.only(
                         bottom: Dimens.getProportionalScreenHeight(context, 15),
                         left: Dimens.getScreenWidth(context) * 0.03,

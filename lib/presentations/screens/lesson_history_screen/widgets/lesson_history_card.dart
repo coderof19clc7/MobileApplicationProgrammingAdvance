@@ -11,6 +11,7 @@ class LessonHistoryCard extends BaseCard {
     super.firstChild,
     super.secondChildItemsDistance = 10,
     super.margin,
+    super.crossAxisAlignment,
     required this.tutorName,
     required this.lessonDateTime,
     required this.lessonEndTime,
@@ -32,45 +33,42 @@ class LessonHistoryCard extends BaseCard {
     final endTime = DateFormat(lessonDurationFormat).format(lessonEndTime);
 
     return Expanded(
-      child: SizedBox(
-        height: Dimens.getProportionalScreenWidth(context, 90),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Wrap(
-              direction: Axis.vertical,
-              alignment: WrapAlignment.center,
-              spacing: Dimens.getProportionalScreenHeight(context, 10),
-              children: [
-                buildInformationRow(
-                  context: context,
-                  icon: Icons.calendar_month_rounded,
-                  text: DateFormat(lessonDateFormat).format(lessonDateTime),
-                  isPilled: false,
-                ),
-                buildInformationRow(
-                  context: context,
-                  icon: Icons.access_time_rounded,
-                  text: '$startTime - $endTime',
-                  isPilled: true,
-                ),
-                buildInformationRow(
-                  context: context,
-                  icon: Icons.person_rounded,
-                  text: tutorName,
-                  isPilled: false,
-                ),
-                buildInformationRow(
-                  context: context,
-                  icon: Icons.stars_rounded,
-                  text: isMarked ? S.current.isMarked : S.current.isNotMarked,
-                  isPilled: false,
-                ),
-              ],
-            ),
-            buttonSet,
-          ],
-        ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Wrap(
+            direction: Axis.vertical,
+            alignment: WrapAlignment.center,
+            spacing: Dimens.getProportionalScreenWidth(context, 10),
+            children: [
+              buildInformationRow(
+                context: context,
+                icon: Icons.calendar_month_rounded,
+                text: DateFormat(lessonDateFormat).format(lessonDateTime),
+                isPilled: false,
+              ),
+              buildInformationRow(
+                context: context,
+                icon: Icons.access_time_rounded,
+                text: '$startTime - $endTime',
+                isPilled: true,
+              ),
+              buildInformationRow(
+                context: context,
+                icon: Icons.person_rounded,
+                text: tutorName,
+                isPilled: false,
+              ),
+              buildInformationRow(
+                context: context,
+                icon: Icons.stars_rounded,
+                text: isMarked ? S.current.isMarked : S.current.isNotMarked,
+                isPilled: false,
+              ),
+            ],
+          ),
+          buttonSet,
+        ],
       ),
     );
   }
@@ -86,7 +84,7 @@ class LessonHistoryCard extends BaseCard {
       children: [
         Icon(
           icon,
-          size: Dimens.getProportionalScreenHeight(context, 14),
+          size: Dimens.getProportionalScreenWidth(context, 14),
           color: AppColors.primaryBlue400,
         ),
         Container(
@@ -105,7 +103,7 @@ class LessonHistoryCard extends BaseCard {
             text,
             style: TextStyle(
               color: isPilled ? AppColors.white : AppColors.black,
-              fontSize: Dimens.getProportionalScreenHeight(context, 11),
+              fontSize: Dimens.getProportionalScreenWidth(context, 12),
             ),
           ),
         )

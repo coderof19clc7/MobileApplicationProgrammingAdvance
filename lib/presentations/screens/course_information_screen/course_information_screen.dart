@@ -66,17 +66,17 @@ class CourseInformationScreen extends StatelessWidget {
                       style: TextStyle(
                         color: AppColors.black,
                         fontSize:
-                            Dimens.getProportionalScreenHeight(context, 21),
+                            Dimens.getProportionalScreenWidth(context, 21),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
 
-                    const EmptyProportionalSpace(height: 10),
+                    const EmptyProportionalSpace(height: 15),
 
                     // categories
                     buildCategories(context, categories),
 
-                    const EmptyProportionalSpace(height: 10),
+                    const EmptyProportionalSpace(height: 15),
 
                     // level
                     buildLeadingInformation(
@@ -100,7 +100,7 @@ class CourseInformationScreen extends StatelessWidget {
                           '|',
                           style: TextStyle(
                             fontSize:
-                                Dimens.getProportionalScreenHeight(context, 14),
+                                Dimens.getProportionalScreenWidth(context, 14),
                             fontWeight: FontWeight.w300,
                           ),
                         ),
@@ -119,13 +119,11 @@ class CourseInformationScreen extends StatelessWidget {
                       S.current.labelAbout,
                       style: TextStyle(
                         fontSize:
-                            Dimens.getProportionalScreenHeight(context, 18),
+                            Dimens.getProportionalScreenWidth(context, 20),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-
-                    const EmptyProportionalSpace(height: 10),
-
+                    const EmptyProportionalSpace(height: 5),
                     buildParagraph(
                       context,
                       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat.',
@@ -134,60 +132,26 @@ class CourseInformationScreen extends StatelessWidget {
                     const EmptyProportionalSpace(height: 15),
 
                     // why subheading
-                    Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      spacing: Dimens.getProportionalScreenWidth(context, 5),
-                      children: [
-                        Icon(
-                          Icons.help_outline_rounded,
-                          color: AppColors.primaryBlue400,
-                          size: 19,
-                        ),
-                        Text(
-                          S.current.labelWhyTakeCourse,
-                          style: TextStyle(
-                            color: AppColors.primaryBlue400,
-                            fontSize:
-                                Dimens.getProportionalScreenHeight(context, 15),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )
-                      ],
+                    buildSubHeading(
+                      context,
+                      iconData: Icons.help_outline_rounded,
+                      text: S.current.labelWhyTakeCourse,
                     ),
-
-                    const EmptyProportionalSpace(height: 10),
-
+                    const EmptyProportionalSpace(height: 7),
                     buildParagraph(
                       context,
                       'Suspendisse potenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci. Mauris ac ex viverra, facilisis augue sit amet, sollicitudin dolor.',
                     ),
 
-                    const EmptyProportionalSpace(height: 10),
+                    const EmptyProportionalSpace(height: 15),
 
                     // able subheading
-                    Wrap(
-                      crossAxisAlignment: WrapCrossAlignment.center,
-                      spacing: Dimens.getProportionalScreenWidth(context, 5),
-                      children: [
-                        Icon(
-                          Icons.error_outline_rounded,
-                          color: AppColors.primaryBlue400,
-                          size: 19,
-                        ),
-                        Text(
-                          S.current.labelWhatAbleDo,
-                          style: TextStyle(
-                            color: AppColors.primaryBlue400,
-                            fontSize:
-                                Dimens.getProportionalScreenHeight(context, 15),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        )
-                      ],
+                    buildSubHeading(
+                      context,
+                      iconData: Icons.error_outline_rounded,
+                      text: S.current.labelWhatAbleDo,
                     ),
-
-                    const EmptyProportionalSpace(height: 10),
-
+                    const EmptyProportionalSpace(height: 7),
                     buildParagraph(
                       context,
                       'Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat. Suspendisse potenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci.',
@@ -200,13 +164,11 @@ class CourseInformationScreen extends StatelessWidget {
                       S.current.labelTopics,
                       style: TextStyle(
                         fontSize:
-                            Dimens.getProportionalScreenHeight(context, 18),
+                            Dimens.getProportionalScreenWidth(context, 18),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-
-                    const EmptyProportionalSpace(height: 10),
-
+                    const EmptyProportionalSpace(height: 7),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: topics.map((topic) {
@@ -227,11 +189,36 @@ class CourseInformationScreen extends StatelessWidget {
     );
   }
 
+  Widget buildSubHeading(BuildContext context, {
+    required IconData iconData, required String text,
+  }) {
+    return Wrap(
+      crossAxisAlignment: WrapCrossAlignment.center,
+      spacing: Dimens.getProportionalScreenWidth(context, 5),
+      children: [
+        Icon(
+          iconData,
+          color: AppColors.primaryBlue400,
+          size: Dimens.getProportionalScreenWidth(context, 20),
+        ),
+        Text(
+          text,
+          style: TextStyle(
+            color: AppColors.primaryBlue400,
+            fontSize:
+            Dimens.getProportionalScreenWidth(context, 16),
+            fontWeight: FontWeight.w500,
+          ),
+        )
+      ],
+    );
+  }
+
   Widget buildParagraph(BuildContext context, String text) {
     return Text(
       text,
       style: TextStyle(
-        fontSize: Dimens.getProportionalScreenHeight(context, 14),
+        fontSize: Dimens.getProportionalScreenWidth(context, 14),
         fontWeight: FontWeight.w300,
       ),
     );
@@ -239,7 +226,7 @@ class CourseInformationScreen extends StatelessWidget {
 
   Widget buildCategories(BuildContext context, List<String> categories) {
     return Wrap(
-      runSpacing: Dimens.getProportionalScreenWidth(context, 8),
+      runSpacing: Dimens.getProportionalScreenHeight(context, 10),
       spacing: Dimens.getProportionalScreenWidth(context, 10),
       children: categories.map((category) {
         return FakeChip(text: category);
@@ -258,12 +245,12 @@ class CourseInformationScreen extends StatelessWidget {
         Icon(
           icon,
           color: AppColors.primaryBlue400,
-          size: 19,
+          size: Dimens.getProportionalScreenWidth(context, 20),
         ),
         Text(
           text,
           style: TextStyle(
-            fontSize: Dimens.getProportionalScreenHeight(context, 14),
+            fontSize: Dimens.getProportionalScreenWidth(context, 14),
             fontWeight: FontWeight.w300,
           ),
         )

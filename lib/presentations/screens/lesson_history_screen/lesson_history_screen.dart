@@ -68,20 +68,7 @@ class LessonHistoryScreen extends StatelessWidget {
                     lessonDateFormat: 'EEE, MMM d, yyyy',
                     lessonDurationFormat: 'HH:mm',
                     isMarked: index.isEven,
-                    firstChild: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              color: AppColors.neutralBlue500,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     margin: EdgeInsets.only(
                       bottom: Dimens.getProportionalScreenHeight(context, 15),
                       left: Dimens.getScreenWidth(context) * 0.03,

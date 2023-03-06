@@ -48,7 +48,7 @@ class TopicContainer extends StatelessWidget {
             Text(
               title,
               style: TextStyle(
-                fontSize: Dimens.getProportionalScreenHeight(context, 12),
+                fontSize: Dimens.getProportionalScreenWidth(context, 14),
                 fontWeight: FontWeight.w500,
               ),
             ),
