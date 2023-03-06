@@ -10,6 +10,7 @@ class PrimaryFillButton extends StatelessWidget {
     this.customBorder,
     this.preferGradient = true,
     this.hasShadow = true,
+    this.boxShadow,
     this.bgLinearGradient,
     this.bgColor,
     this.borderRadiusValue = 8,
@@ -24,6 +25,7 @@ class PrimaryFillButton extends StatelessWidget {
   final ShapeBorder? customBorder;
   final bool preferGradient;
   final bool hasShadow;
+  final List<BoxShadow>? boxShadow;
   final LinearGradient? bgLinearGradient;
   final Color? bgColor;
   final double borderRadiusValue;
@@ -47,7 +49,7 @@ class PrimaryFillButton extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadiusValue),
         color: color,
         gradient: gradient,
-        boxShadow: hasShadow ? [Effects.primaryShadow] : null,
+        boxShadow: hasShadow ? (boxShadow ?? [Effects.primaryShadow]) : null,
       ),
       child: Material(
         color: Colors.transparent,
