@@ -1,9 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/generated/assets.gen.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
@@ -11,8 +9,28 @@ import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_butt
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_fill.dart';
 import 'package:one_one_learn/utils/ui_helper.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  late GestureRecognizer _tapGestureRecognizer;
+
+  @override
+  void initState() {
+    super.initState();
+    _tapGestureRecognizer = TapGestureRecognizer()
+      ..onTap = () {};
+  }
+
+  @override
+  void dispose() {
+    _tapGestureRecognizer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +157,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       TextSpan(
                         text: ' ${S.current.signUp}',
-                        recognizer: TapGestureRecognizer()..onTap = () {},
+                        recognizer: _tapGestureRecognizer,
                         style: TextStyle(
                           color: AppColors.primaryBlue400,
                           fontSize: Dimens.getProportionalScreenWidth(context, 17),
