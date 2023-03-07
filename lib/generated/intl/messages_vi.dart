@@ -47,6 +47,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "labelTopics": MessageLookupByLibrary.simpleMessage("Danh sách chủ đề"),
         "labelTotalLessonTime": MessageLookupByLibrary.simpleMessage(
             "Tổng thời gian học của bạn là"),
+        "labelUpcomingClass": MessageLookupByLibrary.simpleMessage(
+            "Lớp học sắp diễn ra của bạn là"),
         "labelWhatAbleDo":
             MessageLookupByLibrary.simpleMessage("Bạn có thể làm gì"),
         "labelWhyTakeCourse": MessageLookupByLibrary.simpleMessage(

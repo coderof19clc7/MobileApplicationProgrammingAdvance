@@ -4,8 +4,8 @@ import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
-class TotalLessonTimeBanner extends StatelessWidget {
-  const TotalLessonTimeBanner({
+class UpcomingClassBanner extends StatelessWidget {
+  const UpcomingClassBanner({
     super.key,
     required this.topLabel,
     required this.totalTime,

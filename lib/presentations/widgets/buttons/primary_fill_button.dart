@@ -7,6 +7,7 @@ class PrimaryFillButton extends StatelessWidget {
     required this.child,
     this.width = 160, this.height,
     this.splashColor = Colors.white38,
+    this.highlightColor = Colors.white24,
     this.customBorder,
     this.preferGradient = true,
     this.hasShadow = true,
@@ -22,6 +23,7 @@ class PrimaryFillButton extends StatelessWidget {
   final double? width, height;
   final GestureTapCallback? onTap;
   final Color? splashColor;
+  final Color? highlightColor;
   final ShapeBorder? customBorder;
   final bool preferGradient;
   final bool hasShadow;
@@ -59,6 +61,7 @@ class PrimaryFillButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadiusValue),
           ),
           splashColor: splashColor,
+          highlightColor: highlightColor,
           child: Container(
             alignment: alignment,
             width: width, height: height,

@@ -14,6 +14,9 @@ import 'package:flutter/services.dart';
 class $AssetsIconsGen {
   const $AssetsIconsGen();
 
+  /// File path: assets/icons/down_arrow.svg
+  SvgGenImage get downArrow => const SvgGenImage('assets/icons/down_arrow.svg');
+
   /// File path: assets/icons/facebook_colorfull.svg
   SvgGenImage get facebookColorfull =>
       const SvgGenImage('assets/icons/facebook_colorfull.svg');
@@ -25,9 +28,13 @@ class $AssetsIconsGen {
   SvgGenImage get googleColorfull =>
       const SvgGenImage('assets/icons/google_colorfull.svg');
 
+  /// File path: assets/icons/right_arrow.svg
+  SvgGenImage get rightArrow =>
+      const SvgGenImage('assets/icons/right_arrow.svg');
+
   /// List of all assets
   List<SvgGenImage> get values =>
-      [facebookColorfull, favorite, googleColorfull];
+      [downArrow, facebookColorfull, favorite, googleColorfull, rightArrow];
 }
 
 class Assets {

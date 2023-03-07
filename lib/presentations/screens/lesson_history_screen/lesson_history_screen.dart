@@ -26,12 +26,9 @@ class LessonHistoryScreen extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: SimpleTransparentAppBar(
-        height: Dimens.getTopSafeAreaHeight(context),
-      ),
+      appBar: const SimpleTransparentAppBar(),
       body: Container(
         padding: EdgeInsets.only(
-          top: Dimens.getTopSafeAreaHeight(context) + 10,
           bottom: Dimens.getBottomSafeAreaHeight(context) + 10,
         ),
         width: Dimens.getScreenWidth(context),
@@ -57,17 +54,13 @@ class LessonHistoryScreen extends StatelessWidget {
 
                   // lesson history card
                   return LessonHistoryCard(
-                    buttonSet: LessonButtonSet(
-                      onTapRecord: () {},
-                      onTapReview: () {},
-                      onTapFeedback: () {},
-                    ),
                     tutorName: tempList[index],
                     lessonDateTime: time,
                     lessonEndTime: endTime,
                     lessonDateFormat: 'EEE, MMM d, yyyy',
                     lessonDurationFormat: 'HH:mm',
                     isMarked: index.isEven,
+
                     crossAxisAlignment: CrossAxisAlignment.center,
                     margin: EdgeInsets.only(
                       bottom: Dimens.getProportionalScreenHeight(context, 15),

@@ -10,7 +10,7 @@ abstract class BaseCard extends StatelessWidget {
     this.padding,
     this.margin,
     this.width,
-    this.firstSecondDistance = 12,
+    this.firstSecondDistance = 16,
     this.secondChildItemsDistance = 10,
     this.firstChild,
     this.direction = CardDirection.row,
@@ -48,7 +48,7 @@ abstract class BaseCard extends StatelessWidget {
       children: [
         buildFirstChild(context),
         SizedBox(width: Dimens.getProportionalScreenWidth(
-          context, secondChildItemsDistance,
+          context, firstSecondDistance,
         ),),
         buildSecondChild(context),
       ],
@@ -80,7 +80,7 @@ abstract class BaseCard extends StatelessWidget {
       width: width ?? Dimens.getScreenWidth(context),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        boxShadow: [Effects.normalShadow,],
+        boxShadow: [Effects.normalShadowXS,],
         color: AppColors.white,
       ),
       child: direction == CardDirection.row

@@ -9,6 +9,7 @@ class PrimaryOutlineButton extends StatelessWidget {
     this.width = 160,
     this.height,
     this.splashColor = Colors.white38,
+    this.highlightColor = Colors.white24,
     this.customBorder,
     this.preferGradient = true,
     this.bgLinearGradient,
@@ -23,6 +24,7 @@ class PrimaryOutlineButton extends StatelessWidget {
   final double? width, height;
   final GestureTapCallback? onTap;
   final Color? splashColor;
+  final Color? highlightColor;
   final ShapeBorder? customBorder;
   final bool preferGradient;
   final LinearGradient? bgLinearGradient;
@@ -55,7 +57,7 @@ class PrimaryOutlineButton extends StatelessWidget {
         margin: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadiusValue - 1),
-          color: AppColors.white,
+          color: bodyColor ?? AppColors.white,
         ),
         child: Material(
           color: Colors.transparent,
@@ -66,6 +68,7 @@ class PrimaryOutlineButton extends StatelessWidget {
                   borderRadius: BorderRadius.circular(borderRadiusValue),
                 ),
             splashColor: splashColor,
+            highlightColor: highlightColor,
             child: Container(
               alignment: alignment,
               width: width,

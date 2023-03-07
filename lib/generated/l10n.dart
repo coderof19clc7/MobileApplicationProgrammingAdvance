@@ -529,6 +529,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Your upcoming class is`
+  String get labelUpcomingClass {
+    return Intl.message(
+      'Your upcoming class is',
+      name: 'labelUpcomingClass',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

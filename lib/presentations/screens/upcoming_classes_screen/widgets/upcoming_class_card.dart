@@ -4,6 +4,8 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
+import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class UpcomingClassCard extends BaseCard {
   const UpcomingClassCard({
@@ -35,10 +37,8 @@ class UpcomingClassCard extends BaseCard {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Wrap(
-            direction: Axis.vertical,
-            alignment: WrapAlignment.center,
-            spacing: Dimens.getProportionalScreenHeight(context, 10),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               buildInformationRow(
                 context: context,
@@ -46,12 +46,14 @@ class UpcomingClassCard extends BaseCard {
                 text: DateFormat(lessonDateFormat).format(lessonDateTime),
                 isPilled: false,
               ),
+              EmptyProportionalSpace(height: secondChildItemsDistance),
               buildInformationRow(
                 context: context,
                 icon: Icons.access_time_rounded,
                 text: '$startTime - $endTime',
                 isPilled: true,
               ),
+              EmptyProportionalSpace(height: secondChildItemsDistance),
               buildInformationRow(
                 context: context,
                 icon: Icons.person_rounded,
@@ -101,35 +103,21 @@ class UpcomingClassCard extends BaseCard {
     required String text,
     required bool isPilled,
   }) {
-    return Wrap(
-      spacing: Dimens.getProportionalScreenWidth(context, 5),
-      children: [
-        Icon(
-          icon,
-          size: Dimens.getProportionalScreenWidth(context, 14),
-          color: AppColors.primaryBlue400,
+    return RowIconTextInformation(
+      context: context,
+      isPilled: isPilled,
+      icon: Icon(
+        icon,
+        size: Dimens.getProportionalScreenWidth(context, 14),
+        color: AppColors.primaryBlue400,
+      ),
+      text: Text(
+        text,
+        style: TextStyle(
+          color: isPilled ? AppColors.white : AppColors.black,
+          fontSize: Dimens.getProportionalScreenWidth(context, 12),
         ),
-        Container(
-          decoration: isPilled
-              ? BoxDecoration(
-                  borderRadius: BorderRadius.circular(4),
-                  color: AppColors.primaryBlue400,
-                )
-              : null,
-          padding: isPilled
-              ? EdgeInsets.symmetric(
-                  horizontal: Dimens.getProportionalScreenWidth(context, 3),
-                )
-              : null,
-          child: Text(
-            text,
-            style: TextStyle(
-              color: isPilled ? AppColors.white : AppColors.black,
-              fontSize: Dimens.getProportionalScreenWidth(context, 12),
-            ),
-          ),
-        )
-      ],
+      ),
     );
   }
 }

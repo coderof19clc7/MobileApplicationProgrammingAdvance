@@ -3,7 +3,8 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
-import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
+import 'package:one_one_learn/presentations/widgets/choice_chips/simple_list_fake_chips.dart';
+import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 
 class CourseCard extends BaseCard {
   const CourseCard({
@@ -45,7 +46,9 @@ class CourseCard extends BaseCard {
           ),
 
           // categories
-          buildCategoriesField(context, secondChildItemsDistance),
+          SimpleListFakeChips(
+            listData: categories, itemDistance: secondChildItemsDistance,
+          ),
           SizedBox(
             height: Dimens.getProportionalScreenHeight(
               context, secondChildItemsDistance,
@@ -56,19 +59,21 @@ class CourseCard extends BaseCard {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                Icons.signal_cellular_alt_rounded,
-                size: Dimens.getProportionalScreenWidth(context, fontSize + 6),
-                color: AppColors.primaryBlue400,
+              RowIconTextInformation(
+                context: context,
+                icon: Icon(
+                  Icons.signal_cellular_alt_rounded,
+                  size: Dimens.getProportionalScreenWidth(context, fontSize + 6),
+                  color: AppColors.primaryBlue400,
+                ),
+                betweenSpace: 3,
+                text: Text(
+                  level, style: TextStyle(
+                  color: AppColors.neutralBlue500,
+                  fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
+                ),),
               ),
-              SizedBox(width: Dimens.getProportionalScreenWidth(
-                context, 3,
-              )),
-              Text(
-                level, style: TextStyle(
-                color: AppColors.neutralBlue500,
-                fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
-              ),),
+
               SizedBox(width: Dimens.getProportionalScreenWidth(
                 context, 7,
               )),
@@ -80,16 +85,21 @@ class CourseCard extends BaseCard {
               SizedBox(width: Dimens.getProportionalScreenWidth(
                 context, 7,
               )),
-              Icon(
-                Icons.book_rounded,
-                size: Dimens.getProportionalScreenWidth(context, fontSize + 6),
-                color: AppColors.primaryBlue400,
+
+              RowIconTextInformation(
+                context: context,
+                icon: Icon(
+                  Icons.book_rounded,
+                  size: Dimens.getProportionalScreenWidth(context, fontSize + 3),
+                  color: AppColors.primaryBlue400,
+                ),
+                betweenSpace: 2,
+                text: Text(
+                    '$lessons ${S.current.lesson}', style: TextStyle(
+                  color: AppColors.neutralBlue500,
+                  fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
+                )),
               ),
-              Text(
-                '$lessons ${S.current.lesson}', style: TextStyle(
-                color: AppColors.neutralBlue500,
-                fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
-              ),),
             ],
           ),
           SizedBox(
@@ -108,35 +118,6 @@ class CourseCard extends BaseCard {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget buildCategoriesField(
-      BuildContext context, double itemDistance
-      ) {
-    return SizedBox(
-      height: Dimens.getScreenHeight(context,) * 0.037,
-      child: NotificationListener<ScrollNotification>(
-        onNotification: (scrollNotification) {
-          return true;
-        },
-        child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            // category
-            return Container(
-              margin: EdgeInsets.only(
-                right: Dimens.getProportionalScreenWidth(
-                  context, index == categories.length - 1 ? 0 : itemDistance,
-                ),
-              ),
-              child: FakeChip(text: categories[index]),
-            );
-          },
-        ),
       ),
     );
   }

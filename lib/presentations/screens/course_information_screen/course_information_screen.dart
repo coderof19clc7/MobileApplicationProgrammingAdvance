@@ -5,6 +5,7 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/course_information_screen/widgets/course_appbar.dart';
 import 'package:one_one_learn/presentations/screens/course_information_screen/widgets/topic_container.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
+import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class CourseInformationScreen extends StatelessWidget {
@@ -66,7 +67,7 @@ class CourseInformationScreen extends StatelessWidget {
                       style: TextStyle(
                         color: AppColors.black,
                         fontSize:
-                            Dimens.getProportionalScreenWidth(context, 21),
+                        Dimens.getProportionalScreenWidth(context, 21),
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -88,22 +89,23 @@ class CourseInformationScreen extends StatelessWidget {
                     const EmptyProportionalSpace(height: 10),
 
                     // total lessons
-                    Wrap(
-                      spacing: Dimens.getProportionalScreenWidth(context, 5),
+                    Row(
                       children: [
                         buildLeadingInformation(
                           context,
                           Icons.collections_bookmark_rounded,
                           '$numberOfLessons ${S.current.lesson}',
                         ),
+                        const EmptyProportionalSpace(width: 5),
                         Text(
                           '|',
                           style: TextStyle(
                             fontSize:
-                                Dimens.getProportionalScreenWidth(context, 14),
+                            Dimens.getProportionalScreenWidth(context, 14),
                             fontWeight: FontWeight.w300,
                           ),
                         ),
+                        const EmptyProportionalSpace(width: 5),
                         buildLeadingInformation(
                           context,
                           Icons.groups_rounded,
@@ -119,7 +121,7 @@ class CourseInformationScreen extends StatelessWidget {
                       S.current.labelAbout,
                       style: TextStyle(
                         fontSize:
-                            Dimens.getProportionalScreenWidth(context, 20),
+                        Dimens.getProportionalScreenWidth(context, 20),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -164,7 +166,7 @@ class CourseInformationScreen extends StatelessWidget {
                       S.current.labelTopics,
                       style: TextStyle(
                         fontSize:
-                            Dimens.getProportionalScreenWidth(context, 18),
+                        Dimens.getProportionalScreenWidth(context, 18),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -235,26 +237,24 @@ class CourseInformationScreen extends StatelessWidget {
   }
 
   Widget buildLeadingInformation(
-    BuildContext context,
-    IconData icon,
-    String text,
-  ) {
-    return Wrap(
-      spacing: Dimens.getProportionalScreenWidth(context, 5),
-      children: [
-        Icon(
-          icon,
-          color: AppColors.primaryBlue400,
-          size: Dimens.getProportionalScreenWidth(context, 20),
+      BuildContext context,
+      IconData icon,
+      String text,
+      ) {
+    return RowIconTextInformation(
+      context: context,
+      icon: Icon(
+        icon,
+        color: AppColors.primaryBlue400,
+        size: Dimens.getProportionalScreenWidth(context, 20),
+      ),
+      text: Text(
+        text,
+        style: TextStyle(
+          fontSize: Dimens.getProportionalScreenWidth(context, 14),
+          fontWeight: FontWeight.w300,
         ),
-        Text(
-          text,
-          style: TextStyle(
-            fontSize: Dimens.getProportionalScreenWidth(context, 14),
-            fontWeight: FontWeight.w300,
-          ),
-        )
-      ],
+      ),
     );
   }
 }

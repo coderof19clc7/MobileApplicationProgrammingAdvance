@@ -12,32 +12,26 @@ class SimpleTransparentAppBar extends StatelessWidget implements PreferredSizeWi
 
   @override
   Widget build(BuildContext context) {
-    return PreferredSize(
-      preferredSize: Size(
-        Dimens.getScreenWidth(context),
-        Dimens.getScreenWidth(context),
-      ),
-      child: AppBar(
-        backgroundColor: AppColors.transparent,
-        elevation: 0,
-        leadingWidth: Dimens.getProportionalScreenWidth(context, 10),
-        leading: Container(
-          margin: EdgeInsets.only(
-            left: Dimens.getProportionalScreenWidth(context, 15),
-          ),
-          child: GestureDetector(
-            onTap: () {
-              // Navigator.pop(context);
-            },
-            child: Icon(
-              Icons.arrow_back_outlined,
-              color: AppColors.black,
-              size: Dimens.getProportionalScreenWidth(context, 28),
-            ),
+    return AppBar(
+      backgroundColor: AppColors.transparent,
+      elevation: 0,
+      leadingWidth: Dimens.getProportionalScreenWidth(context, 10),
+      leading: Container(
+        margin: EdgeInsets.only(
+          left: Dimens.getProportionalScreenWidth(context, 15),
+        ),
+        child: GestureDetector(
+          onTap: () {
+            // Navigator.pop(context);
+          },
+          child: Icon(
+            Icons.arrow_back_outlined,
+            color: AppColors.black,
+            size: Dimens.getProportionalScreenWidth(context, 28),
           ),
         ),
-        actions: actions,
       ),
+      actions: actions,
     );
   }
 

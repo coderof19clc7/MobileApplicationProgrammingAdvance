@@ -54,14 +54,14 @@ class Effects {
     blurRadius: 8,
     color: AppColors.primaryBlue400.withOpacity(0.44),
   );
-  static final normalShadow = BoxShadow(
+  static final normalShadowXS = BoxShadow(
     offset: const Offset(-2, 5),
     blurRadius: 5,
     color: AppColors.black.withOpacity(0.08),
   );
-  static final onPrimaryShadow = BoxShadow(
+  static final normalShadowSM = BoxShadow(
     offset: const Offset(-2, 5),
-    blurRadius: 13,
-    color: AppColors.black.withOpacity(0.07),
+    blurRadius: 14,
+    color: AppColors.black.withOpacity(0.25),
   );
 }

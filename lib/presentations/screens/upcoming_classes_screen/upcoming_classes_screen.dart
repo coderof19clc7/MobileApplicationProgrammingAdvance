@@ -6,6 +6,7 @@ import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/upcoming_classes_screen/widgets/total_lesson_time_banner.dart';
 import 'package:one_one_learn/presentations/screens/upcoming_classes_screen/widgets/upcoming_class_card.dart';
+import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class UpcomingClassesScreen extends StatefulWidget {
@@ -63,22 +64,22 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
               ),
               child: Row(
                 children: [
-                  Icon(
-                    Icons.info_outline_rounded,
-                    color: AppColors.neutralBlue500,
-                    size: Dimens.getProportionalScreenWidth(context, 16),
-                  ),
-                  SizedBox(
-                    width: Dimens.getProportionalScreenWidth(context, 5),
-                  ),
-                  Text(
-                    S.current.swipeToCancelClass,
-                    style: TextStyle(
+                  RowIconTextInformation(
+                    context: context,
+                    icon: Icon(
+                      Icons.info_outline_rounded,
                       color: AppColors.neutralBlue500,
-                      fontSize: Dimens.getProportionalScreenWidth(context, 12),
-                      fontWeight: FontWeight.w500,
+                      size: Dimens.getProportionalScreenWidth(context, 20),
                     ),
-                  )
+                    text: Text(
+                      S.current.swipeToCancelClass,
+                      style: TextStyle(
+                        color: AppColors.neutralBlue500,
+                        fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

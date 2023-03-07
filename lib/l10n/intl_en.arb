@@ -46,5 +46,6 @@
   "interest": "Interest",
   "specialties": "Specialties",
   "review": "Review",
-  "viewAll": "View all"
+  "viewAll": "View all",
+  "labelUpcomingClass": "Your upcoming class is"
 }

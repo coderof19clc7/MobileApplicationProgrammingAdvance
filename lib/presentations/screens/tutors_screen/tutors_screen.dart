@@ -5,7 +5,10 @@ import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/tutors_screen/widgets/filter_dropdown.dart';
 import 'package:one_one_learn/presentations/screens/tutors_screen/widgets/tutor_card.dart';
+import 'package:one_one_learn/presentations/screens/tutors_screen/widgets/upcoming_class_banner.dart';
+import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/base_choice_chip.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/ui_helper.dart';
 
 class TutorsScreen extends StatelessWidget {
@@ -35,28 +38,57 @@ class TutorsScreen extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // search field
-              TextField(
-                style: TextStyle(
-                  color: AppColors.black,
-                  fontSize: Dimens.getProportionalScreenHeight(context, 15),
-                ),
-                decoration: InputDecoration(
-                  hintText: S.current.searchHintTutor,
-                  hintStyle: TextStyle(
-                    color: AppColors.neutralBlue500,
-                    fontSize: Dimens.getProportionalScreenHeight(context, 15),
-                  ),
-                  isDense: true,
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(
-                      color: AppColors.grey,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                ),
+              // nearest upcoming class countdown
+              UpcomingClassBanner(
+                width: Dimens.getScreenWidth(context),
+                topLabel: S.current.labelUpcomingClass,
+                totalTime:
+                ' ${S.current.hours} ${S.current.minutes}',
+                buttonLabel: S.current.lessonHistory,
+                onTap: () {},
               ),
-              SizedBox(height: Dimens.getProportionalScreenHeight(context, 10)),
+
+              // search and filter field
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      style: TextStyle(
+                        color: AppColors.black,
+                        fontSize: Dimens.getProportionalScreenHeight(context, 15),
+                      ),
+                      decoration: InputDecoration(
+                        hintText: S.current.searchHintTutor,
+                        hintStyle: TextStyle(
+                          color: AppColors.neutralBlue500,
+                          fontSize: Dimens.getProportionalScreenHeight(context, 15),
+                        ),
+                        isDense: true,
+                        border: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: AppColors.grey,
+                          ),
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const EmptyProportionalSpace(width: 10),
+                  PrimaryOutlineButton(
+                    width: Dimens.getProportionalScreenWidth(context, 37),
+                    paddingVertical: Dimens.getProportionalScreenHeight(
+                      context, 12,
+                    ),
+                    preferGradient: false,
+                    bgColor: AppColors.primaryBlue500,
+                    child: Icon(
+                      Icons.filter_alt_rounded,
+                      color: AppColors.primaryBlue500,
+                    ),
+                  ),
+                ],
+              ),
+              const EmptyProportionalSpace(height: 10),
 
               // category filters
               SizedBox(
@@ -81,7 +113,7 @@ class TutorsScreen extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: Dimens.getProportionalScreenHeight(context, 10)),
+              const EmptyProportionalSpace(height: 10),
 
               // nationality and sort filters
               Row(
@@ -92,17 +124,7 @@ class TutorsScreen extends StatelessWidget {
                     data: nationalityCodes,
                     selectedItemBuilder: (context) {
                       return nationalityCodes.map((code) {
-                        return Container(
-                          alignment: Alignment.center,
-                          margin: EdgeInsets.only(
-                            right: Dimens.getProportionalScreenWidth(
-                              context, 10,
-                            ),
-                          ),
-                          child: Text(
-                            UIHelper.getIconFromNationalityCode(code),
-                          ),
-                        );
+                        return Text(UIHelper.getIconFromNationalityCode(code));
                       }).toList();
                     },
                     itemBuilder: (item) {
@@ -123,9 +145,7 @@ class TutorsScreen extends StatelessWidget {
                     },
                   ),
 
-                  SizedBox(
-                    width: Dimens.getProportionalScreenWidth(context, 10),
-                  ),
+                  const EmptyProportionalSpace(width: 10),
 
                   // sort
                   FilterDropDown<int>(
@@ -143,8 +163,10 @@ class TutorsScreen extends StatelessWidget {
                                 : S.current.sortRatingFromLowest,
                           )!,
                           style: TextStyle(
+                            fontWeight: FontWeight.w500,
                             fontSize: Dimens.getProportionalScreenHeight(
-                                context, 12),
+                              context, 14,
+                            ),
                           ),
                         ),
                       );
@@ -152,7 +174,7 @@ class TutorsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: Dimens.getProportionalScreenHeight(context, 10)),
+              const EmptyProportionalSpace(height: 10),
 
               // tutor list
               Expanded(

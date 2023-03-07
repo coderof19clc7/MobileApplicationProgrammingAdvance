@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "labelTopics": MessageLookupByLibrary.simpleMessage("Topics"),
         "labelTotalLessonTime":
             MessageLookupByLibrary.simpleMessage("Your total lesson time is"),
+        "labelUpcomingClass":
+            MessageLookupByLibrary.simpleMessage("Your upcoming class is"),
         "labelWhatAbleDo": MessageLookupByLibrary.simpleMessage(
             "What will you be able to do?"),
         "labelWhyTakeCourse": MessageLookupByLibrary.simpleMessage(

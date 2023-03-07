@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/svg_icons.dart';
 
 class FilterDropDown<T> extends StatelessWidget {
   const FilterDropDown({
@@ -35,7 +37,15 @@ class FilterDropDown<T> extends StatelessWidget {
           DropdownButton<T>(
             value: value,
             selectedItemBuilder: selectedItemBuilder,
-            icon: const Icon(Icons.keyboard_arrow_down_rounded),
+            icon: Container(
+              margin: EdgeInsets.only(
+                left: Dimens.getProportionalScreenWidth(context, 3),
+              ),
+              child: SvgPicture.string(SvgIcons.getIcon(
+                SvgIconEnum.downArrow,
+                fillColor: AppColors.neutralBlue500,
+              )),
+            ),
             menuMaxHeight: Dimens.getProportionalScreenHeight(context, 150),
             alignment: Alignment.center,
             items: data.map(itemBuilder).toList(),

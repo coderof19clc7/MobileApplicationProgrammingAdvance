@@ -4,7 +4,8 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
-import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
+import 'package:one_one_learn/presentations/widgets/choice_chips/simple_list_fake_chips.dart';
+import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 
 class TutorCard extends BaseCard {
   const TutorCard({
@@ -62,28 +63,26 @@ class TutorCard extends BaseCard {
           )),
 
           // categories
-          buildCategoriesField(context, secondChildItemsDistance),
+          SimpleListFakeChips(
+            listData: categories, itemDistance: secondChildItemsDistance,
+          ),
           SizedBox(height: Dimens.getProportionalScreenHeight(
             context, secondChildItemsDistance,
           )),
 
           // rating
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                Icons.star_rounded,
-                size: Dimens.getProportionalScreenWidth(context, 14),
-                color: AppColors.primaryBlue400,
-              ),
-              SizedBox(width: Dimens.getProportionalScreenWidth(context, 4)),
-              Text(
-                '$rating/5', style: TextStyle(
-                color: AppColors.neutralBlue500,
-                fontSize: Dimens.getProportionalScreenWidth(context, 12),
-              ),
-              ),
-            ],
+          RowIconTextInformation(
+            context: context,
+            icon: Icon(
+              Icons.star_rounded,
+              size: Dimens.getProportionalScreenWidth(context, 14),
+              color: AppColors.primaryBlue400,
+            ),
+            text: Text(
+              '$rating/5', style: TextStyle(
+              color: AppColors.neutralBlue500,
+              fontSize: Dimens.getProportionalScreenWidth(context, 12),
+            )),
           ),
           SizedBox(height: Dimens.getProportionalScreenHeight(
             context, secondChildItemsDistance,
@@ -99,36 +98,6 @@ class TutorCard extends BaseCard {
             ),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget buildCategoriesField(
-    BuildContext context, double secondChildItemsDistance
-  ) {
-    return SizedBox(
-      height: Dimens.getScreenHeight(context,) * 0.037,
-      child: NotificationListener<ScrollNotification>(
-        onNotification: (scrollNotification) {
-          return true;
-        },
-        child: ListView.builder(
-          shrinkWrap: true,
-          scrollDirection: Axis.horizontal,
-          itemCount: categories.length,
-          itemBuilder: (context, index) {
-            // category
-            return Container(
-              margin: EdgeInsets.only(
-                right: Dimens.getProportionalScreenWidth(
-                  context, index == categories.length - 1
-                    ? 0 : secondChildItemsDistance,
-                ),
-              ),
-              child: FakeChip(text: categories[index]),
-            );
-          },
-        ),
       ),
     );
   }
