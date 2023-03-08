@@ -114,10 +114,7 @@ class TutorCard extends BaseCard {
             maxLines: 2,
             style: context.theme.textTheme.bodySmall!.copyWith(
               color: context.theme.colorScheme.onTertiaryContainer,
-              fontSize: Dimens.getProportionalScreenHeight(
-                context,
-                12,
-              ),
+              fontSize: Dimens.getProportionalScreenWidth(context, 12),
             ),
           ),
         ],

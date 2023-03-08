@@ -33,8 +33,8 @@ class AppThemes {
       onErrorContainer: AppColors.red400, // error/warning text
     ),
     scaffoldBackgroundColor: AppColors.white,
-    highlightColor: AppColors.primaryBlue200,
-    splashColor: AppColors.primaryBlue400,
+    highlightColor: AppColors.primaryBlue200.withOpacity(0.5),
+    splashColor: AppColors.primaryBlue400.withOpacity(0.3),
     textTheme: AppFonts.textThemeLight,
     iconTheme: IconThemeData(color: AppColors.primaryBlue400),
     dialogTheme: DialogTheme(
@@ -81,8 +81,8 @@ class AppThemes {
       onErrorContainer: AppColors.red300, // error/warning text
     ),
     scaffoldBackgroundColor: AppColors.black,
-    highlightColor: AppColors.primaryBlue800,
-    splashColor: AppColors.primaryBlue500,
+    highlightColor: AppColors.primaryBlue800.withOpacity(0.5),
+    splashColor: AppColors.primaryBlue500.withOpacity(0.3),
     textTheme: AppFonts.textThemeDark,
     iconTheme: IconThemeData(color: AppColors.primaryBlue500),
     dialogTheme: DialogTheme(

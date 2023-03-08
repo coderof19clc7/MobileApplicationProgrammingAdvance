@@ -81,10 +81,14 @@ class LessonHistoryCard extends BaseCard {
               margin: EdgeInsets.only(
                 right: Dimens.getProportionalScreenWidth(context, 5),
               ),
-              child: SvgPicture.string(SvgIcons.getIcon(
-                SvgIconEnum.rightArrow,
-                fillColor: context.theme.colorScheme.onInverseSurface,
-              )),
+              child: SvgPicture.string(
+                SvgIcons.getIcon(
+                  SvgIconEnum.rightArrow,
+                  fillColor: context.theme.colorScheme.onInverseSurface,
+                ),
+                width: Dimens.getProportionalScreenWidth(context, 24),
+                height: Dimens.getProportionalScreenWidth(context, 24),
+              ),
             ),
           ),
         ],

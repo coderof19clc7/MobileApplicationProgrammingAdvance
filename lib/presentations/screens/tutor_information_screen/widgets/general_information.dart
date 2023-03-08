@@ -140,17 +140,20 @@ class GeneralInformation extends StatelessWidget {
   }
 
   Widget buildButtonField(BuildContext context) {
-    const iconSize = 20.0, verticalSpace = 4.0;
-    const fontSize = 14.0, fontWeight = FontWeight.w600;
+    const iconSize = 16.0, verticalSpace = 4.0, buttonVerticalPadding = 7.0;
+    const fontSize = 12.0, fontWeight = FontWeight.w600;
     return SizedBox(
       width: Dimens.getScreenWidth(context) * 0.75,
       child: Column(
         children: [
           // booking button
           PrimaryFillButton(
+            onTap: () {},
             width: Dimens.getScreenWidth(context),
             borderRadiusValue: Dimens.getScreenWidth(context),
-            paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
+            paddingVertical: Dimens.getProportionalScreenHeight(
+              context, buttonVerticalPadding,
+            ),
             child: Column(
               children: [
                 Icon(
@@ -165,8 +168,7 @@ class GeneralInformation extends StatelessWidget {
                     color: context.theme.colorScheme.onPrimary,
                     fontWeight: fontWeight,
                     fontSize: Dimens.getProportionalScreenWidth(
-                      context,
-                      fontSize + 2,
+                      context, fontSize + 2,
                     ),
                   ),
                 ),
@@ -183,7 +185,9 @@ class GeneralInformation extends StatelessWidget {
               Flexible(
                 child: PrimaryOutlineButton(
                   borderRadiusValue: Dimens.getScreenWidth(context),
-                  paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
+                  paddingVertical: Dimens.getProportionalScreenHeight(
+                    context, buttonVerticalPadding,
+                  ),
                   onTap: () {},
                   preferGradient: false,
                   borderColor: context.theme.colorScheme.onSurfaceVariant,
@@ -194,8 +198,7 @@ class GeneralInformation extends StatelessWidget {
                         Icons.report_rounded,
                         color: context.theme.colorScheme.onSurfaceVariant,
                         size: Dimens.getProportionalScreenWidth(
-                          context,
-                          iconSize,
+                          context, iconSize,
                         ),
                       ),
                       const EmptyProportionalSpace(height: verticalSpace),
@@ -205,8 +208,7 @@ class GeneralInformation extends StatelessWidget {
                           color: context.theme.colorScheme.onSurfaceVariant,
                           fontWeight: fontWeight,
                           fontSize: Dimens.getProportionalScreenWidth(
-                            context,
-                            fontSize,
+                            context, fontSize,
                           ),
                         ),
                       ),
@@ -221,7 +223,9 @@ class GeneralInformation extends StatelessWidget {
               Flexible(
                 child: PrimaryOutlineButton(
                   borderRadiusValue: Dimens.getScreenWidth(context),
-                  paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
+                  paddingVertical: Dimens.getProportionalScreenHeight(
+                    context, buttonVerticalPadding,
+                  ),
                   onTap: () {},
                   preferGradient: false,
                   borderColor: context.theme.colorScheme.onSurfaceVariant,
@@ -232,8 +236,7 @@ class GeneralInformation extends StatelessWidget {
                         Icons.videocam_rounded,
                         color: context.theme.colorScheme.onSurfaceVariant,
                         size: Dimens.getProportionalScreenWidth(
-                          context,
-                          iconSize + 4,
+                          context, iconSize + 4,
                         ),
                       ),
                       Text(
@@ -242,8 +245,7 @@ class GeneralInformation extends StatelessWidget {
                           color: context.theme.colorScheme.onSurfaceVariant,
                           fontWeight: fontWeight,
                           fontSize: Dimens.getProportionalScreenWidth(
-                            context,
-                            fontSize,
+                            context, fontSize,
                           ),
                         ),
                       ),
@@ -258,7 +260,9 @@ class GeneralInformation extends StatelessWidget {
               Flexible(
                 child: PrimaryOutlineButton(
                   borderRadiusValue: Dimens.getScreenWidth(context),
-                  paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
+                  paddingVertical: Dimens.getProportionalScreenHeight(
+                    context, buttonVerticalPadding,
+                  ),
                   onTap: () {},
                   preferGradient: false,
                   borderColor: context.theme.colorScheme.onSurfaceVariant,
@@ -269,8 +273,7 @@ class GeneralInformation extends StatelessWidget {
                         Icons.message_rounded,
                         color: context.theme.colorScheme.onSurfaceVariant,
                         size: Dimens.getProportionalScreenWidth(
-                          context,
-                          iconSize,
+                          context, iconSize,
                         ),
                       ),
                       const EmptyProportionalSpace(height: verticalSpace),
@@ -280,8 +283,7 @@ class GeneralInformation extends StatelessWidget {
                           color: context.theme.colorScheme.onSurfaceVariant,
                           fontWeight: fontWeight,
                           fontSize: Dimens.getProportionalScreenWidth(
-                            context,
-                            fontSize,
+                            context, fontSize,
                           ),
                         ),
                       ),
