@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 
@@ -26,20 +27,20 @@ abstract class BaseCard extends StatelessWidget {
 
   Widget buildFirstChild(BuildContext context) {
     return SizedBox(
-      width: direction  == CardDirection.row
-          ? Dimens.getProportionalScreenWidth(context, 90)
-          : Dimens.getScreenWidth(context),
+      width: direction == CardDirection.row ? Dimens.getProportionalScreenWidth(context, 90) : Dimens.getScreenWidth(context),
       child: AspectRatio(
         aspectRatio: direction == CardDirection.row ? 1 : 2,
-        child: firstChild ?? Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            color: AppColors.neutralBlue500,
-          ),
-        ),
+        child: firstChild ??
+            Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: AppColors.neutralBlue500,
+              ),
+            ),
       ),
     );
   }
+
   Widget buildSecondChild(BuildContext context);
 
   Widget buildRowLayout(BuildContext context) {
@@ -47,9 +48,12 @@ abstract class BaseCard extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
       children: [
         buildFirstChild(context),
-        SizedBox(width: Dimens.getProportionalScreenWidth(
-          context, firstSecondDistance,
-        ),),
+        SizedBox(
+          width: Dimens.getProportionalScreenWidth(
+            context,
+            firstSecondDistance,
+          ),
+        ),
         buildSecondChild(context),
       ],
     );
@@ -60,8 +64,10 @@ abstract class BaseCard extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.stretch,
       children: [
         buildFirstChild(context),
-        SizedBox(height: Dimens.getProportionalScreenHeight(
-          context, firstSecondDistance,
+        SizedBox(
+            height: Dimens.getProportionalScreenHeight(
+          context,
+          firstSecondDistance,
         )),
         buildSecondChild(context),
       ],
@@ -71,21 +77,23 @@ abstract class BaseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: padding ?? EdgeInsets.all(
-        Dimens.getProportionalScreenWidth(context, 14),
-      ),
-      margin: margin ?? EdgeInsets.only(
-        bottom: Dimens.getProportionalScreenHeight(context, 15),
-      ),
+      padding: padding ??
+          EdgeInsets.all(
+            Dimens.getProportionalScreenWidth(context, 14),
+          ),
+      margin: margin ??
+          EdgeInsets.only(
+            bottom: Dimens.getProportionalScreenHeight(context, 15),
+          ),
       width: width ?? Dimens.getScreenWidth(context),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(15),
-        boxShadow: [Effects.normalShadowXS,],
-        color: AppColors.white,
+        boxShadow: [
+          Effects.normalShadowXS,
+        ],
+        color: context.theme.colorScheme.surface,
       ),
-      child: direction == CardDirection.row
-          ? buildRowLayout(context)
-          : buildColumnLayout(context),
+      child: direction == CardDirection.row ? buildRowLayout(context) : buildColumnLayout(context),
     );
   }
 }

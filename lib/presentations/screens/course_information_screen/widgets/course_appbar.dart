@@ -26,7 +26,7 @@ class CourseAppBar extends StatelessWidget {
       pinned: true,
       elevation: 0,
       expandedHeight: appBarHeight,
-      toolbarHeight: Dimens.getTopSafeAreaHeight(context),
+      toolbarHeight: Dimens.getTopSafeAreaHeight(context) * 1.5,
       collapsedHeight: Dimens.getTopSafeAreaHeight(context) * 3,
       leading: leading,
       actions: actions,

@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/assets.gen.dart';
 import 'package:one_one_learn/generated/l10n.dart';
@@ -22,8 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   void initState() {
     super.initState();
-    _tapGestureRecognizer = TapGestureRecognizer()
-      ..onTap = () {};
+    _tapGestureRecognizer = TapGestureRecognizer()..onTap = () {};
   }
 
   @override
@@ -49,13 +48,13 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
-              children:[
+              children: [
                 // sign in title field
                 SizedBox(
                   width: Dimens.getScreenWidth(context),
                   child: Text(
                     S.current.loginTitle,
-                    style: TextStyle(
+                    style: context.theme.textTheme.displayLarge!.copyWith(
                       fontSize: Dimens.getProportionalScreenWidth(context, 32),
                       fontWeight: FontWeight.w600,
                     ),
@@ -68,6 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: S.current.email,
                   leftWidget: Icon(
                     Icons.email_rounded,
+                    color: context.theme.colorScheme.onInverseSurface,
                     size: Dimens.getProportionalScreenWidth(context, 24),
                   ),
                 ),
@@ -76,6 +76,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   hintText: S.current.password,
                   leftWidget: Icon(
                     Icons.lock_rounded,
+                    color: context.theme.colorScheme.onInverseSurface,
                     size: Dimens.getProportionalScreenWidth(context, 24),
                   ),
                   canTextBeObscured: true,
@@ -86,30 +87,36 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: Dimens.getScreenWidth(context),
                   paddingVertical: Dimens.getProportionalScreenHeight(context, 14),
                   borderRadiusValue: Dimens.getScreenWidth(context),
-                  child: Text(S.current.login, style: TextStyle(
-                    color: Colors.white,
-                    fontSize: Dimens.getProportionalScreenWidth(context, 16),
-                  ),),
+                  child: Text(
+                    S.current.login,
+                    style: context.theme.textTheme.displaySmall!.copyWith(
+                      fontWeight: FontWeight.w500,
+                      fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                    ),
+                  ),
                 ),
                 SizedBox(height: Dimens.getScreenHeight(context) * 0.0296),
 
                 // forgot password field
                 InkWell(
                   onTap: () {},
-                  child: Text('${S.current.forgotPassword}?', style: TextStyle(
-                    color: AppColors.primaryBlue400,
-                    fontSize: Dimens.getProportionalScreenWidth(context, 15),
-                    fontWeight: FontWeight.w500,
-                  ),),
+                  child: Text(
+                    '${S.current.forgotPassword}?',
+                    style: TextStyle(
+                      color: context.theme.colorScheme.onSurfaceVariant,
+                      fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                 ),
                 SizedBox(height: Dimens.getScreenHeight(context) * 0.0474),
 
                 // more options to sign in field
                 Text(
-                  S.current.orContinueWith,
-                  style: TextStyle(
-                    color: AppColors.neutralBlue500,
-                    fontSize: 15, fontWeight: FontWeight.w500,
+                  S.current.orContinueWith.toLowerCase(),
+                  style: context.theme.textTheme.bodySmall!.copyWith(
+                    fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                    fontWeight: FontWeight.w400,
                   ),
                 ),
                 SizedBox(height: Dimens.getScreenHeight(context) * 0.025),
@@ -119,10 +126,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     PrimaryOutlineButton(
                       onTap: () {},
                       width: Dimens.getProportionalScreenWidth(context, 87),
-                      bgColor: AppColors.grey,
                       paddingVertical: Dimens.getProportionalScreenHeight(context, 17),
                       preferGradient: false,
-                      splashColor: AppColors.grey.withOpacity(0.5),
+                      borderColor: context.theme.colorScheme.outline,
+                      bodyColor: context.theme.colorScheme.surface,
                       child: Assets.icons.googleColorfull.svg(
                         width: Dimens.getProportionalScreenWidth(context, 24),
                         height: Dimens.getProportionalScreenWidth(context, 24),
@@ -132,10 +139,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     PrimaryOutlineButton(
                       onTap: () {},
                       width: Dimens.getProportionalScreenWidth(context, 87),
-                      bgColor: AppColors.grey,
                       paddingVertical: Dimens.getProportionalScreenHeight(context, 17),
                       preferGradient: false,
-                      splashColor: AppColors.grey.withOpacity(0.5),
+                      borderColor: context.theme.colorScheme.outline,
+                      bodyColor: context.theme.colorScheme.surface,
                       child: Assets.icons.facebookColorfull.svg(
                         width: Dimens.getProportionalScreenWidth(context, 24),
                         height: Dimens.getProportionalScreenWidth(context, 24),
@@ -150,18 +157,18 @@ class _LoginScreenState extends State<LoginScreen> {
                   text: TextSpan(
                     text: S.current.dontHaveAccount,
                     style: TextStyle(
-                      color: AppColors.neutralBlue400,
-                      fontSize: Dimens.getProportionalScreenWidth(context, 17),
-                      fontWeight: FontWeight.w500,
+                      color: context.theme.colorScheme.onInverseSurface,
+                      fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                      fontWeight: FontWeight.w400,
                     ),
                     children: [
                       TextSpan(
                         text: ' ${S.current.signUp}',
                         recognizer: _tapGestureRecognizer,
                         style: TextStyle(
-                          color: AppColors.primaryBlue400,
-                          fontSize: Dimens.getProportionalScreenWidth(context, 17),
-                          fontWeight: FontWeight.w500,
+                          color: context.theme.colorScheme.primary,
+                          fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ],

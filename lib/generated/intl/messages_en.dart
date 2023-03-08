@@ -23,7 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
-        "all": MessageLookupByLibrary.simpleMessage("all"),
+        "all": MessageLookupByLibrary.simpleMessage("All"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Book class"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
@@ -34,7 +34,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
-        "enterRoom": MessageLookupByLibrary.simpleMessage("Enter room"),
+        "enterRoom": MessageLookupByLibrary.simpleMessage("Join"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
@@ -77,13 +77,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "sortFavoriteFromHighest":
-            MessageLookupByLibrary.simpleMessage("from most favorited"),
+            MessageLookupByLibrary.simpleMessage("From most favorited"),
         "sortFavoriteFromLowest":
-            MessageLookupByLibrary.simpleMessage("from least favorited"),
+            MessageLookupByLibrary.simpleMessage("From least favorited"),
         "sortRatingFromHighest":
-            MessageLookupByLibrary.simpleMessage("from highest rating"),
+            MessageLookupByLibrary.simpleMessage("From highest rating"),
         "sortRatingFromLowest":
-            MessageLookupByLibrary.simpleMessage("from lowest rating"),
+            MessageLookupByLibrary.simpleMessage("From lowest rating"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
         "swipeToCancelClass": MessageLookupByLibrary.simpleMessage(
             "Swipe left to cancel a class"),

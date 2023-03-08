@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 
 class TextFieldFill extends StatefulWidget {
   const TextFieldFill({
@@ -25,6 +25,7 @@ class TextFieldFill extends StatefulWidget {
   @override
   State<TextFieldFill> createState() => _TextFieldFillState();
 }
+
 class _TextFieldFillState extends State<TextFieldFill> {
   late bool _obscureText;
   late TextEditingController _textController;
@@ -43,8 +44,11 @@ class _TextFieldFillState extends State<TextFieldFill> {
       obscureText: _obscureText,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
+        hintStyle: TextStyle(
+          color: context.theme.colorScheme.onInverseSurface,
+        ),
         filled: true,
-        fillColor: AppColors.neutralBlue200,
+        fillColor: context.theme.colorScheme.inverseSurface,
         contentPadding: widget.contentPadding,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
@@ -52,19 +56,20 @@ class _TextFieldFillState extends State<TextFieldFill> {
         ),
         hintText: widget.hintText,
         prefixIcon: widget.leftWidget,
-        suffixIcon: widget.canTextBeObscured ? GestureDetector(
-          onTap: () {
-            setState(() {
-              _obscureText = !_obscureText;
-            });
-          },
-          child: Icon(
-            _obscureText ? Icons.visibility_off : Icons.visibility,
-          ),
-        ) : widget.rightWidget,
+        suffixIcon: widget.canTextBeObscured
+            ? GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+                child: Icon(
+                  color: context.theme.colorScheme.onInverseSurface,
+                  _obscureText ? Icons.visibility_off : Icons.visibility,
+                ),
+              )
+            : widget.rightWidget,
       ),
     );
   }
 }
-
-

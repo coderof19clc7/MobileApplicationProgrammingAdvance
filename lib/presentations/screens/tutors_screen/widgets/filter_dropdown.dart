@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
 
 class FilterDropDown<T> extends StatelessWidget {
   const FilterDropDown({
-    super.key, this.value, required this.data,
-    this.selectedItemBuilder, required this.itemBuilder,
+    super.key,
+    this.value,
+    required this.data,
+    this.selectedItemBuilder,
+    required this.itemBuilder,
     this.leadingIcon,
   });
 
@@ -22,9 +25,10 @@ class FilterDropDown<T> extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
+        color: context.theme.colorScheme.tertiaryContainer,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-          color: AppColors.grey,
+          color: context.theme.colorScheme.outline,
         ),
       ),
       padding: EdgeInsets.symmetric(
@@ -43,7 +47,7 @@ class FilterDropDown<T> extends StatelessWidget {
               ),
               child: SvgPicture.string(SvgIcons.getIcon(
                 SvgIconEnum.downArrow,
-                fillColor: AppColors.neutralBlue500,
+                fillColor: context.theme.iconTheme.color,
               )),
             ),
             menuMaxHeight: Dimens.getProportionalScreenHeight(context, 150),

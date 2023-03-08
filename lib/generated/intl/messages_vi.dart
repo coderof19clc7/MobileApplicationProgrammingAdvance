@@ -23,7 +23,7 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Về tôi"),
-        "all": MessageLookupByLibrary.simpleMessage("tất cả"),
+        "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
         "chat": MessageLookupByLibrary.simpleMessage("Nhắn tin"),
         "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
@@ -77,13 +77,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "sortFavoriteFromHighest":
-            MessageLookupByLibrary.simpleMessage("nhiều lượt thích nhất"),
+            MessageLookupByLibrary.simpleMessage("Nhiều lượt thích nhất"),
         "sortFavoriteFromLowest":
-            MessageLookupByLibrary.simpleMessage("ít lượt thích nhất"),
+            MessageLookupByLibrary.simpleMessage("Ít lượt thích nhất"),
         "sortRatingFromHighest":
-            MessageLookupByLibrary.simpleMessage("từ đánh giá cao"),
+            MessageLookupByLibrary.simpleMessage("Từ đánh giá cao"),
         "sortRatingFromLowest":
-            MessageLookupByLibrary.simpleMessage("từ đánh giá thấp"),
+            MessageLookupByLibrary.simpleMessage("Từ đánh giá thấp"),
         "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),
         "swipeToCancelClass":
             MessageLookupByLibrary.simpleMessage("Vuốt trái để hủy buổi học"),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/generated/l10n.dart';
@@ -11,7 +11,8 @@ import 'package:one_one_learn/utils/ui_helper.dart';
 
 class GeneralInformation extends StatelessWidget {
   const GeneralInformation({
-    super.key, this.isFavorite = false,
+    super.key,
+    this.isFavorite = false,
   });
 
   final bool isFavorite;
@@ -38,12 +39,12 @@ class GeneralInformation extends StatelessWidget {
                 ),
               ),
               Positioned(
-                right: 0, bottom: 0,
+                right: 0,
+                bottom: 0,
                 child: SvgPicture.string(
                   SvgIcons.getIcon(
                     SvgIconEnum.favorite,
-                    fillColor: isFavorite
-                        ? AppColors.primaryBlue400 : AppColors.white,
+                    fillColor: isFavorite ? context.theme.colorScheme.primary : context.theme.colorScheme.background,
                   ),
                   width: Dimens.getProportionalScreenHeight(context, 40),
                   height: Dimens.getProportionalScreenHeight(context, 40),
@@ -68,14 +69,13 @@ class GeneralInformation extends StatelessWidget {
   Widget buildPublicInformation(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children:[
+      children: [
         // name
         Text(
           'Haylee Caillier',
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: context.theme.textTheme.titleLarge!.copyWith(
             fontSize: Dimens.getProportionalScreenWidth(context, 20),
-            fontWeight: FontWeight.w700,
           ),
         ),
         const EmptyProportionalSpace(height: 10),
@@ -83,17 +83,20 @@ class GeneralInformation extends StatelessWidget {
         // nationality
         Row(
           mainAxisSize: MainAxisSize.min,
-          children:[
+          children: [
             Text(
               UIHelper.getIconFromNationalityCode('DE'),
               style: TextStyle(
-                fontSize: Dimens.getProportionalScreenWidth(context, 20),
+                fontSize: Dimens.getProportionalScreenWidth(context, 16),
               ),
             ),
             const EmptyProportionalSpace(width: 8),
-            Text('Netherlands', style: TextStyle(
-              fontSize: Dimens.getProportionalScreenWidth(context, 20),
-            )),
+            Text(
+              'Netherlands',
+              style: context.theme.textTheme.bodySmall!.copyWith(
+                fontSize: Dimens.getProportionalScreenWidth(context, 16),
+              ),
+            ),
           ],
         ),
         const EmptyProportionalSpace(height: 10),
@@ -101,31 +104,33 @@ class GeneralInformation extends StatelessWidget {
         // rating & review count
         Row(
           mainAxisSize: MainAxisSize.min,
-          children:[
+          children: [
             Icon(
-              Icons.star_rounded, color: AppColors.primaryBlue400,
+              Icons.star_rounded,
+              color: context.theme.colorScheme.onSurfaceVariant,
               size: Dimens.getProportionalScreenWidth(context, 17),
             ),
             const EmptyProportionalSpace(width: 4),
             Text(
               '4.5/5',
-              style: TextStyle(
-                color: AppColors.primaryBlue400, fontWeight: FontWeight.w700,
-                fontSize: Dimens.getProportionalScreenWidth(context, 14),
+              style: context.theme.textTheme.bodySmall!.copyWith(
+                color: context.theme.colorScheme.onSurfaceVariant,
+                fontWeight: FontWeight.w700,
+                fontSize: Dimens.getProportionalScreenWidth(context, 15),
               ),
             ),
             const EmptyProportionalSpace(width: 8),
             Text(
-              '|', style: TextStyle(
-                color: AppColors.neutralBlue500,
-                fontSize: Dimens.getProportionalScreenWidth(context, 14),
+              '|',
+              style: context.theme.textTheme.bodySmall!.copyWith(
+                fontSize: Dimens.getProportionalScreenWidth(context, 15),
               ),
             ),
             const EmptyProportionalSpace(width: 8),
             Text(
-              '23,000 ${S.current.review}', style: TextStyle(
-                color: AppColors.neutralBlue500,
-                fontSize: Dimens.getProportionalScreenWidth(context, 14),
+              '23,000 ${S.current.review}'.toLowerCase(),
+              style: context.theme.textTheme.bodySmall!.copyWith(
+                fontSize: Dimens.getProportionalScreenWidth(context, 15),
               ),
             ),
           ],
@@ -149,15 +154,19 @@ class GeneralInformation extends StatelessWidget {
             child: Column(
               children: [
                 Icon(
-                  Icons.calendar_today_rounded, color: AppColors.white,
+                  Icons.calendar_today_rounded,
+                  color: context.theme.colorScheme.onPrimary,
                   size: Dimens.getProportionalScreenWidth(context, iconSize),
                 ),
                 const EmptyProportionalSpace(height: verticalSpace),
                 Text(
-                  S.current.bookClass, style: TextStyle(
-                    color: AppColors.white, fontWeight: fontWeight,
+                  S.current.bookClass,
+                  style: TextStyle(
+                    color: context.theme.colorScheme.onPrimary,
+                    fontWeight: fontWeight,
                     fontSize: Dimens.getProportionalScreenWidth(
-                      context, fontSize + 2,
+                      context,
+                      fontSize + 2,
                     ),
                   ),
                 ),
@@ -175,23 +184,31 @@ class GeneralInformation extends StatelessWidget {
                 child: PrimaryOutlineButton(
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
+                  onTap: () {},
+                  preferGradient: false,
+                  borderColor: context.theme.colorScheme.onSurfaceVariant,
+                  bodyColor: context.theme.colorScheme.background,
                   child: Column(
                     children: [
                       Icon(
-                        Icons.report_rounded, color: AppColors.primaryBlue400,
+                        Icons.report_rounded,
+                        color: context.theme.colorScheme.onSurfaceVariant,
                         size: Dimens.getProportionalScreenWidth(
-                          context, iconSize,
+                          context,
+                          iconSize,
                         ),
                       ),
                       const EmptyProportionalSpace(height: verticalSpace),
                       Text(
-                        S.current.report, style: TextStyle(
-                        color: AppColors.primaryBlue400,
-                        fontWeight: fontWeight,
-                        fontSize: Dimens.getProportionalScreenWidth(
-                          context, fontSize,
+                        S.current.report,
+                        style: TextStyle(
+                          color: context.theme.colorScheme.onSurfaceVariant,
+                          fontWeight: fontWeight,
+                          fontSize: Dimens.getProportionalScreenWidth(
+                            context,
+                            fontSize,
+                          ),
                         ),
-                      ),
                       ),
                     ],
                   ),
@@ -205,22 +222,30 @@ class GeneralInformation extends StatelessWidget {
                 child: PrimaryOutlineButton(
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
+                  onTap: () {},
+                  preferGradient: false,
+                  borderColor: context.theme.colorScheme.onSurfaceVariant,
+                  bodyColor: context.theme.colorScheme.background,
                   child: Column(
                     children: [
                       Icon(
-                        Icons.videocam_rounded, color: AppColors.primaryBlue400,
+                        Icons.videocam_rounded,
+                        color: context.theme.colorScheme.onSurfaceVariant,
                         size: Dimens.getProportionalScreenWidth(
-                          context, iconSize + 4,
+                          context,
+                          iconSize + 4,
                         ),
                       ),
                       Text(
-                        S.current.demo, style: TextStyle(
-                        color: AppColors.primaryBlue400,
-                        fontWeight: fontWeight,
-                        fontSize: Dimens.getProportionalScreenWidth(
-                          context, fontSize,
+                        S.current.demo,
+                        style: TextStyle(
+                          color: context.theme.colorScheme.onSurfaceVariant,
+                          fontWeight: fontWeight,
+                          fontSize: Dimens.getProportionalScreenWidth(
+                            context,
+                            fontSize,
+                          ),
                         ),
-                      ),
                       ),
                     ],
                   ),
@@ -234,21 +259,31 @@ class GeneralInformation extends StatelessWidget {
                 child: PrimaryOutlineButton(
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
+                  onTap: () {},
+                  preferGradient: false,
+                  borderColor: context.theme.colorScheme.onSurfaceVariant,
+                  bodyColor: context.theme.colorScheme.background,
                   child: Column(
                     children: [
                       Icon(
-                        Icons.message_rounded, color: AppColors.primaryBlue400,
+                        Icons.message_rounded,
+                        color: context.theme.colorScheme.onSurfaceVariant,
                         size: Dimens.getProportionalScreenWidth(
-                          context, iconSize,
+                          context,
+                          iconSize,
                         ),
                       ),
                       const EmptyProportionalSpace(height: verticalSpace),
                       Text(
-                        S.current.chat, style: TextStyle(
-                        color: AppColors.primaryBlue400,
-                        fontWeight: fontWeight,
-                        fontSize: Dimens.getProportionalScreenWidth(context, 14),
-                      ),
+                        S.current.chat,
+                        style: TextStyle(
+                          color: context.theme.colorScheme.onSurfaceVariant,
+                          fontWeight: fontWeight,
+                          fontSize: Dimens.getProportionalScreenWidth(
+                            context,
+                            fontSize,
+                          ),
+                        ),
                       ),
                     ],
                   ),

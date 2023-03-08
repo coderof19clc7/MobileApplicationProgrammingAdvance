@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
@@ -29,13 +29,13 @@ class ForgotPasswordScreen extends StatelessWidget {
           height: Dimens.getScreenHeight(context),
           child: Column(
             mainAxisSize: MainAxisSize.min,
-            children:[
+            children: [
               // sign in title field
               SizedBox(
                 width: Dimens.getScreenWidth(context),
                 child: Text(
                   S.current.forgotPassword,
-                  style: TextStyle(
+                  style: context.theme.textTheme.displayLarge!.copyWith(
                     fontSize: Dimens.getProportionalScreenWidth(context, 32),
                     fontWeight: FontWeight.w600,
                   ),
@@ -44,10 +44,10 @@ class ForgotPasswordScreen extends StatelessWidget {
               SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
 
               // reset password requirement field
-              Text(S.current.resetPasswordRequirement,
-                style: TextStyle(
+              Text(
+                S.current.resetPasswordRequirement,
+                style: context.theme.textTheme.bodySmall!.copyWith(
                   fontSize: Dimens.getProportionalScreenWidth(context, 17),
-                  color: AppColors.neutralBlue500,
                 ),
               ),
               SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
@@ -57,6 +57,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 hintText: S.current.email,
                 leftWidget: Icon(
                   Icons.email_rounded,
+                  color: context.theme.colorScheme.onInverseSurface,
                   size: Dimens.getProportionalScreenWidth(context, 24),
                 ),
               ),
@@ -66,10 +67,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                 width: Dimens.getScreenWidth(context),
                 paddingVertical: Dimens.getProportionalScreenHeight(context, 14),
                 borderRadiusValue: Dimens.getScreenWidth(context),
-                child: Text(S.current.resetPassword, style: TextStyle(
-                  color: Colors.white,
-                  fontSize: Dimens.getProportionalScreenWidth(context, 16),
-                ),),
+                child: Text(
+                  S.current.resetPassword,
+                  style: TextStyle(
+                    color: context.theme.colorScheme.onPrimary,
+                    fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                  ),
+                ),
               ),
               SizedBox(height: Dimens.getScreenHeight(context) * 0.0296),
             ],

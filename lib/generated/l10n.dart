@@ -190,40 +190,40 @@ class S {
     );
   }
 
-  /// `from highest rating`
+  /// `From highest rating`
   String get sortRatingFromHighest {
     return Intl.message(
-      'from highest rating',
+      'From highest rating',
       name: 'sortRatingFromHighest',
       desc: '',
       args: [],
     );
   }
 
-  /// `from lowest rating`
+  /// `From lowest rating`
   String get sortRatingFromLowest {
     return Intl.message(
-      'from lowest rating',
+      'From lowest rating',
       name: 'sortRatingFromLowest',
       desc: '',
       args: [],
     );
   }
 
-  /// `from most favorited`
+  /// `From most favorited`
   String get sortFavoriteFromHighest {
     return Intl.message(
-      'from most favorited',
+      'From most favorited',
       name: 'sortFavoriteFromHighest',
       desc: '',
       args: [],
     );
   }
 
-  /// `from least favorited`
+  /// `From least favorited`
   String get sortFavoriteFromLowest {
     return Intl.message(
-      'from least favorited',
+      'From least favorited',
       name: 'sortFavoriteFromLowest',
       desc: '',
       args: [],
@@ -240,10 +240,10 @@ class S {
     );
   }
 
-  /// `all`
+  /// `All`
   String get all {
     return Intl.message(
-      'all',
+      'All',
       name: 'all',
       desc: '',
       args: [],
@@ -300,10 +300,10 @@ class S {
     );
   }
 
-  /// `Enter room`
+  /// `Join`
   String get enterRoom {
     return Intl.message(
-      'Enter room',
+      'Join',
       name: 'enterRoom',
       desc: '',
       args: [],

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 
 class BaseChoiceChip extends StatelessWidget {
   const BaseChoiceChip({
-    super.key, required this.label, this.isSelected = false, this.onSelected,
+    super.key,
+    required this.label,
+    this.isSelected = false,
+    this.onSelected,
   });
 
   final String label;
@@ -23,13 +26,15 @@ class BaseChoiceChip extends StatelessWidget {
       visualDensity: VisualDensity.compact,
       shape: StadiumBorder(
         side: BorderSide(
-          color: isSelected ? AppColors.primaryBlue400 : AppColors.grey,
+          color: isSelected ? context.theme.colorScheme.primary : context.theme.colorScheme.outline,
         ),
       ),
-      backgroundColor: AppColors.white,
-      selectedColor: AppColors.primaryBlue400,
+      backgroundColor: context.theme.colorScheme.tertiaryContainer,
+      selectedColor: context.theme.colorScheme.primary,
       labelStyle: TextStyle(
-        color: isSelected ? AppColors.white : AppColors.black, // listen to state to change color
+        color: isSelected
+            ? context.theme.colorScheme.onPrimary
+            : context.theme.colorScheme.onTertiaryContainer, // listen to state to change color
         fontSize: Dimens.getProportionalScreenWidth(context, 14),
       ),
     );

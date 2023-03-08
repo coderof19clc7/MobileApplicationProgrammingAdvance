@@ -8,12 +8,12 @@ class PrimaryOutlineButton extends StatelessWidget {
     required this.child,
     this.width = 160,
     this.height,
-    this.splashColor = Colors.white38,
-    this.highlightColor = Colors.white24,
+    this.splashColor,
+    this.highlightColor,
     this.customBorder,
     this.preferGradient = true,
-    this.bgLinearGradient,
-    this.bgColor,
+    this.borderLinearGradient,
+    this.borderColor,
     this.bodyColor,
     this.borderRadiusValue = 8,
     this.paddingVertical,
@@ -27,8 +27,8 @@ class PrimaryOutlineButton extends StatelessWidget {
   final Color? highlightColor;
   final ShapeBorder? customBorder;
   final bool preferGradient;
-  final LinearGradient? bgLinearGradient;
-  final Color? bgColor;
+  final LinearGradient? borderLinearGradient;
+  final Color? borderColor;
   final Color? bodyColor;
   final double borderRadiusValue;
   final double? paddingVertical;
@@ -36,8 +36,8 @@ class PrimaryOutlineButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var gradient = bgLinearGradient;
-    var color = bgColor;
+    var gradient = borderLinearGradient;
+    var color = borderColor;
     if (preferGradient) {
       gradient ??= AppColors.primaryGradient;
       color = null;

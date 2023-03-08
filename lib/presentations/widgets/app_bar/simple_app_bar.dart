@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 
 class SimpleTransparentAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SimpleTransparentAppBar({
-    super.key, this.height, this.actions,
+    super.key,
+    this.height,
+    this.actions,
   });
 
   final double? height;
@@ -26,7 +29,7 @@ class SimpleTransparentAppBar extends StatelessWidget implements PreferredSizeWi
           },
           child: Icon(
             Icons.arrow_back_outlined,
-            color: AppColors.black,
+            color: context.theme.colorScheme.onBackground,
             size: Dimens.getProportionalScreenWidth(context, 28),
           ),
         ),

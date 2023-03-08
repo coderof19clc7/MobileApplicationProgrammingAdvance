@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 
 class TopicContainer extends StatelessWidget {
@@ -20,10 +20,11 @@ class TopicContainer extends StatelessWidget {
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
+          color: context.theme.colorScheme.surfaceTint,
           borderRadius: BorderRadius.circular(
             Dimens.getProportionalScreenWidth(context, 10),
           ),
-          border: Border.all(color: AppColors.grey),
+          border: Border.all(color: context.theme.colorScheme.outline),
         ),
         margin: EdgeInsets.only(
           bottom: Dimens.getProportionalScreenHeight(context, 10),
@@ -37,17 +38,17 @@ class TopicContainer extends StatelessWidget {
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             CircleAvatar(
-              backgroundColor: AppColors.primaryBlue200,
+              backgroundColor: context.theme.colorScheme.tertiary,
               child: Text(
                 index.toString(),
                 style: const TextStyle(
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
             Text(
               title,
-              style: TextStyle(
+              style: context.theme.textTheme.titleMedium!.copyWith(
                 fontSize: Dimens.getProportionalScreenWidth(context, 14),
                 fontWeight: FontWeight.w500,
               ),

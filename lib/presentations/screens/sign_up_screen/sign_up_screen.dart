@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
@@ -28,13 +29,13 @@ class SignUpScreen extends StatelessWidget {
             height: Dimens.getScreenHeight(context),
             child: Column(
               mainAxisSize: MainAxisSize.min,
-              children:[
+              children: [
                 // sign in title field
                 SizedBox(
                   width: Dimens.getScreenWidth(context),
                   child: Text(
                     S.current.signUpTitle,
-                    style: TextStyle(
+                    style: context.theme.textTheme.displayLarge!.copyWith(
                       fontSize: Dimens.getProportionalScreenWidth(context, 32),
                       fontWeight: FontWeight.w600,
                     ),
@@ -47,6 +48,7 @@ class SignUpScreen extends StatelessWidget {
                   hintText: S.current.email,
                   leftWidget: Icon(
                     Icons.email_rounded,
+                    color: context.theme.colorScheme.onInverseSurface,
                     size: Dimens.getProportionalScreenWidth(context, 24),
                   ),
                 ),
@@ -55,6 +57,7 @@ class SignUpScreen extends StatelessWidget {
                   hintText: S.current.password,
                   leftWidget: Icon(
                     Icons.lock_rounded,
+                    color: context.theme.colorScheme.onInverseSurface,
                     size: Dimens.getProportionalScreenWidth(context, 24),
                   ),
                   canTextBeObscured: true,
@@ -63,7 +66,8 @@ class SignUpScreen extends StatelessWidget {
                 TextFieldFill(
                   hintText: S.current.confirmPassword,
                   leftWidget: Icon(
-                    Icons.lock_rounded,
+                    Icons.lock_reset_rounded,
+                    color: context.theme.colorScheme.onInverseSurface,
                     size: Dimens.getProportionalScreenWidth(context, 24),
                   ),
                   canTextBeObscured: true,
@@ -74,10 +78,13 @@ class SignUpScreen extends StatelessWidget {
                   width: Dimens.getScreenWidth(context),
                   paddingVertical: Dimens.getProportionalScreenHeight(context, 14),
                   borderRadiusValue: Dimens.getScreenWidth(context),
-                  child: Text(S.current.login, style: TextStyle(
-                    color: Colors.white,
-                    fontSize: Dimens.getProportionalScreenWidth(context, 16),
-                  ),),
+                  child: Text(
+                    S.current.signUp,
+                    style: context.theme.textTheme.displaySmall!.copyWith(
+                      fontWeight: FontWeight.w500,
+                      fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                    ),
+                  ),
                 ),
                 SizedBox(height: Dimens.getScreenHeight(context) * 0.0296),
               ],

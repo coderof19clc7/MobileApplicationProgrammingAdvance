@@ -1,9 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/presentations/screens/lesson_history_screen/widgets/lesson_button_set.dart';
 import 'package:one_one_learn/presentations/screens/lesson_history_screen/widgets/lesson_history_card.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 

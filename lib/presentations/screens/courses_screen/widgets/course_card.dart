@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
@@ -9,10 +9,15 @@ import 'package:one_one_learn/presentations/widgets/others/row_icon_text_informa
 class CourseCard extends BaseCard {
   const CourseCard({
     super.key,
-    super.firstChild, super.direction = CardDirection.column, super.padding,
+    super.firstChild,
+    super.direction = CardDirection.column,
+    super.padding,
     super.firstSecondDistance = 12,
-    required this.name, required this.description,
-    required this.level, this.categories = const [], this.lessons = 0,
+    required this.name,
+    required this.description,
+    required this.level,
+    this.categories = const [],
+    this.lessons = 0,
   });
 
   final String name, description, level;
@@ -33,25 +38,30 @@ class CourseCard extends BaseCard {
         children: [
           // name
           Text(
-            name, overflow: TextOverflow.ellipsis,
-            style: TextStyle(
-              color: AppColors.black, fontWeight: FontWeight.w700,
+            name,
+            overflow: TextOverflow.ellipsis,
+            style: context.theme.textTheme.titleSmall!.copyWith(
               fontSize: Dimens.getProportionalScreenWidth(context, 17),
             ),
           ),
           SizedBox(
             height: Dimens.getProportionalScreenHeight(
-              context, secondChildItemsDistance,
+              context,
+              secondChildItemsDistance,
             ),
           ),
 
           // categories
           SimpleListFakeChips(
-            listData: categories, itemDistance: secondChildItemsDistance,
+            listData: categories,
+            itemDistance: secondChildItemsDistance,
+            bgColor: context.theme.colorScheme.secondaryContainer,
+            textColor: context.theme.colorScheme.onSecondaryContainer,
           ),
           SizedBox(
             height: Dimens.getProportionalScreenHeight(
-              context, secondChildItemsDistance,
+              context,
+              secondChildItemsDistance,
             ),
           ),
 
@@ -64,56 +74,63 @@ class CourseCard extends BaseCard {
                 icon: Icon(
                   Icons.signal_cellular_alt_rounded,
                   size: Dimens.getProportionalScreenWidth(context, fontSize + 6),
-                  color: AppColors.primaryBlue400,
+                  color: context.theme.colorScheme.primary,
                 ),
                 betweenSpace: 3,
                 text: Text(
-                  level, style: TextStyle(
-                  color: AppColors.neutralBlue500,
-                  fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
-                ),),
+                  level,
+                  style: context.theme.textTheme.bodySmall!.copyWith(
+                    fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
+                  ),
+                ),
               ),
-
-              SizedBox(width: Dimens.getProportionalScreenWidth(
-                context, 7,
+              SizedBox(
+                  width: Dimens.getProportionalScreenWidth(
+                context,
+                7,
               )),
               Text(
-                '|', style: TextStyle(
-                color: AppColors.neutralBlue500,
-                fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
-              ),),
-              SizedBox(width: Dimens.getProportionalScreenWidth(
-                context, 7,
+                '|',
+                style: context.theme.textTheme.bodySmall!.copyWith(
+                  fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
+                ),
+              ),
+              SizedBox(
+                  width: Dimens.getProportionalScreenWidth(
+                context,
+                7,
               )),
-
               RowIconTextInformation(
                 context: context,
                 icon: Icon(
                   Icons.book_rounded,
                   size: Dimens.getProportionalScreenWidth(context, fontSize + 3),
-                  color: AppColors.primaryBlue400,
+                  color: context.theme.colorScheme.primary,
                 ),
                 betweenSpace: 2,
                 text: Text(
-                    '$lessons ${S.current.lesson}', style: TextStyle(
-                  color: AppColors.neutralBlue500,
-                  fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
-                )),
+                  '$lessons ${S.current.lesson}',
+                  style: context.theme.textTheme.bodySmall!.copyWith(
+                    fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
+                  ),
+                ),
               ),
             ],
           ),
           SizedBox(
             height: Dimens.getProportionalScreenHeight(
-              context, secondChildItemsDistance,
+              context,
+              secondChildItemsDistance,
             ),
           ),
 
           // description
           Text(
-            description, overflow: TextOverflow.ellipsis,
-            softWrap: true, maxLines: 2,
-            style: TextStyle(
-              color: AppColors.neutralBlue500,
+            description,
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+            maxLines: 2,
+            style: context.theme.textTheme.bodySmall!.copyWith(
               fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
             ),
           ),

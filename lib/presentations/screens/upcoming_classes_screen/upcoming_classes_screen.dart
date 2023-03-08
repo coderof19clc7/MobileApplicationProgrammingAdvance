@@ -1,7 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
+import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/upcoming_classes_screen/widgets/total_lesson_time_banner.dart';
@@ -50,8 +51,7 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
             TotalLessonTimeBanner(
               width: Dimens.getScreenWidth(context),
               topLabel: S.current.labelTotalLessonTime,
-              totalTime:
-                  '$hour ${S.current.hours} $minute ${S.current.minutes}',
+              totalTime: '$hour ${S.current.hours} $minute ${S.current.minutes}',
               buttonLabel: S.current.lessonHistory,
               onTap: () {},
             ),
@@ -68,13 +68,12 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                     context: context,
                     icon: Icon(
                       Icons.info_outline_rounded,
-                      color: AppColors.neutralBlue500,
+                      color: context.theme.colorScheme.onInverseSurface,
                       size: Dimens.getProportionalScreenWidth(context, 20),
                     ),
                     text: Text(
                       S.current.swipeToCancelClass,
-                      style: TextStyle(
-                        color: AppColors.neutralBlue500,
+                      style: context.theme.textTheme.bodySmall!.copyWith(
                         fontSize: Dimens.getProportionalScreenWidth(context, 14),
                         fontWeight: FontWeight.w500,
                       ),
@@ -118,14 +117,26 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                             title: Text(S.current.confirmCancelClass),
                             actions: [
                               TextButton(
-                                onPressed: () =>
-                                    Navigator.of(context).pop(true),
-                                child: Text(S.current.yes),
+                                onPressed: () => Navigator.of(context).pop(true),
+                                child: Text(
+                                  S.current.yes,
+                                  style: context.theme.textTheme.bodyMedium!.copyWith(
+                                    color: context.theme.colorScheme.onSurfaceVariant,
+                                    fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               ),
                               TextButton(
-                                onPressed: () =>
-                                    Navigator.of(context).pop(false),
-                                child: Text(S.current.no),
+                                onPressed: () => Navigator.of(context).pop(false),
+                                child: Text(
+                                  S.current.no,
+                                  style: context.theme.textTheme.bodyMedium!.copyWith(
+                                    color: context.theme.colorScheme.onErrorContainer,
+                                    fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
                               )
                             ],
                           );
@@ -138,8 +149,8 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                       buttonLabel: S.current.enterRoom,
                       lessonDateTime: time,
                       lessonEndTime: endTime,
-                      lessonDateFormat: 'EEE, MMM d, yyyy',
-                      lessonDurationFormat: 'HH:mm',
+                      lessonDateFormat: AppDateFormats.eeeMMMdyyyy,
+                      lessonDurationFormat: AppDateFormats.tHHmm,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       margin: EdgeInsets.only(
                         bottom: Dimens.getProportionalScreenHeight(context, 15),

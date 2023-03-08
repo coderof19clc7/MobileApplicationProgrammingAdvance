@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/generated/l10n.dart';
@@ -81,8 +81,9 @@ class LessonHistoryCard extends BaseCard {
               margin: EdgeInsets.only(
                 right: Dimens.getProportionalScreenWidth(context, 5),
               ),
-              child: SvgPicture.string(SvgIcons.getIcon
-                (SvgIconEnum.rightArrow, fillColor: AppColors.grey,
+              child: SvgPicture.string(SvgIcons.getIcon(
+                SvgIconEnum.rightArrow,
+                fillColor: context.theme.colorScheme.onInverseSurface,
               )),
             ),
           ),
@@ -103,12 +104,12 @@ class LessonHistoryCard extends BaseCard {
       icon: Icon(
         icon,
         size: Dimens.getProportionalScreenWidth(context, 14),
-        color: AppColors.primaryBlue400,
+        color: context.theme.colorScheme.primary,
       ),
       text: Text(
         text,
         style: TextStyle(
-          color: isPilled ? AppColors.white : AppColors.black,
+          color: isPilled ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onBackground,
           fontSize: Dimens.getProportionalScreenWidth(context, 12),
         ),
       ),

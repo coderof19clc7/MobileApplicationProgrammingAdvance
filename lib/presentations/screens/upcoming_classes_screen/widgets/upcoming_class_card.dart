@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
+import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
@@ -63,19 +64,19 @@ class UpcomingClassCard extends BaseCard {
             ],
           ),
           SizedBox(
-            child: PrimaryOutlineButton(
-              width: Dimens.getProportionalScreenWidth(context, 90),
+            child: PrimaryFillButton(
+              width: Dimens.getProportionalScreenWidth(context, 88),
               borderRadiusValue: Dimens.getProportionalScreenWidth(context, 12),
               paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
               onTap: onTap,
-              splashColor: AppColors.primaryBlue100,
+              boxShadow: [Effects.normalShadowXS],
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(
                     Icons.login_rounded,
+                    color: context.theme.colorScheme.onPrimary,
                     size: Dimens.getProportionalScreenWidth(context, 16),
-                    color: AppColors.primaryBlue400,
                   ),
                   SizedBox(
                     width: Dimens.getProportionalScreenWidth(context, 5),
@@ -83,9 +84,8 @@ class UpcomingClassCard extends BaseCard {
                   Text(
                     buttonLabel,
                     style: TextStyle(
-                      color: AppColors.primaryBlue400,
-                      fontSize:
-                          Dimens.getProportionalScreenWidth(context, 12),
+                      color: context.theme.colorScheme.onPrimary,
+                      fontSize: Dimens.getProportionalScreenWidth(context, 12),
                     ),
                   )
                 ],
@@ -109,12 +109,12 @@ class UpcomingClassCard extends BaseCard {
       icon: Icon(
         icon,
         size: Dimens.getProportionalScreenWidth(context, 14),
-        color: AppColors.primaryBlue400,
+        color: context.theme.colorScheme.primary,
       ),
       text: Text(
         text,
         style: TextStyle(
-          color: isPilled ? AppColors.white : AppColors.black,
+          color: isPilled ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onBackground,
           fontSize: Dimens.getProportionalScreenWidth(context, 12),
         ),
       ),

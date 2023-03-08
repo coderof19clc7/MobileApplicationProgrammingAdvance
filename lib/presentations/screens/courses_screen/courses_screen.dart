@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/courses_screen/widgets/books_tab.dart';
-import 'package:one_one_learn/presentations/screens/courses_screen/widgets/course_card.dart';
 import 'package:one_one_learn/presentations/screens/courses_screen/widgets/courses_tab.dart';
-import 'package:one_one_learn/presentations/widgets/choice_chips/base_choice_chip.dart';
 import 'package:one_one_learn/utils/ui_helper.dart';
 
 class CoursesScreen extends StatelessWidget {
@@ -39,13 +35,15 @@ class CoursesScreen extends StatelessWidget {
                   indicatorWeight: 5,
                   tabs: [
                     Tab(
-                      icon: const Icon(Icons.menu_book_rounded), text: 'Courses',
+                      icon: const Icon(Icons.menu_book_rounded),
+                      text: 'Courses',
                       iconMargin: EdgeInsets.only(
                         bottom: Dimens.getProportionalScreenHeight(context, 5),
                       ),
                     ),
                     Tab(
-                      icon: const Icon(Icons.book_rounded), text: 'Books',
+                      icon: const Icon(Icons.book_rounded),
+                      text: 'Books',
                       iconMargin: EdgeInsets.only(
                         bottom: Dimens.getProportionalScreenHeight(context, 5),
                       ),

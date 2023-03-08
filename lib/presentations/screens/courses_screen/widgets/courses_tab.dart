@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/courses_screen/widgets/course_card.dart';
@@ -13,8 +12,7 @@ class CoursesTab extends StatefulWidget {
   State<CoursesTab> createState() => _CoursesTabState();
 }
 
-class _CoursesTabState extends State<CoursesTab>
-    with AutomaticKeepAliveClientMixin {
+class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     print('OK 1 rendered');
@@ -29,20 +27,20 @@ class _CoursesTabState extends State<CoursesTab>
         children: [
           // search field
           TextField(
-            style: TextStyle(
-              color: AppColors.black,
+            style: context.theme.textTheme.bodyMedium!.copyWith(
               fontSize: Dimens.getProportionalScreenHeight(context, 15),
             ),
             decoration: InputDecoration(
               hintText: S.current.searchHintCourse,
-              hintStyle: TextStyle(
-                color: AppColors.neutralBlue500,
+              hintStyle: context.theme.textTheme.bodySmall!.copyWith(
                 fontSize: Dimens.getProportionalScreenHeight(context, 15),
               ),
+              filled: true,
+              fillColor: context.theme.colorScheme.tertiaryContainer,
               isDense: true,
               border: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: AppColors.grey,
+                  color: context.theme.colorScheme.outline,
                 ),
                 borderRadius: BorderRadius.circular(5),
               ),
@@ -61,11 +59,12 @@ class _CoursesTabState extends State<CoursesTab>
                 return Padding(
                   padding: EdgeInsets.only(
                     right: Dimens.getProportionalScreenWidth(
-                      context, index == 14 ? 0 : 10,
+                      context,
+                      index == 14 ? 0 : 10,
                     ),
                   ),
                   child: BaseChoiceChip(
-                    label: toBeginningOfSentenceCase(S.current.all)!,
+                    label: S.current.all,
                     isSelected: index.isEven,
                     onSelected: (value) {
                       // update state
@@ -98,10 +97,12 @@ class _CoursesTabState extends State<CoursesTab>
                     ),
                   ),
                   name: 'Introduction to Machine Learning',
-                  description:  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pulvinar ante...',
+                  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pulvinar ante...',
                   categories: const [
-                    'Machine Learning', 'A.I',
-                    'Computer Vision', 'Data Science',
+                    'Machine Learning',
+                    'A.I',
+                    'Computer Vision',
+                    'Data Science',
                   ],
                   level: 'Upper-Intermediate',
                   lessons: 10,
