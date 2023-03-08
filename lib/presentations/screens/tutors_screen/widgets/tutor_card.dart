@@ -75,7 +75,6 @@ class TutorCard extends BaseCard {
           SimpleListFakeChips(
             listData: categories,
             itemDistance: secondChildItemsDistance,
-            height: Dimens.getScreenHeight(context) * 0.032,
             fontSize: 12,
             bgColor: context.theme.colorScheme.secondaryContainer,
             textColor: context.theme.colorScheme.onSecondaryContainer,

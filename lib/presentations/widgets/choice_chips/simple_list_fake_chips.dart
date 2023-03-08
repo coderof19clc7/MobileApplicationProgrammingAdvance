@@ -29,7 +29,7 @@ class SimpleListFakeChips extends StatelessWidget {
           (Dimens.getScreenHeight(
                 context,
               ) *
-              0.037),
+              0.034),
       child: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
           return true;

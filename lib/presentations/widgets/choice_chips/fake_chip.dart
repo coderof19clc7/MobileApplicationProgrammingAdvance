@@ -18,9 +18,9 @@ class FakeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      alignment: Alignment.center,
       padding: EdgeInsets.symmetric(
         horizontal: Dimens.getProportionalScreenWidth(context, 10),
-        vertical: Dimens.getProportionalScreenHeight(context, 5),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
