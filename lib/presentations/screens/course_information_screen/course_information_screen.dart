@@ -4,7 +4,7 @@ import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/course_information_screen/widgets/course_appbar.dart';
 import 'package:one_one_learn/presentations/screens/course_information_screen/widgets/topic_container.dart';
-import 'package:one_one_learn/presentations/widgets/choice_chips/simple_list_fake_chips.dart';
+import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
@@ -48,7 +48,7 @@ class CourseInformationScreen extends StatelessWidget {
               onPressed: () {},
               icon: Icon(
                 Icons.arrow_back,
-                color: context.theme.colorScheme.background,
+                color: context.theme.colorScheme.onPrimary,
               ),
             ),
           ),
@@ -58,21 +58,17 @@ class CourseInformationScreen extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: Dimens.getScreenHeight(context) * 0.02,
+                  horizontal: Dimens.getScreenWidth(context) * 0.03,
                 ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // course name
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: Dimens.getScreenWidth(context) * 0.03,
-                      ),
-                      child: Text(
-                        'Life in the Internet Age',
-                        style: context.theme.textTheme.headlineLarge!.copyWith(
-                          fontSize: Dimens.getProportionalScreenWidth(context, 21),
-                        ),
+                    Text(
+                      'Life in the Internet Age',
+                      style: context.theme.textTheme.headlineLarge!.copyWith(
+                        fontSize: Dimens.getProportionalScreenWidth(context, 21),
                       ),
                     ),
 
@@ -83,115 +79,102 @@ class CourseInformationScreen extends StatelessWidget {
 
                     const EmptyProportionalSpace(height: 15),
 
-                    Flexible(
-                      child: Container(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: Dimens.getScreenWidth(context) * 0.03,
+                    buildLeadingInformation(
+                      context,
+                      Icons.signal_cellular_alt_rounded,
+                      'Intermediate',
+                    ),
+                    const EmptyProportionalSpace(height: 10),
+
+                    // total lessons
+                    Row(
+                      children: [
+                        buildLeadingInformation(
+                          context,
+                          Icons.collections_bookmark_rounded,
+                          '$numberOfLessons ${S.current.lesson}',
                         ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // level
-                            buildLeadingInformation(
-                              context,
-                              Icons.signal_cellular_alt_rounded,
-                              'Intermediate',
-                            ),
-                            const EmptyProportionalSpace(height: 10),
-
-                            // total lessons
-                            Row(
-                              children: [
-                                buildLeadingInformation(
-                                  context,
-                                  Icons.collections_bookmark_rounded,
-                                  '$numberOfLessons ${S.current.lesson}',
-                                ),
-                                const EmptyProportionalSpace(width: 5),
-                                Text(
-                                  '|',
-                                  style: TextStyle(
-                                    fontSize: Dimens.getProportionalScreenWidth(context, 14),
-                                    fontWeight: FontWeight.w300,
-                                  ),
-                                ),
-                                const EmptyProportionalSpace(width: 5),
-                                buildLeadingInformation(
-                                  context,
-                                  Icons.groups_rounded,
-                                  '$numberOfTutors ${S.current.tutor}',
-                                ),
-                              ],
-                            ),
-
-                            const EmptyProportionalSpace(height: 15),
-
-                            // about subheading
-                            Text(
-                              S.current.labelAbout,
-                              style: context.theme.textTheme.displayMedium!.copyWith(
-                                fontSize: Dimens.getProportionalScreenWidth(context, 20),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const EmptyProportionalSpace(height: 5),
-                            buildParagraph(
-                              context,
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat.',
-                            ),
-
-                            const EmptyProportionalSpace(height: 15),
-
-                            // why subheading
-                            buildSubHeading(
-                              context,
-                              iconData: Icons.help_outline_rounded,
-                              text: S.current.labelWhyTakeCourse,
-                            ),
-                            const EmptyProportionalSpace(height: 7),
-                            buildParagraph(
-                              context,
-                              'Suspendisse potenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci. Mauris ac ex viverra, facilisis augue sit amet, sollicitudin dolor.',
-                            ),
-
-                            const EmptyProportionalSpace(height: 15),
-
-                            // able subheading
-                            buildSubHeading(
-                              context,
-                              iconData: Icons.error_outline_rounded,
-                              text: S.current.labelWhatAbleDo,
-                            ),
-                            const EmptyProportionalSpace(height: 7),
-                            buildParagraph(
-                              context,
-                              'Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat. Suspendisse potenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci.',
-                            ),
-
-                            const EmptyProportionalSpace(height: 15),
-
-                            // topics subheading
-                            Text(
-                              S.current.labelTopics,
-                              style: context.theme.textTheme.displayMedium!.copyWith(
-                                fontSize: Dimens.getProportionalScreenWidth(context, 20),
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const EmptyProportionalSpace(height: 7),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: topics.map((topic) {
-                                return TopicContainer(
-                                  index: topics.indexOf(topic),
-                                  title: topic,
-                                  onTap: () {},
-                                );
-                              }).toList(),
-                            ),
-                          ],
+                        const EmptyProportionalSpace(width: 5),
+                        Text(
+                          '|',
+                          style: TextStyle(
+                            fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                            fontWeight: FontWeight.w300,
+                          ),
                         ),
+                        const EmptyProportionalSpace(width: 5),
+                        buildLeadingInformation(
+                          context,
+                          Icons.groups_rounded,
+                          '$numberOfTutors ${S.current.tutor}',
+                        ),
+                      ],
+                    ),
+
+                    const EmptyProportionalSpace(height: 15),
+
+                    // about subheading
+                    Text(
+                      S.current.labelAbout,
+                      style: context.theme.textTheme.displayMedium!.copyWith(
+                        fontSize: Dimens.getProportionalScreenWidth(context, 20),
+                        fontWeight: FontWeight.w500,
                       ),
+                    ),
+                    const EmptyProportionalSpace(height: 5),
+                    buildParagraph(
+                      context,
+                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat.',
+                    ),
+
+                    const EmptyProportionalSpace(height: 15),
+
+                    // why subheading
+                    buildSubHeading(
+                      context,
+                      iconData: Icons.help_outline_rounded,
+                      text: S.current.labelWhyTakeCourse,
+                    ),
+                    const EmptyProportionalSpace(height: 7),
+                    buildParagraph(
+                      context,
+                      'Suspendisse potenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci. Mauris ac ex viverra, facilisis augue sit amet, sollicitudin dolor.',
+                    ),
+
+                    const EmptyProportionalSpace(height: 15),
+
+                    // able subheading
+                    buildSubHeading(
+                      context,
+                      iconData: Icons.error_outline_rounded,
+                      text: S.current.labelWhatAbleDo,
+                    ),
+                    const EmptyProportionalSpace(height: 7),
+                    buildParagraph(
+                      context,
+                      'Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat. Suspendisse potenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci.',
+                    ),
+
+                    const EmptyProportionalSpace(height: 15),
+
+                    // topics subheading
+                    Text(
+                      S.current.labelTopics,
+                      style: context.theme.textTheme.displayMedium!.copyWith(
+                        fontSize: Dimens.getProportionalScreenWidth(context, 20),
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const EmptyProportionalSpace(height: 7),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: topics.map((topic) {
+                        return TopicContainer(
+                          index: topics.indexOf(topic),
+                          title: topic,
+                          onTap: () {},
+                        );
+                      }).toList(),
                     ),
                   ],
                 ),
@@ -240,11 +223,16 @@ class CourseInformationScreen extends StatelessWidget {
   }
 
   Widget buildCategories(BuildContext context, List<String> categories) {
-    return SimpleListFakeChips(
-      listData: categories,
-      itemDistance: Dimens.getProportionalScreenWidth(context, 10),
-      bgColor: context.theme.colorScheme.secondaryContainer,
-      textColor: context.theme.colorScheme.onSecondaryContainer,
+    return Wrap(
+      spacing: Dimens.getProportionalScreenWidth(context, 8),
+      runSpacing: Dimens.getProportionalScreenHeight(context, 8),
+      children: categories.map((text) {
+        return FakeChip(
+          text: text,
+          bgColor: context.theme.colorScheme.secondaryContainer,
+          textColor: context.theme.colorScheme.onSecondaryContainer,
+        );
+      }).toList(),
     );
   }
 

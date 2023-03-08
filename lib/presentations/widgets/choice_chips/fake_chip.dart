@@ -18,9 +18,9 @@ class FakeChip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
       padding: EdgeInsets.symmetric(
         horizontal: Dimens.getProportionalScreenWidth(context, 10),
+        vertical: Dimens.getProportionalScreenHeight(context, 5),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
@@ -28,16 +28,21 @@ class FakeChip extends StatelessWidget {
         ),
         color: bgColor ?? AppColors.primaryBlue200,
       ),
-      child: Text(
-        text ?? '',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-          color: textColor ?? AppColors.primaryBlue400,
-          fontSize: Dimens.getProportionalScreenWidth(
-            context,
-            fontSize,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            text ?? '',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: textColor ?? AppColors.primaryBlue400,
+              fontSize: Dimens.getProportionalScreenWidth(
+                context,
+                fontSize,
+              ),
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
