@@ -6,14 +6,14 @@ class AppStyles {
   static BottomSheetThemeData bottomSheetThemeLight = const BottomSheetThemeData(
     backgroundColor: AppColors.white,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
   );
 
   static BottomSheetThemeData bottomSheetThemeDark = BottomSheetThemeData(
     backgroundColor: AppColors.neutralBlue900,
     shape: const RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(15)),
+      borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
     ),
   );
 

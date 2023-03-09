@@ -16,7 +16,7 @@ class BaseChoiceChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChoiceChip(
+    return FilterChip(
       label: Text(label),
       onSelected: onSelected,
       selected: isSelected,
@@ -31,6 +31,7 @@ class BaseChoiceChip extends StatelessWidget {
       ),
       backgroundColor: context.theme.colorScheme.tertiaryContainer,
       selectedColor: context.theme.colorScheme.primary,
+      showCheckmark: false,
       labelStyle: TextStyle(
         color: isSelected
             ? context.theme.colorScheme.onPrimary

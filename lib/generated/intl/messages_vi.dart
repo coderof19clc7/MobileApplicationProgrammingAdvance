@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "enterRoom": MessageLookupByLibrary.simpleMessage("Vào lớp"),
+        "filter": MessageLookupByLibrary.simpleMessage("Lọc"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Bắt Đầu"),
         "hours": MessageLookupByLibrary.simpleMessage("tiếng"),
@@ -61,11 +62,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản"),
         "minutes": MessageLookupByLibrary.simpleMessage("phút"),
+        "nationality": MessageLookupByLibrary.simpleMessage("Quốc gia"),
         "no": MessageLookupByLibrary.simpleMessage("Đéch"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "report": MessageLookupByLibrary.simpleMessage("Báo cáo"),
+        "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "resetPassword":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
@@ -84,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Từ đánh giá cao"),
         "sortRatingFromLowest":
             MessageLookupByLibrary.simpleMessage("Từ đánh giá thấp"),
+        "sorting": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
         "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),
         "swipeToCancelClass":
             MessageLookupByLibrary.simpleMessage("Vuốt trái để hủy buổi học"),

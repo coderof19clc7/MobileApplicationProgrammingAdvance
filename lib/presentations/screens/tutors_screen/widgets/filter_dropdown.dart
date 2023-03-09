@@ -23,7 +23,6 @@ class FilterDropDown<T> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      alignment: Alignment.center,
       decoration: BoxDecoration(
         color: context.theme.colorScheme.tertiaryContainer,
         borderRadius: BorderRadius.circular(10),
@@ -33,28 +32,36 @@ class FilterDropDown<T> extends StatelessWidget {
       ),
       padding: EdgeInsets.symmetric(
         horizontal: Dimens.getProportionalScreenWidth(context, 10),
+        vertical: Dimens.getProportionalScreenHeight(context, 7),
       ),
-      height: Dimens.getProportionalScreenHeight(context, 36),
-      child: Row(
+      // height: Dimens.getProportionalScreenHeight(context, 36),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          leadingIcon ?? const SizedBox.shrink(),
-          DropdownButton<T>(
-            value: value,
-            selectedItemBuilder: selectedItemBuilder,
-            icon: Container(
-              margin: EdgeInsets.only(
-                left: Dimens.getProportionalScreenWidth(context, 3),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              leadingIcon ?? const SizedBox.shrink(),
+              DropdownButton<T>(
+                value: value,
+                isDense: true,
+                selectedItemBuilder: selectedItemBuilder,
+                icon: Container(
+                  margin: EdgeInsets.only(
+                    left: Dimens.getProportionalScreenWidth(context, 7),
+                  ),
+                  child: SvgPicture.string(SvgIcons.getIcon(
+                    SvgIconEnum.downArrow,
+                    fillColor: context.theme.iconTheme.color,
+                  )),
+                ),
+                menuMaxHeight: Dimens.getProportionalScreenHeight(context, 150),
+                alignment: Alignment.center,
+                items: data.map(itemBuilder).toList(),
+                onChanged: (value) {},
+                underline: const SizedBox.shrink(),
               ),
-              child: SvgPicture.string(SvgIcons.getIcon(
-                SvgIconEnum.downArrow,
-                fillColor: context.theme.iconTheme.color,
-              )),
-            ),
-            menuMaxHeight: Dimens.getProportionalScreenHeight(context, 150),
-            alignment: Alignment.center,
-            items: data.map(itemBuilder).toList(),
-            onChanged: (value) {},
-            underline: const SizedBox.shrink(),
+            ],
           ),
         ],
       ),

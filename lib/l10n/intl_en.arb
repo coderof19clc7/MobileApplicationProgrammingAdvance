@@ -47,5 +47,9 @@
   "specialties": "Specialties",
   "review": "Review",
   "viewAll": "View all",
-  "labelUpcomingClass": "Your upcoming class is"
+  "labelUpcomingClass": "Your upcoming class is",
+  "nationality": "Nationality",
+  "sorting": "Sorting",
+  "reset": "Reset",
+  "filter": "Filter"
 }

@@ -35,6 +35,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "enterRoom": MessageLookupByLibrary.simpleMessage("Join"),
+        "filter": MessageLookupByLibrary.simpleMessage("Filter"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
@@ -61,11 +62,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Login to your account"),
         "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
+        "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Or continue with"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "report": MessageLookupByLibrary.simpleMessage("Report"),
+        "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Enter the email associated with your account to reset password."),
@@ -84,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("From highest rating"),
         "sortRatingFromLowest":
             MessageLookupByLibrary.simpleMessage("From lowest rating"),
+        "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
         "swipeToCancelClass": MessageLookupByLibrary.simpleMessage(
             "Swipe left to cancel a class"),

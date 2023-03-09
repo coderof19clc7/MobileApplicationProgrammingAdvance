@@ -47,5 +47,9 @@
   "specialties": "Chuyên môn",
   "review": "Đánh giá",
   "viewAll": "Xem tất cả",
-  "labelUpcomingClass": "Lớp học sắp diễn ra của bạn là"
+  "labelUpcomingClass": "Lớp học sắp diễn ra của bạn là",
+  "nationality": "Quốc gia",
+  "sorting": "Sắp xếp",
+  "reset": "Reset",
+  "filter": "Lọc"
 }

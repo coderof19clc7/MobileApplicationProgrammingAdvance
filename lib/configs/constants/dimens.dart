@@ -28,4 +28,10 @@ class Dimens {
     return (height / figmaHeight) * MediaQuery.of(context).size.height;
   }
 
+  static TextStyle getProportionalFont(BuildContext context, TextStyle? textStyle) {
+    return TextStyle(
+      fontSize: getProportionalScreenWidth(context, textStyle?.fontSize ?? 14),
+    );
+  }
+
 }
