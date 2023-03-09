@@ -21,10 +21,10 @@ class AppThemes {
       background: AppColors.white,
       onBackground: AppColors.black, // icon, text on background
       outline: AppColors.grey, // border
-      outlineVariant: AppColors.primaryBlue400, // blue border
+      outlineVariant: AppColors.grey, // border for component on surface
       surface: AppColors.white, // card fill
       // onSurface: ,
-      surfaceVariant: AppColors.white, // outlined button fill
+      // surfaceVariant: ,
       onSurfaceVariant: AppColors.primaryBlue400, // always primaryBlue400
       surfaceTint: AppColors.white, // component on top of surface
       inverseSurface: AppColors.neutralBlue200, // login sign up text field fill
@@ -70,9 +70,9 @@ class AppThemes {
       background: AppColors.black,
       onBackground: AppColors.white, // icon, text on background
       outline: AppColors.transparent, // border
-      outlineVariant: AppColors.transparent, // blue border
+      outlineVariant: AppColors.neutralBlue700, // border for component on surface
       surface: AppColors.neutralBlue900, // card fill
-      surfaceVariant: AppColors.primaryBlue900, // outlined button fill
+      // surfaceVariant: ,
       onSurfaceVariant: AppColors.primaryBlue400, // always primaryBlue400
       surfaceTint: AppColors.neutralBlue700, // component on top of surface
       inverseSurface: AppColors.neutralBlue900, // login sign up text field fill

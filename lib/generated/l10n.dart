@@ -510,6 +510,26 @@ class S {
     );
   }
 
+  /// `Experience`
+  String get experience {
+    return Intl.message(
+      'Experience',
+      name: 'experience',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Suggested courses`
+  String get suggestedCourses {
+    return Intl.message(
+      'Suggested courses',
+      name: 'suggestedCourses',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Review`
   String get review {
     return Intl.message(
@@ -575,6 +595,136 @@ class S {
     return Intl.message(
       'Filter',
       name: 'filter',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Record`
+  String get record {
+    return Intl.message(
+      'Record',
+      name: 'record',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Request for class`
+  String get requestForClass {
+    return Intl.message(
+      'Request for class',
+      name: 'requestForClass',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tutor's review`
+  String get tutorReview {
+    return Intl.message(
+      'Tutor\'s review',
+      name: 'tutorReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Lesson status`
+  String get lessonStatus {
+    return Intl.message(
+      'Lesson status',
+      name: 'lessonStatus',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Behavior`
+  String get behavior {
+    return Intl.message(
+      'Behavior',
+      name: 'behavior',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Listening`
+  String get listening {
+    return Intl.message(
+      'Listening',
+      name: 'listening',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Speaking`
+  String get speaking {
+    return Intl.message(
+      'Speaking',
+      name: 'speaking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vocabulary`
+  String get vocabulary {
+    return Intl.message(
+      'Vocabulary',
+      name: 'vocabulary',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Overall comment`
+  String get overallComment {
+    return Intl.message(
+      'Overall comment',
+      name: 'overallComment',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Homework`
+  String get homework {
+    return Intl.message(
+      'Homework',
+      name: 'homework',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Learned book`
+  String get learnedBook {
+    return Intl.message(
+      'Learned book',
+      name: 'learnedBook',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No comment`
+  String get noReviewGiven {
+    return Intl.message(
+      'No comment',
+      name: 'noReviewGiven',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `More`
+  String get more {
+    return Intl.message(
+      'More',
+      name: 'more',
       desc: '',
       args: [],
     );

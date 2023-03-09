@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
+        "behavior": MessageLookupByLibrary.simpleMessage("Behavior"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Book class"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
@@ -35,10 +36,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "enterRoom": MessageLookupByLibrary.simpleMessage("Join"),
+        "experience": MessageLookupByLibrary.simpleMessage("Experience"),
         "filter": MessageLookupByLibrary.simpleMessage("Filter"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+        "homework": MessageLookupByLibrary.simpleMessage("Homework"),
         "hours": MessageLookupByLibrary.simpleMessage("hours"),
         "interest": MessageLookupByLibrary.simpleMessage("Interest"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
@@ -56,18 +59,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "labelWhyTakeCourse": MessageLookupByLibrary.simpleMessage(
             "Why should you take this course?"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "learnedBook": MessageLookupByLibrary.simpleMessage("Learned book"),
         "lesson": MessageLookupByLibrary.simpleMessage("lesson"),
         "lessonHistory": MessageLookupByLibrary.simpleMessage("Lesson History"),
+        "lessonStatus": MessageLookupByLibrary.simpleMessage("Lesson status"),
+        "listening": MessageLookupByLibrary.simpleMessage("Listening"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Login to your account"),
         "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
+        "more": MessageLookupByLibrary.simpleMessage("More"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
+        "noReviewGiven": MessageLookupByLibrary.simpleMessage("No comment"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Or continue with"),
+        "overallComment":
+            MessageLookupByLibrary.simpleMessage("Overall comment"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "record": MessageLookupByLibrary.simpleMessage("Record"),
         "report": MessageLookupByLibrary.simpleMessage("Report"),
+        "requestForClass":
+            MessageLookupByLibrary.simpleMessage("Request for class"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
@@ -88,11 +101,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "sortRatingFromLowest":
             MessageLookupByLibrary.simpleMessage("From lowest rating"),
         "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
+        "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
+        "suggestedCourses":
+            MessageLookupByLibrary.simpleMessage("Suggested courses"),
         "swipeToCancelClass": MessageLookupByLibrary.simpleMessage(
             "Swipe left to cancel a class"),
         "tutor": MessageLookupByLibrary.simpleMessage("tutor"),
+        "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
+        "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes")
       };
 }

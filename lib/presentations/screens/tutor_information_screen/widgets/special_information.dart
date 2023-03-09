@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
+import 'package:one_one_learn/presentations/widgets/buttons/box_button.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
@@ -10,6 +11,7 @@ class SpecialInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final courses = ['Life in the Internet Age', 'Basic Conversation Topics'];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -28,6 +30,12 @@ class SpecialInformation extends StatelessWidget {
         buildFakeChipContent(context, ['English', 'Dutch']),
         const EmptyProportionalSpace(height: 20),
 
+        // specialties field
+        buildTitle(context, S.current.specialties),
+        const EmptyProportionalSpace(height: 15),
+        buildFakeChipContent(context, ['Machine Learning', 'A.I', 'Statistics']),
+        const EmptyProportionalSpace(height: 20),
+
         // interest field
         buildTitle(context, S.current.interest),
         const EmptyProportionalSpace(height: 15),
@@ -37,10 +45,28 @@ class SpecialInformation extends StatelessWidget {
         ),
         const EmptyProportionalSpace(height: 20),
 
-        // specialties field
-        buildTitle(context, S.current.specialties),
+        // experience field
+        buildTitle(context, S.current.experience),
         const EmptyProportionalSpace(height: 15),
-        buildFakeChipContent(context, ['Machine Learning', 'A.I', 'Statistics']),
+        buildTextContent(
+          context,
+          'Maecenas vitae faucibus erat. Suspendissepotenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci.',
+        ),
+        const EmptyProportionalSpace(height: 20),
+
+        // courses field
+        buildTitle(context, S.current.suggestedCourses),
+        const EmptyProportionalSpace(height: 15),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: courses.map((topic) {
+            return BoxButton(
+              circleText: (courses.indexOf(topic) + 1).toString(),
+              title: topic,
+              onTap: () {},
+            );
+          }).toList(),
+        ),
         const EmptyProportionalSpace(height: 20),
 
         Row(

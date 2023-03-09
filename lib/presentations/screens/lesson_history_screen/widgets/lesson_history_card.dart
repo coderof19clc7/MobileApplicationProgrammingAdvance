@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
+import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/generated/l10n.dart';
+import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
@@ -21,15 +23,16 @@ class LessonHistoryCard extends BaseCard {
     required this.lessonEndTime,
     required this.lessonDateFormat,
     required this.lessonDurationFormat,
-    // required this.buttonSet,
+    required this.buttonLabel,
     required this.isMarked,
+    required this.onTap,
   });
 
   final String tutorName;
   final DateTime lessonDateTime, lessonEndTime;
-  final String lessonDateFormat, lessonDurationFormat;
-  // final Widget buttonSet;
+  final String lessonDateFormat, lessonDurationFormat, buttonLabel;
   final bool isMarked;
+  final Function() onTap;
 
   @override
   Widget buildSecondChild(BuildContext context) {
@@ -75,19 +78,32 @@ class LessonHistoryCard extends BaseCard {
             ),
           ),
           // buttonSet,
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              margin: EdgeInsets.only(
-                right: Dimens.getProportionalScreenWidth(context, 5),
-              ),
-              child: SvgPicture.string(
-                SvgIcons.getIcon(
-                  SvgIconEnum.rightArrow,
-                  fillColor: context.theme.colorScheme.onInverseSurface,
-                ),
-                width: Dimens.getProportionalScreenWidth(context, 24),
-                height: Dimens.getProportionalScreenWidth(context, 24),
+          SizedBox(
+            child: PrimaryFillButton(
+              width: Dimens.getProportionalScreenWidth(context, 88),
+              borderRadiusValue: Dimens.getProportionalScreenWidth(context, 12),
+              paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
+              onTap: onTap,
+              boxShadow: [Effects.normalShadowXS],
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.info_outline_rounded,
+                    color: context.theme.colorScheme.onPrimary,
+                    size: Dimens.getProportionalScreenWidth(context, 16),
+                  ),
+                  SizedBox(
+                    width: Dimens.getProportionalScreenWidth(context, 5),
+                  ),
+                  Text(
+                    buttonLabel,
+                    style: TextStyle(
+                      color: context.theme.colorScheme.onPrimary,
+                      fontSize: Dimens.getProportionalScreenWidth(context, 12),
+                    ),
+                  )
+                ],
               ),
             ),
           ),

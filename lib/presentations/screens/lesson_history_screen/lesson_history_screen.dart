@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/lesson_history_screen/widgets/lesson_history_card.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 
@@ -58,7 +59,8 @@ class LessonHistoryScreen extends StatelessWidget {
                     lessonDateFormat: 'EEE, MMM d, yyyy',
                     lessonDurationFormat: 'HH:mm',
                     isMarked: index.isEven,
-
+                    onTap: () {},
+                    buttonLabel: S.current.more,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     margin: EdgeInsets.only(
                       bottom: Dimens.getProportionalScreenHeight(context, 15),

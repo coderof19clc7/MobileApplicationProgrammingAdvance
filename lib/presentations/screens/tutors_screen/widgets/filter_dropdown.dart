@@ -24,7 +24,7 @@ class FilterDropDown<T> extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: context.theme.colorScheme.tertiaryContainer,
+        color: context.theme.colorScheme.surfaceTint,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
           color: context.theme.colorScheme.outline,

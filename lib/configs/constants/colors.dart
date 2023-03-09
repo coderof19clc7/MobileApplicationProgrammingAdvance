@@ -46,7 +46,7 @@ class AppColors {
   static final red700 = HexColor.fromHex('#CF8D8D');
 
   static final neutralRed200 = HexColor.fromHex('#F6EAEA');
-  static final neutralRed700 = HexColor.fromHex('#37322E');
+  static final neutralRed700 = HexColor.fromHex('#3D2F23');
 
   static final grey = HexColor.fromHex('#C0C5CA');
 

@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Về tôi"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
+        "behavior": MessageLookupByLibrary.simpleMessage("Thái độ"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
         "chat": MessageLookupByLibrary.simpleMessage("Nhắn tin"),
         "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
@@ -35,9 +36,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "enterRoom": MessageLookupByLibrary.simpleMessage("Vào lớp"),
+        "experience": MessageLookupByLibrary.simpleMessage("Kinh nghiệm"),
         "filter": MessageLookupByLibrary.simpleMessage("Lọc"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Bắt Đầu"),
+        "homework": MessageLookupByLibrary.simpleMessage("Bài tập về nhà"),
         "hours": MessageLookupByLibrary.simpleMessage("tiếng"),
         "interest": MessageLookupByLibrary.simpleMessage("Sở thích"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
@@ -55,19 +58,28 @@ class MessageLookup extends MessageLookupByLibrary {
         "labelWhyTakeCourse": MessageLookupByLibrary.simpleMessage(
             "Tại sao bạn nên học khóa học này"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
+        "learnedBook": MessageLookupByLibrary.simpleMessage("Sách đã học"),
         "lesson": MessageLookupByLibrary.simpleMessage("bài học"),
         "lessonHistory":
             MessageLookupByLibrary.simpleMessage("Lịch sử buổi học"),
+        "lessonStatus": MessageLookupByLibrary.simpleMessage("Tiến độ bài học"),
+        "listening": MessageLookupByLibrary.simpleMessage("Khả năng nghe"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản"),
         "minutes": MessageLookupByLibrary.simpleMessage("phút"),
+        "more": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "nationality": MessageLookupByLibrary.simpleMessage("Quốc gia"),
         "no": MessageLookupByLibrary.simpleMessage("Đéch"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
+        "overallComment":
+            MessageLookupByLibrary.simpleMessage("Đánh giá chung"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "record": MessageLookupByLibrary.simpleMessage("Bản ghi"),
         "report": MessageLookupByLibrary.simpleMessage("Báo cáo"),
+        "requestForClass":
+            MessageLookupByLibrary.simpleMessage("Yêu cầu lớp học"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "resetPassword":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
@@ -88,11 +100,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "sortRatingFromLowest":
             MessageLookupByLibrary.simpleMessage("Từ đánh giá thấp"),
         "sorting": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
+        "speaking": MessageLookupByLibrary.simpleMessage("Khả năng nói"),
         "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),
+        "suggestedCourses":
+            MessageLookupByLibrary.simpleMessage("Khóa học tham khảo"),
         "swipeToCancelClass":
             MessageLookupByLibrary.simpleMessage("Vuốt trái để hủy buổi học"),
         "tutor": MessageLookupByLibrary.simpleMessage("gia sư"),
+        "tutorReview":
+            MessageLookupByLibrary.simpleMessage("Nhận xét từ gia sư"),
         "viewAll": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
+        "vocabulary": MessageLookupByLibrary.simpleMessage("Từ vựng"),
         "yes": MessageLookupByLibrary.simpleMessage("Có")
       };
 }

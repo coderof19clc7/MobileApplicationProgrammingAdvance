@@ -3,19 +3,16 @@ import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 
 class BaseChoiceChip extends StatelessWidget {
-  const BaseChoiceChip({
-    super.key,
-    required this.label,
-    this.isSelected = false,
-    this.onSelected,
-  });
+  const BaseChoiceChip({super.key, required this.label, this.isSelected = false, this.onSelected, this.unselectedBorderColor});
 
   final String label;
   final bool isSelected;
   final Function(bool value)? onSelected;
+  final Color? unselectedBorderColor;
 
   @override
   Widget build(BuildContext context) {
+    final ubColor = unselectedBorderColor ?? context.theme.colorScheme.outline;
     return FilterChip(
       label: Text(label),
       onSelected: onSelected,
@@ -26,10 +23,10 @@ class BaseChoiceChip extends StatelessWidget {
       visualDensity: VisualDensity.compact,
       shape: StadiumBorder(
         side: BorderSide(
-          color: isSelected ? context.theme.colorScheme.primary : context.theme.colorScheme.outline,
+          color: isSelected ? context.theme.colorScheme.primary : ubColor,
         ),
       ),
-      backgroundColor: context.theme.colorScheme.tertiaryContainer,
+      backgroundColor: context.theme.colorScheme.surfaceTint,
       selectedColor: context.theme.colorScheme.primary,
       showCheckmark: false,
       labelStyle: TextStyle(

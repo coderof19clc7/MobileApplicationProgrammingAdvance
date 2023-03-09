@@ -47,7 +47,8 @@ class TutorFilterBottomSheet extends StatelessWidget {
               Text(
                 S.current.specialties,
                 style: Dimens.getProportionalFont(
-                  context, context.theme.textTheme.displayMedium,
+                  context,
+                  context.theme.textTheme.displayMedium,
                 ).copyWith(fontWeight: FontWeight.w500),
               ),
               const EmptyProportionalSpace(height: 15),
@@ -61,7 +62,8 @@ class TutorFilterBottomSheet extends StatelessWidget {
                     return Container(
                       margin: EdgeInsets.only(
                         right: Dimens.getProportionalScreenWidth(
-                          context, index == 14 ? 16 : 10,
+                          context,
+                          index == 14 ? 16 : 10,
                         ),
                       ),
                       child: BaseChoiceChip(
@@ -70,6 +72,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
                         onSelected: (value) {
                           // update state
                         },
+                        unselectedBorderColor: context.theme.colorScheme.outlineVariant,
                       ),
                     );
                   },
@@ -82,7 +85,8 @@ class TutorFilterBottomSheet extends StatelessWidget {
               Text(
                 S.current.nationality,
                 style: Dimens.getProportionalFont(
-                  context, context.theme.textTheme.displayMedium,
+                  context,
+                  context.theme.textTheme.displayMedium,
                 ).copyWith(fontWeight: FontWeight.w500),
               ),
               const EmptyProportionalSpace(height: 15),
@@ -122,7 +126,8 @@ class TutorFilterBottomSheet extends StatelessWidget {
               Text(
                 S.current.sorting,
                 style: Dimens.getProportionalFont(
-                  context, context.theme.textTheme.displayMedium,
+                  context,
+                  context.theme.textTheme.displayMedium,
                 ).copyWith(fontWeight: FontWeight.w500),
               ),
               const EmptyProportionalSpace(height: 15),
@@ -136,9 +141,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
                     alignment: Alignment.center,
                     child: Text(
                       item == 1 ? S.current.sortRatingFromHighest : S.current.sortRatingFromLowest,
-                      style: Dimens.getProportionalFont(
-                          context, context.theme.textTheme.bodyMedium
-                      ).copyWith(
+                      style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                         color: context.theme.colorScheme.onTertiaryContainer,
                       ),
                     ),
@@ -175,7 +178,8 @@ class TutorFilterBottomSheet extends StatelessWidget {
                 child: Text(
                   S.current.reset,
                   style: Dimens.getProportionalFont(
-                    context, context.theme.textTheme.bodyMedium,
+                    context,
+                    context.theme.textTheme.bodyMedium,
                   ).copyWith(
                     color: context.theme.colorScheme.onSurfaceVariant,
                   ),
@@ -192,7 +196,8 @@ class TutorFilterBottomSheet extends StatelessWidget {
                 child: Text(
                   S.current.filter,
                   style: Dimens.getProportionalFont(
-                    context, context.theme.textTheme.bodyMedium,
+                    context,
+                    context.theme.textTheme.bodyMedium,
                   ).copyWith(
                     color: context.theme.colorScheme.onPrimary,
                   ),
