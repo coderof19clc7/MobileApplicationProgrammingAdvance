@@ -12,6 +12,7 @@ class TutorCard extends BaseCard {
     super.key,
     super.firstChild,
     super.secondChildItemsDistance = 7,
+    super.onTap,
     required this.nationality,
     required this.name,
     required this.description,

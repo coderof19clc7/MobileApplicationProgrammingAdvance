@@ -16,6 +16,7 @@ abstract class BaseCard extends StatelessWidget {
     this.firstChild,
     this.direction = CardDirection.row,
     this.crossAxisAlignment,
+    this.onTap,
   });
 
   final EdgeInsetsGeometry? padding, margin;
@@ -24,6 +25,7 @@ abstract class BaseCard extends StatelessWidget {
   final Widget? firstChild;
   final CardDirection direction;
   final CrossAxisAlignment? crossAxisAlignment;
+  final Function()? onTap;
 
   Widget buildFirstChild(BuildContext context) {
     return SizedBox(
@@ -76,24 +78,27 @@ abstract class BaseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: padding ??
-          EdgeInsets.all(
-            Dimens.getProportionalScreenWidth(context, 14),
-          ),
-      margin: margin ??
-          EdgeInsets.only(
-            bottom: Dimens.getProportionalScreenHeight(context, 15),
-          ),
-      width: width ?? Dimens.getScreenWidth(context),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
-        boxShadow: [
-          Effects.normalShadowXS,
-        ],
-        color: context.theme.colorScheme.surface,
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        padding: padding ??
+            EdgeInsets.all(
+              Dimens.getProportionalScreenWidth(context, 14),
+            ),
+        margin: margin ??
+            EdgeInsets.only(
+              bottom: Dimens.getProportionalScreenHeight(context, 15),
+            ),
+        width: width ?? Dimens.getScreenWidth(context),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15),
+          boxShadow: [
+            Effects.normalShadowXS,
+          ],
+          color: context.theme.colorScheme.surface,
+        ),
+        child: direction == CardDirection.row ? buildRowLayout(context) : buildColumnLayout(context),
       ),
-      child: direction == CardDirection.row ? buildRowLayout(context) : buildColumnLayout(context),
     );
   }
 }
