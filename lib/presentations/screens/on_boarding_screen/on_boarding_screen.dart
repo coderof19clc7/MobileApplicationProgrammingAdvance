@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/page/setting_page.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/page/setting/setting_page.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 
 class OnBoardingScreen extends StatelessWidget {

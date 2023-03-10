@@ -31,6 +31,8 @@ class Dimens {
   static TextStyle getProportionalFont(BuildContext context, TextStyle? textStyle) {
     return TextStyle(
       fontSize: getProportionalScreenWidth(context, textStyle?.fontSize ?? 14),
+      fontWeight: textStyle?.fontWeight,
+      color: textStyle?.color,
     );
   }
 

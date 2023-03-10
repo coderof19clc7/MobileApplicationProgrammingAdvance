@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/page/profile/profile_edit_mode_widget.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/page/profile/profile_view_mode_widget.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/page/profile/widgets/profile_edit_mode_widget.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/page/profile/widgets/profile_view_mode_widget.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 import 'package:intl/intl.dart'; // package for formatting dates
 
@@ -96,14 +96,14 @@ class DataSelectFilter {
 
 //</editor-fold>
 }
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     // TODO: implement initState
@@ -164,7 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       body: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 15, ),
         // child: const ProfileViewModeWidget(),
-        child: const ProfileEditModeWidget(),
+        child: const ProfileViewModeWidget(),
 
       ),
     );

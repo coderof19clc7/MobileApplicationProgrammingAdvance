@@ -96,6 +96,7 @@ class TutorsScreen extends StatelessWidget {
                                 context,
                                 leftPadding: 0,
                                 rightPadding: 0,
+                                initialChildSize: 0.501,
                                 body: const TutorFilterBottomSheet(),
                               );
                             },

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/page/profile/avatar_widget.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/page/profile/skill_current_widget.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/page/profile/widgets/avatar_widget.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/page/profile/widgets/skill_current_widget.dart';
+import 'package:one_one_learn/utils/ui_helper.dart';
 
-import '../../../../../utils/ui_helper.dart';
 class ProfileEditModeWidget extends StatelessWidget {
-  const ProfileEditModeWidget({Key? key}) : super(key: key);
+  const ProfileEditModeWidget({super.key});
 
   Widget textViewCurrent({required String tile, Widget?  iconWidget,Color? backgroundColor, bool? isBorder = true}) {
     return  Container(
