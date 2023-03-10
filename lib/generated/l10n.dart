@@ -730,6 +730,136 @@ class S {
     );
   }
 
+  /// `Date of Birth`
+  String get dateOfBirth {
+    return Intl.message(
+      'Date of Birth',
+      name: 'dateOfBirth',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Phone Number`
+  String get phoneNumber {
+    return Intl.message(
+      'Phone Number',
+      name: 'phoneNumber',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Learning interests`
+  String get learningInterests {
+    return Intl.message(
+      'Learning interests',
+      name: 'learningInterests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Skill level`
+  String get skillLevel {
+    return Intl.message(
+      'Skill level',
+      name: 'skillLevel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Preferred schedule`
+  String get preferredSchedule {
+    return Intl.message(
+      'Preferred schedule',
+      name: 'preferredSchedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account`
+  String get account {
+    return Intl.message(
+      'Account',
+      name: 'account',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Profile`
+  String get profile {
+    return Intl.message(
+      'Profile',
+      name: 'profile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Change password`
+  String get changePassword {
+    return Intl.message(
+      'Change password',
+      name: 'changePassword',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tutoring`
+  String get tutoring {
+    return Intl.message(
+      'Tutoring',
+      name: 'tutoring',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Become a tutor`
+  String get becomeATutor {
+    return Intl.message(
+      'Become a tutor',
+      name: 'becomeATutor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `App`
+  String get app {
+    return Intl.message(
+      'App',
+      name: 'app',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Theme`
+  String get theme {
+    return Intl.message(
+      'Theme',
+      name: 'theme',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign out`
+  String get signOut {
+    return Intl.message(
+      'Sign out',
+      name: 'signOut',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Courses`
   String get courses {
     return Intl.message(

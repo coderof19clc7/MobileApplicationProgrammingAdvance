@@ -45,14 +45,14 @@ class UpcomingClassBanner extends StatelessWidget {
         children: [
           Text(
             topLabel,
-            style: context.theme.textTheme.displaySmall!.copyWith(
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
               fontSize: Dimens.getProportionalScreenWidth(context, 15),
             ),
           ),
           const EmptyProportionalSpace(height: 15),
           Text(
             upcomingText,
-            style: context.theme.textTheme.displaySmall!.copyWith(
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
               fontWeight: FontWeight.w600,
               fontSize: Dimens.getProportionalScreenWidth(context, 19),
             ),
@@ -60,7 +60,7 @@ class UpcomingClassBanner extends StatelessWidget {
           const EmptyProportionalSpace(height: 15),
           Text(
             '(in 05:02:01)',
-            style: context.theme.textTheme.displaySmall!.copyWith(
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
               fontSize: Dimens.getProportionalScreenWidth(context, 15),
             ),
           ),
@@ -84,7 +84,7 @@ class UpcomingClassBanner extends StatelessWidget {
                 SizedBox(width: Dimens.getProportionalScreenWidth(context, 5)),
                 Text(
                   buttonLabel,
-                  style: context.theme.textTheme.bodyMedium!.copyWith(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                     color: context.theme.colorScheme.onSurfaceVariant,
                     fontSize: Dimens.getProportionalScreenWidth(context, 14),
                   ),

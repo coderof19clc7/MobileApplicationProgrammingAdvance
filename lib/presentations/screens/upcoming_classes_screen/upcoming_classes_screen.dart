@@ -73,7 +73,7 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                     ),
                     text: Text(
                       S.current.swipeToCancelClass,
-                      style: context.theme.textTheme.bodySmall!.copyWith(
+                      style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                         fontSize: Dimens.getProportionalScreenWidth(context, 14),
                         fontWeight: FontWeight.w500,
                       ),
@@ -120,7 +120,7 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                                 onPressed: () => Navigator.of(context).pop(true),
                                 child: Text(
                                   S.current.yes,
-                                  style: context.theme.textTheme.bodyMedium!.copyWith(
+                                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                                     color: context.theme.colorScheme.onSurfaceVariant,
                                     fontSize: Dimens.getProportionalScreenWidth(context, 16),
                                     fontWeight: FontWeight.w500,
@@ -131,7 +131,7 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                                 onPressed: () => Navigator.of(context).pop(false),
                                 child: Text(
                                   S.current.no,
-                                  style: context.theme.textTheme.bodyMedium!.copyWith(
+                                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                                     color: context.theme.colorScheme.onErrorContainer,
                                     fontSize: Dimens.getProportionalScreenWidth(context, 16),
                                     fontWeight: FontWeight.w500,
@@ -144,7 +144,7 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                       );
                     },
                     child: UpcomingClassCard(
-                      onTap: () {},
+                      onButtonTap: () {},
                       tutorName: tempList[index],
                       buttonLabel: S.current.enterRoom,
                       lessonDateTime: time,

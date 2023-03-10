@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
+import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/page/profile/widgets/profile_edit_mode_widget.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/page/profile/widgets/profile_view_mode_widget.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
-import 'package:intl/intl.dart'; // package for formatting dates
+import 'package:intl/intl.dart'; 
 
 class DateModel {
   DateTime date;
   String weekday;
   DateModel({required this.date, required this.weekday});
 }
-class DataSelectFilter {
 
+class DataSelectFilter {
 //<editor-fold desc="Data Methods">
   DataSelectFilter({
     this.name,
@@ -18,11 +20,11 @@ class DataSelectFilter {
     this.isSelect = false,
     this.index,
   });
-  DataSelectFilter.fromJson(dynamic json) {
-    name = json['name'];
-    nameOther = json['nameOther'];
+  DataSelectFilter.fromJson(Map<String, dynamic> json) {
+    name = json['name'] as String;
+    nameOther = json['nameOther'] as String;
     isSelect = json['isSelect'] as bool? ?? false;
-    index = json['index'];
+    index = json['index'] as int;
   }
   String? name;
   String? nameOther;
@@ -41,25 +43,19 @@ class DataSelectFilter {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          (other is DataSelectFilter &&
-              runtimeType == other.runtimeType &&
-              name == other.name &&
-              nameOther == other.nameOther &&
-              isSelect == other.isSelect &&
-              index == other.index);
+      (other is DataSelectFilter &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          nameOther == other.nameOther &&
+          isSelect == other.isSelect &&
+          index == other.index);
 
   @override
-  int get hashCode =>
-      name.hashCode ^ nameOther.hashCode ^ isSelect.hashCode ^ index.hashCode;
+  int get hashCode => name.hashCode ^ nameOther.hashCode ^ isSelect.hashCode ^ index.hashCode;
 
   @override
   String toString() {
-    return 'DataSelectFilter{' +
-        ' name: $name,' +
-        ' nameOther: $nameOther,' +
-        ' isSelect: $isSelect,' +
-        ' index: $index,' +
-        '}';
+    return 'DataSelectFilter{ name: $name, nameOther: $nameOther, isSelect: $isSelect, index: $index, }';
   }
 
   DataSelectFilter copyWith({
@@ -78,10 +74,10 @@ class DataSelectFilter {
 
   Map<String, dynamic> toMap() {
     return {
-      'name': this.name,
-      'nameOther': this.nameOther,
-      'isSelect': this.isSelect,
-      'index': this.index,
+      'name': name,
+      'nameOther': nameOther,
+      'isSelect': isSelect,
+      'index': index,
     };
   }
 
@@ -96,6 +92,7 @@ class DataSelectFilter {
 
 //</editor-fold>
 }
+
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
 
@@ -106,34 +103,32 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
 // get current date and time
-    var now = DateTime.now();
-    var daysInMonth = DateTime(now.year, now.month + 1, 0).day;
+    final now = DateTime.now();
+    final daysInMonth = DateTime(now.year, now.month + 1, 0).day;
     // create a list to store the dates and weekdays for the current month
-    List<DateModel> datesAndWeekdays = [];
+    final datesAndWeekdays = <DateModel>[];
     // loop through the days of the month and add them to the list
-    for (int i = 1; i <= daysInMonth; i++) {
-      var date = DateTime(now.year, now.month, i);
-      var weekday = DateFormat('EEEE','vi').format(date);
-      var model = DateModel(date: date, weekday: weekday);
+    for (var i = 1; i <= daysInMonth; i++) {
+      final date = DateTime(now.year, now.month, i);
+      final weekday = DateFormat('EEEE', 'vi').format(date);
+      final model = DateModel(date: date, weekday: weekday);
       datesAndWeekdays.add(model);
     }
     // print the dates and weekdays in the list
-    for (var model in datesAndWeekdays) {
+    for (final model in datesAndWeekdays) {
       print('${model.date} is a ${model.weekday}');
     }
-
-
   }
+
   // function weekdays current of month
   List<String> getListWeekOfMonth() {
-    List<String> list = [];
+    final list = <String>[];
     // final now = DateTime.now();
-    final now =  DateTime(2023, 3, 15);
+    final now = DateTime(2023, 3, 15);
 
-    final firstDayOfMonth = DateTime(now.year, now.month, 1);
+    final firstDayOfMonth = DateTime(now.year, now.month);
     final lastDayOfMonth = DateTime(now.year, now.month + 1, 0);
 
     final firstWeekDay = firstDayOfMonth.weekday;
@@ -148,24 +143,27 @@ class _ProfilePageState extends State<ProfilePage> {
     return list;
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-      appBar: const SimpleTransparentAppBar(
-        height: 50,
+    return Scaffold(
+      appBar: SimpleTransparentAppBar(
+        height: Dimens.getTopSafeAreaHeight(context),
         actions: [
           Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: Icon(Icons.edit,color: Colors.black,)),
+            padding: EdgeInsets.only(right: Dimens.getScreenWidth(context) * 0.04),
+            child: Icon(
+              Icons.edit,
+              color: context.theme.colorScheme.onBackground,
+            ),
+          ),
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 15, ),
-        // child: const ProfileViewModeWidget(),
-        child: const ProfileViewModeWidget(),
-
+        padding: EdgeInsets.symmetric(
+          horizontal: Dimens.getScreenWidth(context) * 0.05,
+          vertical: Dimens.getScreenWidth(context) * 0.02,
+        ),
+        child: const ProfileEditModeWidget(),
       ),
     );
   }

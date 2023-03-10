@@ -23,15 +23,21 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
+        "account": MessageLookupByLibrary.simpleMessage("Account"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
+        "app": MessageLookupByLibrary.simpleMessage("App"),
+        "becomeATutor": MessageLookupByLibrary.simpleMessage("Become a tutor"),
         "behavior": MessageLookupByLibrary.simpleMessage("Behavior"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Book class"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Change password"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to cancel this class?"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "courses": MessageLookupByLibrary.simpleMessage("Courses"),
+        "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
@@ -61,6 +67,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Why should you take this course?"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "learnedBook": MessageLookupByLibrary.simpleMessage("Learned book"),
+        "learningInterests":
+            MessageLookupByLibrary.simpleMessage("Learning interests"),
         "lesson": MessageLookupByLibrary.simpleMessage("lesson"),
         "lessonHistory": MessageLookupByLibrary.simpleMessage("Lesson History"),
         "lessonStatus": MessageLookupByLibrary.simpleMessage("Lesson status"),
@@ -78,6 +86,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "overallComment":
             MessageLookupByLibrary.simpleMessage("Overall comment"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "preferredSchedule":
+            MessageLookupByLibrary.simpleMessage("Preferred schedule"),
+        "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "record": MessageLookupByLibrary.simpleMessage("Record"),
         "report": MessageLookupByLibrary.simpleMessage("Report"),
         "requestForClass":
@@ -91,9 +103,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Find a course"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Find a tutor"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
+        "skillLevel": MessageLookupByLibrary.simpleMessage("Skill level"),
         "sortFavoriteFromHighest":
             MessageLookupByLibrary.simpleMessage("From most favorited"),
         "sortFavoriteFromLowest":
@@ -109,8 +123,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Suggested courses"),
         "swipeToCancelClass": MessageLookupByLibrary.simpleMessage(
             "Swipe left to cancel a class"),
+        "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "tutor": MessageLookupByLibrary.simpleMessage("tutor"),
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
+        "tutoring": MessageLookupByLibrary.simpleMessage("Tutoring"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),

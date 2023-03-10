@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/page/setting/widgets/icon_text_icon.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/page/setting/widgets/info_current.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
-import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
-import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class SettingPage extends StatelessWidget {
@@ -24,11 +22,11 @@ class SettingPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            accountWidget(),
+            accountWidget(context),
             const EmptyProportionalSpace(height: 25),
-            tutoringWidget(),
+            tutoringWidget(context),
             const EmptyProportionalSpace(height: 25),
-            appWidget(),
+            appWidget(context),
             const EmptyProportionalSpace(height: 30),
             buttonSignOutWidget(context),
           ],
@@ -37,22 +35,25 @@ class SettingPage extends StatelessWidget {
     );
   }
 
-  Widget accountWidget() {
+  Widget accountWidget(BuildContext context) {
     return InfoCurrentWidget(
-      title: 'Account',
+      title: S.current.account,
       bodyWidget: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+        padding: EdgeInsets.symmetric(
+          vertical: Dimens.getProportionalScreenWidth(context, 10),
+          horizontal: Dimens.getProportionalScreenWidth(context, 14),
+        ),
         child: Column(
           children: [
             IconTextIconWidget(
               leftIcon: Icons.account_circle,
-              text: 'Profile',
+              text: S.current.profile,
               onTap: () {},
             ),
-            const SizedBox(height: 10),
-             IconTextIconWidget(
+            const EmptyProportionalSpace(height: 19),
+            IconTextIconWidget(
               leftIcon: Icons.lock,
-              text: 'Change password',
+              text: S.current.changePassword,
               onTap: () {},
             ),
           ],
@@ -61,41 +62,46 @@ class SettingPage extends StatelessWidget {
     );
   }
 
-  Widget tutoringWidget() {
+  Widget tutoringWidget(BuildContext context) {
     return InfoCurrentWidget(
-      title: 'Account',
+      title: S.current.tutoring,
       bodyWidget: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+        padding: EdgeInsets.symmetric(
+          vertical: Dimens.getProportionalScreenWidth(context, 10),
+          horizontal: Dimens.getProportionalScreenWidth(context, 14),
+        ),
         child: Column(
           children: [
             IconTextIconWidget(
               leftIcon: Icons.school_rounded,
-              text: 'Profile',
+              text: S.current.becomeATutor,
               onTap: () {},
             ),
-
           ],
         ),
       ),
     );
   }
 
-  Widget appWidget() {
+  Widget appWidget(BuildContext context) {
     return InfoCurrentWidget(
-      title: 'Account',
+      title: S.current.app,
       bodyWidget: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+        padding: EdgeInsets.symmetric(
+          vertical: Dimens.getProportionalScreenWidth(context, 10),
+          horizontal: Dimens.getProportionalScreenWidth(context, 14),
+        ),
         child: Column(
           children: [
             IconTextIconWidget(
               leftIcon: Icons.language_rounded,
-              text: 'Profile',
+              text: S.current.language,
               onTap: () {},
             ),
-            const SizedBox(height: 10),
+            const EmptyProportionalSpace(height: 19),
             IconTextIconWidget(
               leftIcon: Icons.lightbulb_outline_rounded,
-              text: 'Change password',
+              text: S.current.theme,
               onTap: () {},
             ),
           ],
@@ -104,21 +110,25 @@ class SettingPage extends StatelessWidget {
     );
   }
 
- Widget  buttonSignOutWidget(BuildContext context) {
+  Widget buttonSignOutWidget(BuildContext context) {
     return PrimaryFillButton(
       preferGradient: false,
       hasShadow: false,
-      bgColor: AppColors.neutralRed200,
-      paddingVertical: 8,
+      borderRadiusValue: Dimens.getScreenWidth(context) * 0.02,
+      bgColor: context.theme.colorScheme.errorContainer,
+      paddingVertical: Dimens.getProportionalScreenWidth(context, 8),
       width: Dimens.getScreenWidth(context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.login, color: AppColors.red400),
-          const EmptyProportionalSpace(width: 8),
-          Text('Sign out',style: Dimens.getProportionalFont(
-            context, context.theme.textTheme.bodyLarge,
-          ).copyWith(color: AppColors.red400)),
+          Icon(Icons.login, color: context.theme.colorScheme.onErrorContainer),
+          const EmptyProportionalSpace(width: 7),
+          Text(
+            S.current.signOut,
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyLarge).copyWith(
+              color: context.theme.colorScheme.onErrorContainer,
+            ),
+          ),
         ],
       ),
       onTap: () {},

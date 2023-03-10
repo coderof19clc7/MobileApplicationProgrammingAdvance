@@ -42,7 +42,7 @@ class TutorCard extends BaseCard {
                 child: Text(
                   '$nationality $name',
                   overflow: TextOverflow.ellipsis,
-                  style: context.theme.textTheme.titleSmall!.copyWith(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.titleSmall).copyWith(
                     fontSize: Dimens.getProportionalScreenWidth(context, 15),
                   ),
                 ),
@@ -96,7 +96,7 @@ class TutorCard extends BaseCard {
             ),
             text: Text(
               '$rating/5',
-              style: context.theme.textTheme.bodySmall!.copyWith(
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 fontSize: Dimens.getProportionalScreenWidth(context, 12),
               ),
             ),
@@ -113,7 +113,7 @@ class TutorCard extends BaseCard {
             overflow: TextOverflow.ellipsis,
             softWrap: true,
             maxLines: 2,
-            style: context.theme.textTheme.bodySmall!.copyWith(
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
               color: context.theme.colorScheme.onTertiaryContainer,
               fontSize: Dimens.getProportionalScreenWidth(context, 12),
             ),

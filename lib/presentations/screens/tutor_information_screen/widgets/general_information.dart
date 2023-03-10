@@ -74,7 +74,7 @@ class GeneralInformation extends StatelessWidget {
         Text(
           'Haylee Caillier',
           textAlign: TextAlign.center,
-          style: context.theme.textTheme.titleLarge!.copyWith(
+          style: Dimens.getProportionalFont(context, context.theme.textTheme.titleLarge).copyWith(
             fontSize: Dimens.getProportionalScreenWidth(context, 20),
           ),
         ),
@@ -86,14 +86,14 @@ class GeneralInformation extends StatelessWidget {
           children: [
             Text(
               UIHelper.getIconFromNationalityCode('DE'),
-              style: TextStyle(
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                 fontSize: Dimens.getProportionalScreenWidth(context, 16),
               ),
             ),
             const EmptyProportionalSpace(width: 8),
             Text(
               'Netherlands',
-              style: context.theme.textTheme.bodySmall!.copyWith(
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 fontSize: Dimens.getProportionalScreenWidth(context, 16),
               ),
             ),
@@ -113,7 +113,7 @@ class GeneralInformation extends StatelessWidget {
             const EmptyProportionalSpace(width: 4),
             Text(
               '4.5/5',
-              style: context.theme.textTheme.bodySmall!.copyWith(
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 color: context.theme.colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w700,
                 fontSize: Dimens.getProportionalScreenWidth(context, 15),
@@ -122,14 +122,14 @@ class GeneralInformation extends StatelessWidget {
             const EmptyProportionalSpace(width: 8),
             Text(
               '|',
-              style: context.theme.textTheme.bodySmall!.copyWith(
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 fontSize: Dimens.getProportionalScreenWidth(context, 15),
               ),
             ),
             const EmptyProportionalSpace(width: 8),
             Text(
               '23,000 ${S.current.review}'.toLowerCase(),
-              style: context.theme.textTheme.bodySmall!.copyWith(
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 fontSize: Dimens.getProportionalScreenWidth(context, 15),
               ),
             ),
@@ -152,7 +152,8 @@ class GeneralInformation extends StatelessWidget {
             width: Dimens.getScreenWidth(context),
             borderRadiusValue: Dimens.getScreenWidth(context),
             paddingVertical: Dimens.getProportionalScreenHeight(
-              context, buttonVerticalPadding,
+              context,
+              buttonVerticalPadding,
             ),
             child: Column(
               children: [
@@ -164,11 +165,12 @@ class GeneralInformation extends StatelessWidget {
                 const EmptyProportionalSpace(height: verticalSpace),
                 Text(
                   S.current.bookClass,
-                  style: TextStyle(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                     color: context.theme.colorScheme.onPrimary,
                     fontWeight: fontWeight,
                     fontSize: Dimens.getProportionalScreenWidth(
-                      context, fontSize + 2,
+                      context,
+                      fontSize + 2,
                     ),
                   ),
                 ),
@@ -186,7 +188,8 @@ class GeneralInformation extends StatelessWidget {
                 child: PrimaryOutlineButton(
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   paddingVertical: Dimens.getProportionalScreenHeight(
-                    context, buttonVerticalPadding,
+                    context,
+                    buttonVerticalPadding,
                   ),
                   onTap: () {},
                   preferGradient: false,
@@ -198,17 +201,19 @@ class GeneralInformation extends StatelessWidget {
                         Icons.report_rounded,
                         color: context.theme.colorScheme.onSurfaceVariant,
                         size: Dimens.getProportionalScreenWidth(
-                          context, iconSize,
+                          context,
+                          iconSize,
                         ),
                       ),
                       const EmptyProportionalSpace(height: verticalSpace),
                       Text(
                         S.current.report,
-                        style: TextStyle(
+                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                           color: context.theme.colorScheme.onSurfaceVariant,
                           fontWeight: fontWeight,
                           fontSize: Dimens.getProportionalScreenWidth(
-                            context, fontSize,
+                            context,
+                            fontSize,
                           ),
                         ),
                       ),
@@ -224,7 +229,8 @@ class GeneralInformation extends StatelessWidget {
                 child: PrimaryOutlineButton(
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   paddingVertical: Dimens.getProportionalScreenHeight(
-                    context, buttonVerticalPadding,
+                    context,
+                    buttonVerticalPadding,
                   ),
                   onTap: () {},
                   preferGradient: false,
@@ -236,16 +242,18 @@ class GeneralInformation extends StatelessWidget {
                         Icons.videocam_rounded,
                         color: context.theme.colorScheme.onSurfaceVariant,
                         size: Dimens.getProportionalScreenWidth(
-                          context, iconSize + 4,
+                          context,
+                          iconSize + 4,
                         ),
                       ),
                       Text(
                         S.current.demo,
-                        style: TextStyle(
+                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                           color: context.theme.colorScheme.onSurfaceVariant,
                           fontWeight: fontWeight,
                           fontSize: Dimens.getProportionalScreenWidth(
-                            context, fontSize,
+                            context,
+                            fontSize,
                           ),
                         ),
                       ),
@@ -261,7 +269,8 @@ class GeneralInformation extends StatelessWidget {
                 child: PrimaryOutlineButton(
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   paddingVertical: Dimens.getProportionalScreenHeight(
-                    context, buttonVerticalPadding,
+                    context,
+                    buttonVerticalPadding,
                   ),
                   onTap: () {},
                   preferGradient: false,
@@ -273,17 +282,19 @@ class GeneralInformation extends StatelessWidget {
                         Icons.message_rounded,
                         color: context.theme.colorScheme.onSurfaceVariant,
                         size: Dimens.getProportionalScreenWidth(
-                          context, iconSize,
+                          context,
+                          iconSize,
                         ),
                       ),
                       const EmptyProportionalSpace(height: verticalSpace),
                       Text(
                         S.current.chat,
-                        style: TextStyle(
+                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                           color: context.theme.colorScheme.onSurfaceVariant,
                           fontWeight: fontWeight,
                           fontSize: Dimens.getProportionalScreenWidth(
-                            context, fontSize,
+                            context,
+                            fontSize,
                           ),
                         ),
                       ),

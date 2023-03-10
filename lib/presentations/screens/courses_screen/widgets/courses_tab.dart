@@ -15,7 +15,6 @@ class CoursesTab extends StatefulWidget {
 class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
-    print('OK 1 rendered');
     super.build(context);
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -27,12 +26,12 @@ class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMi
         children: [
           // search field
           TextField(
-            style: context.theme.textTheme.bodyMedium!.copyWith(
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
               fontSize: Dimens.getProportionalScreenHeight(context, 15),
             ),
             decoration: InputDecoration(
               hintText: S.current.searchHintCourse,
-              hintStyle: context.theme.textTheme.bodySmall!.copyWith(
+              hintStyle: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 fontSize: Dimens.getProportionalScreenHeight(context, 15),
               ),
               filled: true,

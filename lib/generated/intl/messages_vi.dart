@@ -23,15 +23,22 @@ class MessageLookup extends MessageLookupByLibrary {
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Về tôi"),
+        "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
+        "app": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
+        "becomeATutor":
+            MessageLookupByLibrary.simpleMessage("Đăng kí làm Yasuo"),
         "behavior": MessageLookupByLibrary.simpleMessage("Thái độ"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
+        "changePassword":
+            MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
         "chat": MessageLookupByLibrary.simpleMessage("Nhắn tin"),
         "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn hủy lớp này?"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
         "courses": MessageLookupByLibrary.simpleMessage("Khoá học"),
+        "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
@@ -60,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tại sao bạn nên học khóa học này"),
         "language": MessageLookupByLibrary.simpleMessage("Ngôn ngữ"),
         "learnedBook": MessageLookupByLibrary.simpleMessage("Sách đã học"),
+        "learningInterests": MessageLookupByLibrary.simpleMessage("Muốn học"),
         "lesson": MessageLookupByLibrary.simpleMessage("bài học"),
         "lessonHistory":
             MessageLookupByLibrary.simpleMessage("Lịch sử buổi học"),
@@ -77,6 +85,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "overallComment":
             MessageLookupByLibrary.simpleMessage("Đánh giá chung"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "phoneNumber": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
+        "preferredSchedule":
+            MessageLookupByLibrary.simpleMessage("Lịch học mong muốn"),
+        "profile": MessageLookupByLibrary.simpleMessage("Hồ sơ"),
         "record": MessageLookupByLibrary.simpleMessage("Bản ghi"),
         "report": MessageLookupByLibrary.simpleMessage("Báo cáo"),
         "requestForClass":
@@ -91,8 +103,10 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tìm khóa học"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Tìm gia sư"),
         "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
+        "signOut": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
+        "skillLevel": MessageLookupByLibrary.simpleMessage("Trình độ"),
         "sortFavoriteFromHighest":
             MessageLookupByLibrary.simpleMessage("Nhiều lượt thích nhất"),
         "sortFavoriteFromLowest":
@@ -108,9 +122,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Khóa học tham khảo"),
         "swipeToCancelClass":
             MessageLookupByLibrary.simpleMessage("Vuốt trái để hủy buổi học"),
+        "theme": MessageLookupByLibrary.simpleMessage("Chủ đề"),
         "tutor": MessageLookupByLibrary.simpleMessage("gia sư"),
         "tutorReview":
             MessageLookupByLibrary.simpleMessage("Nhận xét từ gia sư"),
+        "tutoring": MessageLookupByLibrary.simpleMessage("Giảng dạy"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "viewAll": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Từ vựng"),

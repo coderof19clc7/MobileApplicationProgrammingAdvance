@@ -108,7 +108,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
                         children: [
                           TextSpan(text: '  ' + item),
                         ],
-                        style: context.theme.textTheme.bodySmall!.copyWith(
+                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                           fontSize: Dimens.getProportionalScreenWidth(
                             context,
                             12,

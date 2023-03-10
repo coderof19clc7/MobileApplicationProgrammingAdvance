@@ -41,7 +41,7 @@ class CourseCard extends BaseCard {
           Text(
             name,
             overflow: TextOverflow.ellipsis,
-            style: context.theme.textTheme.titleSmall!.copyWith(
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.titleSmall).copyWith(
               fontSize: Dimens.getProportionalScreenWidth(context, 17),
             ),
           ),
@@ -80,7 +80,7 @@ class CourseCard extends BaseCard {
                 betweenSpace: 3,
                 text: Text(
                   level,
-                  style: context.theme.textTheme.bodySmall!.copyWith(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                     fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
                   ),
                 ),
@@ -92,7 +92,7 @@ class CourseCard extends BaseCard {
               )),
               Text(
                 '|',
-                style: context.theme.textTheme.bodySmall!.copyWith(
+                style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                   fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
                 ),
               ),
@@ -111,7 +111,7 @@ class CourseCard extends BaseCard {
                 betweenSpace: 2,
                 text: Text(
                   '$lessons ${S.current.lesson}',
-                  style: context.theme.textTheme.bodySmall!.copyWith(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                     fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
                   ),
                 ),
@@ -131,7 +131,7 @@ class CourseCard extends BaseCard {
             overflow: TextOverflow.ellipsis,
             softWrap: true,
             maxLines: 2,
-            style: context.theme.textTheme.bodySmall!.copyWith(
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
               fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
             ),
           ),

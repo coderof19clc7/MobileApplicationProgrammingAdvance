@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
@@ -25,14 +23,14 @@ class LessonHistoryCard extends BaseCard {
     required this.lessonDurationFormat,
     required this.buttonLabel,
     required this.isMarked,
-    required this.onTap,
+    required this.onButtonTap,
   });
 
   final String tutorName;
   final DateTime lessonDateTime, lessonEndTime;
   final String lessonDateFormat, lessonDurationFormat, buttonLabel;
   final bool isMarked;
-  final Function() onTap;
+  final Function() onButtonTap;
 
   @override
   Widget buildSecondChild(BuildContext context) {
@@ -83,7 +81,7 @@ class LessonHistoryCard extends BaseCard {
               width: Dimens.getProportionalScreenWidth(context, 88),
               borderRadiusValue: Dimens.getProportionalScreenWidth(context, 12),
               paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
-              onTap: onTap,
+              onTap: onButtonTap,
               boxShadow: [Effects.normalShadowXS],
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -98,7 +96,7 @@ class LessonHistoryCard extends BaseCard {
                   ),
                   Text(
                     buttonLabel,
-                    style: TextStyle(
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                       color: context.theme.colorScheme.onPrimary,
                       fontSize: Dimens.getProportionalScreenWidth(context, 12),
                     ),
@@ -128,7 +126,7 @@ class LessonHistoryCard extends BaseCard {
       ),
       text: Text(
         text,
-        style: TextStyle(
+        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
           color: isPilled ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onBackground,
           fontSize: Dimens.getProportionalScreenWidth(context, 12),
         ),

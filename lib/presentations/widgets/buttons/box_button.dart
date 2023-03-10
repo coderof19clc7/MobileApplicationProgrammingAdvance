@@ -41,14 +41,15 @@ class BoxButton extends StatelessWidget {
               backgroundColor: context.theme.colorScheme.tertiary,
               child: Text(
                 circleText ?? '',
-                style: const TextStyle(
+                style: Dimens.getProportionalFont(context, context.theme.textTheme.titleMedium).copyWith(
+                  fontSize: Dimens.getProportionalScreenWidth(context, 14),
                   fontWeight: FontWeight.w600,
                 ),
               ),
             ),
             Text(
               title,
-              style: context.theme.textTheme.titleMedium!.copyWith(
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.titleMedium).copyWith(
                 fontSize: Dimens.getProportionalScreenWidth(context, 14),
                 fontWeight: FontWeight.w500,
               ),

@@ -29,7 +29,7 @@ class BaseChoiceChip extends StatelessWidget {
       backgroundColor: context.theme.colorScheme.surfaceTint,
       selectedColor: context.theme.colorScheme.primary,
       showCheckmark: false,
-      labelStyle: TextStyle(
+      labelStyle: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
         color: isSelected
             ? context.theme.colorScheme.onPrimary
             : context.theme.colorScheme.onTertiaryContainer, // listen to state to change color

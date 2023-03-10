@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
@@ -33,7 +34,7 @@ class TotalLessonTimeBanner extends StatelessWidget {
         children: [
           Text(
             topLabel,
-            style: TextStyle(
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
               color: AppColors.white,
               fontSize: Dimens.getProportionalScreenWidth(context, 15),
             ),
@@ -41,7 +42,7 @@ class TotalLessonTimeBanner extends StatelessWidget {
           const EmptyProportionalSpace(height: 15),
           Text(
             totalTime,
-            style: TextStyle(
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
               color: AppColors.white,
               fontWeight: FontWeight.w600,
               fontSize: Dimens.getProportionalScreenWidth(context, 24),
@@ -67,7 +68,7 @@ class TotalLessonTimeBanner extends StatelessWidget {
                 SizedBox(width: Dimens.getProportionalScreenWidth(context, 5)),
                 Text(
                   buttonLabel,
-                  style: TextStyle(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                     color: AppColors.primaryBlue500,
                     fontSize: Dimens.getProportionalScreenWidth(context, 14),
                   ),

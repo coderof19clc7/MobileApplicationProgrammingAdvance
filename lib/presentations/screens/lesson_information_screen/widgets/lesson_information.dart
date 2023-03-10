@@ -160,7 +160,7 @@ class LessonInformation extends StatelessWidget {
       ),
       text: Text(
         text,
-        style: TextStyle(
+        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
           color: context.theme.colorScheme.primary,
           fontSize: Dimens.getProportionalScreenWidth(context, 17),
         ),
@@ -235,7 +235,7 @@ class LessonInformation extends StatelessWidget {
             const EmptyProportionalSpace(height: verticalSpace),
             Text(
               label,
-              style: TextStyle(
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                 color: context.theme.colorScheme.onSurfaceVariant,
                 fontWeight: fontWeight,
                 fontSize: Dimens.getProportionalScreenWidth(
@@ -265,7 +265,7 @@ class LessonInformation extends StatelessWidget {
             Text(
               DateFormat(dateFormat).format(time),
               textAlign: TextAlign.center,
-              style: context.theme.textTheme.headlineSmall!.copyWith(
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.headlineSmall).copyWith(
                 fontSize: Dimens.getProportionalScreenWidth(context, 21),
               ),
             ),
@@ -306,7 +306,7 @@ class LessonInformation extends StatelessWidget {
             Text(
               'Haylee Caillier',
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                 fontSize: Dimens.getProportionalScreenWidth(context, 16),
                 fontWeight: FontWeight.w500,
               ),
@@ -318,14 +318,14 @@ class LessonInformation extends StatelessWidget {
               children: [
                 Text(
                   UIHelper.getIconFromNationalityCode('DE'),
-                  style: TextStyle(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                     fontSize: Dimens.getProportionalScreenWidth(context, 16),
                   ),
                 ),
                 const EmptyProportionalSpace(width: 8),
                 Text(
                   'Netherlands',
-                  style: TextStyle(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                     fontSize: Dimens.getProportionalScreenWidth(context, 14),
                   ),
                 ),
@@ -351,7 +351,7 @@ class LessonInformation extends StatelessWidget {
       ),
       text: Text(
         text,
-        style: TextStyle(
+        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
           color: context.theme.colorScheme.primary,
           fontSize: Dimens.getProportionalScreenWidth(context, 20),
           fontWeight: FontWeight.w700,
@@ -363,7 +363,7 @@ class LessonInformation extends StatelessWidget {
   Widget buildTitle(BuildContext context, String title) {
     return Text(
       title,
-      style: context.theme.textTheme.titleMedium!.copyWith(
+      style: Dimens.getProportionalFont(context, context.theme.textTheme.titleMedium).copyWith(
         fontSize: Dimens.getProportionalScreenWidth(context, 22),
         fontWeight: FontWeight.w600,
       ),
@@ -373,7 +373,7 @@ class LessonInformation extends StatelessWidget {
   Widget buildTextContent(BuildContext context, String content) {
     return Text(
       content,
-      style: context.theme.textTheme.bodyMedium!.copyWith(
+      style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
         fontSize: Dimens.getProportionalScreenWidth(context, 14),
         fontWeight: FontWeight.w400,
       ),
@@ -390,7 +390,7 @@ class LessonInformation extends StatelessWidget {
       children: [
         Text(
           subheading,
-          style: context.theme.textTheme.titleMedium!.copyWith(
+          style: Dimens.getProportionalFont(context, context.theme.textTheme.titleMedium).copyWith(
             fontSize: Dimens.getProportionalScreenWidth(context, 17),
             fontWeight: FontWeight.w600,
           ),

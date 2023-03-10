@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
+import 'package:one_one_learn/configs/constants/dimens.dart';
 
 class TextFieldFill extends StatefulWidget {
   const TextFieldFill({
@@ -44,7 +45,8 @@ class _TextFieldFillState extends State<TextFieldFill> {
       obscureText: _obscureText,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
-        hintStyle: TextStyle(
+        hintStyle: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+          fontSize: Dimens.getProportionalScreenWidth(context, 14),
           color: context.theme.colorScheme.onInverseSurface,
         ),
         filled: true,

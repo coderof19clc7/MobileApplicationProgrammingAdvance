@@ -82,7 +82,7 @@ class UIHelper {
             },
             paddingVertical: Dimens.getProportionalScreenHeight(context, 12),
             preferGradient: false,
-            child: Text(rightButtonText ?? '', style: textFillStyle),
+            child: Text(rightButtonText, style: textFillStyle),
           ),
         ),
       ],

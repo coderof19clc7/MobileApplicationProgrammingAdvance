@@ -15,7 +15,7 @@ class UpcomingClassCard extends BaseCard {
     super.secondChildItemsDistance = 10,
     super.margin,
     super.crossAxisAlignment,
-    required this.onTap,
+    required this.onButtonTap,
     required this.tutorName,
     required this.buttonLabel,
     required this.lessonDateTime,
@@ -24,7 +24,7 @@ class UpcomingClassCard extends BaseCard {
     required this.lessonDurationFormat,
   });
 
-  final Function() onTap;
+  final Function() onButtonTap;
   final String tutorName, buttonLabel;
   final DateTime lessonDateTime, lessonEndTime;
   final String lessonDateFormat, lessonDurationFormat;
@@ -83,7 +83,7 @@ class UpcomingClassCard extends BaseCard {
                   ),
                   Text(
                     buttonLabel,
-                    style: TextStyle(
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                       color: context.theme.colorScheme.onPrimary,
                       fontSize: Dimens.getProportionalScreenWidth(context, 12),
                     ),
@@ -113,7 +113,7 @@ class UpcomingClassCard extends BaseCard {
       ),
       text: Text(
         text,
-        style: TextStyle(
+        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
           color: isPilled ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onBackground,
           fontSize: Dimens.getProportionalScreenWidth(context, 12),
         ),

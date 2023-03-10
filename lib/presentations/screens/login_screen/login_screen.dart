@@ -54,7 +54,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   width: Dimens.getScreenWidth(context),
                   child: Text(
                     S.current.loginTitle,
-                    style: context.theme.textTheme.displayLarge!.copyWith(
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
                       fontSize: Dimens.getProportionalScreenWidth(context, 32),
                       fontWeight: FontWeight.w600,
                     ),
@@ -89,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   child: Text(
                     S.current.login,
-                    style: context.theme.textTheme.displaySmall!.copyWith(
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: Dimens.getProportionalScreenWidth(context, 16),
                     ),
@@ -102,7 +102,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   onTap: () {},
                   child: Text(
                     '${S.current.forgotPassword}?',
-                    style: TextStyle(
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                       color: context.theme.colorScheme.onSurfaceVariant,
                       fontSize: Dimens.getProportionalScreenWidth(context, 15),
                       fontWeight: FontWeight.w500,
@@ -114,7 +114,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // more options to sign in field
                 Text(
                   S.current.orContinueWith.toLowerCase(),
-                  style: context.theme.textTheme.bodySmall!.copyWith(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                     fontSize: Dimens.getProportionalScreenWidth(context, 15),
                     fontWeight: FontWeight.w400,
                   ),
@@ -156,7 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 RichText(
                   text: TextSpan(
                     text: S.current.dontHaveAccount,
-                    style: TextStyle(
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                       color: context.theme.colorScheme.onInverseSurface,
                       fontSize: Dimens.getProportionalScreenWidth(context, 15),
                       fontWeight: FontWeight.w400,
@@ -165,7 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       TextSpan(
                         text: ' ${S.current.signUp}',
                         recognizer: _tapGestureRecognizer,
-                        style: TextStyle(
+                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                           color: context.theme.colorScheme.primary,
                           fontSize: Dimens.getProportionalScreenWidth(context, 15),
                           fontWeight: FontWeight.w600,

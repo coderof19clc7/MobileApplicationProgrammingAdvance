@@ -1,72 +1,64 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
+import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
+
 class SkillCurrentWidget extends StatelessWidget {
   final String title;
-  const SkillCurrentWidget({Key? key, required this.title}) : super(key: key);
+  const SkillCurrentWidget({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
-    return skillCurrentWidget(title);
+    return skillCurrentWidget(context, title);
   }
-  Widget skillCurrentWidget(String title){
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(vertical: 10, ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children:[
-          Text(
-            title,
-            style:  TextStyle(
-              color: AppColors.primaryBlue900,
-              fontSize: 15,
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.w600,
+
+  Widget skillCurrentWidget(BuildContext context, String title) {
+    return Row(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              title,
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          ),
-          const SizedBox(height: 15),
-          Wrap(
-            direction: Axis.horizontal,
-            alignment: WrapAlignment.start,
-            runAlignment: WrapAlignment.start,
-            crossAxisAlignment:   WrapCrossAlignment.start,
-            verticalDirection: VerticalDirection.down,
-            clipBehavior: Clip.hardEdge ,
-            spacing: 10,
-            children: [
-              _generateItem(),
-              _generateItem(),
-              _generateItem(),
-
-            ],
-
-          ),
-        ],
-      ),
+            const EmptyProportionalSpace(height: 15),
+            Wrap(
+              clipBehavior: Clip.hardEdge,
+              spacing: Dimens.getProportionalScreenWidth(context, 8),
+              children: [
+                buildItem(context),
+                buildItem(context),
+                buildItem(context),
+              ],
+            ),
+          ],
+        ),
+      ],
     );
   }
-  Widget _generateItem() {
+
+  Widget buildItem(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: AppColors.primaryBlue400,
+        color: context.theme.colorScheme.primary,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 6, ),
+      padding: EdgeInsets.symmetric(
+        horizontal: Dimens.getProportionalScreenWidth(context, 19),
+        vertical: Dimens.getProportionalScreenWidth(context, 5),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children:const [
+        children: [
           Text(
-            "UI/UX",
+            'UI/UX',
             textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 12,
-              fontFamily: "Poppins",
-              fontWeight: FontWeight.w500,
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
+              color: context.theme.colorScheme.onPrimary,
             ),
           ),
         ],

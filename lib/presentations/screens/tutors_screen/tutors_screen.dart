@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -10,7 +9,6 @@ import 'package:one_one_learn/presentations/screens/tutors_screen/widgets/tutor_
 import 'package:one_one_learn/presentations/screens/tutors_screen/widgets/tutor_filter_bottom_sheet.dart';
 import 'package:one_one_learn/presentations/screens/tutors_screen/widgets/upcoming_class_banner.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
-import 'package:one_one_learn/presentations/widgets/choice_chips/base_choice_chip.dart';
 import 'package:one_one_learn/presentations/widgets/dialogs/normal_bottom_sheet_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/ui_helper.dart';
@@ -69,12 +67,12 @@ class TutorsScreen extends StatelessWidget {
                           // search and filter field
                           Expanded(
                             child: TextField(
-                              style: context.theme.textTheme.bodyMedium!.copyWith(
+                              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                                 fontSize: Dimens.getProportionalScreenHeight(context, 15),
                               ),
                               decoration: InputDecoration(
                                 hintText: S.current.searchHintTutor,
-                                hintStyle: context.theme.textTheme.bodySmall!.copyWith(
+                                hintStyle: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                                   fontSize: Dimens.getProportionalScreenHeight(context, 15),
                                 ),
                                 filled: true,

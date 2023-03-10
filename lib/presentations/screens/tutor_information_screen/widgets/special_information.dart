@@ -78,7 +78,7 @@ class SpecialInformation extends StatelessWidget {
               onTap: () {},
               child: Text(
                 S.current.viewAll,
-                style: TextStyle(
+                style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                   fontSize: Dimens.getProportionalScreenWidth(context, 16),
                   color: context.theme.colorScheme.onSurfaceVariant,
                 ),
@@ -94,7 +94,7 @@ class SpecialInformation extends StatelessWidget {
   Widget buildTitle(BuildContext context, String title) {
     return Text(
       title,
-      style: context.theme.textTheme.titleMedium!.copyWith(
+      style: Dimens.getProportionalFont(context, context.theme.textTheme.titleMedium).copyWith(
         fontSize: Dimens.getProportionalScreenWidth(context, 22),
         fontWeight: FontWeight.w600,
       ),
@@ -104,7 +104,7 @@ class SpecialInformation extends StatelessWidget {
   Widget buildTextContent(BuildContext context, String content) {
     return Text(
       content,
-      style: context.theme.textTheme.bodyMedium!.copyWith(
+      style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
         fontSize: Dimens.getProportionalScreenWidth(context, 14),
         fontWeight: FontWeight.w400,
       ),

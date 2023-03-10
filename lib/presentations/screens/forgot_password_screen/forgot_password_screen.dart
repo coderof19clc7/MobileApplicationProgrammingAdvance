@@ -35,7 +35,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 width: Dimens.getScreenWidth(context),
                 child: Text(
                   S.current.forgotPassword,
-                  style: context.theme.textTheme.displayLarge!.copyWith(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
                     fontSize: Dimens.getProportionalScreenWidth(context, 32),
                     fontWeight: FontWeight.w600,
                   ),
@@ -46,7 +46,7 @@ class ForgotPasswordScreen extends StatelessWidget {
               // reset password requirement field
               Text(
                 S.current.resetPasswordRequirement,
-                style: context.theme.textTheme.bodySmall!.copyWith(
+                style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                   fontSize: Dimens.getProportionalScreenWidth(context, 17),
                 ),
               ),
@@ -69,7 +69,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                 borderRadiusValue: Dimens.getScreenWidth(context),
                 child: Text(
                   S.current.resetPassword,
-                  style: TextStyle(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                     color: context.theme.colorScheme.onPrimary,
                     fontSize: Dimens.getProportionalScreenWidth(context, 16),
                   ),

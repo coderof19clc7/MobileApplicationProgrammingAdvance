@@ -35,7 +35,7 @@ class SignUpScreen extends StatelessWidget {
                   width: Dimens.getScreenWidth(context),
                   child: Text(
                     S.current.signUpTitle,
-                    style: context.theme.textTheme.displayLarge!.copyWith(
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
                       fontSize: Dimens.getProportionalScreenWidth(context, 32),
                       fontWeight: FontWeight.w600,
                     ),
@@ -80,7 +80,7 @@ class SignUpScreen extends StatelessWidget {
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   child: Text(
                     S.current.signUp,
-                    style: context.theme.textTheme.displaySmall!.copyWith(
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
                       fontWeight: FontWeight.w500,
                       fontSize: Dimens.getProportionalScreenWidth(context, 16),
                     ),

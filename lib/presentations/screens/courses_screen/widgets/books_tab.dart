@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/courses_screen/widgets/course_card.dart';
@@ -17,7 +17,6 @@ class _BooksTabState extends State<BooksTab>
     with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
-    print('OK 2 rendered');
     super.build(context);
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -29,20 +28,18 @@ class _BooksTabState extends State<BooksTab>
         children: [
           // search field
           TextField(
-            style: TextStyle(
-              color: AppColors.black,
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
               fontSize: Dimens.getProportionalScreenHeight(context, 15),
             ),
             decoration: InputDecoration(
               hintText: S.current.searchHintCourse,
-              hintStyle: TextStyle(
-                color: AppColors.neutralBlue500,
+              hintStyle: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 fontSize: Dimens.getProportionalScreenHeight(context, 15),
               ),
               isDense: true,
               border: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: AppColors.grey,
+                  color: context.theme.colorScheme.outline,
                 ),
                 borderRadius: BorderRadius.circular(5),
               ),

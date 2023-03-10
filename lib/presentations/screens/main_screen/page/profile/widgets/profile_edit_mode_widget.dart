@@ -1,46 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
+import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/page/profile/widgets/avatar_widget.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/page/profile/widgets/skill_current_widget.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/ui_helper.dart';
 
 class ProfileEditModeWidget extends StatelessWidget {
   const ProfileEditModeWidget({super.key});
 
-  Widget textViewCurrent({required String tile, Widget?  iconWidget,Color? backgroundColor, bool? isBorder = true}) {
-    return  Container(
+  Widget textViewCurrent(BuildContext context, {required String title, Widget? iconWidget, Color? backgroundColor, bool? isBorder = true}) {
+    return Container(
       width: double.infinity,
       decoration: BoxDecoration(
-        color: backgroundColor,
+        color: backgroundColor ?? context.theme.colorScheme.tertiaryContainer,
         borderRadius: BorderRadius.circular(5),
-        border: isBorder == true ?  Border.all(color: const Color(0xffc0c5ca), width: 1, ) : null,
+        border: isBorder == true ? Border.all(color: context.theme.colorScheme.outline) : null,
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 15, ),
+      padding: EdgeInsets.symmetric(
+        horizontal: Dimens.getProportionalScreenWidth(context, 12),
+        vertical: Dimens.getProportionalScreenWidth(context, 14),
+      ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children:[
+        children: [
           Text(
-            tile,
-            style: TextStyle(
-              color: AppColors.primaryBlue900,
-              fontSize: 15,
-            ),
+            title,
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium),
           ),
-          const SizedBox(width: 10),
-          Container(
-            width: 16,
-            height: 16,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: iconWidget ?? Container(),
-          ),
+          iconWidget ?? const SizedBox.shrink(),
         ],
       ),
     );
-
   }
 
   @override
@@ -48,44 +41,57 @@ class ProfileEditModeWidget extends StatelessWidget {
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children:[
-
-          const AvatarWidget(
-            isEditAvt: true,
-          ),
-          SizedBox(height: 20),
+        children: [
+          const AvatarWidget(isEditAvt: true),
+          const EmptyProportionalSpace(height: 20),
           Text(
-            "huyminh@lettutor.com",
-            style: TextStyle(
-              color: Color(0xff05172c),
-              fontSize: 15,
+            'huyminh@lettutor.com',
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.titleLarge).copyWith(
+              fontWeight: FontWeight.w600,
             ),
           ),
-          SizedBox(height: 20),
-          textViewCurrent(tile: "Huy Minh"),
-          SizedBox(height: 20),
-          textViewCurrent(tile: "20/12/1999",iconWidget: Icon(Icons.calendar_today_outlined,color: AppColors.primaryBlue400,size: 16,),),
-
-          const SizedBox(height: 20),
-          textViewCurrent(tile: "+84901111323",backgroundColor: AppColors.neutralBlue200,isBorder: false),
-          SizedBox(height: 20),
-          textViewCurrent(tile:
-          '${UIHelper.getIconFromNationalityCode('VN')} Viet nam',
-              iconWidget: Icon(Icons.expand_more_rounded,color: AppColors.neutralBlue500,size: 22,)),
-          SizedBox(height: 20),
-
-
-          textViewCurrent(tile:
-          'Intermediate',
-              iconWidget: Icon(Icons.expand_more_rounded,color: AppColors.neutralBlue500,size: 22,)),
-          SizedBox(height: 20),
-
-
-          SkillCurrentWidget( title: 'Learning interests',),
-          SkillCurrentWidget( title: 'Target tests',),
-
+          const EmptyProportionalSpace(height: 20),
+          textViewCurrent(context, title: 'Huy Minh'),
+          const EmptyProportionalSpace(height: 20),
+          textViewCurrent(
+            context,
+            title: '20/12/1999',
+            iconWidget: Icon(
+              Icons.calendar_today_outlined,
+              color: context.theme.colorScheme.onSurfaceVariant,
+              size: Dimens.getProportionalScreenWidth(context, 17),
+            ),
+          ),
+          const EmptyProportionalSpace(height: 20),
+          textViewCurrent(
+            context,
+            title: '+84901111323',
+            backgroundColor: context.theme.colorScheme.outlineVariant,
+            isBorder: false,
+          ),
+          const EmptyProportionalSpace(height: 20),
+          textViewCurrent(
+            context,
+            title: '${UIHelper.getIconFromNationalityCode('VN')} Viet Nam',
+            iconWidget: Icon(
+              Icons.expand_more_rounded,
+              color: context.theme.colorScheme.onTertiaryContainer,
+              size: Dimens.getProportionalScreenWidth(context, 22),
+            ),
+          ),
+          const EmptyProportionalSpace(height: 20),
+          textViewCurrent(
+            context,
+            title: 'Intermediate',
+            iconWidget: Icon(
+              Icons.expand_more_rounded,
+              color: context.theme.colorScheme.onTertiaryContainer,
+              size: Dimens.getProportionalScreenWidth(context, 22),
+            ),
+          ),
+          const EmptyProportionalSpace(height: 20),
+          SkillCurrentWidget(title: S.current.learningInterests),
+          // TODO(coderof19clc7): Add preffered schedule form field
         ],
       ),
     );

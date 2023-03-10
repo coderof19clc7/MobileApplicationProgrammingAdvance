@@ -67,7 +67,7 @@ class CourseInformationScreen extends StatelessWidget {
                     // course name
                     Text(
                       'Life in the Internet Age',
-                      style: context.theme.textTheme.headlineLarge!.copyWith(
+                      style: Dimens.getProportionalFont(context, context.theme.textTheme.headlineLarge).copyWith(
                         fontSize: Dimens.getProportionalScreenWidth(context, 21),
                       ),
                     ),
@@ -97,7 +97,7 @@ class CourseInformationScreen extends StatelessWidget {
                         const EmptyProportionalSpace(width: 5),
                         Text(
                           '|',
-                          style: TextStyle(
+                          style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                             fontSize: Dimens.getProportionalScreenWidth(context, 14),
                             fontWeight: FontWeight.w300,
                           ),
@@ -116,7 +116,7 @@ class CourseInformationScreen extends StatelessWidget {
                     // about subheading
                     Text(
                       S.current.labelAbout,
-                      style: context.theme.textTheme.displayMedium!.copyWith(
+                      style: Dimens.getProportionalFont(context, context.theme.textTheme.displayMedium).copyWith(
                         fontSize: Dimens.getProportionalScreenWidth(context, 20),
                         fontWeight: FontWeight.w500,
                       ),
@@ -160,7 +160,7 @@ class CourseInformationScreen extends StatelessWidget {
                     // topics subheading
                     Text(
                       S.current.labelTopics,
-                      style: context.theme.textTheme.displayMedium!.copyWith(
+                      style: Dimens.getProportionalFont(context, context.theme.textTheme.displayMedium).copyWith(
                         fontSize: Dimens.getProportionalScreenWidth(context, 20),
                         fontWeight: FontWeight.w500,
                       ),
@@ -202,7 +202,7 @@ class CourseInformationScreen extends StatelessWidget {
         ),
         Text(
           text,
-          style: TextStyle(
+          style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
             color: context.theme.colorScheme.onSurfaceVariant,
             fontSize: Dimens.getProportionalScreenWidth(context, 16),
             fontWeight: FontWeight.w500,
@@ -215,7 +215,7 @@ class CourseInformationScreen extends StatelessWidget {
   Widget buildParagraph(BuildContext context, String text) {
     return Text(
       text,
-      style: context.theme.textTheme.bodyMedium!.copyWith(
+      style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
         fontSize: Dimens.getProportionalScreenWidth(context, 14),
         fontWeight: FontWeight.w300,
       ),
@@ -250,7 +250,7 @@ class CourseInformationScreen extends StatelessWidget {
       ),
       text: Text(
         text,
-        style: context.theme.textTheme.bodyMedium!.copyWith(
+        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
           fontSize: Dimens.getProportionalScreenWidth(context, 14),
           fontWeight: FontWeight.w300,
         ),

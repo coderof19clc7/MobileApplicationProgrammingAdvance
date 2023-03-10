@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 
@@ -34,7 +35,7 @@ class FakeChip extends StatelessWidget {
           Text(
             text ?? '',
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
               color: textColor ?? AppColors.primaryBlue400,
               fontSize: Dimens.getProportionalScreenWidth(
                 context,

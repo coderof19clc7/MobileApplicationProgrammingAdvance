@@ -59,7 +59,7 @@ class LessonHistoryScreen extends StatelessWidget {
                     lessonDateFormat: 'EEE, MMM d, yyyy',
                     lessonDurationFormat: 'HH:mm',
                     isMarked: index.isEven,
-                    onTap: () {},
+                    onButtonTap: () {},
                     buttonLabel: S.current.more,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     margin: EdgeInsets.only(
