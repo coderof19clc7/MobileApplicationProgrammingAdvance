@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/page/profile/widgets/profile_edit_mode_widget.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/page/profile/widgets/profile_view_mode_widget.dart';
+import 'package:one_one_learn/presentations/screens/profile/widgets/profile_edit_mode_widget.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 import 'package:intl/intl.dart'; 
 

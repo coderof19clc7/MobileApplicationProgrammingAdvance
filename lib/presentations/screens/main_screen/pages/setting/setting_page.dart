@@ -2,16 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/page/setting/widgets/icon_text_icon.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/page/setting/widgets/info_current.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/setting/widgets/icon_text_icon.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/setting/widgets/info_current.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
-class SettingPage extends StatelessWidget {
+class SettingPage extends StatefulWidget {
   const SettingPage({super.key});
 
   @override
+  State<SettingPage> createState() => _SettingPageState();
+}
+
+class _SettingPageState extends State<SettingPage>
+    with AutomaticKeepAliveClientMixin<SettingPage> {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
       body: Container(
         padding: EdgeInsets.only(
@@ -134,4 +141,7 @@ class SettingPage extends StatelessWidget {
       onTap: () {},
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

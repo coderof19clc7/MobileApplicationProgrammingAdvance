@@ -5,19 +5,20 @@ import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/upcoming_classes_screen/widgets/total_lesson_time_banner.dart';
-import 'package:one_one_learn/presentations/screens/upcoming_classes_screen/widgets/upcoming_class_card.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/upcoming_classes/widgets/total_lesson_time_banner.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/upcoming_classes/widgets/upcoming_class_card.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
-class UpcomingClassesScreen extends StatefulWidget {
-  const UpcomingClassesScreen({super.key});
+class UpcomingClassesPage extends StatefulWidget {
+  const UpcomingClassesPage({super.key});
 
   @override
-  State<UpcomingClassesScreen> createState() => _UpcomingClassesScreenState();
+  State<UpcomingClassesPage> createState() => _UpcomingClassesPageState();
 }
 
-class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
+class _UpcomingClassesPageState extends State<UpcomingClassesPage>
+    with AutomaticKeepAliveClientMixin<UpcomingClassesPage> {
   var tempList = [
     'Raymond Sanft',
     'Haylee Caillier',
@@ -33,6 +34,7 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     final hour = Random().nextInt(12) + 1;
     final minute = Random().nextInt(45);
 
@@ -40,7 +42,6 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
       body: Container(
         padding: EdgeInsets.only(
           top: Dimens.getTopSafeAreaHeight(context) + 10,
-          bottom: Dimens.getBottomSafeAreaHeight(context) + 10,
         ),
         width: Dimens.getScreenWidth(context),
         height: Dimens.getScreenHeight(context),
@@ -162,9 +163,15 @@ class _UpcomingClassesScreenState extends State<UpcomingClassesScreen> {
                 },
               ),
             ),
+            EmptyProportionalSpace(
+              height: Dimens.getBottomSafeAreaHeight(context) + 10,
+            ),
           ],
         ),
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

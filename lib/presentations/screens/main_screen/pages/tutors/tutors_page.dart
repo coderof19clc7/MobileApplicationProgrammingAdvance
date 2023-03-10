@@ -5,19 +5,26 @@ import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/tutors_screen/widgets/tutor_card.dart';
-import 'package:one_one_learn/presentations/screens/tutors_screen/widgets/tutor_filter_bottom_sheet.dart';
-import 'package:one_one_learn/presentations/screens/tutors_screen/widgets/upcoming_class_banner.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/tutor_card.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/tutor_filter_bottom_sheet.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/upcoming_class_banner.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/dialogs/normal_bottom_sheet_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/ui_helper.dart';
 
-class TutorsScreen extends StatelessWidget {
-  const TutorsScreen({super.key});
+class TutorsPage extends StatefulWidget {
+  const TutorsPage({super.key});
 
   @override
+  State<TutorsPage> createState() => _TutorsPageState();
+}
+
+class _TutorsPageState extends State<TutorsPage>
+    with AutomaticKeepAliveClientMixin<TutorsPage> {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     final startTime = DateTime.now().add(
       Duration(
         days: Random().nextInt(5),
@@ -35,7 +42,6 @@ class TutorsScreen extends StatelessWidget {
         body: Container(
           padding: EdgeInsets.only(
             top: Dimens.getTopSafeAreaHeight(context),
-            bottom: Dimens.getBottomSafeAreaHeight(context) + 10,
           ),
           width: Dimens.getScreenWidth(context),
           height: Dimens.getScreenHeight(context),
@@ -141,10 +147,16 @@ class TutorsScreen extends StatelessWidget {
                   ),
                 ),
               ),
+              EmptyProportionalSpace(
+                height: Dimens.getBottomSafeAreaHeight(context) + 10,
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

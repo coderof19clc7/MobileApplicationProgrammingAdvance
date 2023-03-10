@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/presentations/screens/courses_screen/widgets/books_tab.dart';
-import 'package:one_one_learn/presentations/screens/courses_screen/widgets/courses_tab.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/widgets/books_tab.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/widgets/courses_tab.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/ui_helper.dart';
 
-class CoursesScreen extends StatelessWidget {
-  const CoursesScreen({super.key});
+class CoursesPage extends StatefulWidget {
+  const CoursesPage({super.key});
 
   @override
+  State<CoursesPage> createState() => _CoursesPageState();
+}
+
+class _CoursesPageState extends State<CoursesPage>
+    with AutomaticKeepAliveClientMixin<CoursesPage> {
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return GestureDetector(
       onTap: () {
         UIHelper.hideKeyboard(context);
@@ -20,7 +28,6 @@ class CoursesScreen extends StatelessWidget {
           body: Container(
             padding: EdgeInsets.only(
               top: Dimens.getTopSafeAreaHeight(context) + 10,
-              bottom: Dimens.getBottomSafeAreaHeight(context) + 10,
             ),
             width: Dimens.getScreenWidth(context),
             height: Dimens.getScreenHeight(context),
@@ -62,6 +69,9 @@ class CoursesScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                EmptyProportionalSpace(
+                  height: Dimens.getBottomSafeAreaHeight(context) + 10,
+                ),
               ],
             ),
           ),
@@ -69,4 +79,7 @@ class CoursesScreen extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

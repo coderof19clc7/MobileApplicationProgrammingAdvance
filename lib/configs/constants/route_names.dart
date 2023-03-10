@@ -13,4 +13,6 @@ class RouteNames {
   static const upcomingClasses = '/upcoming-classes';
   static const lessonHistory = '/lesson-history';
   static const lessonInformation = '/lesson-information';
+  static const settings = '/settings';
+  static const profile = '/profile';
 }

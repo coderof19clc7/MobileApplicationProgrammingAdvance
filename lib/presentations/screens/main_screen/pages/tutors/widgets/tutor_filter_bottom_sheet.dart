@@ -3,7 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/tutors_screen/widgets/filter_dropdown.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/filter_dropdown.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/base_choice_chip.dart';

@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/presentations/screens/course_information_screen/course_information_screen.dart';
-import 'package:one_one_learn/presentations/screens/courses_screen/courses_screen.dart';
 import 'package:one_one_learn/presentations/screens/forgot_password_screen/forgot_password_screen.dart';
 import 'package:one_one_learn/presentations/screens/lesson_history_screen/lesson_history_screen.dart';
 import 'package:one_one_learn/presentations/screens/login_screen/login_screen.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/main_screen.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/courses_page.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/tutors_page.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/upcoming_classes/upcoming_classes_page.dart';
 import 'package:one_one_learn/presentations/screens/on_boarding_screen/on_boarding_screen.dart';
 import 'package:one_one_learn/presentations/screens/sign_up_screen/sign_up_screen.dart';
 import 'package:one_one_learn/presentations/screens/tutor_information_screen/tutor_information_screen.dart';
-import 'package:one_one_learn/presentations/screens/tutors_screen/tutors_screen.dart';
-import 'package:one_one_learn/presentations/screens/upcoming_classes_screen/upcoming_classes_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AppRouter {
@@ -43,7 +44,7 @@ class AppRouter {
         );
       case RouteNames.tutors:
         return PageTransition(
-          child: const TutorsScreen(), // navigate to main and change index of visible tab index to 0
+          child: const MainScreen(), // navigate to main and change index of visible tab index to 0
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );
@@ -61,7 +62,7 @@ class AppRouter {
       //   );
       case RouteNames.coursesList:
         return PageTransition(
-          child: const CoursesScreen(), // navigate to main and change index of visible tab index to 1
+          child: const MainScreen(), // navigate to main and change index of visible tab index to 3
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );
@@ -79,13 +80,13 @@ class AppRouter {
       //   );
       case RouteNames.booksList:
         return PageTransition(
-          child: const CoursesScreen(), // navigate to main and change index of visible tab index to 1
+          child: const MainScreen(), // navigate to main and change index of visible tab index to 3 with index is 1
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );
       case RouteNames.upcomingClasses:
         return PageTransition(
-          child: const UpcomingClassesScreen(), // navigate to main and change index of visible tab index to 2
+          child: const MainScreen(), // navigate to main and change index of visible tab index to 2
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );
@@ -98,6 +99,12 @@ class AppRouter {
       case RouteNames.lessonInformation:
         return PageTransition(
           child: const OnBoardingScreen(),
+          type: PageTransitionType.rightToLeft,
+          alignment: Alignment.center,
+        );
+      case RouteNames.settings:
+        return PageTransition(
+          child: const MainScreen(), // navigate to main and change index of visible tab index to 4
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );

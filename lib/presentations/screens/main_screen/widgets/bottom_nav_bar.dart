@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -16,88 +17,88 @@ class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = Dimens.getScreenWidth(context);
-    // return Column(
-    //   mainAxisSize: MainAxisSize.min,
-    //   children: [
-    //     const SizedBox(height: 10),
-    //     AnimatedContainer(
-    //       duration: const Duration(milliseconds: 200),
-    //       curve: Curves.easeInOut,
-    //       height: Dimens.getProportionalScreenHeight(context, 5),
-    //       width: screenWidth / 5,
-    //       margin: EdgeInsets.only(
-    //         left: screenWidth / 5 * currentIndex,
-    //         right: screenWidth/ 5 * (4 - currentIndex),
-    //       ),
-    //       decoration: BoxDecoration(
-    //         color: context.theme.primaryColor,
-    //         borderRadius: const BorderRadius.vertical(
-    //           bottom: Radius.circular(10),
-    //         ),
-    //       ),
-    //     ),
-    //     Row(
-    //       children: [
-    //
-    //       ],
-    //     ),
-    //   ],
-    // );
-    return Stack(
-      alignment: Alignment.bottomCenter,
-      children: [
-        Container(
-          height: 58,
-          decoration: BoxDecoration(
-            color: context.theme.dividerColor,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withOpacity(0.05),
-                blurRadius: 10,
-                offset: const Offset(0, -5),
+    return BottomAppBar(
+      elevation: 10,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            curve: Curves.easeInOut,
+            height: Dimens.getProportionalScreenHeight(context, 5),
+            width: screenWidth / 5,
+            margin: EdgeInsets.only(
+              left: screenWidth / 5 * currentIndex,
+              right: screenWidth/ 5 * (4 - currentIndex),
+            ),
+            decoration: BoxDecoration(
+              color: context.theme.primaryColor,
+              borderRadius: const BorderRadius.vertical(
+                bottom: Radius.circular(10),
+              ),
+            ),
+          ),
+          Row(
+            children: [
+              buildBottomNavBarItem(
+                context,
+                isSelected: currentIndex == 0,
+                title: S.current.tutor,
+                unSelectedIcon: Icon(
+                  Icons.groups_2_rounded,
+                  color: context.theme.colorScheme.onInverseSurface,
+                ),
+                selectedIcon: const Icon(Icons.groups_2_rounded),
+                onTap: () => onTap(0),
+              ),
+              buildBottomNavBarItem(
+                context,
+                isSelected: currentIndex == 1,
+                title: S.current.chat,
+                unSelectedIcon: Icon(
+                  Icons.message_rounded,
+                  color: context.theme.colorScheme.onInverseSurface,
+                ),
+                selectedIcon: const Icon(Icons.message_rounded),
+                onTap: () => onTap(1),
+              ),
+              buildBottomNavBarItem(
+                context,
+                isSelected: currentIndex == 2,
+                title: S.current.upcoming,
+                unSelectedIcon: Icon(
+                  Icons.timelapse_rounded,
+                  color: context.theme.colorScheme.onInverseSurface,
+                ),
+                selectedIcon: const Icon(Icons.timelapse_rounded),
+                onTap: () => onTap(2),
+              ),
+              buildBottomNavBarItem(
+                context,
+                isSelected: currentIndex == 3,
+                title: S.current.courses,
+                unSelectedIcon: Icon(
+                  Icons.menu_book_rounded,
+                  color: context.theme.colorScheme.onInverseSurface,
+                ),
+                selectedIcon: const Icon(Icons.menu_book_rounded),
+                onTap: () => onTap(3),
+              ),
+              buildBottomNavBarItem(
+                context,
+                isSelected: currentIndex == 4,
+                title: S.current.settings,
+                unSelectedIcon: Icon(
+                  Icons.settings_rounded,
+                  color: context.theme.colorScheme.onInverseSurface,
+                ),
+                selectedIcon: const Icon(Icons.settings_rounded),
+                onTap: () => onTap(4),
               ),
             ],
           ),
-        ),
-        AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          curve: Curves.easeInOut,
-          height: 58,
-          width: screenWidth / 5,
-          color: context.theme.primaryColor,
-          margin: EdgeInsets.only(
-            left: screenWidth / 5 * currentIndex,
-            right: screenWidth/ 5 * (4 - currentIndex),
-          ),
-        ),
-        BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          currentIndex: currentIndex,
-          onTap: onTap,
-          items: [
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.groups_2_rounded),
-              label: S.current.tutor,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.message_rounded),
-              label: S.current.chat,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.timelapse_rounded),
-              label: S.current.upcoming,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.menu_book_rounded),
-              label: S.current.courses,
-            ),
-            BottomNavigationBarItem(
-              icon: const Icon(Icons.settings_rounded),
-              label: S.current.settings,
-            ),
-          ],
-        ),
-      ],
+        ],
+      ),
     );
   }
 
@@ -109,15 +110,29 @@ class BottomNavBar extends StatelessWidget {
     required Function() onTap,
   }) {
     return Expanded(
-      child: InkWell(
+      child: InkResponse(
         onTap: () => onTap(),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            isSelected ? selectedIcon : unSelectedIcon,
-            const SizedBox(height: 5),
-          ],
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+            vertical: Dimens.getProportionalScreenHeight(context, 15),
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              isSelected ? selectedIcon : unSelectedIcon,
+              const SizedBox(height: 4),
+              Text(title, style: Dimens.getProportionalFont(
+                context, context.theme.textTheme.bodySmall,
+              ).copyWith(
+                fontSize: Dimens.getProportionalScreenWidth(context, 10),
+                fontWeight: FontWeight.w500,
+                color: isSelected
+                    ? context.theme.colorScheme.primary
+                    : context.theme.colorScheme.onInverseSurface,
+              )),
+            ],
+          ),
         ),
       ),
     );
