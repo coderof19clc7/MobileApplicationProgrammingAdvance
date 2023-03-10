@@ -91,8 +91,12 @@ class AppThemes {
     ),
     bottomSheetTheme: AppStyles.bottomSheetThemeDark,
     popupMenuTheme: AppStyles.popupMenuThemeDataDark,
+    bottomAppBarTheme: BottomAppBarTheme(
+      color: AppColors.neutralBlue900,
+      elevation: 0,
+    ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.black,
       selectedIconTheme: IconThemeData(color: AppColors.primaryBlue400),
       unselectedIconTheme: IconThemeData(color: AppColors.grey),
       selectedLabelStyle: AppFonts.textThemeLight.bodySmall!.copyWith(color: AppColors.primaryBlue400),

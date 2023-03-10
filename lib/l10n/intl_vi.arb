@@ -65,5 +65,8 @@
   "overallComment": "Đánh giá chung",
   "homework": "Bài tập về nhà",
   "learnedBook": "Sách đã học",
-  "more": "Chi tiết"
+  "more": "Chi tiết",
+  "courses": "Khoá học",
+  "upcoming": "Upcoming",
+  "settings": "Cài đặt"
 }

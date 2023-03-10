@@ -10,6 +10,7 @@ import 'package:one_one_learn/presentations/screens/lesson_history_screen/lesson
 import 'package:one_one_learn/presentations/screens/lesson_history_screen/widgets/lesson_history_card.dart';
 import 'package:one_one_learn/presentations/screens/lesson_information_screen/lesson_information_screen.dart';
 import 'package:one_one_learn/presentations/screens/login_screen/login_screen.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/main_screen.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/page/profile/profile_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/page/setting/setting_page.dart';
 import 'package:one_one_learn/presentations/screens/on_boarding_screen/on_boarding_screen.dart';
@@ -39,7 +40,7 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: S.delegate.supportedLocales,
-      home: const ProfilePage(),
+      home: const MainScreen(),
     );
   }
 }

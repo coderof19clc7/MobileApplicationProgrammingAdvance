@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn có chắc chắn muốn hủy lớp này?"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
+        "courses": MessageLookupByLibrary.simpleMessage("Khoá học"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
@@ -89,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Tìm khóa học"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Tìm gia sư"),
+        "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "sortFavoriteFromHighest":
@@ -109,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tutor": MessageLookupByLibrary.simpleMessage("gia sư"),
         "tutorReview":
             MessageLookupByLibrary.simpleMessage("Nhận xét từ gia sư"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "viewAll": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Từ vựng"),
         "yes": MessageLookupByLibrary.simpleMessage("Có")

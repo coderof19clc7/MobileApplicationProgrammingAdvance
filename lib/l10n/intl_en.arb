@@ -66,5 +66,8 @@
   "homework": "Homework",
   "learnedBook": "Learned book",
   "noReviewGiven": "No comment",
-  "more": "More"
+  "more": "More",
+  "courses": "Courses",
+  "upcoming": "Upcoming",
+  "settings": "Settings"
 }

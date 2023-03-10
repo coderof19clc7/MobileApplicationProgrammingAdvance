@@ -31,6 +31,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure you want to cancel this class?"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "courses": MessageLookupByLibrary.simpleMessage("Courses"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
@@ -89,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Find a course"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Find a tutor"),
+        "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
@@ -109,6 +111,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Swipe left to cancel a class"),
         "tutor": MessageLookupByLibrary.simpleMessage("tutor"),
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
+        "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes")
