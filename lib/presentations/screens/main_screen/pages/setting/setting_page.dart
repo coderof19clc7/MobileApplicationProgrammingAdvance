@@ -20,23 +20,25 @@ class _SettingPageState extends State<SettingPage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(
-          top: Dimens.getTopSafeAreaHeight(context) * 2,
-          left: Dimens.getProportionalScreenWidth(context, 16),
-          right: Dimens.getProportionalScreenWidth(context, 16),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            accountWidget(context),
-            const EmptyProportionalSpace(height: 25),
-            tutoringWidget(context),
-            const EmptyProportionalSpace(height: 25),
-            appWidget(context),
-            const EmptyProportionalSpace(height: 30),
-            buttonSignOutWidget(context),
-          ],
+      body: SingleChildScrollView(
+        child: Container(
+          padding: EdgeInsets.only(
+            top: Dimens.getTopSafeAreaHeight(context) * 2,
+            left: Dimens.getProportionalScreenWidth(context, 16),
+            right: Dimens.getProportionalScreenWidth(context, 16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              accountWidget(context),
+              const EmptyProportionalSpace(height: 25),
+              tutoringWidget(context),
+              const EmptyProportionalSpace(height: 25),
+              appWidget(context),
+              const EmptyProportionalSpace(height: 30),
+              buttonSignOutWidget(context),
+            ],
+          ),
         ),
       ),
     );

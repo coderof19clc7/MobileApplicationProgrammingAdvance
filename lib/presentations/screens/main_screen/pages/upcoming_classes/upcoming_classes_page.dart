@@ -163,9 +163,6 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
                 },
               ),
             ),
-            EmptyProportionalSpace(
-              height: Dimens.getBottomSafeAreaHeight(context) + 10,
-            ),
           ],
         ),
       ),

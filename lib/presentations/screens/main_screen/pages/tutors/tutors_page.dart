@@ -147,9 +147,6 @@ class _TutorsPageState extends State<TutorsPage>
                   ),
                 ),
               ),
-              EmptyProportionalSpace(
-                height: Dimens.getBottomSafeAreaHeight(context) + 10,
-              ),
             ],
           ),
         ),

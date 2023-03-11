@@ -69,9 +69,6 @@ class _CoursesPageState extends State<CoursesPage>
                     ],
                   ),
                 ),
-                EmptyProportionalSpace(
-                  height: Dimens.getBottomSafeAreaHeight(context) + 10,
-                ),
               ],
             ),
           ),
