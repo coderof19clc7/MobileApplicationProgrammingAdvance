@@ -18,65 +18,67 @@ class ForgotPasswordPage extends StatelessWidget {
       },
       child: Scaffold(
         appBar: const SimpleTransparentAppBar(),
-        resizeToAvoidBottomInset: false,
-        body: Container(
-          padding: EdgeInsets.only(
-            left: Dimens.getProportionalScreenWidth(context, 60),
-            right: Dimens.getProportionalScreenWidth(context, 60),
-            top: Dimens.getScreenHeight(context) * 0.15,
-          ),
-          width: Dimens.getScreenWidth(context),
-          height: Dimens.getScreenHeight(context),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              // sign in title field
-              SizedBox(
-                width: Dimens.getScreenWidth(context),
-                child: Text(
-                  S.current.forgotPassword,
-                  style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
-                    fontSize: Dimens.getProportionalScreenWidth(context, 32),
-                    fontWeight: FontWeight.w600,
+        body: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.only(
+              left: Dimens.getProportionalScreenWidth(context, 60),
+              right: Dimens.getProportionalScreenWidth(context, 60),
+              top: Dimens.getScreenHeight(context) * 0.1,
+            ),
+            width: Dimens.getScreenWidth(context),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // sign in title field
+                SizedBox(
+                  width: Dimens.getScreenWidth(context),
+                  child: Text(
+                    S.current.forgotPassword,
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
+                      fontSize: Dimens.getProportionalScreenWidth(context, 32),
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
+                SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
 
-              // reset password requirement field
-              Text(
-                S.current.resetPasswordRequirement,
-                style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                  fontSize: Dimens.getProportionalScreenWidth(context, 17),
-                ),
-              ),
-              SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
-
-              // account's email input field
-              TextFieldFill(
-                hintText: S.current.email,
-                leftWidget: Icon(
-                  Icons.email_rounded,
-                  color: context.theme.colorScheme.onInverseSurface,
-                  size: Dimens.getProportionalScreenWidth(context, 24),
-                ),
-              ),
-              SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
-              PrimaryFillButton(
-                onTap: () {},
-                width: Dimens.getScreenWidth(context),
-                paddingVertical: Dimens.getProportionalScreenHeight(context, 14),
-                borderRadiusValue: Dimens.getScreenWidth(context),
-                child: Text(
-                  S.current.resetPassword,
-                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                    color: context.theme.colorScheme.onPrimary,
-                    fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                // reset password requirement field
+                Text(
+                  S.current.resetPasswordRequirement,
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
+                    fontSize: Dimens.getProportionalScreenWidth(context, 17),
                   ),
                 ),
-              ),
-              SizedBox(height: Dimens.getScreenHeight(context) * 0.0296),
-            ],
+                SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
+
+                // account's email input field
+                TextFieldFill(
+                  hintText: S.current.email,
+                  leftWidget: Icon(
+                    Icons.email_rounded,
+                    color: context.theme.colorScheme.onInverseSurface,
+                    size: Dimens.getProportionalScreenWidth(context, 24),
+                  ),
+                ),
+                SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
+                PrimaryFillButton(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  width: Dimens.getScreenWidth(context),
+                  paddingVertical: Dimens.getProportionalScreenHeight(context, 14),
+                  borderRadiusValue: Dimens.getScreenWidth(context),
+                  child: Text(
+                    S.current.resetPassword,
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+                      color: context.theme.colorScheme.onPrimary,
+                      fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                    ),
+                  ),
+                ),
+                SizedBox(height: Dimens.getScreenHeight(context) * 0.0296),
+              ],
+            ),
           ),
         ),
       ),

@@ -18,7 +18,6 @@ class SimpleTransparentAppBar extends StatelessWidget implements PreferredSizeWi
     return AppBar(
       backgroundColor: AppColors.transparent,
       elevation: 0,
-      leadingWidth: Dimens.getProportionalScreenWidth(context, 10),
       leading: Container(
         margin: EdgeInsets.only(
           left: Dimens.getProportionalScreenWidth(context, 15),

@@ -23,10 +23,9 @@ class SignUpPage extends StatelessWidget {
             padding: EdgeInsets.only(
               left: Dimens.getProportionalScreenWidth(context, 60),
               right: Dimens.getProportionalScreenWidth(context, 60),
-              top: Dimens.getScreenHeight(context) * 0.15,
+              top: Dimens.getScreenHeight(context) * 0.07,
             ),
             width: Dimens.getScreenWidth(context),
-            height: Dimens.getScreenHeight(context),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -74,7 +73,9 @@ class SignUpPage extends StatelessWidget {
                 ),
                 SizedBox(height: Dimens.getScreenHeight(context) * 0.0474),
                 PrimaryFillButton(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
                   width: Dimens.getScreenWidth(context),
                   paddingVertical: Dimens.getProportionalScreenHeight(context, 14),
                   borderRadiusValue: Dimens.getScreenWidth(context),

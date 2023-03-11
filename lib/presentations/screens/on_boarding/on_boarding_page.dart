@@ -36,7 +36,7 @@ class OnBoardingPage extends StatelessWidget {
             SizedBox(height: Dimens.getProportionalScreenHeight(context, 40)),
             PrimaryFillButton(
               onTap: () {
-                Navigator.of(context).pushNamed(RouteNames.login);
+                Navigator.of(context).pushReplacementNamed(RouteNames.login);
               },
               width: Dimens.getScreenWidth(context) - Dimens.getProportionalScreenWidth(context, 100),
               paddingVertical: Dimens.getProportionalScreenHeight(context, 16),

@@ -44,11 +44,13 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: Dimens.getProportionalScreenWidth(context, 60),
+            padding: EdgeInsets.only(
+              left: Dimens.getProportionalScreenWidth(context, 60),
+              right: Dimens.getProportionalScreenWidth(context, 60),
+              top: Dimens.getTopSafeAreaHeight(context) * 3,
+              bottom: Dimens.getBottomSafeAreaHeight(context) + 7,
             ),
             width: Dimens.getScreenWidth(context),
-            height: Dimens.getScreenHeight(context),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
