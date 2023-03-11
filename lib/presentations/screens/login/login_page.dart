@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/assets.gen.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
@@ -22,7 +23,10 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
-    _tapGestureRecognizer = TapGestureRecognizer()..onTap = () {};
+    _tapGestureRecognizer = TapGestureRecognizer()
+      ..onTap = () {
+        Navigator.of(context).pushNamed(RouteNames.signUp);
+      };
   }
 
   @override
@@ -83,7 +87,9 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 SizedBox(height: Dimens.getScreenHeight(context) * 0.0474),
                 PrimaryFillButton(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamedAndRemoveUntil(RouteNames.main, (route) => false);
+                  },
                   width: Dimens.getScreenWidth(context),
                   paddingVertical: Dimens.getProportionalScreenHeight(context, 14),
                   borderRadiusValue: Dimens.getScreenWidth(context),
@@ -99,7 +105,9 @@ class _LoginPageState extends State<LoginPage> {
 
                 // forgot password field
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.of(context).pushNamed(RouteNames.forgotPassword);
+                  },
                   child: Text(
                     '${S.current.forgotPassword}?',
                     style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(

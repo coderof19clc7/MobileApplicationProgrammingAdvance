@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/course_information_screen/widgets/course_appbar.dart';
+import 'package:one_one_learn/presentations/screens/course_information/widgets/course_appbar.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/box_button.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
-class CourseInformationScreen extends StatelessWidget {
-  const CourseInformationScreen({super.key});
+class CourseInformationPage extends StatelessWidget {
+  const CourseInformationPage({super.key});
 
   @override
   Widget build(BuildContext context) {

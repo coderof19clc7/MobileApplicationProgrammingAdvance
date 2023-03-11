@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
-import 'package:one_one_learn/presentations/screens/course_information_screen/course_information_screen.dart';
-import 'package:one_one_learn/presentations/screens/forgot_password_screen/forgot_password_screen.dart';
-import 'package:one_one_learn/presentations/screens/lesson_history_screen/lesson_history_screen.dart';
-import 'package:one_one_learn/presentations/screens/login_screen/login_screen.dart';
+import 'package:one_one_learn/presentations/screens/course_detail/course_detail_screen.dart';
+import 'package:one_one_learn/presentations/screens/course_information/course_information_screen.dart';
+import 'package:one_one_learn/presentations/screens/forgot_password/forgot_password_screen.dart';
+import 'package:one_one_learn/presentations/screens/lesson_history/lesson_history_screen.dart';
+import 'package:one_one_learn/presentations/screens/lesson_information/lesson_information_screen.dart';
+import 'package:one_one_learn/presentations/screens/login/login_screen.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/main_screen.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/courses_page.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/tutors_page.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/upcoming_classes/upcoming_classes_page.dart';
-import 'package:one_one_learn/presentations/screens/on_boarding_screen/on_boarding_screen.dart';
-import 'package:one_one_learn/presentations/screens/sign_up_screen/sign_up_screen.dart';
-import 'package:one_one_learn/presentations/screens/tutor_information_screen/tutor_information_screen.dart';
+import 'package:one_one_learn/presentations/screens/on_boarding/on_boarding_screen.dart';
+import 'package:one_one_learn/presentations/screens/sign_up/sign_up_screen.dart';
+import 'package:one_one_learn/presentations/screens/tutor_information/tutor_information_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AppRouter {
@@ -39,6 +38,12 @@ class AppRouter {
       case RouteNames.forgotPassword:
         return PageTransition(
           child: const ForgotPasswordScreen(),
+          type: PageTransitionType.rightToLeft,
+          alignment: Alignment.center,
+        );
+      case RouteNames.main:
+        return PageTransition(
+          child: const MainScreen(),
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );
@@ -72,12 +77,15 @@ class AppRouter {
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );
-      // case RouteNames.courseDetail:
-      //   return PageTransition(
-      //     child: const OnBoardingScreen(),
-      //     type: PageTransitionType.rightToLeft,
-      //     alignment: Alignment.center,
-      //   );
+      case RouteNames.courseDetail:
+        if (args != null && args is CourseDetailArguments) {
+          return PageTransition(
+            child: const OnBoardingScreen(),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center,
+          );
+        }
+        return _errRoute();
       case RouteNames.booksList:
         return PageTransition(
           child: const MainScreen(), // navigate to main and change index of visible tab index to 3 with index is 1
@@ -98,7 +106,7 @@ class AppRouter {
         );
       case RouteNames.lessonInformation:
         return PageTransition(
-          child: const OnBoardingScreen(),
+          child: const LessonInformationScreen(),
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );

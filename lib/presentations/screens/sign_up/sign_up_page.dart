@@ -7,8 +7,8 @@ import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_fill.dart';
 import 'package:one_one_learn/utils/ui_helper.dart';
 
-class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({super.key});
+class SignUpPage extends StatelessWidget {
+  const SignUpPage({super.key});
 
   @override
   Widget build(BuildContext context) {

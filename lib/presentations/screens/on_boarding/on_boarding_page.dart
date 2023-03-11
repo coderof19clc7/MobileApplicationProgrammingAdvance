@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 
-class OnBoardingScreen extends StatelessWidget {
-  const OnBoardingScreen({super.key});
+class OnBoardingPage extends StatelessWidget {
+  const OnBoardingPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
       body: Center(
         child: Column(
@@ -37,7 +35,9 @@ class OnBoardingScreen extends StatelessWidget {
             ),
             SizedBox(height: Dimens.getProportionalScreenHeight(context, 40)),
             PrimaryFillButton(
-              onTap: () {},
+              onTap: () {
+                Navigator.of(context).pushNamed(RouteNames.login);
+              },
               width: Dimens.getScreenWidth(context) - Dimens.getProportionalScreenWidth(context, 100),
               paddingVertical: Dimens.getProportionalScreenHeight(context, 16),
               borderRadiusValue: Dimens.getScreenWidth(context),

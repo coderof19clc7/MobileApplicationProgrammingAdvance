@@ -3,6 +3,7 @@ class RouteNames {
   static const login = '/login';
   static const signUp = '/sign-up';
   static const forgotPassword = '/forgot-password';
+  static const main = '/main';
   static const tutors = '/tutors';
   static const tutorInformation = '/tutor-information';
   static const tutorBooking = '/tutor-booking';

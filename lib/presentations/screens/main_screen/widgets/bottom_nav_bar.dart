@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({
@@ -10,7 +9,7 @@ class BottomNavBar extends StatelessWidget {
     this.currentIndex = 0,
     required this.onTap,
   });
-  
+
   final int currentIndex;
   final Function(int) onTap;
 
@@ -18,6 +17,7 @@ class BottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = Dimens.getScreenWidth(context);
     return BottomAppBar(
+      color: context.theme.colorScheme.background,
       elevation: 10,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -29,7 +29,7 @@ class BottomNavBar extends StatelessWidget {
             width: screenWidth / 5,
             margin: EdgeInsets.only(
               left: screenWidth / 5 * currentIndex,
-              right: screenWidth/ 5 * (4 - currentIndex),
+              right: screenWidth / 5 * (4 - currentIndex),
             ),
             decoration: BoxDecoration(
               color: context.theme.primaryColor,
@@ -102,7 +102,8 @@ class BottomNavBar extends StatelessWidget {
     );
   }
 
-  Widget buildBottomNavBarItem(BuildContext context, {
+  Widget buildBottomNavBarItem(
+    BuildContext context, {
     required String title,
     required Widget unSelectedIcon,
     required Widget selectedIcon,
@@ -122,15 +123,15 @@ class BottomNavBar extends StatelessWidget {
             children: [
               isSelected ? selectedIcon : unSelectedIcon,
               const SizedBox(height: 4),
-              Text(title, style: Dimens.getProportionalFont(
-                context, context.theme.textTheme.bodySmall,
-              ).copyWith(
-                fontSize: Dimens.getProportionalScreenWidth(context, 10),
-                fontWeight: FontWeight.w500,
-                color: isSelected
-                    ? context.theme.colorScheme.primary
-                    : context.theme.colorScheme.onInverseSurface,
-              )),
+              Text(title,
+                  style: Dimens.getProportionalFont(
+                    context,
+                    context.theme.textTheme.bodySmall,
+                  ).copyWith(
+                    fontSize: Dimens.getProportionalScreenWidth(context, 10),
+                    fontWeight: FontWeight.w500,
+                    color: isSelected ? context.theme.colorScheme.primary : context.theme.colorScheme.onInverseSurface,
+                  )),
             ],
           ),
         ),

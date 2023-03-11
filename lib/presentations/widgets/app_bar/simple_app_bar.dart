@@ -25,7 +25,7 @@ class SimpleTransparentAppBar extends StatelessWidget implements PreferredSizeWi
         ),
         child: GestureDetector(
           onTap: () {
-            // Navigator.pop(context);
+            Navigator.pop(context);
           },
           child: Icon(
             Icons.arrow_back_outlined,

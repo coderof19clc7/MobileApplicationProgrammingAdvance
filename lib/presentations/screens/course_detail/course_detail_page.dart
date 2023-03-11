@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
-class CourseDetailScreen extends StatelessWidget {
-  const CourseDetailScreen({
+class CourseDetailPage extends StatelessWidget {
+  const CourseDetailPage({
     super.key,
     required this.topicUrl,
     required this.topicName,

@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/lesson_history_screen/widgets/lesson_history_card.dart';
+import 'package:one_one_learn/presentations/screens/lesson_history/widgets/lesson_history_card.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 
-class LessonHistoryScreen extends StatelessWidget {
-  const LessonHistoryScreen({super.key});
+class LessonHistoryPage extends StatelessWidget {
+  const LessonHistoryPage({super.key});
 
   @override
   Widget build(BuildContext context) {
