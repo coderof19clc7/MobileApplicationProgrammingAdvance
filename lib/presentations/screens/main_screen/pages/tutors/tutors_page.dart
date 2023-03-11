@@ -39,10 +39,7 @@ class _TutorsPageState extends State<TutorsPage>
         UIHelper.hideKeyboard(context);
       },
       child: Scaffold(
-        body: Container(
-          padding: EdgeInsets.only(
-            top: Dimens.getTopSafeAreaHeight(context),
-          ),
+        body: SizedBox(
           width: Dimens.getScreenWidth(context),
           height: Dimens.getScreenHeight(context),
           child: Column(

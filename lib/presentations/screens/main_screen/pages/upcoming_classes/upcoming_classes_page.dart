@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/upcoming_classes/widgets/total_lesson_time_banner.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/upcoming_classes/widgets/upcoming_class_card.dart';
@@ -39,10 +40,7 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
     final minute = Random().nextInt(45);
 
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(
-          top: Dimens.getTopSafeAreaHeight(context) + 10,
-        ),
+      body: SizedBox(
         width: Dimens.getScreenWidth(context),
         height: Dimens.getScreenHeight(context),
         child: Column(
@@ -54,7 +52,9 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
               topLabel: S.current.labelTotalLessonTime,
               totalTime: '$hour ${S.current.hours} $minute ${S.current.minutes}',
               buttonLabel: S.current.lessonHistory,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, RouteNames.lessonHistory);
+              },
             ),
 
             // swipe hint

@@ -27,7 +27,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "app": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
         "becomeATutor":
-            MessageLookupByLibrary.simpleMessage("Đăng kí làm Yasuo"),
+            MessageLookupByLibrary.simpleMessage("Đăng kí làm giảng viên"),
         "behavior": MessageLookupByLibrary.simpleMessage("Thái độ"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
         "changePassword":

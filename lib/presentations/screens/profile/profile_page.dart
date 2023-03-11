@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/screens/profile/widgets/profile_edit_mode_widget.dart';
+import 'package:one_one_learn/presentations/screens/profile/widgets/profile_view_mode_widget.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 import 'package:intl/intl.dart'; 
 
@@ -100,6 +101,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  var _isEditMode = false;
   @override
   void initState() {
     super.initState();
@@ -148,13 +150,20 @@ class _ProfilePageState extends State<ProfilePage> {
       appBar: SimpleTransparentAppBar(
         height: Dimens.getTopSafeAreaHeight(context),
         actions: [
-          Padding(
+          !_isEditMode ? Padding(
             padding: EdgeInsets.only(right: Dimens.getScreenWidth(context) * 0.04),
-            child: Icon(
-              Icons.edit,
-              color: context.theme.colorScheme.onBackground,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _isEditMode = !_isEditMode;
+                });
+              },
+              child: Icon(
+                Icons.edit,
+                color: context.theme.colorScheme.onBackground,
+              ),
             ),
-          ),
+          ) : const SizedBox.shrink(),
         ],
       ),
       body: Container(
@@ -162,7 +171,8 @@ class _ProfilePageState extends State<ProfilePage> {
           horizontal: Dimens.getScreenWidth(context) * 0.05,
           vertical: Dimens.getScreenWidth(context) * 0.02,
         ),
-        child: const ProfileEditModeWidget(),
+        child: !_isEditMode
+            ? const ProfileViewModeWidget() : const ProfileEditModeWidget(),
       ),
     );
   }

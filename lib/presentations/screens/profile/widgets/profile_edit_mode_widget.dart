@@ -91,6 +91,7 @@ class ProfileEditModeWidget extends StatelessWidget {
           ),
           const EmptyProportionalSpace(height: 20),
           SkillCurrentWidget(title: S.current.learningInterests),
+          
         ],
       ),
     );

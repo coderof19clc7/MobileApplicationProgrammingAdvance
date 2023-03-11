@@ -36,8 +36,10 @@ class UpcomingClassBanner extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: AppColors.primaryGradient,
       ),
-      padding: EdgeInsets.symmetric(
-        vertical: Dimens.getProportionalScreenWidth(context, 28),
+      padding: EdgeInsets.only(
+        top: Dimens.getTopSafeAreaHeight(context)
+            + Dimens.getProportionalScreenHeight(context, 28),
+        bottom: Dimens.getProportionalScreenHeight(context, 28),
       ),
       width: width,
       child: Column(

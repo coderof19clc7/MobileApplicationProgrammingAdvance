@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
+import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/setting/widgets/icon_text_icon.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/setting/widgets/info_current.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/settings/widgets/icon_text_icon.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/settings/widgets/info_current.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
-class SettingPage extends StatefulWidget {
-  const SettingPage({super.key});
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
 
   @override
-  State<SettingPage> createState() => _SettingPageState();
+  State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _SettingPageState extends State<SettingPage>
-    with AutomaticKeepAliveClientMixin<SettingPage> {
+class _SettingsPageState extends State<SettingsPage>
+    with AutomaticKeepAliveClientMixin<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -57,7 +59,9 @@ class _SettingPageState extends State<SettingPage>
             IconTextIconWidget(
               leftIcon: Icons.account_circle,
               text: S.current.profile,
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, RouteNames.profile);
+              },
             ),
             const EmptyProportionalSpace(height: 19),
             IconTextIconWidget(
@@ -126,6 +130,7 @@ class _SettingPageState extends State<SettingPage>
       borderRadiusValue: Dimens.getScreenWidth(context) * 0.02,
       bgColor: context.theme.colorScheme.errorContainer,
       paddingVertical: Dimens.getProportionalScreenWidth(context, 8),
+      splashColor: AppColors.red700.withOpacity(0.4),
       width: Dimens.getScreenWidth(context),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

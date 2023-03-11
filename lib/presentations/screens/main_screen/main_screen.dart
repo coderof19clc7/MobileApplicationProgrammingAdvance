@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/courses_page.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/setting/setting_page.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/pages/settings/settings_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/tutors_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/upcoming_classes/upcoming_classes_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/widgets/bottom_nav_bar.dart';
@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     Center(child: Text('This is Chat screen')),
     UpcomingClassesPage(),
     CoursesPage(key: PageStorageKey('CoursesPage')),
-    SettingPage(),
+    SettingsPage(),
   ];
 
   final pageController = PageController();

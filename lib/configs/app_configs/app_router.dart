@@ -8,6 +8,7 @@ import 'package:one_one_learn/presentations/screens/lesson_information/lesson_in
 import 'package:one_one_learn/presentations/screens/login/login_screen.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/main_screen.dart';
 import 'package:one_one_learn/presentations/screens/on_boarding/on_boarding_screen.dart';
+import 'package:one_one_learn/presentations/screens/profile/profile_screen.dart';
 import 'package:one_one_learn/presentations/screens/sign_up/sign_up_screen.dart';
 import 'package:one_one_learn/presentations/screens/tutor_information/tutor_information_screen.dart';
 import 'package:page_transition/page_transition.dart';
@@ -113,6 +114,12 @@ class AppRouter {
       case RouteNames.settings:
         return PageTransition(
           child: const MainScreen(), // navigate to main and change index of visible tab index to 4
+          type: PageTransitionType.rightToLeft,
+          alignment: Alignment.center,
+        );
+      case RouteNames.profile:
+        return PageTransition(
+          child: const ProfileScreen(), // navigate to main and change index of visible tab index to 4 with index is 1
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );

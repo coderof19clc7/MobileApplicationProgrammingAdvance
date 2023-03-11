@@ -27,7 +27,7 @@ class _CoursesPageState extends State<CoursesPage>
         child: Scaffold(
           body: Container(
             padding: EdgeInsets.only(
-              top: Dimens.getTopSafeAreaHeight(context) + 10,
+              top: Dimens.getTopSafeAreaHeight(context),
             ),
             width: Dimens.getScreenWidth(context),
             height: Dimens.getScreenHeight(context),
@@ -40,6 +40,11 @@ class _CoursesPageState extends State<CoursesPage>
                   labelColor: AppColors.primaryBlue400,
                   indicatorSize: TabBarIndicatorSize.label,
                   indicatorWeight: 5,
+                  indicatorPadding: const EdgeInsets.only(top: 71),
+                  indicator: BoxDecoration(
+                    color: AppColors.primaryBlue400,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   tabs: [
                     Tab(
                       icon: const Icon(Icons.menu_book_rounded),
