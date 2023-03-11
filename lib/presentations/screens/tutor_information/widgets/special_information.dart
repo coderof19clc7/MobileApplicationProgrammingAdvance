@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
+import 'package:one_one_learn/presentations/screens/tutor_information/widgets/tutor_reviews_bottom_sheet.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/box_button.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
+import 'package:one_one_learn/presentations/widgets/dialogs/normal_bottom_sheet_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class SpecialInformation extends StatelessWidget {
@@ -75,7 +77,17 @@ class SpecialInformation extends StatelessWidget {
               child: buildTitle(context, S.current.review),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                NormalBottomSheetDialog.show(
+                  context,
+                  leftPadding: Dimens.getProportionalScreenWidth(context, 16),
+                  rightPadding: Dimens.getProportionalScreenWidth(context, 16),
+                  initialChildSize: 0.501,
+                  title: S.current.review,
+                  titleAlignment: CrossAxisAlignment.start,
+                  body: const TutorReviewsBottomSheet(),
+                );
+              },
               child: Text(
                 S.current.viewAll,
                 style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(

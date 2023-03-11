@@ -80,6 +80,8 @@
   "theme": "Chủ đề",
   "signOut": "Đăng xuất",
   "courses": "Khoá học",
+  "books": "Sách",
   "upcoming": "Upcoming",
-  "settings": "Cài đặt"
+  "settings": "Cài đặt",
+  "upcomingIn": "bắt đầu sau"
 }

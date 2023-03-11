@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 
@@ -21,7 +22,7 @@ class CourseAppBar extends StatelessWidget {
     var top = 0.0;
 
     return SliverAppBar(
-      backgroundColor: AppColors.transparent,
+      backgroundColor: context.theme.colorScheme.surface,
       stretch: true,
       pinned: true,
       elevation: 0,
@@ -59,14 +60,8 @@ class CourseAppBar extends StatelessWidget {
               Positioned.fill(
                 child: AnimatedOpacity(
                   duration: const Duration(milliseconds: 180),
-                  opacity: top <=
-                          Dimens.getTopSafeAreaHeight(context) * 4 +
-                              MediaQuery.of(context).padding.top +
-                              30
-                      ? top <=
-                              Dimens.getTopSafeAreaHeight(context) * 4 +
-                                  MediaQuery.of(context).padding.top +
-                                  10
+                  opacity: top <= Dimens.getTopSafeAreaHeight(context) * 4 + MediaQuery.of(context).padding.top + 30
+                      ? top <= Dimens.getTopSafeAreaHeight(context) * 4 + MediaQuery.of(context).padding.top + 10
                           ? 1.0
                           : 0.5
                       : 0.0,

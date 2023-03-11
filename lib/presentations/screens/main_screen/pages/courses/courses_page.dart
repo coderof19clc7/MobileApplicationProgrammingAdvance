@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/widgets/books_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/widgets/courses_tab.dart';
-import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/ui_helper.dart';
 
 class CoursesPage extends StatefulWidget {
@@ -13,8 +13,7 @@ class CoursesPage extends StatefulWidget {
   State<CoursesPage> createState() => _CoursesPageState();
 }
 
-class _CoursesPageState extends State<CoursesPage>
-    with AutomaticKeepAliveClientMixin<CoursesPage> {
+class _CoursesPageState extends State<CoursesPage> with AutomaticKeepAliveClientMixin<CoursesPage> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -48,14 +47,14 @@ class _CoursesPageState extends State<CoursesPage>
                   tabs: [
                     Tab(
                       icon: const Icon(Icons.menu_book_rounded),
-                      text: 'Courses',
+                      text: S.current.courses,
                       iconMargin: EdgeInsets.only(
                         bottom: Dimens.getProportionalScreenHeight(context, 5),
                       ),
                     ),
                     Tab(
                       icon: const Icon(Icons.book_rounded),
-                      text: 'Books',
+                      text: S.current.books,
                       iconMargin: EdgeInsets.only(
                         bottom: Dimens.getProportionalScreenHeight(context, 5),
                       ),

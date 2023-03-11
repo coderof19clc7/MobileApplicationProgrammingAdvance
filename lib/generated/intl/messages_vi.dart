@@ -30,6 +30,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng kí làm giảng viên"),
         "behavior": MessageLookupByLibrary.simpleMessage("Thái độ"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
+        "books": MessageLookupByLibrary.simpleMessage("Sách"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
         "chat": MessageLookupByLibrary.simpleMessage("Nhắn tin"),
@@ -128,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Nhận xét từ gia sư"),
         "tutoring": MessageLookupByLibrary.simpleMessage("Giảng dạy"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
+        "upcomingIn": MessageLookupByLibrary.simpleMessage("bắt đầu sau"),
         "viewAll": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Từ vựng"),
         "yes": MessageLookupByLibrary.simpleMessage("Có")

@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "becomeATutor": MessageLookupByLibrary.simpleMessage("Become a tutor"),
         "behavior": MessageLookupByLibrary.simpleMessage("Behavior"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Book class"),
+        "books": MessageLookupByLibrary.simpleMessage("Books"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
@@ -128,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
         "tutoring": MessageLookupByLibrary.simpleMessage("Tutoring"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
+        "upcomingIn": MessageLookupByLibrary.simpleMessage("in"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes")

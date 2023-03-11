@@ -81,7 +81,7 @@ class AppRouter {
       case RouteNames.courseDetail:
         if (args != null && args is CourseDetailArguments) {
           return PageTransition(
-            child: const OnBoardingScreen(),
+            child: CourseDetailScreen(args: args),
             type: PageTransitionType.rightToLeft,
             alignment: Alignment.center,
           );

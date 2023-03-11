@@ -870,6 +870,16 @@ class S {
     );
   }
 
+  /// `Books`
+  String get books {
+    return Intl.message(
+      'Books',
+      name: 'books',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Upcoming`
   String get upcoming {
     return Intl.message(
@@ -885,6 +895,16 @@ class S {
     return Intl.message(
       'Settings',
       name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `in`
+  String get upcomingIn {
+    return Intl.message(
+      'in',
+      name: 'upcomingIn',
       desc: '',
       args: [],
     );

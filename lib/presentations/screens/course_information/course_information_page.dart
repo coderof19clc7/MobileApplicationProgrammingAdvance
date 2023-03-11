@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
+import 'package:one_one_learn/presentations/screens/course_detail/course_detail_screen.dart';
 import 'package:one_one_learn/presentations/screens/course_information/widgets/course_appbar.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/box_button.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
@@ -45,7 +47,9 @@ class CourseInformationPage extends StatelessWidget {
           CourseAppBar(
             imageUrl: imageUrl,
             leading: IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
               icon: Icon(
                 Icons.arrow_back,
                 color: context.theme.colorScheme.onPrimary,
@@ -172,7 +176,17 @@ class CourseInformationPage extends StatelessWidget {
                         return BoxButton(
                           circleText: topics.indexOf(topic).toString(),
                           title: topic,
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              RouteNames.courseDetail,
+                              arguments: CourseDetailArguments(
+                                topicUrl:
+                                    'https://sandbox.api.lettutor.com/file/4d54d3d7-d2a9-42e5-97a2-5ed38af5789a_file__everybody-5---unit-4---lesson-3pdf.pdf',
+                                topicName: 'Everybody 5',
+                                topicIndex: 'Lesson 3',
+                              ),
+                            );
+                          },
                         );
                       }).toList(),
                     ),

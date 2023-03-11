@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/widgets/course_card.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/base_choice_chip.dart';
@@ -84,6 +85,9 @@ class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMi
               itemBuilder: (context, index) {
                 // tutor card
                 return CourseCard(
+                  onTap: () {
+                    Navigator.of(context).pushNamed(RouteNames.courseInformation);
+                  },
                   padding: EdgeInsets.zero,
                   firstChild: ClipRRect(
                     borderRadius: const BorderRadius.only(

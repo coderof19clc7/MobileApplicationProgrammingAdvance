@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/tutor_card.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/tutor_filter_bottom_sheet.dart';
@@ -20,14 +21,13 @@ class TutorsPage extends StatefulWidget {
   State<TutorsPage> createState() => _TutorsPageState();
 }
 
-class _TutorsPageState extends State<TutorsPage>
-    with AutomaticKeepAliveClientMixin<TutorsPage> {
+class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMixin<TutorsPage> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
     final startTime = DateTime.now().add(
       Duration(
-        days: Random().nextInt(5),
+        days: 2,
         hours: Random().nextInt(5),
         minutes: Random().nextInt(5),
       ),
@@ -125,6 +125,9 @@ class _TutorsPageState extends State<TutorsPage>
                           itemBuilder: (context, index) {
                             // tutor card
                             return TutorCard(
+                              onTap: () {
+                                Navigator.of(context).pushNamed(RouteNames.tutorInformation);
+                              },
                               nationality: UIHelper.getIconFromNationalityCode('DE'),
                               name: 'Haylee Caillier',
                               rating: 4.5,

@@ -81,6 +81,8 @@
   "theme": "Theme",
   "signOut": "Sign out",
   "courses": "Courses",
+  "books": "Books",
   "upcoming": "Upcoming",
-  "settings": "Settings"
+  "settings": "Settings",
+  "upcomingIn": "in"
 }
