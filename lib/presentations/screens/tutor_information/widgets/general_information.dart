@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
@@ -148,7 +149,9 @@ class GeneralInformation extends StatelessWidget {
         children: [
           // booking button
           PrimaryFillButton(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(RouteNames.tutorBooking);
+            },
             width: Dimens.getScreenWidth(context),
             borderRadiusValue: Dimens.getScreenWidth(context),
             paddingVertical: Dimens.getProportionalScreenHeight(

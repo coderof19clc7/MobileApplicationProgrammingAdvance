@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/widgets/others/linked_scroll_controller.dart';
 
 class MultipleScrollDirectionBoard extends StatefulWidget {
-  const MultipleScrollDirectionBoard({super.key,
+  const MultipleScrollDirectionBoard({
+    super.key,
     required this.onPress,
     this.headerData = const [],
     this.bodyData = const [],
@@ -59,7 +60,6 @@ class _MultipleScrollDirectionBoardState extends State<MultipleScrollDirectionBo
           headerData: widget.headerData,
           scrollController: _headController,
         ),
-
         Expanded(
           child: TableBody(
             // use when want data body is ListView.builder vertical wrap ListView.builder horizontal
@@ -96,7 +96,8 @@ class TableBody extends StatefulWidget {
   final bool lazyRenderDataColumn;
   final Function(String dateSelected) onPress;
 
-  const TableBody({super.key,
+  const TableBody({
+    super.key,
     // required this.horizontalScrollControllerLinker,
     required this.scrollController,
     this.bodyData = const [],
@@ -163,8 +164,7 @@ class _TableBodyState extends State<TableBody> {
 
   @override
   Widget build(BuildContext context) {
-    final numberOfDataColumns = (widget.numberOfColumn - 1) > 0
-        ? (widget.numberOfColumn - 1) : 0;
+    final numberOfDataColumns = (widget.numberOfColumn - 1) > 0 ? (widget.numberOfColumn - 1) : 0;
 
     return Row(
       children: [
@@ -173,8 +173,7 @@ class _TableBodyState extends State<TableBody> {
           decoration: BoxDecoration(
             border: Border(
               right: BorderSide(
-                color: context.theme.colorScheme.primary,
-                width: 1.5,
+                color: context.theme.colorScheme.outline,
               ),
             ),
           ),
@@ -190,7 +189,7 @@ class _TableBodyState extends State<TableBody> {
                 onPress: (dateSelected) {
                   widget.onPress.call(dateSelected);
                 },
-                color: index.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
+                color: context.theme.colorScheme.background,
                 content: widget.bodyData[0][index] ?? 'null',
                 textAlign: TextAlign.left,
                 dateSelected: widget.bodyData[0][index].toString(),
@@ -280,7 +279,7 @@ class _TableBodyState extends State<TableBody> {
       ],
     );
   }
-  
+
   Widget buildBodyRestColumns(BuildContext context, int numberOfDataColumns) {
     if (widget.lazyRenderDataRow && widget.lazyRenderDataColumn) {
       // full ListView.builder
@@ -300,7 +299,7 @@ class _TableBodyState extends State<TableBody> {
               itemCount: widget.bodyData[index + 1].length,
               itemBuilder: (singleColumnContext, singleIndex) {
                 return TableBodyCell(
-                  color: singleIndex.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
+                  color: context.theme.highlightColor,
                   content: widget.bodyData[index + 1][singleIndex] ?? 'null',
                   textAlign: TextAlign.center,
                   isShowDate: false,
@@ -327,18 +326,21 @@ class _TableBodyState extends State<TableBody> {
             itemCount: widget.bodyData[0].length,
             itemBuilder: (resColumnContext, index) {
               return Row(
-                  children: List.generate(numberOfDataColumns, (indexCol) {
+                children: List.generate(
+                  numberOfDataColumns,
+                  (indexCol) {
                     return SizedBox(
                       width: widget.cellWidth,
                       child: TableBodyCell(
-                        color: index.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
+                        color: context.theme.highlightColor,
                         content: widget.bodyData[indexCol + 1][index] ?? 'null',
                         textAlign: TextAlign.center,
                         isShowDate: false,
                         dateSelected: widget.bodyData[0][index] ?? 'null',
                       ),
                     );
-                  })
+                  },
+                ),
               );
             },
           ),
@@ -364,7 +366,7 @@ class _TableBodyState extends State<TableBody> {
                   SizedBox(
                     height: widget.cellHeight,
                     child: TableBodyCell(
-                      color: i.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
+                      color: context.theme.highlightColor,
                       content: widget.bodyData[index + 1][i] ?? 'null',
                       textAlign: TextAlign.center,
                       isShowDate: false,
@@ -399,7 +401,7 @@ class _TableBodyState extends State<TableBody> {
                     SizedBox(
                       width: widget.cellWidth,
                       child: TableBodyCell(
-                        color: i.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
+                        color: context.theme.highlightColor,
                         content: widget.bodyData[j + 1][i] ?? 'null',
                         textAlign: TextAlign.center,
                         isShowDate: false,
@@ -450,6 +452,11 @@ class TableBodyCell extends StatelessWidget {
         height: height,
         decoration: BoxDecoration(
           color: color,
+          border: Border(
+            bottom: BorderSide(
+              color: context.theme.colorScheme.scrim,
+            ),
+          ),
         ),
         alignment: Alignment.center,
         child: Text(
@@ -485,13 +492,18 @@ class TableHeaderCell extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         border: Border(
-            top: BorderSide(color: context.theme.colorScheme.primary.withOpacity(0.5)),
-            bottom: BorderSide(color: context.theme.colorScheme.primary, width: 1.5)),
+          top: BorderSide(color: context.theme.colorScheme.outline),
+          bottom: BorderSide(color: context.theme.colorScheme.outline),
+        ),
       ),
       alignment: Alignment.center,
       child: Text(
         content,
         textAlign: textAlign,
+        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+          fontSize: Dimens.getProportionalScreenWidth(context, 14),
+          fontWeight: FontWeight.w500,
+        ),
       ),
     );
   }
@@ -520,13 +532,12 @@ class TableHead extends StatelessWidget {
         children: [
           headerData.isNotEmpty
               ? TableHeaderCell(
-            color: Colors.white,
-            content: headerData[0] ?? '',
-            width: width,
-            textAlign: TextAlign.left,
-          )
+                  color: context.theme.colorScheme.outlineVariant.withOpacity(0.6),
+                  content: headerData[0] ?? '',
+                  width: width,
+                  textAlign: TextAlign.left,
+                )
               : Container(),
-
           Expanded(
             child: ListView.builder(
               controller: scrollController,
@@ -538,6 +549,7 @@ class TableHead extends StatelessWidget {
                   textAlign: TextAlign.center,
                   content: headerData[index + 1] ?? '',
                   width: 100,
+                  color: context.theme.colorScheme.background,
                 );
               },
             ),

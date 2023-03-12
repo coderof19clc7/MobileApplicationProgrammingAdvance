@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 
 class PrimaryOutlineButton extends StatelessWidget {
@@ -57,7 +58,7 @@ class PrimaryOutlineButton extends StatelessWidget {
         margin: const EdgeInsets.all(1),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(borderRadiusValue - 1),
-          color: bodyColor ?? AppColors.white,
+          color: bodyColor ?? context.theme.colorScheme.background,
         ),
         child: Material(
           color: Colors.transparent,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/screens/booking/widgets/multiple_scroll_direction_board.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
+import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class BookingPage extends StatelessWidget {
   const BookingPage({super.key});
@@ -11,7 +14,34 @@ class BookingPage extends StatelessWidget {
       appBar: const SimpleTransparentAppBar(),
       body: Column(
         children: [
-          const Text('Booking Page'),
+          Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: Dimens.getScreenWidth(context) * 0.05,
+              vertical: Dimens.getScreenHeight(context) * 0.02,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PrimaryOutlineButton(
+                  width: Dimens.getScreenWidth(context) * 0.15,
+                  onTap: () {},
+                  child: Icon(
+                    Icons.chevron_left_rounded,
+                    size: Dimens.getProportionalScreenWidth(context, 30),
+                  ),
+                ),
+                const EmptyProportionalSpace(width: 10),
+                PrimaryOutlineButton(
+                  width: Dimens.getScreenWidth(context) * 0.15,
+                  onTap: () {},
+                  child: Icon(
+                    Icons.chevron_right_rounded,
+                    size: Dimens.getProportionalScreenWidth(context, 30),
+                  ),
+                ),
+              ],
+            ),
+          ),
           Expanded(
             child: MultipleScrollDirectionBoard(
               onPress: (String dateSelected) {

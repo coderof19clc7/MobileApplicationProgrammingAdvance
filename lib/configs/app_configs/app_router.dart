@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
+import 'package:one_one_learn/presentations/screens/booking/booking_screen.dart';
 import 'package:one_one_learn/presentations/screens/course_detail/course_detail_screen.dart';
 import 'package:one_one_learn/presentations/screens/course_information/course_information_screen.dart';
 import 'package:one_one_learn/presentations/screens/forgot_password/forgot_password_screen.dart';
@@ -60,12 +61,12 @@ class AppRouter {
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );
-      // case RouteNames.tutorBooking:
-      //   return PageTransition(
-      //     child: const OnBoardingScreen(),
-      //     type: PageTransitionType.rightToLeft,
-      //     alignment: Alignment.center,
-      //   );
+      case RouteNames.tutorBooking:
+        return PageTransition(
+          child: const BookingScreen(),
+          type: PageTransitionType.rightToLeft,
+          alignment: Alignment.center,
+        );
       case RouteNames.coursesList:
         return PageTransition(
           child: const MainScreen(), // navigate to main and change index of visible tab index to 3

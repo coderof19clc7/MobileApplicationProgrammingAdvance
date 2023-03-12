@@ -31,6 +31,7 @@ class AppThemes {
       onInverseSurface: AppColors.neutralBlue500, // always neutralBlue500
       errorContainer: AppColors.neutralRed200, // error/warning fill
       onErrorContainer: AppColors.red400, // error/warning text
+      scrim: AppColors.neutralBlue400.withOpacity(0.5),
     ),
     scaffoldBackgroundColor: AppColors.white,
     highlightColor: AppColors.primaryBlue200.withOpacity(0.5),
@@ -79,6 +80,7 @@ class AppThemes {
       onInverseSurface: AppColors.neutralBlue500, // always neutralBlue500
       errorContainer: AppColors.neutralRed700, // error/warning fill
       onErrorContainer: AppColors.red300, // error/warning text
+      scrim: AppColors.neutralBlue700,
     ),
     scaffoldBackgroundColor: AppColors.black,
     highlightColor: AppColors.primaryBlue800.withOpacity(0.5),
