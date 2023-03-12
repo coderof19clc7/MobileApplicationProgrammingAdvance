@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/presentations/widgets/others/linked_scroll_controller.dart';
 
@@ -10,7 +11,9 @@ class MultipleScrollDirectionBoard extends StatefulWidget {
     this.cellWidth = 100,
     this.cellHeight = 46,
     this.headerHeight = 68,
-    this.firstColumnWidth = 50,
+    this.firstColumnWidth = 100,
+    this.lazyRenderDataRow = true,
+    this.lazyRenderDataColumn = true,
   });
 
   final List<String?> headerData;
@@ -19,6 +22,8 @@ class MultipleScrollDirectionBoard extends StatefulWidget {
   final double cellHeight;
   final double headerHeight;
   final double firstColumnWidth;
+  final bool lazyRenderDataRow;
+  final bool lazyRenderDataColumn;
   final Function(String dateSelected) onPress;
 
   @override
@@ -50,15 +55,20 @@ class _MultipleScrollDirectionBoardState extends State<MultipleScrollDirectionBo
       children: [
         TableHead(
           height: widget.headerHeight,
-          width: widget.cellWidth,
+          width: widget.firstColumnWidth,
           headerData: widget.headerData,
           scrollController: _headController,
         ),
 
         Expanded(
           child: TableBody(
+            // use when want data body is ListView.builder vertical wrap ListView.builder horizontal
+            // scrollController: _headController,
+            // horizontalScrollControllerLinker: _controllers,
             scrollController: _bodyController,
             bodyData: widget.bodyData,
+            lazyRenderDataRow: widget.lazyRenderDataRow,
+            lazyRenderDataColumn: widget.lazyRenderDataColumn,
             cellHeight: widget.cellHeight,
             cellWidth: widget.cellWidth,
             firstColumnWidth: widget.firstColumnWidth,
@@ -74,17 +84,24 @@ class _MultipleScrollDirectionBoardState extends State<MultipleScrollDirectionBo
 }
 
 class TableBody extends StatefulWidget {
+  // use when want data body is ListView.builder vertical wrap ListView.builder horizontal
+  // final LinkedScrollControllerGroup horizontalScrollControllerLinker;
   final ScrollController scrollController;
   final List<List<String?>> bodyData;
   final double cellHeight;
   final double cellWidth;
   final double firstColumnWidth;
   final int numberOfColumn;
+  final bool lazyRenderDataRow;
+  final bool lazyRenderDataColumn;
   final Function(String dateSelected) onPress;
 
   const TableBody({super.key,
+    // required this.horizontalScrollControllerLinker,
     required this.scrollController,
     this.bodyData = const [],
+    this.lazyRenderDataRow = true,
+    this.lazyRenderDataColumn = true,
     required this.cellHeight,
     required this.cellWidth,
     required this.firstColumnWidth,
@@ -100,17 +117,28 @@ class _TableBodyState extends State<TableBody> {
   LinkedScrollControllerGroup? _controllers;
   ScrollController? _firstColumnController;
   ScrollController? _restColumnController;
-  // List<ScrollController?>? _restColumnControllers;
+  List<ScrollController?>? _restColumnControllers;
 
   @override
   void initState() {
     super.initState();
     _controllers = LinkedScrollControllerGroup();
     _firstColumnController = _controllers?.addAndGet();
-    _restColumnController = _controllers?.addAndGet();
+    if (widget.lazyRenderDataRow) {
+      _restColumnControllers = [];
+      // use when want data body is a horizontal list wrap vertical lists
+      for (var i = 0; i < widget.numberOfColumn - 1; i++) {
+        _restColumnControllers?.add(_controllers?.addAndGet());
+      }
+    } else {
+      _restColumnController = _controllers?.addAndGet();
+    }
+
+    // use when want data body is ListView.builder vertical wrap ListView.builder horizontal
+    // _restColumnController = _controllers?.addAndGet();
     // _restColumnControllers = [];
-    // for (var i = 0; i < widget.numberOfColumn - 1; i++) {
-    //   _restColumnControllers?.add(_controllers?.addAndGet());
+    // for (var i = 0; i < widget.bodyData[0].length; i++) {
+    //   _restColumnControllers?.add(widget.horizontalScrollControllerLinker.addAndGet());
     // }
   }
 
@@ -118,10 +146,18 @@ class _TableBodyState extends State<TableBody> {
   void dispose() {
     _firstColumnController?.dispose();
     _restColumnController?.dispose();
-    // for (var i = 0; i < widget.numberOfColumn - 1; i++) {
+    // use when want data body is a horizontal list wrap vertical lists
+    if (_restColumnControllers != null) {
+      for (var i = 0; i < widget.numberOfColumn - 1; i++) {
+        _restColumnControllers?[i]?.dispose();
+      }
+    }
+
+    // use when want data body is ListView.builder vertical wrap ListView.builder horizontal
+    // for (var i = 0; i < widget.bodyData[0].length; i++) {
     //   _restColumnControllers?[i]?.dispose();
     // }
-    // _restColumnControllers?.clear();
+    _restColumnControllers?.clear();
     super.dispose();
   }
 
@@ -129,10 +165,19 @@ class _TableBodyState extends State<TableBody> {
   Widget build(BuildContext context) {
     final numberOfDataColumns = (widget.numberOfColumn - 1) > 0
         ? (widget.numberOfColumn - 1) : 0;
+
     return Row(
       children: [
-        SizedBox(
+        Container(
           width: widget.firstColumnWidth,
+          decoration: BoxDecoration(
+            border: Border(
+              right: BorderSide(
+                color: context.theme.colorScheme.primary,
+                width: 1.5,
+              ),
+            ),
+          ),
           child: ListView.builder(
             controller: _firstColumnController,
             physics: const AlwaysScrollableScrollPhysics(
@@ -188,101 +233,186 @@ class _TableBodyState extends State<TableBody> {
                 _firstColumnController?.jumpTo(newDy);
               }
             },
-            // child: SingleChildScrollView(
-            //   controller: widget.scrollController,
-            //   scrollDirection: Axis.horizontal,
-            //   physics: const ClampingScrollPhysics(),
-            //   child: SizedBox(
-            //     width: numberOfDataColumns * widget.cellWidth,
-            //     child: ListView.builder(
-            //       controller: _restColumnController,
-            //       physics: const AlwaysScrollableScrollPhysics(
-            //         parent: ClampingScrollPhysics(),
-            //       ),
-            //       itemCount: widget.bodyData[0].length,
-            //       itemBuilder: (resColumnContext, index) {
-            //         return Row(
-            //             children: List.generate(numberOfDataColumns, (indexCol) {
-            //               return SizedBox(
-            //                 width: widget.cellWidth,
-            //                 child: TableBodyCell(
-            //                   color: index.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
-            //                   content: widget.bodyData[indexCol + 1][index] ?? 'null',
-            //                   textAlign: TextAlign.center,
-            //                   isShowDate: false,
-            //                   dateSelected: widget.bodyData[0][index] ?? 'null',
-            //                 ),
-            //               );
-            //             })
-            //         );
-            //       },
+            // use when want data body is a horizontal list wrap vertical lists
+            child: buildBodyRestColumns(context, numberOfDataColumns),
+
+            // use when want data body is ListView.builder vertical wrap ListView.builder horizontal
+            // child: SizedBox(
+            //   width: widget.cellHeight * numberOfDataColumns,
+            //   child: ListView.builder(
+            //     controller: _restColumnController,
+            //     physics: const AlwaysScrollableScrollPhysics(
+            //       parent: ClampingScrollPhysics(),
             //     ),
+            //     itemCount: widget.bodyData[0].length,
+            //     itemBuilder: (rowContext, rowIndex) {
+            //       return SizedBox(
+            //         height: widget.cellHeight,
+            //         child: ListView.builder(
+            //           controller: _restColumnControllers?[rowIndex],
+            //           physics: const AlwaysScrollableScrollPhysics(
+            //             parent: ClampingScrollPhysics(),
+            //           ),
+            //           scrollDirection: Axis.horizontal,
+            //           itemCount: numberOfDataColumns,
+            //           itemBuilder: (restColumnContext, colIndex) {
+            //             return SizedBox(
+            //               width: widget.cellWidth,
+            //               child: TableBodyCell(
+            //                 isShowDate: false,
+            //                 onPress: (dateSelected) {
+            //                   widget.onPress.call(dateSelected);
+            //                 },
+            //                 color: rowIndex.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
+            //                 content: widget.bodyData[colIndex + 1][rowIndex] ?? 'null',
+            //                 textAlign: TextAlign.center,
+            //                 dateSelected: widget.bodyData[0][rowIndex].toString(),
+            //               ),
+            //             );
+            //           },
+            //         ),
+            //       );
+            //     },
             //   ),
             // ),
-            // child: ListView.builder(
-            //   controller: widget.scrollController,
-            //   scrollDirection: Axis.horizontal,
-            //   physics: const ClampingScrollPhysics(),
-            //   itemCount: numberOfDataColumns,
-            //   itemBuilder: (restColumnContext, index) {
-            //     return SizedBox(
-            //       width: widget.cellWidth,
-            //       child: ListView.builder(
-            //         controller: _restColumnControllers?[index],
-            //         physics: const AlwaysScrollableScrollPhysics(
-            //           parent: ClampingScrollPhysics(),
-            //         ),
-            //         itemCount: widget.bodyData[index + 1].length,
-            //         itemBuilder: (singleColumnContext, singleIndex) {
-            //           return TableBodyCell(
-            //             color: singleIndex.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
-            //             content: widget.bodyData[index + 1][singleIndex] ?? 'null',
-            //             textAlign: TextAlign.center,
-            //             isShowDate: false,
-            //             dateSelected: widget.bodyData[0][singleIndex] ?? 'null',
-            //           );
-            //         },
-            //       ),
-            //     );
-            //   },
-            // ),
-            child: SingleChildScrollView(
-              controller: widget.scrollController,
-              scrollDirection: Axis.horizontal,
-              physics: const ClampingScrollPhysics(),
-              child: SizedBox(
-                width: numberOfDataColumns * widget.cellWidth,
-                child: ListView(
-                  controller: _restColumnController,
-                  physics: const AlwaysScrollableScrollPhysics(
-                    parent: ClampingScrollPhysics(),
-                  ),
-                  children: [
-                    for (var i = 0; i < widget.bodyData[0].length; i++) ...[
-                      Row(
-                        children: [
-                          for (var j = 0; j < numberOfDataColumns; j++) ...[
-                            SizedBox(
-                              width: widget.cellWidth,
-                              child: TableBodyCell(
-                                color: i.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
-                                content: widget.bodyData[j + 1][i] ?? 'null',
-                                textAlign: TextAlign.center,
-                                isShowDate: false,
-                                dateSelected: widget.bodyData[0][i] ?? 'null',
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ]
-                  ],
-                ),
-              ),
-            ),
           ),
         ),
       ],
+    );
+  }
+  
+  Widget buildBodyRestColumns(BuildContext context, int numberOfDataColumns) {
+    if (widget.lazyRenderDataRow && widget.lazyRenderDataColumn) {
+      // full ListView.builder
+      return ListView.builder(
+        controller: widget.scrollController,
+        scrollDirection: Axis.horizontal,
+        physics: const ClampingScrollPhysics(),
+        itemCount: numberOfDataColumns,
+        itemBuilder: (restColumnContext, index) {
+          return SizedBox(
+            width: widget.cellWidth,
+            child: ListView.builder(
+              controller: _restColumnControllers?[index],
+              physics: const AlwaysScrollableScrollPhysics(
+                parent: ClampingScrollPhysics(),
+              ),
+              itemCount: widget.bodyData[index + 1].length,
+              itemBuilder: (singleColumnContext, singleIndex) {
+                return TableBodyCell(
+                  color: singleIndex.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
+                  content: widget.bodyData[index + 1][singleIndex] ?? 'null',
+                  textAlign: TextAlign.center,
+                  isShowDate: false,
+                  dateSelected: widget.bodyData[0][singleIndex] ?? 'null',
+                );
+              },
+            ),
+          );
+        },
+      );
+    } else if (!widget.lazyRenderDataRow && widget.lazyRenderDataColumn) {
+      // SingleChildScrollView horizontal with ListView.builder vertical
+      return SingleChildScrollView(
+        controller: widget.scrollController,
+        scrollDirection: Axis.horizontal,
+        physics: const ClampingScrollPhysics(),
+        child: SizedBox(
+          width: numberOfDataColumns * widget.cellWidth,
+          child: ListView.builder(
+            controller: _restColumnController,
+            physics: const AlwaysScrollableScrollPhysics(
+              parent: ClampingScrollPhysics(),
+            ),
+            itemCount: widget.bodyData[0].length,
+            itemBuilder: (resColumnContext, index) {
+              return Row(
+                  children: List.generate(numberOfDataColumns, (indexCol) {
+                    return SizedBox(
+                      width: widget.cellWidth,
+                      child: TableBodyCell(
+                        color: index.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
+                        content: widget.bodyData[indexCol + 1][index] ?? 'null',
+                        textAlign: TextAlign.center,
+                        isShowDate: false,
+                        dateSelected: widget.bodyData[0][index] ?? 'null',
+                      ),
+                    );
+                  })
+              );
+            },
+          ),
+        ),
+      );
+    } else if (widget.lazyRenderDataRow && !widget.lazyRenderDataColumn) {
+      // SingleChildScrollView vertical with ListView.builder horizontal
+      return ListView.builder(
+        controller: widget.scrollController,
+        scrollDirection: Axis.horizontal,
+        physics: const ClampingScrollPhysics(),
+        itemCount: numberOfDataColumns,
+        itemBuilder: (restColumnContext, index) {
+          return SizedBox(
+            width: widget.cellWidth,
+            child: ListView(
+              controller: _restColumnControllers?[index],
+              physics: const AlwaysScrollableScrollPhysics(
+                parent: ClampingScrollPhysics(),
+              ),
+              children: [
+                for (var i = 0; i < widget.bodyData[index + 1].length; i++) ...[
+                  SizedBox(
+                    height: widget.cellHeight,
+                    child: TableBodyCell(
+                      color: i.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
+                      content: widget.bodyData[index + 1][i] ?? 'null',
+                      textAlign: TextAlign.center,
+                      isShowDate: false,
+                      dateSelected: widget.bodyData[0][i] ?? 'null',
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          );
+        },
+      );
+    }
+    // SingleChildScrollView horizontal
+    // with ListView vertical (full un-lazy rendered)
+    return SingleChildScrollView(
+      controller: widget.scrollController,
+      scrollDirection: Axis.horizontal,
+      physics: const ClampingScrollPhysics(),
+      child: SizedBox(
+        width: numberOfDataColumns * widget.cellWidth,
+        child: ListView(
+          controller: _restColumnController,
+          physics: const AlwaysScrollableScrollPhysics(
+            parent: ClampingScrollPhysics(),
+          ),
+          children: [
+            for (var i = 0; i < widget.bodyData[0].length; i++) ...[
+              Row(
+                children: [
+                  for (var j = 0; j < numberOfDataColumns; j++) ...[
+                    SizedBox(
+                      width: widget.cellWidth,
+                      child: TableBodyCell(
+                        color: i.isEven ? Colors.white : HexColor.fromHex('EEF4FF'),
+                        content: widget.bodyData[j + 1][i] ?? 'null',
+                        textAlign: TextAlign.center,
+                        isShowDate: false,
+                        dateSelected: widget.bodyData[0][i] ?? 'null',
+                      ),
+                    ),
+                  ],
+                ],
+              ),
+            ]
+          ],
+        ),
+      ),
     );
   }
 }
@@ -355,8 +485,8 @@ class TableHeaderCell extends StatelessWidget {
       decoration: BoxDecoration(
         color: color,
         border: Border(
-            top: BorderSide(color: AppColors.primaryBlue200),
-            bottom: BorderSide(color: AppColors.primaryBlue400, width: 1.5)),
+            top: BorderSide(color: context.theme.colorScheme.primary.withOpacity(0.5)),
+            bottom: BorderSide(color: context.theme.colorScheme.primary, width: 1.5)),
       ),
       alignment: Alignment.center,
       child: Text(
@@ -392,7 +522,7 @@ class TableHead extends StatelessWidget {
               ? TableHeaderCell(
             color: Colors.white,
             content: headerData[0] ?? '',
-            width: 50,
+            width: width,
             textAlign: TextAlign.left,
           )
               : Container(),

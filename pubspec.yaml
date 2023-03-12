@@ -46,13 +46,15 @@ dependencies:
   # page-transition (custom page route) libs
   page_transition: ^2.0.9
 
-  # pdf viewer libs
+  # pdf viewer lib
   syncfusion_flutter_pdfviewer: ^20.4.53
+
+  # stop_watch_timer (count down) lib:
+  stop_watch_timer: ^2.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  stop_watch_timer: ^2.0.0
 
 dev_dependencies:
   flutter_test:
