@@ -130,7 +130,8 @@ class _UpcomingClassBannerState extends State<UpcomingClassBanner> {
                 Text(
                   widget.buttonLabel,
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                    color: context.theme.colorScheme.onSurfaceVariant,
+                    color: context.theme.colorScheme.onSecondary,
+                    fontWeight: FontWeight.w500,
                     fontSize: Dimens.getProportionalScreenWidth(context, 14),
                   ),
                 ),

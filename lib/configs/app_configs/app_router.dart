@@ -12,6 +12,7 @@ import 'package:one_one_learn/presentations/screens/on_boarding/on_boarding_scre
 import 'package:one_one_learn/presentations/screens/profile/profile_screen.dart';
 import 'package:one_one_learn/presentations/screens/sign_up/sign_up_screen.dart';
 import 'package:one_one_learn/presentations/screens/tutor_information/tutor_information_screen.dart';
+import 'package:one_one_learn/presentations/screens/video_call/video_call_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class AppRouter {
@@ -121,6 +122,12 @@ class AppRouter {
       case RouteNames.profile:
         return PageTransition(
           child: const ProfileScreen(), // navigate to main and change index of visible tab index to 4 with index is 1
+          type: PageTransitionType.rightToLeft,
+          alignment: Alignment.center,
+        );
+      case RouteNames.videoCall:
+        return PageTransition(
+          child: const VideoCallScreen(),
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );

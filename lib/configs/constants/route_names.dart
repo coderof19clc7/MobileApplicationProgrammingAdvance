@@ -16,4 +16,5 @@ class RouteNames {
   static const lessonInformation = '/lesson-information';
   static const settings = '/settings';
   static const profile = '/profile';
+  static const videoCall = '/video-call';
 }

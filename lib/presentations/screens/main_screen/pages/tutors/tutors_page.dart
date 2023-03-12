@@ -27,7 +27,7 @@ class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMi
     super.build(context);
     final startTime = DateTime.now().add(
       Duration(
-        days: 2,
+        days: Random().nextInt(5),
         hours: Random().nextInt(5),
         minutes: Random().nextInt(5),
       ),
@@ -54,7 +54,9 @@ class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMi
                 upcomingDateFormat: AppDateFormats.eeeMMMdyyyy,
                 upcomingTimeFormat: AppDateFormats.tHHmm,
                 buttonLabel: S.current.enterRoom,
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).pushNamed(RouteNames.videoCall);
+                },
               ),
               const EmptyProportionalSpace(height: 10),
 
