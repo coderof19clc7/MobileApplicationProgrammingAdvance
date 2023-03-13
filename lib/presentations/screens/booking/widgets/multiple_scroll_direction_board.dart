@@ -283,32 +283,71 @@ class _TableBodyState extends State<TableBody> {
   Widget buildBodyRestColumns(BuildContext context, int numberOfDataColumns) {
     if (widget.lazyRenderDataRow && widget.lazyRenderDataColumn) {
       // full ListView.builder
-      return ListView.builder(
+      // return ListView.builder(
+      //   controller: widget.scrollController,
+      //   scrollDirection: Axis.horizontal,
+      //   physics: const ClampingScrollPhysics(),
+      //   itemCount: numberOfDataColumns,
+      //   itemBuilder: (restColumnContext, index) {
+      //     return SizedBox(
+      //       width: widget.cellWidth,
+      //       child: ListView.builder(
+      //         controller: _restColumnControllers?[index],
+      //         physics: const AlwaysScrollableScrollPhysics(
+      //           parent: ClampingScrollPhysics(),
+      //         ),
+      //         itemCount: widget.bodyData[index + 1].length,
+      //         itemBuilder: (singleColumnContext, singleIndex) {
+      //           return TableBodyCell(
+      //             color: context.theme.highlightColor,
+      //             content: widget.bodyData[index + 1][singleIndex] ?? 'null',
+      //             textAlign: TextAlign.center,
+      //             isShowDate: false,
+      //             dateSelected: widget.bodyData[0][singleIndex] ?? 'null',
+      //           );
+      //         },
+      //       ),
+      //     );
+      //   },
+      // );
+      return CustomScrollView(
         controller: widget.scrollController,
         scrollDirection: Axis.horizontal,
         physics: const ClampingScrollPhysics(),
-        itemCount: numberOfDataColumns,
-        itemBuilder: (restColumnContext, index) {
-          return SizedBox(
-            width: widget.cellWidth,
-            child: ListView.builder(
-              controller: _restColumnControllers?[index],
-              physics: const AlwaysScrollableScrollPhysics(
-                parent: ClampingScrollPhysics(),
-              ),
-              itemCount: widget.bodyData[index + 1].length,
-              itemBuilder: (singleColumnContext, singleIndex) {
-                return TableBodyCell(
-                  color: context.theme.highlightColor,
-                  content: widget.bodyData[index + 1][singleIndex] ?? 'null',
-                  textAlign: TextAlign.center,
-                  isShowDate: false,
-                  dateSelected: widget.bodyData[0][singleIndex] ?? 'null',
+        slivers: [
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return SizedBox(
+                  width: widget.cellWidth,
+                  child: CustomScrollView(
+                    controller: _restColumnControllers?[index],
+                    physics: const AlwaysScrollableScrollPhysics(
+                      parent: ClampingScrollPhysics(),
+                    ),
+                    slivers: [
+                      SliverList(
+                        delegate: SliverChildBuilderDelegate(
+                          (context, singleIndex) {
+                            return TableBodyCell(
+                              color: context.theme.highlightColor,
+                              content: widget.bodyData[index + 1][singleIndex] ?? 'null',
+                              textAlign: TextAlign.center,
+                              isShowDate: false,
+                              dateSelected: widget.bodyData[0][singleIndex] ?? 'null',
+                            );
+                          },
+                          childCount: widget.bodyData[index + 1].length,
+                        ),
+                      ),
+                    ],
+                  ),
                 );
               },
+              childCount: numberOfDataColumns,
             ),
-          );
-        },
+          ),
+        ],
       );
     } else if (!widget.lazyRenderDataRow && widget.lazyRenderDataColumn) {
       // SingleChildScrollView horizontal with ListView.builder vertical
