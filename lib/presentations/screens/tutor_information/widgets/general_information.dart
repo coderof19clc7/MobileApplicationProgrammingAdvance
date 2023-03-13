@@ -5,6 +5,7 @@ import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/generated/l10n.dart';
+import 'package:one_one_learn/presentations/screens/tutor_information/widgets/demo_video_popup.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
@@ -235,7 +236,16 @@ class GeneralInformation extends StatelessWidget {
                     context,
                     buttonVerticalPadding,
                   ),
-                  onTap: () {},
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return const Dialog(
+                          child: DemoVideoPopup(),
+                        );
+                      },
+                    );
+                  },
                   preferGradient: false,
                   borderColor: context.theme.colorScheme.onSurfaceVariant,
                   bodyColor: context.theme.colorScheme.background,
