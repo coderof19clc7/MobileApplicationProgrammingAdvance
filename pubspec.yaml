@@ -52,11 +52,13 @@ dependencies:
   # stop_watch_timer (count down) lib:
   stop_watch_timer: ^2.0.0
 
+  # video player libs (chewie is controller of video_player)
+  chewie: ^1.4.0
+  video_player: ^2.6.0
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  chewie: ^1.4.0
-  video_player: ^2.6.0
 
 dev_dependencies:
   flutter_test:

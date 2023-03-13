@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/screens/booking/widgets/multiple_scroll_direction_board.dart';
+import 'package:one_one_learn/presentations/screens/booking/widgets/multiple_scroll_direction_board_with_interactive_viewer_builder.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
@@ -43,7 +44,7 @@ class BookingPage extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: MultipleScrollDirectionBoard(
+            child: MultipleScrollDirectionBoardWithInteractiveViewerBuilder(
               onPress: (String dateSelected) {
                 print('dateSelected: $dateSelected');
               },
