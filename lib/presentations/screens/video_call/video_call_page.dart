@@ -74,7 +74,7 @@ class _VideoCallPageState extends State<VideoCallPage> {
                   days == '00'
                       ? '(${S.current.upcomingIn} $hours:$minutes:$seconds)'
                       : '(${S.current.upcomingIn} $days:$hours:$minutes:$seconds)',
-                  style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
+                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                     fontSize: Dimens.getProportionalScreenWidth(context, 15),
                   ),
                 );

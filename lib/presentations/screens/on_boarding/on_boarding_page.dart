@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
@@ -16,13 +17,10 @@ class OnBoardingPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              width: 162,
-              height: 162,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                color: context.theme.colorScheme.primary,
-              ),
+            SvgPicture.asset(
+              'assets/icons/logo.svg',
+              width: Dimens.getScreenWidth(context) / 2,
+              height: Dimens.getScreenWidth(context) / 2,
             ),
             SizedBox(height: Dimens.getProportionalScreenHeight(context, 40)),
             Text(

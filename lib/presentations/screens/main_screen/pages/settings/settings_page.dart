@@ -16,8 +16,7 @@ class SettingsPage extends StatefulWidget {
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage>
-    with AutomaticKeepAliveClientMixin<SettingsPage> {
+class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClientMixin<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     super.build(context);
@@ -145,7 +144,9 @@ class _SettingsPageState extends State<SettingsPage>
           ),
         ],
       ),
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).pushNamedAndRemoveUntil(RouteNames.login, (route) => false);
+      },
     );
   }
 
