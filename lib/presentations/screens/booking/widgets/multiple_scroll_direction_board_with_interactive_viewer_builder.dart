@@ -1,8 +1,6 @@
-import 'dart:math' as math;
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/presentations/widgets/others/linked_scroll_controller.dart';
 import 'package:vector_math/vector_math_64.dart' show Quad, Vector3;
 
 class MultipleScrollDirectionBoardWithInteractiveViewerBuilder extends StatefulWidget {
@@ -33,8 +31,7 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState extends Sta
   late final ScrollController _headController;
   late final ScrollController _bodyHeaderController;
   late final TransformationController _transformationController;
-  var _prevHorizontalOffset = 0.0, _prevVerticalOffset = 0.0;
-  var isBodyDataScrolled = false;
+  var isHandlingScrollEvent = false;
 
   @override
   void initState() {
@@ -43,70 +40,42 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState extends Sta
     _headController = ScrollController();
     _bodyHeaderController = ScrollController();
     _transformationController = TransformationController();
+    _transformationController.addListener(onTransformationValueUpdated);
   }
 
   @override
   void dispose() {
     _headController.dispose();
     _bodyHeaderController.dispose();
-    _transformationController.dispose();
+    _transformationController..removeListener(onTransformationValueUpdated)
+    ..dispose();
     super.dispose();
   }
 
-  // stop the animation of interactiveviewer when onInteractionEnd triggered
+  void onScrollPositionUpdated(double scrollDelta) {
+    if (isHandlingScrollEvent) return;
+    isHandlingScrollEvent = true;
 
+    _transformationController.value = Matrix4.translationValues(
+      -_headController.offset, -_bodyHeaderController.offset, 0,
+    );
 
-  bool onHeaderScroll() {
-    if (isBodyDataScrolled) return false;
-    final delta = _headController.offset - _prevHorizontalOffset;
-    if (delta == 0) return false;
-    _transformationController.value = (Matrix4.translationValues(
-      -delta, 0, 0,
-    ) * _transformationController.value) as Matrix4;
-    _prevHorizontalOffset = _headController.offset;
-
-    return true;
+    isHandlingScrollEvent = false;
   }
 
-  bool onBodyHeaderScroll() {
-    if (isBodyDataScrolled) return false;
-    final delta = _bodyHeaderController.offset - _prevVerticalOffset;
-    if (delta == 0) return false;
-    _transformationController.value = (Matrix4.translationValues(
-      0, -delta, 0,
-    ) * _transformationController.value) as Matrix4;
-    _prevVerticalOffset = _bodyHeaderController.offset;
+  void onTransformationValueUpdated() {
+    if (isHandlingScrollEvent) return;
+    isHandlingScrollEvent = true;
 
-    return true;
-  }
-
-  bool onTransformationUpdate(bool isEndInteraction) {
-    if (isEndInteraction == true) {
-      print('onTransformationUpdate: ${_transformationController.value}');
-      setState(() {
-        isBodyDataScrolled = false;
-      });
-      return false;
-    }
-    if (isBodyDataScrolled == false) {
-      setState(() {
-        isBodyDataScrolled = true;
-      });
-    }
     final matrix4 = _transformationController.value;
     final dx = matrix4.getTranslation().x;
     final dy = matrix4.getTranslation().y;
 
-    final deltaVertical = dy - _prevVerticalOffset;
-    final deltaHorizontal = dx - _prevHorizontalOffset;
-
     _bodyHeaderController.jumpTo(-dy);
     _headController.jumpTo(-dx);
 
-    _prevVerticalOffset = dy;
-    _prevHorizontalOffset = dx;
 
-    return true;
+    isHandlingScrollEvent = false;
   }
 
   @override
@@ -118,12 +87,12 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState extends Sta
           width: widget.firstColumnWidth,
           headerData: widget.headerData,
           scrollController: _headController,
-          onScroll: onHeaderScroll,
+          onScroll: onScrollPositionUpdated,
         ),
         Expanded(
           child: TableBody(
-            onBodyHeadScroll: onBodyHeaderScroll,
-            onBodyDataInteract: onTransformationUpdate,
+            onBodyHeadScroll: onScrollPositionUpdated,
+            onBodyDataInteract: onTransformationValueUpdated,
             bodyHeaderScrollController: _bodyHeaderController,
             transformationController: _transformationController,
             bodyData: widget.bodyData,
@@ -150,8 +119,8 @@ class TableBody extends StatefulWidget {
   final double firstColumnWidth;
   final int numberOfColumn;
   final Function(String dateSelected) onPress;
-  final bool Function() onBodyHeadScroll;
-  final bool Function(bool isEndInteract) onBodyDataInteract;
+  final Function(double) onBodyHeadScroll;
+  final Function() onBodyDataInteract;
 
   const TableBody({
     super.key,
@@ -228,11 +197,11 @@ class _TableBodyState extends State<TableBody> {
             ),
           ),
           child: NotificationListener<ScrollNotification>(
-            onNotification: (scrollNotification) {
-              if (scrollNotification is ScrollUpdateNotification) {
-                return widget.onBodyHeadScroll.call();
+            onNotification: (notification) {
+              if (notification is ScrollUpdateNotification) {
+                widget.onBodyHeadScroll.call(notification.scrollDelta ?? 0);
               }
-              return false;
+              return true;
             },
             child: ListView.builder(
               controller: widget.bodyHeaderScrollController,
@@ -262,16 +231,7 @@ class _TableBodyState extends State<TableBody> {
             builder: (context, constraints) {
               return InteractiveViewer.builder(
                 transformationController: widget.transformationController,
-                // scaleEnabled: false,
-                onInteractionUpdate: (details) {
-                  print('onInteractionUpdate');
-                  print('pointNumber: ${details.pointerCount}');
-                  widget.onBodyDataInteract.call(false);
-                },
-                onInteractionEnd: (details) {
-                  print('onInteractionEnd: $details');
-                  widget.onBodyDataInteract.call(true);
-                },
+                scaleEnabled: false,
                 builder: (dataFieldContext, dataFieldViewPort) {
                   return TableBodyDataBuilder(
                     numRows: numberOfDataRows,
@@ -438,7 +398,7 @@ class TableHeaderCell extends StatelessWidget {
 
 class TableHead extends StatelessWidget {
   final ScrollController scrollController;
-  final bool Function() onScroll;
+  final Function(double) onScroll;
 
   const TableHead({
     super.key,
@@ -471,9 +431,9 @@ class TableHead extends StatelessWidget {
             child: NotificationListener<ScrollNotification>(
               onNotification: (notification) {
                 if (notification is ScrollUpdateNotification) {
-                  return onScroll();
+                  onScroll(notification.scrollDelta ?? 0);
                 }
-                return false;
+                return true;
               },
               child: ListView.builder(
                 controller: scrollController,
