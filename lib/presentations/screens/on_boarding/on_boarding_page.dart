@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
+import 'package:one_one_learn/generated/assets.gen.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 
@@ -18,7 +19,7 @@ class OnBoardingPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             SvgPicture.asset(
-              'assets/icons/logo.svg',
+              Assets.icons.logo.path,
               width: Dimens.getScreenWidth(context) / 2,
               height: Dimens.getScreenWidth(context) / 2,
             ),

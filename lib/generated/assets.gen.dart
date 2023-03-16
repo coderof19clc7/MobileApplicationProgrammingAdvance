@@ -28,19 +28,47 @@ class $AssetsIconsGen {
   SvgGenImage get googleColorfull =>
       const SvgGenImage('assets/icons/google_colorfull.svg');
 
+  /// File path: assets/icons/logo.svg
+  SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
+
   /// File path: assets/icons/right_arrow.svg
   SvgGenImage get rightArrow =>
       const SvgGenImage('assets/icons/right_arrow.svg');
 
   /// List of all assets
-  List<SvgGenImage> get values =>
-      [downArrow, facebookColorfull, favorite, googleColorfull, rightArrow];
+  List<SvgGenImage> get values => [
+        downArrow,
+        facebookColorfull,
+        favorite,
+        googleColorfull,
+        logo,
+        rightArrow
+      ];
+}
+
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/logo.png
+  AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
+
+  /// File path: assets/images/logo_1024.png
+  AssetGenImage get logo1024 =>
+      const AssetGenImage('assets/images/logo_1024.png');
+
+  /// File path: assets/images/logo_square.png
+  AssetGenImage get logoSquare =>
+      const AssetGenImage('assets/images/logo_square.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [logo, logo1024, logoSquare];
 }
 
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
 }
 
 class AssetGenImage {
