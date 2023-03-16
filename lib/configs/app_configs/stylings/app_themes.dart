@@ -24,7 +24,7 @@ class AppThemes {
       outlineVariant: AppColors.neutralBlue200, // border for component on surface | fill for disabled input/option button
       surface: AppColors.white, // card fill
       // onSurface: ,
-      // surfaceVariant: ,
+      surfaceVariant: AppColors.primaryBlue100.withOpacity(0.14), // board body cell
       onSurfaceVariant: AppColors.primaryBlue400, // always primaryBlue400
       surfaceTint: AppColors.white, // component on top of surface
       inverseSurface: AppColors.neutralBlue200, // login sign up text field fill
@@ -73,7 +73,7 @@ class AppThemes {
       outline: AppColors.transparent, // border
       outlineVariant: AppColors.neutralBlue700, // border for component on surface | fill for disabled input/option button
       surface: AppColors.neutralBlue900, // card fill
-      // surfaceVariant: ,
+      surfaceVariant: AppColors.primaryBlue800.withOpacity(0.3), // board body cell
       onSurfaceVariant: AppColors.primaryBlue400, // always primaryBlue400
       surfaceTint: AppColors.neutralBlue700, // component on top of surface
       inverseSurface: AppColors.neutralBlue900, // login sign up text field fill

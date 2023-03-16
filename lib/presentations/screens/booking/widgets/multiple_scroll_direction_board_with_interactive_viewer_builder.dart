@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
+import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:vector_math/vector_math_64.dart' show Quad, Vector3;
 
@@ -27,7 +28,8 @@ class MultipleScrollDirectionBoardWithInteractiveViewerBuilder extends StatefulW
   createState() => _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState();
 }
 
-class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState extends State<MultipleScrollDirectionBoardWithInteractiveViewerBuilder> {
+class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState
+    extends State<MultipleScrollDirectionBoardWithInteractiveViewerBuilder> {
   late final ScrollController _headController;
   late final ScrollController _bodyHeaderController;
   late final TransformationController _transformationController;
@@ -47,8 +49,9 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState extends Sta
   void dispose() {
     _headController.dispose();
     _bodyHeaderController.dispose();
-    _transformationController..removeListener(onTransformationValueUpdated)
-    ..dispose();
+    _transformationController
+      ..removeListener(onTransformationValueUpdated)
+      ..dispose();
     super.dispose();
   }
 
@@ -57,7 +60,9 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState extends Sta
     isHandlingScrollEvent = true;
 
     _transformationController.value = Matrix4.translationValues(
-      -_headController.offset, -_bodyHeaderController.offset, 0,
+      -_headController.offset,
+      -_bodyHeaderController.offset,
+      0,
     );
 
     isHandlingScrollEvent = false;
@@ -73,7 +78,6 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState extends Sta
 
     _bodyHeaderController.jumpTo(-dy);
     _headController.jumpTo(-dx);
-
 
     isHandlingScrollEvent = false;
   }
@@ -141,7 +145,6 @@ class TableBody extends StatefulWidget {
 }
 
 class _TableBodyState extends State<TableBody> {
-
   @override
   void initState() {
     super.initState();
@@ -182,20 +185,15 @@ class _TableBodyState extends State<TableBody> {
 
   @override
   Widget build(BuildContext context) {
-    final numberOfDataColumns = (widget.numberOfColumn - 1) > 0
-        ? (widget.numberOfColumn - 1) : 0;
+    final numberOfDataColumns = (widget.numberOfColumn - 1) > 0 ? (widget.numberOfColumn - 1) : 0;
     final numberOfDataRows = widget.bodyData[0].length;
 
     return Row(
       children: [
         // first column
         Container(
+          decoration: BoxDecoration(boxShadow: [Effects.faintShadowXS]),
           width: widget.firstColumnWidth,
-          decoration: BoxDecoration(
-            border: Border(
-              right: BorderSide(color: context.theme.colorScheme.outline),
-            ),
-          ),
           child: NotificationListener<ScrollNotification>(
             onNotification: (notification) {
               if (notification is ScrollUpdateNotification) {
@@ -241,7 +239,7 @@ class _TableBodyState extends State<TableBody> {
                     viewport: axisAlignedBoundingBox(dataFieldViewPort),
                     builder: (BuildContext context, int row, int column) {
                       return TableBodyCell(
-                        color: context.theme.highlightColor,
+                        color: context.theme.colorScheme.surfaceVariant,
                         content: widget.bodyData[column + 1][row] ?? 'null',
                         textAlign: TextAlign.center,
                         isShowDate: false,
@@ -259,8 +257,7 @@ class _TableBodyState extends State<TableBody> {
   }
 }
 
-typedef CellBuilder = Widget Function(
-    BuildContext context, int row, int column);
+typedef CellBuilder = Widget Function(BuildContext context, int row, int column);
 
 class TableBodyDataBuilder extends StatelessWidget {
   const TableBodyDataBuilder({
@@ -342,6 +339,9 @@ class TableBodyCell extends StatelessWidget {
             bottom: BorderSide(
               color: context.theme.colorScheme.scrim,
             ),
+            right: BorderSide(
+              color: context.theme.colorScheme.scrim,
+            ),
           ),
         ),
         alignment: Alignment.center,
@@ -421,11 +421,11 @@ class TableHead extends StatelessWidget {
         children: [
           headerData.isNotEmpty
               ? TableHeaderCell(
-            color: context.theme.colorScheme.outlineVariant.withOpacity(0.6),
-            content: headerData[0] ?? '',
-            width: width,
-            textAlign: TextAlign.left,
-          )
+                  color: context.theme.colorScheme.outlineVariant.withOpacity(0.6),
+                  content: headerData[0] ?? '',
+                  width: width,
+                  textAlign: TextAlign.left,
+                )
               : Container(),
           Expanded(
             child: NotificationListener<ScrollNotification>(
@@ -435,19 +435,22 @@ class TableHead extends StatelessWidget {
                 }
                 return true;
               },
-              child: ListView.builder(
-                controller: scrollController,
-                physics: const ClampingScrollPhysics(),
-                scrollDirection: Axis.horizontal,
-                itemCount: headerData.length - 1,
-                itemBuilder: (headerContext, index) {
-                  return TableHeaderCell(
-                    textAlign: TextAlign.center,
-                    content: headerData[index + 1] ?? '',
-                    width: 100,
-                    color: context.theme.colorScheme.background,
-                  );
-                },
+              child: DecoratedBox(
+                decoration: BoxDecoration(boxShadow: [Effects.faintShadowXS]),
+                child: ListView.builder(
+                  controller: scrollController,
+                  physics: const ClampingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: headerData.length - 1,
+                  itemBuilder: (headerContext, index) {
+                    return TableHeaderCell(
+                      textAlign: TextAlign.center,
+                      content: headerData[index + 1] ?? '',
+                      width: 100,
+                      color: context.theme.colorScheme.background,
+                    );
+                  },
+                ),
               ),
             ),
           ),

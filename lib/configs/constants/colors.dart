@@ -72,4 +72,9 @@ class Effects {
     blurRadius: 14,
     color: AppColors.black.withOpacity(0.25),
   );
+  static final faintShadowXS = BoxShadow(
+    blurRadius: 2,
+    offset: const Offset(2, 2),
+    color: AppColors.black.withOpacity(0.04),
+  );
 }
