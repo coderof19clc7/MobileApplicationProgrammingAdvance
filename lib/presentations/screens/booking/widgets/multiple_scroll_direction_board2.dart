@@ -1,35 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
-import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:vector_math/vector_math_64.dart' show Quad, Vector3;
 
-class MultipleScrollDirectionBoardWithInteractiveViewerBuilder extends StatefulWidget {
-  const MultipleScrollDirectionBoardWithInteractiveViewerBuilder({
+// version using 2 ListView.builder
+// (horizontal for header and vertical for body's header)
+// and an interactiveViewer for body's data
+class MultipleScrollDirectionBoard2 extends StatefulWidget {
+  const MultipleScrollDirectionBoard2({
     super.key,
-    required this.onPress,
-    this.headerData = const [],
-    this.bodyData = const [],
+    this.rowCount = 0,
+    this.columnCount = 0,
     this.cellWidth = 100,
     this.cellHeight = 46,
     this.headerHeight = 68,
     this.firstColumnWidth = 100,
+    this.useDefaultDivider = true,
+    this.firstCellBuilder,
+    this.headerCellBuilder,
+    this.bodyHeaderCellBuilder,
+    this.bodyDataCellBuilder,
+    this.onBodyDataCellTap,
   });
 
-  final List<String?> headerData;
-  final List<List<String?>> bodyData;
-  final double cellWidth;
-  final double cellHeight;
-  final double headerHeight;
-  final double firstColumnWidth;
-  final Function(String dateSelected) onPress;
+  final int rowCount, columnCount;
+  final double cellWidth, cellHeight, headerHeight, firstColumnWidth;
+  final bool useDefaultDivider;
+  final Widget Function(BuildContext context)? firstCellBuilder;
+  final Widget Function(BuildContext context, int column)? headerCellBuilder;
+  final Widget Function(BuildContext context, int row)? bodyHeaderCellBuilder;
+  final Widget Function(BuildContext context, int, int column)? bodyDataCellBuilder;
+  final Function(int row, int column)? onBodyDataCellTap;
 
   @override
-  createState() => _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState();
+  createState() => _MultipleScrollDirectionBoard2State();
 }
 
-class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState
-    extends State<MultipleScrollDirectionBoardWithInteractiveViewerBuilder> {
+class _MultipleScrollDirectionBoard2State
+    extends State<MultipleScrollDirectionBoard2> {
   late final ScrollController _headController;
   late final ScrollController _bodyHeaderController;
   late final TransformationController _transformationController;
@@ -47,6 +55,7 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState
 
   @override
   void dispose() {
+    // dispose controllers
     _headController.dispose();
     _bodyHeaderController.dispose();
     _transformationController
@@ -55,8 +64,10 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState
     super.dispose();
   }
 
+  // update transformationController's value
   void onScrollPositionUpdated(double scrollDelta) {
     if (isHandlingScrollEvent) return;
+    // prevent any other update callbacks from executing
     isHandlingScrollEvent = true;
 
     _transformationController.value = Matrix4.translationValues(
@@ -65,11 +76,14 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState
       0,
     );
 
+    // allow other update callbacks execute
     isHandlingScrollEvent = false;
   }
 
+  // update position of scrollControllers
   void onTransformationValueUpdated() {
     if (isHandlingScrollEvent) return;
+    // prevent any other update callbacks from executing
     isHandlingScrollEvent = true;
 
     final matrix4 = _transformationController.value;
@@ -79,6 +93,7 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState
     _bodyHeaderController.jumpTo(-dy);
     _headController.jumpTo(-dx);
 
+    // allow other update callbacks execute
     isHandlingScrollEvent = false;
   }
 
@@ -86,27 +101,35 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState
   Widget build(BuildContext context) {
     return Column(
       children: [
+        // header
         TableHead(
-          height: widget.headerHeight,
-          width: widget.firstColumnWidth,
-          headerData: widget.headerData,
           scrollController: _headController,
           onScroll: onScrollPositionUpdated,
+          firstColumnWidth: widget.firstColumnWidth,
+          otherWidth: widget.cellWidth,
+          height: widget.headerHeight,
+          hasDivider: widget.useDefaultDivider,
+          headerDataLength: widget.columnCount,
+          firstCellBuilder: widget.firstCellBuilder,
+          otherCellsBuilder: widget.headerCellBuilder,
         ),
+
+        // body
         Expanded(
           child: TableBody(
-            onBodyHeadScroll: onScrollPositionUpdated,
-            onBodyDataInteract: onTransformationValueUpdated,
             bodyHeaderScrollController: _bodyHeaderController,
             transformationController: _transformationController,
-            bodyData: widget.bodyData,
+            onBodyHeadScroll: onScrollPositionUpdated,
+            onBodyDataInteract: onTransformationValueUpdated,
             cellHeight: widget.cellHeight,
             cellWidth: widget.cellWidth,
             firstColumnWidth: widget.firstColumnWidth,
-            numberOfColumn: widget.headerData.length,
-            onPress: (String dateSelected) {
-              widget.onPress.call(dateSelected);
-            },
+            numberOfRows: widget.rowCount,
+            numberOfColumns: widget.columnCount,
+            hasDivider: widget.useDefaultDivider,
+            firstColumnCellBuilder: widget.bodyHeaderCellBuilder,
+            otherColumnCellBuilder: widget.bodyDataCellBuilder,
+            onBodyDataCellTap: widget.onBodyDataCellTap,
           ),
         ),
       ],
@@ -117,27 +140,30 @@ class _MultipleScrollDirectionBoardWithInteractiveViewerBuilderState
 class TableBody extends StatefulWidget {
   final ScrollController bodyHeaderScrollController;
   final TransformationController transformationController;
-  final List<List<String?>> bodyData;
-  final double cellHeight;
-  final double cellWidth;
-  final double firstColumnWidth;
-  final int numberOfColumn;
-  final Function(String dateSelected) onPress;
   final Function(double) onBodyHeadScroll;
   final Function() onBodyDataInteract;
+  final double cellHeight, cellWidth, firstColumnWidth;
+  final int numberOfRows, numberOfColumns;
+  final bool hasDivider;
+  final Widget Function(BuildContext context, int index)? firstColumnCellBuilder;
+  final Widget Function(BuildContext context, int row, int coulumn)? otherColumnCellBuilder;
+  final Function(int row, int coulmn)? onBodyDataCellTap;
 
   const TableBody({
     super.key,
     required this.bodyHeaderScrollController,
     required this.transformationController,
-    this.bodyData = const [],
+    required this.onBodyHeadScroll,
+    required this.onBodyDataInteract,
     required this.cellHeight,
     required this.cellWidth,
     required this.firstColumnWidth,
-    required this.numberOfColumn,
-    required this.onPress,
-    required this.onBodyHeadScroll,
-    required this.onBodyDataInteract,
+    this.numberOfRows = 0,
+    this.numberOfColumns = 0,
+    this.hasDivider = true,
+    this.firstColumnCellBuilder,
+    this.otherColumnCellBuilder,
+    this.onBodyDataCellTap,
   });
 
   @override
@@ -185,9 +211,6 @@ class _TableBodyState extends State<TableBody> {
 
   @override
   Widget build(BuildContext context) {
-    final numberOfDataColumns = (widget.numberOfColumn - 1) > 0 ? (widget.numberOfColumn - 1) : 0;
-    final numberOfDataRows = widget.bodyData[0].length;
-
     return Row(
       children: [
         // first column
@@ -206,17 +229,15 @@ class _TableBodyState extends State<TableBody> {
               physics: const AlwaysScrollableScrollPhysics(
                 parent: ClampingScrollPhysics(),
               ),
-              itemCount: numberOfDataRows,
+              itemCount: widget.numberOfRows,
               itemBuilder: (firstColumnContext, index) {
                 return TableBodyCell(
-                  isShowDate: true,
-                  onPress: (dateSelected) {
-                    widget.onPress.call(dateSelected);
-                  },
+                  width: widget.firstColumnWidth,
+                  height: widget.cellHeight,
                   color: context.theme.colorScheme.background,
-                  content: widget.bodyData[0][index] ?? 'null',
-                  textAlign: TextAlign.left,
-                  dateSelected: widget.bodyData[0][index].toString(),
+                  child: widget.firstColumnCellBuilder?.call(
+                    firstColumnContext, index,
+                  ),
                 );
               },
             ),
@@ -232,18 +253,23 @@ class _TableBodyState extends State<TableBody> {
                 scaleEnabled: false,
                 builder: (dataFieldContext, dataFieldViewPort) {
                   return TableBodyDataBuilder(
-                    numRows: numberOfDataRows,
-                    numColumns: numberOfDataColumns,
+                    numRows: widget.numberOfRows,
+                    numColumns: widget.numberOfColumns,
                     cellWidth: widget.cellWidth,
                     cellHeight: widget.cellHeight,
                     viewport: axisAlignedBoundingBox(dataFieldViewPort),
                     builder: (BuildContext context, int row, int column) {
                       return TableBodyCell(
+                        hasDivider: widget.hasDivider,
+                        width: widget.cellWidth,
+                        height: widget.cellHeight,
                         color: context.theme.colorScheme.surfaceVariant,
-                        content: widget.bodyData[column + 1][row] ?? 'null',
-                        textAlign: TextAlign.center,
-                        isShowDate: false,
-                        dateSelected: widget.bodyData[0][row] ?? 'null',
+                        onTap: widget.onBodyDataCellTap == null
+                            ? null
+                            : () => widget.onBodyDataCellTap?.call(row, column),
+                        child: widget.otherColumnCellBuilder?.call(
+                          context, row, column,
+                        ),
                       );
                     },
                   );
@@ -303,130 +329,127 @@ class TableBodyDataBuilder extends StatelessWidget {
 }
 
 class TableBodyCell extends StatelessWidget {
-  final bool isShowDate;
-  final String content;
-  final Color? color;
   final double width;
   final double height;
-  final TextAlign textAlign;
-  final String dateSelected;
-  final Function(String dateSelected)? onPress;
+  final Color? color;
+  final bool hasDivider;
+  final Widget? child;
+  final Function()? onTap;
 
   const TableBodyCell({
     super.key,
-    required this.content,
+    required this.width,
+    required this.height,
     this.color,
-    required this.isShowDate,
-    this.width = 100,
-    this.height = 46,
-    this.onPress,
-    required this.dateSelected,
-    this.textAlign = TextAlign.right,
+    this.hasDivider = true,
+    this.child,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        onPress?.call(dateSelected);
+      onTap: onTap == null ? null : () {
+        onTap?.call();
       },
       child: Container(
         width: width,
         height: height,
         decoration: BoxDecoration(
           color: color,
-          border: Border(
-            bottom: BorderSide(
-              color: context.theme.colorScheme.scrim,
-            ),
-            right: BorderSide(
-              color: context.theme.colorScheme.scrim,
-            ),
-          ),
+          border: hasDivider ? Border(
+            bottom: BorderSide(color: context.theme.colorScheme.scrim),
+            right: BorderSide(color: context.theme.colorScheme.scrim),
+          ) : null,
         ),
         alignment: Alignment.center,
-        child: Text(
-          content,
-          textAlign: textAlign,
-        ),
+        child: child,
+        // Text(
+        //   content,
+        //   textAlign: textAlign,
+        // ),
       ),
     );
   }
 }
 
 class TableHeaderCell extends StatelessWidget {
-  final String content;
+  final bool hasDivider;
   final Color? color;
   final double? width;
   final double? height;
-  final TextAlign textAlign;
+  final Widget? child;
 
   const TableHeaderCell({
     super.key,
+    this.hasDivider = true,
     this.color,
-    required this.content,
     this.width,
     this.height,
-    this.textAlign = TextAlign.right,
+    this.child,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width ?? 100,
-      height: double.infinity,
+      height: height,
       decoration: BoxDecoration(
         color: color,
-        border: Border(
+        border: hasDivider ? Border(
           top: BorderSide(color: context.theme.colorScheme.outline),
           right: BorderSide(color: context.theme.colorScheme.outline),
           bottom: BorderSide(color: context.theme.colorScheme.outline),
-        ),
+        ) : null,
       ),
       alignment: Alignment.center,
-      child: Text(
-        content,
-        textAlign: textAlign,
-        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-          fontSize: Dimens.getProportionalScreenWidth(context, 14),
-          fontWeight: FontWeight.w500,
-        ),
-      ),
+      child: child,
     );
   }
 }
 
 class TableHead extends StatelessWidget {
-  final ScrollController scrollController;
-  final Function(double) onScroll;
-
   const TableHead({
     super.key,
     required this.scrollController,
     required this.onScroll,
-    this.headerData = const [],
-    this.width,
-    this.height,
+    required this.firstColumnWidth,
+    required this.otherWidth,
+    required this.height,
+    this.hasDivider = true,
+    this.headerDataLength = 0,
+    this.firstCellBuilder,
+    this.otherCellsBuilder,
   });
 
-  final List<String?> headerData;
-  final double? width;
-  final double? height;
+  final ScrollController scrollController;
+  final Function(double) onScroll;
+  final bool hasDivider;
+  final int headerDataLength;
+  final double firstColumnWidth, otherWidth, height;
+  final Widget Function(BuildContext context)? firstCellBuilder;
+  final Widget Function(BuildContext context, int index)? otherCellsBuilder;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 68,
+      height: height,
       child: Row(
         children: [
-          headerData.isNotEmpty
-              ? TableHeaderCell(
-                  color: context.theme.colorScheme.outlineVariant.withOpacity(0.6),
-                  content: headerData[0] ?? '',
-                  width: width,
-                  textAlign: TextAlign.left,
-                )
-              : Container(),
+          // first cell of the board
+          DecoratedBox(
+            decoration: BoxDecoration(boxShadow: [Effects.faintShadowXS]),
+            child: TableHeaderCell(
+              width: firstColumnWidth,
+              height: height,
+              hasDivider: hasDivider,
+              color: context.theme.colorScheme.outlineVariant.withOpacity(0.6),
+              child: firstCellBuilder != null
+                  ? firstCellBuilder!(context) : const SizedBox(),
+            ),
+          ),
+
+          // other cells of board's header
           Expanded(
             child: NotificationListener<ScrollNotification>(
               onNotification: (notification) {
@@ -441,13 +464,16 @@ class TableHead extends StatelessWidget {
                   controller: scrollController,
                   physics: const ClampingScrollPhysics(),
                   scrollDirection: Axis.horizontal,
-                  itemCount: headerData.length - 1,
+                  itemCount: headerDataLength,
                   itemBuilder: (headerContext, index) {
                     return TableHeaderCell(
-                      textAlign: TextAlign.center,
-                      content: headerData[index + 1] ?? '',
-                      width: 100,
+                      width: otherWidth,
+                      height: height,
+                      hasDivider: hasDivider,
                       color: context.theme.colorScheme.background,
+                      child: otherCellsBuilder != null
+                          ? otherCellsBuilder!(headerContext, index)
+                          : const SizedBox(),
                     );
                   },
                 ),

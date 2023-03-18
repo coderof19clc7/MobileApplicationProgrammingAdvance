@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
-import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/widgets/others/linked_scroll_controller.dart';
 
 class MultipleScrollDirectionBoard extends StatefulWidget {
   const MultipleScrollDirectionBoard({
     super.key,
-    required this.onPress,
-    this.headerData = const [],
-    this.bodyData = const [],
+    this.rowCount = 0,
+    this.columnCount = 0,
     this.cellWidth = 100,
     this.cellHeight = 46,
     this.headerHeight = 68,
     this.firstColumnWidth = 100,
+    this.useDefaultDivider = true,
     this.lazyRenderDataRow = true,
     this.lazyRenderDataColumn = true,
+    this.firstCellBuilder,
+    this.headerCellBuilder,
+    this.bodyHeaderCellBuilder,
+    this.bodyDataCellBuilder,
+    this.onBodyDataCellTap,
   });
 
-  final List<String?> headerData;
-  final List<List<String?>> bodyData;
-  final double cellWidth;
-  final double cellHeight;
-  final double headerHeight;
-  final double firstColumnWidth;
-  final bool lazyRenderDataRow;
-  final bool lazyRenderDataColumn;
-  final Function(String dateSelected) onPress;
+  final int rowCount, columnCount;
+  final double cellWidth, cellHeight, headerHeight, firstColumnWidth;
+  final bool useDefaultDivider, lazyRenderDataRow, lazyRenderDataColumn;
+  final Widget Function(BuildContext context)? firstCellBuilder;
+  final Widget Function(BuildContext context, int column)? headerCellBuilder;
+  final Widget Function(BuildContext context, int row)? bodyHeaderCellBuilder;
+  final Widget Function(BuildContext context, int, int column)? bodyDataCellBuilder;
+  final Function(int row, int column)? onBodyDataCellTap;
 
   @override
   createState() => _MultipleScrollDirectionBoardState();
@@ -55,10 +58,13 @@ class _MultipleScrollDirectionBoardState extends State<MultipleScrollDirectionBo
     return Column(
       children: [
         TableHead(
-          height: widget.headerHeight,
-          width: widget.firstColumnWidth,
-          headerData: widget.headerData,
           scrollController: _headController,
+          firstColumnWidth: widget.firstColumnWidth,
+          otherWidth: widget.cellWidth,
+          height: widget.headerHeight,
+          headerDataLength: widget.columnCount,
+          firstCellBuilder: widget.firstCellBuilder,
+          otherCellsBuilder: widget.headerCellBuilder,
         ),
         Expanded(
           child: TableBody(
@@ -66,16 +72,16 @@ class _MultipleScrollDirectionBoardState extends State<MultipleScrollDirectionBo
             // scrollController: _headController,
             // horizontalScrollControllerLinker: _controllers,
             scrollController: _bodyController,
-            bodyData: widget.bodyData,
             lazyRenderDataRow: widget.lazyRenderDataRow,
             lazyRenderDataColumn: widget.lazyRenderDataColumn,
             cellHeight: widget.cellHeight,
             cellWidth: widget.cellWidth,
             firstColumnWidth: widget.firstColumnWidth,
-            numberOfColumn: widget.headerData.length,
-            onPress: (String dateSelected) {
-              widget.onPress.call(dateSelected);
-            },
+            numberOfRows: widget.rowCount,
+            numberOfColumns: widget.columnCount,
+            firstColumnCellBuilder: widget.bodyHeaderCellBuilder,
+            otherColumnCellBuilder: widget.bodyDataCellBuilder,
+            onBodyDataCellTap: widget.onBodyDataCellTap,
           ),
         ),
       ],
@@ -87,27 +93,28 @@ class TableBody extends StatefulWidget {
   // use when want data body is ListView.builder vertical wrap ListView.builder horizontal
   // final LinkedScrollControllerGroup horizontalScrollControllerLinker;
   final ScrollController scrollController;
-  final List<List<String?>> bodyData;
-  final double cellHeight;
-  final double cellWidth;
-  final double firstColumnWidth;
-  final int numberOfColumn;
-  final bool lazyRenderDataRow;
-  final bool lazyRenderDataColumn;
-  final Function(String dateSelected) onPress;
+  final double cellHeight, cellWidth, firstColumnWidth;
+  final int numberOfRows, numberOfColumns;
+  final bool hasDivider, lazyRenderDataRow, lazyRenderDataColumn;
+  final Widget Function(BuildContext context, int index)? firstColumnCellBuilder;
+  final Widget Function(BuildContext context, int row, int coulumn)? otherColumnCellBuilder;
+  final Function(int row, int coulmn)? onBodyDataCellTap;
 
   const TableBody({
     super.key,
     // required this.horizontalScrollControllerLinker,
     required this.scrollController,
-    this.bodyData = const [],
+    this.hasDivider = true,
     this.lazyRenderDataRow = true,
     this.lazyRenderDataColumn = true,
+    this.firstColumnCellBuilder,
+    this.otherColumnCellBuilder,
     required this.cellHeight,
     required this.cellWidth,
     required this.firstColumnWidth,
-    required this.numberOfColumn,
-    required this.onPress,
+    required this.numberOfRows,
+    required this.numberOfColumns,
+    required this.onBodyDataCellTap,
   });
 
   @override
@@ -128,7 +135,7 @@ class _TableBodyState extends State<TableBody> {
     if (widget.lazyRenderDataRow) {
       _restColumnControllers = [];
       // use when want data body is a horizontal list wrap vertical lists
-      for (var i = 0; i < widget.numberOfColumn - 1; i++) {
+      for (var i = 0; i < widget.numberOfColumns; i++) {
         _restColumnControllers?.add(_controllers?.addAndGet());
       }
     } else {
@@ -149,7 +156,7 @@ class _TableBodyState extends State<TableBody> {
     _restColumnController?.dispose();
     // use when want data body is a horizontal list wrap vertical lists
     if (_restColumnControllers != null) {
-      for (var i = 0; i < widget.numberOfColumn - 1; i++) {
+      for (var i = 0; i < widget.numberOfColumns; i++) {
         _restColumnControllers?[i]?.dispose();
       }
     }
@@ -164,8 +171,6 @@ class _TableBodyState extends State<TableBody> {
 
   @override
   Widget build(BuildContext context) {
-    final numberOfDataColumns = (widget.numberOfColumn - 1) > 0 ? (widget.numberOfColumn - 1) : 0;
-
     return Row(
       children: [
         Container(
@@ -182,17 +187,15 @@ class _TableBodyState extends State<TableBody> {
             physics: const AlwaysScrollableScrollPhysics(
               parent: ClampingScrollPhysics(),
             ),
-            itemCount: widget.bodyData[0].length,
+            itemCount: widget.numberOfRows,
             itemBuilder: (firstColumnContext, index) {
               return TableBodyCell(
-                isShowDate: true,
-                onPress: (dateSelected) {
-                  widget.onPress.call(dateSelected);
-                },
+                width: widget.firstColumnWidth,
+                height: widget.cellHeight,
                 color: context.theme.colorScheme.background,
-                content: widget.bodyData[0][index] ?? 'null',
-                textAlign: TextAlign.left,
-                dateSelected: widget.bodyData[0][index].toString(),
+                child: widget.firstColumnCellBuilder?.call(
+                  firstColumnContext, index,
+                ),
               );
             },
           ),
@@ -233,7 +236,7 @@ class _TableBodyState extends State<TableBody> {
               }
             },
             // use when want data body is a horizontal list wrap vertical lists
-            child: buildBodyRestColumns(context, numberOfDataColumns),
+            child: buildBodyRestColumns(context, widget.numberOfRows, widget.numberOfColumns),
 
             // use when want data body is ListView.builder vertical wrap ListView.builder horizontal
             // child: SizedBox(
@@ -280,7 +283,7 @@ class _TableBodyState extends State<TableBody> {
     );
   }
 
-  Widget buildBodyRestColumns(BuildContext context, int numberOfDataColumns) {
+  Widget buildBodyRestColumns(BuildContext context, int rowCount, int columnCount) {
     if (widget.lazyRenderDataRow && widget.lazyRenderDataColumn) {
       // full ListView.builder
       // return ListView.builder(
@@ -317,34 +320,39 @@ class _TableBodyState extends State<TableBody> {
         slivers: [
           SliverList(
             delegate: SliverChildBuilderDelegate(
-              (context, index) {
+              (context, column) {
                 return SizedBox(
                   width: widget.cellWidth,
                   child: CustomScrollView(
-                    controller: _restColumnControllers?[index],
+                    controller: _restColumnControllers?[column],
                     physics: const AlwaysScrollableScrollPhysics(
                       parent: ClampingScrollPhysics(),
                     ),
                     slivers: [
                       SliverList(
                         delegate: SliverChildBuilderDelegate(
-                          (context, singleIndex) {
+                          (context, row) {
                             return TableBodyCell(
-                              color: context.theme.highlightColor,
-                              content: widget.bodyData[index + 1][singleIndex] ?? 'null',
-                              textAlign: TextAlign.center,
-                              isShowDate: false,
-                              dateSelected: widget.bodyData[0][singleIndex] ?? 'null',
+                              hasDivider: widget.hasDivider,
+                              width: widget.cellWidth,
+                              height: widget.cellHeight,
+                              color: context.theme.colorScheme.surfaceVariant,
+                              onTap: widget.onBodyDataCellTap == null
+                                  ? null
+                                  : () => widget.onBodyDataCellTap?.call(row, column),
+                              child: widget.otherColumnCellBuilder?.call(
+                                context, row, column,
+                              ),
                             );
                           },
-                          childCount: widget.bodyData[index + 1].length,
+                          childCount: rowCount,
                         ),
                       ),
                     ],
                   ),
                 );
               },
-              childCount: numberOfDataColumns,
+              childCount: columnCount,
             ),
           ),
         ],
@@ -356,26 +364,31 @@ class _TableBodyState extends State<TableBody> {
         scrollDirection: Axis.horizontal,
         physics: const ClampingScrollPhysics(),
         child: SizedBox(
-          width: numberOfDataColumns * widget.cellWidth,
+          width: columnCount * widget.cellWidth,
           child: ListView.builder(
             controller: _restColumnController,
             physics: const AlwaysScrollableScrollPhysics(
               parent: ClampingScrollPhysics(),
             ),
-            itemCount: widget.bodyData[0].length,
-            itemBuilder: (resColumnContext, index) {
+            itemCount: rowCount,
+            itemBuilder: (resColumnContext, row) {
               return Row(
                 children: List.generate(
-                  numberOfDataColumns,
-                  (indexCol) {
+                  columnCount,
+                  (column) {
                     return SizedBox(
                       width: widget.cellWidth,
                       child: TableBodyCell(
-                        color: context.theme.highlightColor,
-                        content: widget.bodyData[indexCol + 1][index] ?? 'null',
-                        textAlign: TextAlign.center,
-                        isShowDate: false,
-                        dateSelected: widget.bodyData[0][index] ?? 'null',
+                        hasDivider: widget.hasDivider,
+                        width: widget.cellWidth,
+                        height: widget.cellHeight,
+                        color: context.theme.colorScheme.surfaceVariant,
+                        onTap: widget.onBodyDataCellTap == null
+                            ? null
+                            : () => widget.onBodyDataCellTap?.call(row, column),
+                        child: widget.otherColumnCellBuilder?.call(
+                          context, row, column,
+                        ),
                       ),
                     );
                   },
@@ -391,25 +404,30 @@ class _TableBodyState extends State<TableBody> {
         controller: widget.scrollController,
         scrollDirection: Axis.horizontal,
         physics: const ClampingScrollPhysics(),
-        itemCount: numberOfDataColumns,
-        itemBuilder: (restColumnContext, index) {
+        itemCount: columnCount,
+        itemBuilder: (restColumnContext, column) {
           return SizedBox(
             width: widget.cellWidth,
             child: ListView(
-              controller: _restColumnControllers?[index],
+              controller: _restColumnControllers?[column],
               physics: const AlwaysScrollableScrollPhysics(
                 parent: ClampingScrollPhysics(),
               ),
               children: [
-                for (var i = 0; i < widget.bodyData[index + 1].length; i++) ...[
+                for (var row = 0; row < rowCount; row++) ...[
                   SizedBox(
                     height: widget.cellHeight,
                     child: TableBodyCell(
-                      color: context.theme.highlightColor,
-                      content: widget.bodyData[index + 1][i] ?? 'null',
-                      textAlign: TextAlign.center,
-                      isShowDate: false,
-                      dateSelected: widget.bodyData[0][i] ?? 'null',
+                      hasDivider: widget.hasDivider,
+                      width: widget.cellWidth,
+                      height: widget.cellHeight,
+                      color: context.theme.colorScheme.surfaceVariant,
+                      onTap: widget.onBodyDataCellTap == null
+                          ? null
+                          : () => widget.onBodyDataCellTap?.call(row, column),
+                      child: widget.otherColumnCellBuilder?.call(
+                        context, row, column,
+                      ),
                     ),
                   ),
                 ],
@@ -426,25 +444,30 @@ class _TableBodyState extends State<TableBody> {
       scrollDirection: Axis.horizontal,
       physics: const ClampingScrollPhysics(),
       child: SizedBox(
-        width: numberOfDataColumns * widget.cellWidth,
+        width: columnCount * widget.cellWidth,
         child: ListView(
           controller: _restColumnController,
           physics: const AlwaysScrollableScrollPhysics(
             parent: ClampingScrollPhysics(),
           ),
           children: [
-            for (var i = 0; i < widget.bodyData[0].length; i++) ...[
+            for (var row = 0; row < rowCount; row++) ...[
               Row(
                 children: [
-                  for (var j = 0; j < numberOfDataColumns; j++) ...[
+                  for (var column = 0; column < columnCount; column++) ...[
                     SizedBox(
                       width: widget.cellWidth,
                       child: TableBodyCell(
-                        color: context.theme.highlightColor,
-                        content: widget.bodyData[j + 1][i] ?? 'null',
-                        textAlign: TextAlign.center,
-                        isShowDate: false,
-                        dateSelected: widget.bodyData[0][i] ?? 'null',
+                        hasDivider: widget.hasDivider,
+                        width: widget.cellWidth,
+                        height: widget.cellHeight,
+                        color: context.theme.colorScheme.surfaceVariant,
+                        onTap: widget.onBodyDataCellTap == null
+                            ? null
+                            : () => widget.onBodyDataCellTap?.call(row, column),
+                        child: widget.otherColumnCellBuilder?.call(
+                          context, row, column,
+                        ),
                       ),
                     ),
                   ],
@@ -459,32 +482,28 @@ class _TableBodyState extends State<TableBody> {
 }
 
 class TableBodyCell extends StatelessWidget {
-  final bool isShowDate;
-  final String content;
-  final Color? color;
   final double width;
   final double height;
-  final TextAlign textAlign;
-  final String dateSelected;
-  final Function(String dateSelected)? onPress;
+  final Color? color;
+  final bool hasDivider;
+  final Widget? child;
+  final Function()? onTap;
 
   const TableBodyCell({
     super.key,
-    required this.content,
+    required this.width,
+    required this.height,
     this.color,
-    required this.isShowDate,
-    this.width = 100,
-    this.height = 46,
-    this.onPress,
-    required this.dateSelected,
-    this.textAlign = TextAlign.right,
+    this.hasDivider = true,
+    this.child,
+    this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        onPress?.call(dateSelected);
+        onTap?.call();
       },
       child: Container(
         width: width,
@@ -498,97 +517,96 @@ class TableBodyCell extends StatelessWidget {
           ),
         ),
         alignment: Alignment.center,
-        child: Text(
-          content,
-          textAlign: textAlign,
-        ),
+        child: child,
       ),
     );
   }
 }
 
 class TableHeaderCell extends StatelessWidget {
-  final String content;
+  final bool hasDivider;
   final Color? color;
   final double? width;
   final double? height;
-  final TextAlign textAlign;
+  final Widget? child;
 
   const TableHeaderCell({
     super.key,
+    this.hasDivider = true,
     this.color,
-    required this.content,
     this.width,
     this.height,
-    this.textAlign = TextAlign.right,
+    this.child,
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: width ?? 100,
-      height: double.infinity,
+      height: height,
       decoration: BoxDecoration(
         color: color,
-        border: Border(
+        border: hasDivider ? Border(
           top: BorderSide(color: context.theme.colorScheme.outline),
+          right: BorderSide(color: context.theme.colorScheme.outline),
           bottom: BorderSide(color: context.theme.colorScheme.outline),
-        ),
+        ) : null,
       ),
       alignment: Alignment.center,
-      child: Text(
-        content,
-        textAlign: textAlign,
-        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-          fontSize: Dimens.getProportionalScreenWidth(context, 14),
-          fontWeight: FontWeight.w500,
-        ),
-      ),
+      child: child,
     );
   }
 }
 
 class TableHead extends StatelessWidget {
-  final ScrollController scrollController;
 
   const TableHead({
     super.key,
     required this.scrollController,
-    this.headerData = const [],
-    this.width,
-    this.height,
+    required this.firstColumnWidth,
+    required this.otherWidth,
+    required this.height,
+    this.headerDataLength = 0,
+    this.firstCellBuilder,
+    this.otherCellsBuilder,
   });
 
-  final List<String?> headerData;
-  final double? width;
-  final double? height;
+  final ScrollController scrollController;
+  final int headerDataLength;
+  final double firstColumnWidth, otherWidth, height;
+  final Widget Function(BuildContext context)? firstCellBuilder;
+  final Widget Function(BuildContext context, int index)? otherCellsBuilder;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ?? 68,
+      height: height,
       child: Row(
         children: [
-          headerData.isNotEmpty
-              ? TableHeaderCell(
-                  color: context.theme.colorScheme.outlineVariant.withOpacity(0.6),
-                  content: headerData[0] ?? '',
-                  width: width,
-                  textAlign: TextAlign.left,
-                )
-              : Container(),
+          // first cell of the board
+          TableHeaderCell(
+            width: firstColumnWidth,
+            height: height,
+            color: context.theme.colorScheme.outlineVariant.withOpacity(0.6),
+            child: firstCellBuilder != null
+                ? firstCellBuilder!(context) : const SizedBox(),
+          ),
+
+          // other cells of board's header
           Expanded(
             child: ListView.builder(
               controller: scrollController,
               physics: const ClampingScrollPhysics(),
               scrollDirection: Axis.horizontal,
-              itemCount: headerData.length - 1,
+              itemCount: headerDataLength,
               itemBuilder: (headerContext, index) {
                 return TableHeaderCell(
-                  textAlign: TextAlign.center,
-                  content: headerData[index + 1] ?? '',
-                  width: 100,
+                  width: otherWidth,
+                  height: height,
                   color: context.theme.colorScheme.background,
+                  child: otherCellsBuilder != null
+                      ? otherCellsBuilder!(headerContext, index)
+                      : const SizedBox(),
                 );
               },
             ),
