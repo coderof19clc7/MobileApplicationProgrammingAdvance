@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/presentations/widgets/others/linked_scroll_controller.dart';
 
+// version using 4 List widgets
 class MultipleScrollDirectionBoard extends StatefulWidget {
   const MultipleScrollDirectionBoard({
     super.key,
