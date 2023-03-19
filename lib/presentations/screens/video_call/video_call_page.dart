@@ -1,10 +1,12 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
+import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:stop_watch_timer/stop_watch_timer.dart';
 
 class VideoCallPage extends StatefulWidget {
@@ -15,6 +17,8 @@ class VideoCallPage extends StatefulWidget {
 }
 
 class _VideoCallPageState extends State<VideoCallPage> {
+  var showButton = true;
+
   final _stopWatchTimer = StopWatchTimer(
     mode: StopWatchMode.countDown,
   );
@@ -26,8 +30,8 @@ class _VideoCallPageState extends State<VideoCallPage> {
     final startTime = DateTime.now().add(
       Duration(
         days: Random().nextInt(5),
-        hours: Random().nextInt(5),
-        minutes: Random().nextInt(5),
+        hours: Random().nextInt(5) + 1,
+        minutes: Random().nextInt(5) + 1,
       ),
     );
 
@@ -56,6 +60,37 @@ class _VideoCallPageState extends State<VideoCallPage> {
               'Video Conference Widget',
               textAlign: TextAlign.center,
             ),
+            if (showButton)
+              PrimaryFillButton(
+                onTap: () async {
+                  final featureFlags = {FeatureFlag.isPipEnabled: true};
+                  final options = JitsiMeetingOptions(
+                    roomNameOrUrl: 'https://meet.jit.si/LongTermFarmsDenySoftly',
+                    featureFlags: featureFlags,
+                  );
+                  await JitsiMeetWrapper.joinMeeting(
+                    options: options,
+                    listener: JitsiMeetingListener(
+                      onConferenceJoined: (url) {
+                        setState(() {
+                          showButton = false;
+                        });
+                      },
+                      onConferenceTerminated: (url, error) {
+                        setState(() {
+                          showButton = true;
+                        });
+                      },
+                      onClosed: () {
+                        setState(() {
+                          showButton = true;
+                        });
+                      },
+                    ),
+                  );
+                },
+                child: const Text('test'),
+              ),
             StreamBuilder<int>(
               stream: _stopWatchTimer.rawTime,
               initialData: 0,
