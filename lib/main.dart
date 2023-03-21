@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:one_one_learn/configs/app_configs/app_router.dart';
 import 'package:one_one_learn/configs/app_configs/stylings/app_themes.dart';
+import 'package:one_one_learn/configs/life_cycle_manager.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/on_boarding/on_boarding_page.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const LifecycleManager(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {

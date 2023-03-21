@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:omni_jitsi_meet/jitsi_meet.dart';
+// import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
 import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
@@ -73,52 +73,52 @@ class _VideoCallPageState extends State<VideoCallPage> {
             if (showButton)
               PrimaryFillButton(
                 onTap: () async {
-                  final featureFlags = {FeatureFlagEnum.PIP_ENABLED: true};
-                  final options = JitsiMeetingOptions(
-                    room: 'LongTermFarmsDenySoftly',
-                    featureFlags: featureFlags,
-                  );
-                  await JitsiMeet.joinMeeting(
-                    options,
-                    listener: JitsiMeetingListener(
-                      onConferenceWillJoin: (url) {
-                        setState(() {
-                          print('conf will join');
-                          saveBoolPreferences(
-                            check: false,
-                          );
-                          showButton = true;
-                        });
-                      },
-                      onConferenceJoined: (url) {
-                        setState(() {
-                          print('conf joined');
-                          saveBoolPreferences(
-                            check: true,
-                          );
-                          showButton = false;
-                        });
-                      },
-                      onConferenceTerminated: (url, error) {
-                        setState(() {
-                          print('conf terminated');
-                          saveBoolPreferences(
-                            check: false,
-                          );
-                          showButton = true;
-                        });
-                      },
-                      onClosed: () {
-                        setState(() {
-                          print('closed');
-                          saveBoolPreferences(
-                            check: false,
-                          );
-                          showButton = true;
-                        });
-                      },
-                    ),
-                  );
+                  // final featureFlags = {FeatureFlag.isPipEnabled: true};
+                  // final options = JitsiMeetingOptions(
+                  //   roomNameOrUrl: 'https://meet.jit.si/LongTermFarmsDenySoftly',
+                  //   featureFlags: featureFlags,
+                  // );
+                  // await JitsiMeetWrapper.joinMeeting(
+                  //   options: options,
+                  //   listener: JitsiMeetingListener(
+                  //     onConferenceWillJoin: (url) {
+                  //       setState(() {
+                  //         print('conf will join');
+                  //         saveBoolPreferences(
+                  //           check: false,
+                  //         );
+                  //         showButton = true;
+                  //       });
+                  //     },
+                  //     onConferenceJoined: (url) {
+                  //       setState(() {
+                  //         print('conf joined');
+                  //         saveBoolPreferences(
+                  //           check: true,
+                  //         );
+                  //         showButton = false;
+                  //       });
+                  //     },
+                  //     onConferenceTerminated: (url, error) {
+                  //       setState(() {
+                  //         print('conf terminated');
+                  //         saveBoolPreferences(
+                  //           check: false,
+                  //         );
+                  //         showButton = true;
+                  //       });
+                  //     },
+                  //     onClosed: () {
+                  //       setState(() {
+                  //         print('closed');
+                  //         saveBoolPreferences(
+                  //           check: false,
+                  //         );
+                  //         showButton = true;
+                  //       });
+                  //     },
+                  //   ),
+                  // );
                 },
                 child: const Text('test'),
               ),
