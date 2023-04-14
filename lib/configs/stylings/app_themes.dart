@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/app_configs/stylings/app_fonts.dart';
-import 'package:one_one_learn/configs/app_configs/stylings/app_styles.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/stylings/app_fonts.dart';
+import 'package:one_one_learn/configs/stylings/app_styles.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(

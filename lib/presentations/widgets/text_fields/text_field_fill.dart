@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/app_configs/app_extensions.dart';
+import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 
 class TextFieldFill extends StatefulWidget {
@@ -7,6 +7,7 @@ class TextFieldFill extends StatefulWidget {
     super.key,
     this.textController,
     this.hintText,
+    this.errorText,
     this.leftWidget,
     this.rightWidget,
     this.contentPadding,
@@ -16,6 +17,7 @@ class TextFieldFill extends StatefulWidget {
 
   final TextEditingController? textController;
   final String? hintText;
+  final String? errorText;
   final Widget? leftWidget;
   final Widget? rightWidget;
   final EdgeInsetsGeometry? contentPadding;
@@ -56,6 +58,13 @@ class _TextFieldFillState extends State<TextFieldFill> {
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,
         ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8),
+          borderSide: BorderSide(
+            color: context.theme.colorScheme.error,
+          ),
+        ),
+        errorText: widget.errorText?.isNotEmpty == true ? widget.errorText : null,
         hintText: widget.hintText,
         prefixIcon: widget.leftWidget,
         suffixIcon: widget.canTextBeObscured

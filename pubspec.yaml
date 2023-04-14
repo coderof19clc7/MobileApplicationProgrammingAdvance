@@ -41,23 +41,41 @@ dependencies:
   equatable: ^2.0.5
 
   # svg lib
-  flutter_svg: ^2.0.2
+  flutter_svg: 1.1.6
 
   # page-transition (custom page route) libs
   page_transition: ^2.0.9
 
   # pdf viewer lib
-  syncfusion_flutter_pdfviewer: ^20.4.53
+  syncfusion_flutter_pdfviewer: ^21.1.38
 
   # stop_watch_timer (count down) lib:
   stop_watch_timer: ^2.0.0
 
   # video player libs (chewie is controller of video_player)
   chewie: ^1.4.0
-  video_player: ^2.6.0
+  video_player: ^2.6.1
 
   # meeting lib
   jitsi_meet_wrapper: ^0.0.6
+
+  # dio (calling api) lib
+  dio: ^5.1.1
+
+  # bloc (logic business handler) lib
+  flutter_bloc: ^8.1.2
+
+  # get_it (singleton handler) lib
+  get_it: ^7.2.0
+
+  # shared_preferences (local storage) lib
+  shared_preferences: ^2.1.0
+
+  # show toast lib
+  fluttertoast: ^8.2.1
+
+  # check internet connection lib
+  connectivity_plus: ^3.0.4
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -69,7 +87,7 @@ dev_dependencies:
     sdk: flutter
 
   build_runner:
-  flutter_gen_runner:
+  flutter_gen_runner: 5.0.3
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -106,6 +124,7 @@ flutter:
 
   assets:
     - .env
+    - assets/ca/
     - assets/icons/
     - assets/images/
 
@@ -141,3 +160,6 @@ flutter:
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_intl:
   enabled: true
+
+dependency_overrides:
+  intl: ^0.18.0

@@ -1,32 +1,22 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:one_one_learn/configs/app_configs/app_router.dart';
-import 'package:one_one_learn/configs/app_configs/stylings/app_themes.dart';
-import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/on_boarding/on_boarding_page.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/app_configs/app_configs.dart';
+import 'package:one_one_learn/configs/app_configs/injector.dart';
+import 'package:one_one_learn/presentations/app.dart';
 
-void main() {
+Future<void> main() async {
+  // initialize needed things
+  WidgetsFlutterBinding.ensureInitialized();
+  final data = await PlatformAssetBundle().load('assets/ca/lets-encrypt-r3.pem');
+  SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+  await initializeDependencies();
+
+  // set up bloc observer
+  Bloc.observer = AppBlocObserver();
+
   runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      onGenerateRoute: AppRouter.onGenerateRoute,
-      theme: AppThemes.lightTheme,
-      darkTheme: AppThemes.darkTheme,
-      localizationsDelegates: const [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
-      home: const OnBoardingPage(),
-    );
-  }
 }

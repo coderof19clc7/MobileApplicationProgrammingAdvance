@@ -50,6 +50,18 @@ class AppColors {
 
   static final grey = HexColor.fromHex('#C0C5CA');
 
+  //accent green colors
+  static Color green50 = HexColor.fromHex('#F0FFF4');
+  static Color green100 = HexColor.fromHex('#E7FBED');
+  static Color green200 = HexColor.fromHex('#A1E2B3');
+  static Color green300 = HexColor.fromHex('#73D48C');
+  static Color green400 = HexColor.fromHex('#73D48C');
+  static Color green500 = HexColor.fromHex('#34A853');
+  static Color green600 = HexColor.fromHex('#2B8C45');
+  static Color green700 = HexColor.fromHex('#226D36');
+  static Color green800 = HexColor.fromHex('#184E26');
+  static Color green900 = HexColor.fromHex('#0E2F17');
+
   static final primaryGradient = LinearGradient(
     colors: [primaryBlue400, primaryBlue500],
   );
