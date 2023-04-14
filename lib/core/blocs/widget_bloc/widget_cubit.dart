@@ -11,7 +11,6 @@ import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
-import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/core/managers/local_manager.dart';
 import 'package:one_one_learn/core/models/responses/base_response.dart';
 part 'widget_state.dart';
@@ -121,16 +120,16 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
         emit(state.hideLoading() as StateType);
       }
       _handleApiError(err, showToastException);
-      return Future.value();
+      return null;
     }
   }
 
   @override
-  close() async {
-    super.close();
+  Future<void> close() async {
     //to prevent emit state after close cubit that throw exception.
     // Fix error show bad state after navigate to another page
-    stream.drain();
+    await stream.drain();
+    await super.close();
   }
 
   Future<void> _handleApiResponse<ResponseType extends BaseResponse>(
@@ -144,15 +143,14 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
       emit(state.hideLoading() as StateType);
     }
 
-    if (response?.statusCode == ApiStatusCode.basicError
+    if (response?.statusCode == ApiStatusCode.tokenExpired
         && response?.message == ApiConstants.refreshTokenError
     ) {
       await localManager.clearDataLocalLogout();
       if (!isClosed) {
-        await Future.delayed(const Duration(seconds: 1));
-        navigateToLogin();
+        emit(state.navigateToLogin() as StateType);
+        await close();
       }
-      await close();
       return;
     }
 
@@ -188,11 +186,5 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
     if (kDebugMode) {
       print(err);
     }
-  }
-
-  void navigateToLogin() {
-    // Navigator.of(context, rootNavigator: true).pushNamedAndRemoveUntil(
-    //   RouteNames.login, (Route<dynamic> route) => false,
-    // );
   }
 }

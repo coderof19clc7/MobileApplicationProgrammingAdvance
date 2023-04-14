@@ -909,6 +909,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Your session has expired. Please login again.`
+  String get refreshTokenError {
+    return Intl.message(
+      'Your session has expired. Please login again.',
+      name: 'refreshTokenError',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

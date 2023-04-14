@@ -84,5 +84,6 @@
   "books": "Books",
   "upcoming": "Upcoming",
   "settings": "Settings",
-  "upcomingIn": "in"
+  "upcomingIn": "in",
+  "refreshTokenError": "Your session has expired. Please login again."
 }

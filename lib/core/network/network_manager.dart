@@ -231,7 +231,7 @@ class NetworkManager {
   Map<String, dynamic> getTokenExpiredResponseData() {
     return {
       ApiConstants.statusCode: ApiStatusCode.tokenExpired,
-      ApiConstants.message: ApiConstants.accessTokenExpiredMess,
+      ApiConstants.message: ApiConstants.refreshTokenError,
     };
   }
 
@@ -281,12 +281,8 @@ class NetworkManager {
       log('recalling ${options.path}');
     }
 
-    // cancel previous request
-    options.cancelToken?.cancel();
-
     // update options to prepare for recall
     options.headers[ApiConstants.authorization] = 'Bearer $_accessToken';
-    options.cancelToken = CancelToken();
 
     // if (options.data is FormData) {
     //   //Clone a new formData to prevent Bad state: Can't finalize a finalized MultipartFile
@@ -314,10 +310,13 @@ class NetworkManager {
     Map<String, dynamic>? extra,
   }) async {
     final makeRequestDio = needAuth ? _privateDio : _publicDio;
-    final result = await makeRequestDio?.request(path,
-        queryParameters: queryParameters ?? <String, dynamic>{},
-        options: Options(method: method, headers: headers, extra: extra),
-        data: data);
+    final result = await makeRequestDio?.request(
+      path,
+      queryParameters: queryParameters ?? <String, dynamic>{},
+      options: Options(method: method, headers: headers, extra: extra),
+      data: data,
+      cancelToken: CancelToken(),
+    );
     if (method != ApiMethods.get) {
       // _dioCacheManager?.delete(path);
     }

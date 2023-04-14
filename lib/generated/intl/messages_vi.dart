@@ -91,6 +91,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lịch học mong muốn"),
         "profile": MessageLookupByLibrary.simpleMessage("Hồ sơ"),
         "record": MessageLookupByLibrary.simpleMessage("Bản ghi"),
+        "refreshTokenError": MessageLookupByLibrary.simpleMessage(
+            "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại."),
         "report": MessageLookupByLibrary.simpleMessage("Báo cáo"),
         "requestForClass":
             MessageLookupByLibrary.simpleMessage("Yêu cầu lớp học"),

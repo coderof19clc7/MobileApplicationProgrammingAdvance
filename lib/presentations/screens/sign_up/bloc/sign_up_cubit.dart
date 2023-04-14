@@ -69,7 +69,9 @@ class SignUpCubit extends WidgetCubit<SignUpState> {
       () => authRepository.register(email, password),
     );
 
-    emit(state.copyWith(signUpSucceeded: signUpResponse?.statusCode == null));
+    if (signUpResponse != null) {
+      emit(state.copyWith(signUpSucceeded: signUpResponse.statusCode == null));
+    }
   }
 
 }

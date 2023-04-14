@@ -83,5 +83,6 @@
   "books": "Sách",
   "upcoming": "Upcoming",
   "settings": "Cài đặt",
-  "upcomingIn": "bắt đầu sau"
+  "upcomingIn": "bắt đầu sau",
+  "refreshTokenError": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại."
 }

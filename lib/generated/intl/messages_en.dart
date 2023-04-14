@@ -92,6 +92,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Preferred schedule"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "record": MessageLookupByLibrary.simpleMessage("Record"),
+        "refreshTokenError": MessageLookupByLibrary.simpleMessage(
+            "Your session has expired. Please login again."),
         "report": MessageLookupByLibrary.simpleMessage("Report"),
         "requestForClass":
             MessageLookupByLibrary.simpleMessage("Request for class"),

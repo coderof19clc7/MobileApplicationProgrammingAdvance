@@ -1,3 +1,5 @@
+import 'package:one_one_learn/generated/l10n.dart';
+
 class ApiServices {
   static const auth = 'auth';
   static const user = 'user';
@@ -37,7 +39,7 @@ class ApiConstants {
 
   // error constants
   static const accessTokenExpiredMess = 'Please authenticate';
-  static const refreshTokenError = 'Refresh token failed';
+  static final refreshTokenError = S.current.refreshTokenError;
 }
 
 class ApiMethods {
