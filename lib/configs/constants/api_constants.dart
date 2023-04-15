@@ -53,6 +53,7 @@ class ApiStatusCode {
   static const httpSuccess = 200;
   static const basicError = 400;
   static const refreshToken = 401;
+  static const success = 0;
   static const needActivated = 2;
-  static const tokenExpired = 7;
+  static const logInSessionExpired = 7;
 }

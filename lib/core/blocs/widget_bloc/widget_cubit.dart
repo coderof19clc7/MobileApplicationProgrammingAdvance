@@ -143,7 +143,7 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
       emit(state.hideLoading() as StateType);
     }
 
-    if (response?.statusCode == ApiStatusCode.tokenExpired
+    if (response?.statusCode == ApiStatusCode.logInSessionExpired
         && response?.message == ApiConstants.refreshTokenError
     ) {
       await localManager.clearDataLocalLogout();

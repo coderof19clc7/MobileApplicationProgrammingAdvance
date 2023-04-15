@@ -25,7 +25,7 @@ class NetworkManager {
   static const connectTimeout = Duration(milliseconds: 30000);
   static const receiveTimeout = Duration(milliseconds: 30000);
 
-  String _baseUrl = injector<AppConfig>().baseUrl;
+  final _baseUrl = injector<AppConfig>().baseUrl;
   Tokens _tokens = Tokens();
   String _accessToken = '';
   String _refreshToken = '';
@@ -55,13 +55,13 @@ class NetworkManager {
   }
 
   void initPublicDio() {
-    _baseUrl = injector<AppConfig>().baseUrl;
-
     // initialize public dio
     _publicDio = Dio(getBaseOptions());
 
-    //add header
-    _publicDio?.options.headers[ApiConstants.contentType] = 'application/json';
+    //add interceptor
+    _publicDio?.interceptors.add(InterceptorsWrapper(
+      onResponse: _onBasicResponse,
+    ));
   }
 
   void initPrivateDio() {
@@ -72,10 +72,10 @@ class NetworkManager {
 
     // initialize private dio
     _privateDio = Dio(getBaseOptions());
-    _privateDio?.options.headers[ApiConstants.contentType] = 'application/json';
     _privateDio?.options.headers[ApiConstants.authorization] = 'Bearer $_accessToken';
 
     // add interceptor
+    _privateDio?.interceptors.clear();
     _configInterceptor();
   }
 
@@ -144,7 +144,7 @@ class NetworkManager {
             }
 
             // return token expired response
-            returnExpireToken(response, handler);
+            returnExpiredLogInSession(response, handler);
 
             // handler.reject(DioError(
             //   requestOptions: options,
@@ -178,17 +178,24 @@ class NetworkManager {
           _isRefreshingToken = false;
 
           // return token expired response
-          returnExpireToken(response, handler);
+          returnExpiredLogInSession(response, handler);
         });
       }
     } else {
-      handler.next(response);
+      _onBasicResponse(response, handler);
     }
   }
 
   void _onError(DioError err, ErrorInterceptorHandler handler) {
     log('[DIO] Path: ${err.requestOptions.uri} Error: ${err.error}: ${err.response}');
     handler.next(err);
+  }
+
+  void _onBasicResponse(Response response, ResponseInterceptorHandler handler) {
+    if (response.statusCode == 200) {
+      (response.data as Map<String, dynamic>)['statusCode'] = ApiStatusCode.success;
+    }
+    handler.next(response);
   }
 
   Future<Response>? refreshAccessToken() {
@@ -230,12 +237,12 @@ class NetworkManager {
 
   Map<String, dynamic> getTokenExpiredResponseData() {
     return {
-      ApiConstants.statusCode: ApiStatusCode.tokenExpired,
+      ApiConstants.statusCode: ApiStatusCode.logInSessionExpired,
       ApiConstants.message: ApiConstants.refreshTokenError,
     };
   }
 
-  Future<void> returnExpireToken(
+  Future<void> returnExpiredLogInSession(
       Response response, ResponseInterceptorHandler? handler) async {
     response.data = getTokenExpiredResponseData();
 
