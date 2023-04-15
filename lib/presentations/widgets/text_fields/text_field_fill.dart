@@ -31,19 +31,17 @@ class TextFieldFill extends StatefulWidget {
 
 class _TextFieldFillState extends State<TextFieldFill> {
   late bool _obscureText;
-  late TextEditingController _textController;
   @override
   void initState() {
     super.initState();
     _obscureText = widget.canTextBeObscured;
-    _textController = widget.textController ?? TextEditingController();
   }
 
   @override
   Widget build(BuildContext context) {
     // build widget textfield  has background radius and icon left email
     return TextField(
-      controller: _textController,
+      controller: widget.textController,
       obscureText: _obscureText,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
