@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
-import 'package:one_one_learn/utils/toast_helper.dart';
+import 'package:one_one_learn/utils/helpers/toast_helper.dart';
 
 abstract class BaseScreen<T extends WidgetCubit<S>, S extends WidgetState> extends StatelessWidget {
   const BaseScreen({super.key});

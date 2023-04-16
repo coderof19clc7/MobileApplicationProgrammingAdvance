@@ -9,7 +9,7 @@ import 'package:one_one_learn/presentations/screens/tutor_information/widgets/de
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
-import 'package:one_one_learn/utils/ui_helper.dart';
+import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class GeneralInformation extends StatelessWidget {
   const GeneralInformation({

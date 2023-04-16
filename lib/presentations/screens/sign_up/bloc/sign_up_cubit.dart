@@ -41,7 +41,7 @@ class SignUpCubit extends WidgetCubit<SignUpState> {
     if (password.isEmpty) {
       passwordError = S.current.somethingRequiredError(S.current.password);
     } else if (!password.isValidPassword()) {
-      passwordError = '${S.current.invalid} ${S.current.password.toLowerCase()}}';
+      passwordError = '${S.current.invalid} ${S.current.password.toLowerCase()}';
     }
     if (confirmPassword.isEmpty) {
       confirmPasswordError = S.current.confirmPasswordRequired;
@@ -69,13 +69,20 @@ class SignUpCubit extends WidgetCubit<SignUpState> {
 
     final signUpResponse = await fetchApi<AuthResponse>(
       () => authRepository.register(email, password),
+      showToastError: false,
     );
 
     if (signUpResponse != null) {
       if (signUpResponse.statusCode == ApiStatusCode.success) {
         showSuccessToast(S.current.doSomethingsSuccess(S.current.signUp));
         navigateToNextBusinessLogic();
+      } else if (signUpResponse.message == ApiConstants.emailAlreadyTaken) {
+        showWarningToast(S.current.signUpFailedWithEmailTaken);
+      } else {
+        showErrorToast(S.current.doSomethingsFailed(S.current.signUp));
       }
+    } else {
+      showErrorToast(S.current.doSomethingsFailed(S.current.signUp));
     }
   }
 

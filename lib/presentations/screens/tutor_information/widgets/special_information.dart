@@ -5,7 +5,7 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/tutor_information/widgets/tutor_reviews_bottom_sheet.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/box_button.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
-import 'package:one_one_learn/presentations/widgets/dialogs/normal_bottom_sheet_dialog.dart';
+import 'package:one_one_learn/presentations/widgets/dialogs/bottom_sheet_dialogs/normal_bottom_sheet_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class SpecialInformation extends StatelessWidget {

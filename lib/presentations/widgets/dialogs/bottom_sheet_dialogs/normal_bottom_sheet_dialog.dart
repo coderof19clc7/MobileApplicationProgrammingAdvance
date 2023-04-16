@@ -3,11 +3,115 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/utils/ui_helper.dart';
+import 'package:one_one_learn/utils/helpers/ui_helper.dart';
+
+class NormalBottomSheetDialogController<T> {
+  NormalBottomSheetDialogController(this.showerContext);
+
+  BuildContext showerContext;
+  BuildContext? _hiderContext;
+
+  void hide() {
+    if (_hiderContext != null) {
+      Navigator.of(_hiderContext!).pop();
+      _hiderContext = null;
+    }
+  }
+
+  Future? show({
+    bool isShowButtonCancelHeader = false,
+    String? title,
+    String? smallTitle,
+    String? leftButtonText,
+    String? rightButtonText,
+    bool isDismissible = true,
+    bool enableDrag = false,
+    bool snap = false,
+    Widget? body,
+    TextStyle? titleTextStyle,
+    TextStyle? smallTitleTextStyle,
+    TextAlign titleTextAlignment = TextAlign.center,
+    CrossAxisAlignment titleAlignment = CrossAxisAlignment.center,
+    bool hasHeaderDivider = true,
+    double topPadding = 16.0,
+    double bottomPadding = 16.0,
+    double rightPadding = 16.0,
+    double leftPadding = 16.0,
+    double dividerVerticalSpace = 8.0,
+    double spaceBetweenLeftAndRightButton = 21.0,
+    double initialChildSize = 0.5,
+    double minChildSize = 0.25,
+    double maxChildSize = 0.9,
+    List<double> snapSizes = const [0.5, 0.9],
+    double? maxHeight,
+    Color? backgroundColor,
+    bool hasButton = false,
+    Object? data,
+    Function(Object?)? onLeftButtonPress,
+    Function(Object?)? onRightButtonPress,
+    Function(Object?)? onCloseButtonPress,
+    Function()? onButtonCancelHeaderPress,
+    Function()? onHideBottomSheet,
+    bool isScrolling = true,
+  }) {
+    final instance = NormalBottomSheetDialog(
+      showerContext: showerContext,
+      onHideBottomSheet: onHideBottomSheet,
+      isShowButtonCancelHeader: isShowButtonCancelHeader,
+      title: title,
+      smallTitle: smallTitle,
+      leftButtonText: leftButtonText,
+      rightButtonText: rightButtonText,
+      body: body,
+      hasButton: hasButton,
+      hasHeaderDivider: hasHeaderDivider,
+      titleTextStyle: titleTextStyle,
+      smallTitleTextStyle: smallTitleTextStyle,
+      titleAlignment: titleAlignment,
+      titleTextAlignment: titleTextAlignment,
+      topPadding: topPadding,
+      bottomPadding: bottomPadding,
+      rightPadding: rightPadding,
+      leftPadding: leftPadding,
+      dividerVerticalSpace: dividerVerticalSpace,
+      initialChildSize: initialChildSize,
+      minChildSize: minChildSize,
+      maxChildSize: maxChildSize,
+      snapSizes: snapSizes,
+      backgroundColor: backgroundColor ?? AppColors.white,
+      data: data,
+      onLeftButtonPress: onLeftButtonPress,
+      onRightButtonPress: onRightButtonPress,
+      onButtonCancelHeaderPress: onButtonCancelHeaderPress,
+      isScrolling: isScrolling,
+      maxHeight: maxHeight,
+    );
+    return showModalBottomSheet(
+      context: showerContext,
+      isDismissible: isDismissible,
+      isScrollControlled: true,
+      enableDrag: enableDrag,
+      barrierColor: AppColors.black.withOpacity(0.5),
+      builder: (BuildContext contextBuilder) {
+        _hiderContext = contextBuilder;
+        if (kDebugMode) {
+          print('building dialog...');
+        }
+        return instance;
+      },
+    ).then((value) {
+      if (kDebugMode) {
+        print('dialog dismissed...');
+      }
+      _hiderContext = null;
+    });
+  }
+}
 
 class NormalBottomSheetDialog extends StatelessWidget {
   const NormalBottomSheetDialog({
     super.key,
+    this.showerContext,
     this.title,
     this.smallTitle,
     this.leftButtonText,
@@ -42,6 +146,7 @@ class NormalBottomSheetDialog extends StatelessWidget {
     this.maxHeight,
   });
 
+  final BuildContext? showerContext;
   final String? title;
   final String? smallTitle;
   final String? leftButtonText;
@@ -75,6 +180,10 @@ class NormalBottomSheetDialog extends StatelessWidget {
   static void hide() {
     if (_context == null) return;
     Navigator.of(_context!).pop();
+  }
+
+  void _hideWithContext(BuildContext context) {
+    Navigator.of(context).pop();
   }
 
   static Future? show(BuildContext context,{
@@ -172,8 +281,7 @@ class NormalBottomSheetDialog extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         onHideBottomSheet?.call();
-        hide();
-        return false;
+        return true;
       },
       child: DraggableScrollableSheet(
         expand: false,
@@ -246,10 +354,20 @@ class NormalBottomSheetDialog extends StatelessWidget {
                         spaceBetweenLeftAndRight: spaceBetweenLeftAndRightButton,
                         leftButtonText: leftButtonText,
                         rightButtonText: rightButtonText,
-                        onLeftButtonPress:
-                        onLeftButtonPress ?? (data) => hide(),
-                        onRightButtonPress:
-                        onRightButtonPress ?? (data) => hide(),
+                        onLeftButtonPress: onLeftButtonPress ?? (data) {
+                          if (showerContext == null) {
+                            hide();
+                          } else {
+                            _hideWithContext(context);
+                          }
+                        },
+                        onRightButtonPress: onRightButtonPress ?? (data) {
+                          if (showerContext == null) {
+                            hide();
+                          } else {
+                            _hideWithContext(context);
+                          }
+                        },
                       ),
                     ),
                   ],

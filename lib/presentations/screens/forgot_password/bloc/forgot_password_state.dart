@@ -1,31 +1,28 @@
-part of 'login_cubit.dart';
+part of 'forgot_password_cubit.dart';
 
 @immutable
-class LoginState extends WidgetState {
-  final bool needShowActivateDialog;
+class ForgotPasswordState extends WidgetState {
+  final bool needShowCheckMailDialog;
   final String? emailError;
-  final String? passwordError;
 
   @override
   List<Object?> get props => [
     ...super.props,
-    needShowActivateDialog,
+    needShowCheckMailDialog,
     emailError,
-    passwordError,
   ];
 
   @override
   WidgetState fromJson(json) {
     final mapJson = json as Map<String, dynamic>;
-    return LoginState(
+    return ForgotPasswordState(
       isLoading: mapJson['isLoading'] as bool? ?? false,
       needNavigateToLogin: mapJson['needNavigateToLogin'] as bool? ?? false,
       basicStatusFToastState: mapJson['basicStatusFToastState'] != null
           ? BasicStatusFToastState.fromJson(mapJson['basicStatusFToastState'])
           : null,
-      needShowActivateDialog: mapJson['needShowActivateDialog'] as bool? ?? false,
+      needShowCheckMailDialog: mapJson['needShowCheckMailDialog'] as bool? ?? false,
       emailError: mapJson['emailError'] as String?,
-      passwordError: mapJson['passwordError'] as String?,
     );
   }
 
@@ -35,49 +32,44 @@ class LoginState extends WidgetState {
     map['isLoading'] = isLoading;
     map['needNavigateToLogin'] = needNavigateToLogin;
     map['basicStatusFToastState'] = basicStatusFToastState?.toJson();
-    map['needShowActivateDialog'] = needShowActivateDialog;
+    map['needShowCheckMailDialog'] = needShowCheckMailDialog;
     map['emailError'] = emailError;
-    map['passwordError'] = passwordError;
     return map;
   }
 
 //<editor-fold desc="Data Methods">
-  const LoginState({
+  const ForgotPasswordState({
     super.isLoading = false,
     super.needNavigateToLogin = false,
     super.basicStatusFToastState,
-    this.needShowActivateDialog = false,
+    this.needShowCheckMailDialog = false,
     this.emailError,
-    this.passwordError,
   });
 
   @override
   String toString() {
-    return 'LoginState{'
+    return 'ForgotPasswordState{'
         ' isLoading: $isLoading,'
         ' needNavigateToLogin: $needNavigateToLogin,'
         ' basicStatusFToastState: $basicStatusFToastState,'
-        ' needShowActivateDialog: $needShowActivateDialog,'
+        ' needShowCheckMailDialog: $needShowCheckMailDialog,'
         ' emailError: $emailError,'
-        ' passwordError: $passwordError,'
         ' }';
   }
 
-  LoginState copyWith({
+  ForgotPasswordState copyWith({
     bool? isLoading,
     bool? needNavigateToLogin,
     BasicStatusFToastState? basicStatusFToastState,
-    bool? needShowActivateDialog,
+    bool? needShowCheckMailDialog,
     String? emailError,
-    String? passwordError,
   }) {
-    return LoginState(
+    return ForgotPasswordState(
       isLoading: isLoading ?? this.isLoading,
       needNavigateToLogin: needNavigateToLogin ?? this.needNavigateToLogin,
       basicStatusFToastState: basicStatusFToastState ?? this.basicStatusFToastState,
-      needShowActivateDialog: needShowActivateDialog ?? this.needShowActivateDialog,
+      needShowCheckMailDialog: needShowCheckMailDialog ?? this.needShowCheckMailDialog,
       emailError: emailError ?? this.emailError,
-      passwordError: passwordError ?? this.passwordError,
     );
   }
 
@@ -86,22 +78,20 @@ class LoginState extends WidgetState {
     map['isLoading'] = isLoading;
     map['needNavigateToLogin'] = needNavigateToLogin;
     map['basicStatusFToastState'] = basicStatusFToastState?.toMap();
-    map['needShowActivateDialog'] = needShowActivateDialog;
+    map['needShowCheckMailDialog'] = needShowCheckMailDialog;
     map['emailError'] = emailError;
-    map['passwordError'] = passwordError;
     return map;
   }
 
-  factory LoginState.fromMap(Map<String, dynamic> map) {
-    return LoginState(
+  factory ForgotPasswordState.fromMap(Map<String, dynamic> map) {
+    return ForgotPasswordState(
       isLoading: map['isLoading'] as bool? ?? false,
       needNavigateToLogin: map['needNavigateToLogin'] as bool? ?? false,
       basicStatusFToastState: map['basicStatusFToastState'] != null
           ? BasicStatusFToastState.fromMap(map['basicStatusFToastState'] as Map<String, dynamic>)
           : null,
-      needShowActivateDialog: map['needShowActivateDialog'] as bool? ?? false,
+      needShowCheckMailDialog: map['needShowCheckMailDialog'] as bool? ?? false,
       emailError: map['emailError'] as String?,
-      passwordError: map['passwordError'] as String?,
     );
   }
 

@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/presentations/screens/login/bloc/login_cubit.dart';
+import 'package:one_one_learn/presentations/widgets/dialogs/popup_dialogs/simplest_notify_dialog.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
@@ -10,7 +11,7 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_fill.dart';
-import 'package:one_one_learn/utils/ui_helper.dart';
+import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -39,7 +40,22 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(
+    return BlocConsumer<LoginCubit, LoginState>(
+      listener: (contextCubit, state) {
+        if (state.needShowActivateDialog) {
+          showDialog(
+            context: contextCubit,
+            barrierDismissible: false,
+            builder: (contextDialog) {
+              return SimplestNotifyDialog(
+                title: S.current.needActivateHeader,
+                content: S.current.needActivateContent,
+              );
+            },
+          );
+          contextCubit.read<LoginCubit>().onChangeShowActivateDialog(value: false);
+        }
+      },
       builder: (contextCubit, state) {
         return GestureDetector(
           onTap: () {
@@ -64,7 +80,9 @@ class _LoginPageState extends State<LoginPage> {
                       width: Dimens.getScreenWidth(context),
                       child: Text(
                         S.current.loginTitle,
-                        style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
+                        style: Dimens.getProportionalFont(
+                          context, context.theme.textTheme.displayLarge,
+                        ).copyWith(
                           fontSize: Dimens.getProportionalWidth(context, 32),
                           fontWeight: FontWeight.w600,
                         ),
@@ -75,6 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                     // account's information input field
                     TextFieldFill(
                       textController: contextCubit.read<LoginCubit>().emailController,
+                      errorText: state.emailError,
                       hintText: S.current.email,
                       leftWidget: Icon(
                         Icons.email_rounded,
@@ -85,6 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: Dimens.getScreenHeight(context) * 0.0474),
                     TextFieldFill(
                       textController: contextCubit.read<LoginCubit>().passwordController,
+                      errorText: state.passwordError,
                       hintText: S.current.password,
                       leftWidget: Icon(
                         Icons.lock_rounded,
@@ -104,7 +124,9 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadiusValue: Dimens.getScreenWidth(context),
                       child: Text(
                         S.current.login,
-                        style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
+                        style: Dimens.getProportionalFont(
+                          context, context.theme.textTheme.displaySmall,
+                        ).copyWith(
                           fontWeight: FontWeight.w500,
                           fontSize: Dimens.getProportionalWidth(context, 16),
                         ),
@@ -120,7 +142,9 @@ class _LoginPageState extends State<LoginPage> {
                       },
                       child: Text(
                         '${S.current.forgotPassword}?',
-                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+                        style: Dimens.getProportionalFont(
+                          context, context.theme.textTheme.bodyMedium,
+                        ).copyWith(
                           color: context.theme.colorScheme.onSurfaceVariant,
                           fontSize: Dimens.getProportionalWidth(context, 15),
                           fontWeight: FontWeight.w500,
@@ -132,7 +156,9 @@ class _LoginPageState extends State<LoginPage> {
                     // more options to sign in field
                     Text(
                       S.current.orContinueWith.toLowerCase(),
-                      style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
+                      style: Dimens.getProportionalFont(
+                        context, context.theme.textTheme.bodySmall,
+                      ).copyWith(
                         fontSize: Dimens.getProportionalWidth(context, 15),
                         fontWeight: FontWeight.w400,
                       ),
@@ -178,7 +204,9 @@ class _LoginPageState extends State<LoginPage> {
                     RichText(
                       text: TextSpan(
                         text: S.current.dontHaveAccount,
-                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+                        style: Dimens.getProportionalFont(
+                          context, context.theme.textTheme.bodyMedium,
+                        ).copyWith(
                           color: context.theme.colorScheme.onInverseSurface,
                           fontSize: Dimens.getProportionalWidth(context, 15),
                           fontWeight: FontWeight.w400,
@@ -187,7 +215,9 @@ class _LoginPageState extends State<LoginPage> {
                           TextSpan(
                             text: ' ${S.current.signUp}',
                             recognizer: _tapGestureRecognizer,
-                            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+                            style: Dimens.getProportionalFont(
+                              context, context.theme.textTheme.bodyMedium,
+                            ).copyWith(
                               color: context.theme.colorScheme.primary,
                               fontSize: Dimens.getProportionalWidth(context, 15),
                               fontWeight: FontWeight.w600,

@@ -20,9 +20,11 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(somethings) => "${somethings} successfully";
+  static String m0(somethings) => "${somethings} failed";
 
-  static String m1(somethings) => "${somethings} is required";
+  static String m1(somethings) => "${somethings} successfully";
+
+  static String m2(somethings) => "${somethings} is required";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -48,7 +50,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "courses": MessageLookupByLibrary.simpleMessage("Courses"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
-        "doSomethingsSuccess": m0,
+        "doSomethingsFailed": m0,
+        "doSomethingsSuccess": m1,
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -57,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "filter": MessageLookupByLibrary.simpleMessage("Filter"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
+        "forgotPasswordFailedWithEmailNotExists":
+            MessageLookupByLibrary.simpleMessage("Email does not exist"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "homework": MessageLookupByLibrary.simpleMessage("Homework"),
         "hours": MessageLookupByLibrary.simpleMessage("hours"),
@@ -87,13 +92,20 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginFailedWithNoTokens": MessageLookupByLibrary.simpleMessage(
             "Cannot verify login session. Please try again later."),
+        "loginFailedWithWrongCredentials": MessageLookupByLibrary.simpleMessage(
+            "Email or password is incorrect"),
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Login to your account"),
         "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
+        "needActivateContent": MessageLookupByLibrary.simpleMessage(
+            "Your account is not activated.\nPlease check your email to activate it."),
+        "needActivateHeader":
+            MessageLookupByLibrary.simpleMessage("Account activation notify"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noReviewGiven": MessageLookupByLibrary.simpleMessage("No comment"),
+        "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Or continue with"),
         "overallComment":
@@ -113,20 +125,27 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Request for class"),
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "resetPassword": MessageLookupByLibrary.simpleMessage("Reset password"),
+        "resetPasswordRequestSendSucceededContent":
+            MessageLookupByLibrary.simpleMessage(
+                "Please check your email to reset your password.\nIf you didn\'t receive any mail, please ensure that the email you entered is correct and check your spam folder or wait for 1 to 2 minutes and then send a new request."),
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Enter the email associated with your account to reset password."),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Find a course"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Find a tutor"),
+        "sendResetPasswordRequest":
+            MessageLookupByLibrary.simpleMessage("Send reset password request"),
         "server": MessageLookupByLibrary.simpleMessage("Server"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "signUpFailedWithEmailTaken":
+            MessageLookupByLibrary.simpleMessage("Email is already taken"),
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Skill level"),
-        "somethingRequiredError": m1,
+        "somethingRequiredError": m2,
         "sortFavoriteFromHighest":
             MessageLookupByLibrary.simpleMessage("From most favorited"),
         "sortFavoriteFromLowest":

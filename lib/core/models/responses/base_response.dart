@@ -6,10 +6,11 @@ class BaseResponse extends BaseModel {
 
   const BaseResponse({this.message, this.statusCode});
 
-  factory BaseResponse.fromJson(Map<String, dynamic> json) {
+  factory BaseResponse.fromJson(dynamic json) {
+    final mapJson = json as Map<String, dynamic>;
     return BaseResponse(
-      statusCode: json['statusCode'] as int?,
-      message: json['message'] as String?,
+      statusCode: mapJson['statusCode'] as int?,
+      message: mapJson['message'] as String?,
     );
   }
 

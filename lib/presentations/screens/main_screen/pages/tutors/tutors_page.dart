@@ -10,9 +10,9 @@ import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/wid
 import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/tutor_filter_bottom_sheet.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/upcoming_class_banner.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
-import 'package:one_one_learn/presentations/widgets/dialogs/normal_bottom_sheet_dialog.dart';
+import 'package:one_one_learn/presentations/widgets/dialogs/bottom_sheet_dialogs/normal_bottom_sheet_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
-import 'package:one_one_learn/utils/ui_helper.dart';
+import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class TutorsPage extends StatefulWidget {
   const TutorsPage({super.key});

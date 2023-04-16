@@ -17,7 +17,7 @@ class ApiEndpoints {
   static const refreshToken = 'refresh-token';
 
   // user
-  static const forgotPassword = 'forgot-password';
+  static const forgotPassword = 'forgotPassword';
   static const info = 'info';
   static const feedbackTutor ='feedbackTutor';
   static const manageFavoriteTutor = 'manageFavoriteTutor';
@@ -37,8 +37,13 @@ class ApiConstants {
   static const refreshToken = 'refreshToken';
   static const accessToken = 'accessToken';
 
-  // error constants
+  // api error messages
   static const accessTokenExpiredMess = 'Please authenticate';
+  static const emailAlreadyTaken = 'Email has already taken';
+  static const incorrectEmailOrPassword = 'Incorrect email or password';
+  static const emailNotExist = "Email doesn't exist!";
+
+  // app defined error messages
   static final refreshTokenError = S.current.refreshTokenError;
 }
 

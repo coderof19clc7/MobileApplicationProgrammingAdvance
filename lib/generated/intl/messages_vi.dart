@@ -20,9 +20,11 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'vi';
 
-  static String m0(somethings) => "${somethings} thành công";
+  static String m0(somethings) => "${somethings} thất bại";
 
-  static String m1(somethings) => "${somethings} là bắt buộc";
+  static String m1(somethings) => "${somethings} thành công";
+
+  static String m2(somethings) => "${somethings} là bắt buộc";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -49,7 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "courses": MessageLookupByLibrary.simpleMessage("Khoá học"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
-        "doSomethingsSuccess": m0,
+        "doSomethingsFailed": m0,
+        "doSomethingsSuccess": m1,
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -57,6 +60,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "experience": MessageLookupByLibrary.simpleMessage("Kinh nghiệm"),
         "filter": MessageLookupByLibrary.simpleMessage("Lọc"),
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
+        "forgotPasswordFailedWithEmailNotExists":
+            MessageLookupByLibrary.simpleMessage("Email không tồn tại"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Bắt Đầu"),
         "homework": MessageLookupByLibrary.simpleMessage("Bài tập về nhà"),
         "hours": MessageLookupByLibrary.simpleMessage("tiếng"),
@@ -87,12 +92,19 @@ class MessageLookup extends MessageLookupByLibrary {
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "loginFailedWithNoTokens": MessageLookupByLibrary.simpleMessage(
             "Không thể xác thực phiên đăng nhập. Vui lòng thử lại sau."),
+        "loginFailedWithWrongCredentials": MessageLookupByLibrary.simpleMessage(
+            "Email hoặc mật khẩu không đúng"),
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản"),
         "minutes": MessageLookupByLibrary.simpleMessage("phút"),
         "more": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "nationality": MessageLookupByLibrary.simpleMessage("Quốc gia"),
+        "needActivateContent": MessageLookupByLibrary.simpleMessage(
+            "Tài khoản của bạn chưa được kích hoạt.\nVui lòng kiểm tra email để kích hoạt."),
+        "needActivateHeader": MessageLookupByLibrary.simpleMessage(
+            "Thông báo kích hoạt tài khoản"),
         "no": MessageLookupByLibrary.simpleMessage("Đéch"),
+        "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
         "overallComment":
@@ -113,19 +125,26 @@ class MessageLookup extends MessageLookupByLibrary {
         "reset": MessageLookupByLibrary.simpleMessage("Reset"),
         "resetPassword":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
+        "resetPasswordRequestSendSucceededContent":
+            MessageLookupByLibrary.simpleMessage(
+                "Vui lòng kiểm tra email để đặt lại mật khẩu.\nNếu bạn không nhận được mail, xin hãy chắc chắn rằng email bạn nhập là chính xác và thử kiểm tra trong hộp thư rác hoặc đợi từ 1 đến 2 phút và gửi yêu cầu mới."),
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Điền email ứng với tài khoản muốn đặt lại mật khẩu."),
         "review": MessageLookupByLibrary.simpleMessage("Đánh giá"),
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Tìm khóa học"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Tìm gia sư"),
+        "sendResetPasswordRequest": MessageLookupByLibrary.simpleMessage(
+            "Gửi yêu cầu đặt lại mật khẩu"),
         "server": MessageLookupByLibrary.simpleMessage("Máy chủ"),
         "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "signOut": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),
+        "signUpFailedWithEmailTaken":
+            MessageLookupByLibrary.simpleMessage("Email đã được sử dụng"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Trình độ"),
-        "somethingRequiredError": m1,
+        "somethingRequiredError": m2,
         "sortFavoriteFromHighest":
             MessageLookupByLibrary.simpleMessage("Nhiều lượt thích nhất"),
         "sortFavoriteFromLowest":

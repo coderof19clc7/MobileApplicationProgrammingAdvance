@@ -16,6 +16,7 @@ class PrimaryOutlineButton extends StatelessWidget {
     this.borderLinearGradient,
     this.borderColor,
     this.bodyColor,
+    this.borderWidth = 1.5,
     this.borderRadiusValue = 8,
     this.paddingVertical,
     this.alignment = Alignment.center,
@@ -31,6 +32,7 @@ class PrimaryOutlineButton extends StatelessWidget {
   final LinearGradient? borderLinearGradient;
   final Color? borderColor;
   final Color? bodyColor;
+  final double borderWidth;
   final double borderRadiusValue;
   final double? paddingVertical;
   final Alignment alignment;
@@ -55,9 +57,9 @@ class PrimaryOutlineButton extends StatelessWidget {
         gradient: gradient,
       ),
       child: Container(
-        margin: const EdgeInsets.all(1),
+        margin: EdgeInsets.all(borderWidth),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(borderRadiusValue - 1),
+          borderRadius: BorderRadius.circular(borderRadiusValue - borderWidth),
           color: bodyColor ?? context.theme.colorScheme.background,
         ),
         child: Material(

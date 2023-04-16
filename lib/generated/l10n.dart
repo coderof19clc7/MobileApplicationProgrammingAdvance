@@ -980,6 +980,16 @@ class S {
     );
   }
 
+  /// `{somethings} failed`
+  String doSomethingsFailed(String somethings) {
+    return Intl.message(
+      '$somethings failed',
+      name: 'doSomethingsFailed',
+      desc: 'A message appear when user do something failed',
+      args: [somethings],
+    );
+  }
+
   /// `Server`
   String get server {
     return Intl.message(
@@ -995,6 +1005,86 @@ class S {
     return Intl.message(
       'Cannot verify login session. Please try again later.',
       name: 'loginFailedWithNoTokens',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email or password is incorrect`
+  String get loginFailedWithWrongCredentials {
+    return Intl.message(
+      'Email or password is incorrect',
+      name: 'loginFailedWithWrongCredentials',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Account activation notify`
+  String get needActivateHeader {
+    return Intl.message(
+      'Account activation notify',
+      name: 'needActivateHeader',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your account is not activated.\nPlease check your email to activate it.`
+  String get needActivateContent {
+    return Intl.message(
+      'Your account is not activated.\nPlease check your email to activate it.',
+      name: 'needActivateContent',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email is already taken`
+  String get signUpFailedWithEmailTaken {
+    return Intl.message(
+      'Email is already taken',
+      name: 'signUpFailedWithEmailTaken',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send reset password request`
+  String get sendResetPasswordRequest {
+    return Intl.message(
+      'Send reset password request',
+      name: 'sendResetPasswordRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email does not exist`
+  String get forgotPasswordFailedWithEmailNotExists {
+    return Intl.message(
+      'Email does not exist',
+      name: 'forgotPasswordFailedWithEmailNotExists',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notification`
+  String get notification {
+    return Intl.message(
+      'Notification',
+      name: 'notification',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please check your email to reset your password.\nIf you didn't receive any mail, please ensure that the email you entered is correct and check your spam folder or wait for 1 to 2 minutes and then send a new request.`
+  String get resetPasswordRequestSendSucceededContent {
+    return Intl.message(
+      'Please check your email to reset your password.\nIf you didn\'t receive any mail, please ensure that the email you entered is correct and check your spam folder or wait for 1 to 2 minutes and then send a new request.',
+      name: 'resetPasswordRequestSendSucceededContent',
       desc: '',
       args: [],
     );

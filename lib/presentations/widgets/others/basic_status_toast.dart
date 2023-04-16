@@ -3,7 +3,7 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
-import 'package:one_one_learn/utils/toast_helper.dart';
+import 'package:one_one_learn/utils/helpers/toast_helper.dart';
 
 class BasicStatusToast extends StatelessWidget {
   const BasicStatusToast({

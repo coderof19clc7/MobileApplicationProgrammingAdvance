@@ -93,6 +93,15 @@
   "passwordRule": "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt",
   "invalid": "Không hợp lệ",
   "doSomethingsSuccess": "{somethings} thành công",
+  "doSomethingsFailed": "{somethings} thất bại",
   "server": "Máy chủ",
-  "loginFailedWithNoTokens": "Không thể xác thực phiên đăng nhập. Vui lòng thử lại sau."
+  "loginFailedWithNoTokens": "Không thể xác thực phiên đăng nhập. Vui lòng thử lại sau.",
+  "loginFailedWithWrongCredentials": "Email hoặc mật khẩu không đúng",
+  "needActivateHeader": "Thông báo kích hoạt tài khoản",
+  "needActivateContent": "Tài khoản của bạn chưa được kích hoạt.\nVui lòng kiểm tra email để kích hoạt.",
+  "signUpFailedWithEmailTaken": "Email đã được sử dụng",
+  "sendResetPasswordRequest": "Gửi yêu cầu đặt lại mật khẩu",
+  "forgotPasswordFailedWithEmailNotExists": "Email không tồn tại",
+  "notification": "Thông báo",
+  "resetPasswordRequestSendSucceededContent": "Vui lòng kiểm tra email để đặt lại mật khẩu.\nNếu bạn không nhận được mail, xin hãy chắc chắn rằng email bạn nhập là chính xác và thử kiểm tra trong hộp thư rác hoặc đợi từ 1 đến 2 phút và gửi yêu cầu mới."
 }

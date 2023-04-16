@@ -10,7 +10,7 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_fill.dart';
-import 'package:one_one_learn/utils/ui_helper.dart';
+import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -66,30 +66,26 @@ class SignUpPage extends StatelessWidget {
                     const EmptyProportionalPercentSpace(
                       percentHeight: textFieldsSpaceBetweenPercent,
                     ),
-                    Column(
-                      children: [
-                        TextFieldFill(
-                          textController: context.read<SignUpCubit>().passwordController,
-                          errorText: state.passwordError,
-                          hintText: S.current.password,
-                          leftWidget: Icon(
-                            Icons.lock_rounded,
-                            color: context.theme.colorScheme.onInverseSurface,
-                            size: Dimens.getProportionalWidth(context, 24),
-                          ),
-                          canTextBeObscured: true,
-                        ),
-                        const EmptyProportionalSpace(height: 1),
-                        Text(
-                          S.current.passwordRule,
-                          style: Dimens.getProportionalFont(
-                            context, context.theme.textTheme.bodyMedium,
-                          ).copyWith(
-                            color: state.passwordError?.isNotEmpty == true
-                                ? AppColors.red700 : null,
-                          ),
-                        ),
-                      ],
+                    TextFieldFill(
+                      textController: context.read<SignUpCubit>().passwordController,
+                      errorText: state.passwordError,
+                      hintText: S.current.password,
+                      leftWidget: Icon(
+                        Icons.lock_rounded,
+                        color: context.theme.colorScheme.onInverseSurface,
+                        size: Dimens.getProportionalWidth(context, 24),
+                      ),
+                      canTextBeObscured: true,
+                    ),
+                    const EmptyProportionalSpace(height: 7),
+                    Text(
+                      S.current.passwordRule,
+                      style: Dimens.getProportionalFont(
+                        context, context.theme.textTheme.bodyMedium,
+                      ).copyWith(
+                        color: state.passwordError?.isNotEmpty == true
+                            ? AppColors.red700 : null,
+                      ),
                     ),
                     const EmptyProportionalPercentSpace(
                       percentHeight: textFieldsSpaceBetweenPercent,

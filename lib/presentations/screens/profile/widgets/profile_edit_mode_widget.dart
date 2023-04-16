@@ -5,7 +5,7 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/profile/widgets/avatar_widget.dart';
 import 'package:one_one_learn/presentations/screens/profile/widgets/skill_current_widget.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
-import 'package:one_one_learn/utils/ui_helper.dart';
+import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class ProfileEditModeWidget extends StatelessWidget {
   const ProfileEditModeWidget({super.key});

@@ -72,12 +72,17 @@ class LoginCubit extends WidgetCubit<LoginState> {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
-    if (validateInput() < 1) {
+    final validateResult = validateInput();
+    if (validateResult < 1) {
+      if (validateResult == -1) {
+        showErrorToast(S.current.loginFailedWithWrongCredentials);
+      }
       return;
     }
 
     final loginResponse = await fetchApi<AuthResponse>(
       () => authRepository.login(email, password),
+      showToastError: false,
     );
 
     if (loginResponse != null) {
@@ -90,8 +95,20 @@ class LoginCubit extends WidgetCubit<LoginState> {
             '${S.current.server} ${S.current.loginFailedWithNoTokens.toLowerCase()}',
           );
         }
+      } else if (loginResponse.statusCode == ApiStatusCode.needActivated) {
+        onChangeShowActivateDialog(value: true);
+      } else if (loginResponse.message == ApiConstants.incorrectEmailOrPassword) {
+        showWarningToast(S.current.loginFailedWithWrongCredentials);
+      } else {
+        showErrorToast(S.current.doSomethingsFailed(S.current.login));
       }
+    } else {
+      showErrorToast(S.current.doSomethingsFailed(S.current.login));
     }
+  }
+
+  void onChangeShowActivateDialog({required bool value}) {
+    emit(state.copyWith(needShowActivateDialog: value));
   }
 
   @override

@@ -14,7 +14,7 @@ import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/core/managers/local_manager.dart';
 import 'package:one_one_learn/core/models/responses/base_response.dart';
-import 'package:one_one_learn/utils/toast_helper.dart';
+import 'package:one_one_learn/utils/helpers/toast_helper.dart';
 part 'widget_state.dart';
 abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateType> {
   void onWidgetCreated();

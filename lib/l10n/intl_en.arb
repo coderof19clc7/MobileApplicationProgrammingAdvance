@@ -112,6 +112,24 @@
       }
     }
   },
+  "doSomethingsFailed": "{somethings} failed",
+  "@doSomethingsFailed": {
+    "description": "A message appear when user do something failed",
+    "placeholders": {
+      "somethings": {
+        "type": "String",
+        "example": "Login"
+      }
+    }
+  },
   "server": "Server",
-  "loginFailedWithNoTokens": "Cannot verify login session. Please try again later."
+  "loginFailedWithNoTokens": "Cannot verify login session. Please try again later.",
+  "loginFailedWithWrongCredentials": "Email or password is incorrect",
+  "needActivateHeader": "Account activation notify",
+  "needActivateContent": "Your account is not activated.\nPlease check your email to activate it.",
+  "signUpFailedWithEmailTaken": "Email is already taken",
+  "sendResetPasswordRequest": "Send reset password request",
+  "forgotPasswordFailedWithEmailNotExists": "Email does not exist",
+  "notification": "Notification",
+  "resetPasswordRequestSendSucceededContent": "Please check your email to reset your password.\nIf you didn't receive any mail, please ensure that the email you entered is correct and check your spam folder or wait for 1 to 2 minutes and then send a new request."
 }

@@ -8,7 +8,7 @@ import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/base_choice_chip.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
-import 'package:one_one_learn/utils/ui_helper.dart';
+import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class TutorFilterBottomSheet extends StatelessWidget {
   const TutorFilterBottomSheet({super.key});

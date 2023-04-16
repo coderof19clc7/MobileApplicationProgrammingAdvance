@@ -192,7 +192,8 @@ class NetworkManager {
   }
 
   void _onBasicResponse(Response response, ResponseInterceptorHandler handler) {
-    if (response.statusCode == 200) {
+    final responseData = response.data as Map<String, dynamic>;
+    if (responseData['statusCode'] == null) {
       (response.data as Map<String, dynamic>)['statusCode'] = ApiStatusCode.success;
     }
     handler.next(response);
