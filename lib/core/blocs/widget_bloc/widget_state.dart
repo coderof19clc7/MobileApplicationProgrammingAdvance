@@ -36,7 +36,7 @@ abstract class WidgetState extends Equatable {
 
   WidgetState navigateToLogin() {
     return fromJson(
-      toJson()..addAll({'navigateToLogin': true}),
+      toJson()..addAll({'needNavigateToLogin': true}),
     );
   }
 

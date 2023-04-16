@@ -36,8 +36,8 @@ abstract class BaseRepository {
     );
 
     if (kDebugMode) {
-      print('log api: $api');
-      print('result: ${inspect(result)}');
+      log('log api: $api');
+      log('result: ${inspect(result)}');
     }
 
     return result;

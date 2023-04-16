@@ -16,7 +16,7 @@ class BasicStatusToast extends StatelessWidget {
   final StatusToastType type;
 
   Widget getIcon(BuildContext context) {
-    final iconSize = Dimens.getProportionalWidth(context, 14);
+    final iconSize = Dimens.getProportionalWidth(context, 17);
     Widget icon = const SizedBox.shrink();
     if (type == StatusToastType.success) {
       icon = Icon(
@@ -61,7 +61,7 @@ class BasicStatusToast extends StatelessWidget {
       width: Dimens.getScreenWidth(context),
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: Dimens.getProportionalWidth(context, 7),
+          horizontal: Dimens.getProportionalWidth(context, 14),
           vertical: Dimens.getProportionalHeight(context, 10),
         ),
         decoration: BoxDecoration(
@@ -76,10 +76,12 @@ class BasicStatusToast extends StatelessWidget {
             EmptyProportionalSpace(
               width: type == StatusToastType.info ? 0 : 7,
             ),
-            Text(
-              message,
-              style: context.theme.textTheme.displaySmall?.copyWith(
-                fontSize: Dimens.getProportionalWidth(context, 14),
+            Flexible(
+              child: Text(
+                message,
+                style: context.theme.textTheme.displaySmall?.copyWith(
+                  fontSize: Dimens.getProportionalWidth(context, 14),
+                ),
               ),
             ),
           ],

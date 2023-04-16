@@ -63,6 +63,14 @@ class UserInfo {
   factory UserInfo.fromJson(dynamic json) {
     final mapJson = json as Map<String, dynamic>;
 
+    var roles = <String>[];
+    if (mapJson['roles'] != null) {
+      roles = [];
+      for (final role in mapJson['roles'] as List<dynamic>) {
+        roles.add(role.toString());
+      }
+    }
+
     List? courses = [];
     if (mapJson['courses'] != null) {
       courses = [];
@@ -94,7 +102,7 @@ class UserInfo {
       avatar: json['avatar'] as String?,
       country: json['country'] as String?,
       phone: json['phone'] as String?,
-      roles: json['roles'] != null ? List<String>.from(json['roles'] as List<String>) : <String>[],
+      roles: roles,
       language: json['language'] as String?,
       birthday:json['birthday'] as String?,
       isActivated: json['isActivated'] as bool?,
@@ -373,6 +381,14 @@ class UserInfo {
   }
 
   factory UserInfo.fromMap(Map<String, dynamic> map) {
+    var roles = <String>[];
+    if (map['roles'] != null) {
+      roles = [];
+      for (final role in map['roles'] as List<dynamic>) {
+        roles.add(role.toString());
+      }
+    }
+
     List? courses = [];
     if (map['courses'] != null) {
       courses = [];
@@ -404,9 +420,7 @@ class UserInfo {
       avatar: map['avatar'] as String?,
       country: map['country'] as String?,
       phone: map['phone'] as String?,
-      roles: map['roles'] != null ? List<String>.from(
-        map['roles'] as List<String>,
-      ) : <String>[],
+      roles: roles,
       language: map['language'] as String?,
       birthday:map['birthday'] as String?,
       isActivated: map['isActivated'] as bool?,

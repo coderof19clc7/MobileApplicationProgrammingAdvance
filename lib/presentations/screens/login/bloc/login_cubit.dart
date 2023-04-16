@@ -34,17 +34,18 @@ class LoginCubit extends WidgetCubit<LoginState> {
       passwordError: passwordError,
     ));
 
-    if (email.isEmpty) {
-      emailError = S.current.somethingRequiredError('Email');
+    if (email.isEmpty || password.isEmpty) {
       result = 0;
-    } else if (!email.isValidEmail()) {
+      if (email.isEmpty) {
+        emailError = S.current.somethingRequiredError('Email');
+      }
+      if (password.isEmpty) {
+        passwordError = S.current.somethingRequiredError('Password');
+      }
+    } else if (!email.isValidEmail() || !password.isValidPassword()) {
       result = -1;
-    }
-    if (password.isEmpty) {
-      passwordError = S.current.somethingRequiredError(S.current.password);
-      result = 0;
-    } else if (!password.isValidPassword()) {
-      result = -1;
+      emailError = '';
+      passwordError = '';
     }
 
     // update error
@@ -76,7 +77,7 @@ class LoginCubit extends WidgetCubit<LoginState> {
     }
 
     final loginResponse = await fetchApi<AuthResponse>(
-      () => authRepository.register(email, password),
+      () => authRepository.login(email, password),
     );
 
     if (loginResponse != null) {

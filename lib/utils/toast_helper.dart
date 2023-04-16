@@ -32,21 +32,13 @@ class ToastHelper {
     ) {
       _fToast.init(AppGlobalNavigator.navigatorKey.currentState!.context);
     }
-    // _fToast.showToast(
-    //   child: Container(
-    //     padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 12.0),
-    //     decoration: BoxDecoration(
-    //       borderRadius: BorderRadius.circular(25.0),
-    //       color: Colors.black87,
-    //     ),
-    //     child: Text(
-    //       message,
-    //       style: const TextStyle(color: Colors.white),
-    //     ),
-    //   ),
-    //   gravity: ToastGravity.BOTTOM,
-    //   toastDuration: const Duration(seconds: 2),
-    // );
+    _fToast.showToast(
+      child: child,
+      positionedToastBuilder: positionedToastBuilder,
+      toastDuration: toastDuration,
+      gravity: gravity,
+      fadeDuration: fadeDuration,
+    );
   }
 
   static void showBasicStatusToast({
@@ -54,12 +46,11 @@ class ToastHelper {
     StatusToastType statusToastType = StatusToastType.info,
   }) {
     showToast(
-      toastDuration: const Duration(seconds: 1),
       positionedToastBuilder: (context, child) {
         return Positioned(
-          left: 0,
-          right: 0,
-          bottom: Dimens.getBottomSafeAreaHeight(context),
+          left: Dimens.getProportionalWidth(context, 30),
+          right: Dimens.getProportionalWidth(context, 30),
+          bottom: Dimens.getBottomSafeAreaHeight(context) + 5,
           child: child,
         );
       },

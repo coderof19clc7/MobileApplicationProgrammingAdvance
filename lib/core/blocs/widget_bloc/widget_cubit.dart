@@ -196,6 +196,8 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
   Future<void> close() async {
     //to prevent emit state after close cubit that throw exception.
     // Fix error show bad state after navigate to another page
+    timer?.cancel();
+    timer = null;
     await stream.drain();
     await super.close();
   }
