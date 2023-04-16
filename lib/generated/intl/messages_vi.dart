@@ -20,6 +20,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'vi';
 
+  static String m0(somethings) => "${somethings} thành công";
+
+  static String m1(somethings) => "${somethings} là bắt buộc";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Về tôi"),
@@ -38,9 +42,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn có chắc chắn muốn hủy lớp này?"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
+        "confirmPasswordNotMatch": MessageLookupByLibrary.simpleMessage(
+            "Xác nhận mật khẩu không khớp"),
+        "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng xác nhận lại mật khẩu"),
         "courses": MessageLookupByLibrary.simpleMessage("Khoá học"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
+        "doSomethingsSuccess": m0,
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -54,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "interest": MessageLookupByLibrary.simpleMessage("Sở thích"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Cải thiện bản thân với các gia sư tuyệt vời"),
+        "invalid": MessageLookupByLibrary.simpleMessage("Không hợp lệ"),
         "isMarked": MessageLookupByLibrary.simpleMessage("Đã chấm điểm"),
         "isNotMarked": MessageLookupByLibrary.simpleMessage("Chưa chấm điểm"),
         "labelAbout": MessageLookupByLibrary.simpleMessage("Tổng quan"),
@@ -75,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lessonStatus": MessageLookupByLibrary.simpleMessage("Tiến độ bài học"),
         "listening": MessageLookupByLibrary.simpleMessage("Khả năng nghe"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
+        "loginFailedWithNoTokens": MessageLookupByLibrary.simpleMessage(
+            "Không thể xác thực phiên đăng nhập. Vui lòng thử lại sau."),
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản"),
         "minutes": MessageLookupByLibrary.simpleMessage("phút"),
@@ -86,6 +98,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "overallComment":
             MessageLookupByLibrary.simpleMessage("Đánh giá chung"),
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
+        "passwordRule": MessageLookupByLibrary.simpleMessage(
+            "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Lịch học mong muốn"),
@@ -105,11 +119,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Tìm khóa học"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Tìm gia sư"),
+        "server": MessageLookupByLibrary.simpleMessage("Máy chủ"),
         "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "signOut": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Trình độ"),
+        "somethingRequiredError": m1,
         "sortFavoriteFromHighest":
             MessageLookupByLibrary.simpleMessage("Nhiều lượt thích nhất"),
         "sortFavoriteFromLowest":

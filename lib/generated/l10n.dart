@@ -919,6 +919,86 @@ class S {
       args: [],
     );
   }
+
+  /// `{somethings} is required`
+  String somethingRequiredError(String somethings) {
+    return Intl.message(
+      '$somethings is required',
+      name: 'somethingRequiredError',
+      desc: 'An error message appear when user miss an required field',
+      args: [somethings],
+    );
+  }
+
+  /// `Please confirm your password`
+  String get confirmPasswordRequired {
+    return Intl.message(
+      'Please confirm your password',
+      name: 'confirmPasswordRequired',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Confirm password does not match`
+  String get confirmPasswordNotMatch {
+    return Intl.message(
+      'Confirm password does not match',
+      name: 'confirmPasswordNotMatch',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character`
+  String get passwordRule {
+    return Intl.message(
+      'Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character',
+      name: 'passwordRule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid`
+  String get invalid {
+    return Intl.message(
+      'Invalid',
+      name: 'invalid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{somethings} successfully`
+  String doSomethingsSuccess(String somethings) {
+    return Intl.message(
+      '$somethings successfully',
+      name: 'doSomethingsSuccess',
+      desc: 'A message appear when user do something successfully',
+      args: [somethings],
+    );
+  }
+
+  /// `Server`
+  String get server {
+    return Intl.message(
+      'Server',
+      name: 'server',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cannot verify login session. Please try again later.`
+  String get loginFailedWithNoTokens {
+    return Intl.message(
+      'Cannot verify login session. Please try again later.',
+      name: 'loginFailedWithNoTokens',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -17,7 +17,7 @@ class CourseAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appBarHeight = Dimens.getProportionalScreenHeight(context, 260);
+    final appBarHeight = Dimens.getProportionalHeight(context, 260);
 
     var top = 0.0;
 

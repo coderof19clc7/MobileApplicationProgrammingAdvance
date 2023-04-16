@@ -20,8 +20,8 @@ class FakeChip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
-        horizontal: Dimens.getProportionalScreenWidth(context, 10),
-        vertical: Dimens.getProportionalScreenHeight(context, 5),
+        horizontal: Dimens.getProportionalWidth(context, 10),
+        vertical: Dimens.getProportionalHeight(context, 5),
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(
@@ -37,7 +37,7 @@ class FakeChip extends StatelessWidget {
             textAlign: TextAlign.center,
             style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
               color: textColor ?? AppColors.primaryBlue400,
-              fontSize: Dimens.getProportionalScreenWidth(
+              fontSize: Dimens.getProportionalWidth(
                 context,
                 fontSize,
               ),

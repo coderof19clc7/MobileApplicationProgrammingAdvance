@@ -33,7 +33,7 @@ class IconTextIconWidget extends StatelessWidget {
           ),
           Icon(
             Icons.arrow_forward_ios,
-            size: Dimens.getProportionalScreenWidth(context, 20),
+            size: Dimens.getProportionalWidth(context, 20),
           ),
         ],
       ),

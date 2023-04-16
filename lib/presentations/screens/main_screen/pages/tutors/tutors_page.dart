@@ -73,12 +73,12 @@ class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMi
                           Expanded(
                             child: TextField(
                               style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                                fontSize: Dimens.getProportionalScreenHeight(context, 15),
+                                fontSize: Dimens.getProportionalHeight(context, 15),
                               ),
                               decoration: InputDecoration(
                                 hintText: S.current.searchHintTutor,
                                 hintStyle: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                                  fontSize: Dimens.getProportionalScreenHeight(context, 15),
+                                  fontSize: Dimens.getProportionalHeight(context, 15),
                                 ),
                                 filled: true,
                                 fillColor: context.theme.colorScheme.tertiaryContainer,
@@ -103,8 +103,8 @@ class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMi
                                 body: const TutorFilterBottomSheet(),
                               );
                             },
-                            width: Dimens.getProportionalScreenWidth(context, 37),
-                            paddingVertical: Dimens.getProportionalScreenHeight(
+                            width: Dimens.getProportionalWidth(context, 37),
+                            paddingVertical: Dimens.getProportionalHeight(
                               context,
                               12,
                             ),

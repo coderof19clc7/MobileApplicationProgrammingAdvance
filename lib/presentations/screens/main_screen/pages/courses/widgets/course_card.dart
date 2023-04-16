@@ -30,9 +30,9 @@ class CourseCard extends BaseCard {
     const fontSize = 14.0;
     return Padding(
       padding: EdgeInsets.only(
-        left: Dimens.getProportionalScreenWidth(context, 14),
-        right: Dimens.getProportionalScreenWidth(context, 14),
-        bottom: Dimens.getProportionalScreenWidth(context, 14),
+        left: Dimens.getProportionalWidth(context, 14),
+        right: Dimens.getProportionalWidth(context, 14),
+        bottom: Dimens.getProportionalWidth(context, 14),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,11 +42,11 @@ class CourseCard extends BaseCard {
             name,
             overflow: TextOverflow.ellipsis,
             style: Dimens.getProportionalFont(context, context.theme.textTheme.titleSmall).copyWith(
-              fontSize: Dimens.getProportionalScreenWidth(context, 17),
+              fontSize: Dimens.getProportionalWidth(context, 17),
             ),
           ),
           SizedBox(
-            height: Dimens.getProportionalScreenHeight(
+            height: Dimens.getProportionalHeight(
               context,
               secondChildItemsDistance,
             ),
@@ -60,7 +60,7 @@ class CourseCard extends BaseCard {
             textColor: context.theme.colorScheme.onSecondaryContainer,
           ),
           SizedBox(
-            height: Dimens.getProportionalScreenHeight(
+            height: Dimens.getProportionalHeight(
               context,
               secondChildItemsDistance,
             ),
@@ -74,30 +74,30 @@ class CourseCard extends BaseCard {
                 context: context,
                 icon: Icon(
                   Icons.signal_cellular_alt_rounded,
-                  size: Dimens.getProportionalScreenWidth(context, fontSize + 6),
+                  size: Dimens.getProportionalWidth(context, fontSize + 6),
                   color: context.theme.colorScheme.primary,
                 ),
                 betweenSpace: 3,
                 text: Text(
                   level,
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                    fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
+                    fontSize: Dimens.getProportionalWidth(context, fontSize),
                   ),
                 ),
               ),
               SizedBox(
-                  width: Dimens.getProportionalScreenWidth(
+                  width: Dimens.getProportionalWidth(
                 context,
                 7,
               )),
               Text(
                 '|',
                 style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                  fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
+                  fontSize: Dimens.getProportionalWidth(context, fontSize),
                 ),
               ),
               SizedBox(
-                  width: Dimens.getProportionalScreenWidth(
+                  width: Dimens.getProportionalWidth(
                 context,
                 7,
               )),
@@ -105,21 +105,21 @@ class CourseCard extends BaseCard {
                 context: context,
                 icon: Icon(
                   Icons.book_rounded,
-                  size: Dimens.getProportionalScreenWidth(context, fontSize + 3),
+                  size: Dimens.getProportionalWidth(context, fontSize + 3),
                   color: context.theme.colorScheme.primary,
                 ),
                 betweenSpace: 2,
                 text: Text(
                   '$lessons ${S.current.lesson}',
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                    fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
+                    fontSize: Dimens.getProportionalWidth(context, fontSize),
                   ),
                 ),
               ),
             ],
           ),
           SizedBox(
-            height: Dimens.getProportionalScreenHeight(
+            height: Dimens.getProportionalHeight(
               context,
               secondChildItemsDistance,
             ),
@@ -132,7 +132,7 @@ class CourseCard extends BaseCard {
             softWrap: true,
             maxLines: 2,
             style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-              fontSize: Dimens.getProportionalScreenWidth(context, fontSize),
+              fontSize: Dimens.getProportionalWidth(context, fontSize),
             ),
           ),
         ],

@@ -49,7 +49,7 @@ class UIHelper {
         onTap: () {
           onLeftButtonPress?.call(data);
         },
-        paddingVertical: Dimens.getProportionalScreenHeight(context, 12),
+        paddingVertical: Dimens.getProportionalHeight(context, 12),
         width: Dimens.getScreenWidth(context),
         preferGradient: false,
         child: Text(leftButtonText ?? '', style: textFillStyle),
@@ -64,14 +64,14 @@ class UIHelper {
             onTap: () {
               onLeftButtonPress?.call(data);
             },
-            paddingVertical: Dimens.getProportionalScreenHeight(context, 12),
+            paddingVertical: Dimens.getProportionalHeight(context, 12),
             preferGradient: false,
             child: Text(leftButtonText ?? '', style: textOutlineStyle),
           ),
         ),
 
         SizedBox(
-          width: Dimens.getProportionalScreenWidth(
+          width: Dimens.getProportionalWidth(
               context, spaceBetweenLeftAndRight),
         ),
 
@@ -80,7 +80,7 @@ class UIHelper {
             onTap: () {
               onRightButtonPress?.call(data);
             },
-            paddingVertical: Dimens.getProportionalScreenHeight(context, 12),
+            paddingVertical: Dimens.getProportionalHeight(context, 12),
             preferGradient: false,
             child: Text(rightButtonText, style: textFillStyle),
           ),

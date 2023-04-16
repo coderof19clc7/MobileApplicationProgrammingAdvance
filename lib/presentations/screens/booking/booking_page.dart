@@ -106,7 +106,7 @@ class BookingPage extends StatelessWidget {
                   onTap: () {},
                   child: Icon(
                     Icons.chevron_left_rounded,
-                    size: Dimens.getProportionalScreenWidth(context, 30),
+                    size: Dimens.getProportionalWidth(context, 30),
                   ),
                 ),
                 const EmptyProportionalSpace(width: 10),
@@ -115,7 +115,7 @@ class BookingPage extends StatelessWidget {
                   onTap: () {},
                   child: Icon(
                     Icons.chevron_right_rounded,
-                    size: Dimens.getProportionalScreenWidth(context, 30),
+                    size: Dimens.getProportionalWidth(context, 30),
                   ),
                 ),
               ],
@@ -134,7 +134,7 @@ class BookingPage extends StatelessWidget {
                   style: Dimens.getProportionalFont(
                     context, context.theme.textTheme.bodyMedium,
                   ).copyWith(
-                    fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                    fontSize: Dimens.getProportionalWidth(context, 14),
                     fontWeight: FontWeight.w500,
                   ),
                 );

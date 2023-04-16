@@ -29,12 +29,12 @@ class _BooksTabState extends State<BooksTab>
           // search field
           TextField(
             style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-              fontSize: Dimens.getProportionalScreenHeight(context, 15),
+              fontSize: Dimens.getProportionalHeight(context, 15),
             ),
             decoration: InputDecoration(
               hintText: S.current.searchHintCourse,
               hintStyle: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                fontSize: Dimens.getProportionalScreenHeight(context, 15),
+                fontSize: Dimens.getProportionalHeight(context, 15),
               ),
               isDense: true,
               border: OutlineInputBorder(
@@ -45,7 +45,7 @@ class _BooksTabState extends State<BooksTab>
               ),
             ),
           ),
-          SizedBox(height: Dimens.getProportionalScreenHeight(context, 10)),
+          SizedBox(height: Dimens.getProportionalHeight(context, 10)),
 
           // category filters
           SizedBox(
@@ -57,7 +57,7 @@ class _BooksTabState extends State<BooksTab>
                 // category filter
                 return Padding(
                   padding: EdgeInsets.only(
-                    right: Dimens.getProportionalScreenWidth(
+                    right: Dimens.getProportionalWidth(
                       context, index == 14 ? 0 : 10,
                     ),
                   ),
@@ -72,7 +72,7 @@ class _BooksTabState extends State<BooksTab>
               },
             ),
           ),
-          SizedBox(height: Dimens.getProportionalScreenHeight(context, 20)),
+          SizedBox(height: Dimens.getProportionalHeight(context, 20)),
 
           // books list
           Expanded(

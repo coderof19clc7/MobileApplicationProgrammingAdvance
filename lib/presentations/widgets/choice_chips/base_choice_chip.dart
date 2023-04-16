@@ -18,7 +18,7 @@ class BaseChoiceChip extends StatelessWidget {
       onSelected: onSelected,
       selected: isSelected,
       padding: EdgeInsets.symmetric(
-        horizontal: Dimens.getProportionalScreenWidth(context, 10),
+        horizontal: Dimens.getProportionalWidth(context, 10),
       ),
       visualDensity: VisualDensity.compact,
       shape: StadiumBorder(
@@ -33,7 +33,7 @@ class BaseChoiceChip extends StatelessWidget {
         color: isSelected
             ? context.theme.colorScheme.onPrimary
             : context.theme.colorScheme.onTertiaryContainer, // listen to state to change color
-        fontSize: Dimens.getProportionalScreenWidth(context, 14),
+        fontSize: Dimens.getProportionalWidth(context, 14),
       ),
     );
   }

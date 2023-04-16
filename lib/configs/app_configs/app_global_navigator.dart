@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AppNavigator{
+class AppGlobalNavigator{
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey();
   static NavigatorState? get state => navigatorKey.currentState;
 
-  static final AppNavigator _instance = AppNavigator();
-  static AppNavigator get instance => _instance;
+  static final AppGlobalNavigator _instance = AppGlobalNavigator();
+  static AppGlobalNavigator get instance => _instance;
 
   static Future? pushNamed(String route, [Object? arguments]) {
     return state?.pushNamed(route, arguments: arguments);

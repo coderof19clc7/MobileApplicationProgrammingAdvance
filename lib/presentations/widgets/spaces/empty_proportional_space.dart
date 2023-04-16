@@ -10,8 +10,8 @@ class EmptyProportionalSpace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: Dimens.getProportionalScreenHeight(context, height),
-      width: Dimens.getProportionalScreenWidth(context, width),
+      height: Dimens.getProportionalHeight(context, height),
+      width: Dimens.getProportionalWidth(context, width),
     );
   }
 }

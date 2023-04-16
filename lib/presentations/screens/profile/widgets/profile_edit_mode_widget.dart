@@ -19,8 +19,8 @@ class ProfileEditModeWidget extends StatelessWidget {
         border: isBorder == true ? Border.all(color: context.theme.colorScheme.outline) : null,
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: Dimens.getProportionalScreenWidth(context, 12),
-        vertical: Dimens.getProportionalScreenWidth(context, 14),
+        horizontal: Dimens.getProportionalWidth(context, 12),
+        vertical: Dimens.getProportionalWidth(context, 14),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -59,7 +59,7 @@ class ProfileEditModeWidget extends StatelessWidget {
             iconWidget: Icon(
               Icons.calendar_today_outlined,
               color: context.theme.colorScheme.onSurfaceVariant,
-              size: Dimens.getProportionalScreenWidth(context, 17),
+              size: Dimens.getProportionalWidth(context, 17),
             ),
           ),
           const EmptyProportionalSpace(height: 20),
@@ -76,7 +76,7 @@ class ProfileEditModeWidget extends StatelessWidget {
             iconWidget: Icon(
               Icons.expand_more_rounded,
               color: context.theme.colorScheme.onTertiaryContainer,
-              size: Dimens.getProportionalScreenWidth(context, 22),
+              size: Dimens.getProportionalWidth(context, 22),
             ),
           ),
           const EmptyProportionalSpace(height: 20),
@@ -86,7 +86,7 @@ class ProfileEditModeWidget extends StatelessWidget {
             iconWidget: Icon(
               Icons.expand_more_rounded,
               color: context.theme.colorScheme.onTertiaryContainer,
-              size: Dimens.getProportionalScreenWidth(context, 22),
+              size: Dimens.getProportionalWidth(context, 22),
             ),
           ),
           const EmptyProportionalSpace(height: 20),

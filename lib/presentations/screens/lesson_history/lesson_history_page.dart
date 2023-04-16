@@ -66,7 +66,7 @@ class LessonHistoryPage extends StatelessWidget {
                     buttonLabel: S.current.more,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     margin: EdgeInsets.only(
-                      bottom: Dimens.getProportionalScreenHeight(context, 15),
+                      bottom: Dimens.getProportionalHeight(context, 15),
                       left: Dimens.getScreenWidth(context) * 0.03,
                       right: Dimens.getScreenWidth(context) * 0.03,
                     ),

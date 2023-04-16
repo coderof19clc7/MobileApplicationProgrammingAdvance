@@ -70,12 +70,12 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
                     icon: Icon(
                       Icons.info_outline_rounded,
                       color: context.theme.colorScheme.onInverseSurface,
-                      size: Dimens.getProportionalScreenWidth(context, 20),
+                      size: Dimens.getProportionalWidth(context, 20),
                     ),
                     text: Text(
                       S.current.swipeToCancelClass,
                       style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                        fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                        fontSize: Dimens.getProportionalWidth(context, 14),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -123,7 +123,7 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
                                   S.current.yes,
                                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                                     color: context.theme.colorScheme.onSurfaceVariant,
-                                    fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                                    fontSize: Dimens.getProportionalWidth(context, 16),
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -134,7 +134,7 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
                                   S.current.no,
                                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                                     color: context.theme.colorScheme.onErrorContainer,
-                                    fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                                    fontSize: Dimens.getProportionalWidth(context, 16),
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -154,7 +154,7 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
                       lessonDurationFormat: AppDateFormats.tHHmm,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       margin: EdgeInsets.only(
-                        bottom: Dimens.getProportionalScreenHeight(context, 15),
+                        bottom: Dimens.getProportionalHeight(context, 15),
                         left: Dimens.getScreenWidth(context) * 0.03,
                         right: Dimens.getScreenWidth(context) * 0.03,
                       ),

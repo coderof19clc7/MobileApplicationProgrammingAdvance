@@ -43,12 +43,12 @@ class TutorCard extends BaseCard {
                   '$nationality $name',
                   overflow: TextOverflow.ellipsis,
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.titleSmall).copyWith(
-                    fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                    fontSize: Dimens.getProportionalWidth(context, 15),
                   ),
                 ),
               ),
               SizedBox(
-                  width: Dimens.getProportionalScreenWidth(
+                  width: Dimens.getProportionalWidth(
                 context,
                 3,
               )),
@@ -60,14 +60,14 @@ class TutorCard extends BaseCard {
                     strokeColor: context.theme.colorScheme.primary,
                     fillColor: isFavorite ? context.theme.colorScheme.primary : context.theme.colorScheme.surface,
                   ),
-                  width: Dimens.getProportionalScreenHeight(context, 25),
-                  height: Dimens.getProportionalScreenHeight(context, 25),
+                  width: Dimens.getProportionalHeight(context, 25),
+                  height: Dimens.getProportionalHeight(context, 25),
                 ),
               ),
             ],
           ),
           SizedBox(
-              height: Dimens.getProportionalScreenHeight(
+              height: Dimens.getProportionalHeight(
             context,
             secondChildItemsDistance,
           )),
@@ -81,7 +81,7 @@ class TutorCard extends BaseCard {
             textColor: context.theme.colorScheme.onSecondaryContainer,
           ),
           SizedBox(
-              height: Dimens.getProportionalScreenHeight(
+              height: Dimens.getProportionalHeight(
             context,
             secondChildItemsDistance,
           )),
@@ -91,18 +91,18 @@ class TutorCard extends BaseCard {
             context: context,
             icon: Icon(
               Icons.star_rounded,
-              size: Dimens.getProportionalScreenWidth(context, 14),
+              size: Dimens.getProportionalWidth(context, 14),
               color: context.theme.colorScheme.primary,
             ),
             text: Text(
               '$rating/5',
               style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                fontSize: Dimens.getProportionalScreenWidth(context, 12),
+                fontSize: Dimens.getProportionalWidth(context, 12),
               ),
             ),
           ),
           SizedBox(
-              height: Dimens.getProportionalScreenHeight(
+              height: Dimens.getProportionalHeight(
             context,
             secondChildItemsDistance,
           )),
@@ -115,7 +115,7 @@ class TutorCard extends BaseCard {
             maxLines: 2,
             style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
               color: context.theme.colorScheme.onTertiaryContainer,
-              fontSize: Dimens.getProportionalScreenWidth(context, 12),
+              fontSize: Dimens.getProportionalWidth(context, 12),
             ),
           ),
         ],

@@ -42,7 +42,7 @@ class TutorReviewsBottomSheet extends StatelessWidget {
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                            fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                            fontSize: Dimens.getProportionalWidth(context, 16),
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -54,7 +54,7 @@ class TutorReviewsBottomSheet extends StatelessWidget {
                           Icon(
                             Icons.star_rounded,
                             color: context.theme.colorScheme.onSurfaceVariant,
-                            size: Dimens.getProportionalScreenWidth(context, 17),
+                            size: Dimens.getProportionalWidth(context, 17),
                           ),
                           const EmptyProportionalSpace(width: 4),
                           Text(
@@ -62,7 +62,7 @@ class TutorReviewsBottomSheet extends StatelessWidget {
                             style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                               color: context.theme.colorScheme.onSurfaceVariant,
                               fontWeight: FontWeight.w700,
-                              fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                              fontSize: Dimens.getProportionalWidth(context, 15),
                             ),
                           ),
                         ],
@@ -74,7 +74,7 @@ class TutorReviewsBottomSheet extends StatelessWidget {
                   Text(
                     'Sed tempor vulputate mauris, ac viverra arcu sagittis vel. Morbi eu velit nec sem cursus molestie nec id dui.',
                     style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                      fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                      fontSize: Dimens.getProportionalWidth(context, 14),
                     ),
                   ),
                   const EmptyProportionalSpace(height: 12),
@@ -82,7 +82,7 @@ class TutorReviewsBottomSheet extends StatelessWidget {
                   Text(
                     'Wed, Mar 10, 2023 at 10:53',
                     style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                      fontSize: Dimens.getProportionalScreenWidth(context, 13),
+                      fontSize: Dimens.getProportionalWidth(context, 13),
                     ),
                   ),
                   const EmptyProportionalSpace(height: 30),

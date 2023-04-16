@@ -45,8 +45,8 @@ class _LoginPageState extends State<LoginPage> {
         body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.only(
-              left: Dimens.getProportionalScreenWidth(context, 60),
-              right: Dimens.getProportionalScreenWidth(context, 60),
+              left: Dimens.getProportionalWidth(context, 60),
+              right: Dimens.getProportionalWidth(context, 60),
               top: Dimens.getTopSafeAreaHeight(context) * 3,
               bottom: Dimens.getBottomSafeAreaHeight(context) + 7,
             ),
@@ -61,7 +61,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Text(
                     S.current.loginTitle,
                     style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
-                      fontSize: Dimens.getProportionalScreenWidth(context, 32),
+                      fontSize: Dimens.getProportionalWidth(context, 32),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -74,7 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                   leftWidget: Icon(
                     Icons.email_rounded,
                     color: context.theme.colorScheme.onInverseSurface,
-                    size: Dimens.getProportionalScreenWidth(context, 24),
+                    size: Dimens.getProportionalWidth(context, 24),
                   ),
                 ),
                 SizedBox(height: Dimens.getScreenHeight(context) * 0.0474),
@@ -83,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                   leftWidget: Icon(
                     Icons.lock_rounded,
                     color: context.theme.colorScheme.onInverseSurface,
-                    size: Dimens.getProportionalScreenWidth(context, 24),
+                    size: Dimens.getProportionalWidth(context, 24),
                   ),
                   canTextBeObscured: true,
                 ),
@@ -93,13 +93,13 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.of(context).pushNamedAndRemoveUntil(RouteNames.main, (route) => false);
                   },
                   width: Dimens.getScreenWidth(context),
-                  paddingVertical: Dimens.getProportionalScreenHeight(context, 14),
+                  paddingVertical: Dimens.getProportionalHeight(context, 14),
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   child: Text(
                     S.current.login,
                     style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
                       fontWeight: FontWeight.w500,
-                      fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                      fontSize: Dimens.getProportionalWidth(context, 16),
                     ),
                   ),
                 ),
@@ -114,7 +114,7 @@ class _LoginPageState extends State<LoginPage> {
                     '${S.current.forgotPassword}?',
                     style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                       color: context.theme.colorScheme.onSurfaceVariant,
-                      fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                      fontSize: Dimens.getProportionalWidth(context, 15),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
@@ -125,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                 Text(
                   S.current.orContinueWith.toLowerCase(),
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                    fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                    fontSize: Dimens.getProportionalWidth(context, 15),
                     fontWeight: FontWeight.w400,
                   ),
                 ),
@@ -135,27 +135,27 @@ class _LoginPageState extends State<LoginPage> {
                   children: [
                     PrimaryOutlineButton(
                       onTap: () {},
-                      width: Dimens.getProportionalScreenWidth(context, 87),
-                      paddingVertical: Dimens.getProportionalScreenHeight(context, 17),
+                      width: Dimens.getProportionalWidth(context, 87),
+                      paddingVertical: Dimens.getProportionalHeight(context, 17),
                       preferGradient: false,
                       borderColor: context.theme.colorScheme.outline,
                       bodyColor: context.theme.colorScheme.surface,
                       child: Assets.icons.googleColorfull.svg(
-                        width: Dimens.getProportionalScreenWidth(context, 24),
-                        height: Dimens.getProportionalScreenWidth(context, 24),
+                        width: Dimens.getProportionalWidth(context, 24),
+                        height: Dimens.getProportionalWidth(context, 24),
                       ),
                     ),
                     SizedBox(width: Dimens.getScreenWidth(context) * 0.0795),
                     PrimaryOutlineButton(
                       onTap: () {},
-                      width: Dimens.getProportionalScreenWidth(context, 87),
-                      paddingVertical: Dimens.getProportionalScreenHeight(context, 17),
+                      width: Dimens.getProportionalWidth(context, 87),
+                      paddingVertical: Dimens.getProportionalHeight(context, 17),
                       preferGradient: false,
                       borderColor: context.theme.colorScheme.outline,
                       bodyColor: context.theme.colorScheme.surface,
                       child: Assets.icons.facebookColorfull.svg(
-                        width: Dimens.getProportionalScreenWidth(context, 24),
-                        height: Dimens.getProportionalScreenWidth(context, 24),
+                        width: Dimens.getProportionalWidth(context, 24),
+                        height: Dimens.getProportionalWidth(context, 24),
                       ),
                     ),
                   ],
@@ -168,7 +168,7 @@ class _LoginPageState extends State<LoginPage> {
                     text: S.current.dontHaveAccount,
                     style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                       color: context.theme.colorScheme.onInverseSurface,
-                      fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                      fontSize: Dimens.getProportionalWidth(context, 15),
                       fontWeight: FontWeight.w400,
                     ),
                     children: [
@@ -177,7 +177,7 @@ class _LoginPageState extends State<LoginPage> {
                         recognizer: _tapGestureRecognizer,
                         style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                           color: context.theme.colorScheme.primary,
-                          fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                          fontSize: Dimens.getProportionalWidth(context, 15),
                           fontWeight: FontWeight.w600,
                         ),
                       ),

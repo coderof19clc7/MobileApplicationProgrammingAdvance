@@ -78,9 +78,9 @@ class LessonHistoryCard extends BaseCard {
           // buttonSet,
           SizedBox(
             child: PrimaryFillButton(
-              width: Dimens.getProportionalScreenWidth(context, 88),
-              borderRadiusValue: Dimens.getProportionalScreenWidth(context, 12),
-              paddingVertical: Dimens.getProportionalScreenHeight(context, 10),
+              width: Dimens.getProportionalWidth(context, 88),
+              borderRadiusValue: Dimens.getProportionalWidth(context, 12),
+              paddingVertical: Dimens.getProportionalHeight(context, 10),
               onTap: onButtonTap,
               boxShadow: [Effects.normalShadowXS],
               child: Row(
@@ -89,16 +89,16 @@ class LessonHistoryCard extends BaseCard {
                   Icon(
                     Icons.info_outline_rounded,
                     color: context.theme.colorScheme.onPrimary,
-                    size: Dimens.getProportionalScreenWidth(context, 16),
+                    size: Dimens.getProportionalWidth(context, 16),
                   ),
                   SizedBox(
-                    width: Dimens.getProportionalScreenWidth(context, 5),
+                    width: Dimens.getProportionalWidth(context, 5),
                   ),
                   Text(
                     buttonLabel,
                     style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                       color: context.theme.colorScheme.onPrimary,
-                      fontSize: Dimens.getProportionalScreenWidth(context, 12),
+                      fontSize: Dimens.getProportionalWidth(context, 12),
                     ),
                   )
                 ],
@@ -121,14 +121,14 @@ class LessonHistoryCard extends BaseCard {
       isPilled: isPilled,
       icon: Icon(
         icon,
-        size: Dimens.getProportionalScreenWidth(context, 14),
+        size: Dimens.getProportionalWidth(context, 14),
         color: context.theme.colorScheme.primary,
       ),
       text: Text(
         text,
         style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
           color: isPilled ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onBackground,
-          fontSize: Dimens.getProportionalScreenWidth(context, 12),
+          fontSize: Dimens.getProportionalWidth(context, 12),
         ),
       ),
     );

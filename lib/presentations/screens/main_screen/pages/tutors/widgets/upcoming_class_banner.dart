@@ -63,8 +63,8 @@ class _UpcomingClassBannerState extends State<UpcomingClassBanner> {
         gradient: AppColors.primaryGradient,
       ),
       padding: EdgeInsets.only(
-        top: Dimens.getTopSafeAreaHeight(context) + Dimens.getProportionalScreenHeight(context, 28),
-        bottom: Dimens.getProportionalScreenHeight(context, 28),
+        top: Dimens.getTopSafeAreaHeight(context) + Dimens.getProportionalHeight(context, 28),
+        bottom: Dimens.getProportionalHeight(context, 28),
       ),
       width: widget.width,
       child: Column(
@@ -73,7 +73,7 @@ class _UpcomingClassBannerState extends State<UpcomingClassBanner> {
           Text(
             widget.topLabel,
             style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
-              fontSize: Dimens.getProportionalScreenWidth(context, 15),
+              fontSize: Dimens.getProportionalWidth(context, 15),
             ),
           ),
           const EmptyProportionalSpace(height: 15),
@@ -81,7 +81,7 @@ class _UpcomingClassBannerState extends State<UpcomingClassBanner> {
             upcomingText,
             style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
               fontWeight: FontWeight.w600,
-              fontSize: Dimens.getProportionalScreenWidth(context, 19),
+              fontSize: Dimens.getProportionalWidth(context, 19),
             ),
           ),
           const EmptyProportionalSpace(height: 15),
@@ -104,35 +104,35 @@ class _UpcomingClassBannerState extends State<UpcomingClassBanner> {
                     ? '(${S.current.upcomingIn} $hours:$minutes:$seconds)'
                     : '(${S.current.upcomingIn} $days:$hours:$minutes:$seconds)',
                 style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
-                  fontSize: Dimens.getProportionalScreenWidth(context, 15),
+                  fontSize: Dimens.getProportionalWidth(context, 15),
                 ),
               );
             },
           ),
           const EmptyProportionalSpace(height: 15),
           PrimaryFillButton(
-            width: Dimens.getProportionalScreenWidth(context, 160),
+            width: Dimens.getProportionalWidth(context, 160),
             bgColor: context.theme.colorScheme.secondary,
             preferGradient: false,
             boxShadow: [Effects.normalShadowSM],
             borderRadiusValue: Dimens.getScreenWidth(context),
             onTap: widget.onTap,
-            paddingVertical: Dimens.getProportionalScreenWidth(context, 5),
+            paddingVertical: Dimens.getProportionalWidth(context, 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.login_rounded,
                   color: context.theme.colorScheme.onSecondary,
-                  size: Dimens.getProportionalScreenWidth(context, 17),
+                  size: Dimens.getProportionalWidth(context, 17),
                 ),
-                SizedBox(width: Dimens.getProportionalScreenWidth(context, 5)),
+                SizedBox(width: Dimens.getProportionalWidth(context, 5)),
                 Text(
                   widget.buttonLabel,
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                     color: context.theme.colorScheme.onSecondary,
                     fontWeight: FontWeight.w500,
-                    fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                    fontSize: Dimens.getProportionalWidth(context, 14),
                   ),
                 ),
               ],

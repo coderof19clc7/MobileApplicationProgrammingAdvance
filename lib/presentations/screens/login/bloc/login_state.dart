@@ -1,22 +1,31 @@
-part of 'sign_up_cubit.dart';
+part of 'login_cubit.dart';
 
-class SignUpState extends WidgetState {
+@immutable
+class LoginState extends WidgetState {
+  final bool isLoginSuccess;
   final String? emailError;
   final String? passwordError;
-  final String? confirmPasswordError;
+
+  @override
+  List<Object?> get props => [
+    ...super.props,
+    isLoginSuccess,
+    emailError,
+    passwordError,
+  ];
 
   @override
   WidgetState fromJson(json) {
     final mapJson = json as Map<String, dynamic>;
-    return SignUpState(
+    return LoginState(
       isLoading: mapJson['isLoading'] as bool? ?? false,
       needNavigateToLogin: mapJson['needNavigateToLogin'] as bool? ?? false,
       basicStatusFToastState: mapJson['basicStatusFToastState'] != null
           ? BasicStatusFToastState.fromJson(mapJson['basicStatusFToastState'])
           : null,
+      isLoginSuccess: mapJson['isLoginSuccess'] as bool? ?? false,
       emailError: mapJson['emailError'] as String?,
       passwordError: mapJson['passwordError'] as String?,
-      confirmPasswordError: mapJson['confirmPasswordError'] as String?,
     );
   }
 
@@ -26,82 +35,73 @@ class SignUpState extends WidgetState {
     map['isLoading'] = isLoading;
     map['needNavigateToLogin'] = needNavigateToLogin;
     map['basicStatusFToastState'] = basicStatusFToastState?.toJson();
+    map['isLoginSuccess'] = isLoginSuccess;
     map['emailError'] = emailError;
     map['passwordError'] = passwordError;
-    map['confirmPasswordError'] = confirmPasswordError;
     return map;
   }
 
-  @override
-  List<Object?> get props => [
-    ...super.props,
-    emailError,
-    passwordError,
-    confirmPasswordError,
-  ];
-
 //<editor-fold desc="Data Methods">
-  const SignUpState({
+  const LoginState({
     super.isLoading = false,
     super.needNavigateToLogin = false,
     super.basicStatusFToastState,
+    this.isLoginSuccess = false,
     this.emailError,
     this.passwordError,
-    this.confirmPasswordError,
   });
 
   @override
   String toString() {
-    return 'SignUpState{'
+    return 'LoginState{'
         ' isLoading: $isLoading,'
         ' needNavigateToLogin: $needNavigateToLogin,'
         ' basicStatusFToastState: $basicStatusFToastState,'
+        ' isLoginSuccess: $isLoginSuccess,'
         ' emailError: $emailError,'
         ' passwordError: $passwordError,'
-        ' confirmPasswordError: $confirmPasswordError,'
         ' }';
   }
 
-  SignUpState copyWith({
+  LoginState copyWith({
     bool? isLoading,
     bool? needNavigateToLogin,
     BasicStatusFToastState? basicStatusFToastState,
+    bool? isLoginSuccess,
     String? emailError,
     String? passwordError,
-    String? confirmPasswordError,
-    bool? signUpSucceeded,
   }) {
-    return SignUpState(
+    return LoginState(
       isLoading: isLoading ?? this.isLoading,
       needNavigateToLogin: needNavigateToLogin ?? this.needNavigateToLogin,
       basicStatusFToastState: basicStatusFToastState ?? this.basicStatusFToastState,
+      isLoginSuccess: isLoginSuccess ?? this.isLoginSuccess,
       emailError: emailError ?? this.emailError,
       passwordError: passwordError ?? this.passwordError,
-      confirmPasswordError: confirmPasswordError ?? this.confirmPasswordError,
     );
   }
 
   Map<String, dynamic> toMap() {
-    return {
-      'isLoading': isLoading,
-      'needNavigateToLogin': needNavigateToLogin,
-      'basicStatusFToastState': basicStatusFToastState?.toMap(),
-      'emailError': emailError,
-      'passwordError': passwordError,
-      'confirmPasswordError': confirmPasswordError,
-    };
+    final map = <String, dynamic>{};
+    map['isLoading'] = isLoading;
+    map['needNavigateToLogin'] = needNavigateToLogin;
+    map['basicStatusFToastState'] = basicStatusFToastState?.toMap();
+    map['isLoginSuccess'] = isLoginSuccess;
+    map['emailError'] = emailError;
+    map['passwordError'] = passwordError;
+    return map;
   }
 
-  factory SignUpState.fromMap(Map<String, dynamic> map) {
-    return SignUpState(
+  factory LoginState.fromMap(Map<String, dynamic> map) {
+    return LoginState(
       isLoading: map['isLoading'] as bool? ?? false,
       needNavigateToLogin: map['needNavigateToLogin'] as bool? ?? false,
       basicStatusFToastState: map['basicStatusFToastState'] != null
           ? BasicStatusFToastState.fromMap(map['basicStatusFToastState'] as Map<String, dynamic>)
           : null,
+      isLoginSuccess: map['isLoginSuccess'] as bool? ?? false,
       emailError: map['emailError'] as String?,
       passwordError: map['passwordError'] as String?,
-      confirmPasswordError: map['confirmPasswordError'] as String?,
     );
   }
 

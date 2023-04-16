@@ -156,13 +156,13 @@ class LessonInformation extends StatelessWidget {
       icon: Icon(
         Icons.stars_rounded,
         color: context.theme.colorScheme.primary,
-        size: Dimens.getProportionalScreenWidth(context, 15),
+        size: Dimens.getProportionalWidth(context, 15),
       ),
       text: Text(
         text,
         style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
           color: context.theme.colorScheme.primary,
-          fontSize: Dimens.getProportionalScreenWidth(context, 17),
+          fontSize: Dimens.getProportionalWidth(context, 17),
         ),
       ),
     );
@@ -214,7 +214,7 @@ class LessonInformation extends StatelessWidget {
     return Flexible(
       child: PrimaryOutlineButton(
         borderRadiusValue: Dimens.getScreenWidth(context),
-        paddingVertical: Dimens.getProportionalScreenHeight(
+        paddingVertical: Dimens.getProportionalHeight(
           context,
           buttonVerticalPadding,
         ),
@@ -227,7 +227,7 @@ class LessonInformation extends StatelessWidget {
             Icon(
               icon,
               color: context.theme.colorScheme.onSurfaceVariant,
-              size: Dimens.getProportionalScreenWidth(
+              size: Dimens.getProportionalWidth(
                 context,
                 iconSize,
               ),
@@ -238,7 +238,7 @@ class LessonInformation extends StatelessWidget {
               style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                 color: context.theme.colorScheme.onSurfaceVariant,
                 fontWeight: fontWeight,
-                fontSize: Dimens.getProportionalScreenWidth(
+                fontSize: Dimens.getProportionalWidth(
                   context,
                   fontSize,
                 ),
@@ -266,7 +266,7 @@ class LessonInformation extends StatelessWidget {
               DateFormat(dateFormat).format(time),
               textAlign: TextAlign.center,
               style: Dimens.getProportionalFont(context, context.theme.textTheme.headlineSmall).copyWith(
-                fontSize: Dimens.getProportionalScreenWidth(context, 21),
+                fontSize: Dimens.getProportionalWidth(context, 21),
               ),
             ),
             const EmptyProportionalSpace(height: 10),
@@ -307,7 +307,7 @@ class LessonInformation extends StatelessWidget {
               'Haylee Caillier',
               textAlign: TextAlign.center,
               style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                fontSize: Dimens.getProportionalWidth(context, 16),
                 fontWeight: FontWeight.w500,
               ),
             ),
@@ -319,14 +319,14 @@ class LessonInformation extends StatelessWidget {
                 Text(
                   UIHelper.getIconFromNationalityCode('DE'),
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                    fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                    fontSize: Dimens.getProportionalWidth(context, 16),
                   ),
                 ),
                 const EmptyProportionalSpace(width: 8),
                 Text(
                   'Netherlands',
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                    fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                    fontSize: Dimens.getProportionalWidth(context, 14),
                   ),
                 ),
               ],
@@ -346,14 +346,14 @@ class LessonInformation extends StatelessWidget {
       context: context,
       icon: Icon(
         icon,
-        size: Dimens.getProportionalScreenWidth(context, 23),
+        size: Dimens.getProportionalWidth(context, 23),
         color: context.theme.colorScheme.primary,
       ),
       text: Text(
         text,
         style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
           color: context.theme.colorScheme.primary,
-          fontSize: Dimens.getProportionalScreenWidth(context, 20),
+          fontSize: Dimens.getProportionalWidth(context, 20),
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -364,7 +364,7 @@ class LessonInformation extends StatelessWidget {
     return Text(
       title,
       style: Dimens.getProportionalFont(context, context.theme.textTheme.titleMedium).copyWith(
-        fontSize: Dimens.getProportionalScreenWidth(context, 22),
+        fontSize: Dimens.getProportionalWidth(context, 22),
         fontWeight: FontWeight.w600,
       ),
     );
@@ -374,7 +374,7 @@ class LessonInformation extends StatelessWidget {
     return Text(
       content,
       style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-        fontSize: Dimens.getProportionalScreenWidth(context, 14),
+        fontSize: Dimens.getProportionalWidth(context, 14),
         fontWeight: FontWeight.w400,
       ),
     );
@@ -391,7 +391,7 @@ class LessonInformation extends StatelessWidget {
         Text(
           subheading,
           style: Dimens.getProportionalFont(context, context.theme.textTheme.titleMedium).copyWith(
-            fontSize: Dimens.getProportionalScreenWidth(context, 17),
+            fontSize: Dimens.getProportionalWidth(context, 17),
             fontWeight: FontWeight.w600,
           ),
         ),

@@ -20,21 +20,21 @@ class BoxButton extends StatelessWidget {
       decoration: BoxDecoration(
         color: context.theme.colorScheme.surfaceTint,
         borderRadius: BorderRadius.circular(
-          Dimens.getProportionalScreenWidth(context, 10),
+          Dimens.getProportionalWidth(context, 10),
         ),
         border: Border.all(color: context.theme.colorScheme.outline),
       ),
       margin: EdgeInsets.only(
-        bottom: Dimens.getProportionalScreenHeight(context, 10),
+        bottom: Dimens.getProportionalHeight(context, 10),
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: Dimens.getProportionalScreenWidth(context, 14),
-        vertical: Dimens.getProportionalScreenHeight(context, 9),
+        horizontal: Dimens.getProportionalWidth(context, 14),
+        vertical: Dimens.getProportionalHeight(context, 9),
       ),
       child: InkWell(
         onTap: onTap,
         child: Wrap(
-          spacing: Dimens.getProportionalScreenWidth(context, 14),
+          spacing: Dimens.getProportionalWidth(context, 14),
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             CircleAvatar(
@@ -42,7 +42,7 @@ class BoxButton extends StatelessWidget {
               child: Text(
                 circleText ?? '',
                 style: Dimens.getProportionalFont(context, context.theme.textTheme.titleMedium).copyWith(
-                  fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                  fontSize: Dimens.getProportionalWidth(context, 14),
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -50,7 +50,7 @@ class BoxButton extends StatelessWidget {
             Text(
               title,
               style: Dimens.getProportionalFont(context, context.theme.textTheme.titleMedium).copyWith(
-                fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                fontSize: Dimens.getProportionalWidth(context, 14),
                 fontWeight: FontWeight.w500,
               ),
             ),

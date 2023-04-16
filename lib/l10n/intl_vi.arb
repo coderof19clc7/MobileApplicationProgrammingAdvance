@@ -84,5 +84,15 @@
   "upcoming": "Upcoming",
   "settings": "Cài đặt",
   "upcomingIn": "bắt đầu sau",
-  "refreshTokenError": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại."
+  "refreshTokenError": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
+  "somethingRequiredError": "{somethings} là bắt buộc",
+  "password": "Mật khẩu",
+  "confirmPassword": "Xác nhận mật khẩu",
+  "confirmPasswordRequired": "Vui lòng xác nhận lại mật khẩu",
+  "confirmPasswordNotMatch": "Xác nhận mật khẩu không khớp",
+  "passwordRule": "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt",
+  "invalid": "Không hợp lệ",
+  "doSomethingsSuccess": "{somethings} thành công",
+  "server": "Máy chủ",
+  "loginFailedWithNoTokens": "Không thể xác thực phiên đăng nhập. Vui lòng thử lại sau."
 }

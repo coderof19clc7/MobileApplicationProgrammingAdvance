@@ -27,8 +27,8 @@ class TotalLessonTimeBanner extends StatelessWidget {
       ),
       padding: EdgeInsets.only(
         top: Dimens.getTopSafeAreaHeight(context)
-            + Dimens.getProportionalScreenHeight(context, 28),
-        bottom: Dimens.getProportionalScreenHeight(context, 28),
+            + Dimens.getProportionalHeight(context, 28),
+        bottom: Dimens.getProportionalHeight(context, 28),
       ),
       width: width,
       child: Column(
@@ -38,7 +38,7 @@ class TotalLessonTimeBanner extends StatelessWidget {
             topLabel,
             style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
               color: AppColors.white,
-              fontSize: Dimens.getProportionalScreenWidth(context, 15),
+              fontSize: Dimens.getProportionalWidth(context, 15),
             ),
           ),
           const EmptyProportionalSpace(height: 15),
@@ -47,32 +47,32 @@ class TotalLessonTimeBanner extends StatelessWidget {
             style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
               color: AppColors.white,
               fontWeight: FontWeight.w600,
-              fontSize: Dimens.getProportionalScreenWidth(context, 24),
+              fontSize: Dimens.getProportionalWidth(context, 24),
             ),
           ),
           const EmptyProportionalSpace(height: 15),
           PrimaryFillButton(
-            width: Dimens.getProportionalScreenWidth(context, 160),
+            width: Dimens.getProportionalWidth(context, 160),
             bgColor: AppColors.primaryBlue200,
             preferGradient: false,
             boxShadow: [Effects.normalShadowSM],
             borderRadiusValue: Dimens.getScreenWidth(context),
             onTap: onTap,
-            paddingVertical: Dimens.getProportionalScreenWidth(context, 5),
+            paddingVertical: Dimens.getProportionalWidth(context, 5),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
                   Icons.menu_book_rounded,
                   color: AppColors.primaryBlue500,
-                  size: Dimens.getProportionalScreenWidth(context, 17),
+                  size: Dimens.getProportionalWidth(context, 17),
                 ),
-                SizedBox(width: Dimens.getProportionalScreenWidth(context, 5)),
+                SizedBox(width: Dimens.getProportionalWidth(context, 5)),
                 Text(
                   buttonLabel,
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                     color: AppColors.primaryBlue500,
-                    fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                    fontSize: Dimens.getProportionalWidth(context, 14),
                   ),
                 ),
               ],

@@ -25,7 +25,7 @@ class BottomNavBar extends StatelessWidget {
           AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeInOut,
-            height: Dimens.getProportionalScreenHeight(context, 5),
+            height: Dimens.getProportionalHeight(context, 5),
             width: screenWidth / 5,
             margin: EdgeInsets.only(
               left: screenWidth / 5 * currentIndex,
@@ -115,7 +115,7 @@ class BottomNavBar extends StatelessWidget {
         onTap: () => onTap(),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            vertical: Dimens.getProportionalScreenHeight(context, 15),
+            vertical: Dimens.getProportionalHeight(context, 15),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -128,7 +128,7 @@ class BottomNavBar extends StatelessWidget {
                     context,
                     context.theme.textTheme.bodySmall,
                   ).copyWith(
-                    fontSize: Dimens.getProportionalScreenWidth(context, 10),
+                    fontSize: Dimens.getProportionalWidth(context, 10),
                     fontWeight: FontWeight.w500,
                     color: isSelected ? context.theme.colorScheme.primary : context.theme.colorScheme.onInverseSurface,
                   )),

@@ -23,27 +23,27 @@ class OnBoardingPage extends StatelessWidget {
               width: Dimens.getScreenWidth(context) / 2,
               height: Dimens.getScreenWidth(context) / 2,
             ),
-            SizedBox(height: Dimens.getProportionalScreenHeight(context, 40)),
+            SizedBox(height: Dimens.getProportionalHeight(context, 40)),
             Text(
               S.current.introducingText,
               textAlign: TextAlign.center,
               style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
-                fontSize: Dimens.getProportionalScreenWidth(context, 32),
+                fontSize: Dimens.getProportionalWidth(context, 32),
                 fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(height: Dimens.getProportionalScreenHeight(context, 40)),
+            SizedBox(height: Dimens.getProportionalHeight(context, 40)),
             PrimaryFillButton(
               onTap: () {
                 Navigator.of(context).pushReplacementNamed(RouteNames.login);
               },
-              width: Dimens.getScreenWidth(context) - Dimens.getProportionalScreenWidth(context, 100),
-              paddingVertical: Dimens.getProportionalScreenHeight(context, 16),
+              width: Dimens.getScreenWidth(context) - Dimens.getProportionalWidth(context, 100),
+              paddingVertical: Dimens.getProportionalHeight(context, 16),
               borderRadiusValue: Dimens.getScreenWidth(context),
               child: Text(
                 S.current.getStarted,
                 style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
-                  fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                  fontSize: Dimens.getProportionalWidth(context, 16),
                   fontWeight: FontWeight.w500,
                 ),
               ),

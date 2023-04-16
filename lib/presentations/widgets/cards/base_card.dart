@@ -29,7 +29,7 @@ abstract class BaseCard extends StatelessWidget {
 
   Widget buildFirstChild(BuildContext context) {
     return SizedBox(
-      width: direction == CardDirection.row ? Dimens.getProportionalScreenWidth(context, 90) : Dimens.getScreenWidth(context),
+      width: direction == CardDirection.row ? Dimens.getProportionalWidth(context, 90) : Dimens.getScreenWidth(context),
       child: AspectRatio(
         aspectRatio: direction == CardDirection.row ? 1 : 2,
         child: firstChild ??
@@ -51,7 +51,7 @@ abstract class BaseCard extends StatelessWidget {
       children: [
         buildFirstChild(context),
         SizedBox(
-          width: Dimens.getProportionalScreenWidth(
+          width: Dimens.getProportionalWidth(
             context,
             firstSecondDistance,
           ),
@@ -67,7 +67,7 @@ abstract class BaseCard extends StatelessWidget {
       children: [
         buildFirstChild(context),
         SizedBox(
-            height: Dimens.getProportionalScreenHeight(
+            height: Dimens.getProportionalHeight(
           context,
           firstSecondDistance,
         )),
@@ -83,11 +83,11 @@ abstract class BaseCard extends StatelessWidget {
       child: Container(
         padding: padding ??
             EdgeInsets.all(
-              Dimens.getProportionalScreenWidth(context, 14),
+              Dimens.getProportionalWidth(context, 14),
             ),
         margin: margin ??
             EdgeInsets.only(
-              bottom: Dimens.getProportionalScreenHeight(context, 15),
+              bottom: Dimens.getProportionalHeight(context, 15),
             ),
         width: width ?? Dimens.getScreenWidth(context),
         decoration: BoxDecoration(

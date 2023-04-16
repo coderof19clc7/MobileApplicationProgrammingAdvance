@@ -35,7 +35,7 @@ class RowIconTextInformation extends StatelessWidget {
               : null,
           padding: isPilled
               ? EdgeInsets.symmetric(
-            horizontal: Dimens.getProportionalScreenWidth(context, 3),
+            horizontal: Dimens.getProportionalWidth(context, 3),
           )
               : null,
           child: text,

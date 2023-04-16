@@ -72,7 +72,7 @@ class CourseInformationPage extends StatelessWidget {
                     Text(
                       'Life in the Internet Age',
                       style: Dimens.getProportionalFont(context, context.theme.textTheme.headlineLarge).copyWith(
-                        fontSize: Dimens.getProportionalScreenWidth(context, 21),
+                        fontSize: Dimens.getProportionalWidth(context, 21),
                       ),
                     ),
 
@@ -102,7 +102,7 @@ class CourseInformationPage extends StatelessWidget {
                         Text(
                           '|',
                           style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                            fontSize: Dimens.getProportionalScreenWidth(context, 14),
+                            fontSize: Dimens.getProportionalWidth(context, 14),
                             fontWeight: FontWeight.w300,
                           ),
                         ),
@@ -121,7 +121,7 @@ class CourseInformationPage extends StatelessWidget {
                     Text(
                       S.current.labelAbout,
                       style: Dimens.getProportionalFont(context, context.theme.textTheme.displayMedium).copyWith(
-                        fontSize: Dimens.getProportionalScreenWidth(context, 20),
+                        fontSize: Dimens.getProportionalWidth(context, 20),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -165,7 +165,7 @@ class CourseInformationPage extends StatelessWidget {
                     Text(
                       S.current.labelTopics,
                       style: Dimens.getProportionalFont(context, context.theme.textTheme.displayMedium).copyWith(
-                        fontSize: Dimens.getProportionalScreenWidth(context, 20),
+                        fontSize: Dimens.getProportionalWidth(context, 20),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -207,18 +207,18 @@ class CourseInformationPage extends StatelessWidget {
   }) {
     return Wrap(
       crossAxisAlignment: WrapCrossAlignment.center,
-      spacing: Dimens.getProportionalScreenWidth(context, 5),
+      spacing: Dimens.getProportionalWidth(context, 5),
       children: [
         Icon(
           iconData,
           color: context.theme.colorScheme.onSurfaceVariant,
-          size: Dimens.getProportionalScreenWidth(context, 20),
+          size: Dimens.getProportionalWidth(context, 20),
         ),
         Text(
           text,
           style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
             color: context.theme.colorScheme.onSurfaceVariant,
-            fontSize: Dimens.getProportionalScreenWidth(context, 16),
+            fontSize: Dimens.getProportionalWidth(context, 16),
             fontWeight: FontWeight.w500,
           ),
         )
@@ -230,7 +230,7 @@ class CourseInformationPage extends StatelessWidget {
     return Text(
       text,
       style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-        fontSize: Dimens.getProportionalScreenWidth(context, 14),
+        fontSize: Dimens.getProportionalWidth(context, 14),
         fontWeight: FontWeight.w300,
       ),
     );
@@ -238,8 +238,8 @@ class CourseInformationPage extends StatelessWidget {
 
   Widget buildCategories(BuildContext context, List<String> categories) {
     return Wrap(
-      spacing: Dimens.getProportionalScreenWidth(context, 8),
-      runSpacing: Dimens.getProportionalScreenHeight(context, 8),
+      spacing: Dimens.getProportionalWidth(context, 8),
+      runSpacing: Dimens.getProportionalHeight(context, 8),
       children: categories.map((text) {
         return FakeChip(
           text: text,
@@ -260,12 +260,12 @@ class CourseInformationPage extends StatelessWidget {
       icon: Icon(
         icon,
         color: context.theme.colorScheme.onSurfaceVariant,
-        size: Dimens.getProportionalScreenWidth(context, 20),
+        size: Dimens.getProportionalWidth(context, 20),
       ),
       text: Text(
         text,
         style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-          fontSize: Dimens.getProportionalScreenWidth(context, 14),
+          fontSize: Dimens.getProportionalWidth(context, 14),
           fontWeight: FontWeight.w300,
         ),
       ),

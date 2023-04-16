@@ -23,45 +23,45 @@ class LessonButtonSet extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Wrap(
-          spacing: Dimens.getProportionalScreenWidth(context, 10),
+          spacing: Dimens.getProportionalWidth(context, 10),
           children: [
             PrimaryOutlineButton(
-              width: Dimens.getProportionalScreenWidth(context, 45),
-              paddingVertical: Dimens.getProportionalScreenHeight(
+              width: Dimens.getProportionalWidth(context, 45),
+              paddingVertical: Dimens.getProportionalHeight(
                 context, verticalPadding,
               ),
               onTap: onTapRecord,
               child: Icon(
                 Icons.missed_video_call_rounded,
                 color: AppColors.primaryBlue400,
-                size: Dimens.getProportionalScreenWidth(context, iconSize),
+                size: Dimens.getProportionalWidth(context, iconSize),
               ),
             ),
             PrimaryOutlineButton(
-              width: Dimens.getProportionalScreenWidth(context, 45),
-              paddingVertical: Dimens.getProportionalScreenHeight(
+              width: Dimens.getProportionalWidth(context, 45),
+              paddingVertical: Dimens.getProportionalHeight(
                 context, verticalPadding,
               ),
               onTap: onTapReview,
               child: Icon(
                 Icons.rate_review_rounded,
                 color: AppColors.primaryBlue400,
-                size: Dimens.getProportionalScreenWidth(context, iconSize),
+                size: Dimens.getProportionalWidth(context, iconSize),
               ),
             ),
           ],
         ),
         const EmptyProportionalSpace(height: 10),
         PrimaryFillButton(
-          width: Dimens.getProportionalScreenWidth(context, 100),
-          paddingVertical: Dimens.getProportionalScreenHeight(
+          width: Dimens.getProportionalWidth(context, 100),
+          paddingVertical: Dimens.getProportionalHeight(
             context, verticalPadding,
           ),
           onTap: onTapFeedback,
           child: Icon(
             Icons.grading_rounded,
             color: AppColors.white,
-            size: Dimens.getProportionalScreenWidth(context, iconSize),
+            size: Dimens.getProportionalWidth(context, iconSize),
           ),
         ),
       ],

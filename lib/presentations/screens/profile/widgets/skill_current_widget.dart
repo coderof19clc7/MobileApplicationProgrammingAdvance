@@ -27,7 +27,7 @@ class SkillCurrentWidget extends StatelessWidget {
             const EmptyProportionalSpace(height: 15),
             Wrap(
               clipBehavior: Clip.hardEdge,
-              spacing: Dimens.getProportionalScreenWidth(context, 8),
+              spacing: Dimens.getProportionalWidth(context, 8),
               children: [
                 buildItem(context),
                 buildItem(context),
@@ -47,8 +47,8 @@ class SkillCurrentWidget extends StatelessWidget {
         color: context.theme.colorScheme.primary,
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: Dimens.getProportionalScreenWidth(context, 19),
-        vertical: Dimens.getProportionalScreenWidth(context, 5),
+        horizontal: Dimens.getProportionalWidth(context, 19),
+        vertical: Dimens.getProportionalWidth(context, 5),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,

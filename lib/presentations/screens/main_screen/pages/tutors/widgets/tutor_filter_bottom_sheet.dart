@@ -37,7 +37,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
       children: [
         Padding(
           padding: EdgeInsets.only(
-            left: Dimens.getProportionalScreenWidth(context, 16),
+            left: Dimens.getProportionalWidth(context, 16),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -61,7 +61,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
                     // category filter
                     return Container(
                       margin: EdgeInsets.only(
-                        right: Dimens.getProportionalScreenWidth(
+                        right: Dimens.getProportionalWidth(
                           context,
                           index == 14 ? 16 : 10,
                         ),
@@ -109,7 +109,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
                           TextSpan(text: '  ' + item),
                         ],
                         style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                          fontSize: Dimens.getProportionalScreenWidth(
+                          fontSize: Dimens.getProportionalWidth(
                             context,
                             12,
                           ),
@@ -155,7 +155,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
         const EmptyProportionalSpace(height: 25),
 
         Divider(
-          height: Dimens.getProportionalScreenHeight(context, 2),
+          height: Dimens.getProportionalHeight(context, 2),
           color: context.theme.colorScheme.onInverseSurface,
         ),
 
@@ -164,7 +164,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
         // button field
         Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: Dimens.getProportionalScreenWidth(context, 16),
+            horizontal: Dimens.getProportionalWidth(context, 16),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
@@ -172,7 +172,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
               PrimaryOutlineButton(
                 onTap: () {},
                 width: Dimens.getScreenWidth(context) * 0.21282,
-                paddingVertical: Dimens.getProportionalScreenHeight(context, 5),
+                paddingVertical: Dimens.getProportionalHeight(context, 5),
                 borderRadiusValue: Dimens.getScreenWidth(context),
                 preferGradient: false,
                 child: Text(
@@ -189,7 +189,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
               PrimaryFillButton(
                 onTap: () {},
                 width: Dimens.getScreenWidth(context) * 0.21282,
-                paddingVertical: Dimens.getProportionalScreenHeight(context, 5),
+                paddingVertical: Dimens.getProportionalHeight(context, 5),
                 borderRadiusValue: Dimens.getScreenWidth(context),
                 preferGradient: false,
                 hasShadow: false,

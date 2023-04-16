@@ -2,79 +2,93 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
+import 'package:one_one_learn/core/managers/local_manager.dart';
 import 'package:one_one_learn/core/models/responses/auth/auth_response.dart';
+import 'package:one_one_learn/core/models/responses/auth/tokens.dart';
+import 'package:one_one_learn/core/network/network_manager.dart';
 import 'package:one_one_learn/core/network/repositories/auth_repository.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/utils/extensions/string_extensions.dart';
 
-part 'sign_up_state.dart';
+part 'login_state.dart';
 
-class SignUpCubit extends WidgetCubit<SignUpState> {
-  SignUpCubit() : super(widgetState: const SignUpState());
+class LoginCubit extends WidgetCubit<LoginState> {
+  LoginCubit() : super(widgetState: const LoginState());
 
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
   final authRepository = injector<AuthRepository>();
 
   @override
   void onWidgetCreated() {}
 
-  bool validateInput() {
+  int validateInput() {
+    var result = 1;
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
-    final confirmPassword = confirmPasswordController.text.trim();
-    var emailError = '', passwordError = '', confirmPasswordError = '';
+    var emailError = '', passwordError = '';
 
     // clear error before validate
     emit(state.copyWith(
       emailError: emailError,
       passwordError: passwordError,
-      confirmPasswordError: confirmPasswordError,
     ));
 
     if (email.isEmpty) {
       emailError = S.current.somethingRequiredError('Email');
+      result = 0;
     } else if (!email.isValidEmail()) {
-      emailError = '${S.current.invalid} email';
+      result = -1;
     }
     if (password.isEmpty) {
       passwordError = S.current.somethingRequiredError(S.current.password);
+      result = 0;
     } else if (!password.isValidPassword()) {
-      passwordError = '${S.current.invalid} ${S.current.password.toLowerCase()}}';
-    }
-    if (confirmPassword.isEmpty) {
-      confirmPasswordError = S.current.confirmPasswordRequired;
-    } else if (!confirmPassword.isValidConfirmPassword(password)) {
-      confirmPasswordError = S.current.confirmPasswordNotMatch;
+      result = -1;
     }
 
     // update error
     emit(state.copyWith(
       emailError: emailError,
       passwordError: passwordError,
-      confirmPasswordError: confirmPasswordError,
     ));
 
-    return emailError.isEmpty && passwordError.isEmpty && confirmPasswordError.isEmpty;
+    return result;
   }
 
-  Future<void> onSignUp() async {
+  Future<void> onLoginSucceeded(Tokens tokens) async {
+    // save access and refresh token to local
+    await injector<LocalManager>().saveTokens(tokens);
+
+    // re-init private dio with new access token
+    injector<NetworkManager>().initPrivateDio();
+
+    // navigate to main screen
+    navigateToNextBusinessLogic();
+  }
+
+  Future<void> onLogin() async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
-    if (!validateInput()) {
+    if (validateInput() < 1) {
       return;
     }
 
-    final signUpResponse = await fetchApi<AuthResponse>(
+    final loginResponse = await fetchApi<AuthResponse>(
       () => authRepository.register(email, password),
     );
 
-    if (signUpResponse != null) {
-      if (signUpResponse.statusCode == ApiStatusCode.success) {
-        showSuccessToast(S.current.doSomethingsSuccess(S.current.signUp));
-        navigateToNextBusinessLogic();
+    if (loginResponse != null) {
+      if (loginResponse.statusCode == ApiStatusCode.success) {
+        if (loginResponse.tokens != null) {
+          showSuccessToast(S.current.doSomethingsSuccess(S.current.login));
+          await onLoginSucceeded(loginResponse.tokens!);
+        } else {
+          showErrorToast(
+            '${S.current.server} ${S.current.loginFailedWithNoTokens.toLowerCase()}',
+          );
+        }
       }
     }
   }
@@ -83,7 +97,6 @@ class SignUpCubit extends WidgetCubit<SignUpState> {
   Future<void> close() async {
     emailController.dispose();
     passwordController.dispose();
-    confirmPasswordController.dispose();
     return super.close();
   }
 }

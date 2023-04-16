@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/presentations/screens/sign_up/bloc/sign_up_cubit.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_percent_space.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
@@ -27,8 +29,8 @@ class SignUpPage extends StatelessWidget {
             return SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(
-                  left: Dimens.getProportionalScreenWidth(context, 60),
-                  right: Dimens.getProportionalScreenWidth(context, 60),
+                  left: Dimens.getProportionalWidth(context, 60),
+                  right: Dimens.getProportionalWidth(context, 60),
                   top: Dimens.getScreenHeight(context) * 0.07,
                 ),
                 width: Dimens.getScreenWidth(context),
@@ -41,7 +43,7 @@ class SignUpPage extends StatelessWidget {
                       child: Text(
                         S.current.signUpTitle,
                         style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
-                          fontSize: Dimens.getProportionalScreenWidth(context, 32),
+                          fontSize: Dimens.getProportionalWidth(context, 32),
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -58,22 +60,36 @@ class SignUpPage extends StatelessWidget {
                       leftWidget: Icon(
                         Icons.email_rounded,
                         color: context.theme.colorScheme.onInverseSurface,
-                        size: Dimens.getProportionalScreenWidth(context, 24),
+                        size: Dimens.getProportionalWidth(context, 24),
                       ),
                     ),
                     const EmptyProportionalPercentSpace(
                       percentHeight: textFieldsSpaceBetweenPercent,
                     ),
-                    TextFieldFill(
-                      textController: context.read<SignUpCubit>().passwordController,
-                      errorText: state.passwordError,
-                      hintText: S.current.password,
-                      leftWidget: Icon(
-                        Icons.lock_rounded,
-                        color: context.theme.colorScheme.onInverseSurface,
-                        size: Dimens.getProportionalScreenWidth(context, 24),
-                      ),
-                      canTextBeObscured: true,
+                    Column(
+                      children: [
+                        TextFieldFill(
+                          textController: context.read<SignUpCubit>().passwordController,
+                          errorText: state.passwordError,
+                          hintText: S.current.password,
+                          leftWidget: Icon(
+                            Icons.lock_rounded,
+                            color: context.theme.colorScheme.onInverseSurface,
+                            size: Dimens.getProportionalWidth(context, 24),
+                          ),
+                          canTextBeObscured: true,
+                        ),
+                        const EmptyProportionalSpace(height: 1),
+                        Text(
+                          S.current.passwordRule,
+                          style: Dimens.getProportionalFont(
+                            context, context.theme.textTheme.bodyMedium,
+                          ).copyWith(
+                            color: state.passwordError?.isNotEmpty == true
+                                ? AppColors.red700 : null,
+                          ),
+                        ),
+                      ],
                     ),
                     const EmptyProportionalPercentSpace(
                       percentHeight: textFieldsSpaceBetweenPercent,
@@ -85,7 +101,7 @@ class SignUpPage extends StatelessWidget {
                       leftWidget: Icon(
                         Icons.lock_reset_rounded,
                         color: context.theme.colorScheme.onInverseSurface,
-                        size: Dimens.getProportionalScreenWidth(context, 24),
+                        size: Dimens.getProportionalWidth(context, 24),
                       ),
                       canTextBeObscured: true,
                     ),
@@ -98,13 +114,13 @@ class SignUpPage extends StatelessWidget {
                         context.read<SignUpCubit>().onSignUp();
                       },
                       width: Dimens.getScreenWidth(context),
-                      paddingVertical: Dimens.getProportionalScreenHeight(context, 14),
+                      paddingVertical: Dimens.getProportionalHeight(context, 14),
                       borderRadiusValue: Dimens.getScreenWidth(context),
                       child: Text(
                         S.current.signUp,
                         style: Dimens.getProportionalFont(context, context.theme.textTheme.displaySmall).copyWith(
                           fontWeight: FontWeight.w500,
-                          fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                          fontSize: Dimens.getProportionalWidth(context, 16),
                         ),
                       ),
                     ),

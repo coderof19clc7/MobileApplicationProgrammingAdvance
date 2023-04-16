@@ -20,7 +20,7 @@ class SimpleTransparentAppBar extends StatelessWidget implements PreferredSizeWi
       elevation: 0,
       leading: Container(
         margin: EdgeInsets.only(
-          left: Dimens.getProportionalScreenWidth(context, 15),
+          left: Dimens.getProportionalWidth(context, 15),
         ),
         child: GestureDetector(
           onTap: () {
@@ -29,7 +29,7 @@ class SimpleTransparentAppBar extends StatelessWidget implements PreferredSizeWi
           child: Icon(
             Icons.arrow_back_outlined,
             color: context.theme.colorScheme.onBackground,
-            size: Dimens.getProportionalScreenWidth(context, 28),
+            size: Dimens.getProportionalWidth(context, 28),
           ),
         ),
       ),

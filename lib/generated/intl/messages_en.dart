@@ -20,6 +20,10 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
+  static String m0(somethings) => "${somethings} successfully";
+
+  static String m1(somethings) => "${somethings} is required";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
@@ -37,9 +41,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Are you sure you want to cancel this class?"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
+        "confirmPasswordNotMatch": MessageLookupByLibrary.simpleMessage(
+            "Confirm password does not match"),
+        "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
+            "Please confirm your password"),
         "courses": MessageLookupByLibrary.simpleMessage("Courses"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
+        "doSomethingsSuccess": m0,
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
@@ -54,6 +63,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "interest": MessageLookupByLibrary.simpleMessage("Interest"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Improve yourself with great tutors!"),
+        "invalid": MessageLookupByLibrary.simpleMessage("Invalid"),
         "isMarked": MessageLookupByLibrary.simpleMessage("Marked"),
         "isNotMarked": MessageLookupByLibrary.simpleMessage("Not marked"),
         "labelAbout": MessageLookupByLibrary.simpleMessage("About"),
@@ -75,6 +85,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "lessonStatus": MessageLookupByLibrary.simpleMessage("Lesson status"),
         "listening": MessageLookupByLibrary.simpleMessage("Listening"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
+        "loginFailedWithNoTokens": MessageLookupByLibrary.simpleMessage(
+            "Cannot verify login session. Please try again later."),
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Login to your account"),
         "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
@@ -87,6 +99,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "overallComment":
             MessageLookupByLibrary.simpleMessage("Overall comment"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
+        "passwordRule": MessageLookupByLibrary.simpleMessage(
+            "Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Preferred schedule"),
@@ -105,12 +119,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Find a course"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Find a tutor"),
+        "server": MessageLookupByLibrary.simpleMessage("Server"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Skill level"),
+        "somethingRequiredError": m1,
         "sortFavoriteFromHighest":
             MessageLookupByLibrary.simpleMessage("From most favorited"),
         "sortFavoriteFromLowest":

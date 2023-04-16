@@ -49,20 +49,20 @@ class _CoursesPageState extends State<CoursesPage> with AutomaticKeepAliveClient
                       icon: const Icon(Icons.menu_book_rounded),
                       text: S.current.courses,
                       iconMargin: EdgeInsets.only(
-                        bottom: Dimens.getProportionalScreenHeight(context, 5),
+                        bottom: Dimens.getProportionalHeight(context, 5),
                       ),
                     ),
                     Tab(
                       icon: const Icon(Icons.book_rounded),
                       text: S.current.books,
                       iconMargin: EdgeInsets.only(
-                        bottom: Dimens.getProportionalScreenHeight(context, 5),
+                        bottom: Dimens.getProportionalHeight(context, 5),
                       ),
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: Dimens.getProportionalScreenHeight(context, 20),
+                  height: Dimens.getProportionalHeight(context, 20),
                 ),
                 const Expanded(
                   child: TabBarView(

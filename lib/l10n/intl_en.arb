@@ -85,5 +85,33 @@
   "upcoming": "Upcoming",
   "settings": "Settings",
   "upcomingIn": "in",
-  "refreshTokenError": "Your session has expired. Please login again."
+  "refreshTokenError": "Your session has expired. Please login again.",
+  "somethingRequiredError": "{somethings} is required",
+  "@somethingRequiredError": {
+    "description": "An error message appear when user miss an required field",
+    "placeholders": {
+      "somethings": {
+        "type": "String",
+        "example": "Email"
+      }
+    }
+  },
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "confirmPasswordRequired": "Please confirm your password",
+  "confirmPasswordNotMatch": "Confirm password does not match",
+  "passwordRule": "Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character",
+  "invalid": "Invalid",
+  "doSomethingsSuccess": "{somethings} successfully",
+  "@doSomethingsSuccess": {
+    "description": "A message appear when user do something successfully",
+    "placeholders": {
+      "somethings": {
+        "type": "String",
+        "example": "Login"
+      }
+    }
+  },
+  "server": "Server",
+  "loginFailedWithNoTokens": "Cannot verify login session. Please try again later."
 }

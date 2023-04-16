@@ -46,7 +46,7 @@ class _TextFieldFillState extends State<TextFieldFill> {
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(
         hintStyle: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-          fontSize: Dimens.getProportionalScreenWidth(context, 14),
+          fontSize: Dimens.getProportionalWidth(context, 14),
           color: context.theme.colorScheme.onInverseSurface,
         ),
         filled: true,

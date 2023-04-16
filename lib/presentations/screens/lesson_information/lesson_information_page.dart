@@ -12,9 +12,9 @@ class LessonInformationPage extends StatelessWidget {
       appBar: const SimpleTransparentAppBar(),
       body: Container(
         padding: EdgeInsets.only(
-          top: Dimens.getProportionalScreenHeight(context, 10),
-          left: Dimens.getProportionalScreenWidth(context, 14),
-          right: Dimens.getProportionalScreenWidth(context, 14),
+          top: Dimens.getProportionalHeight(context, 10),
+          left: Dimens.getProportionalWidth(context, 14),
+          right: Dimens.getProportionalWidth(context, 14),
         ),
         child: SingleChildScrollView(
           child: Column(

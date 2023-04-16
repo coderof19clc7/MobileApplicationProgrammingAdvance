@@ -25,8 +25,8 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
         child: Container(
           padding: EdgeInsets.only(
             top: Dimens.getTopSafeAreaHeight(context) * 2,
-            left: Dimens.getProportionalScreenWidth(context, 16),
-            right: Dimens.getProportionalScreenWidth(context, 16),
+            left: Dimens.getProportionalWidth(context, 16),
+            right: Dimens.getProportionalWidth(context, 16),
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -50,8 +50,8 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
       title: S.current.account,
       bodyWidget: Container(
         padding: EdgeInsets.symmetric(
-          vertical: Dimens.getProportionalScreenWidth(context, 10),
-          horizontal: Dimens.getProportionalScreenWidth(context, 14),
+          vertical: Dimens.getProportionalWidth(context, 10),
+          horizontal: Dimens.getProportionalWidth(context, 14),
         ),
         child: Column(
           children: [
@@ -79,8 +79,8 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
       title: S.current.tutoring,
       bodyWidget: Container(
         padding: EdgeInsets.symmetric(
-          vertical: Dimens.getProportionalScreenWidth(context, 10),
-          horizontal: Dimens.getProportionalScreenWidth(context, 14),
+          vertical: Dimens.getProportionalWidth(context, 10),
+          horizontal: Dimens.getProportionalWidth(context, 14),
         ),
         child: Column(
           children: [
@@ -100,8 +100,8 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
       title: S.current.app,
       bodyWidget: Container(
         padding: EdgeInsets.symmetric(
-          vertical: Dimens.getProportionalScreenWidth(context, 10),
-          horizontal: Dimens.getProportionalScreenWidth(context, 14),
+          vertical: Dimens.getProportionalWidth(context, 10),
+          horizontal: Dimens.getProportionalWidth(context, 14),
         ),
         child: Column(
           children: [
@@ -128,7 +128,7 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
       hasShadow: false,
       borderRadiusValue: Dimens.getScreenWidth(context) * 0.02,
       bgColor: context.theme.colorScheme.errorContainer,
-      paddingVertical: Dimens.getProportionalScreenWidth(context, 8),
+      paddingVertical: Dimens.getProportionalWidth(context, 8),
       splashColor: AppColors.red700.withOpacity(0.4),
       width: Dimens.getScreenWidth(context),
       child: Row(

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:one_one_learn/configs/app_configs/app_configs.dart';
-import 'package:one_one_learn/configs/app_configs/app_navigator.dart';
+import 'package:one_one_learn/configs/app_configs/app_global_navigator.dart';
 import 'package:one_one_learn/configs/app_configs/app_router.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/stylings/app_themes.dart';
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     final appConfig = injector<AppConfig>();
     return MaterialApp(
-      navigatorKey: AppNavigator.navigatorKey,
+      navigatorKey: AppGlobalNavigator.navigatorKey,
       title: appConfig.appName,
       onGenerateRoute: AppRouter.onGenerateRoute,
       theme: AppThemes.lightTheme,
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       initialRoute: appConfig.initialRoute,
+      builder: FToastBuilder(),
     );
   }
 }

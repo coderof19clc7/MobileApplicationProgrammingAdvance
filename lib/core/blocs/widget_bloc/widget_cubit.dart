@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -13,6 +14,7 @@ import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/core/managers/local_manager.dart';
 import 'package:one_one_learn/core/models/responses/base_response.dart';
+import 'package:one_one_learn/utils/toast_helper.dart';
 part 'widget_state.dart';
 abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateType> {
   void onWidgetCreated();
@@ -27,42 +29,109 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
   }
 
   final localManager = injector<LocalManager>();
-
-  void showToast(String? message, {
-    Toast toastLength = Toast.LENGTH_LONG,
-    ToastGravity? toastGravity,
-    int timeInSecForIosWeb = 1,
-    double? fontSize,
-    Color? backgroundColor,
-    Color? textColor,
-    bool webShowClose = false,
-  }) {
-    if ((message?.isNotEmpty ?? false) == true) {
-      Fluttertoast.showToast(
-        msg: message!,
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: toastGravity ?? ToastGravity.TOP,
-        backgroundColor: backgroundColor,
-        textColor: textColor,
-        fontSize: fontSize,
-      );
+  Timer? timer;
+  
+  void changeLoadingState({required bool isLoading}) {
+    if (isLoading) {
+      emit(state.showLoading() as StateType);
+    } else {
+      emit(state.hideLoading() as StateType);
     }
   }
+  
+  void navigateToNextBusinessLogic() {
+    emit(state.navigateToLogin() as StateType);
+  }
 
-  void showErrorToast(String? message, [ToastGravity? toastGravity]) =>
-      showToast(
-        message,backgroundColor: AppColors.red400,
-        toastGravity: toastGravity,
-      );
-  void showSuccessToast(String? message, [ToastGravity? toastGravity]) =>
-      showToast(
-        message, backgroundColor: AppColors.green400,
-        toastGravity: toastGravity,
-      );
-  void showNormalToast(String? message, [ToastGravity? toastGravity]) =>
-      showToast(
-        message, backgroundColor: AppColors.grey, toastGravity: toastGravity,
-      );
+  void resetStatusToast() {
+    emit(state.hideToast() as StateType);
+  }
+
+  // void showToast(String? message, {
+  //   Toast toastLength = Toast.LENGTH_LONG,
+  //   ToastGravity? toastGravity,
+  //   int timeInSecForIosWeb = 1,
+  //   double? fontSize,
+  //   Color? backgroundColor,
+  //   Color? textColor,
+  //   bool webShowClose = false,
+  // }) {
+  //   if ((message?.isNotEmpty ?? false) == true) {
+  //     Fluttertoast.showToast(
+  //       msg: message!,
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       gravity: toastGravity ?? ToastGravity.TOP,
+  //       backgroundColor: backgroundColor,
+  //       textColor: textColor,
+  //       fontSize: fontSize,
+  //     );
+  //   }
+  // }
+  //
+  // void showErrorToast(String? message, [ToastGravity? toastGravity]) =>
+  //     showToast(
+  //       message,backgroundColor: AppColors.red400,
+  //       toastGravity: toastGravity,
+  //     );
+  // void showSuccessToast(String? message, [ToastGravity? toastGravity]) =>
+  //     showToast(
+  //       message, backgroundColor: AppColors.green400,
+  //       toastGravity: toastGravity,
+  //     );
+  // void showNormalToast(String? message, [ToastGravity? toastGravity]) =>
+  //     showToast(
+  //       message, backgroundColor: AppColors.grey, toastGravity: toastGravity,
+  //     );
+
+  // void showToast(String? message, {
+  //   Toast toastLength = Toast.LENGTH_LONG,
+  //   ToastGravity? toastGravity,
+  //   int timeInSecForIosWeb = 1,
+  //   double? fontSize,
+  //   Color? backgroundColor,
+  //   Color? textColor,
+  //   bool webShowClose = false,
+  // }) {
+  //   if ((message?.isNotEmpty ?? false) == true) {
+  //     Fluttertoast.showToast(
+  //       msg: message!,
+  //       toastLength: Toast.LENGTH_SHORT,
+  //       gravity: toastGravity ?? ToastGravity.TOP,
+  //       backgroundColor: backgroundColor,
+  //       textColor: textColor,
+  //       fontSize: fontSize,
+  //     );
+  //   }
+  // }
+  //
+  // void showErrorToast(String? message, [ToastGravity? toastGravity]) =>
+  //     showToast(
+  //       message,backgroundColor: AppColors.red400,
+  //       toastGravity: toastGravity,
+  //     );
+  // void showSuccessToast(String? message, [ToastGravity? toastGravity]) =>
+  //     showToast(
+  //       message, backgroundColor: AppColors.green400,
+  //       toastGravity: toastGravity,
+  //     );
+  // void showNormalToast(String? message, [ToastGravity? toastGravity]) =>
+  //     showToast(
+  //       message, backgroundColor: AppColors.grey, toastGravity: toastGravity,
+  //     );
+
+  void showStatusToast(String? message, StatusToastType statusToastType) {
+    if (message?.isNotEmpty == true) {
+      emit(state.showToast(message!, statusToastType) as StateType);
+    }
+  }
+  void showNormalToast(String? message) =>
+      showStatusToast(message, StatusToastType.info);
+  void showSuccessToast(String? message) =>
+      showStatusToast(message, StatusToastType.success);
+  void showWarningToast(String? message) =>
+      showStatusToast(message, StatusToastType.warning);
+  void showErrorToast(String? message) =>
+      showStatusToast(message, StatusToastType.error);
 
   Future<bool> checkInternetConnection() async {
     final currentConnection = await Connectivity().checkConnectivity();
@@ -102,7 +171,7 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
       //   status: 'loading...',
       //   maskType: EasyLoadingMaskType.none,
       // );
-      emit(state.showLoading() as StateType);
+      changeLoadingState(isLoading: true);
     }
 
     try {
@@ -112,14 +181,13 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
         response,
         showLoading: showLoading,
         showToastError: showToastError,
-        showToastException: showToastException,
       );
       return response;
     } catch (err) {
       if (showLoading) {
-        emit(state.hideLoading() as StateType);
+        changeLoadingState(isLoading: false);
       }
-      _handleApiError(err, showToastException);
+      _handleApiError(err, showToastException: showToastException);
       return null;
     }
   }
@@ -133,14 +201,14 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
   }
 
   Future<void> _handleApiResponse<ResponseType extends BaseResponse>(
-      ResponseType? response, {
-        bool showLoading = true,
-        bool showToastError = true,
-        bool showToastException = true,
-      }) async {
+    ResponseType? response,{
+      bool showLoading = true,
+      bool showToastError = true,
+    }
+  ) async {
     //hide loading after receive api response
     if (showLoading) {
-      emit(state.hideLoading() as StateType);
+      changeLoadingState(isLoading: false);
     }
 
     if (response?.statusCode == ApiStatusCode.logInSessionExpired
@@ -148,18 +216,20 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
     ) {
       await localManager.clearDataLocalLogout();
       if (!isClosed) {
+        ApiConstants.refreshTokenError.let(showErrorToast);
         emit(state.navigateToLogin() as StateType);
         await close();
       }
       return;
     }
 
-    if (response?.statusCode != null && showToastError) {
-      response?.message?.let(showErrorToast);
+    if (!isClosed && response?.statusCode != ApiStatusCode.success && showToastError) {
+      // response?.message?.let(showErrorToast);
+      response?.message?.let(showWarningToast);
     }
   }
 
-  Future _handleApiError(err, showPopupException) async {
+  Future _handleApiError(err, {required bool showToastException}) async {
     if (err is DioError){
       if (kDebugMode) {
         log('api error:');
@@ -176,8 +246,9 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
     }
 
     //only show when cubit active, not show when cubit is closed
-    if (!isClosed) {
-      showErrorToast(err.toString());
+    if (!isClosed && showToastException) {
+      // showErrorToast(err.toString());
+      err.toString().let(showErrorToast);
       // ErrorDialog(
       //   errorTitle: "Error occurred",
       //   errorStringContent: err.toString(),

@@ -188,12 +188,12 @@ class NormalBottomSheetDialog extends StatelessWidget {
             child: Container(
               width: Dimens.getScreenWidth(context),
               padding: EdgeInsets.only(
-                top: Dimens.getProportionalScreenHeight(
+                top: Dimens.getProportionalHeight(
                   context,
                   isShowButtonCancelHeader ? 16.5 : topPadding,
                 ),
                 bottom: MediaQuery.of(context).viewInsets.bottom
-                    + Dimens.getProportionalScreenHeight(context, bottomPadding),
+                    + Dimens.getProportionalHeight(context, bottomPadding),
               ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -207,8 +207,8 @@ class NormalBottomSheetDialog extends StatelessWidget {
                       if (isShowButtonCancelHeader) _buildButtonCancelHeader(context),
                       Padding(
                         padding: EdgeInsets.only(
-                          left: Dimens.getProportionalScreenWidth(context, leftPadding),
-                          right: Dimens.getProportionalScreenWidth(context, rightPadding),
+                          left: Dimens.getProportionalWidth(context, leftPadding),
+                          right: Dimens.getProportionalWidth(context, rightPadding),
                         ),
                         child: _buildHeadField(context),
                       ),
@@ -218,9 +218,9 @@ class NormalBottomSheetDialog extends StatelessWidget {
                   Flexible(
                     child: Padding(
                       padding: EdgeInsets.only(
-                        left: Dimens.getProportionalScreenWidth(
+                        left: Dimens.getProportionalWidth(
                             context, leftPadding),
-                        right: Dimens.getProportionalScreenWidth(
+                        right: Dimens.getProportionalWidth(
                             context, rightPadding),
                       ),
                       child: Column(
@@ -237,8 +237,8 @@ class NormalBottomSheetDialog extends StatelessWidget {
                   if (hasButton) ...[
                     Padding(
                       padding: EdgeInsets.only(
-                        left: Dimens.getProportionalScreenWidth(context, leftPadding),
-                        right: Dimens.getProportionalScreenWidth(context, rightPadding),
+                        left: Dimens.getProportionalWidth(context, leftPadding),
+                        right: Dimens.getProportionalWidth(context, rightPadding),
                       ),
                       child: UIHelper.buildDialogButton(
                         context: context,
@@ -274,12 +274,12 @@ class NormalBottomSheetDialog extends StatelessWidget {
           },
           child: Container(
             padding: EdgeInsets.only(
-              right: Dimens.getProportionalScreenWidth(context, 17),
+              right: Dimens.getProportionalWidth(context, 17),
             ),
             child: Icon(
               Icons.close_rounded,
               color: context.theme.colorScheme.onTertiaryContainer,
-              size: Dimens.getProportionalScreenWidth(context, 15),
+              size: Dimens.getProportionalWidth(context, 15),
             ),
           ),
         ),
@@ -306,7 +306,7 @@ class NormalBottomSheetDialog extends StatelessWidget {
         // small title field (if it is not null)
         if (smallTitle != null) ...[
           SizedBox(
-            height: Dimens.getProportionalScreenHeight(context, 8),
+            height: Dimens.getProportionalHeight(context, 8),
           ),
           Text(
             smallTitle ?? '',
@@ -321,13 +321,13 @@ class NormalBottomSheetDialog extends StatelessWidget {
         if (hasHeaderDivider && (title != null || smallTitle != null)) ...[
           Padding(
             padding: EdgeInsets.symmetric(
-              vertical: Dimens.getProportionalScreenWidth(
+              vertical: Dimens.getProportionalWidth(
                 context,
                 dividerVerticalSpace,
               ),
             ),
             child: Divider(
-              height: Dimens.getProportionalScreenHeight(context, 2),
+              height: Dimens.getProportionalHeight(context, 2),
               color: context.theme.colorScheme.onInverseSurface,
             ),
           ),

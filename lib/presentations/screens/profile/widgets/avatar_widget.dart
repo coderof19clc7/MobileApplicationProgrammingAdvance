@@ -25,8 +25,8 @@ class AvatarWidget extends StatelessWidget {
             bottom: 0,
             right: 0,
             child: Container(
-              width: Dimens.getProportionalScreenWidth(context, 30),
-              height: Dimens.getProportionalScreenWidth(context, 30),
+              width: Dimens.getProportionalWidth(context, 30),
+              height: Dimens.getProportionalWidth(context, 30),
               decoration: BoxDecoration(
                 color: context.theme.colorScheme.primary,
                 shape: BoxShape.circle,
@@ -34,7 +34,7 @@ class AvatarWidget extends StatelessWidget {
               child: Icon(
                 Icons.camera_alt_rounded,
                 color: context.theme.colorScheme.onPrimary,
-                size: Dimens.getProportionalScreenWidth(context, 19),
+                size: Dimens.getProportionalWidth(context, 19),
               ),
             ),
           ),

@@ -229,7 +229,7 @@ class _ExpandableWidgetState extends State<ExpandableWidget> with SingleTickerPr
           children: <Widget>[
             if (!widget.headerBodyDistanceAffectOutsideWidget)
               SizedBox(
-                height: Dimens.getProportionalScreenHeight(
+                height: Dimens.getProportionalHeight(
                   context,
                   widget.headerBodyDistance,
                 ),
@@ -243,7 +243,7 @@ class _ExpandableWidgetState extends State<ExpandableWidget> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    final defaultControlIconSize = Dimens.getProportionalScreenWidth(
+    final defaultControlIconSize = Dimens.getProportionalWidth(
       context,
       widget.defaultControlIconSize,
     );
@@ -263,7 +263,7 @@ class _ExpandableWidgetState extends State<ExpandableWidget> with SingleTickerPr
           _buildHeader(defaultControlIconSize),
           if (widget.headerBodyDistanceAffectOutsideWidget)
             SizedBox(
-              height: Dimens.getProportionalScreenHeight(
+              height: Dimens.getProportionalHeight(
                 context,
                 widget.headerBodyDistance,
               ),

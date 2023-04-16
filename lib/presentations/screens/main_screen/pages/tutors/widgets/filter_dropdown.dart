@@ -31,8 +31,8 @@ class FilterDropDown<T> extends StatelessWidget {
         ),
       ),
       padding: EdgeInsets.symmetric(
-        horizontal: Dimens.getProportionalScreenWidth(context, 10),
-        vertical: Dimens.getProportionalScreenHeight(context, 7),
+        horizontal: Dimens.getProportionalWidth(context, 10),
+        vertical: Dimens.getProportionalHeight(context, 7),
       ),
       // height: Dimens.getProportionalScreenHeight(context, 36),
       child: Column(
@@ -48,14 +48,14 @@ class FilterDropDown<T> extends StatelessWidget {
                 selectedItemBuilder: selectedItemBuilder,
                 icon: Container(
                   margin: EdgeInsets.only(
-                    left: Dimens.getProportionalScreenWidth(context, 7),
+                    left: Dimens.getProportionalWidth(context, 7),
                   ),
                   child: SvgPicture.string(SvgIcons.getIcon(
                     SvgIconEnum.downArrow,
                     fillColor: context.theme.iconTheme.color,
                   )),
                 ),
-                menuMaxHeight: Dimens.getProportionalScreenHeight(context, 150),
+                menuMaxHeight: Dimens.getProportionalHeight(context, 150),
                 alignment: Alignment.center,
                 items: data.map(itemBuilder).toList(),
                 onChanged: (value) {},

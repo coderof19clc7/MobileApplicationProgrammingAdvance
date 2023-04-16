@@ -42,11 +42,11 @@ class SimpleListFakeChips extends StatelessWidget {
             final isLast = index == listData.length - 1;
             return Container(
               margin: EdgeInsets.only(
-                right: Dimens.getProportionalScreenWidth(
+                right: Dimens.getProportionalWidth(
                   context,
                   (!isHorizontal || isLast) ? 0 : itemDistance,
                 ),
-                bottom: Dimens.getProportionalScreenWidth(
+                bottom: Dimens.getProportionalWidth(
                   context,
                   (isHorizontal || isLast) ? 0 : itemDistance,
                 ),

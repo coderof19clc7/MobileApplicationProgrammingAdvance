@@ -20,17 +20,17 @@ class Dimens {
     return MediaQuery.of(context).padding.bottom;
   }
 
-  static double getProportionalScreenWidth(BuildContext context, double width) {
+  static double getProportionalWidth(BuildContext context, double width) {
     return (width / figmaWidth) * MediaQuery.of(context).size.width;
   }
 
-  static double getProportionalScreenHeight(BuildContext context, double height) {
+  static double getProportionalHeight(BuildContext context, double height) {
     return (height / figmaHeight) * MediaQuery.of(context).size.height;
   }
 
   static TextStyle getProportionalFont(BuildContext context, TextStyle? textStyle) {
     return TextStyle(
-      fontSize: getProportionalScreenWidth(context, textStyle?.fontSize ?? 14),
+      fontSize: getProportionalWidth(context, textStyle?.fontSize ?? 14),
       fontWeight: textStyle?.fontWeight,
       color: textStyle?.color,
     );

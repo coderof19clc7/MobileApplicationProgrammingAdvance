@@ -21,8 +21,8 @@ class ForgotPasswordPage extends StatelessWidget {
         body: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.only(
-              left: Dimens.getProportionalScreenWidth(context, 60),
-              right: Dimens.getProportionalScreenWidth(context, 60),
+              left: Dimens.getProportionalWidth(context, 60),
+              right: Dimens.getProportionalWidth(context, 60),
               top: Dimens.getScreenHeight(context) * 0.1,
             ),
             width: Dimens.getScreenWidth(context),
@@ -35,7 +35,7 @@ class ForgotPasswordPage extends StatelessWidget {
                   child: Text(
                     S.current.forgotPassword,
                     style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
-                      fontSize: Dimens.getProportionalScreenWidth(context, 32),
+                      fontSize: Dimens.getProportionalWidth(context, 32),
                       fontWeight: FontWeight.w600,
                     ),
                   ),
@@ -46,7 +46,7 @@ class ForgotPasswordPage extends StatelessWidget {
                 Text(
                   S.current.resetPasswordRequirement,
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                    fontSize: Dimens.getProportionalScreenWidth(context, 17),
+                    fontSize: Dimens.getProportionalWidth(context, 17),
                   ),
                 ),
                 SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
@@ -57,7 +57,7 @@ class ForgotPasswordPage extends StatelessWidget {
                   leftWidget: Icon(
                     Icons.email_rounded,
                     color: context.theme.colorScheme.onInverseSurface,
-                    size: Dimens.getProportionalScreenWidth(context, 24),
+                    size: Dimens.getProportionalWidth(context, 24),
                   ),
                 ),
                 SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
@@ -66,13 +66,13 @@ class ForgotPasswordPage extends StatelessWidget {
                     Navigator.pop(context);
                   },
                   width: Dimens.getScreenWidth(context),
-                  paddingVertical: Dimens.getProportionalScreenHeight(context, 14),
+                  paddingVertical: Dimens.getProportionalHeight(context, 14),
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   child: Text(
                     S.current.resetPassword,
                     style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                       color: context.theme.colorScheme.onPrimary,
-                      fontSize: Dimens.getProportionalScreenWidth(context, 16),
+                      fontSize: Dimens.getProportionalWidth(context, 16),
                     ),
                   ),
                 ),
