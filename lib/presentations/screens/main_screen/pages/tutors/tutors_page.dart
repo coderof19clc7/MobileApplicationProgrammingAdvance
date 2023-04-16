@@ -129,7 +129,6 @@ class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMi
                             return TutorCard(
                               onTap: () {
                                 Navigator.of(context).pushNamed(RouteNames.tutorInformation);
-                                Navigator.of(context, rootNavigator: true).pop();
                               },
                               nationality: UIHelper.getIconFromNationalityCode('DE'),
                               name: 'Haylee Caillier',
