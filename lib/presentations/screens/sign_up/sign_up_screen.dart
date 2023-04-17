@@ -16,11 +16,11 @@ class SignUpScreen extends BaseScreen<SignUpCubit, SignUpState> {
    return const SignUpPage();
   }
 
-  @override
-  void onListenerIsLoading(BuildContext context, SignUpState state) {
-    print('isLoading: ${state.isLoading}');
-    print('state: ${state.toJson()}');
-  }
+  // @override
+  // void onListenerIsLoading(BuildContext context, SignUpState state) {
+  //   print('isLoading: ${state.isLoading}');
+  //   print('state: ${state.toJson()}');
+  // }
 
   @override
   void onListenerNeedNavigateToLogin(BuildContext context, SignUpState state) {

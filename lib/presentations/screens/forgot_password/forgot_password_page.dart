@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/constants/debounces.dart';
 import 'package:one_one_learn/presentations/screens/forgot_password/bloc/forgot_password_cubit.dart';
 import 'package:one_one_learn/presentations/widgets/dialogs/popup_dialogs/simplest_notify_dialog.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
@@ -8,6 +9,7 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_fill.dart';
+import 'package:one_one_learn/utils/helpers/debounce_helper.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class ForgotPasswordPage extends StatelessWidget {
@@ -86,7 +88,14 @@ class ForgotPasswordPage extends StatelessWidget {
                     SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
                     PrimaryFillButton(
                       onTap: () {
-                        contextCubit.read<ForgotPasswordCubit>().onSendForgotPasswordRequest();
+                        DebounceHelper.runDisable(
+                          DebounceConstants.resetPasswordButton,
+                          callback: () {
+                            UIHelper.hideKeyboard(context);
+                            contextCubit.read<ForgotPasswordCubit>()
+                                .onSendForgotPasswordRequest();
+                          },
+                        );
                       },
                       width: Dimens.getScreenWidth(context),
                       paddingVertical: Dimens.getProportionalHeight(context, 14),

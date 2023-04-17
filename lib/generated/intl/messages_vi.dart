@@ -89,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lịch sử buổi học"),
         "lessonStatus": MessageLookupByLibrary.simpleMessage("Tiến độ bài học"),
         "listening": MessageLookupByLibrary.simpleMessage("Khả năng nghe"),
+        "loading": MessageLookupByLibrary.simpleMessage("Đang tải"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
         "loginFailedWithNoTokens": MessageLookupByLibrary.simpleMessage(
             "Không thể xác thực phiên đăng nhập. Vui lòng thử lại sau."),

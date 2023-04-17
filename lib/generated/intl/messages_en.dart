@@ -89,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lessonHistory": MessageLookupByLibrary.simpleMessage("Lesson History"),
         "lessonStatus": MessageLookupByLibrary.simpleMessage("Lesson status"),
         "listening": MessageLookupByLibrary.simpleMessage("Listening"),
+        "loading": MessageLookupByLibrary.simpleMessage("Loading"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
         "loginFailedWithNoTokens": MessageLookupByLibrary.simpleMessage(
             "Cannot verify login session. Please try again later."),

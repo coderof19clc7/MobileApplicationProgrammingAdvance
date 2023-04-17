@@ -11,11 +11,11 @@ class ForgotPasswordScreen extends BaseScreen<ForgotPasswordCubit, ForgotPasswor
     return ForgotPasswordCubit();
   }
 
-  @override
-  void onListenerIsLoading(BuildContext context, ForgotPasswordState state) {
-    print('isLoading: ${state.isLoading}');
-    print('state: ${state.toJson()}');
-  }
+  // @override
+  // void onListenerIsLoading(BuildContext context, ForgotPasswordState state) {
+  //   print('isLoading: ${state.isLoading}');
+  //   print('state: ${state.toJson()}');
+  // }
 
   @override
   void onListenerNeedNavigateToLogin(BuildContext context, ForgotPasswordState state) {

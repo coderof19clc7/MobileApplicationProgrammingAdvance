@@ -17,11 +17,11 @@ class LoginScreen extends BaseScreen<LoginCubit, LoginState> {
     return const LoginPage();
   }
 
-  @override
-  void onListenerIsLoading(BuildContext context, LoginState state) {
-    print('isLoading: ${state.isLoading}');
-    print('state: ${state.toJson()}');
-  }
+  // @override
+  // void onListenerIsLoading(BuildContext context, LoginState state) {
+  //   print('isLoading: ${state.isLoading}');
+  //   print('state: ${state.toJson()}');
+  // }
 
   @override
   void onListenerNeedNavigateToLogin(BuildContext context, LoginState state) {

@@ -40,7 +40,9 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
   }
   
   void navigateToNextBusinessLogic() {
-    emit(state.navigateToLogin() as StateType);
+    Future.delayed(const Duration(milliseconds: 500), () {
+      emit(state.navigateToLogin() as StateType);
+    });
   }
 
   void resetStatusToast() {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/configs/constants/debounces.dart';
 import 'package:one_one_learn/presentations/screens/sign_up/bloc/sign_up_cubit.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_percent_space.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
@@ -10,6 +11,7 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_fill.dart';
+import 'package:one_one_learn/utils/helpers/debounce_helper.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class SignUpPage extends StatelessWidget {
@@ -106,8 +108,13 @@ class SignUpPage extends StatelessWidget {
                     ),
                     PrimaryFillButton(
                       onTap: () {
-                        UIHelper.hideKeyboard(context);
-                        context.read<SignUpCubit>().onSignUp();
+                        DebounceHelper.runDisable(
+                          DebounceConstants.signUpButton,
+                          callback: () {
+                            UIHelper.hideKeyboard(context);
+                            context.read<SignUpCubit>().onSignUp();
+                          },
+                        );
                       },
                       width: Dimens.getScreenWidth(context),
                       paddingVertical: Dimens.getProportionalHeight(context, 14),

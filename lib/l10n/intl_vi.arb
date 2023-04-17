@@ -86,8 +86,6 @@
   "upcomingIn": "bắt đầu sau",
   "refreshTokenError": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
   "somethingRequiredError": "{somethings} là bắt buộc",
-  "password": "Mật khẩu",
-  "confirmPassword": "Xác nhận mật khẩu",
   "confirmPasswordRequired": "Vui lòng xác nhận lại mật khẩu",
   "confirmPasswordNotMatch": "Xác nhận mật khẩu không khớp",
   "passwordRule": "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt",
@@ -103,5 +101,6 @@
   "sendResetPasswordRequest": "Gửi yêu cầu đặt lại mật khẩu",
   "forgotPasswordFailedWithEmailNotExists": "Email không tồn tại",
   "notification": "Thông báo",
-  "resetPasswordRequestSendSucceededContent": "Vui lòng kiểm tra email để đặt lại mật khẩu.\nNếu bạn không nhận được mail, xin hãy chắc chắn rằng email bạn nhập là chính xác và thử kiểm tra trong hộp thư rác hoặc đợi từ 1 đến 2 phút và gửi yêu cầu mới."
+  "resetPasswordRequestSendSucceededContent": "Vui lòng kiểm tra email để đặt lại mật khẩu.\nNếu bạn không nhận được mail, xin hãy chắc chắn rằng email bạn nhập là chính xác và thử kiểm tra trong hộp thư rác hoặc đợi từ 1 đến 2 phút và gửi yêu cầu mới.",
+  "loading": "Đang tải"
 }

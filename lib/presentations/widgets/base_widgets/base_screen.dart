@@ -1,9 +1,12 @@
 import 'dart:async';
+import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
+import 'package:one_one_learn/presentations/widgets/dialogs/popup_dialogs/simple_loading_dialog.dart';
 import 'package:one_one_learn/utils/helpers/toast_helper.dart';
 
 abstract class BaseScreen<T extends WidgetCubit<S>, S extends WidgetState> extends StatelessWidget {
@@ -11,7 +14,23 @@ abstract class BaseScreen<T extends WidgetCubit<S>, S extends WidgetState> exten
 
   T provideBloc(BuildContext context);
 
-  void onListenerIsLoading(BuildContext context, S state);
+  void onListenerIsLoading(BuildContext context, S state) {
+    if (kDebugMode) {
+      log('isLoading: ${state.isLoading}');
+      log('state: ${state.toJson()}');
+    }
+    if (state.isLoading) {
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return const SimpleLoadingDialog();
+        },
+      );
+    } else {
+      Navigator.of(context).pop();
+    }
+  }
 
   void onListenerNeedNavigateToLogin(BuildContext context, S state) {
     Navigator.of(context).pushNamedAndRemoveUntil(

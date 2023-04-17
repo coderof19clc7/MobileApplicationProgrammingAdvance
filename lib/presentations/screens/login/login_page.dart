@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/constants/debounces.dart';
 import 'package:one_one_learn/presentations/screens/login/bloc/login_cubit.dart';
 import 'package:one_one_learn/presentations/widgets/dialogs/popup_dialogs/simplest_notify_dialog.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
@@ -11,6 +12,7 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_fill.dart';
+import 'package:one_one_learn/utils/helpers/debounce_helper.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class LoginPage extends StatefulWidget {
@@ -116,8 +118,13 @@ class _LoginPageState extends State<LoginPage> {
                     SizedBox(height: Dimens.getScreenHeight(context) * 0.0474),
                     PrimaryFillButton(
                       onTap: () {
-                        UIHelper.hideKeyboard(context);
-                        contextCubit.read<LoginCubit>().onLogin();
+                        DebounceHelper.runDisable(
+                          DebounceConstants.loginButton,
+                          callback: () {
+                            UIHelper.hideKeyboard(context);
+                            contextCubit.read<LoginCubit>().onLogin();
+                          },
+                        );
                       },
                       width: Dimens.getScreenWidth(context),
                       paddingVertical: Dimens.getProportionalHeight(context, 14),

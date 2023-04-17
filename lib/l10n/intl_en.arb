@@ -96,8 +96,6 @@
       }
     }
   },
-  "password": "Password",
-  "confirmPassword": "Confirm Password",
   "confirmPasswordRequired": "Please confirm your password",
   "confirmPasswordNotMatch": "Confirm password does not match",
   "passwordRule": "Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character",
@@ -131,5 +129,6 @@
   "sendResetPasswordRequest": "Send reset password request",
   "forgotPasswordFailedWithEmailNotExists": "Email does not exist",
   "notification": "Notification",
-  "resetPasswordRequestSendSucceededContent": "Please check your email to reset your password.\nIf you didn't receive any mail, please ensure that the email you entered is correct and check your spam folder or wait for 1 to 2 minutes and then send a new request."
+  "resetPasswordRequestSendSucceededContent": "Please check your email to reset your password.\nIf you didn't receive any mail, please ensure that the email you entered is correct and check your spam folder or wait for 1 to 2 minutes and then send a new request.",
+  "loading": "Loading"
 }
