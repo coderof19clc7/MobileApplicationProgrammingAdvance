@@ -25,11 +25,7 @@ class SimpleListFakeChips extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: height ??
-          (Dimens.getScreenHeight(
-                context,
-              ) *
-              0.034),
+      height: height ?? (Dimens.getScreenHeight(context) * 0.037),
       child: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
           return true;

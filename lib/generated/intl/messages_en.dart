@@ -26,6 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(somethings) => "${somethings} is required";
 
+  static String m3(nationality) => "Gia sư ${nationality}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
@@ -36,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "behavior": MessageLookupByLibrary.simpleMessage("Behavior"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Book class"),
         "books": MessageLookupByLibrary.simpleMessage("Books"),
+        "businessEnglish":
+            MessageLookupByLibrary.simpleMessage("Business English"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
@@ -47,6 +51,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Confirm password does not match"),
         "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
             "Please confirm your password"),
+        "conversationalEnglish":
+            MessageLookupByLibrary.simpleMessage("Conversational"),
         "courses": MessageLookupByLibrary.simpleMessage("Courses"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
@@ -55,9 +61,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "englishForKids":
+            MessageLookupByLibrary.simpleMessage("English for kids"),
         "enterRoom": MessageLookupByLibrary.simpleMessage("Join"),
         "experience": MessageLookupByLibrary.simpleMessage("Experience"),
         "filter": MessageLookupByLibrary.simpleMessage("Filter"),
+        "flyers": MessageLookupByLibrary.simpleMessage("FLYERS"),
+        "foreign": MessageLookupByLibrary.simpleMessage("Foreign"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "forgotPasswordFailedWithEmailNotExists":
@@ -65,12 +75,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "homework": MessageLookupByLibrary.simpleMessage("Homework"),
         "hours": MessageLookupByLibrary.simpleMessage("hours"),
+        "ielts": MessageLookupByLibrary.simpleMessage("IELTS"),
         "interest": MessageLookupByLibrary.simpleMessage("Interest"),
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Improve yourself with great tutors!"),
         "invalid": MessageLookupByLibrary.simpleMessage("Invalid"),
         "isMarked": MessageLookupByLibrary.simpleMessage("Marked"),
         "isNotMarked": MessageLookupByLibrary.simpleMessage("Not marked"),
+        "ket": MessageLookupByLibrary.simpleMessage("KET"),
         "labelAbout": MessageLookupByLibrary.simpleMessage("About"),
         "labelTopics": MessageLookupByLibrary.simpleMessage("Topics"),
         "labelTotalLessonTime":
@@ -99,7 +111,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Login to your account"),
         "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
+        "movers": MessageLookupByLibrary.simpleMessage("MOVERS"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
+        "nativeEnglish": MessageLookupByLibrary.simpleMessage("Native English"),
         "needActivateContent": MessageLookupByLibrary.simpleMessage(
             "Your account is not activated.\nPlease check your email to activate it."),
         "needActivateHeader":
@@ -114,6 +128,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordRule": MessageLookupByLibrary.simpleMessage(
             "Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character"),
+        "pet": MessageLookupByLibrary.simpleMessage("PET"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Preferred schedule"),
@@ -158,16 +173,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
+        "starters": MessageLookupByLibrary.simpleMessage("STARTERS"),
         "suggestedCourses":
             MessageLookupByLibrary.simpleMessage("Suggested courses"),
         "swipeToCancelClass": MessageLookupByLibrary.simpleMessage(
             "Swipe left to cancel a class"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
+        "toefl": MessageLookupByLibrary.simpleMessage("TOEFL"),
+        "toeic": MessageLookupByLibrary.simpleMessage("TOEIC"),
         "tutor": MessageLookupByLibrary.simpleMessage("tutor"),
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
+        "tutorWithNationality": m3,
         "tutoring": MessageLookupByLibrary.simpleMessage("Tutoring"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("in"),
+        "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes")

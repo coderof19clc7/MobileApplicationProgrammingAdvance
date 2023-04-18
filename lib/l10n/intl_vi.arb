@@ -102,5 +102,20 @@
   "forgotPasswordFailedWithEmailNotExists": "Email không tồn tại",
   "notification": "Thông báo",
   "resetPasswordRequestSendSucceededContent": "Vui lòng kiểm tra email để đặt lại mật khẩu.\nNếu bạn không nhận được mail, xin hãy chắc chắn rằng email bạn nhập là chính xác và thử kiểm tra trong hộp thư rác hoặc đợi từ 1 đến 2 phút và gửi yêu cầu mới.",
-  "loading": "Đang tải"
+  "loading": "Đang tải",
+  "englishForKids": "Tiếng Anh cho trẻ em",
+  "businessEnglish":  "Tiếng Anh cho công việc",
+  "conversationalEnglish": "Giao tiếp",
+  "starters":  "STARTERS",
+  "movers": "MOVERS",
+  "flyers":  "FLYERS",
+  "ket": "KET",
+  "pet":  "PET",
+  "ielts": "IELTS",
+  "toefl":  "TOEFL",
+  "toeic": "TOEIC",
+  "vietnamese": "Việt Nam",
+  "foreign": "Nước ngoài",
+  "nativeEnglish": "Tiếng Anh bản địa",
+  "tutorWithNationality": "Gia sư {nationality}"
 }

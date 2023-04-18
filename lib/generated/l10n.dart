@@ -1099,6 +1099,156 @@ class S {
       args: [],
     );
   }
+
+  /// `English for kids`
+  String get englishForKids {
+    return Intl.message(
+      'English for kids',
+      name: 'englishForKids',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Business English`
+  String get businessEnglish {
+    return Intl.message(
+      'Business English',
+      name: 'businessEnglish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Conversational`
+  String get conversationalEnglish {
+    return Intl.message(
+      'Conversational',
+      name: 'conversationalEnglish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `STARTERS`
+  String get starters {
+    return Intl.message(
+      'STARTERS',
+      name: 'starters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `MOVERS`
+  String get movers {
+    return Intl.message(
+      'MOVERS',
+      name: 'movers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `FLYERS`
+  String get flyers {
+    return Intl.message(
+      'FLYERS',
+      name: 'flyers',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `KET`
+  String get ket {
+    return Intl.message(
+      'KET',
+      name: 'ket',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `PET`
+  String get pet {
+    return Intl.message(
+      'PET',
+      name: 'pet',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `IELTS`
+  String get ielts {
+    return Intl.message(
+      'IELTS',
+      name: 'ielts',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TOEFL`
+  String get toefl {
+    return Intl.message(
+      'TOEFL',
+      name: 'toefl',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `TOEIC`
+  String get toeic {
+    return Intl.message(
+      'TOEIC',
+      name: 'toeic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vietnamese`
+  String get vietnamese {
+    return Intl.message(
+      'Vietnamese',
+      name: 'vietnamese',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Foreign`
+  String get foreign {
+    return Intl.message(
+      'Foreign',
+      name: 'foreign',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Native English`
+  String get nativeEnglish {
+    return Intl.message(
+      'Native English',
+      name: 'nativeEnglish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Gia sư {nationality}`
+  String tutorWithNationality(String nationality) {
+    return Intl.message(
+      'Gia sư $nationality',
+      name: 'tutorWithNationality',
+      desc: 'Tutor with nationality label',
+      args: [nationality],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

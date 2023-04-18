@@ -74,7 +74,7 @@ class UserInfo {
     List? courses = [];
     if (mapJson['courses'] != null) {
       courses = [];
-      for (var v in mapJson['courses'] as List) {
+      for (final v in mapJson['courses'] as List) {
         courses.add(v.fromJson(v));
       }
     }
@@ -82,7 +82,7 @@ class UserInfo {
     List<LearnTopic>? learnTopics;
     if (mapJson['learnTopics'] != null) {
       learnTopics = [];
-      for (var v in mapJson['learnTopics'] as List) {
+      for (final v in mapJson['learnTopics'] as List) {
         learnTopics.add(LearnTopic.fromJson(v));
       }
     }
@@ -90,7 +90,7 @@ class UserInfo {
     var testPreparations = [];
     if (mapJson['testPreparations'] != null) {
       testPreparations = [];
-      for (var v in mapJson['testPreparations'] as List) {
+      for (final v in mapJson['testPreparations'] as List) {
         testPreparations.add(v.fromJson(v));
       }
     }
@@ -305,8 +305,8 @@ class UserInfo {
     ReferralInfo? referralInfo,
     String? studySchedule,
     bool? canSendMessage,
-    dynamic? studentGroup,
-    dynamic? studentInfo,
+    dynamic studentGroup,
+    dynamic studentInfo,
     num? avgRating,
   }) {
     return UserInfo(
@@ -392,7 +392,7 @@ class UserInfo {
     List? courses = [];
     if (map['courses'] != null) {
       courses = [];
-      for (var v in map['courses'] as List) {
+      for (final v in map['courses'] as List) {
         courses.add(v.fromJson(v));
       }
     }
@@ -400,7 +400,7 @@ class UserInfo {
     List<LearnTopic>? learnTopics;
     if (map['learnTopics'] != null) {
       learnTopics = [];
-      for (var v in map['learnTopics'] as List) {
+      for (final v in map['learnTopics'] as List) {
         learnTopics.add(LearnTopic.fromMap(v as Map<String, dynamic>));
       }
     }
@@ -408,7 +408,7 @@ class UserInfo {
     var testPreparations = [];
     if (map['testPreparations'] != null) {
       testPreparations = [];
-      for (var v in map['testPreparations'] as List) {
+      for (final v in map['testPreparations'] as List) {
         testPreparations.add(v.fromJson(v));
       }
     }

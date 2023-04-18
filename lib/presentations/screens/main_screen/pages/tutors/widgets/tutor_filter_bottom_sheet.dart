@@ -15,20 +15,23 @@ class TutorFilterBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final nationalityCodes = [
-      'VN',
-      'DE',
-      'US',
-      'GB',
-      'FR',
-      'IT',
-      'ES',
-      'CA',
-      'AU',
-      'JP',
-      'KR',
-      'CN',
-    ];
+    final specialtiesMap = {
+      'All': S.current.all,
+      'english-for-kids': S.current.englishForKids,
+      'business-english': S.current.businessEnglish,
+      'conversational-english': S.current.conversationalEnglish,
+      'starters': S.current.starters,
+      'movers': S.current.movers,
+      'flyers': S.current.flyers,
+      'ket': S.current.ket,
+      'pet': S.current.pet,
+      'ielts': S.current.ielts,
+      'toefl': S.current.toefl,
+      'toeic': S.current.toeic,
+    };
+    final specialtiesList = specialtiesMap.entries.toList();
+    final numSpecialties = specialtiesList.length;
+    final nationalityValues = [0, 1, 2];
     final sortValues = [1, -1];
 
     return Column(
@@ -36,8 +39,8 @@ class TutorFilterBottomSheet extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: EdgeInsets.only(
-            left: Dimens.getProportionalWidth(context, 16),
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimens.getProportionalWidth(context, 16),
           ),
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -56,18 +59,18 @@ class TutorFilterBottomSheet extends StatelessWidget {
                 height: Dimens.getScreenHeight(context) * 0.045,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
-                  itemCount: 15,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: numSpecialties,
                   itemBuilder: (context, index) {
                     // category filter
                     return Container(
                       margin: EdgeInsets.only(
                         right: Dimens.getProportionalWidth(
-                          context,
-                          index == 14 ? 16 : 10,
+                          context, (index == numSpecialties - 1) ? 0 : 10,
                         ),
                       ),
                       child: BaseChoiceChip(
-                        label: toBeginningOfSentenceCase(S.current.all)!,
+                        label: toBeginningOfSentenceCase(specialtiesList[index].value)!,
                         isSelected: index.isEven,
                         onSelected: (value) {
                           // update state
@@ -90,30 +93,23 @@ class TutorFilterBottomSheet extends StatelessWidget {
                 ).copyWith(fontWeight: FontWeight.w500),
               ),
               const EmptyProportionalSpace(height: 15),
-              FilterDropDown<String>(
-                value: nationalityCodes.first,
-                data: nationalityCodes,
-                selectedItemBuilder: (context) {
-                  return nationalityCodes.map((code) {
-                    return Text(UIHelper.getIconFromNationalityCode(code));
-                  }).toList();
-                },
+              FilterDropDown<int>(
+                value: nationalityValues.first,
+                data: nationalityValues,
+                alignment: AlignmentDirectional.centerStart,
                 itemBuilder: (item) {
-                  return DropdownMenuItem<String>(
+                  var nationality = S.current.vietnamese;
+                  if (item == 1) {
+                    nationality = S.current.foreign;
+                  } else if (item == 2) {
+                    nationality = S.current.nativeEnglish;
+                  }
+                  return DropdownMenuItem<int>(
                     value: item,
-                    alignment: Alignment.center,
-                    child: Text.rich(
-                      TextSpan(
-                        text: UIHelper.getIconFromNationalityCode(item),
-                        children: [
-                          TextSpan(text: '  ' + item),
-                        ],
-                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                          fontSize: Dimens.getProportionalWidth(
-                            context,
-                            12,
-                          ),
-                        ),
+                    child: Text(
+                      S.current.tutorWithNationality(nationality),
+                      style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+                        color: context.theme.colorScheme.onTertiaryContainer,
                       ),
                     ),
                   );

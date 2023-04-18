@@ -130,5 +130,29 @@
   "forgotPasswordFailedWithEmailNotExists": "Email does not exist",
   "notification": "Notification",
   "resetPasswordRequestSendSucceededContent": "Please check your email to reset your password.\nIf you didn't receive any mail, please ensure that the email you entered is correct and check your spam folder or wait for 1 to 2 minutes and then send a new request.",
-  "loading": "Loading"
+  "loading": "Loading",
+  "englishForKids": "English for kids",
+  "businessEnglish":  "Business English",
+  "conversationalEnglish": "Conversational",
+  "starters":  "STARTERS",
+  "movers": "MOVERS",
+  "flyers":  "FLYERS",
+  "ket": "KET",
+  "pet":  "PET",
+  "ielts": "IELTS",
+  "toefl":  "TOEFL",
+  "toeic": "TOEIC",
+  "vietnamese": "Vietnamese",
+  "foreign": "Foreign",
+  "nativeEnglish": "Native English",
+  "tutorWithNationality": "Gia sư {nationality}",
+  "@tutorWithNationality": {
+    "description": "Tutor with nationality label",
+    "placeholders": {
+      "nationality": {
+        "type": "String",
+        "example": "Vietnamese"
+      }
+    }
+  }
 }

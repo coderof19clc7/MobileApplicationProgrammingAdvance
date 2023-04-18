@@ -99,7 +99,7 @@ class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMi
                                 context,
                                 leftPadding: 0,
                                 rightPadding: 0,
-                                initialChildSize: 0.501,
+                                initialChildSize: 0.5018,
                                 body: const TutorFilterBottomSheet(),
                               );
                             },
