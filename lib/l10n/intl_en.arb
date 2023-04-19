@@ -38,6 +38,8 @@
   "isMarked": "Marked",
   "isNotMarked": "Not marked",
   "bookClass": "Book class",
+  "bookSchedule": "Book",
+  "booked": "Booked",
   "report": "Report",
   "demo": "Demo",
   "chat": "Chat",

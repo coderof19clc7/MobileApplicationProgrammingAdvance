@@ -37,6 +37,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "becomeATutor": MessageLookupByLibrary.simpleMessage("Become a tutor"),
         "behavior": MessageLookupByLibrary.simpleMessage("Behavior"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Book class"),
+        "bookSchedule": MessageLookupByLibrary.simpleMessage("Book"),
+        "booked": MessageLookupByLibrary.simpleMessage("Booked"),
         "books": MessageLookupByLibrary.simpleMessage("Books"),
         "businessEnglish":
             MessageLookupByLibrary.simpleMessage("Business English"),

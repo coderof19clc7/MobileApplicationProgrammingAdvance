@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/presentations/screens/course_information/course_information_screen.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
@@ -86,7 +87,8 @@ class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMi
                 // tutor card
                 return CourseCard(
                   onTap: () {
-                    Navigator.of(context).pushNamed(RouteNames.courseInformation);
+                    Navigator.of(context)
+                        .pushNamed(RouteNames.courseInformation, arguments: const CourseInformationArguments(courseId: '964bed84-6450-49ee-92d5-e8c565864bd9', category: 'Machine Learning'));
                   },
                   padding: EdgeInsets.zero,
                   firstChild: ClipRRect(

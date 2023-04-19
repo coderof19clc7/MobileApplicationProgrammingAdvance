@@ -6,12 +6,12 @@ import 'package:one_one_learn/configs/constants/dimens.dart';
 class CourseAppBar extends StatelessWidget {
   const CourseAppBar({
     super.key,
-    required this.imageUrl,
+    this.imageUrl,
     required this.leading,
     this.actions,
   });
 
-  final String imageUrl;
+  final String? imageUrl;
   final Widget leading;
   final List<Widget>? actions;
 
@@ -36,12 +36,13 @@ class CourseAppBar extends StatelessWidget {
           top = constraints.biggest.height; // current height of appbar
           return Stack(
             children: [
-              Positioned.fill(
-                child: Image.network(
-                  imageUrl,
-                  fit: BoxFit.cover,
+              if (imageUrl != null)
+                Positioned.fill(
+                  child: Image.network(
+                    imageUrl!,
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
               Positioned.fill(
                 child: Container(
                   decoration: BoxDecoration(

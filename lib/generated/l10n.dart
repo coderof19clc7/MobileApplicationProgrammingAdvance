@@ -440,6 +440,26 @@ class S {
     );
   }
 
+  /// `Book`
+  String get bookSchedule {
+    return Intl.message(
+      'Book',
+      name: 'bookSchedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booked`
+  String get booked {
+    return Intl.message(
+      'Booked',
+      name: 'booked',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Report`
   String get report {
     return Intl.message(

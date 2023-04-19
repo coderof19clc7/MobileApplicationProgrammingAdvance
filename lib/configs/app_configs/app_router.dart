@@ -63,11 +63,14 @@ class AppRouter {
           alignment: Alignment.center,
         );
       case RouteNames.tutorBooking:
-        return PageTransition(
-          child: const BookingScreen(),
-          type: PageTransitionType.rightToLeft,
-          alignment: Alignment.center,
-        );
+        if (args != null && args is BookingArguments) {
+          return PageTransition(
+            child: BookingScreen(args: args),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center,
+          );
+        }
+        return _errRoute();
       case RouteNames.coursesList:
         return PageTransition(
           child: const MainScreen(), // navigate to main and change index of visible tab index to 3
@@ -75,11 +78,14 @@ class AppRouter {
           alignment: Alignment.center,
         );
       case RouteNames.courseInformation:
-        return PageTransition(
-          child: const CourseInformationScreen(),
-          type: PageTransitionType.rightToLeft,
-          alignment: Alignment.center,
-        );
+        if (args != null && args is CourseInformationArguments) {
+          return PageTransition(
+            child: CourseInformationScreen(args: args),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center,
+          );
+        }
+        return _errRoute();
       case RouteNames.courseDetail:
         if (args != null && args is CourseDetailArguments) {
           return PageTransition(

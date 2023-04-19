@@ -3,7 +3,10 @@ import 'package:one_one_learn/configs/app_configs/app_configs.dart';
 import 'package:one_one_learn/core/managers/local_manager.dart';
 import 'package:one_one_learn/core/network/network_manager.dart';
 import 'package:one_one_learn/core/network/repositories/auth_repository.dart';
+import 'package:one_one_learn/core/network/repositories/tutor_repository.dart';
 import 'package:one_one_learn/core/network/repositories/user_repository.dart';
+import 'package:one_one_learn/core/network/repositories/course_repository.dart';
+import 'package:one_one_learn/core/network/repositories/schedule_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final injector = GetIt.instance;
@@ -35,5 +38,8 @@ void initNetwork() {
   injector
     ..registerSingleton<NetworkManager>(NetworkManager())
     ..registerLazySingleton<AuthRepository>(AuthRepository.new)
-    ..registerLazySingleton<UserRepository>(UserRepository.new);
+    ..registerLazySingleton<UserRepository>(UserRepository.new)
+    ..registerLazySingleton<TutorRepository>(TutorRepository.new)
+    ..registerLazySingleton<ScheduleRepository>(ScheduleRepository.new)
+    ..registerLazySingleton<CourseRepository>(CourseRepository.new);
 }

@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Đăng kí làm giảng viên"),
         "behavior": MessageLookupByLibrary.simpleMessage("Thái độ"),
         "bookClass": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
+        "bookSchedule": MessageLookupByLibrary.simpleMessage("Đặt lịch"),
+        "booked": MessageLookupByLibrary.simpleMessage("Đã đặt"),
         "books": MessageLookupByLibrary.simpleMessage("Sách"),
         "businessEnglish":
             MessageLookupByLibrary.simpleMessage("Tiếng Anh cho công việc"),
