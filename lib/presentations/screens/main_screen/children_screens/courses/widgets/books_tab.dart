@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/widgets/course_card.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/widgets/course_card.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/base_choice_chip.dart';
 
 class BooksTab extends StatefulWidget {

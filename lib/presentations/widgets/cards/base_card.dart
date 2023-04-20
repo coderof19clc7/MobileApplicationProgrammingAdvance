@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/presentations/widgets/shimmers/fade_shimmer.dart';
+import 'package:one_one_learn/presentations/widgets/shimmers/linear_shimmer.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -8,6 +10,7 @@ enum CardDirection { row, column }
 abstract class BaseCard extends StatelessWidget {
   const BaseCard({
     super.key,
+    required this.isLoading,
     this.padding,
     this.margin,
     this.width,
@@ -19,6 +22,7 @@ abstract class BaseCard extends StatelessWidget {
     this.onTap,
   });
 
+  final bool isLoading;
   final EdgeInsetsGeometry? padding, margin;
   final double? width;
   final double firstSecondDistance, secondChildItemsDistance;
@@ -32,14 +36,31 @@ abstract class BaseCard extends StatelessWidget {
       width: direction == CardDirection.row ? Dimens.getProportionalWidth(context, 90) : Dimens.getScreenWidth(context),
       child: AspectRatio(
         aspectRatio: direction == CardDirection.row ? 1 : 2,
-        child: firstChild ??
-            Container(
+        child: firstChild ?? Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
                 color: AppColors.neutralBlue500,
               ),
             ),
       ),
+    );
+  }
+
+  Widget buildSimpleRectangleShimmer(BuildContext context, {
+    bool isLinear = false,
+  }) {
+    if (isLinear) {
+      return LinearShimmer(
+        width: Dimens.getScreenWidth(context) * 0.3,
+        height: Dimens.getScreenHeight(context) * 0.02,
+        radius: 15,
+      );
+    }
+
+    return AppFadeShimmer(
+      width: Dimens.getScreenWidth(context) * 0.3,
+      height: Dimens.getScreenHeight(context) * 0.02,
+      radius: 15,
     );
   }
 

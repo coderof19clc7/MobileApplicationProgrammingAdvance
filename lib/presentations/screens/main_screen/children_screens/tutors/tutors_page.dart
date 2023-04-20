@@ -1,30 +1,24 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/tutor_card.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/tutor_filter_bottom_sheet.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/widgets/upcoming_class_banner.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/list_tutors.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/tutor_filter_bottom_sheet.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/upcoming_class_banner.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/dialogs/bottom_sheet_dialogs/normal_bottom_sheet_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
+import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
-class TutorsPage extends StatefulWidget {
+class TutorsPage extends StatelessWidget {
   const TutorsPage({super.key});
 
   @override
-  State<TutorsPage> createState() => _TutorsPageState();
-}
-
-class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMixin<TutorsPage> {
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     final startTime = DateTime.now().add(
       Duration(
         days: Random().nextInt(5),
@@ -95,6 +89,11 @@ class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMi
                           const EmptyProportionalSpace(width: 10),
                           PrimaryOutlineButton(
                             onTap: () {
+                              final now = DateTime.now();
+                              print('now: ${now.millisecondsSinceEpoch}');
+                              print('now - 35 min: ${now.subtract(const Duration(minutes: 35)).millisecondsSinceEpoch}');
+                              print('now + 5 min: ${now.add(const Duration(minutes: 5)).millisecondsSinceEpoch}');
+                              print('testTime: ${DateTime.fromMillisecondsSinceEpoch(1639805436469)}');
                               NormalBottomSheetDialog.show(
                                 context,
                                 leftPadding: 0,
@@ -119,31 +118,8 @@ class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMi
                       const EmptyProportionalSpace(height: 10),
 
                       // tutor list
-                      Expanded(
-                        child: ListView.builder(
-                          padding: EdgeInsets.zero,
-                          shrinkWrap: true,
-                          itemCount: 10,
-                          itemBuilder: (context, index) {
-                            // tutor card
-                            return TutorCard(
-                              onTap: () {
-                                Navigator.of(context).pushNamed(RouteNames.tutorInformation);
-                              },
-                              nationality: UIHelper.getIconFromNationalityCode('DE'),
-                              name: 'Haylee Caillier',
-                              rating: 4.5,
-                              description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pulvinar ante...',
-                              categories: const [
-                                'Machine Learning',
-                                'Deep Learning',
-                                'Computer Vision',
-                                'Data Science',
-                              ],
-                              isFavorite: index.isOdd,
-                            );
-                          },
-                        ),
+                      const Expanded(
+                        child: ListTutors(),
                       ),
                     ],
                   ),
@@ -155,7 +131,4 @@ class _TutorsPageState extends State<TutorsPage> with AutomaticKeepAliveClientMi
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

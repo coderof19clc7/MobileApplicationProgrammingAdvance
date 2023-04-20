@@ -21,13 +21,13 @@ class AppThemes {
       background: AppColors.white,
       onBackground: AppColors.black, // icon, text on background
       outline: AppColors.grey, // border
-      outlineVariant: AppColors.neutralBlue200, // border for component on surface | fill for disabled input/option button
+      outlineVariant: AppColors.neutralBlue100, // border for component on surface | fill for disabled input/option button
       surface: AppColors.white, // card fill
       // onSurface: ,
       surfaceVariant: AppColors.primaryBlue100.withOpacity(0.14), // board body cell
       onSurfaceVariant: AppColors.primaryBlue400, // always primaryBlue400
       surfaceTint: AppColors.white, // component on top of surface
-      inverseSurface: AppColors.neutralBlue200, // login sign up text field fill
+      inverseSurface: AppColors.neutralBlue100, // login sign up text field fill
       onInverseSurface: AppColors.neutralBlue500, // always neutralBlue500
       errorContainer: AppColors.neutralRed200, // error/warning fill
       onErrorContainer: AppColors.red400, // error/warning text

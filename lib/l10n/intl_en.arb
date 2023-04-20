@@ -147,7 +147,7 @@
   "vietnamese": "Vietnamese",
   "foreign": "Foreign",
   "nativeEnglish": "Native English",
-  "tutorWithNationality": "Gia sư {nationality}",
+  "tutorWithNationality": "{nationality} tutor",
   "@tutorWithNationality": {
     "description": "Tutor with nationality label",
     "placeholders": {

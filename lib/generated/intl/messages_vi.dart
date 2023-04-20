@@ -141,7 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "report": MessageLookupByLibrary.simpleMessage("Báo cáo"),
         "requestForClass":
             MessageLookupByLibrary.simpleMessage("Yêu cầu lớp học"),
-        "reset": MessageLookupByLibrary.simpleMessage("Reset"),
+        "reset": MessageLookupByLibrary.simpleMessage("Đặt lại"),
         "resetPassword":
             MessageLookupByLibrary.simpleMessage("Đặt lại mật khẩu"),
         "resetPasswordRequestSendSucceededContent":

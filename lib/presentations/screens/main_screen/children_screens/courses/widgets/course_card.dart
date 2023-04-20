@@ -9,6 +9,7 @@ import 'package:one_one_learn/presentations/widgets/others/row_icon_text_informa
 class CourseCard extends BaseCard {
   const CourseCard({
     super.key,
+    super.isLoading = false,
     super.firstChild,
     super.direction = CardDirection.column,
     super.padding,

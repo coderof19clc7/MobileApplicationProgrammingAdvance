@@ -1,54 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/courses_page.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/settings/settings_page.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/tutors/tutors_page.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/upcoming_classes/upcoming_classes_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/courses_page.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/settings_page.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/upcoming_classes_page.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/tabs/tutors_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/widgets/bottom_nav_bar.dart';
+import 'package:one_one_learn/presentations/widgets/base_widgets/base_screen.dart';
 
-class MainScreen extends StatefulWidget {
+const listScreens = <Widget>[
+  TutorsTab(),
+  Center(child: Text('This is Chat screen')),
+  UpcomingClassesPage(),
+  CoursesPage(key: PageStorageKey('CoursesPage')),
+  SettingsPage(),
+];
+
+class MainScreen extends BaseScreen<MainCubit, MainState> {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
-  var currentIndex = 0;
-
-  final listScreens = const <Widget>[
-    TutorsPage(),
-    Center(child: Text('This is Chat screen')),
-    UpcomingClassesPage(),
-    CoursesPage(key: PageStorageKey('CoursesPage')),
-    SettingsPage(),
-  ];
-
-  final pageController = PageController();
-
-  @override
-  void dispose() {
-    pageController.dispose();
-    super.dispose();
+  MainCubit provideBloc(BuildContext context) {
+    return MainCubit();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView.builder(
-        controller: pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        itemCount: listScreens.length,
-        itemBuilder: (context, index) {
-          return listScreens[index];
+  Widget buildWidget(BuildContext context) {
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TutorsCubit>(
+          create: (context) => TutorsCubit(),
+          lazy: false,
+        ),
+      ],
+      child: BlocListener<MainCubit, MainState>(
+        listenWhen: (previous, current) => previous.currentIndex != current.currentIndex,
+        listener: (context, state) {
+          context.read<MainCubit>().pageController.jumpToPage(state.currentIndex);
         },
-      ),
-      bottomNavigationBar: BottomNavBar(
-        currentIndex: currentIndex,
-        onTap: (index) {
-          if (index == currentIndex) return;
-          setState(() => currentIndex = index);
-          pageController.jumpToPage(index);
-        },
+        child: BlocBuilder<MainCubit, MainState>(
+          buildWhen: (previous, current) => previous.currentIndex != current.currentIndex,
+          builder: (context, state) {
+            return Scaffold(
+              body: PageView.builder(
+                controller: context.read<MainCubit>().pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: listScreens.length,
+                itemBuilder: (context, index) {
+                  return listScreens[index];
+                },
+              ),
+              bottomNavigationBar: BottomNavBar(
+                currentIndex: state.currentIndex,
+                onTap: context.read<MainCubit>().onChangeIndex,
+              ),
+            );
+          },
+        ),
       ),
     );
   }

@@ -1260,10 +1260,10 @@ class S {
     );
   }
 
-  /// `Gia sư {nationality}`
+  /// `{nationality} tutor`
   String tutorWithNationality(String nationality) {
     return Intl.message(
-      'Gia sư $nationality',
+      '$nationality tutor',
       name: 'tutorWithNationality',
       desc: 'Tutor with nationality label',
       args: [nationality],

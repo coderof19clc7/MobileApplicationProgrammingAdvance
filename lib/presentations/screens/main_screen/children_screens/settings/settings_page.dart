@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/widgets/icon_text_icon.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/settings/widgets/icon_text_icon.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/settings/widgets/info_current.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
+
+import 'widgets/info_current.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});

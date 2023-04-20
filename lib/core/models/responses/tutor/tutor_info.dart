@@ -49,7 +49,6 @@ import 'package:one_one_learn/core/models/responses/user/user_info.dart';
 /// isOnline : true
 /// price : 50000
 class TutorInfo {
-
 //<editor-fold desc="Data Methods">
   TutorInfo({
     this.level,
@@ -101,106 +100,108 @@ class TutorInfo {
     this.price,
   });
 
-  TutorInfo.fromJson(dynamic json) {
+  factory TutorInfo.fromJson(dynamic json) {
     final mapJson = json as Map<String, dynamic>;
-    level = mapJson['level'] as String?;
-    email = mapJson['email'] as String?;
-    google = mapJson['google'];
-    facebook = mapJson['facebook'];
-    apple = mapJson['apple'];
-    avatar = mapJson['avatar'] as String?;
-    name = mapJson['name'] as String?;
-    country = mapJson['country'] as String?;
-    phone = mapJson['phone'] as String?;
-    language = mapJson['language'] as String?;
-    birthday = mapJson['birthday'] as String?;
-    requestPassword = mapJson['requestPassword'] as bool?;
-    isActivated = mapJson['isActivated'] as bool?;
-    isPhoneActivated = mapJson['isPhoneActivated'];
-    requireNote = mapJson['requireNote'];
-    timezone = mapJson['timezone'] as num?;
-    phoneAuth = mapJson['phoneAuth'];
-    isPhoneAuthActivated = mapJson['isPhoneAuthActivated'] as bool?;
-    studySchedule = mapJson['studySchedule'] as String?;
-    canSendMessage = mapJson['canSendMessage'] as bool?;
-    isPublicRecord = mapJson['isPublicRecord'] as bool?;
-    caredByStaffId = mapJson['caredByStaffId'];
-    createdAt = mapJson['createdAt'] as String?;
-    updatedAt = mapJson['updatedAt'] as String?;
-    deletedAt = mapJson['deletedAt'];
-    studentGroupId = mapJson['studentGroupId'];
-    feedbacks = mapJson['feedbacks'] != null
-        ? (mapJson['feedbacks'] as List).map(FeedBack.fromJson).toList()
-        : null;
-    id = mapJson['id'] as String?;
-    userId = mapJson['userId'] as String?;
-    video = mapJson['video'] as String?;
-    bio = mapJson['bio'] as String?;
-    education = mapJson['education'] as String?;
-    experience = mapJson['experience'] as String?;
-    profession = mapJson['profession'] as String?;
-    accent = mapJson['accent'];
-    targetStudent = mapJson['targetStudent'] as String?;
-    interests = mapJson['interests'] as String?;
-    languages = mapJson['languages'] as String?;
-    specialties = mapJson['specialties'] as String?;
-    resume = mapJson['resume'];
-    rating = mapJson['rating'] as num?;
-    isNative = mapJson['isNative'];
-    User = mapJson['User'] != null ? UserInfo.fromJson(mapJson['User']) : null;
-    schedulestimes = mapJson['schedulestimes']as String?;
-    isfavoritetutor = mapJson['isfavoritetutor'] as String?;
-    isOnline = mapJson['isOnline'] as bool?;
-    price = mapJson['price'] as num?;
+    return TutorInfo(
+      level: mapJson['level'] as String?,
+      email :mapJson['email'] as String?,
+      google: mapJson['google'],
+      facebook: mapJson['facebook'],
+      apple: mapJson['apple'],
+      avatar: mapJson['avatar'] as String?,
+      name: mapJson['name'] as String?,
+      country: mapJson['country'] as String?,
+      phone: mapJson['phone'] as String?,
+      language: mapJson['language'] as String?,
+      birthday: mapJson['birthday'] as String?,
+      requestPassword: mapJson['requestPassword'] as bool?,
+      isActivated: mapJson['isActivated'] as bool?,
+      isPhoneActivated: mapJson['isPhoneActivated'],
+      requireNote: mapJson['requireNote'],
+      timezone: mapJson['timezone'] as num?,
+      phoneAuth: mapJson['phoneAuth'],
+      isPhoneAuthActivated: mapJson['isPhoneAuthActivated'] as bool?,
+      studySchedule: mapJson['studySchedule'] as String?,
+      canSendMessage: mapJson['canSendMessage'] as bool?,
+      isPublicRecord: mapJson['isPublicRecord'] as bool?,
+      caredByStaffId: mapJson['caredByStaffId'],
+      createdAt: mapJson['createdAt'] as String?,
+      updatedAt: mapJson['updatedAt'] as String?,
+      deletedAt: mapJson['deletedAt'],
+      studentGroupId: mapJson['studentGroupId'],
+      feedbacks: mapJson['feedbacks'] != null
+          ? (mapJson['feedbacks'] as List).map(FeedBack.fromJson).toList()
+          : null,
+      id: mapJson['id'] as String?,
+      userId: mapJson['userId'] as String?,
+      video: mapJson['video'] as String?,
+      bio: mapJson['bio'] as String?,
+      education :mapJson['education'] as String?,
+      experience: mapJson['experience'] as String?,
+      profession: mapJson['profession'] as String?,
+      accent: mapJson['accent'],
+      targetStudent: mapJson['targetStudent'] as String?,
+      interests: mapJson['interests'] as String?,
+      languages: mapJson['languages'] as String?,
+      specialties: mapJson['specialties'] as String?,
+      resume: mapJson['resume'],
+      rating: mapJson['rating'] as num?,
+      isNative: mapJson['isNative'],
+      User: mapJson['User'] != null ? UserInfo.fromJson(mapJson['User']) : null,
+      schedulestimes: mapJson['schedulestimes']as String?,
+      isfavoritetutor: mapJson['isfavoritetutor'] as String?,
+      isOnline: mapJson['isOnline'] as bool?,
+      price: mapJson['price'] as num?,
+    );
   }
 
-  String? level;
-  String? email;
-  dynamic google;
-  dynamic facebook;
-  dynamic apple;
-  String? avatar;
-  String? name;
-  String? country;
-  String? phone;
-  String? language;
-  String? birthday;
-  bool? requestPassword;
-  bool? isActivated;
-  dynamic isPhoneActivated;
-  dynamic requireNote;
-  num? timezone;
-  dynamic phoneAuth;
-  bool? isPhoneAuthActivated;
-  String? studySchedule;
-  bool? canSendMessage;
-  bool? isPublicRecord;
-  dynamic caredByStaffId;
-  String? createdAt;
-  String? updatedAt;
-  dynamic deletedAt;
-  dynamic studentGroupId;
-  List<FeedBack>? feedbacks;
-  String? id;
-  String? userId;
-  String? video;
-  String? bio;
-  String? education;
-  String? experience;
-  String? profession;
-  dynamic accent;
-  String? targetStudent;
-  String? interests;
-  String? languages;
-  String? specialties;
-  dynamic resume;
-  num? rating;
-  dynamic isNative;
-  UserInfo? User;
-  String? schedulestimes;
-  String? isfavoritetutor;
-  bool? isOnline;
-  num? price;
+  final String? level;
+  final String? email;
+  final dynamic google;
+  final dynamic facebook;
+  final dynamic apple;
+  final String? avatar;
+  final String? name;
+  final String? country;
+  final String? phone;
+  final String? language;
+  final String? birthday;
+  final bool? requestPassword;
+  final bool? isActivated;
+  final dynamic isPhoneActivated;
+  final dynamic requireNote;
+  final num? timezone;
+  final dynamic phoneAuth;
+  final bool? isPhoneAuthActivated;
+  final String? studySchedule;
+  final bool? canSendMessage;
+  final bool? isPublicRecord;
+  final dynamic caredByStaffId;
+  final String? createdAt;
+  final String? updatedAt;
+  final dynamic deletedAt;
+  final dynamic studentGroupId;
+  final List<FeedBack>? feedbacks;
+  final String? id;
+  final String? userId;
+  final String? video;
+  final String? bio;
+  final String? education;
+  final String? experience;
+  final String? profession;
+  final dynamic accent;
+  final String? targetStudent;
+  final String? interests;
+  final String? languages;
+  final String? specialties;
+  final dynamic resume;
+  final num? rating;
+  final dynamic isNative;
+  final UserInfo? User;
+  final String? schedulestimes;
+  final String? isfavoritetutor;
+  final bool? isOnline;
+  final num? price;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

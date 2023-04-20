@@ -38,7 +38,9 @@ class TutorSearchRequest extends BaseRequest {
     if (filters != null) {
       map['filters'] = filters?.toJson();
     }
-    map['search'] = search;
+    if (search != null) {
+      map['search'] = search;
+    }
     map['page'] = page;
     map['perPage'] = perPage;
     return map;
@@ -99,7 +101,7 @@ class Filters {
   Filters({
     this.specialties,
     this.nationality,
-    required this.date,
+    this.date,
     this.tutoringTimeAvailable,
   });
 
@@ -113,9 +115,9 @@ class Filters {
     date = mapJson['date'];
     if (mapJson['tutoringTimeAvailable'] != null) {
       tutoringTimeAvailable = [];
-      mapJson['tutoringTimeAvailable'].forEach((v) {
+      for (final v in mapJson['tutoringTimeAvailable'] as List) {
         tutoringTimeAvailable?.add(v.fromJson(v));
-      });
+      }
     }
   }
 
@@ -191,9 +193,9 @@ class Filters {
     List<dynamic>? tutoringTimeAvailable;
     if (map['tutoringTimeAvailable'] != null) {
       tutoringTimeAvailable = [];
-      map['tutoringTimeAvailable'].forEach((v) {
-        tutoringTimeAvailable?.add(v.fromJson(v));
-      });
+      for (final v in map['tutoringTimeAvailable'] as List) {
+        tutoringTimeAvailable.add(v.fromJson(v));
+      }
     }
     return Filters(
       specialties: map['specialties'] as List<String>,

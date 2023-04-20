@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -318,11 +319,20 @@ class NetworkManager {
     Map<String, dynamic>? extra,
   }) async {
     final makeRequestDio = needAuth ? _privateDio : _publicDio;
+    final dataJson = jsonEncode(data);
+    if (kDebugMode) {
+      print('executor dio header: ${makeRequestDio?.options.headers}');
+      log('url : $path');
+      log('queryParameters: $queryParameters');
+      log('dataOutput: -> $dataJson');
+      log('headers: $headers');
+      log('extra: $extra');
+    }
     final result = await makeRequestDio?.request(
       path,
-      queryParameters: queryParameters ?? <String, dynamic>{},
+      queryParameters: queryParameters,
       options: Options(method: method, headers: headers, extra: extra),
-      data: data,
+      data: dataJson,
       cancelToken: CancelToken(),
     );
     if (method != ApiMethods.get) {

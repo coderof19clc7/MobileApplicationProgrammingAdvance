@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:one_one_learn/presentations/widgets/choice_chips/simple_list_loading_fake_chips.dart';
+import 'package:one_one_learn/presentations/widgets/shimmers/fade_shimmer.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
@@ -10,6 +12,7 @@ import 'package:one_one_learn/presentations/widgets/others/row_icon_text_informa
 class TutorCard extends BaseCard {
   const TutorCard({
     super.key,
+    super.isLoading = false,
     super.firstChild,
     super.secondChildItemsDistance = 7,
     super.onTap,
@@ -39,7 +42,14 @@ class TutorCard extends BaseCard {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Flexible(
-                child: Text(
+                child: isLoading
+                    ? Padding(
+                      padding: const EdgeInsets.only(
+                        top: 3,
+                      ),
+                      child: buildSimpleRectangleShimmer(context),
+                    )
+                    : Text(
                   '$nationality $name',
                   overflow: TextOverflow.ellipsis,
                   style: Dimens.getProportionalFont(context, context.theme.textTheme.titleSmall).copyWith(
@@ -47,12 +57,10 @@ class TutorCard extends BaseCard {
                   ),
                 ),
               ),
-              SizedBox(
-                  width: Dimens.getProportionalWidth(
-                context,
-                3,
-              )),
-              InkWell(
+              SizedBox(width: Dimens.getProportionalWidth(context, 3)),
+              isLoading
+                  ? const SizedBox.shrink()
+                  : InkWell(
                 onTap: () {},
                 child: SvgPicture.string(
                   SvgIcons.getIcon(
@@ -73,53 +81,69 @@ class TutorCard extends BaseCard {
           )),
 
           // categories
-          SimpleListFakeChips(
-            listData: categories,
-            itemDistance: secondChildItemsDistance,
-            fontSize: 12,
-            bgColor: context.theme.colorScheme.secondaryContainer,
-            textColor: context.theme.colorScheme.onSecondaryContainer,
-          ),
-          SizedBox(
-              height: Dimens.getProportionalHeight(
-            context,
-            secondChildItemsDistance,
-          )),
+          isLoading
+              ? Container(
+            color: context.theme.colorScheme.secondaryContainer,
+            // width: Dimens.getScreenWidth(context),
+            // height: Dimens.getScreenHeight(context) * 0.01,
+          )
+              : buildOverViewInformation(context),
+        ],
+      ),
+    );
+  }
+  
+  Widget buildOverViewInformation(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SimpleListFakeChips(
+          listData: categories,
+          itemDistance: secondChildItemsDistance,
+          fontSize: 12,
+          bgColor: context.theme.colorScheme.secondaryContainer,
+          textColor: context.theme.colorScheme.onSecondaryContainer,
+        ),
+        SizedBox(
+            height: Dimens.getProportionalHeight(
+              context,
+              secondChildItemsDistance,
+            )),
 
-          // rating
-          RowIconTextInformation(
-            context: context,
-            icon: Icon(
-              Icons.star_rounded,
-              size: Dimens.getProportionalWidth(context, 14),
-              color: context.theme.colorScheme.primary,
-            ),
-            text: Text(
-              '$rating/5',
-              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                fontSize: Dimens.getProportionalWidth(context, 12),
-              ),
-            ),
+        // rating
+        RowIconTextInformation(
+          context: context,
+          icon: Icon(
+            Icons.star_rounded,
+            size: Dimens.getProportionalWidth(context, 14),
+            color: context.theme.colorScheme.primary,
           ),
-          SizedBox(
-              height: Dimens.getProportionalHeight(
-            context,
-            secondChildItemsDistance,
-          )),
-
-          // description
-          Text(
-            description,
-            overflow: TextOverflow.ellipsis,
-            softWrap: true,
-            maxLines: 2,
+          text: Text(
+            '$rating/5',
             style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-              color: context.theme.colorScheme.onTertiaryContainer,
               fontSize: Dimens.getProportionalWidth(context, 12),
             ),
           ),
-        ],
-      ),
+        ),
+        SizedBox(
+            height: Dimens.getProportionalHeight(
+              context,
+              secondChildItemsDistance,
+            )),
+
+        // description
+        Text(
+          description,
+          overflow: TextOverflow.ellipsis,
+          softWrap: true,
+          maxLines: 2,
+          style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
+            color: context.theme.colorScheme.onTertiaryContainer,
+            fontSize: Dimens.getProportionalWidth(context, 12),
+          ),
+        ),
+      ],
     );
   }
 }

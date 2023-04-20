@@ -5,8 +5,10 @@ import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
 import 'package:one_one_learn/core/managers/local_manager.dart';
 import 'package:one_one_learn/core/models/responses/auth/auth_response.dart';
 import 'package:one_one_learn/core/models/responses/auth/tokens.dart';
+import 'package:one_one_learn/core/models/responses/user/user_info.dart';
 import 'package:one_one_learn/core/network/network_manager.dart';
 import 'package:one_one_learn/core/network/repositories/auth_repository.dart';
+import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/utils/extensions/string_extensions.dart';
 
@@ -18,6 +20,7 @@ class LoginCubit extends WidgetCubit<LoginState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final authRepository = injector<AuthRepository>();
+  final userRepository = injector<UserRepository>();
 
   @override
   void onWidgetCreated() {}
@@ -57,9 +60,12 @@ class LoginCubit extends WidgetCubit<LoginState> {
     return result;
   }
 
-  Future<void> onLoginSucceeded(Tokens tokens) async {
+  Future<void> onLoginSucceeded(AuthResponse loginResponse) async {
+    // update user information in this session
+    userRepository.userInfo = loginResponse.user ?? const UserInfo();
+
     // save access and refresh token to local
-    await injector<LocalManager>().saveTokens(tokens);
+    await injector<LocalManager>().saveTokens(loginResponse.tokens!);
 
     // re-init private dio with new access token
     injector<NetworkManager>().initPrivateDio();
@@ -89,7 +95,7 @@ class LoginCubit extends WidgetCubit<LoginState> {
       if (loginResponse.statusCode == ApiStatusCode.success) {
         if (loginResponse.tokens != null) {
           showSuccessToast(S.current.doSomethingsSuccess(S.current.login));
-          await onLoginSucceeded(loginResponse.tokens!);
+          await onLoginSucceeded(loginResponse);
         } else {
           showErrorToast(
             '${S.current.server} ${S.current.loginFailedWithNoTokens.toLowerCase()}',

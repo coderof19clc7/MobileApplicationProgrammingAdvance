@@ -42,7 +42,7 @@ class BasicStatusToast extends StatelessWidget {
   }
 
   Color getColor() {
-    var color = AppColors.neutralBlue200;
+    var color = AppColors.neutralBlue100;
     if (type == StatusToastType.success) {
       color = AppColors.green400;
     } else if (type == StatusToastType.warning) {

@@ -12,6 +12,7 @@ import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_sp
 class LessonHistoryCard extends BaseCard {
   const LessonHistoryCard({
     super.key,
+    super.isLoading = false,
     super.firstChild,
     super.secondChildItemsDistance = 10,
     super.margin,

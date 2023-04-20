@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/widgets/books_tab.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/pages/courses/widgets/courses_tab.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/widgets/books_tab.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/widgets/courses_tab.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class CoursesPage extends StatefulWidget {

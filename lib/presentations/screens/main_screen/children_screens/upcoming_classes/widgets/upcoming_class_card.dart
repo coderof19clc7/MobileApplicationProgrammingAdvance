@@ -11,6 +11,7 @@ import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_sp
 class UpcomingClassCard extends BaseCard {
   const UpcomingClassCard({
     super.key,
+    super.isLoading = false,
     super.firstChild,
     super.secondChildItemsDistance = 10,
     super.margin,
