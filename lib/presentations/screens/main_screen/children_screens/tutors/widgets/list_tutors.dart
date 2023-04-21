@@ -32,7 +32,7 @@ class ListTutors extends StatelessWidget {
             final item = listTutors[index];
 
             if (item == null) {
-              if (index == state.listTutors.length - 3 && !state.isLoading) {
+              if (index == state.listTutors.length - 3 && !state.isLoadingMore) {
                 print('call api to get more tutors at index: $index');
                 context.read<TutorsCubit>().searchListTutor();
               }
@@ -49,6 +49,22 @@ class ListTutors extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushNamed(RouteNames.tutorInformation);
               },
+              firstChild: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: Image.network(
+                  item.avatar ?? '',
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) {
+                      return child;
+                    }
+                    return const CircularProgressIndicator();
+                  },
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(Icons.error);
+                  }
+                ),
+              ),
               nationality: UIHelper.getIconFromNationalityCode(item.country ?? 'unknown'),
               name: item.name ?? '',
               rating: item.rating?.toDouble() ?? 0,

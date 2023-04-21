@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:one_one_learn/presentations/widgets/choice_chips/simple_list_loading_fake_chips.dart';
-import 'package:one_one_learn/presentations/widgets/shimmers/fade_shimmer.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/simple_list_fake_chips.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
+import 'package:one_one_learn/utils/extensions/string_extensions.dart';
 
 class TutorCard extends BaseCard {
   const TutorCard({
@@ -94,6 +93,14 @@ class TutorCard extends BaseCard {
   }
   
   Widget buildOverViewInformation(BuildContext context) {
+    var fractionDigits = 2;
+    final ratingString = rating.toStringAsFixed(2);
+    final ratingFixedString = ratingString.split('.')[1];
+    if (ratingFixedString.toInt() == 0) {
+      fractionDigits = 0;
+    } else if (ratingFixedString.toInt() % 10 == 0) {
+      fractionDigits = 1;
+    }
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,7 +127,7 @@ class TutorCard extends BaseCard {
             color: context.theme.colorScheme.primary,
           ),
           text: Text(
-            '$rating/5',
+            '${rating.toStringAsFixed(fractionDigits)}/5',
             style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
               fontSize: Dimens.getProportionalWidth(context, 12),
             ),

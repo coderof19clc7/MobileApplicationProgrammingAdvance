@@ -17,4 +17,12 @@ extension StringExtensions on String {
   bool isValidConfirmPassword(String password) {
     return compareTo(password) == 0;
   }
+
+  int toInt() {
+    return int.parse(this);
+  }
+
+  double toDouble() {
+    return double.parse(this);
+  }
 }

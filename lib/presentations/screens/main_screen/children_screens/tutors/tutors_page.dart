@@ -6,12 +6,9 @@ import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/list_tutors.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/tutor_filter_bottom_sheet.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/search_field.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/upcoming_class_banner.dart';
-import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
-import 'package:one_one_learn/presentations/widgets/dialogs/bottom_sheet_dialogs/normal_bottom_sheet_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
-import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class TutorsPage extends StatelessWidget {
@@ -60,67 +57,12 @@ class TutorsPage extends StatelessWidget {
                     horizontal: Dimens.getScreenWidth(context) * 0.03,
                   ),
                   child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          // search and filter field
-                          Expanded(
-                            child: TextField(
-                              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                                fontSize: Dimens.getProportionalHeight(context, 15),
-                              ),
-                              decoration: InputDecoration(
-                                hintText: S.current.searchHintTutor,
-                                hintStyle: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                                  fontSize: Dimens.getProportionalHeight(context, 15),
-                                ),
-                                filled: true,
-                                fillColor: context.theme.colorScheme.tertiaryContainer,
-                                isDense: true,
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: context.theme.colorScheme.outline,
-                                  ),
-                                  borderRadius: BorderRadius.circular(5),
-                                ),
-                              ),
-                            ),
-                          ),
-                          const EmptyProportionalSpace(width: 10),
-                          PrimaryOutlineButton(
-                            onTap: () {
-                              final now = DateTime.now();
-                              print('now: ${now.millisecondsSinceEpoch}');
-                              print('now - 35 min: ${now.subtract(const Duration(minutes: 35)).millisecondsSinceEpoch}');
-                              print('now + 5 min: ${now.add(const Duration(minutes: 5)).millisecondsSinceEpoch}');
-                              print('testTime: ${DateTime.fromMillisecondsSinceEpoch(1639805436469)}');
-                              NormalBottomSheetDialog.show(
-                                context,
-                                leftPadding: 0,
-                                rightPadding: 0,
-                                initialChildSize: 0.5018,
-                                body: const TutorFilterBottomSheet(),
-                              );
-                            },
-                            width: Dimens.getProportionalWidth(context, 37),
-                            paddingVertical: Dimens.getProportionalHeight(
-                              context,
-                              12,
-                            ),
-                            preferGradient: false,
-                            borderColor: context.theme.colorScheme.primary,
-                            bodyColor: context.theme.colorScheme.background,
-                            child: const Icon(Icons.filter_alt_rounded),
-                          ),
-                        ],
-                      ),
-                      const EmptyProportionalSpace(height: 10),
-                      const EmptyProportionalSpace(height: 10),
-
+                    children: const [
+                      // search field
+                      SearchField(),
+                      EmptyProportionalSpace(height: 30),
                       // tutor list
-                      const Expanded(
-                        child: ListTutors(),
-                      ),
+                      Expanded(child: ListTutors()),
                     ],
                   ),
                 ),

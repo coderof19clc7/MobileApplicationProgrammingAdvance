@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:one_one_learn/core/models/requests/tutor/tutor_search_request.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/filter_dropdown.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -10,13 +11,52 @@ import 'package:one_one_learn/presentations/widgets/choice_chips/base_choice_chi
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
-class TutorFilterBottomSheet extends StatelessWidget {
-  const TutorFilterBottomSheet({super.key});
+class TutorFilterBottomSheet extends StatefulWidget {
+  const TutorFilterBottomSheet({
+    super.key,
+    this.currentFilters,
+    this.isDescending = true,
+    this.onApplyFilters,
+  });
+
+  final Filters? currentFilters;
+  final bool isDescending;
+  final Function(Filters, bool)? onApplyFilters;
+
+  @override
+  State<TutorFilterBottomSheet> createState() => _TutorFilterBottomSheetState();
+}
+
+class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
+  late ScrollController _scrollController;
+  final _defaultFilters = Filters(
+    specialties: <String>[],
+    nationality: Nationality(),
+    tutoringTimeAvailable: [null, null],
+  );
+  final _defaultIsDescending = true;
+
+  late Filters newFilters;
+  late bool newIsDescending;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController = ScrollController();
+    newFilters = (widget.currentFilters ?? _defaultFilters).copyWith();
+    newIsDescending = widget.isDescending;
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final specialtiesMap = {
-      'All': S.current.all,
+      'all': S.current.all,
       'english-for-kids': S.current.englishForKids,
       'business-english': S.current.businessEnglish,
       'conversational-english': S.current.conversationalEnglish,
@@ -58,6 +98,7 @@ class TutorFilterBottomSheet extends StatelessWidget {
               SizedBox(
                 height: Dimens.getScreenHeight(context) * 0.045,
                 child: ListView.builder(
+                  controller: _scrollController,
                   scrollDirection: Axis.horizontal,
                   physics: const ClampingScrollPhysics(),
                   itemCount: numSpecialties,
@@ -71,9 +112,25 @@ class TutorFilterBottomSheet extends StatelessWidget {
                       ),
                       child: BaseChoiceChip(
                         label: toBeginningOfSentenceCase(specialtiesList[index].value)!,
-                        isSelected: index.isEven,
+                        isSelected: index == 0
+                            ? newFilters.specialties?.isEmpty == true
+                            : newFilters.specialties?.contains(specialtiesList[index].key) == true,
                         onSelected: (value) {
-                          // update state
+                          // update specialities list
+                          setState(() {
+                            if (index == 0) {
+                              // clear all specialities list
+                              newFilters.specialties = <String>[];
+                            } else {
+                              // add or remove speciality
+                              final curSpecialities = newFilters.specialties ?? <String>[];
+                              if (value) {
+                                newFilters.specialties = [...curSpecialities, specialtiesList[index].key];
+                              } else {
+                                newFilters.specialties =  [...curSpecialities]..remove(specialtiesList[index].key);
+                              }
+                            }
+                          });
                         },
                         unselectedBorderColor: context.theme.colorScheme.outlineVariant,
                       ),
@@ -166,7 +223,18 @@ class TutorFilterBottomSheet extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               PrimaryOutlineButton(
-                onTap: () {},
+                onTap: () {
+                  setState(() {
+                    print('_defaultFilters: $_defaultFilters');
+                    _scrollController.animateTo(
+                      0,
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                    );
+                    newFilters = _defaultFilters.copyWith();
+                    newIsDescending = _defaultIsDescending;
+                  });
+                },
                 width: Dimens.getScreenWidth(context) * 0.21282,
                 paddingVertical: Dimens.getProportionalHeight(context, 5),
                 borderRadiusValue: Dimens.getScreenWidth(context),
@@ -183,7 +251,10 @@ class TutorFilterBottomSheet extends StatelessWidget {
               ),
               const EmptyProportionalSpace(width: 10),
               PrimaryFillButton(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pop(context);
+                  widget.onApplyFilters?.call(newFilters, newIsDescending);
+                },
                 width: Dimens.getScreenWidth(context) * 0.21282,
                 paddingVertical: Dimens.getProportionalHeight(context, 5),
                 borderRadiusValue: Dimens.getScreenWidth(context),

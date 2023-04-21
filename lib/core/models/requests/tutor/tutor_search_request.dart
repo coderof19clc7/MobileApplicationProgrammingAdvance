@@ -38,7 +38,7 @@ class TutorSearchRequest extends BaseRequest {
     if (filters != null) {
       map['filters'] = filters?.toJson();
     }
-    if (search != null) {
+    if (search?.isNotEmpty == true) {
       map['search'] = search;
     }
     map['page'] = page;
@@ -128,7 +128,9 @@ class Filters {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['specialties'] = specialties;
+    if (specialties != null) {
+      map['specialties'] = specialties;
+    }
     if (nationality != null) {
       map['nationality'] = nationality?.toJson();
     }
@@ -228,8 +230,12 @@ class Nationality {
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
-    map['isVietNamese'] = isVietNamese;
-    map['isNative'] = isNative;
+    if (isVietNamese != null) {
+      map['isVietNamese'] = isVietNamese;
+    }
+    if (isNative != null) {
+      map['isNative'] = isNative;
+    }
     return map;
   }
 

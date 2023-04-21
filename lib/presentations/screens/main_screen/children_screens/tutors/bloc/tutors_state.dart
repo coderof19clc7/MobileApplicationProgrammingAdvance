@@ -3,10 +3,11 @@ part of 'tutors_cubit.dart';
 @immutable
 class TutorsState extends WidgetState {
   final int nextPage;
-  final bool isRefreshing;
+  final bool isLoadingMore;
   final int total;
   final List<TutorInfo?> listTutors;
   final Filters? filters;
+  final String? searchText;
   final bool isDescending;
 
   @override
@@ -19,7 +20,7 @@ class TutorsState extends WidgetState {
           ? BasicStatusFToastState.fromJson(mapJson['basicStatusFToastState'])
           : null,
       nextPage: mapJson['nextPage'] as int? ?? 1,
-      isRefreshing: mapJson['isRefreshing'] as bool? ?? false,
+      isLoadingMore: mapJson['isLoadingMore'] as bool? ?? false,
       total: mapJson['total'] as int? ?? 0,
       listTutors: mapJson['listTutors'] != null
           ? (mapJson['listTutors'] as List).map((e) {
@@ -29,6 +30,7 @@ class TutorsState extends WidgetState {
       filters: mapJson['filters'] != null
           ? Filters.fromJson(mapJson['filters'])
           : null,
+      searchText: mapJson['searchText'] as String?,
       isDescending: mapJson['isDescending'] as bool? ?? false,
     );
   }
@@ -40,10 +42,11 @@ class TutorsState extends WidgetState {
     map['needNavigateToLogin'] = needNavigateToLogin;
     map['basicStatusFToastState'] = basicStatusFToastState?.toJson();
     map['nextPage'] = nextPage;
-    map['isRefreshing'] = isRefreshing;
+    map['isLoadingMore'] = isLoadingMore;
     map['total'] = total;
     map['listTutors'] = listTutors.map((e) => e?.toJson()).toList();
     map['filters'] = filters?.toJson();
+    map['searchText'] = searchText;
     map['isDescending'] = isDescending;
     return map;
   }
@@ -52,10 +55,11 @@ class TutorsState extends WidgetState {
   List<Object?> get props => [
     ...super.props,
     nextPage,
-    isRefreshing,
+    isLoadingMore,
     total,
     listTutors,
     filters,
+    searchText,
     isDescending,
   ];
 
@@ -65,10 +69,11 @@ class TutorsState extends WidgetState {
     super.needNavigateToLogin = false,
     super.basicStatusFToastState,
     this.nextPage = 1,
-    this.isRefreshing = false,
+    this.isLoadingMore = false,
     this.total = 0,
     this.listTutors = const <TutorInfo?>[null, null, null],
     this.filters,
+    this.searchText,
     this.isDescending = true,
   });
 
@@ -79,10 +84,11 @@ class TutorsState extends WidgetState {
         ' needNavigateToLogin: $needNavigateToLogin,'
         ' basicStatusFToastState: $basicStatusFToastState,'
         ' nextPage: $nextPage,'
-        ' isRefreshing: $isRefreshing,'
+        ' isLoadingMore: $isLoadingMore,'
         ' total: $total,'
         ' listTutors: $listTutors,'
         ' filters: $filters,'
+        ' searchText: $searchText,'
         ' isDescending: $isDescending,'
         ' }';
   }
@@ -92,10 +98,11 @@ class TutorsState extends WidgetState {
     bool? needNavigateToLogin,
     BasicStatusFToastState? basicStatusFToastState,
     int? nextPage,
-    bool? isRefreshing,
+    bool? isLoadingMore,
     int? total,
     List<TutorInfo?>? listTutors,
     Filters? filters,
+    String? searchText,
     bool? isDescending,
   }) {
     return TutorsState(
@@ -103,10 +110,11 @@ class TutorsState extends WidgetState {
       needNavigateToLogin: needNavigateToLogin ?? this.needNavigateToLogin,
       basicStatusFToastState: basicStatusFToastState ?? this.basicStatusFToastState,
       nextPage: nextPage ?? this.nextPage,
-      isRefreshing: isRefreshing ?? this.isRefreshing,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       total: total ?? this.total,
       listTutors: listTutors ?? this.listTutors,
       filters: filters ?? this.filters,
+      searchText: searchText ?? this.searchText,
       isDescending: isDescending ?? this.isDescending,
     );
   }
@@ -117,10 +125,11 @@ class TutorsState extends WidgetState {
       'needNavigateToLogin': needNavigateToLogin,
       'basicStatusFToastState': basicStatusFToastState?.toMap(),
       'nextPage': nextPage,
-      'isRefreshing': isRefreshing,
+      'isLoadingMore': isLoadingMore,
       'total': total,
       'listTutors': listTutors.map((e) => e?.toMap()).toList(),
       'filters': filters?.toMap(),
+      'searchText': searchText,
       'isDescending': isDescending,
     };
   }
@@ -133,7 +142,7 @@ class TutorsState extends WidgetState {
           ? BasicStatusFToastState.fromMap(map['basicStatusFToastState'] as Map<String, dynamic>)
           : null,
       nextPage: map['nextPage'] as int? ?? 1,
-      isRefreshing: map['isRefreshing'] as bool? ?? false,
+      isLoadingMore: map['isLoadingMore'] as bool? ?? false,
       total: map['total'] as int? ?? 0,
       listTutors: map['listTutors'] != null
           ? (map['listTutors'] as List).map((e) {
@@ -143,6 +152,7 @@ class TutorsState extends WidgetState {
       filters: map['filters'] != null
           ? Filters.fromMap(map['filters'] as Map<String, dynamic>)
           : null,
+      searchText: map['searchText'] as String?,
       isDescending: map['isDescending'] as bool? ?? false,
     );
   }

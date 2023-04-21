@@ -14,11 +14,14 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
   final numTutorsPerPage = 12;
   final tutorRepository = injector<TutorRepository>();
+  final tutorsTextEditingController = TextEditingController();
 
   @override
   Future<void> onWidgetCreated() async {
     // refreshList();
   }
+
+  List<TutorInfo?> get initialLoadMoreAbleList => <TutorInfo?>[null, null, null];
 
   void refreshList() {
     emit(state.copyWith(
@@ -54,30 +57,34 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     return listTutors;
   }
 
-  Future<void> searchListTutor({bool reloadAllCurrentList = false} ) async {
-    changeLoadingState(isLoading: true);
-
-    // get the page number and per page amount
-    final page = '${reloadAllCurrentList ? 1 : state.nextPage}';
-    var perPage = numTutorsPerPage;
-    if (reloadAllCurrentList) {
-      perPage = state.listTutors.length - (canListTutorsLoadMore() ? 3 : 0);
+  List<TutorInfo?> getRealCurrentList({bool reloadAllCurrentList = false}) {
+    final currentList = reloadAllCurrentList ? initialLoadMoreAbleList : [...state.listTutors];
+    if (currentList.last == null) {
+      currentList.removeRange(state.listTutors.length - 3, state.listTutors.length);
     }
+    return currentList;
+  }
+
+  Future<void> searchListTutor({bool reloadAllCurrentList = false} ) async {
+    emit(state.copyWith(isLoadingMore: true));
 
     // search list by the filters amd page number
     final tutorSearchResponse = await fetchApi<TutorSearchResponse>(
       () => tutorRepository.search(TutorSearchRequest(
-        filters: state.filters, page: page, perPage: perPage,
+        filters: state.filters,
+        search: state.searchText,
+        page: '${reloadAllCurrentList ? 1 : state.nextPage}',
+        perPage: reloadAllCurrentList
+            ? state.listTutors.length - (canListTutorsLoadMore() ? 3 : 0)
+            : numTutorsPerPage,
       )),
       showLoading: false,
     );
 
     // handle the response
-    final currentList = reloadAllCurrentList ? <TutorInfo?>[null, null, null] : [...state.listTutors];
-    if (currentList.last == null) {
-      currentList.removeRange(state.listTutors.length - 3, state.listTutors.length);
-    }
-    print('currentListLength: ${currentList.length}');
+    print('currentListLength: ${
+      state.listTutors.last == null ? state.listTutors.length - 3 : state.listTutors.length
+    }');
     if (tutorSearchResponse != null) {
       if (tutorSearchResponse.statusCode == ApiStatusCode.success) {
         var newPage = state.nextPage;
@@ -93,6 +100,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         } else {
           // load more --> combine current list and new list
           newPage = state.nextPage + (newListTutors.isEmpty ? 0 : 1);
+          final currentList = getRealCurrentList(reloadAllCurrentList: reloadAllCurrentList);
           finalNewListTutors = newListTutors.isEmpty ? [...currentList] : [...currentList, ...newListTutors];
           if (finalNewListTutors.length != currentList.length) {
             finalNewListTutors = sortList(
@@ -109,6 +117,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         ));
       }
     } else {
+      final currentList = getRealCurrentList(reloadAllCurrentList: reloadAllCurrentList);
       emit(state.copyWith(
         listTutors: [...currentList],
       ));
@@ -118,10 +127,28 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     // emit(state.copyWith(
     //   isRefreshing: false,
     // ));
-    changeLoadingState(isLoading: false);
+    emit(state.copyWith(isLoadingMore: false));
+  }
+
+  void onSearchTextSubmitted() {
+    if (tutorsTextEditingController.text == state.searchText) {
+      return;
+    }
+
+    emit(state.copyWith(
+      searchText: tutorsTextEditingController.text,
+      nextPage: 1, total: 0,
+      listTutors: initialLoadMoreAbleList,
+    ));
   }
 
   Future<void> onAddTutorToFavouriteList(String tutorId, int index) async {
 
+  }
+
+  @override
+  Future<void> close() {
+    tutorsTextEditingController.dispose();
+    return super.close();
   }
 }
