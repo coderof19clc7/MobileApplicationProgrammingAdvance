@@ -71,6 +71,11 @@ class ListTutors extends StatelessWidget {
               description: item.bio ?? '',
               categories: item.specialties?.split(',') ?? <String>[],
               isFavorite:  item.isfavoritetutor == '1',
+              onFavoriteIconTap: () {
+                context.read<TutorsCubit>().onTutorFavouriteStatusChanged(
+                  item.userId ?? '', index: index,
+                );
+              },
             );
           },
         );

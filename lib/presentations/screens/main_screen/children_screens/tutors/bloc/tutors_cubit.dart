@@ -5,7 +5,9 @@ import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
 import 'package:one_one_learn/core/models/requests/tutor/tutor_search_request.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_search_response.dart';
+import 'package:one_one_learn/core/models/responses/user/user_manage_favorite_tutor_response.dart';
 import 'package:one_one_learn/core/network/repositories/tutor_repository.dart';
+import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 
 part 'tutors_state.dart';
 
@@ -14,6 +16,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
   final numTutorsPerPage = 12;
   final tutorRepository = injector<TutorRepository>();
+  final userRepository = injector<UserRepository>();
   final tutorsTextEditingController = TextEditingController();
 
   @override
@@ -177,8 +180,31 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
   }
 
-  Future<void> onAddTutorToFavouriteList(String tutorId, int index) async {
+  Future<void> onTutorFavouriteStatusChanged(String tutorId, {
+    int index = -1,
+  }) async {
+    changeLoadingState(isLoading: true);
+    final userManageFavouriteTutorResponse = await fetchApi<UserManageFavoriteTutorResponse>(
+      () => userRepository.manageFavoriteTutor(tutorId),
+      showLoading: false,
+    );
 
+    if (userManageFavouriteTutorResponse != null) {
+      if (userManageFavouriteTutorResponse.statusCode == ApiStatusCode.success) {
+        if (index == -1) {
+          await searchListTutor(reloadAllCurrentList: true);
+        } else {
+          final newList = [...getRealCurrentList()];
+          newList[index] = newList[index]?.copyWith(
+            isfavoritetutor: newList[index]?.isfavoritetutor == '1' ? '0' : '1',
+          );
+          emit(state.copyWith(
+            listTutors: sortList(newList, sortValue: state.sortValue),
+          ));
+        }
+      }
+    }
+    changeLoadingState(isLoading: false);
   }
 
   @override

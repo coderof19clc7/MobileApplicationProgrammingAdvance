@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:one_one_learn/configs/constants/debounces.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
@@ -7,6 +8,7 @@ import 'package:one_one_learn/presentations/widgets/cards/base_card.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/simple_list_fake_chips.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/utils/extensions/string_extensions.dart';
+import 'package:one_one_learn/utils/helpers/debounce_helper.dart';
 
 class TutorCard extends BaseCard {
   const TutorCard({
@@ -21,12 +23,14 @@ class TutorCard extends BaseCard {
     this.categories = const [],
     this.rating = 0,
     this.isFavorite = false,
+    this.onFavoriteIconTap,
   });
 
   final String nationality, name, description;
   final List<String> categories;
   final double rating;
   final bool isFavorite;
+  final Function()? onFavoriteIconTap;
 
   @override
   Widget buildSecondChild(BuildContext context) {
@@ -60,7 +64,13 @@ class TutorCard extends BaseCard {
               isLoading
                   ? const SizedBox.shrink()
                   : InkWell(
-                onTap: () {},
+                onTap: () {
+                  DebounceHelper.runDisable(
+                    '${DebounceConstants.favoriteIconTap}-$name}',
+                    callback: () {onFavoriteIconTap?.call();
+                    },
+                  );
+                },
                 child: SvgPicture.string(
                   SvgIcons.getIcon(
                     SvgIconEnum.favorite,

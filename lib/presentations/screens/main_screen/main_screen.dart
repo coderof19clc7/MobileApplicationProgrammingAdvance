@@ -5,6 +5,7 @@ import 'package:one_one_learn/presentations/screens/main_screen/children_screens
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/settings_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/upcoming_classes_page.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/tabs/main_courses_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/tabs/tutors_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/widgets/bottom_nav_bar.dart';
 import 'package:one_one_learn/presentations/widgets/base_widgets/base_screen.dart';
@@ -13,7 +14,7 @@ const listScreens = <Widget>[
   TutorsTab(),
   Center(child: Text('This is Chat screen')),
   UpcomingClassesPage(),
-  CoursesPage(key: PageStorageKey('CoursesPage')),
+  MainCoursesTab(key: PageStorageKey('CoursesPage')),
   SettingsPage(),
 ];
 
@@ -42,18 +43,28 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
         child: BlocBuilder<MainCubit, MainState>(
           buildWhen: (previous, current) => previous.currentIndex != current.currentIndex,
           builder: (context, state) {
-            return Scaffold(
-              body: PageView.builder(
-                controller: context.read<MainCubit>().pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: listScreens.length,
-                itemBuilder: (context, index) {
-                  return listScreens[index];
-                },
-              ),
-              bottomNavigationBar: BottomNavBar(
-                currentIndex: state.currentIndex,
-                onTap: context.read<MainCubit>().onChangeIndex,
+            return MultiBlocListener(
+              listeners: [
+                BlocListener<TutorsCubit, TutorsState>(
+                  listenWhen: (previous, current) => previous.isLoading != current.isLoading,
+                  listener: (context, state) {
+                    context.read<MainCubit>().changeLoadingState(isLoading: state.isLoading);
+                  },
+                ),
+              ],
+              child: Scaffold(
+                body: PageView.builder(
+                  controller: context.read<MainCubit>().pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: listScreens.length,
+                  itemBuilder: (context, index) {
+                    return listScreens[index];
+                  },
+                ),
+                bottomNavigationBar: BottomNavBar(
+                  currentIndex: state.currentIndex,
+                  onTap: context.read<MainCubit>().onChangeIndex,
+                ),
               ),
             );
           },

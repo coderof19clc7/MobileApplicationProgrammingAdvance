@@ -125,7 +125,9 @@ class Filters {
     if (mapJson['tutoringTimeAvailable'] != null) {
       tutoringTimeAvailable = [];
       for (final v in mapJson['tutoringTimeAvailable'] as List) {
-        tutoringTimeAvailable?.add(v.fromJson(v));
+        if (v != null) {
+          tutoringTimeAvailable?.add(v);
+        }
       }
     }
   }

@@ -6,17 +6,11 @@ import 'package:one_one_learn/presentations/screens/main_screen/children_screens
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/widgets/courses_tab.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
-class CoursesPage extends StatefulWidget {
+class CoursesPage extends StatelessWidget {
   const CoursesPage({super.key});
 
   @override
-  State<CoursesPage> createState() => _CoursesPageState();
-}
-
-class _CoursesPageState extends State<CoursesPage> with AutomaticKeepAliveClientMixin<CoursesPage> {
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return GestureDetector(
       onTap: () {
         UIHelper.hideKeyboard(context);
@@ -68,8 +62,8 @@ class _CoursesPageState extends State<CoursesPage> with AutomaticKeepAliveClient
                   child: TabBarView(
                     physics: NeverScrollableScrollPhysics(),
                     children: [
-                      CoursesTab(),
-                      BooksTab(),
+                      CoursesTab(key: PageStorageKey('courses-tab')),
+                      BooksTab(key: PageStorageKey('books-tab')),
                     ],
                   ),
                 ),
@@ -80,7 +74,4 @@ class _CoursesPageState extends State<CoursesPage> with AutomaticKeepAliveClient
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }
