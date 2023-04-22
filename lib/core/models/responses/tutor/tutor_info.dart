@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/tutor/feed_back.dart';
 import 'package:one_one_learn/core/models/responses/user/user_info.dart';
 
@@ -286,7 +287,7 @@ class TutorInfo {
           updatedAt == other.updatedAt &&
           deletedAt == other.deletedAt &&
           studentGroupId == other.studentGroupId &&
-          feedbacks == other.feedbacks &&
+          listEquals(feedbacks, other.feedbacks) &&
           id == other.id &&
           userId == other.userId &&
           video == other.video &&

@@ -1,4 +1,6 @@
 
+import 'package:flutter/foundation.dart';
+import 'package:one_one_learn/core/models/responses/course/course_information.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 import 'package:one_one_learn/core/models/responses/user/learn_topic.dart';
 import 'package:one_one_learn/core/models/responses/user/referral_info.dart';
@@ -71,11 +73,11 @@ class UserInfo {
       }
     }
 
-    List? courses = [];
+    List<CourseInformation>? courses;
     if (mapJson['courses'] != null) {
       courses = [];
-      for (final v in mapJson['courses'] as List) {
-        courses.add(v.fromJson(v));
+      for (final v in mapJson['courses'] as List<dynamic>) {
+        courses.add(CourseInformation.fromJson(v as Map<String, dynamic>));
       }
     }
 
@@ -136,7 +138,7 @@ class UserInfo {
   final bool? isActivated;
   final TutorInfo? tutorInfo;
   final WalletInfo? walletInfo;
-  final List<dynamic>? courses;
+  final List<CourseInformation>? courses;
   final String? requireNote;
   final String? level;
   final List<LearnTopic>? learnTopics;
@@ -203,17 +205,17 @@ class UserInfo {
           avatar == other.avatar &&
           country == other.country &&
           phone == other.phone &&
-          roles == other.roles &&
+          listEquals(roles, other.roles) &&
           language == other.language &&
           birthday == other.birthday &&
           isActivated == other.isActivated &&
           tutorInfo == other.tutorInfo &&
           walletInfo == other.walletInfo &&
-          courses == other.courses &&
+          listEquals(courses, other.courses) &&
           requireNote == other.requireNote &&
           level == other.level &&
-          learnTopics == other.learnTopics &&
-          testPreparations == other.testPreparations &&
+          listEquals(learnTopics, other.learnTopics) &&
+          listEquals(testPreparations, other.testPreparations) &&
           isPhoneActivated == other.isPhoneActivated &&
           timezone == other.timezone &&
           referralInfo == other.referralInfo &&
@@ -295,7 +297,7 @@ class UserInfo {
     bool? isActivated,
     TutorInfo? tutorInfo,
     WalletInfo? walletInfo,
-    List<dynamic>? courses,
+    List<CourseInformation>? courses,
     String? requireNote,
     String? level,
     List<LearnTopic>? learnTopics,
@@ -357,7 +359,7 @@ class UserInfo {
       map['walletInfo'] = walletInfo?.toMap();
     }
     if (courses != null) {
-      map['courses'] = courses?.map((v) => v.toJson()).toList();
+      map['courses'] = courses?.map((v) => v.toMap()).toList();
     }
     map['requireNote'] = requireNote;
     map['level'] = level;
@@ -389,11 +391,11 @@ class UserInfo {
       }
     }
 
-    List? courses = [];
+    List<CourseInformation>? courses;
     if (map['courses'] != null) {
-      courses = [];
-      for (final v in map['courses'] as List) {
-        courses.add(v.fromJson(v));
+      courses = <CourseInformation>[];
+      for (final v in map['courses'] as List<dynamic>) {
+        courses.add(CourseInformation.fromMap(v as Map<String, dynamic>));
       }
     }
 

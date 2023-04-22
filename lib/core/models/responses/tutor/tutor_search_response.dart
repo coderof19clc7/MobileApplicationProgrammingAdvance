@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/base_response.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 
@@ -47,6 +48,20 @@ class TutorSearchResponse extends BaseResponse {
   List<Object?> get props => [...super.props, count, rows];
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          (other is TutorSearchResponse &&
+              runtimeType == other.runtimeType &&
+              count == other.count &&
+              listEquals(rows, other.rows));
+
+  @override
+  int get hashCode => statusCode.hashCode
+      ^ message.hashCode
+      ^ count.hashCode
+      ^ rows.hashCode;
+
+  @override
   String toString() {
     return 'TutorSearchResponse{'
         ' statusCode: $statusCode,'
@@ -89,6 +104,7 @@ class TutorSearchResponse extends BaseResponse {
       ).toList() : null,
     );
   }
+
 
 //</editor-fold>
 }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/requests/base_request.dart';
 
 /// filters : {"specialties":["starters"],"nationality":{"isVietNamese":true,"isNative":true},"date":null,"tutoringTimeAvailable":[null,null]}
@@ -105,6 +106,14 @@ class Filters {
     this.tutoringTimeAvailable,
   });
 
+  factory Filters.defaultFilters() {
+    return Filters(
+      specialties: <String>[],
+      nationality: Nationality(),
+      tutoringTimeAvailable: [null, null],
+    );
+  }
+
   Filters.fromJson(dynamic json) {
     final mapJson = json as Map<String, dynamic>;
     specialties = mapJson['specialties'] != null
@@ -136,7 +145,7 @@ class Filters {
     }
     map['date'] = date;
     if (tutoringTimeAvailable != null) {
-      map['tutoringTimeAvailable'] = tutoringTimeAvailable?.map((v) => v.toJson()).toList();
+      map['tutoringTimeAvailable'] = tutoringTimeAvailable?.map((v) => v?.toJson()).toList();
     }
     return map;
   }
@@ -146,10 +155,10 @@ class Filters {
       identical(this, other) ||
       (other is Filters &&
           runtimeType == other.runtimeType &&
-          specialties == other.specialties &&
+          listEquals(specialties, other.specialties) &&
           nationality == other.nationality &&
           date == other.date &&
-          tutoringTimeAvailable == other.tutoringTimeAvailable);
+          listEquals(tutoringTimeAvailable, other.tutoringTimeAvailable));
 
   @override
   int get hashCode =>

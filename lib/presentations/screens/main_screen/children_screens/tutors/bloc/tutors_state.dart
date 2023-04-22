@@ -8,7 +8,7 @@ class TutorsState extends WidgetState {
   final List<TutorInfo?> listTutors;
   final Filters? filters;
   final String? searchText;
-  final bool isDescending;
+  final int sortValue;
 
   @override
   WidgetState fromJson(dynamic json) {
@@ -31,7 +31,7 @@ class TutorsState extends WidgetState {
           ? Filters.fromJson(mapJson['filters'])
           : null,
       searchText: mapJson['searchText'] as String?,
-      isDescending: mapJson['isDescending'] as bool? ?? false,
+      sortValue: mapJson['sortValue'] as int? ?? 0,
     );
   }
 
@@ -47,7 +47,7 @@ class TutorsState extends WidgetState {
     map['listTutors'] = listTutors.map((e) => e?.toJson()).toList();
     map['filters'] = filters?.toJson();
     map['searchText'] = searchText;
-    map['isDescending'] = isDescending;
+    map['sortValue'] = sortValue;
     return map;
   }
 
@@ -60,8 +60,32 @@ class TutorsState extends WidgetState {
     listTutors,
     filters,
     searchText,
-    isDescending,
+    sortValue,
   ];
+
+  @override
+  bool operator ==(Object other) => identical(this, other)
+      || super == other && other is TutorsState
+      && runtimeType == other.runtimeType
+      && nextPage == other.nextPage
+      && isLoadingMore == other.isLoadingMore
+      && total == other.total
+      && listTutors == other.listTutors
+      && filters == other.filters
+      && searchText == other.searchText
+      && sortValue == other.sortValue;
+
+  @override
+  int get hashCode => isLoading.hashCode
+      ^ needNavigateToLogin.hashCode
+      ^ basicStatusFToastState.hashCode
+      ^ nextPage.hashCode
+      ^ isLoadingMore.hashCode
+      ^ total.hashCode
+      ^ listTutors.hashCode
+      ^ filters.hashCode
+      ^ searchText.hashCode
+      ^ sortValue.hashCode;
 
 //<editor-fold desc="Data Methods">
   const TutorsState({
@@ -74,7 +98,7 @@ class TutorsState extends WidgetState {
     this.listTutors = const <TutorInfo?>[null, null, null],
     this.filters,
     this.searchText,
-    this.isDescending = true,
+    this.sortValue = 0,
   });
 
   @override
@@ -89,7 +113,7 @@ class TutorsState extends WidgetState {
         ' listTutors: $listTutors,'
         ' filters: $filters,'
         ' searchText: $searchText,'
-        ' isDescending: $isDescending,'
+        ' sortValue: $sortValue,'
         ' }';
   }
 
@@ -103,7 +127,7 @@ class TutorsState extends WidgetState {
     List<TutorInfo?>? listTutors,
     Filters? filters,
     String? searchText,
-    bool? isDescending,
+    int? sortValue,
   }) {
     return TutorsState(
       isLoading: isLoading ?? this.isLoading,
@@ -115,7 +139,7 @@ class TutorsState extends WidgetState {
       listTutors: listTutors ?? this.listTutors,
       filters: filters ?? this.filters,
       searchText: searchText ?? this.searchText,
-      isDescending: isDescending ?? this.isDescending,
+      sortValue: sortValue ?? this.sortValue,
     );
   }
 
@@ -130,7 +154,7 @@ class TutorsState extends WidgetState {
       'listTutors': listTutors.map((e) => e?.toMap()).toList(),
       'filters': filters?.toMap(),
       'searchText': searchText,
-      'isDescending': isDescending,
+      'sortValue': sortValue,
     };
   }
 
@@ -153,9 +177,10 @@ class TutorsState extends WidgetState {
           ? Filters.fromMap(map['filters'] as Map<String, dynamic>)
           : null,
       searchText: map['searchText'] as String?,
-      isDescending: map['isDescending'] as bool? ?? false,
+      sortValue: map['sortValue'] as int? ?? 0,
     );
   }
+
 
 //</editor-fold>
 }

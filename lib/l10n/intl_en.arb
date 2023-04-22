@@ -13,6 +13,7 @@
   "signUpTitle": "Create your account",
   "resetPassword": "Reset password",
   "resetPasswordRequirement": "Enter the email associated with your account to reset password.",
+  "sortRatingFromNameAtoZ": "From A to Z",
   "sortRatingFromHighest": "From highest rating",
   "sortRatingFromLowest": "From lowest rating",
   "sortFavoriteFromHighest": "From most favorited",

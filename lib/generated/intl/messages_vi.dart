@@ -172,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Từ đánh giá cao"),
         "sortRatingFromLowest":
             MessageLookupByLibrary.simpleMessage("Từ đánh giá thấp"),
+        "sortRatingFromNameAtoZ":
+            MessageLookupByLibrary.simpleMessage("Từ tên A đến Z"),
         "sorting": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
         "speaking": MessageLookupByLibrary.simpleMessage("Khả năng nói"),
         "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),

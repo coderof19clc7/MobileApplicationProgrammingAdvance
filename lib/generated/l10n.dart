@@ -190,6 +190,16 @@ class S {
     );
   }
 
+  /// `From A to Z`
+  String get sortRatingFromNameAtoZ {
+    return Intl.message(
+      'From A to Z',
+      name: 'sortRatingFromNameAtoZ',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `From highest rating`
   String get sortRatingFromHighest {
     return Intl.message(

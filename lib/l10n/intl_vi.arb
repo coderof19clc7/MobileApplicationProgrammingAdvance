@@ -13,6 +13,7 @@
   "signUpTitle": "Tạo tài khoản",
   "resetPassword": "Đặt lại mật khẩu",
   "resetPasswordRequirement": "Điền email ứng với tài khoản muốn đặt lại mật khẩu.",
+  "sortRatingFromNameAtoZ": "Từ tên A đến Z",
   "sortRatingFromHighest": "Từ đánh giá cao",
   "sortRatingFromLowest": "Từ đánh giá thấp",
   "sortFavoriteFromHighest": "Nhiều lượt thích nhất",

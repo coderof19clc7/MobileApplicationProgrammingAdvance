@@ -13,6 +13,7 @@ class FilterDropDown<T> extends StatelessWidget {
     required this.itemBuilder,
     this.leadingIcon,
     this.alignment = Alignment.center,
+    this.onChanged,
   });
 
   final T? value;
@@ -21,6 +22,7 @@ class FilterDropDown<T> extends StatelessWidget {
   final DropdownMenuItem<T> Function(T item) itemBuilder;
   final AlignmentGeometry alignment;
   final Widget? leadingIcon;
+  final Function(T? value)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -61,8 +63,8 @@ class FilterDropDown<T> extends StatelessWidget {
                 menuMaxHeight: Dimens.getProportionalHeight(context, 150),
                 alignment: alignment,
                 items: data.map(itemBuilder).toList(),
-                onChanged: (value) {},
                 underline: const SizedBox.shrink(),
+                onChanged: onChanged,
               ),
             ],
           ),

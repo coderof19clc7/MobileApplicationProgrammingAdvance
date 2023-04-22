@@ -26,8 +26,8 @@ class AuthResponse extends BaseResponse {
     return AuthResponse(
       statusCode: mapJson['statusCode'] as int?,
       message: mapJson['message'] as String?,
-      tokens: mapJson['tokens'] != null ? Tokens.fromJson(mapJson['tokens'] as Map<String, dynamic>) : null,
-      user: mapJson['user'] != null ? UserInfo.fromJson(mapJson['user'] as Map<String, dynamic>) : null,
+      tokens: mapJson['tokens'] != null ? Tokens.fromJson(mapJson['tokens']) : null,
+      user: mapJson['user'] != null ? UserInfo.fromJson(mapJson['user']) : null,
     );
   }
 

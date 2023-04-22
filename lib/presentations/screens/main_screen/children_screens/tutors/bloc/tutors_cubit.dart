@@ -18,6 +18,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
   @override
   Future<void> onWidgetCreated() async {
+    emit(state.copyWith(filters: Filters.defaultFilters()));
     // refreshList();
   }
 
@@ -37,21 +38,34 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
   }
 
   List<TutorInfo?> sortList(List<TutorInfo?> listSource, {
-    required bool isDescending,
+    required int sortValue,
   }) {
     final listTutors = [...listSource]
       ..sort((a, b) {
-        // sort by favorite status
-        if (a?.isfavoritetutor == '1' && b?.isfavoritetutor != '1') {
-          return -1;
+        // a always stand before b if b is null
+        if (b == null) {
+          return - 1;
         }
-        if (a?.isfavoritetutor != '1' && b?.isfavoritetutor == '1') {
+        // b always stand before a if a is null
+        if (a == null) {
           return 1;
         }
 
+        // sort by favorite status
+        if (a.isfavoritetutor == '1' && b.isfavoritetutor != '1') {
+          return -1;
+        }
+        if (a.isfavoritetutor != '1' && b.isfavoritetutor == '1') {
+          return 1;
+        }
+
+        if (sortValue == 0) {
+          return a.name?.compareTo(b.name ?? '') ?? 0;
+        }
+
         // sort by rating
-        final compareValue =  (a?.rating?.toInt() ?? 0).compareTo(b?.rating?.toInt() ?? 0);
-        return isDescending ? -compareValue : compareValue;
+        final compareValue =  (a.rating?.toInt() ?? 0).compareTo(b.rating?.toInt() ?? 0);
+        return sortValue == -1 ? -compareValue : compareValue;
       });
 
     return listTutors;
@@ -93,7 +107,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         print('newListTutors: ${newListTutors.length}');
         if (reloadAllCurrentList) {
           // reload all current list --> replace current list with new list
-          finalNewListTutors = sortList(newListTutors, isDescending: state.isDescending);
+          finalNewListTutors = sortList(newListTutors, sortValue: state.sortValue);
           if (canListTutorsLoadMore()) {
             finalNewListTutors.addAll([null, null, null]);
           }
@@ -104,7 +118,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
           finalNewListTutors = newListTutors.isEmpty ? [...currentList] : [...currentList, ...newListTutors];
           if (finalNewListTutors.length != currentList.length) {
             finalNewListTutors = sortList(
-              finalNewListTutors, isDescending: state.isDescending,
+              finalNewListTutors, sortValue: state.sortValue,
             )..addAll([null, null, null]);
           }
         }
@@ -142,12 +156,33 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     ));
   }
 
+  void onApplyFilters(Filters newFilters, int newSortValue) {
+    // only apply new filters if they are different from the current ones
+    if (newFilters == state.filters && newSortValue == state.sortValue) {
+      return;
+    }
+    if (newFilters != state.filters) {
+      emit(state.copyWith(
+        nextPage: 1, total: 0,
+        listTutors: initialLoadMoreAbleList,
+        filters: newFilters,
+        sortValue: newSortValue,
+      ));
+    } else if (newSortValue != state.sortValue) {
+      emit(state.copyWith(
+        listTutors: sortList([...state.listTutors], sortValue: newSortValue),
+        sortValue: newSortValue,
+      ));
+    }
+
+  }
+
   Future<void> onAddTutorToFavouriteList(String tutorId, int index) async {
 
   }
 
   @override
-  Future<void> close() {
+  Future<void> close() async {
     tutorsTextEditingController.dispose();
     return super.close();
   }

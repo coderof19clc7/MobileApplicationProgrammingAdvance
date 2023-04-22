@@ -50,7 +50,15 @@ class SearchField extends StatelessWidget {
                   leftPadding: 0,
                   rightPadding: 0,
                   initialChildSize: 0.5018,
-                  body: const TutorFilterBottomSheet(),
+                  body: TutorFilterBottomSheet(
+                    currentFilters: state.filters,
+                    sortValue: state.sortValue,
+                    onApplyFilters: (filters, sortValue) {
+                      context.read<TutorsCubit>().onApplyFilters(
+                        filters, sortValue,
+                      );
+                    },
+                  ),
                 );
               },
               width: Dimens.getProportionalWidth(context, 37),

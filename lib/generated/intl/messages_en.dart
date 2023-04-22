@@ -172,6 +172,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("From highest rating"),
         "sortRatingFromLowest":
             MessageLookupByLibrary.simpleMessage("From lowest rating"),
+        "sortRatingFromNameAtoZ":
+            MessageLookupByLibrary.simpleMessage("From A to Z"),
         "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),

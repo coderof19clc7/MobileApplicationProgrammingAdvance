@@ -9,19 +9,18 @@ import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/base_choice_chip.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
-import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class TutorFilterBottomSheet extends StatefulWidget {
   const TutorFilterBottomSheet({
     super.key,
     this.currentFilters,
-    this.isDescending = true,
+    this.sortValue = 0,
     this.onApplyFilters,
   });
 
   final Filters? currentFilters;
-  final bool isDescending;
-  final Function(Filters, bool)? onApplyFilters;
+  final int sortValue;
+  final Function(Filters, int)? onApplyFilters;
 
   @override
   State<TutorFilterBottomSheet> createState() => _TutorFilterBottomSheetState();
@@ -29,22 +28,52 @@ class TutorFilterBottomSheet extends StatefulWidget {
 
 class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
   late ScrollController _scrollController;
-  final _defaultFilters = Filters(
-    specialties: <String>[],
-    nationality: Nationality(),
-    tutoringTimeAvailable: [null, null],
-  );
-  final _defaultIsDescending = true;
+
+  // constants
+  final specialtiesMap = {
+    'all': S.current.all,
+    'english-for-kids': S.current.englishForKids,
+    'business-english': S.current.businessEnglish,
+    'conversational-english': S.current.conversationalEnglish,
+    'starters': S.current.starters,
+    'movers': S.current.movers,
+    'flyers': S.current.flyers,
+    'ket': S.current.ket,
+    'pet': S.current.pet,
+    'ielts': S.current.ielts,
+    'toefl': S.current.toefl,
+    'toeic': S.current.toeic,
+  };
+  final nationalityValues = [0, 1, 2, 3];
+  final sortValues = [0, 1, -1];
+
+  // default values
+  final _defaultFilters = Filters.defaultFilters();
+  final _defaultIsDescending = 0;
 
   late Filters newFilters;
-  late bool newIsDescending;
+  int newNationalityValue = 0;
+  int newSortValue = 0;
 
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
     newFilters = (widget.currentFilters ?? _defaultFilters).copyWith();
-    newIsDescending = widget.isDescending;
+    if (newFilters.nationality?.isVietNamese == null
+        && newFilters.nationality?.isNative == null
+    ) {
+      newNationalityValue = 0;
+    } else if (newFilters.nationality?.isVietNamese == false
+        && newFilters.nationality?.isNative == false
+    ) {
+      newNationalityValue = 1;
+    } else if (newFilters.nationality?.isVietNamese == true) {
+      newNationalityValue = 2;
+    } else if (newFilters.nationality?.isNative == true) {
+      newNationalityValue = 3;
+    }
+    newSortValue = widget.sortValue;
   }
 
   @override
@@ -55,24 +84,8 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final specialtiesMap = {
-      'all': S.current.all,
-      'english-for-kids': S.current.englishForKids,
-      'business-english': S.current.businessEnglish,
-      'conversational-english': S.current.conversationalEnglish,
-      'starters': S.current.starters,
-      'movers': S.current.movers,
-      'flyers': S.current.flyers,
-      'ket': S.current.ket,
-      'pet': S.current.pet,
-      'ielts': S.current.ielts,
-      'toefl': S.current.toefl,
-      'toeic': S.current.toeic,
-    };
     final specialtiesList = specialtiesMap.entries.toList();
     final numSpecialties = specialtiesList.length;
-    final nationalityValues = [0, 1, 2];
-    final sortValues = [1, -1];
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -151,25 +164,36 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
               ),
               const EmptyProportionalSpace(height: 15),
               FilterDropDown<int>(
-                value: nationalityValues.first,
+                value: newNationalityValue,
                 data: nationalityValues,
                 alignment: AlignmentDirectional.centerStart,
                 itemBuilder: (item) {
-                  var nationality = S.current.vietnamese;
+                  var nationality = S.current.all;
                   if (item == 1) {
                     nationality = S.current.foreign;
                   } else if (item == 2) {
+                    nationality = S.current.vietnamese;
+                  } else if (item == 3) {
                     nationality = S.current.nativeEnglish;
                   }
                   return DropdownMenuItem<int>(
                     value: item,
                     child: Text(
-                      S.current.tutorWithNationality(nationality),
+                      item == 0 ? nationality : S.current.tutorWithNationality(nationality),
                       style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                         color: context.theme.colorScheme.onTertiaryContainer,
                       ),
                     ),
                   );
+                },
+                onChanged: (value) {
+                  setState(() {
+                    newNationalityValue = value ?? 0;
+                    newFilters.nationality = Nationality(
+                      isVietNamese: value == 2 ? true : (value == 1 ? false : null),
+                      isNative: value == 3 ? true : (value == 1 ? false : null),
+                    );
+                  });
                 },
               ),
 
@@ -185,20 +209,30 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
               ),
               const EmptyProportionalSpace(height: 15),
               FilterDropDown<int>(
-                value: sortValues.first,
+                value: newSortValue,
                 data: sortValues,
                 leadingIcon: const Icon(Icons.sort_rounded),
                 itemBuilder: (item) {
+                  final text = item == 0
+                      ? S.current.sortRatingFromNameAtoZ
+                      : (item == 1
+                      ? S.current.sortRatingFromLowest
+                      : S.current.sortRatingFromHighest);
                   return DropdownMenuItem<int>(
                     value: item,
                     alignment: Alignment.center,
                     child: Text(
-                      item == 1 ? S.current.sortRatingFromHighest : S.current.sortRatingFromLowest,
+                      text,
                       style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                         color: context.theme.colorScheme.onTertiaryContainer,
                       ),
                     ),
                   );
+                },
+                onChanged: (value) {
+                  setState(() {
+                    newSortValue = value ?? 0;
+                  });
                 },
               ),
             ],
@@ -225,14 +259,14 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
               PrimaryOutlineButton(
                 onTap: () {
                   setState(() {
-                    print('_defaultFilters: $_defaultFilters');
                     _scrollController.animateTo(
                       0,
                       duration: const Duration(milliseconds: 250),
                       curve: Curves.easeInOut,
                     );
                     newFilters = _defaultFilters.copyWith();
-                    newIsDescending = _defaultIsDescending;
+                    newNationalityValue = 0;
+                    newSortValue = _defaultIsDescending;
                   });
                 },
                 width: Dimens.getScreenWidth(context) * 0.21282,
@@ -253,7 +287,7 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
               PrimaryFillButton(
                 onTap: () {
                   Navigator.pop(context);
-                  widget.onApplyFilters?.call(newFilters, newIsDescending);
+                  widget.onApplyFilters?.call(newFilters, newSortValue);
                 },
                 width: Dimens.getScreenWidth(context) * 0.21282,
                 paddingVertical: Dimens.getProportionalHeight(context, 5),
