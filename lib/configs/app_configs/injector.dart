@@ -8,7 +8,6 @@ import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 import 'package:one_one_learn/core/network/repositories/course_repository.dart';
 import 'package:one_one_learn/core/network/repositories/schedule_repository.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final injector = GetIt.instance;
 
