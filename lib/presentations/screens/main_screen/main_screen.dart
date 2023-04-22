@@ -28,39 +28,47 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
 
   @override
   Widget buildWidget(BuildContext context) {
-    return BlocListener<MainCubit, MainState>(
-      listenWhen: (previous, current) => previous.currentIndex != current.currentIndex,
-      listener: (context, state) {
-        context.read<MainCubit>().pageController.jumpToPage(state.currentIndex);
-      },
-      child: BlocBuilder<MainCubit, MainState>(
-        buildWhen: (previous, current) => previous.currentIndex != current.currentIndex,
-        builder: (context, state) {
-          return MultiBlocListener(
-            listeners: [
-              BlocListener<TutorsCubit, TutorsState>(
-                listenWhen: (previous, current) => previous.isLoading != current.isLoading,
-                listener: (context, state) {
-                  context.read<MainCubit>().changeLoadingState(isLoading: state.isLoading);
-                },
-              ),
-            ],
-            child: Scaffold(
-              body: PageView.builder(
-                controller: context.read<MainCubit>().pageController,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: listScreens.length,
-                itemBuilder: (context, index) {
-                  return listScreens[index];
-                },
-              ),
-              bottomNavigationBar: BottomNavBar(
-                currentIndex: state.currentIndex,
-                onTap: context.read<MainCubit>().onChangeIndex,
-              ),
-            ),
-          );
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<TutorsCubit>(
+          create: (context) => TutorsCubit(),
+          lazy: false,
+        ),
+      ],
+      child: BlocListener<MainCubit, MainState>(
+        listenWhen: (previous, current) => previous.currentIndex != current.currentIndex,
+        listener: (context, state) {
+          context.read<MainCubit>().pageController.jumpToPage(state.currentIndex);
         },
+        child: BlocBuilder<MainCubit, MainState>(
+          buildWhen: (previous, current) => previous.currentIndex != current.currentIndex,
+          builder: (context, state) {
+            return MultiBlocListener(
+              listeners: [
+                BlocListener<TutorsCubit, TutorsState>(
+                  listenWhen: (previous, current) => previous.isLoading != current.isLoading,
+                  listener: (context, state) {
+                    context.read<MainCubit>().changeLoadingState(isLoading: state.isLoading);
+                  },
+                ),
+              ],
+              child: Scaffold(
+                body: PageView.builder(
+                  controller: context.read<MainCubit>().pageController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: listScreens.length,
+                  itemBuilder: (context, index) {
+                    return listScreens[index];
+                  },
+                ),
+                bottomNavigationBar: BottomNavBar(
+                  currentIndex: state.currentIndex,
+                  onTap: context.read<MainCubit>().onChangeIndex,
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
