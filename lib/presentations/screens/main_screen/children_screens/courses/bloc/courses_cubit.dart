@@ -40,7 +40,7 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
           () => courseRepository.getListCourses(CoursesListRequest(
         page: state.nextPage,
         size: size,
-        q: "Life",
+        q: state.coursesSearchText,
       )),
       showLoading: false,
     );
