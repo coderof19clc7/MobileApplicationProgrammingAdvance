@@ -13,7 +13,7 @@ import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 part 'tutors_state.dart';
 
 class TutorsCubit extends WidgetCubit<TutorsState> {
-  TutorsCubit._() : super(widgetState: const TutorsState());
+  TutorsCubit._() : super(widgetState: TutorsInitialState());
 
   final numTutorsPerPage = 12;
   final tutorRepository = injector<TutorRepository>();
@@ -37,7 +37,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
   @override
   Future<void> onWidgetCreated() async {
-    emit(state.copyWith(filters: Filters.defaultFilters()));
+    // emit(state.copyWith(filters: Filters.defaultFilters()));
     // refreshList();
   }
 
