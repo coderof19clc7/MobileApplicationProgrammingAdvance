@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
@@ -12,12 +13,27 @@ import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 part 'tutors_state.dart';
 
 class TutorsCubit extends WidgetCubit<TutorsState> {
-  TutorsCubit() : super(widgetState: const TutorsState());
+  TutorsCubit._() : super(widgetState: const TutorsState());
 
   final numTutorsPerPage = 12;
   final tutorRepository = injector<TutorRepository>();
   final userRepository = injector<UserRepository>();
-  final tutorsTextEditingController = TextEditingController();
+  TextEditingController? tutorsTextEditingController;
+
+  static TutorsCubit? _instance;
+  static TutorsCubit getInstance() {
+    if (kDebugMode) {
+      print('TutorsCubit _instance?.isClosed: ${_instance?.isClosed}');
+    }
+    if (_instance == null || _instance!.isClosed) {
+      if (kDebugMode) {
+        print('create new _instance of TutorsCubit');
+      }
+      _instance = TutorsCubit._();
+      _instance?.tutorsTextEditingController = TextEditingController();
+    }
+    return _instance!;
+  }
 
   @override
   Future<void> onWidgetCreated() async {
@@ -148,12 +164,12 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
   }
 
   void onSearchTextSubmitted() {
-    if (tutorsTextEditingController.text == state.searchText) {
+    if (tutorsTextEditingController?.text == state.searchText) {
       return;
     }
 
     emit(state.copyWith(
-      searchText: tutorsTextEditingController.text,
+      searchText: tutorsTextEditingController?.text,
       nextPage: 1, total: 0,
       listTutors: initialLoadMoreAbleList,
     ));
@@ -209,7 +225,13 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
   @override
   Future<void> close() async {
-    tutorsTextEditingController.dispose();
-    return super.close();
+    tutorsTextEditingController?.dispose();
+    super.close();
+    if (_instance?.isClosed == true) {
+      if (kDebugMode) {
+        print('TutorsCubit _instance is closed --> set to null');
+      }
+      _instance = null;
+    }
   }
 }

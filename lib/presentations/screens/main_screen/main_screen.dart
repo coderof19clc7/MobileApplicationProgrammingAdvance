@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/courses_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/settings_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/upcoming_classes_page.dart';
@@ -31,7 +30,7 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<TutorsCubit>(
-          create: (context) => TutorsCubit(),
+          create: (context) => TutorsCubit.getInstance(),
           lazy: false,
         ),
       ],

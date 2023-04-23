@@ -184,3 +184,9 @@ class TutorsState extends WidgetState {
 
 //</editor-fold>
 }
+
+class TutorsInitialState extends TutorsState {
+  TutorsInitialState() : super(
+    filters: Filters.defaultFilters(),
+  );
+}

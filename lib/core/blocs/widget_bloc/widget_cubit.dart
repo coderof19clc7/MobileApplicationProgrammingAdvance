@@ -200,8 +200,8 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
     // Fix error show bad state after navigate to another page
     timer?.cancel();
     timer = null;
-    await stream.drain();
-    await super.close();
+    stream.drain();
+    super.close();
   }
 
   Future<void> _handleApiResponse<ResponseType extends BaseResponse>(
