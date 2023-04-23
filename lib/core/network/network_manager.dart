@@ -50,6 +50,8 @@ class NetworkManager {
       receiveTimeout: receiveTimeout,
       headers: {
         'Accept': 'application/json',
+        'origin': 'https://sandbox.app.lettutor.com/',
+        'referer': 'https://sandbox.app.lettutor.com/'
       },
       validateStatus: (status) => true,
     );

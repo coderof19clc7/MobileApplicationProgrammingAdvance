@@ -98,6 +98,7 @@ class CourseInformation {
           : null,
       topics: topics,
       users: users,
+      categories: categories,
     );
   }
 
@@ -324,6 +325,7 @@ class CourseInformation {
           : null,
       topics: topics,
       users: users,
+      categories: categories,
     );
   }
 

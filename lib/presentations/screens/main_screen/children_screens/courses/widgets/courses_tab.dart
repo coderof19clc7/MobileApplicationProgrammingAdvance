@@ -1,6 +1,13 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/presentations/screens/course_information/course_information_screen.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/bloc/courses_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/widgets/course_card.dart';
+import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
+import 'package:one_one_learn/presentations/widgets/shimmers/fade_shimmer.dart';
+import 'package:one_one_learn/presentations/widgets/text_fields/text_field_outline.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
@@ -18,105 +25,130 @@ class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMi
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: Dimens.getScreenWidth(context) * 0.03,
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // search field
-          TextField(
-            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-              fontSize: Dimens.getProportionalHeight(context, 15),
-            ),
-            decoration: InputDecoration(
-              hintText: S.current.searchHintCourse,
-              hintStyle: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                fontSize: Dimens.getProportionalHeight(context, 15),
-              ),
-              filled: true,
-              fillColor: context.theme.colorScheme.tertiaryContainer,
-              isDense: true,
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: context.theme.colorScheme.outline,
-                ),
-                borderRadius: BorderRadius.circular(5),
-              ),
-            ),
+    return BlocBuilder<CoursesCubit, CoursesState>(
+      builder: (context, state) {
+        return Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: Dimens.getScreenWidth(context) * 0.03,
           ),
-          SizedBox(height: Dimens.getProportionalHeight(context, 10)),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // search field
+              TextFieldOutline(
+                enable: !state.isLoading,
+                hintText: S.current.searchHintCourse,
+                onSubmitted: (value) {
+                  context.read<CoursesCubit>().onSearchTextSubmitted(value);
+                },
+              ),
+              SizedBox(height: Dimens.getProportionalHeight(context, 10)),
 
-          // category filters
-          SizedBox(
-            height: Dimens.getScreenHeight(context) * 0.045,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 15,
-              itemBuilder: (context, index) {
-                // category filter
-                return Padding(
-                  padding: EdgeInsets.only(
-                    right: Dimens.getProportionalWidth(
-                      context,
-                      index == 14 ? 0 : 10,
-                    ),
-                  ),
-                  child: BaseChoiceChip(
-                    label: S.current.all,
-                    isSelected: index.isEven,
-                    onSelected: (value) {
-                      // update state
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-          SizedBox(height: Dimens.getProportionalHeight(context, 20)),
-
-          // courses list
-          Expanded(
-            child: ListView.builder(
-              padding: EdgeInsets.zero,
-              shrinkWrap: true,
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                // tutor card
-                return CourseCard(
-                  onTap: () {
-                    Navigator.of(context)
-                        .pushNamed(RouteNames.courseInformation, arguments: const CourseInformationArguments(courseId: '964bed84-6450-49ee-92d5-e8c565864bd9', category: 'Machine Learning'));
+              // category filters
+              SizedBox(
+                height: Dimens.getScreenHeight(context) * 0.045,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 15,
+                  itemBuilder: (context, index) {
+                    // category filter
+                    return Padding(
+                      padding: EdgeInsets.only(
+                        right: Dimens.getProportionalWidth(
+                          context,
+                          index == 14 ? 0 : 10,
+                        ),
+                      ),
+                      child: BaseChoiceChip(
+                        label: S.current.all,
+                        isSelected: index.isEven,
+                        onSelected: (value) {
+                          // update state
+                        },
+                      ),
+                    );
                   },
+                ),
+              ),
+              SizedBox(height: Dimens.getProportionalHeight(context, 20)),
+
+              // courses list
+              Expanded(
+                child: ListView.builder(
                   padding: EdgeInsets.zero,
-                  firstChild: ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(15),
-                      topRight: Radius.circular(15),
-                    ),
-                    child: Image.network(
-                      'https://camblycurriculumicons.s3.amazonaws.com/5e2b9a4c05342470fdddf8b8?h=d41d8cd98f00b204e9800998ecf8427e',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  name: 'Introduction to Machine Learning',
-                  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus pulvinar ante...',
-                  categories: const [
-                    'Machine Learning',
-                    'A.I',
-                    'Computer Vision',
-                    'Data Science',
-                  ],
-                  level: 'Upper-Intermediate',
-                  lessons: 10,
-                );
-              },
-            ),
+                  shrinkWrap: true,
+                  itemCount: state.listCourses.length,
+                  itemBuilder: (context, index) {
+                    // tutor card
+                    final item = state.listCourses[index];
+
+                    if (item == null) {
+                      if (index == state.listCourses.length - 3 && !state.isLoading) {
+                        if (kDebugMode) {
+                          print('call api to get more courses at index: $index');
+                        }
+                        context.read<CoursesCubit>().searchListCourses();
+                      }
+                      return const CourseCard(
+                        isLoading: true,
+                        firstChild: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                          ),
+                          child: AppFadeShimmer(radius: 15,),
+                        ),
+                        name: 'name',
+                        description: 'description',
+                        level: 'level',
+                      );
+                    }
+
+                    return CourseCard(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(
+                          RouteNames.courseInformation,
+                          arguments: CourseInformationArguments(
+                            courseId: item.id ?? '',
+                            categories: item.categories?.map((e) => e.title ?? '').toList() ?? [],
+                          ),
+                        );
+                      },
+                      padding: EdgeInsets.zero,
+                      firstChild: ClipRRect(
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(15),
+                        ),
+                        child: SimpleNetworkImage(
+                          url: item.imageUrl ?? '',
+                          errorBuilder: (context, error, stackTrace) {
+                            return DecoratedBox(
+                              decoration: BoxDecoration(
+                                color: AppColors.grey
+                              ),
+                              child: Icon(
+                                Icons.error,
+                                size: Dimens.getProportionalWidth(context, 50),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      name: item.name ?? '',
+                      description: item.description ?? '',
+                      categories: item.categories?.map((e) => e.title ?? '').toList() ?? [],
+                      level: item.level ?? '',
+                      lessons: item.topics?.length ?? 0,
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        );
+      },
     );
   }
 

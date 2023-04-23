@@ -910,6 +910,16 @@ class S {
     );
   }
 
+  /// `Suggested tutors`
+  String get suggestedTutors {
+    return Intl.message(
+      'Suggested tutors',
+      name: 'suggestedTutors',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Upcoming`
   String get upcoming {
     return Intl.message(

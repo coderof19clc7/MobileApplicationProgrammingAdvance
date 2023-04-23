@@ -19,9 +19,9 @@ class TutorSearchResponse extends BaseResponse {
       statusCode: mapJson['statusCode'] as int?,
       message: mapJson['message'] as String?,
       count: mapJson['count'] as num?,
-      rows: mapJson['rows'] != null ? (mapJson['rows'] as List).map(
-        TutorInfo.fromJson,
-      ).toList() : null,
+      rows: mapJson['rows'] != null
+          ? (mapJson['rows'] as List).map(TutorInfo.fromJson).toList()
+          : null,
     );
   }
 
@@ -99,9 +99,11 @@ class TutorSearchResponse extends BaseResponse {
       statusCode: map['statusCode'] as int?,
       message: map['message'] as String?,
       count: map['count'] as num,
-      rows: map['rows'] != null ? (map['rows'] as List).map(
-        (e) => TutorInfo.fromMap(e as Map<String, dynamic>),
-      ).toList() : null,
+      rows: map['rows'] != null
+          ? (map['rows'] as List).map(
+            (e) => TutorInfo.fromMap(e as Map<String, dynamic>),
+      ).toList()
+          : null,
     );
   }
 

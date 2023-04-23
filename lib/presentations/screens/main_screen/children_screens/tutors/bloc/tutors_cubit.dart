@@ -90,15 +90,15 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     return listTutors;
   }
 
-  List<TutorInfo?> getRealCurrentList({bool reloadAllCurrentList = false}) {
-    final currentList = reloadAllCurrentList ? initialLoadMoreAbleList : [...state.listTutors];
+  List<TutorInfo?> getRealCurrentList() {
+    final currentList = [...state.listTutors];
     if (currentList.last == null) {
       currentList.removeRange(state.listTutors.length - 3, state.listTutors.length);
     }
     return currentList;
   }
 
-  Future<void> searchListTutor({bool reloadAllCurrentList = false} ) async {
+  Future<void> searchListTutors({bool reloadAllCurrentList = false} ) async {
     emit(state.copyWith(isLoadingMore: true));
 
     // search list by the filters amd page number
@@ -116,7 +116,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
     // handle the response
     print('currentListLength: ${
-      state.listTutors.last == null ? state.listTutors.length - 3 : state.listTutors.length
+      canListTutorsLoadMore() ? state.listTutors.length - 3 : state.listTutors.length
     }');
     if (tutorSearchResponse != null) {
       if (tutorSearchResponse.statusCode == ApiStatusCode.success) {
@@ -133,7 +133,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         } else {
           // load more --> combine current list and new list
           newPage = state.nextPage + (newListTutors.isEmpty ? 0 : 1);
-          final currentList = getRealCurrentList(reloadAllCurrentList: reloadAllCurrentList);
+          final currentList = getRealCurrentList();
           finalNewListTutors = newListTutors.isEmpty ? [...currentList] : [...currentList, ...newListTutors];
           if (finalNewListTutors.length != currentList.length) {
             finalNewListTutors = sortList(
@@ -148,11 +148,14 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
           total: tutorSearchResponse.count?.toInt() ?? 0,
           listTutors: [...finalNewListTutors],
         ));
+      } else {
+        emit(state.copyWith(
+          listTutors: [...getRealCurrentList()],
+        ));
       }
     } else {
-      final currentList = getRealCurrentList(reloadAllCurrentList: reloadAllCurrentList);
       emit(state.copyWith(
-        listTutors: [...currentList],
+        listTutors: [...getRealCurrentList()],
       ));
     }
 
@@ -208,7 +211,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     if (userManageFavouriteTutorResponse != null) {
       if (userManageFavouriteTutorResponse.statusCode == ApiStatusCode.success) {
         if (index == -1) {
-          await searchListTutor(reloadAllCurrentList: true);
+          await searchListTutors(reloadAllCurrentList: true);
         } else {
           final newList = [...getRealCurrentList()];
           newList[index] = newList[index]?.copyWith(

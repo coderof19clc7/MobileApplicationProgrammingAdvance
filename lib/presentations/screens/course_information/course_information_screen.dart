@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/presentations/screens/course_information/bloc/course_information_cubit.dart';
 import 'package:one_one_learn/presentations/screens/course_information/course_information_page.dart';
@@ -9,19 +12,22 @@ class CourseInformationScreen extends BaseScreen<CourseInformationCubit, CourseI
   final CourseInformationArguments args;
 
   @override
-  Widget buildWidget(BuildContext context) {
-    return const CourseInformationPage();
+  CourseInformationCubit provideBloc(BuildContext context) {
+    return CourseInformationCubit(courseId: args.courseId, categories: args.categories)..getCourseInformation();
   }
 
   @override
-  CourseInformationCubit provideBloc(BuildContext context) {
-    return CourseInformationCubit(courseId: args.courseId, category: args.category)..getCourseInformation();
+  void onListenerIsLoading(BuildContext context, CourseInformationState state) {}
+
+  @override
+  Widget buildWidget(BuildContext context) {
+    return const CourseInformationPage();
   }
 }
 
 class CourseInformationArguments {
-  const CourseInformationArguments({required this.courseId, required this.category});
+  const CourseInformationArguments({required this.courseId, required this.categories});
 
   final String courseId;
-  final String category;
+  final List<String> categories;
 }

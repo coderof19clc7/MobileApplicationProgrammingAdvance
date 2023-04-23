@@ -45,6 +45,9 @@ class ApiConstants {
 
   // app defined error messages
   static final refreshTokenError = S.current.refreshTokenError;
+
+  // query parameters
+  static const categoriesId = 'categoryId[]';
 }
 
 class ApiMethods {

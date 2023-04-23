@@ -180,6 +180,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "starters": MessageLookupByLibrary.simpleMessage("STARTERS"),
         "suggestedCourses":
             MessageLookupByLibrary.simpleMessage("Suggested courses"),
+        "suggestedTutors":
+            MessageLookupByLibrary.simpleMessage("Suggested tutors"),
         "swipeToCancelClass": MessageLookupByLibrary.simpleMessage(
             "Swipe left to cancel a class"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),

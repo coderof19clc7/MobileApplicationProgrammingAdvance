@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:one_one_learn/configs/constants/debounces.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
@@ -47,9 +48,7 @@ class TutorCard extends BaseCard {
               Flexible(
                 child: isLoading
                     ? Padding(
-                      padding: const EdgeInsets.only(
-                        top: 3,
-                      ),
+                      padding: const EdgeInsets.only(top: 3),
                       child: buildSimpleRectangleShimmer(context),
                     )
                     : Text(
@@ -60,43 +59,33 @@ class TutorCard extends BaseCard {
                   ),
                 ),
               ),
-              SizedBox(width: Dimens.getProportionalWidth(context, 3)),
-              isLoading
-                  ? const SizedBox.shrink()
-                  : InkWell(
-                onTap: () {
-                  DebounceHelper.runDisable(
-                    '${DebounceConstants.favoriteIconTap}-$name}',
-                    callback: () {onFavoriteIconTap?.call();
-                    },
-                  );
-                },
-                child: SvgPicture.string(
-                  SvgIcons.getIcon(
-                    SvgIconEnum.favorite,
-                    strokeColor: context.theme.colorScheme.primary,
-                    fillColor: isFavorite ? context.theme.colorScheme.primary : context.theme.colorScheme.surface,
+              const EmptyProportionalSpace(width: 3),
+              if (!isLoading)
+                InkWell(
+                  onTap: () {
+                    DebounceHelper.runDisable(
+                      '${DebounceConstants.favoriteIconTap}-$name}',
+                      callback: () {onFavoriteIconTap?.call();
+                      },
+                    );
+                  },
+                  child: SvgPicture.string(
+                    SvgIcons.getIcon(
+                      SvgIconEnum.favorite,
+                      strokeColor: context.theme.colorScheme.primary,
+                      fillColor: isFavorite ? context.theme.colorScheme.primary : context.theme.colorScheme.surface,
+                    ),
+                    width: Dimens.getProportionalHeight(context, 25),
+                    height: Dimens.getProportionalHeight(context, 25),
                   ),
-                  width: Dimens.getProportionalHeight(context, 25),
-                  height: Dimens.getProportionalHeight(context, 25),
                 ),
-              ),
             ],
           ),
-          SizedBox(
-              height: Dimens.getProportionalHeight(
-            context,
-            secondChildItemsDistance,
-          )),
+          EmptyProportionalSpace(height: secondChildItemsDistance),
 
           // categories
-          isLoading
-              ? Container(
-            color: context.theme.colorScheme.secondaryContainer,
-            // width: Dimens.getScreenWidth(context),
-            // height: Dimens.getScreenHeight(context) * 0.01,
-          )
-              : buildOverViewInformation(context),
+          if (!isLoading)
+            buildOverViewInformation(context),
         ],
       ),
     );
@@ -122,11 +111,7 @@ class TutorCard extends BaseCard {
           bgColor: context.theme.colorScheme.secondaryContainer,
           textColor: context.theme.colorScheme.onSecondaryContainer,
         ),
-        SizedBox(
-            height: Dimens.getProportionalHeight(
-              context,
-              secondChildItemsDistance,
-            )),
+        EmptyProportionalSpace(height: secondChildItemsDistance),
 
         // rating
         RowIconTextInformation(
@@ -143,11 +128,7 @@ class TutorCard extends BaseCard {
             ),
           ),
         ),
-        SizedBox(
-            height: Dimens.getProportionalHeight(
-              context,
-              secondChildItemsDistance,
-            )),
+        EmptyProportionalSpace(height: secondChildItemsDistance),
 
         // description
         Text(

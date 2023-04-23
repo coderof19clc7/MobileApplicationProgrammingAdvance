@@ -19,6 +19,8 @@ abstract class BaseCard extends StatelessWidget {
     this.firstChild,
     this.direction = CardDirection.row,
     this.crossAxisAlignment,
+    this.firstChildAspectRatio,
+    this.boxShadows,
     this.onTap,
   });
 
@@ -29,13 +31,15 @@ abstract class BaseCard extends StatelessWidget {
   final Widget? firstChild;
   final CardDirection direction;
   final CrossAxisAlignment? crossAxisAlignment;
+  final double? firstChildAspectRatio;
+  final List<BoxShadow>? boxShadows;
   final Function()? onTap;
 
   Widget buildFirstChild(BuildContext context) {
     return SizedBox(
       width: direction == CardDirection.row ? Dimens.getProportionalWidth(context, 90) : Dimens.getScreenWidth(context),
       child: AspectRatio(
-        aspectRatio: direction == CardDirection.row ? 1 : 2,
+        aspectRatio: firstChildAspectRatio ?? ( direction == CardDirection.row ? 1 : 2),
         child: firstChild ?? Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
@@ -113,7 +117,7 @@ abstract class BaseCard extends StatelessWidget {
         width: width ?? Dimens.getScreenWidth(context),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(15),
-          boxShadow: [
+          boxShadow: boxShadows ?? [
             Effects.normalShadowXS,
           ],
           color: context.theme.colorScheme.surface,

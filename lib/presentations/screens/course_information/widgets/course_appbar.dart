@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -17,7 +18,12 @@ class CourseAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appBarHeight = Dimens.getProportionalHeight(context, 260);
+    final collapsedHeight = Dimens.getTopSafeAreaHeight(context) * 3;
+    final appBarHeight = Dimens.getProportionalHeight(
+      context, imageUrl == null ? collapsedHeight : 260,
+    );
+
+    print('imageUrl2: $imageUrl');
 
     var top = 0.0;
 
@@ -38,9 +44,11 @@ class CourseAppBar extends StatelessWidget {
             children: [
               if (imageUrl != null)
                 Positioned.fill(
-                  child: Image.network(
-                    imageUrl!,
-                    fit: BoxFit.cover,
+                  child: SimpleNetworkImage(
+                    url: imageUrl,
+                    errorBuilder: (context, error, stackTrace) => Container(
+                      color: AppColors.neutralBlue400,
+                    ),
                   ),
                 ),
               Positioned.fill(

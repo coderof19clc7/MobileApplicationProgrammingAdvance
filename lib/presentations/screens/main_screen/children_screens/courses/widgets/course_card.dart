@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
@@ -28,7 +29,6 @@ class CourseCard extends BaseCard {
 
   @override
   Widget buildSecondChild(BuildContext context) {
-    const fontSize = 14.0;
     return Padding(
       padding: EdgeInsets.only(
         left: Dimens.getProportionalWidth(context, 14),
@@ -39,105 +39,97 @@ class CourseCard extends BaseCard {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // name
-          Text(
+          isLoading
+              ? Padding(
+            padding: const EdgeInsets.only(top: 3),
+            child: buildSimpleRectangleShimmer(context),
+          )
+              : Text(
             name,
             overflow: TextOverflow.ellipsis,
             style: Dimens.getProportionalFont(context, context.theme.textTheme.titleSmall).copyWith(
               fontSize: Dimens.getProportionalWidth(context, 17),
             ),
           ),
-          SizedBox(
-            height: Dimens.getProportionalHeight(
-              context,
-              secondChildItemsDistance,
-            ),
-          ),
+          EmptyProportionalSpace(height: secondChildItemsDistance),
 
-          // categories
-          SimpleListFakeChips(
-            listData: categories,
-            itemDistance: secondChildItemsDistance,
-            bgColor: context.theme.colorScheme.secondaryContainer,
-            textColor: context.theme.colorScheme.onSecondaryContainer,
-          ),
-          SizedBox(
-            height: Dimens.getProportionalHeight(
-              context,
-              secondChildItemsDistance,
-            ),
-          ),
+          if (!isLoading)
+            buildOverviewInformationField(context),
+        ],
+      ),
+    );
+  }
 
-          // level & lessons
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              RowIconTextInformation(
-                context: context,
-                icon: Icon(
-                  Icons.signal_cellular_alt_rounded,
-                  size: Dimens.getProportionalWidth(context, fontSize + 6),
-                  color: context.theme.colorScheme.primary,
-                ),
-                betweenSpace: 3,
-                text: Text(
-                  level,
-                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                    fontSize: Dimens.getProportionalWidth(context, fontSize),
-                  ),
-                ),
+  Widget buildOverviewInformationField(BuildContext context) {
+    const fontSize = 14.0;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        SimpleListFakeChips(
+          listData: categories,
+          itemDistance: secondChildItemsDistance,
+          bgColor: context.theme.colorScheme.secondaryContainer,
+          textColor: context.theme.colorScheme.onSecondaryContainer,
+        ),
+        EmptyProportionalSpace(height: secondChildItemsDistance),
+
+        // level & lessons
+        Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            RowIconTextInformation(
+              context: context,
+              icon: Icon(
+                Icons.signal_cellular_alt_rounded,
+                size: Dimens.getProportionalWidth(context, fontSize + 6),
+                color: context.theme.colorScheme.primary,
               ),
-              SizedBox(
-                  width: Dimens.getProportionalWidth(
-                context,
-                7,
-              )),
-              Text(
-                '|',
+              betweenSpace: 3,
+              text: Text(
+                level,
                 style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                   fontSize: Dimens.getProportionalWidth(context, fontSize),
                 ),
               ),
-              SizedBox(
-                  width: Dimens.getProportionalWidth(
-                context,
-                7,
-              )),
-              RowIconTextInformation(
-                context: context,
-                icon: Icon(
-                  Icons.book_rounded,
-                  size: Dimens.getProportionalWidth(context, fontSize + 3),
-                  color: context.theme.colorScheme.primary,
-                ),
-                betweenSpace: 2,
-                text: Text(
-                  '$lessons ${S.current.lesson}',
-                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                    fontSize: Dimens.getProportionalWidth(context, fontSize),
-                  ),
+            ),
+            const EmptyProportionalSpace(width: 7),
+            Text(
+              '|',
+              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
+                fontSize: Dimens.getProportionalWidth(context, fontSize),
+              ),
+            ),
+            const EmptyProportionalSpace(width: 7),
+            RowIconTextInformation(
+              context: context,
+              icon: Icon(
+                Icons.book_rounded,
+                size: Dimens.getProportionalWidth(context, fontSize + 3),
+                color: context.theme.colorScheme.primary,
+              ),
+              betweenSpace: 2,
+              text: Text(
+                '$lessons ${S.current.lesson}',
+                style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
+                  fontSize: Dimens.getProportionalWidth(context, fontSize),
                 ),
               ),
-            ],
-          ),
-          SizedBox(
-            height: Dimens.getProportionalHeight(
-              context,
-              secondChildItemsDistance,
             ),
-          ),
+          ],
+        ),
+        EmptyProportionalSpace(height: secondChildItemsDistance),
 
-          // description
-          Text(
-            description,
-            overflow: TextOverflow.ellipsis,
-            softWrap: true,
-            maxLines: 2,
-            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-              fontSize: Dimens.getProportionalWidth(context, fontSize),
-            ),
+        // description
+        Text(
+          description,
+          overflow: TextOverflow.ellipsis,
+          softWrap: true,
+          maxLines: 2,
+          style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
+            fontSize: Dimens.getProportionalWidth(context, fontSize),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
