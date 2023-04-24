@@ -125,12 +125,12 @@ class CourseBody extends StatelessWidget {
                   courseInfo?.purpose ?? '',
                 ),
 
-                const EmptyProportionalSpace(height: 15),
-
-                if (courseInfo != null && courseInfo.topics != null && courseInfo.topics!.isNotEmpty)
+                if (courseInfo != null && courseInfo.topics?.isNotEmpty == true)
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      const EmptyProportionalSpace(height: 15),
+
                       // topics subheading
                       Text(
                         S.current.labelTopics,
@@ -160,8 +160,8 @@ class CourseBody extends StatelessWidget {
                     ],
                   ),
 
-                const EmptyProportionalSpace(height: 15),
-                Flexible(child: buildSuggestedTutorsList(context, courseInfo?.users ?? <UserInfo>[])),
+                if (courseInfo != null && courseInfo.users?.isNotEmpty == true)
+                  buildSuggestedTutorsList(context, courseInfo.users ?? <UserInfo>[]),
               ],
             ),
           ),
@@ -247,6 +247,8 @@ class CourseBody extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        const EmptyProportionalSpace(height: 15),
+
         // suggested tutors subheading
         Text(
           S.current.suggestedTutors,
