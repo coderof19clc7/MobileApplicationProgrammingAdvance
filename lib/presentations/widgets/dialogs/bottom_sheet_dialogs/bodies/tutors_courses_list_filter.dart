@@ -14,7 +14,7 @@ class TutorsCoursesListFilterBottomSheet extends StatefulWidget {
   const TutorsCoursesListFilterBottomSheet({
     super.key,
     required this.choiceChipsValues,
-    
+    this.choiceChipsRenderValues,
     this.sortValue = 0,
     this.onApplyFilters,
   });
