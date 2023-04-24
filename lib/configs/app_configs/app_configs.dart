@@ -19,7 +19,7 @@ class AppConfig{
 
   AppConfig._init();
 
-  static AppConfig getInstance() {
+  factory AppConfig.getInstance() {
     _instance ??= AppConfig._init().._loadConfig();
     return _instance!;
   }

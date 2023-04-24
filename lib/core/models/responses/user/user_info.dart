@@ -4,33 +4,9 @@ import 'package:one_one_learn/core/models/responses/course/course_information.da
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 import 'package:one_one_learn/core/models/responses/user/learn_topic.dart';
 import 'package:one_one_learn/core/models/responses/user/referral_info.dart';
+import 'package:one_one_learn/core/models/responses/user/test_preparation.dart';
 import 'package:one_one_learn/core/models/responses/user/wallet_info.dart';
 
-/// id : "cb9e7deb-3382-48db-b07c-90acf52f541c"
-/// email : "phhai@ymail.com"
-/// name : "Phhai"
-/// avatar : "https://sandbox.api.lettutor.com/avatar/f569c202-7bbf-4620-af77-ecc1419a6b28avatar1673212216107.jpg"
-/// country : "VN"
-/// phone : "842499996508"
-/// roles : ["student","CHANGE_PASSWORD"]
-/// language : null
-/// birthday : "1999-06-01"
-/// isActivated : true
-/// tutorInfo : {"id":"36f7fdc3-39a7-48a4-9ac8-93a12c8e5f6f","video":"https://sandbox.api.lettutor.com/undefined/undefined","bio":"I am a teacher","education":"MBS","experience":"15 years of teaching","profession":"Lecturer","accent":null,"targetStudent":"Advanced","interests":"ABC","languages":"English, Việt Nam","specialties":"english-for-kids,business-english","resume":null,"rating":0,"isActivated":false,"isNative":false}
-/// walletInfo : {"id":"102ef671-a249-4d19-852e-ea23016d7d34","userId":"cb9e7deb-3382-48db-b07c-90acf52f541c","amount":"0","isBlocked":false,"createdAt":"2021-12-18T03:55:53.522Z","updatedAt":"2021-12-18T03:55:53.522Z","bonus":0}
-/// courses : []
-/// requireNote : ""
-/// level : "INTERMEDIATE"
-/// learnTopics : [{"id":3,"key":"english-for-kids","name":"English for Kids"}]
-/// testPreparations : []
-/// isPhoneActivated : true
-/// timezone : 7
-/// referralInfo : {"referralCode":"WJDRSTWNES","referralPackInfo":{"earnPercent":5}}
-/// studySchedule : ""
-/// canSendMessage : false
-/// studentGroup : null
-/// studentInfo : null
-/// avgRating : 0
 class UserInfo {
 //<editor-fold desc="Data Methods">
 
@@ -76,8 +52,8 @@ class UserInfo {
     List<CourseInformation>? courses;
     if (mapJson['courses'] != null) {
       courses = [];
-      for (final v in mapJson['courses'] as List<dynamic>) {
-        courses.add(CourseInformation.fromJson(v as Map<String, dynamic>));
+      for (final v in mapJson['courses'] as List) {
+        courses.add(CourseInformation.fromJson(v));
       }
     }
 
@@ -89,11 +65,11 @@ class UserInfo {
       }
     }
 
-    var testPreparations = [];
+    List<TestPreparation>? testPreparations;
     if (mapJson['testPreparations'] != null) {
-      testPreparations = [];
+      testPreparations = <TestPreparation>[];
       for (final v in mapJson['testPreparations'] as List) {
-        testPreparations.add(v.fromJson(v));
+        testPreparations.add(TestPreparation.fromJson(v));
       }
     }
 
@@ -142,7 +118,7 @@ class UserInfo {
   final String? requireNote;
   final String? level;
   final List<LearnTopic>? learnTopics;
-  final List<dynamic>? testPreparations;
+  final List<TestPreparation>? testPreparations;
   final bool? isPhoneActivated;
   final num? timezone;
   final ReferralInfo? referralInfo;
@@ -301,7 +277,7 @@ class UserInfo {
     String? requireNote,
     String? level,
     List<LearnTopic>? learnTopics,
-    List<dynamic>? testPreparations,
+    List<TestPreparation>? testPreparations,
     bool? isPhoneActivated,
     num? timezone,
     ReferralInfo? referralInfo,
@@ -407,11 +383,11 @@ class UserInfo {
       }
     }
 
-    var testPreparations = [];
+    List<TestPreparation>? testPreparations;
     if (map['testPreparations'] != null) {
-      testPreparations = [];
+      testPreparations = <TestPreparation>[];
       for (final v in map['testPreparations'] as List) {
-        testPreparations.add(v.fromJson(v));
+        testPreparations.add(TestPreparation.fromMap(v as Map<String, dynamic>));
       }
     }
 

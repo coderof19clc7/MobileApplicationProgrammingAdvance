@@ -123,17 +123,7 @@ class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMi
                         ),
                         child: SimpleNetworkImage(
                           url: item.imageUrl ?? '',
-                          errorBuilder: (context, error, stackTrace) {
-                            return DecoratedBox(
-                              decoration: BoxDecoration(
-                                color: AppColors.grey
-                              ),
-                              child: Icon(
-                                Icons.error,
-                                size: Dimens.getProportionalWidth(context, 50),
-                              ),
-                            );
-                          },
+                          errorIconSize: Dimens.getProportionalWidth(context, 50),
                         ),
                       ),
                       name: item.name ?? '',

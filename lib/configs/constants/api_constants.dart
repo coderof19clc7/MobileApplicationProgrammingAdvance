@@ -30,6 +30,9 @@ class ApiEndpoints {
 class ApiConstants {
   // normal constants
   static const contentType = 'Content-Type';
+  static const accept = 'Accept';
+  static const textPlain = 'text/plain';
+  static const applicationJson = 'application/json';
   static const authorization = 'Authorization';
   static const statusCode = 'statusCode';
   static const message = 'message';

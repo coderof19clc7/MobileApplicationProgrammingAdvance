@@ -49,7 +49,8 @@ class NetworkManager {
       connectTimeout: connectTimeout,
       receiveTimeout: receiveTimeout,
       headers: {
-        'Accept': 'application/json',
+        ApiConstants.accept: ApiConstants.applicationJson,
+        ApiConstants.contentType: ApiConstants.applicationJson,
         'origin': 'https://sandbox.app.lettutor.com/',
         'referer': 'https://sandbox.app.lettutor.com/'
       },
@@ -92,6 +93,7 @@ class NetworkManager {
   }
 
   void _onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    log('uri: ${options.uri}');
     if (_isRefreshingToken) {
       _listPendingRequest.add(PendingRequestInfo(
         options: options,

@@ -12,7 +12,7 @@ abstract class BaseRepository {
   BaseRepository(this._serviceName);
 
   String getApi(String path) {
-    return '/$_serviceName/$path';
+    return '/$_serviceName${path.isNotEmpty ? '/$path' : ''}';
   }
 
   Future<Map<String, dynamic>?> request({

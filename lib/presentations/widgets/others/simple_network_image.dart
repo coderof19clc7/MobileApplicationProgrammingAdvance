@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/constants/colors.dart';
 
 class SimpleNetworkImage extends StatelessWidget {
   const SimpleNetworkImage({
     super.key,
     this.url,
     this.fit = BoxFit.cover,
+    this.errorIconSize,
     this.loadingBuilder,
     this.errorBuilder,
   });
 
   final String? url;
   final BoxFit fit;
+  final double? errorIconSize;
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
 
@@ -28,7 +31,15 @@ class SimpleNetworkImage extends StatelessWidget {
         );
       },
       errorBuilder: errorBuilder ?? (context, error, stackTrace) {
-        return const Icon(Icons.error);
+        return DecoratedBox(
+          decoration: BoxDecoration(
+              color: AppColors.grey
+          ),
+          child: Icon(
+            Icons.error,
+            size: errorIconSize,
+          ),
+        );
       },
     );
   }

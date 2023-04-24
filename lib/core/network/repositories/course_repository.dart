@@ -12,6 +12,9 @@ class CourseRepository extends BaseRepository {
   }) async {
     return CourseInfoResponse.fromJson(await request(
       method: ApiMethods.get,
+      headers: {
+        ApiConstants.contentType: ApiConstants.textPlain,
+      },
       path: courseId,
     ));
   }
@@ -20,6 +23,9 @@ class CourseRepository extends BaseRepository {
     return CoursesListResponse.fromJson(await request(
       method: ApiMethods.get,
       path: '',
+      headers: {
+        ApiConstants.contentType: ApiConstants.textPlain,
+      },
       queryParameters: coursesListRequest,
     ));
   }
