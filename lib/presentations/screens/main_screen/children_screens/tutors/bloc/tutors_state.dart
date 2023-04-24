@@ -7,6 +7,7 @@ class TutorsState extends WidgetState {
   final int total;
   final List<TutorInfo?> listTutors;
   final Filters? filters;
+  final List<int> nationalityValues;
   final String? searchText;
   final int sortValue;
 
@@ -30,6 +31,9 @@ class TutorsState extends WidgetState {
       filters: mapJson['filters'] != null
           ? Filters.fromJson(mapJson['filters'])
           : null,
+      nationalityValues: mapJson['nationalityValues'] != null
+          ? (mapJson['nationalityValues'] as List).map((e) => e as int).toList()
+          : <int>[],
       searchText: mapJson['searchText'] as String?,
       sortValue: mapJson['sortValue'] as int? ?? 0,
     );
@@ -46,6 +50,7 @@ class TutorsState extends WidgetState {
     map['total'] = total;
     map['listTutors'] = listTutors.map((e) => e?.toJson()).toList();
     map['filters'] = filters?.toJson();
+    map['nationalityValues'] = nationalityValues;
     map['searchText'] = searchText;
     map['sortValue'] = sortValue;
     return map;
@@ -59,6 +64,7 @@ class TutorsState extends WidgetState {
     total,
     listTutors,
     filters,
+    nationalityValues,
     searchText,
     sortValue,
   ];
@@ -72,6 +78,7 @@ class TutorsState extends WidgetState {
       && total == other.total
       && listTutors == other.listTutors
       && filters == other.filters
+      && nationalityValues == other.nationalityValues
       && searchText == other.searchText
       && sortValue == other.sortValue;
 
@@ -84,6 +91,7 @@ class TutorsState extends WidgetState {
       ^ total.hashCode
       ^ listTutors.hashCode
       ^ filters.hashCode
+      ^ nationalityValues.hashCode
       ^ searchText.hashCode
       ^ sortValue.hashCode;
 
@@ -97,6 +105,7 @@ class TutorsState extends WidgetState {
     this.total = 0,
     this.listTutors = const <TutorInfo?>[null, null, null],
     this.filters,
+    this.nationalityValues = const <int>[],
     this.searchText,
     this.sortValue = 0,
   });
@@ -112,6 +121,7 @@ class TutorsState extends WidgetState {
         ' total: $total,'
         ' listTutors: $listTutors,'
         ' filters: $filters,'
+      ' nationalityValues: $nationalityValues,'
         ' searchText: $searchText,'
         ' sortValue: $sortValue,'
         ' }';
@@ -126,6 +136,7 @@ class TutorsState extends WidgetState {
     int? total,
     List<TutorInfo?>? listTutors,
     Filters? filters,
+    List<int>? nationalityValues,
     String? searchText,
     int? sortValue,
   }) {
@@ -138,6 +149,7 @@ class TutorsState extends WidgetState {
       total: total ?? this.total,
       listTutors: listTutors ?? this.listTutors,
       filters: filters ?? this.filters,
+      nationalityValues: nationalityValues ?? this.nationalityValues,
       searchText: searchText ?? this.searchText,
       sortValue: sortValue ?? this.sortValue,
     );
@@ -153,6 +165,7 @@ class TutorsState extends WidgetState {
       'total': total,
       'listTutors': listTutors.map((e) => e?.toMap()).toList(),
       'filters': filters?.toMap(),
+      'nationalityValues': nationalityValues,
       'searchText': searchText,
       'sortValue': sortValue,
     };
@@ -176,6 +189,9 @@ class TutorsState extends WidgetState {
       filters: map['filters'] != null
           ? Filters.fromMap(map['filters'] as Map<String, dynamic>)
           : null,
+      nationalityValues: map['nationalityValues'] != null
+          ? (map['nationalityValues'] as List).map((e) => e as int).toList()
+          : <int>[],
       searchText: map['searchText'] as String?,
       sortValue: map['sortValue'] as int? ?? 0,
     );
@@ -183,10 +199,4 @@ class TutorsState extends WidgetState {
 
 
 //</editor-fold>
-}
-
-class TutorsInitialState extends TutorsState {
-  TutorsInitialState() : super(
-    filters: Filters.defaultFilters(),
-  );
 }

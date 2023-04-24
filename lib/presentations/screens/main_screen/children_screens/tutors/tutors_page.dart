@@ -1,13 +1,17 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/list_tutors.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/search_field.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/upcoming_class_banner.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/widgets/tutors_courses_search_field.dart';
+import 'package:one_one_learn/presentations/widgets/dialogs/bottom_sheet_dialogs/bodies/tutors_courses_list_filter.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
@@ -57,12 +61,42 @@ class TutorsPage extends StatelessWidget {
                     horizontal: Dimens.getScreenWidth(context) * 0.03,
                   ),
                   child: Column(
-                    children: const [
+                    children: [
                       // search field
-                      SearchField(),
-                      EmptyProportionalSpace(height: 30),
+                      // SearchField(),
+                      BlocBuilder<TutorsCubit, TutorsState>(
+                        builder: (context, state) {
+                          return TutorsCoursesSearchField(
+                            hintText: S.current.searchHintTutor,
+                            isLoadingMore: state.isLoadingMore,
+                            listFilterBodyBottomSheet: TutorsCoursesListFilterBottomSheet(
+                              label1: S.current.specialties,
+                              label2: S.current.nationality,
+                              data1Values: context.read<TutorsCubit>().specialtiesMap.keys.toList(),
+                              data1RenderValues: context.read<TutorsCubit>().specialtiesMap.values.toList(),
+                              data1CurrentFilter: context.read<TutorsCubit>().getCurrentSpecialties(),
+
+                              data2Values: context.read<TutorsCubit>().nationalitiesMap.values.toList(),
+                              data2RenderValues: context.read<TutorsCubit>().nationalitiesMap.keys.toList(),
+                              data2CurrentFilter: context.read<TutorsCubit>().getCurrentNationalities(),
+
+                              data3Values: context.read<TutorsCubit>().sortMap.values.toList(),
+                              data3RenderValues: context.read<TutorsCubit>().sortMap.keys.toList(),
+                              data3CurrentFilter: state.sortValue,
+
+                              onApplyFilters: (data1, data2, data3) {
+                                context.read<TutorsCubit>().onApplyFilters2(data1, data2, data3);
+                              },
+                            ),
+                            onSubmitted: (value) {
+                              context.read<TutorsCubit>().onSearchTextSubmitted();
+                            },
+                          );
+                        },
+                      ),
+                      const EmptyProportionalSpace(height: 30),
                       // tutor list
-                      Expanded(child: ListTutors()),
+                      const Expanded(child: ListTutors()),
                     ],
                   ),
                 ),

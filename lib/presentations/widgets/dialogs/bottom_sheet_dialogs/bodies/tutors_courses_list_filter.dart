@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:one_one_learn/core/models/requests/tutor/tutor_search_request.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/filter_dropdown.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -13,82 +12,64 @@ import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_sp
 class TutorsCoursesListFilterBottomSheet extends StatefulWidget {
   const TutorsCoursesListFilterBottomSheet({
     super.key,
-    required this.choiceChipsValues,
-    this.choiceChipsRenderValues,
-    this.sortValue = 0,
+    required this.label1,
+    required this.label2,
+    required this.data1Values,
+    this.data1CurrentFilter = const <String>[],
+    this.data1RenderValues,
+    required this.data2Values,
+    this.data2CurrentFilter = const <int>[],
+    this.data2RenderValues,
+    required this.data3Values,
+    this.data3CurrentFilter = 0,
+    this.data3RenderValues,
     this.onApplyFilters,
   });
 
-  final Filters choiceChipsValues;
-  final List<String>? choiceChipsRenderValues;
-  final int sortValue;
-  final Function(Filters, int)? onApplyFilters;
+  final String label1, label2;
+  final List<String> data1Values;
+  final List<String> data1CurrentFilter;
+  final List<String>? data1RenderValues;
+  final List<int> data2Values;
+  final List<int> data2CurrentFilter;
+  final List<String>? data2RenderValues;
+  final List<int> data3Values;
+  final int data3CurrentFilter;
+  final List<String>? data3RenderValues;
+  final Function(List<String>, List<int>, int)? onApplyFilters;
 
   @override
   State<TutorsCoursesListFilterBottomSheet> createState() => _TutorsCoursesListFilterBottomSheetState();
 }
 
 class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFilterBottomSheet> {
-  late ScrollController _scrollController;
+  late ScrollController _scrollController1;
+  late ScrollController _scrollController2;
 
-  // constants
-  final specialtiesMap = {
-    'all': S.current.all,
-    'english-for-kids': S.current.englishForKids,
-    'business-english': S.current.businessEnglish,
-    'conversational-english': S.current.conversationalEnglish,
-    'starters': S.current.starters,
-    'movers': S.current.movers,
-    'flyers': S.current.flyers,
-    'ket': S.current.ket,
-    'pet': S.current.pet,
-    'ielts': S.current.ielts,
-    'toefl': S.current.toefl,
-    'toeic': S.current.toeic,
-  };
-  final nationalityValues = [0, 1, 2, 3];
-  final sortValues = [0, 1, -1];
-
-  // default values
-  final _defaultFilters = Filters.defaultFilters();
-  final _defaultIsDescending = 0;
-
-  late Filters newFilters;
-  int newNationalityValue = 0;
-  int newSortValue = 0;
+  late List<String> newData1Filter;
+  late List<int> newData2Filter;
+  late int newData3Filter;
 
   @override
   void initState() {
     super.initState();
-    _scrollController = ScrollController();
-    newFilters = (widget.choiceChipsValues ?? _defaultFilters).copyWith();
-    if (newFilters.nationality?.isVietNamese == null
-        && newFilters.nationality?.isNative == null
-    ) {
-      newNationalityValue = 0;
-    } else if (newFilters.nationality?.isVietNamese == false
-        && newFilters.nationality?.isNative == false
-    ) {
-      newNationalityValue = 1;
-    } else if (newFilters.nationality?.isVietNamese == true) {
-      newNationalityValue = 2;
-    } else if (newFilters.nationality?.isNative == true) {
-      newNationalityValue = 3;
-    }
-    newSortValue = widget.sortValue;
+    _scrollController1 = ScrollController();
+    _scrollController2 = ScrollController();
+
+    newData1Filter = [...widget.data1CurrentFilter];
+    newData2Filter = [...widget.data2CurrentFilter];
+    newData3Filter = widget.data3CurrentFilter;
   }
 
   @override
   void dispose() {
-    _scrollController.dispose();
+    _scrollController1.dispose();
+    _scrollController2.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final specialtiesList = specialtiesMap.entries.toList();
-    final numSpecialties = specialtiesList.length;
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,9 +82,9 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // category filters
+              // data1 (specialties or categories) filter
               Text(
-                S.current.specialties,
+                widget.label1,
                 style: Dimens.getProportionalFont(
                   context,
                   context.theme.textTheme.displayMedium,
@@ -113,36 +94,41 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
               SizedBox(
                 height: Dimens.getScreenHeight(context) * 0.045,
                 child: ListView.builder(
-                  controller: _scrollController,
+                  controller: _scrollController1,
                   scrollDirection: Axis.horizontal,
                   physics: const ClampingScrollPhysics(),
-                  itemCount: numSpecialties,
+                  itemCount: widget.data1Values.length,
                   itemBuilder: (context, index) {
-                    // category filter
+                    final label =  widget.data1RenderValues != null
+                        ? widget.data1RenderValues![index]
+                        : widget.data1Values[index];
                     return Container(
                       margin: EdgeInsets.only(
                         right: Dimens.getProportionalWidth(
-                          context, (index == numSpecialties - 1) ? 0 : 10,
+                          context, (index == widget.data1Values.length - 1) ? 0 : 10,
                         ),
                       ),
                       child: BaseChoiceChip(
-                        label: toBeginningOfSentenceCase(specialtiesList[index].value)!,
+                        label: toBeginningOfSentenceCase(label)!,
                         isSelected: index == 0
-                            ? newFilters.specialties?.isEmpty == true
-                            : newFilters.specialties?.contains(specialtiesList[index].key) == true,
+                            ? newData1Filter.isEmpty == true
+                            : newData1Filter.contains(widget.data1Values[index]) == true,
                         onSelected: (value) {
                           // update specialities list
                           setState(() {
                             if (index == 0) {
                               // clear all specialities list
-                              newFilters.specialties = <String>[];
+                              newData1Filter = <String>[];
                             } else {
                               // add or remove speciality
-                              final curSpecialities = newFilters.specialties ?? <String>[];
+                              final curData1Filter = [...newData1Filter];
                               if (value) {
-                                newFilters.specialties = [...curSpecialities, specialtiesList[index].key];
+                                newData1Filter = [...curData1Filter, widget.data1Values[index]];
+                                if (newData1Filter.length == widget.data1Values.length - 1) {
+                                  newData1Filter = <String>[];
+                                }
                               } else {
-                                newFilters.specialties =  [...curSpecialities]..remove(specialtiesList[index].key);
+                                newData1Filter = [...curData1Filter]..remove(widget.data1Values[index]);
                               }
                             }
                           });
@@ -156,52 +142,67 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
 
               const EmptyProportionalSpace(height: 20),
 
-              // nationality filter
+              // data2 (nationality or level) filter
               Text(
-                S.current.nationality,
+                widget.label2,
                 style: Dimens.getProportionalFont(
                   context,
                   context.theme.textTheme.displayMedium,
                 ).copyWith(fontWeight: FontWeight.w500),
               ),
               const EmptyProportionalSpace(height: 15),
-              FilterDropDown<int>(
-                value: newNationalityValue,
-                data: nationalityValues,
-                alignment: AlignmentDirectional.centerStart,
-                itemBuilder: (item) {
-                  var nationality = S.current.all;
-                  if (item == 1) {
-                    nationality = S.current.foreign;
-                  } else if (item == 2) {
-                    nationality = S.current.vietnamese;
-                  } else if (item == 3) {
-                    nationality = S.current.nativeEnglish;
-                  }
-                  return DropdownMenuItem<int>(
-                    value: item,
-                    child: Text(
-                      item == 0 ? nationality : S.current.tutorWithNationality(nationality),
-                      style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                        color: context.theme.colorScheme.onTertiaryContainer,
+              SizedBox(
+                height: Dimens.getScreenHeight(context) * 0.045,
+                child: ListView.builder(
+                  controller: _scrollController2,
+                  scrollDirection: Axis.horizontal,
+                  physics: const ClampingScrollPhysics(),
+                  itemCount: widget.data2Values.length,
+                  itemBuilder: (context, index) {
+                    final label =  widget.data2RenderValues != null
+                        ? widget.data2RenderValues![index]
+                        : widget.data2Values[index].toString();
+                    return Container(
+                      margin: EdgeInsets.only(
+                        right: Dimens.getProportionalWidth(
+                          context, (index == widget.data2Values.length - 1) ? 0 : 10,
+                        ),
                       ),
-                    ),
-                  );
-                },
-                onChanged: (value) {
-                  setState(() {
-                    newNationalityValue = value ?? 0;
-                    newFilters.nationality = Nationality(
-                      isVietNamese: value == 2 ? true : (value == 1 ? false : null),
-                      isNative: value == 3 ? true : (value == 1 ? false : null),
+                      child: BaseChoiceChip(
+                        label: toBeginningOfSentenceCase(label)!,
+                        isSelected: index == 0
+                            ? newData2Filter.isEmpty == true
+                            : newData2Filter.contains(widget.data2Values[index]) == true,
+                        onSelected: (value) {
+                          // update specialities list
+                          setState(() {
+                            if (index == 0) {
+                              // clear all specialities list
+                              newData2Filter = <int>[];
+                            } else {
+                              // add or remove speciality
+                              final curData2Filter = [...newData2Filter];
+                              if (value) {
+                                newData2Filter = [...curData2Filter, widget.data2Values[index]];
+                                if (newData2Filter.length == widget.data2Values.length - 1) {
+                                  newData2Filter = <int>[];
+                                }
+                              } else {
+                                newData2Filter = [...curData2Filter]..remove(widget.data2Values[index]);
+                              }
+                            }
+                          });
+                        },
+                        unselectedBorderColor: context.theme.colorScheme.outlineVariant,
+                      ),
                     );
-                  });
-                },
+                  },
+                ),
               ),
 
               const EmptyProportionalSpace(height: 20),
 
-              // sorting filters
+              // data3 (sorting) filters
               Text(
                 S.current.sorting,
                 style: Dimens.getProportionalFont(
@@ -211,21 +212,23 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
               ),
               const EmptyProportionalSpace(height: 15),
               FilterDropDown<int>(
-                value: newSortValue,
-                data: sortValues,
-                leadingIcon: const Icon(Icons.sort_rounded),
+                value: newData3Filter,
+                data: widget.data3Values,
                 itemBuilder: (item) {
-                  final text = item == 0
-                      ? S.current.sortRatingFromNameAtoZ
-                      : (item == 1
-                      ? S.current.sortRatingFromLowest
-                      : S.current.sortRatingFromHighest);
+                  var index = widget.data3Values.indexOf(item);
+                  if (index < 0) {
+                    index = 0;
+                  }
+                  final text = '${widget.data3RenderValues != null
+                      ? widget.data3RenderValues![index]
+                      : widget.data3Values[index]}';
                   return DropdownMenuItem<int>(
                     value: item,
                     alignment: Alignment.center,
                     child: Text(
-                      text,
-                      style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+                      text, style: Dimens.getProportionalFont(
+                        context, context.theme.textTheme.bodyMedium,
+                      ).copyWith(
                         color: context.theme.colorScheme.onTertiaryContainer,
                       ),
                     ),
@@ -233,7 +236,7 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                 },
                 onChanged: (value) {
                   setState(() {
-                    newSortValue = value ?? 0;
+                    newData3Filter = value ?? 0;
                   });
                 },
               ),
@@ -261,14 +264,19 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
               PrimaryOutlineButton(
                 onTap: () {
                   setState(() {
-                    _scrollController.animateTo(
+                    _scrollController1.animateTo(
                       0,
                       duration: const Duration(milliseconds: 250),
                       curve: Curves.easeInOut,
                     );
-                    newFilters = _defaultFilters.copyWith();
-                    newNationalityValue = 0;
-                    newSortValue = _defaultIsDescending;
+                    _scrollController2.animateTo(
+                      0,
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                    );
+                    newData1Filter = <String>[];
+                    newData2Filter = <int>[];
+                    newData3Filter = 0;
                   });
                 },
                 width: Dimens.getScreenWidth(context) * 0.21282,
@@ -289,7 +297,7 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
               PrimaryFillButton(
                 onTap: () {
                   Navigator.pop(context);
-                  widget.onApplyFilters?.call(newFilters, newSortValue);
+                  widget.onApplyFilters?.call(newData1Filter, newData2Filter, newData3Filter);
                 },
                 width: Dimens.getScreenWidth(context) * 0.21282,
                 paddingVertical: Dimens.getProportionalHeight(context, 5),

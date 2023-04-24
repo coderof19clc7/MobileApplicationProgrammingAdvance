@@ -9,16 +9,44 @@ import 'package:one_one_learn/core/models/responses/tutor/tutor_search_response.
 import 'package:one_one_learn/core/models/responses/user/user_manage_favorite_tutor_response.dart';
 import 'package:one_one_learn/core/network/repositories/tutor_repository.dart';
 import 'package:one_one_learn/core/network/repositories/user_repository.dart';
+import 'package:one_one_learn/generated/l10n.dart';
 
 part 'tutors_state.dart';
 
 class TutorsCubit extends WidgetCubit<TutorsState> {
-  TutorsCubit._() : super(widgetState: TutorsInitialState());
+  TutorsCubit._() : super(widgetState: const TutorsState());
 
   final numTutorsPerPage = 12;
   final tutorRepository = injector<TutorRepository>();
   final userRepository = injector<UserRepository>();
   TextEditingController? tutorsTextEditingController;
+
+  // constants
+  final specialtiesMap = {
+    'all': S.current.all,
+    'english-for-kids': S.current.englishForKids,
+    'business-english': S.current.businessEnglish,
+    'conversational-english': S.current.conversationalEnglish,
+    'starters': S.current.starters,
+    'movers': S.current.movers,
+    'flyers': S.current.flyers,
+    'ket': S.current.ket,
+    'pet': S.current.pet,
+    'ielts': S.current.ielts,
+    'toefl': S.current.toefl,
+    'toeic': S.current.toeic,
+  };
+  final nationalitiesMap = {
+    S.current.all: 0,
+    S.current.foreign: 1,
+    S.current.vietnamese: 2,
+    S.current.nativeEnglish: 3,
+  };
+  final sortMap = {
+    S.current.sortRatingFromNameAtoZ: 0,
+    S.current.sortRatingFromLowest: 1,
+    S.current.sortRatingFromHighest: -1,
+  };
 
   static TutorsCubit? _instance;
   static TutorsCubit getInstance() {
@@ -49,6 +77,14 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       total: 0,
       listTutors: [],
     ));
+  }
+
+  List<String> getCurrentSpecialties() {
+    final specialties = state.filters?.specialties ?? <String>[];
+    return specialties;
+  }
+  List<int> getCurrentNationalities() {
+    return state.nationalityValues;
   }
 
   bool canListTutorsLoadMore() {
@@ -99,7 +135,10 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
   }
 
   Future<void> searchListTutors({bool reloadAllCurrentList = false} ) async {
-    emit(state.copyWith(isLoadingMore: true));
+    emit(state.copyWith(
+      isLoadingMore: true,
+      filters: state.filters ?? Filters.defaultFilters(),
+    ));
 
     // search list by the filters amd page number
     final tutorSearchResponse = await fetchApi<TutorSearchResponse>(
@@ -196,7 +235,55 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         sortValue: newSortValue,
       ));
     }
+  }
 
+  void onApplyFilters2(List<String> newSpecialities, List<int> newNationalityValues, int newSortValue) {
+    // only apply new filters if they are different from the current ones
+    if (listEquals(newSpecialities, getCurrentSpecialties())
+        && listEquals(newNationalityValues, getCurrentNationalities())
+        && newSortValue == state.sortValue
+    ) {
+      return;
+    }
+
+    // convert new filters into Filters object if there is a change
+    if (!listEquals(newSpecialities, getCurrentSpecialties())
+        || !listEquals(newNationalityValues, getCurrentNationalities())
+    ) {
+      var currentNationality = state.filters?.nationality?.copyWith();
+      if (newNationalityValues != getCurrentNationalities()) {
+        if (newNationalityValues.isEmpty) {
+          currentNationality = Nationality();
+        } else if (newNationalityValues.contains(nationalitiesMap[S.current.foreign])) {
+          currentNationality = Nationality(
+            isVietNamese: newNationalityValues.contains(nationalitiesMap[S.current.vietnamese]) ? null : false,
+            isNative: newNationalityValues.contains(nationalitiesMap[S.current.nativeEnglish]) ? null : false,
+          );
+        } else {
+          currentNationality = Nationality(
+            isVietNamese: newNationalityValues.contains(nationalitiesMap[S.current.vietnamese]) ? true : null,
+            isNative: newNationalityValues.contains(nationalitiesMap[S.current.nativeEnglish]) ? true : null,
+          );
+        }
+      }
+
+      final newFilters = Filters(
+        specialties: newSpecialities,
+        nationality: currentNationality,
+      );
+      emit(state.copyWith(
+        nextPage: 1, total: 0,
+        listTutors: initialLoadMoreAbleList,
+        filters: newFilters,
+        nationalityValues: newNationalityValues,
+        sortValue: newSortValue,
+      ));
+    } else if (newSortValue != state.sortValue) {
+      emit(state.copyWith(
+        listTutors: sortList([...state.listTutors], sortValue: newSortValue),
+        sortValue: newSortValue,
+      ));
+    }
   }
 
   Future<void> onTutorFavouriteStatusChanged(String tutorId, {

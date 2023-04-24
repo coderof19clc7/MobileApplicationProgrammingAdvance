@@ -116,6 +116,9 @@ abstract class BaseCard extends StatelessWidget {
             ),
         width: width ?? Dimens.getScreenWidth(context),
         decoration: BoxDecoration(
+          border: Border.all(
+            color: AppColors.neutralBlue300,
+          ),
           borderRadius: BorderRadius.circular(15),
           boxShadow: boxShadows ?? [
             Effects.normalShadowXS,
