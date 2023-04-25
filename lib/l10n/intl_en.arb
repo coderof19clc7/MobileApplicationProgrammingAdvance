@@ -13,11 +13,28 @@
   "signUpTitle": "Create your account",
   "resetPassword": "Reset password",
   "resetPasswordRequirement": "Enter the email associated with your account to reset password.",
-  "sortRatingFromNameAtoZ": "From A to Z",
-  "sortRatingFromHighest": "From highest rating",
-  "sortRatingFromLowest": "From lowest rating",
-  "sortFavoriteFromHighest": "From most favorited",
-  "sortFavoriteFromLowest": "From least favorited",
+  "rating": "Rating",
+  "sortNameFromAtoZ": "From A to Z",
+  "sortSomethingsFromHigh": "From high {somethings}",
+  "@sortSomethingsFromHigh": {
+      "description": "A description for option sort something from highest",
+      "placeholders": {
+      "somethings": {
+          "type": "String",
+          "example": "rating"
+      }
+      }
+  },
+  "sortSomethingsFromLow": "From low {somethings}",
+  "@sortSomethingsFromLow": {
+    "description": "A description for option sort something from lowest",
+    "placeholders": {
+      "somethings": {
+        "type": "String",
+        "example": "rating"
+      }
+    }
+  },
   "searchHintTutor": "Find a tutor",
   "all": "All",
   "labelTotalLessonTime": "Your total lesson time is",
@@ -55,6 +72,8 @@
   "labelUpcomingClass": "Your upcoming class is",
   "nationality": "Nationality",
   "sorting": "Sorting",
+  "categories": "Categories",
+  "level": "Level",
   "reset": "Reset",
   "filter": "Filter",
   "record": "Record",
@@ -136,8 +155,11 @@
   "resetPasswordRequestSendSucceededContent": "Please check your email to reset your password.\nIf you didn't receive any mail, please ensure that the email you entered is correct and check your spam folder or wait for 1 to 2 minutes and then send a new request.",
   "loading": "Loading",
   "englishForKids": "English for kids",
-  "businessEnglish":  "Business English",
-  "conversationalEnglish": "Conversational",
+  "businessEnglish":  "English for business",
+  "conversationalEnglish": "Conversational English",
+  "englishForTraveling": "English for traveling",
+  "englishForBeginners": "English for beginners",
+  "forStudyingAboard": "For studying aboard",
   "starters":  "STARTERS",
   "movers": "MOVERS",
   "flyers":  "FLYERS",

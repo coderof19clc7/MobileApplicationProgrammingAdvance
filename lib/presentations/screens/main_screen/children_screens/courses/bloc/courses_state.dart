@@ -6,6 +6,9 @@ class CoursesState extends WidgetState {
   final int total;
   final String? coursesSearchText;
   final List<CourseInformation?> listCourses;
+  final List<String> listCategoriesId;
+  final List<int> listLevelValues;
+  final int sortValue;
 
   @override
   WidgetState fromJson(json) {
@@ -16,14 +19,21 @@ class CoursesState extends WidgetState {
       basicStatusFToastState: mapJson['basicStatusFToastState'] != null
           ? BasicStatusFToastState.fromJson(mapJson['basicStatusFToastState'])
           : null,
-      nextPage: mapJson['nextPage'] as int,
-      total: mapJson['total'] as int,
+      nextPage: mapJson['nextPage'] as int? ?? 1,
+      total: mapJson['total'] as int? ?? 0,
       coursesSearchText: mapJson['coursesSearchText'] as String?,
       listCourses: mapJson['listCourses'] != null
           ? (mapJson['listCourses'] as List).map((e) {
               return e != null ? CourseInformation.fromJson(e) : null;
             }).toList()
           : const <CourseInformation?>[null, null, null],
+      listCategoriesId: mapJson['listCategoriesId'] != null
+          ? (mapJson['listCategoriesId'] as List).map((e) => e as String).toList()
+          : const <String>[],
+      listLevelValues: mapJson['listLevelValues'] != null
+          ? (mapJson['listLevelValues'] as List).map((e) => e as int).toList()
+          : const <int>[],
+      sortValue: mapJson['sortValue'] as int? ?? 0,
     );
   }
 
@@ -37,6 +47,9 @@ class CoursesState extends WidgetState {
     map['total'] = total;
     map['coursesSearchText'] = coursesSearchText;
     map['listCourses'] = listCourses.map((e) => e?.toJson()).toList();
+    map['listCategoriesId'] = listCategoriesId;
+    map['listLevelValues'] = listLevelValues;
+    map['sortValue'] = sortValue;
     return map;
   }
 
@@ -49,6 +62,9 @@ class CoursesState extends WidgetState {
     this.total = 0,
     this.coursesSearchText,
     this.listCourses = const <CourseInformation?>[null, null, null],
+    this.listCategoriesId = const <String>[],
+    this.listLevelValues = const <int>[],
+    this.sortValue = 0,
   });
 
   @override
@@ -62,7 +78,10 @@ class CoursesState extends WidgetState {
           nextPage == other.nextPage &&
           total == other.total &&
           coursesSearchText == other.coursesSearchText &&
-          listCourses == other.listCourses);
+          listCourses == other.listCourses &&
+          listCategoriesId == other.listCategoriesId &&
+          listLevelValues == other.listLevelValues &&
+          sortValue == other.sortValue);
 
   @override
   int get hashCode => isLoading.hashCode
@@ -71,7 +90,10 @@ class CoursesState extends WidgetState {
       ^ nextPage.hashCode
       ^ total.hashCode
       ^ coursesSearchText.hashCode
-      ^ listCourses.hashCode;
+      ^ listCourses.hashCode
+      ^ listCategoriesId.hashCode
+      ^ listLevelValues.hashCode
+      ^ sortValue.hashCode;
 
   @override
   String toString() {
@@ -83,6 +105,9 @@ class CoursesState extends WidgetState {
         ' total: $total,'
         ' coursesSearchText: $coursesSearchText,'
         ' listCourses: $listCourses,'
+        ' listCategoriesId: $listCategoriesId,'
+        ' listLevelValues: $listLevelValues,'
+        ' sortValue: $sortValue,'
         ' }';
   }
 
@@ -95,6 +120,9 @@ class CoursesState extends WidgetState {
     int? total,
     String? coursesSearchText,
     List<CourseInformation?>? listCourses,
+    List<String>? listCategoriesId,
+    List<int>? listLevelValues,
+    int? sortValue,
   }) {
     return CoursesState(
       isLoading: isLoading ?? this.isLoading,
@@ -104,6 +132,9 @@ class CoursesState extends WidgetState {
       total: total ?? this.total,
       coursesSearchText: coursesSearchText ?? this.coursesSearchText,
       listCourses: listCourses ?? this.listCourses,
+      listCategoriesId: listCategoriesId ?? this.listCategoriesId,
+      listLevelValues: listLevelValues ?? this.listLevelValues,
+      sortValue: sortValue ?? this.sortValue,
     );
   }
 
@@ -116,6 +147,9 @@ class CoursesState extends WidgetState {
       'total': total,
       'coursesSearchText': coursesSearchText,
       'listCourses': listCourses,
+      'listCategoriesId': listCategoriesId,
+      'listLevelValues': listLevelValues,
+      'sortValue': sortValue,
     };
   }
 
@@ -133,7 +167,14 @@ class CoursesState extends WidgetState {
           ? (map['listCourses'] as List).map((e) {
             return e != null ? CourseInformation.fromMap(e as Map<String, dynamic>) : null;
           }).toList()
-          : const <CourseInformation?>[null, null, null]
+          : const <CourseInformation?>[null, null, null],
+      listCategoriesId: map['listCategoriesId'] != null
+          ? (map['listCategoriesId'] as List).map((e) => e as String).toList()
+          : const <String>[],
+      listLevelValues: map['listLevelValues'] != null
+          ? (map['listLevelValues'] as List).map((e) => e as int).toList()
+          : const <int>[],
+      sortValue: map['sortValue'] as int? ?? 0,
     );
   }
 

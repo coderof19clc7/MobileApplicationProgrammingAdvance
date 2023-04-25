@@ -1,5 +1,4 @@
 import 'package:one_one_learn/configs/constants/api_constants.dart';
-import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/core/models/requests/base_request.dart';
 
 class CoursesListRequest extends BaseRequest {
@@ -12,7 +11,33 @@ class CoursesListRequest extends BaseRequest {
     this.size,
     this.q,
     this.categoriesId,
+    this.levels,
+    this.sortValue,
   });
+
+  String toQueryString() {
+    var queryString = '?';
+    if (page != null) queryString += 'page=$page&';
+    if (size != null) queryString += 'size=$size&';
+    if (q != null) queryString += 'q=$q&';
+    if (categoriesId != null) {
+      final categoriesQueryList = categoriesId?.map((e) {
+        return '${ApiConstants.categoriesId}=$e&';
+      }).toList() ?? <String>[];
+      queryString += categoriesQueryList.join();
+    }
+    if (levels != null) {
+      final levelsQueryList = levels?.map((e) {
+        return '${ApiConstants.levels}=$e&';
+      }).toList() ?? <String>[];
+      queryString += levelsQueryList.join();
+    }
+    if (sortValue != null && sortValue != 0) {
+      final sortQuery = (sortValue == 1 ? 'asc' : 'desc').toUpperCase();
+      queryString += '${ApiConstants.order}=level&${ApiConstants.orderBy}=$sortQuery&';
+    }
+    return queryString.substring(0, queryString.length - 1);
+  }
 
   factory CoursesListRequest.fromJson(dynamic json) {
     final mapJson = json as Map<String, dynamic>;
@@ -23,6 +48,10 @@ class CoursesListRequest extends BaseRequest {
       categoriesId: mapJson[ApiConstants.categoriesId] != null
           ? (mapJson[ApiConstants.categoriesId] as List).map((e) => e.toString()).toList()
           : null,
+      levels: mapJson[ApiConstants.levels] != null
+          ? (mapJson[ApiConstants.levels] as List).map((e) => e as int).toList()
+          : null,
+      sortValue: mapJson[ApiConstants.orderBy] as int?,
     );
   }
 
@@ -30,6 +59,8 @@ class CoursesListRequest extends BaseRequest {
   final num? size;
   final String? q;
   final List<String>? categoriesId;
+  final List<int>? levels;
+  final int? sortValue;
 
   @override
   Map<String, dynamic> toJson() {
@@ -38,6 +69,8 @@ class CoursesListRequest extends BaseRequest {
     map['size'] = size;
     if (q?.isNotEmpty == true) map['q'] = q;
     if (categoriesId != null) map[ApiConstants.categoriesId] = categoriesId;
+    if (levels != null) map[ApiConstants.levels] = levels;
+    if (sortValue != null) map[ApiConstants.orderBy] = sortValue;
     return map;
   }
 
@@ -48,6 +81,8 @@ class CoursesListRequest extends BaseRequest {
         ' size: $size,'
         ' q: $q,'
         ' categoriesId: $categoriesId,'
+        ' levels: $levels,'
+        ' sortValue: $sortValue,'
         ' }';
   }
 
@@ -56,12 +91,16 @@ class CoursesListRequest extends BaseRequest {
     num? size,
     String? q,
     List<String>? categoriesId,
+    List<int>? levels,
+    int? sortValue,
   }) {
     return CoursesListRequest(
       page: page ?? this.page,
       size: size ?? this.size,
       q: q ?? this.q,
       categoriesId: categoriesId ?? this.categoriesId,
+      levels: levels ?? this.levels,
+      sortValue: sortValue ?? this.sortValue,
     );
   }
 
@@ -71,6 +110,8 @@ class CoursesListRequest extends BaseRequest {
       'size': size,
       'q': q,
       'categoriesId': categoriesId,
+      'levels': levels,
+      'sortValue': sortValue,
     };
   }
 
@@ -82,6 +123,10 @@ class CoursesListRequest extends BaseRequest {
       categoriesId: map[ApiConstants.categoriesId] != null
           ? (map[ApiConstants.categoriesId] as List).map((e) => e.toString()).toList()
           : null,
+      levels: map[ApiConstants.levels] != null 
+          ? (map[ApiConstants.levels] as List).map((e) => e as int).toList() 
+          : null,
+      sortValue: map[ApiConstants.orderBy] as int?,
     );
   }
 }

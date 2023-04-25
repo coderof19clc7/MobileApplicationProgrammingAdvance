@@ -214,10 +214,10 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
                 leadingIcon: const Icon(Icons.sort_rounded),
                 itemBuilder: (item) {
                   final text = item == 0
-                      ? S.current.sortRatingFromNameAtoZ
+                      ? S.current.sortNameFromAtoZ
                       : (item == 1
-                      ? S.current.sortRatingFromLowest
-                      : S.current.sortRatingFromHighest);
+                      ? S.current.sortSomethingsFromLow(S.current.rating)
+                      : S.current.sortSomethingsFromHigh(S.current.rating));
                   return DropdownMenuItem<int>(
                     value: item,
                     alignment: Alignment.center,

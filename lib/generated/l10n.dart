@@ -190,53 +190,43 @@ class S {
     );
   }
 
+  /// `Rating`
+  String get rating {
+    return Intl.message(
+      'Rating',
+      name: 'rating',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `From A to Z`
-  String get sortRatingFromNameAtoZ {
+  String get sortNameFromAtoZ {
     return Intl.message(
       'From A to Z',
-      name: 'sortRatingFromNameAtoZ',
+      name: 'sortNameFromAtoZ',
       desc: '',
       args: [],
     );
   }
 
-  /// `From highest rating`
-  String get sortRatingFromHighest {
+  /// `From high {somethings}`
+  String sortSomethingsFromHigh(String somethings) {
     return Intl.message(
-      'From highest rating',
-      name: 'sortRatingFromHighest',
-      desc: '',
-      args: [],
+      'From high $somethings',
+      name: 'sortSomethingsFromHigh',
+      desc: 'A description for option sort something from highest',
+      args: [somethings],
     );
   }
 
-  /// `From lowest rating`
-  String get sortRatingFromLowest {
+  /// `From low {somethings}`
+  String sortSomethingsFromLow(String somethings) {
     return Intl.message(
-      'From lowest rating',
-      name: 'sortRatingFromLowest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `From most favorited`
-  String get sortFavoriteFromHighest {
-    return Intl.message(
-      'From most favorited',
-      name: 'sortFavoriteFromHighest',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `From least favorited`
-  String get sortFavoriteFromLowest {
-    return Intl.message(
-      'From least favorited',
-      name: 'sortFavoriteFromLowest',
-      desc: '',
-      args: [],
+      'From low $somethings',
+      name: 'sortSomethingsFromLow',
+      desc: 'A description for option sort something from lowest',
+      args: [somethings],
     );
   }
 
@@ -605,6 +595,26 @@ class S {
     return Intl.message(
       'Sorting',
       name: 'sorting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Categories`
+  String get categories {
+    return Intl.message(
+      'Categories',
+      name: 'categories',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Level`
+  String get level {
+    return Intl.message(
+      'Level',
+      name: 'level',
       desc: '',
       args: [],
     );
@@ -1150,21 +1160,51 @@ class S {
     );
   }
 
-  /// `Business English`
+  /// `English for business`
   String get businessEnglish {
     return Intl.message(
-      'Business English',
+      'English for business',
       name: 'businessEnglish',
       desc: '',
       args: [],
     );
   }
 
-  /// `Conversational`
+  /// `Conversational English`
   String get conversationalEnglish {
     return Intl.message(
-      'Conversational',
+      'Conversational English',
       name: 'conversationalEnglish',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English for traveling`
+  String get englishForTraveling {
+    return Intl.message(
+      'English for traveling',
+      name: 'englishForTraveling',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English for beginners`
+  String get englishForBeginners {
+    return Intl.message(
+      'English for beginners',
+      name: 'englishForBeginners',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `For studying aboard`
+  String get forStudyingAboard {
+    return Intl.message(
+      'For studying aboard',
+      name: 'forStudyingAboard',
       desc: '',
       args: [],
     );

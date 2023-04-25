@@ -26,7 +26,11 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(somethings) => "${somethings} is required";
 
-  static String m3(nationality) => "${nationality} tutor";
+  static String m3(somethings) => "From high ${somethings}";
+
+  static String m4(somethings) => "From low ${somethings}";
+
+  static String m5(nationality) => "${nationality} tutor";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -41,7 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "booked": MessageLookupByLibrary.simpleMessage("Booked"),
         "books": MessageLookupByLibrary.simpleMessage("Books"),
         "businessEnglish":
-            MessageLookupByLibrary.simpleMessage("Business English"),
+            MessageLookupByLibrary.simpleMessage("English for business"),
+        "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
@@ -54,7 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
             "Please confirm your password"),
         "conversationalEnglish":
-            MessageLookupByLibrary.simpleMessage("Conversational"),
+            MessageLookupByLibrary.simpleMessage("Conversational English"),
         "courses": MessageLookupByLibrary.simpleMessage("Courses"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
@@ -63,12 +68,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "englishForBeginners":
+            MessageLookupByLibrary.simpleMessage("English for beginners"),
         "englishForKids":
             MessageLookupByLibrary.simpleMessage("English for kids"),
+        "englishForTraveling":
+            MessageLookupByLibrary.simpleMessage("English for traveling"),
         "enterRoom": MessageLookupByLibrary.simpleMessage("Join"),
         "experience": MessageLookupByLibrary.simpleMessage("Experience"),
         "filter": MessageLookupByLibrary.simpleMessage("Filter"),
         "flyers": MessageLookupByLibrary.simpleMessage("FLYERS"),
+        "forStudyingAboard":
+            MessageLookupByLibrary.simpleMessage("For studying aboard"),
         "foreign": MessageLookupByLibrary.simpleMessage("Foreign"),
         "forgotPassword":
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
@@ -102,6 +113,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lesson": MessageLookupByLibrary.simpleMessage("lesson"),
         "lessonHistory": MessageLookupByLibrary.simpleMessage("Lesson History"),
         "lessonStatus": MessageLookupByLibrary.simpleMessage("Lesson status"),
+        "level": MessageLookupByLibrary.simpleMessage("Level"),
         "listening": MessageLookupByLibrary.simpleMessage("Listening"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -135,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Preferred schedule"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
+        "rating": MessageLookupByLibrary.simpleMessage("Rating"),
         "record": MessageLookupByLibrary.simpleMessage("Record"),
         "refreshTokenError": MessageLookupByLibrary.simpleMessage(
             "Your session has expired. Please login again."),
@@ -164,16 +177,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Skill level"),
         "somethingRequiredError": m2,
-        "sortFavoriteFromHighest":
-            MessageLookupByLibrary.simpleMessage("From most favorited"),
-        "sortFavoriteFromLowest":
-            MessageLookupByLibrary.simpleMessage("From least favorited"),
-        "sortRatingFromHighest":
-            MessageLookupByLibrary.simpleMessage("From highest rating"),
-        "sortRatingFromLowest":
-            MessageLookupByLibrary.simpleMessage("From lowest rating"),
-        "sortRatingFromNameAtoZ":
-            MessageLookupByLibrary.simpleMessage("From A to Z"),
+        "sortNameFromAtoZ": MessageLookupByLibrary.simpleMessage("From A to Z"),
+        "sortSomethingsFromHigh": m3,
+        "sortSomethingsFromLow": m4,
         "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
@@ -189,7 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "toeic": MessageLookupByLibrary.simpleMessage("TOEIC"),
         "tutor": MessageLookupByLibrary.simpleMessage("tutor"),
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
-        "tutorWithNationality": m3,
+        "tutorWithNationality": m5,
         "tutoring": MessageLookupByLibrary.simpleMessage("Tutoring"),
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("in"),

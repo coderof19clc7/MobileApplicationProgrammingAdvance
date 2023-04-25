@@ -22,11 +22,10 @@ class CourseRepository extends BaseRepository {
   Future<CoursesListResponse> getListCourses(CoursesListRequest coursesListRequest) async {
     return CoursesListResponse.fromJson(await request(
       method: ApiMethods.get,
-      path: '',
+      path: coursesListRequest.toQueryString(),
       headers: {
         ApiConstants.contentType: ApiConstants.textPlain,
       },
-      queryParameters: coursesListRequest,
     ));
   }
 }

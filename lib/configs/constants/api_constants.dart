@@ -51,6 +51,9 @@ class ApiConstants {
 
   // query parameters
   static const categoriesId = 'categoryId[]';
+  static const levels = 'level[]';
+  static const order = 'order[]';
+  static const orderBy = 'orderBy[]';
 }
 
 class ApiMethods {

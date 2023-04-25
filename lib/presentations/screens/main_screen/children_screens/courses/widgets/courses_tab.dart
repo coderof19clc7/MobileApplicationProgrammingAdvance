@@ -5,6 +5,8 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/presentations/screens/course_information/course_information_screen.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/bloc/courses_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/widgets/course_card.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/widgets/tutors_courses_search_field.dart';
+import 'package:one_one_learn/presentations/widgets/dialogs/bottom_sheet_dialogs/bodies/tutors_courses_list_filter.dart';
 import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
 import 'package:one_one_learn/presentations/widgets/shimmers/fade_shimmer.dart';
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_outline.dart';
@@ -36,42 +38,38 @@ class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMi
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               // search field
-              TextFieldOutline(
-                enable: !state.isLoading,
+              TutorsCoursesSearchField(
                 hintText: S.current.searchHintCourse,
+                isLoadingMore: state.isLoading,
+                listFilterBodyBottomSheet: TutorsCoursesListFilterBottomSheet(
+                  label1: S.current.categories,
+                  label2: S.current.level,
+
+                  // data1Map: context.read<CoursesCubit>().categoriesMap.values.toList(),
+                  // data1RenderValues: context.read<CoursesCubit>().categoriesMap.keys.toList(),
+                  data1Map: context.read<CoursesCubit>().categoriesMap,
+                  data1CurrentFilter: context.read<CoursesCubit>().getCurrentCategories(),
+
+                  // data2Map: context.read<CoursesCubit>().levelsMap.values.toList(),
+                  // data2RenderValues: context.read<CoursesCubit>().levelsMap.keys.toList(),
+                  data2Map: context.read<CoursesCubit>().levelsMap,
+                  data2CurrentFilter: context.read<CoursesCubit>().getCurrentLevelValues(),
+
+                  // data3Map: context.read<CoursesCubit>().sortMap.values.toList(),
+                  // data3RenderValues: context.read<CoursesCubit>().sortMap.keys.toList(),
+                  data3Map: context.read<CoursesCubit>().sortMap,
+                  data3CurrentFilter: state.sortValue,
+
+                  onApplyFilters: (data1, data2, data3) {
+                    context.read<CoursesCubit>().onApplyFilters(data1, data2, data3);
+                  },
+                ),
                 onSubmitted: (value) {
                   context.read<CoursesCubit>().onSearchTextSubmitted(value);
                 },
               ),
-              SizedBox(height: Dimens.getProportionalHeight(context, 10)),
 
-              // category filters
-              SizedBox(
-                height: Dimens.getScreenHeight(context) * 0.045,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 15,
-                  itemBuilder: (context, index) {
-                    // category filter
-                    return Padding(
-                      padding: EdgeInsets.only(
-                        right: Dimens.getProportionalWidth(
-                          context,
-                          index == 14 ? 0 : 10,
-                        ),
-                      ),
-                      child: BaseChoiceChip(
-                        label: S.current.all,
-                        isSelected: index.isEven,
-                        onSelected: (value) {
-                          // update state
-                        },
-                      ),
-                    );
-                  },
-                ),
-              ),
-              SizedBox(height: Dimens.getProportionalHeight(context, 20)),
+              SizedBox(height: Dimens.getProportionalHeight(context, 30)),
 
               // courses list
               Expanded(

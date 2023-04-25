@@ -23,18 +23,18 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
   // constants
   final specialtiesMap = {
-    'all': S.current.all,
-    'english-for-kids': S.current.englishForKids,
-    'business-english': S.current.businessEnglish,
-    'conversational-english': S.current.conversationalEnglish,
-    'starters': S.current.starters,
-    'movers': S.current.movers,
-    'flyers': S.current.flyers,
-    'ket': S.current.ket,
-    'pet': S.current.pet,
-    'ielts': S.current.ielts,
-    'toefl': S.current.toefl,
-    'toeic': S.current.toeic,
+    S.current.all: 'all',
+    S.current.englishForKids: 'english-for-kids',
+    S.current.businessEnglish: 'business-english',
+    S.current.conversationalEnglish: 'conversational-english',
+    S.current.starters: 'starters',
+    S.current.movers: 'movers',
+    S.current.flyers: 'flyers',
+    S.current.ket: 'ket',
+    S.current.pet: 'pet',
+    S.current.ielts: 'ielts',
+    S.current.toefl: 'toefl',
+    S.current.toeic: 'toeic',
   };
   final nationalitiesMap = {
     S.current.all: 0,
@@ -43,9 +43,9 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     S.current.nativeEnglish: 3,
   };
   final sortMap = {
-    S.current.sortRatingFromNameAtoZ: 0,
-    S.current.sortRatingFromLowest: 1,
-    S.current.sortRatingFromHighest: -1,
+    S.current.sortNameFromAtoZ: 0,
+    S.current.sortSomethingsFromLow(S.current.rating): 1,
+    S.current.sortSomethingsFromHigh(S.current.rating): -1,
   };
 
   static TutorsCubit? _instance;
@@ -217,6 +217,18 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     ));
   }
 
+  void onSearchTextSubmitted2(String value) {
+    if (value == state.searchText) {
+      return;
+    }
+
+    emit(state.copyWith(
+      searchText: value,
+      nextPage: 1, total: 0,
+      listTutors: initialLoadMoreAbleList,
+    ));
+  }
+
   void onApplyFilters(Filters newFilters, int newSortValue) {
     // only apply new filters if they are different from the current ones
     if (newFilters == state.filters && newSortValue == state.sortValue) {
@@ -246,6 +258,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       return;
     }
 
+    var newFilters = state.filters?.copyWith();
     // convert new filters into Filters object if there is a change
     if (!listEquals(newSpecialities, getCurrentSpecialties())
         || !listEquals(newNationalityValues, getCurrentNationalities())
@@ -267,23 +280,19 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         }
       }
 
-      final newFilters = Filters(
+      newFilters = Filters(
         specialties: newSpecialities,
         nationality: currentNationality,
       );
-      emit(state.copyWith(
-        nextPage: 1, total: 0,
-        listTutors: initialLoadMoreAbleList,
-        filters: newFilters,
-        nationalityValues: newNationalityValues,
-        sortValue: newSortValue,
-      ));
-    } else if (newSortValue != state.sortValue) {
-      emit(state.copyWith(
-        listTutors: sortList([...state.listTutors], sortValue: newSortValue),
-        sortValue: newSortValue,
-      ));
     }
+
+    emit(state.copyWith(
+      nextPage: 1, total: 0,
+      listTutors: initialLoadMoreAbleList,
+      filters: newFilters,
+      nationalityValues: newNationalityValues,
+      sortValue: newSortValue,
+    ));
   }
 
   Future<void> onTutorFavouriteStatusChanged(String tutorId, {

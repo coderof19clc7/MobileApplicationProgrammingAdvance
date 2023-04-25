@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
+import 'package:one_one_learn/presentations/widgets/dialogs/bottom_sheet_dialogs/bodies/tutors_courses_list_filter.dart';
 import 'package:one_one_learn/presentations/widgets/dialogs/bottom_sheet_dialogs/normal_bottom_sheet_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_outline.dart';
@@ -18,7 +19,7 @@ class TutorsCoursesSearchField extends StatelessWidget {
 
   final String hintText;
   final bool isLoadingMore;
-  final Widget listFilterBodyBottomSheet;
+  final TutorsCoursesListFilterBottomSheet listFilterBodyBottomSheet;
   final Function(String) onSubmitted;
 
   @override

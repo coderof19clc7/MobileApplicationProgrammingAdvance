@@ -72,16 +72,20 @@ class TutorsPage extends StatelessWidget {
                             listFilterBodyBottomSheet: TutorsCoursesListFilterBottomSheet(
                               label1: S.current.specialties,
                               label2: S.current.nationality,
-                              data1Values: context.read<TutorsCubit>().specialtiesMap.keys.toList(),
-                              data1RenderValues: context.read<TutorsCubit>().specialtiesMap.values.toList(),
+
+                              // data1Map: context.read<TutorsCubit>().specialtiesMap.values.toList(),
+                              // data1RenderValues: context.read<TutorsCubit>().specialtiesMap.keys.toList(),
+                              data1Map: context.read<TutorsCubit>().specialtiesMap,
                               data1CurrentFilter: context.read<TutorsCubit>().getCurrentSpecialties(),
 
-                              data2Values: context.read<TutorsCubit>().nationalitiesMap.values.toList(),
-                              data2RenderValues: context.read<TutorsCubit>().nationalitiesMap.keys.toList(),
+                              // data2Map: context.read<TutorsCubit>().nationalitiesMap.values.toList(),
+                              // data2RenderValues: context.read<TutorsCubit>().nationalitiesMap.keys.toList(),
+                              data2Map: context.read<TutorsCubit>().nationalitiesMap,
                               data2CurrentFilter: context.read<TutorsCubit>().getCurrentNationalities(),
 
-                              data3Values: context.read<TutorsCubit>().sortMap.values.toList(),
-                              data3RenderValues: context.read<TutorsCubit>().sortMap.keys.toList(),
+                              // data3Map: context.read<TutorsCubit>().sortMap.values.toList(),
+                              // data3RenderValues: context.read<TutorsCubit>().sortMap.keys.toList(),
+                              data3Map: context.read<TutorsCubit>().sortMap,
                               data3CurrentFilter: state.sortValue,
 
                               onApplyFilters: (data1, data2, data3) {
@@ -89,13 +93,13 @@ class TutorsPage extends StatelessWidget {
                               },
                             ),
                             onSubmitted: (value) {
-                              context.read<TutorsCubit>().onSearchTextSubmitted();
+                              context.read<TutorsCubit>().onSearchTextSubmitted2(value);
                             },
                           );
                         },
                       ),
                       const EmptyProportionalSpace(height: 30),
-                      // tutor list
+                      // tutors list
                       const Expanded(child: ListTutors()),
                     ],
                   ),
