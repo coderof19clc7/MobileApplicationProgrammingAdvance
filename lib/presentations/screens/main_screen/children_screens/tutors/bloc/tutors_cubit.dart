@@ -44,8 +44,8 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
   };
   final sortMap = {
     S.current.sortNameFromAtoZ: 0,
-    S.current.sortSomethingsFromLow(S.current.rating): 1,
-    S.current.sortSomethingsFromHigh(S.current.rating): -1,
+    S.current.sortSomethingsFromLow(S.current.rating.toLowerCase()): 1,
+    S.current.sortSomethingsFromHigh(S.current.rating.toLowerCase()): -1,
   };
 
   static TutorsCubit? _instance;

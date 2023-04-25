@@ -49,8 +49,8 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
   };
   final sortMap = {
     S.current.sortNameFromAtoZ: 0,
-    S.current.sortSomethingsFromLow(S.current.level): 1,
-    S.current.sortSomethingsFromHigh(S.current.level): -1,
+    S.current.sortSomethingsFromLow(S.current.level.toLowerCase()): 1,
+    S.current.sortSomethingsFromHigh(S.current.level.toLowerCase()): -1,
   };
 
 
