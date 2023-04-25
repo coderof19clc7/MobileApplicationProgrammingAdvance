@@ -1,9 +1,9 @@
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
-import 'package:one_one_learn/core/models/requests/schedule/schedule_query_request.dart';
+import 'package:one_one_learn/core/models/requests/schedule/schedule_by_tutor_id_request.dart';
 import 'package:one_one_learn/core/models/responses/schedule/schedule_cell.dart';
 import 'package:one_one_learn/core/models/responses/schedule/schedule_column.dart';
-import 'package:one_one_learn/core/models/responses/schedule/schedule_info_response.dart';
+import 'package:one_one_learn/core/models/responses/schedule/schedule_by_tutor_id_response.dart';
 import 'package:one_one_learn/core/models/responses/schedule/schedule_table.dart';
 import 'package:one_one_learn/core/network/repositories/schedule_repository.dart';
 
@@ -40,7 +40,7 @@ class BookingCubit extends WidgetCubit<BookingState> {
   Future getScheduleOfTutor(DateTime startTimestamp, DateTime endTimestamp) async {
     final scheduleInfoResponse = await fetchApi(
       () async => _scheduleRepository.getScheduleOfTutor(
-        query: ScheduleQueryRequest(
+        query: ScheduleByTutorIdRequest(
           tutorId: state.tutorId,
           startTimestamp: startTimestamp.millisecondsSinceEpoch,
           endTimestamp: endTimestamp.millisecondsSinceEpoch,
@@ -65,7 +65,7 @@ class BookingCubit extends WidgetCubit<BookingState> {
     final scheduleTable = ScheduleTable(days: days);
 
     // organize schedules into table
-    if (scheduleInfoResponse != null && scheduleInfoResponse is ScheduleInfoResponse && scheduleInfoResponse.scheduleOfTutor != null && scheduleInfoResponse.scheduleOfTutor!.isNotEmpty) {
+    if (scheduleInfoResponse != null && scheduleInfoResponse is ScheduleByTutorIDResponse && scheduleInfoResponse.scheduleOfTutor != null && scheduleInfoResponse.scheduleOfTutor!.isNotEmpty) {
       for (final scheduleInfo in scheduleInfoResponse.scheduleOfTutor!) {
         if (scheduleInfo.startTimestamp != null) {
           // convert to model using DateTime instead of unix timestamp

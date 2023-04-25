@@ -1,3 +1,6 @@
+import 'package:flutter/foundation.dart';
+
+@immutable
 class BookingInfo {
   final String? id;
   final int? createdAtTimeStamp;
@@ -6,15 +9,15 @@ class BookingInfo {
   final String? scheduleDetailId;
   final String? tutorMeetingLink;
   final String? studentMeetingLink;
-  // studentRequest
-  // tutorReview
-  // scoreByTutor
+  final String? studentRequest;
+  final String? tutorReview;
+  final String? scoreByTutor;
   final String? createdAt;
   final String? updatedAt;
   final String? recordUrl;
   final int? cancelReasonId;
   final String? lessonPlanId;
-  // cancelNote
+  final String? cancelNote;
   final String? calendarId;
   final bool? isDeleted;
 
@@ -27,11 +30,15 @@ class BookingInfo {
     this.scheduleDetailId,
     this.tutorMeetingLink,
     this.studentMeetingLink,
+    this.studentRequest,
+    this.tutorReview,
+    this.scoreByTutor,
     this.createdAt,
     this.updatedAt,
     this.recordUrl,
     this.cancelReasonId,
     this.lessonPlanId,
+    this.cancelNote,
     this.calendarId,
     this.isDeleted,
   });
@@ -47,12 +54,17 @@ class BookingInfo {
       scheduleDetailId: mapJson['scheduleDetailId'] as String?,
       tutorMeetingLink: mapJson['tutorMeetingLink'] as String?,
       studentMeetingLink: mapJson['studentMeetingLink'] as String?,
+      studentRequest: mapJson['studentRequest'] as String?,
+      tutorReview: mapJson['tutorReview'] as String?,
+      scoreByTutor: mapJson['scoreByTutor'] as String?,
       createdAt: mapJson['createdAt'] as String?,
       updatedAt: mapJson['updatedAt'] as String?,
       recordUrl: mapJson['recordUrl'] as String?,
       cancelReasonId: mapJson['cancelReasonId'] as int?,
       lessonPlanId: mapJson['lessonPlanId'] as String?,
       isDeleted: mapJson['isDeleted'] as bool?,
+      cancelNote: mapJson['cancelNote'] as String?,
+      calendarId: mapJson['calendarId'] as String?,
     );
   }
 
@@ -66,15 +78,65 @@ class BookingInfo {
     map['scheduleDetailId'] = scheduleDetailId;
     map['tutorMeetingLink'] = tutorMeetingLink;
     map['studentMeetingLink'] = studentMeetingLink;
+    map['studentRequest'] = studentRequest;
+    map['tutorReview'] = tutorReview;
+    map['scoreByTutor'] = scoreByTutor;
     map['createdAt'] = createdAt;
     map['updatedAt'] = updatedAt;
     map['recordUrl'] = recordUrl;
     map['cancelReasonId'] = cancelReasonId;
+    map['calendarId'] = calendarId;
+    map['cancelNote'] = cancelNote;
     map['lessonPlanId'] = lessonPlanId;
     map['isDeleted'] = isDeleted;
 
     return map;
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BookingInfo &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          createdAtTimeStamp == other.createdAtTimeStamp &&
+          updatedAtTimeStamp == other.updatedAtTimeStamp &&
+          userId == other.userId &&
+          scheduleDetailId == other.scheduleDetailId &&
+          tutorMeetingLink == other.tutorMeetingLink &&
+          studentMeetingLink == other.studentMeetingLink &&
+          studentRequest == other.studentRequest &&
+          tutorReview == other.tutorReview &&
+          scoreByTutor == other.scoreByTutor &&
+          createdAt == other.createdAt &&
+          updatedAt == other.updatedAt &&
+          recordUrl == other.recordUrl &&
+          cancelReasonId == other.cancelReasonId &&
+          lessonPlanId == other.lessonPlanId &&
+          cancelNote == other.cancelNote &&
+          calendarId == other.calendarId &&
+          isDeleted == other.isDeleted;
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      createdAtTimeStamp.hashCode ^
+      updatedAtTimeStamp.hashCode ^
+      userId.hashCode ^
+      scheduleDetailId.hashCode ^
+      tutorMeetingLink.hashCode ^
+      studentMeetingLink.hashCode ^
+      studentRequest.hashCode ^
+      tutorReview.hashCode ^
+      scoreByTutor.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode ^
+      recordUrl.hashCode ^
+      cancelReasonId.hashCode ^
+      lessonPlanId.hashCode ^
+      cancelNote.hashCode ^
+      calendarId.hashCode ^
+      isDeleted.hashCode;
 
   @override
   String toString() {
@@ -86,10 +148,14 @@ class BookingInfo {
         ' scheduleDetailId: $scheduleDetailId,'
         ' tutorMeetingLink: $tutorMeetingLink,'
         ' studentMeetingLink: $studentMeetingLink,'
+        ' studentRequest: $studentRequest,'
+        ' tutorReview: $tutorReview,'
+        ' scoreByTutor: $scoreByTutor,'
         ' createdAt: $createdAt,'
         ' updatedAt: $updatedAt,'
         ' recordUrl: $recordUrl,'
         ' cancelReasonId: $cancelReasonId,'
+        ' cancelNote: $cancelNote,'
         ' lessonPlanId: $lessonPlanId,'
         ' calendarId: $calendarId,'
         ' isDeleted: $isDeleted,'
@@ -104,10 +170,14 @@ class BookingInfo {
     String? scheduleDetailId,
     String? tutorMeetingLink,
     String? studentMeetingLink,
+    String? studentRequest,
+    String? tutorReview,
+    String? scoreByTutor,
     String? createdAt,
     String? updatedAt,
     String? recordUrl,
     int? cancelReasonId,
+    String? cancelNote,
     String? lessonPlanId,
     String? calendarId,
     bool? isDeleted,
@@ -120,10 +190,14 @@ class BookingInfo {
       scheduleDetailId: scheduleDetailId ?? this.scheduleDetailId,
       tutorMeetingLink: tutorMeetingLink ?? this.tutorMeetingLink,
       studentMeetingLink: studentMeetingLink ?? this.studentMeetingLink,
+      studentRequest: studentRequest ?? this.studentRequest,
+      tutorReview: tutorReview ?? this.tutorReview,
+      scoreByTutor: scoreByTutor ?? this.scoreByTutor,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       recordUrl: recordUrl ?? this.recordUrl,
       cancelReasonId: cancelReasonId ?? this.cancelReasonId,
+      cancelNote: cancelNote ?? this.cancelNote,
       lessonPlanId: lessonPlanId ?? this.lessonPlanId,
       calendarId: calendarId ?? this.calendarId,
       isDeleted: isDeleted ?? this.isDeleted,
@@ -139,10 +213,14 @@ class BookingInfo {
       'scheduleDetailId': scheduleDetailId,
       'tutorMeetingLink': tutorMeetingLink,
       'studentMeetingLink': studentMeetingLink,
+      'studentRequest': studentRequest,
+      'tutorReview': tutorReview,
+      'scoreByTutor': scoreByTutor,
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       'recordUrl': recordUrl,
       'cancelReasonId': cancelReasonId,
+      'cancelNote': cancelNote,
       'lessonPlanId': lessonPlanId,
       'calendarId': calendarId,
       'isDeleted': isDeleted,
@@ -158,10 +236,14 @@ class BookingInfo {
       scheduleDetailId: map['scheduleDetailId'] as String?,
       tutorMeetingLink: map['tutorMeetingLink'] as String?,
       studentMeetingLink: map['studentMeetingLink'] as String?,
+      studentRequest: map['studentRequest'] as String?,
+      tutorReview: map['tutorReview'] as String?,
+      scoreByTutor: map['scoreByTutor'] as String?,
       createdAt: map['createdAt'] as String?,
       updatedAt: map['updatedAt'] as String?,
       recordUrl: map['recordUrl'] as String?,
       cancelReasonId: map['cancelReasonId'] as int?,
+      cancelNote: map['cancelNote'] as String?,
       lessonPlanId: map['lessonPlanId'] as String?,
       calendarId: map['calendarId'] as String?,
       isDeleted: map['isDeleted'] as bool?,

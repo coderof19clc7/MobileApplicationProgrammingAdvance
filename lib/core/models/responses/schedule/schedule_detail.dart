@@ -1,5 +1,7 @@
-import 'package:one_one_learn/core/models/responses/booking/booking_info.dart';
+import 'package:flutter/foundation.dart';
+import 'package:one_one_learn/core/models/responses/schedule/booking_info.dart';
 
+@immutable
 class ScheduleDetail {
   final int? startPeriodTimestamp;
   final int? endPeriodTimestamp;
@@ -10,6 +12,7 @@ class ScheduleDetail {
   final String? createdAt;
   final String? updatedAt;
   final List<BookingInfo>? bookingInfo;
+  final bool? isBooked;
 
 //<editor-fold desc="Data Methods">
   const ScheduleDetail({
@@ -22,6 +25,7 @@ class ScheduleDetail {
     this.createdAt,
     this.updatedAt,
     this.bookingInfo,
+    this.isBooked,
   });
 
   factory ScheduleDetail.fromJson(dynamic json) {
@@ -36,6 +40,8 @@ class ScheduleDetail {
     }
 
     return ScheduleDetail(
+      startPeriodTimestamp: mapJson['startPeriodTimestamp'] as int?,
+      endPeriodTimestamp: mapJson['endPeriodTimestamp'] as int?,
       id: mapJson['id'] as String?,
       scheduleId: mapJson['scheduleId'] as String?,
       startPeriod: mapJson['startPeriod'] as String?,
@@ -43,17 +49,21 @@ class ScheduleDetail {
       createdAt: mapJson['createdAt'] as String?,
       updatedAt: mapJson['updatedAt'] as String?,
       bookingInfo: bookingInfo,
+      isBooked: mapJson['isBooked'] as bool?,
     );
   }
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
+    map['startPeriodTimestamp'] = startPeriodTimestamp;
+    map['endPeriodTimestamp'] = endPeriodTimestamp;
     map['id'] = id;
     map['scheduleId'] = scheduleId;
     map['startPeriod'] = startPeriod;
     map['endPeriod'] = endPeriod;
     map['createdAt'] = createdAt;
     map['updatedAt'] = updatedAt;
+    map['isBooked'] = isBooked;
 
     if (bookingInfo != null) {
       map['bookingInfo'] = bookingInfo!.map((v) => v.toJson()).toList();
@@ -61,6 +71,35 @@ class ScheduleDetail {
 
     return map;
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          (other is ScheduleDetail &&
+              runtimeType == other.runtimeType &&
+              startPeriodTimestamp == other.startPeriodTimestamp &&
+              endPeriodTimestamp == other.endPeriodTimestamp &&
+              id == other.id &&
+              scheduleId == other.scheduleId &&
+              startPeriod == other.startPeriod &&
+              endPeriod == other.endPeriod &&
+              createdAt == other.createdAt &&
+              updatedAt == other.updatedAt &&
+              listEquals(bookingInfo, other.bookingInfo) &&
+              isBooked == other.isBooked);
+
+  @override
+  int get hashCode =>
+      startPeriodTimestamp.hashCode ^
+      endPeriodTimestamp.hashCode ^
+      id.hashCode ^
+      scheduleId.hashCode ^
+      startPeriod.hashCode ^
+      endPeriod.hashCode ^
+      createdAt.hashCode ^
+      updatedAt.hashCode ^
+      bookingInfo.hashCode ^
+      isBooked.hashCode;
 
   @override
   String toString() {
@@ -121,7 +160,7 @@ class ScheduleDetail {
     if (map['bookingInfo'] != null) {
       bookingInfo = [];
       for (final v in map['bookingInfo'] as List) {
-        bookingInfo.add(BookingInfo.fromJson(v));
+        bookingInfo.add(BookingInfo.fromMap(v as Map<String, dynamic>));
       }
     }
 

@@ -1,5 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/schedule/schedule_cell.dart';
 
+@immutable
 class ScheduleColumn {
   final DateTime? date;
   final List<ScheduleCell>? scheduleCells;
@@ -39,6 +41,17 @@ class ScheduleColumn {
   }
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ScheduleColumn &&
+          runtimeType == other.runtimeType &&
+          date == other.date &&
+         listEquals(scheduleCells, other.scheduleCells);
+
+  @override
+  int get hashCode => date.hashCode ^ scheduleCells.hashCode;
+
+  @override
   String toString() {
     return 'ScheduleColumn{'
         ' date: $date,'
@@ -73,7 +86,7 @@ class ScheduleColumn {
     if (map['scheduleCells'] != null) {
       scheduleCells = [];
       for (final v in map['scheduleCells'] as List) {
-        scheduleCells.add(ScheduleCell.fromJson(v));
+        scheduleCells.add(ScheduleCell.fromMap(v as Map<String, dynamic>));
       }
     }
 

@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/schedule/schedule_detail.dart';
-import 'package:one_one_learn/core/models/responses/schedule/schedule_info.dart';
+import 'package:one_one_learn/core/models/responses/schedule/schedule_by_tutor_id.dart';
 
+@immutable
 class ScheduleCell {
   final String? id;
   final String? tutorId;
@@ -19,7 +21,7 @@ class ScheduleCell {
     this.scheduleDetails,
   });
 
-  factory ScheduleCell.fromScheduleInfo(ScheduleInfo info) {
+  factory ScheduleCell.fromScheduleInfo(ScheduleByTutorID info) {
     return ScheduleCell(
       id: info.id,
       startTimestamp: DateTime.fromMillisecondsSinceEpoch(info.startTimestamp!, isUtc: true).toLocal(),
@@ -65,6 +67,27 @@ class ScheduleCell {
     map['isBooked'] = isBooked;
     return map;
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ScheduleCell &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          tutorId == other.tutorId &&
+          startTimestamp == other.startTimestamp &&
+          endTimestamp == other.endTimestamp &&
+          isBooked == other.isBooked &&
+          listEquals(scheduleDetails, other.scheduleDetails);
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      tutorId.hashCode ^
+      startTimestamp.hashCode ^
+      endTimestamp.hashCode ^
+      isBooked.hashCode ^
+      scheduleDetails.hashCode;
 
   @override
   String toString() {
@@ -114,7 +137,7 @@ class ScheduleCell {
     if (map['scheduleDetails'] != null) {
       scheduleDetails = [];
       for (final v in map['scheduleDetails'] as List) {
-        scheduleDetails.add(ScheduleDetail.fromJson(v));
+        scheduleDetails.add(ScheduleDetail.fromMap(v as Map<String, dynamic>));
       }
     }
 

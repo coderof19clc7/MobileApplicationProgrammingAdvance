@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/schedule/schedule_detail.dart';
 
-class ScheduleInfo {
+@immutable
+class ScheduleByTutorID {
   final String? id;
   final String? tutorId;
   final String? startTime;
@@ -12,7 +14,7 @@ class ScheduleInfo {
   final List<ScheduleDetail>? scheduleDetails;
 
 //<editor-fold desc="Data Methods">
-  const ScheduleInfo({
+  const ScheduleByTutorID({
     this.id,
     this.tutorId,
     this.startTime,
@@ -24,7 +26,7 @@ class ScheduleInfo {
     this.scheduleDetails,
   });
 
-  factory ScheduleInfo.fromJson(dynamic json) {
+  factory ScheduleByTutorID.fromJson(dynamic json) {
     final mapJson = json as Map<String, dynamic>;
 
     List<ScheduleDetail>? scheduleDetails;
@@ -35,7 +37,7 @@ class ScheduleInfo {
       }
     }
 
-    return ScheduleInfo(
+    return ScheduleByTutorID(
       id: mapJson['id'] as String?,
       tutorId: mapJson['tutorId'] as String?,
       startTime: mapJson['startTime'] as String?,
@@ -67,6 +69,33 @@ class ScheduleInfo {
   }
 
   @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          (other is ScheduleByTutorID &&
+              runtimeType == other.runtimeType &&
+              id == other.id &&
+              tutorId == other.tutorId &&
+              startTime == other.startTime &&
+              endTime == other.endTime &&
+              startTimestamp == other.startTimestamp &&
+              endTimestamp == other.endTimestamp &&
+              createdAt == other.createdAt &&
+              isBooked == other.isBooked &&
+              listEquals(scheduleDetails, other.scheduleDetails));
+
+  @override
+  int get hashCode =>
+      id.hashCode ^
+      tutorId.hashCode ^
+      startTime.hashCode ^
+      endTime.hashCode ^
+      startTimestamp.hashCode ^
+      endTimestamp.hashCode ^
+      createdAt.hashCode ^
+      isBooked.hashCode ^
+      scheduleDetails.hashCode;
+
+  @override
   String toString() {
     return 'ScheduleInfo{'
         ' id: $id,'
@@ -81,7 +110,7 @@ class ScheduleInfo {
         ' }';
   }
 
-  ScheduleInfo copyWith({
+  ScheduleByTutorID copyWith({
     String? id,
     String? tutorId,
     String? startTime,
@@ -92,7 +121,7 @@ class ScheduleInfo {
     bool? isBooked,
     List<ScheduleDetail>? scheduleDetails,
   }) {
-    return ScheduleInfo(
+    return ScheduleByTutorID(
       id: id ?? this.id,
       tutorId: tutorId ?? this.tutorId,
       startTime: startTime ?? this.startTime,
@@ -123,17 +152,17 @@ class ScheduleInfo {
     return map;
   }
 
-  factory ScheduleInfo.fromMap(Map<String, dynamic> map) {
+  factory ScheduleByTutorID.fromMap(Map<String, dynamic> map) {
 
     List<ScheduleDetail>? scheduleDetails;
     if (map['scheduleDetails'] != null) {
       scheduleDetails = [];
       for (final v in map['scheduleDetails'] as List) {
-        scheduleDetails.add(ScheduleDetail.fromJson(v));
+        scheduleDetails.add(ScheduleDetail.fromMap(v as Map<String, dynamic>));
       }
     }
 
-    return ScheduleInfo(
+    return ScheduleByTutorID(
       id: map['id'] as String?,
       tutorId: map['tutorId'] as String?,
       startTime: map['startTime'] as String?,
