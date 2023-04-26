@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:one_one_learn/core/models/responses/schedule/schedule_detail.dart';
 
 @immutable
 class BookingInfo {
@@ -20,6 +21,11 @@ class BookingInfo {
   final String? cancelNote;
   final String? calendarId;
   final bool? isDeleted;
+  final ScheduleDetail? scheduleDetailInfo;
+  final String? classReview;
+  final bool? showRecordUrl;
+  final List<String>? studentMaterials;
+  final List<String>? feedbacks;
 
 //<editor-fold desc="Data Methods">
   const BookingInfo({
@@ -41,6 +47,11 @@ class BookingInfo {
     this.cancelNote,
     this.calendarId,
     this.isDeleted,
+    this.scheduleDetailInfo,
+    this.classReview,
+    this.showRecordUrl,
+    this.studentMaterials,
+    this.feedbacks,
   });
 
   factory BookingInfo.fromJson(dynamic json) {
@@ -63,8 +74,19 @@ class BookingInfo {
       cancelReasonId: mapJson['cancelReasonId'] as int?,
       lessonPlanId: mapJson['lessonPlanId'] as String?,
       isDeleted: mapJson['isDeleted'] as bool?,
+      scheduleDetailInfo: mapJson['scheduleDetailInfo'] != null
+          ? ScheduleDetail.fromJson(mapJson['scheduleDetailInfo'])
+          : null,
       cancelNote: mapJson['cancelNote'] as String?,
       calendarId: mapJson['calendarId'] as String?,
+      classReview: mapJson['classReview'] as String?,
+      showRecordUrl: mapJson['showRecordUrl'] as bool?,
+      studentMaterials: mapJson['studentMaterials'] != null
+          ? (mapJson['studentMaterials'] as List).map((e) => e as String).toList()
+          : null,
+      feedbacks: mapJson['feedbacks'] != null
+          ? (mapJson['feedbacks'] as List).map((e) => e as String).toList()
+          : null,
     );
   }
 
@@ -89,6 +111,11 @@ class BookingInfo {
     map['cancelNote'] = cancelNote;
     map['lessonPlanId'] = lessonPlanId;
     map['isDeleted'] = isDeleted;
+    map['scheduleDetailInfo'] = scheduleDetailInfo?.toJson();
+    map['classReview'] = classReview;
+    map['showRecordUrl'] = showRecordUrl;
+    map['studentMaterials'] = studentMaterials;
+    map['feedbacks'] = feedbacks;
 
     return map;
   }
@@ -115,7 +142,12 @@ class BookingInfo {
           lessonPlanId == other.lessonPlanId &&
           cancelNote == other.cancelNote &&
           calendarId == other.calendarId &&
-          isDeleted == other.isDeleted;
+          isDeleted == other.isDeleted &&
+          scheduleDetailInfo == other.scheduleDetailInfo &&
+          classReview == other.classReview &&
+          showRecordUrl == other.showRecordUrl &&
+          listEquals(studentMaterials, other.studentMaterials) &&
+          listEquals(feedbacks, other.feedbacks);
 
   @override
   int get hashCode =>
@@ -136,7 +168,12 @@ class BookingInfo {
       lessonPlanId.hashCode ^
       cancelNote.hashCode ^
       calendarId.hashCode ^
-      isDeleted.hashCode;
+      isDeleted.hashCode ^
+      scheduleDetailInfo.hashCode ^
+      classReview.hashCode ^
+      showRecordUrl.hashCode ^
+      studentMaterials.hashCode ^
+      feedbacks.hashCode;
 
   @override
   String toString() {
@@ -159,6 +196,11 @@ class BookingInfo {
         ' lessonPlanId: $lessonPlanId,'
         ' calendarId: $calendarId,'
         ' isDeleted: $isDeleted,'
+        ' scheduleDetailInfo: $scheduleDetailInfo,'
+        ' classReview: $classReview,'
+        ' showRecordUrl: $showRecordUrl,'
+        ' studentMaterials: $studentMaterials,'
+        ' feedbacks: $feedbacks,'
         ' }';
   }
 
@@ -181,6 +223,11 @@ class BookingInfo {
     String? lessonPlanId,
     String? calendarId,
     bool? isDeleted,
+    ScheduleDetail? scheduleDetailInfo,
+    String? classReview,
+    bool? showRecordUrl,
+    List<String>? studentMaterials,
+    List<String>? feedbacks,
   }) {
     return BookingInfo(
       id: id ?? this.id,
@@ -201,6 +248,11 @@ class BookingInfo {
       lessonPlanId: lessonPlanId ?? this.lessonPlanId,
       calendarId: calendarId ?? this.calendarId,
       isDeleted: isDeleted ?? this.isDeleted,
+      scheduleDetailInfo: scheduleDetailInfo ?? this.scheduleDetailInfo,
+      classReview: classReview ?? this.classReview,
+      showRecordUrl: showRecordUrl ?? this.showRecordUrl,
+      studentMaterials: studentMaterials ?? this.studentMaterials,
+      feedbacks: feedbacks ?? this.feedbacks,
     );
   }
 
@@ -224,6 +276,11 @@ class BookingInfo {
       'lessonPlanId': lessonPlanId,
       'calendarId': calendarId,
       'isDeleted': isDeleted,
+      'scheduleDetailInfo': scheduleDetailInfo?.toMap(),
+      'classReview': classReview,
+      'showRecordUrl': showRecordUrl,
+      'studentMaterials': studentMaterials,
+      'feedbacks': feedbacks,
     };
   }
 
@@ -247,6 +304,17 @@ class BookingInfo {
       lessonPlanId: map['lessonPlanId'] as String?,
       calendarId: map['calendarId'] as String?,
       isDeleted: map['isDeleted'] as bool?,
+      scheduleDetailInfo: map['scheduleDetailInfo'] != null
+          ? ScheduleDetail.fromMap(map['scheduleDetailInfo'] as Map<String, dynamic>)
+          : null,
+      classReview: map['classReview'] as String?,
+      showRecordUrl: map['showRecordUrl'] as bool?,
+      studentMaterials: map['studentMaterials'] != null
+          ? (map['studentMaterials'] as List).map((e) => e as String).toList()
+          : null,
+      feedbacks: map['feedbacks'] != null
+          ? (map['feedbacks'] as List).map((e) => e as String).toList()
+          : null,
     );
   }
 

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/schedule/schedule_detail.dart';
-import 'package:one_one_learn/core/models/responses/schedule/schedule_by_tutor_id.dart';
+import 'package:one_one_learn/core/models/responses/schedule/schedule_info.dart';
 
 @immutable
 class ScheduleCell {
@@ -21,7 +21,7 @@ class ScheduleCell {
     this.scheduleDetails,
   });
 
-  factory ScheduleCell.fromScheduleInfo(ScheduleByTutorID info) {
+  factory ScheduleCell.fromScheduleInfo(ScheduleInfo info) {
     return ScheduleCell(
       id: info.id,
       startTimestamp: DateTime.fromMillisecondsSinceEpoch(info.startTimestamp!, isUtc: true).toLocal(),

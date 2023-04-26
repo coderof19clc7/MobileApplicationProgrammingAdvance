@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/schedule/booking_info.dart';
+import 'package:one_one_learn/core/models/responses/schedule/schedule_info.dart';
 
 @immutable
 class ScheduleDetail {
@@ -12,6 +13,7 @@ class ScheduleDetail {
   final String? createdAt;
   final String? updatedAt;
   final List<BookingInfo>? bookingInfo;
+  final ScheduleInfo? scheduleInfo;
   final bool? isBooked;
 
 //<editor-fold desc="Data Methods">
@@ -25,6 +27,7 @@ class ScheduleDetail {
     this.createdAt,
     this.updatedAt,
     this.bookingInfo,
+    this.scheduleInfo,
     this.isBooked,
   });
 
@@ -49,6 +52,9 @@ class ScheduleDetail {
       createdAt: mapJson['createdAt'] as String?,
       updatedAt: mapJson['updatedAt'] as String?,
       bookingInfo: bookingInfo,
+      scheduleInfo: mapJson['scheduleInfo'] != null
+          ? ScheduleInfo.fromJson(mapJson['scheduleInfo'])
+          : null,
       isBooked: mapJson['isBooked'] as bool?,
     );
   }
@@ -69,6 +75,10 @@ class ScheduleDetail {
       map['bookingInfo'] = bookingInfo!.map((v) => v.toJson()).toList();
     }
 
+    if (scheduleInfo != null) {
+      map['scheduleInfo'] = scheduleInfo!.toJson();
+    }
+
     return map;
   }
 
@@ -86,6 +96,7 @@ class ScheduleDetail {
               createdAt == other.createdAt &&
               updatedAt == other.updatedAt &&
               listEquals(bookingInfo, other.bookingInfo) &&
+              scheduleInfo == other.scheduleInfo &&
               isBooked == other.isBooked);
 
   @override
@@ -99,6 +110,7 @@ class ScheduleDetail {
       createdAt.hashCode ^
       updatedAt.hashCode ^
       bookingInfo.hashCode ^
+      scheduleInfo.hashCode ^
       isBooked.hashCode;
 
   @override
@@ -113,7 +125,8 @@ class ScheduleDetail {
         ' createdAt: $createdAt,'
         ' updatedAt: $updatedAt,'
         ' bookingInfo: $bookingInfo,'
-        ' bookingInfo: $bookingInfo,'
+        ' scheduleInfo: $scheduleInfo,'
+        ' isBooked: $isBooked,'
         ' }';
   }
 
@@ -127,6 +140,8 @@ class ScheduleDetail {
     String? createdAt,
     String? updatedAt,
     List<BookingInfo>? bookingInfo,
+    ScheduleInfo? scheduleInfo,
+    bool? isBooked,
   }) {
     return ScheduleDetail(
       startPeriodTimestamp: startPeriodTimestamp ?? this.startPeriodTimestamp,
@@ -138,6 +153,8 @@ class ScheduleDetail {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       bookingInfo: bookingInfo ?? this.bookingInfo,
+      scheduleInfo: scheduleInfo ?? this.scheduleInfo,
+      isBooked: isBooked ?? this.isBooked,
     );
   }
 
@@ -152,6 +169,8 @@ class ScheduleDetail {
       'createdAt': createdAt,
       'updatedAt': updatedAt,
       'bookingInfo': bookingInfo,
+      'scheduleInfo': scheduleInfo,
+      'isBooked': isBooked,
     };
   }
 
@@ -174,6 +193,10 @@ class ScheduleDetail {
       createdAt: map['createdAt'] as String?,
       updatedAt: map['updatedAt'] as String?,
       bookingInfo: bookingInfo,
+      scheduleInfo: map['scheduleInfo'] != null
+          ? ScheduleInfo.fromMap(map['scheduleInfo'] as Map<String, dynamic>)
+          : null,
+      isBooked: map['isBooked'] as bool?,
     );
   }
 

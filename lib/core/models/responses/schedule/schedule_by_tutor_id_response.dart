@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/base_response.dart';
-import 'package:one_one_learn/core/models/responses/schedule/schedule_by_tutor_id.dart';
+import 'package:one_one_learn/core/models/responses/schedule/schedule_info.dart';
 
 class ScheduleByTutorIDResponse extends BaseResponse {
-  final List<ScheduleByTutorID>? scheduleOfTutor;
+  final List<ScheduleInfo>? scheduleOfTutor;
 
   @override
   List<Object?> get props => [...super.props, scheduleOfTutor];
@@ -17,11 +17,11 @@ class ScheduleByTutorIDResponse extends BaseResponse {
   factory ScheduleByTutorIDResponse.fromJson(dynamic json) {
     final mapJson = json as Map<String, dynamic>;
 
-    List<ScheduleByTutorID>? scheduleOfTutor;
+    List<ScheduleInfo>? scheduleOfTutor;
     if (mapJson['scheduleOfTutor'] != null) {
       scheduleOfTutor = [];
       for (final v in mapJson['scheduleOfTutor'] as List) {
-        scheduleOfTutor.add(ScheduleByTutorID.fromJson(v));
+        scheduleOfTutor.add(ScheduleInfo.fromJson(v));
       }
     }
 
@@ -60,7 +60,7 @@ class ScheduleByTutorIDResponse extends BaseResponse {
   ScheduleByTutorIDResponse copyWith({
     int? statusCode,
     String? message,
-    List<ScheduleByTutorID>? scheduleOfTutor,
+    List<ScheduleInfo>? scheduleOfTutor,
   }) {
     return ScheduleByTutorIDResponse(
       statusCode: statusCode ?? this.statusCode,
@@ -87,11 +87,11 @@ class ScheduleByTutorIDResponse extends BaseResponse {
   }
 
   factory ScheduleByTutorIDResponse.fromMap(Map<String, dynamic> map) {
-    List<ScheduleByTutorID>? scheduleOfTutor;
+    List<ScheduleInfo>? scheduleOfTutor;
     if (map['scheduleOfTutor'] != null) {
       scheduleOfTutor = [];
       for (final v in map['scheduleOfTutor'] as List) {
-        scheduleOfTutor.add(ScheduleByTutorID.fromMap(v as Map<String, dynamic>));
+        scheduleOfTutor.add(ScheduleInfo.fromMap(v as Map<String, dynamic>));
       }
     }
 
