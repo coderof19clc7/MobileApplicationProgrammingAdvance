@@ -309,7 +309,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         if (index == -1) {
           await searchListTutors(reloadAllCurrentList: true);
         } else {
-          final newList = [...getRealCurrentList()];
+          final newList = [...state.listTutors];
           newList[index] = newList[index]?.copyWith(
             isfavoritetutor: newList[index]?.isfavoritetutor == '1' ? '0' : '1',
           );
