@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/base_response.dart';
-import 'package:one_one_learn/core/models/responses/schedule/schedule_info.dart';
+import 'package:one_one_learn/core/models/responses/schedule_and_booking/schedule_info.dart';
 
 class ScheduleByTutorIDResponse extends BaseResponse {
   final List<ScheduleInfo>? scheduleOfTutor;

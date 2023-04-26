@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:one_one_learn/core/models/responses/schedule/schedule_detail.dart';
-import 'package:one_one_learn/core/models/responses/schedule/schedule_info.dart';
+import 'package:one_one_learn/core/models/responses/schedule_and_booking/schedule_detail.dart';
+import 'package:one_one_learn/core/models/responses/schedule_and_booking/schedule_info.dart';
 
 @immutable
 class ScheduleCell {

@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:one_one_learn/core/models/responses/schedule/schedule_cell.dart';
+import 'package:one_one_learn/core/models/responses/schedule_and_booking/schedule_cell.dart';
 
 @immutable
 class ScheduleColumn {
