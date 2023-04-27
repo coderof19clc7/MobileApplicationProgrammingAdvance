@@ -58,7 +58,7 @@ class BookedClassesRequest extends BaseRequest {
       map['orderBy'] = orderBy;
     }
     if (sortBy != null) {
-      map['tutorId'] = sortBy;
+      map['sortBy'] = sortBy;
     }
     return map;
   }
