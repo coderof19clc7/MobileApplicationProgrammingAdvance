@@ -2,7 +2,8 @@ part of 'upcoming_cubit.dart';
 
 @immutable
 class UpcomingState extends WidgetState {
-  final int page;
+  final bool isLoadingMore;
+  final int nextPage;
 
   @override
   WidgetState fromJson(json) {
@@ -13,7 +14,8 @@ class UpcomingState extends WidgetState {
       basicStatusFToastState: mapJson['basicStatusFToastState'] != null
           ? BasicStatusFToastState.fromJson(mapJson['basicStatusFToastState'])
           : null,
-      page: mapJson['page'] as int? ?? 1,
+      isLoadingMore: mapJson['isLoadingMore'] as bool? ?? false,
+      nextPage: mapJson['nextPage'] as int? ?? 1,
     );
   }
 
@@ -25,7 +27,8 @@ class UpcomingState extends WidgetState {
     if (basicStatusFToastState != null) {
       map['basicStatusFToastState'] = basicStatusFToastState?.toJson();
     }
-    map['page'] = page;
+    map['isLoadingMore'] = isLoadingMore;
+    map['nextPage'] = nextPage;
     return map;
   }
 
@@ -34,7 +37,8 @@ class UpcomingState extends WidgetState {
     super.isLoading,
     super.needNavigateToLogin,
     super.basicStatusFToastState,
-    this.page = 1,
+    this.isLoadingMore = false,
+    this.nextPage = 1,
   });
 
   @override
@@ -45,14 +49,16 @@ class UpcomingState extends WidgetState {
           isLoading == other.isLoading &&
           needNavigateToLogin == other.needNavigateToLogin &&
           basicStatusFToastState == other.basicStatusFToastState &&
-          page == other.page);
+          isLoadingMore == other.isLoadingMore &&
+          nextPage == other.nextPage);
 
   @override
   int get hashCode =>
       isLoading.hashCode ^
       needNavigateToLogin.hashCode ^
       basicStatusFToastState.hashCode ^
-      page.hashCode;
+      isLoadingMore.hashCode ^
+      nextPage.hashCode;
 
   @override
   String toString() {
@@ -60,7 +66,8 @@ class UpcomingState extends WidgetState {
         ' isLoading: $isLoading,'
         ' needNavigateToLogin: $needNavigateToLogin,'
         ' basicStatusFToastState: $basicStatusFToastState,'
-        ' page: $page,'
+        ' isLoadingMore: $isLoadingMore,'
+        ' page: $nextPage,'
         ' }';
   }
 
@@ -68,13 +75,15 @@ class UpcomingState extends WidgetState {
     bool? isLoading,
     bool? needNavigateToLogin,
     BasicStatusFToastState? basicStatusFToastState,
-    int? page,
+    bool? isLoadingMore,
+    int? nextPage,
   }) {
     return UpcomingState(
       isLoading: isLoading ?? this.isLoading,
       needNavigateToLogin: needNavigateToLogin ?? this.needNavigateToLogin,
       basicStatusFToastState: basicStatusFToastState ?? this.basicStatusFToastState,
-      page: page ?? this.page,
+      isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      nextPage: nextPage ?? this.nextPage,
     );
   }
 
@@ -83,7 +92,8 @@ class UpcomingState extends WidgetState {
       'isLoading': isLoading,
       'needNavigateToLogin': needNavigateToLogin,
       'basicStatusFToastState': basicStatusFToastState?.toMap(),
-      'page': page,
+      'isLoadingMore': isLoadingMore,
+      'nextPage': nextPage,
     };
   }
 
@@ -94,7 +104,8 @@ class UpcomingState extends WidgetState {
       basicStatusFToastState: map['basicStatusFToastState'] != null
           ? BasicStatusFToastState.fromMap(map['basicStatusFToastState'] as Map<String, dynamic>)
           : null,
-      page: map['page'] as int? ?? 1,
+      isLoadingMore: map['isLoadingMore'] as bool? ?? false,
+      nextPage: map['nextPage'] as int? ?? 1,
     );
   }
 

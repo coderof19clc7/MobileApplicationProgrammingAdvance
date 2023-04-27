@@ -53,9 +53,17 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     if (kDebugMode) {
       print('TutorsCubit _instance?.isClosed: ${_instance?.isClosed}');
     }
-    if (_instance == null || _instance!.isClosed) {
+    if (_instance == null || _instance?.isClosed == true) {
       if (kDebugMode) {
-        print('create new _instance of TutorsCubit');
+        var text = '';
+        if (_instance == null) {
+          text += '_instance is null, ';
+        }
+        if (_instance?.isClosed == true) {
+          text += '_instance is closed, set to null and ';
+          _instance = null;
+        }
+        print('$text create new _instance of TutorsCubit');
       }
       _instance = TutorsCubit._();
       _instance?.tutorsTextEditingController = TextEditingController();

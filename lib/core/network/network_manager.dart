@@ -30,7 +30,7 @@ class NetworkManager {
   Tokens _tokens = Tokens();
   String _accessToken = '';
   String _refreshToken = '';
-  final String _refreshTokenPath = '${ApiServices.auth}/${ApiEndpoints.refreshToken}';
+  final String _refreshTokenPath = '/${ApiServices.auth}/${ApiEndpoints.refreshToken}';
 
   // used for locking refresh token, allow only one request execute one time
   final List<PendingRequestInfo> _listPendingRequest = [];
@@ -256,7 +256,7 @@ class NetworkManager {
 
     // cancel all pending request
     for (final item in _listPendingRequest) {
-      item.options.cancelToken?.cancel();
+      item.options.cancelToken?.cancel(ApiConstants.refreshTokenError);
     }
     _listPendingRequest.clear();
   }

@@ -13,6 +13,9 @@ class BookingRepository extends BaseRepository {
       method: ApiMethods.get,
       path: ApiEndpoints.listStudent,
       queryParameters: query,
+      headers: {
+        ApiConstants.contentType: ApiConstants.textPlain,
+      }
     ));
   }
 }

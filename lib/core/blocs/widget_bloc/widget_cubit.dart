@@ -121,9 +121,11 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
   //       message, backgroundColor: AppColors.grey, toastGravity: toastGravity,
   //     );
 
-  void showStatusToast(String? message, StatusToastType statusToastType) {
+  void showStatusToast(String? message, StatusToastType? statusToastType) {
     if (message?.isNotEmpty == true) {
-      emit(state.showToast(message!, statusToastType) as StateType);
+      emit(state.showToast(
+        message!, statusToastType ?? StatusToastType.info,
+      ) as StateType);
     }
   }
   void showNormalToast(String? message) =>
@@ -222,7 +224,7 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
       if (!isClosed) {
         ApiConstants.refreshTokenError.let(showErrorToast);
         emit(state.navigateToLogin() as StateType);
-        await close();
+        // await close();
       }
       return;
     }
@@ -234,9 +236,12 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
   }
 
   Future _handleApiError(err, {required bool showToastException}) async {
-    if (err is DioError){
+    final isDioError = err is DioError;
+    if (isDioError){
       if (kDebugMode) {
-        log('api error:');
+        log('api error: $err');
+        log('detail: ${err.message}');
+        log('errorType: ${err.type}');
         log('errorPath: ${err.requestOptions.path}');
         log('errorUri: ${err.requestOptions.uri}');
         log('errorHeader: ${err.requestOptions.headers}');
@@ -251,15 +256,16 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
 
     //only show when cubit active, not show when cubit is closed
     if (!isClosed && showToastException) {
+      if (isDioError && err.error?.toString() == ApiConstants.refreshTokenError) {
+        log('Canceled by session expired --> not show anythings');
+        return;
+      }
       // showErrorToast(err.toString());
       err.toString().let(showErrorToast);
       // ErrorDialog(
       //   errorTitle: "Error occurred",
       //   errorStringContent: err.toString(),
       // ).show();
-    }
-    if (kDebugMode) {
-      print(err);
     }
   }
 }

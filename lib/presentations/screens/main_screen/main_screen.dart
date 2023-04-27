@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/settings_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/upcoming_classes_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/tabs/main_courses_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/tabs/tutors_tab.dart';
@@ -33,41 +34,87 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
           create: (context) => TutorsCubit.getInstance(),
           lazy: false,
         ),
+        BlocProvider<UpcomingCubit>(
+          create: (context) => UpcomingCubit.getInstance(),
+          lazy: false,
+        ),
       ],
-      child: BlocListener<MainCubit, MainState>(
+      child: BlocConsumer<MainCubit, MainState>(
         listenWhen: (previous, current) => previous.currentIndex != current.currentIndex,
         listener: (context, state) {
           context.read<MainCubit>().pageController.jumpToPage(state.currentIndex);
         },
-        child: BlocBuilder<MainCubit, MainState>(
-          buildWhen: (previous, current) => previous.currentIndex != current.currentIndex,
-          builder: (context, state) {
-            return MultiBlocListener(
-              listeners: [
-                BlocListener<TutorsCubit, TutorsState>(
-                  listenWhen: (previous, current) => previous.isLoading != current.isLoading,
-                  listener: (context, state) {
-                    context.read<MainCubit>().changeLoadingState(isLoading: state.isLoading);
-                  },
-                ),
-              ],
-              child: Scaffold(
-                body: PageView.builder(
-                  controller: context.read<MainCubit>().pageController,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: listScreens.length,
-                  itemBuilder: (context, index) {
-                    return listScreens[index];
-                  },
-                ),
-                bottomNavigationBar: BottomNavBar(
-                  currentIndex: state.currentIndex,
-                  onTap: context.read<MainCubit>().onChangeIndex,
-                ),
+        buildWhen: (previous, current) => previous.currentIndex != current.currentIndex,
+        builder: (context, state) {
+          return MultiBlocListener(
+            listeners: [
+              BlocListener<TutorsCubit, TutorsState>(
+                listenWhen: (previous, current) => previous.isLoading != current.isLoading,
+                listener: (context, state) {
+                  context.read<MainCubit>().changeLoadingState(isLoading: state.isLoading);
+                },
               ),
-            );
-          },
-        ),
+              BlocListener<TutorsCubit, TutorsState>(
+                listenWhen: (previous, current) {
+                  return previous.needNavigateToLogin != current.needNavigateToLogin;
+                },
+                listener: (context, state) {
+                  context.read<MainCubit>().navigateToNextBusinessLogic();
+                },
+              ),
+              BlocListener<TutorsCubit, TutorsState>(
+                listenWhen: (previous, current) {
+                  return previous.basicStatusFToastState != current.basicStatusFToastState;
+                },
+                listener: (context, state) {
+                  context.read<MainCubit>().showStatusToast(
+                    state.basicStatusFToastState?.message,
+                    state.basicStatusFToastState?.statusToastType,
+                  );
+                },
+              ),
+              BlocListener<UpcomingCubit, UpcomingState>(
+                listenWhen: (previous, current) => previous.isLoading != current.isLoading,
+                listener: (context, state) {
+                  context.read<MainCubit>().changeLoadingState(isLoading: state.isLoading);
+                },
+              ),
+              BlocListener<UpcomingCubit, UpcomingState>(
+                listenWhen: (previous, current) {
+                  return previous.needNavigateToLogin != current.needNavigateToLogin;
+                },
+                listener: (context, state) {
+                  context.read<MainCubit>().navigateToNextBusinessLogic();
+                },
+              ),
+              BlocListener<UpcomingCubit, UpcomingState>(
+                listenWhen: (previous, current) {
+                  return previous.basicStatusFToastState != current.basicStatusFToastState;
+                },
+                listener: (context, state) {
+                  context.read<MainCubit>().showStatusToast(
+                    state.basicStatusFToastState?.message,
+                    state.basicStatusFToastState?.statusToastType,
+                  );
+                },
+              ),
+            ],
+            child: Scaffold(
+              body: PageView.builder(
+                controller: context.read<MainCubit>().pageController,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: listScreens.length,
+                itemBuilder: (context, index) {
+                  return listScreens[index];
+                },
+              ),
+              bottomNavigationBar: BottomNavBar(
+                currentIndex: state.currentIndex,
+                onTap: context.read<MainCubit>().onChangeIndex,
+              ),
+            ),
+          );
+        },
       ),
     );
   }
