@@ -260,6 +260,16 @@ class S {
     );
   }
 
+  /// `You have not learned any lesson yet`
+  String get haveNotLearnAnyLesson {
+    return Intl.message(
+      'You have not learned any lesson yet',
+      name: 'haveNotLearnAnyLesson',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `hours`
   String get hours {
     return Intl.message(

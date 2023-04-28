@@ -82,6 +82,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPasswordFailedWithEmailNotExists":
             MessageLookupByLibrary.simpleMessage("Email không tồn tại"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Bắt Đầu"),
+        "haveNotLearnAnyLesson": MessageLookupByLibrary.simpleMessage(
+            "Bạn chưa tham gia buổi học nào"),
         "homework": MessageLookupByLibrary.simpleMessage("Bài tập về nhà"),
         "hours": MessageLookupByLibrary.simpleMessage("tiếng"),
         "ielts": MessageLookupByLibrary.simpleMessage("IELTS"),

@@ -1,6 +1,9 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/constants/colors.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/total_lesson_time_banner.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/upcoming_class_card.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
@@ -36,8 +39,6 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    final hour = Random().nextInt(12) + 1;
-    final minute = Random().nextInt(45);
 
     return Scaffold(
       body: SizedBox(
@@ -47,13 +48,36 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
           mainAxisSize: MainAxisSize.min,
           children: [
             // total lesson time
-            TotalLessonTimeBanner(
-              width: Dimens.getScreenWidth(context),
-              topLabel: S.current.labelTotalLessonTime,
-              totalTime: '$hour ${S.current.hours} $minute ${S.current.minutes}',
-              buttonLabel: S.current.lessonHistory,
-              onTap: () {
-                Navigator.pushNamed(context, RouteNames.lessonHistory);
+            BlocBuilder<UpcomingCubit, UpcomingState>(
+              builder: (context, state) {
+                final learned = state.totalCall > 0;
+                final fontSize = learned ? 24.0 : 20.0;
+                var text = S.current.haveNotLearnAnyLesson;
+                if (learned) {
+                  final hour = state.totalCall ~/ 60;
+                  final minute = state.totalCall % 60;
+                  text = '$hour ${S.current.hours} $minute ${S.current.minutes}';
+                }
+                return TotalLessonTimeBanner(
+                  isLoading: state.isLoadingTotalCall,
+                  showLabel: learned,
+                  width: Dimens.getScreenWidth(context),
+                  topLabel: S.current.labelTotalLessonTime,
+                  topContentWidget: Text(
+                    text, textAlign: TextAlign.center,
+                    style: Dimens.getProportionalFont(
+                      context, context.theme.textTheme.bodyMedium,
+                    ).copyWith(
+                      color: AppColors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: Dimens.getProportionalWidth(context, fontSize),
+                    ),
+                  ),
+                  buttonLabel: S.current.lessonHistory,
+                  onTap: () {
+                    Navigator.pushNamed(context, RouteNames.lessonHistory);
+                  },
+                );
               },
             ),
 

@@ -86,6 +86,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPasswordFailedWithEmailNotExists":
             MessageLookupByLibrary.simpleMessage("Email does not exist"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
+        "haveNotLearnAnyLesson": MessageLookupByLibrary.simpleMessage(
+            "You have not learned any lesson yet"),
         "homework": MessageLookupByLibrary.simpleMessage("Homework"),
         "hours": MessageLookupByLibrary.simpleMessage("hours"),
         "ielts": MessageLookupByLibrary.simpleMessage("IELTS"),

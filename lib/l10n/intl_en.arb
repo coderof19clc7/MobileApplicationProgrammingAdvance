@@ -38,6 +38,7 @@
   "searchHintTutor": "Find a tutor",
   "all": "All",
   "labelTotalLessonTime": "Your total lesson time is",
+  "haveNotLearnAnyLesson": "You have not learned any lesson yet",
   "hours": "hours",
   "minutes": "minutes",
   "lessonHistory": "Lesson History",

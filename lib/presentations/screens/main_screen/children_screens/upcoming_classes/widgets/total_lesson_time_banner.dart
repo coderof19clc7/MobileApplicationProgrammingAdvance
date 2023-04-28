@@ -8,15 +8,19 @@ import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_sp
 class TotalLessonTimeBanner extends StatelessWidget {
   const TotalLessonTimeBanner({
     super.key,
+    this.isLoading = false,
+    this.showLabel = true,
     required this.topLabel,
-    required this.totalTime,
+    required this.topContentWidget,
     required this.buttonLabel,
     required this.onTap,
     required this.width,
   });
 
-  final String topLabel, totalTime, buttonLabel;
+  final bool isLoading, showLabel;
+  final String topLabel, buttonLabel;
   final double width;
+  final Widget topContentWidget;
   final Function() onTap;
 
   @override
@@ -34,22 +38,24 @@ class TotalLessonTimeBanner extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            topLabel,
-            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-              color: AppColors.white,
-              fontSize: Dimens.getProportionalWidth(context, 15),
+          if (isLoading) const LinearProgressIndicator()
+          else
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                showLabel
+                    ? Text(
+                  topLabel, style: Dimens.getProportionalFont(
+                  context, context.theme.textTheme.bodyMedium,
+                ).copyWith(
+                  color: AppColors.white,
+                  fontSize: Dimens.getProportionalWidth(context, 15),
+                ))
+                    : const SizedBox.shrink(),
+                const EmptyProportionalSpace(height: 15),
+                topContentWidget,
+              ],
             ),
-          ),
-          const EmptyProportionalSpace(height: 15),
-          Text(
-            totalTime,
-            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-              color: AppColors.white,
-              fontWeight: FontWeight.w600,
-              fontSize: Dimens.getProportionalWidth(context, 24),
-            ),
-          ),
           const EmptyProportionalSpace(height: 15),
           PrimaryFillButton(
             width: Dimens.getProportionalWidth(context, 160),
