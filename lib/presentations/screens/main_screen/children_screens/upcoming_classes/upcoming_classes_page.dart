@@ -6,6 +6,7 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/total_lesson_time_banner.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/upcoming_class_card.dart';
+import 'package:one_one_learn/presentations/widgets/others/expandable_widget.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -168,20 +169,26 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
                         },
                       );
                     },
-                    child: UpcomingClassCard(
-                      onButtonTap: () {},
-                      tutorName: tempList[index],
-                      buttonLabel: S.current.enterRoom,
-                      lessonDateTime: time,
-                      lessonEndTime: endTime,
-                      lessonDateFormat: AppDateFormats.eeeMMMdyyyy,
-                      lessonDurationFormat: AppDateFormats.tHHmm,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      margin: EdgeInsets.only(
-                        bottom: Dimens.getProportionalHeight(context, 15),
-                        left: Dimens.getScreenWidth(context) * 0.03,
-                        right: Dimens.getScreenWidth(context) * 0.03,
+                    child: ExpandableWidget(
+                      controlIconIndex: 0,
+                      header: UpcomingClassCard(
+                        onButtonTap: () {},
+                        tutorName: tempList[index],
+                        buttonLabel: S.current.enterRoom,
+                        lessonDateTime: time,
+                        lessonEndTime: endTime,
+                        lessonDateFormat: AppDateFormats.eeeMMMdyyyy,
+                        lessonDurationFormat: AppDateFormats.tHHmm,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        margin: EdgeInsets.only(
+                          bottom: Dimens.getProportionalHeight(context, 15),
+                          left: Dimens.getScreenWidth(context) * 0.03,
+                          right: Dimens.getScreenWidth(context) * 0.03,
+                        ),
                       ),
+                      children: [
+                        Text('test')
+                      ],
                     ),
                   );
                 },
