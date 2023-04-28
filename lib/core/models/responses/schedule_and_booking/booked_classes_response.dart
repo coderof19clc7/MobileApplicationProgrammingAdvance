@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/base_response.dart';
-import 'package:one_one_learn/core/models/responses/schedule_and_booking/schedule_detail.dart';
+import 'package:one_one_learn/core/models/responses/schedule_and_booking/booking_info.dart';
 
 class BookedClassesResponse extends BaseResponse {
   const BookedClassesResponse({
@@ -79,17 +79,17 @@ class Data {
     return Data(
       count: mapJson['count'] as num?,
       rows: mapJson['rows'] != null
-          ? (mapJson['rows'] as List).map(ScheduleDetail.fromJson).toList()
+          ? (mapJson['rows'] as List).map(BookingInfo.fromJson).toList()
           : null,
     );
   }
 
   final num? count;
-  final List<ScheduleDetail>? rows;
+  final List<BookingInfo>? rows;
 
   Data copyWith({
     num? count,
-    List<ScheduleDetail>? rows,
+    List<BookingInfo>? rows,
   }) => Data(
     count: count ?? this.count,
     rows: rows ?? this.rows,
@@ -131,7 +131,7 @@ class Data {
     return Data(
       count: map['count'] as num,
       rows: map['rows']  != null
-          ? (map['rows'] as List).map((e) => ScheduleDetail.fromMap(e as Map<String, dynamic>)).toList()
+          ? (map['rows'] as List).map((e) => BookingInfo.fromMap(e as Map<String, dynamic>)).toList()
           : null,
     );
   }

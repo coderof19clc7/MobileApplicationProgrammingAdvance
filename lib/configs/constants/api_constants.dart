@@ -6,6 +6,7 @@ class ApiServices {
   static const tutor = 'tutor';
   static const schedule = 'schedule';
   static const booking = 'booking';
+  static const call = 'call';
   static const payment = 'payment';
   static const course = 'course';
 }
@@ -30,6 +31,9 @@ class ApiEndpoints {
   // booking
   static const listStudent = 'list/student';
   static const studentRequest = 'student-request';
+
+  // call
+  static const total = 'total';
 }
 
 class ApiConstants {

@@ -142,7 +142,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     return currentList;
   }
 
-  Future<void> searchListTutors({bool reloadAllCurrentList = false} ) async {
+  Future<void> searchListTutors({bool reloadAllCurrentList = false}) async {
     emit(state.copyWith(
       isLoadingMore: true,
       filters: state.filters ?? Filters.defaultFilters(),

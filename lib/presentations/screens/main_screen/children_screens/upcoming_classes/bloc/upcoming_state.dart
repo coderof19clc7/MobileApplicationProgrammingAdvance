@@ -3,7 +3,11 @@ part of 'upcoming_cubit.dart';
 @immutable
 class UpcomingState extends WidgetState {
   final bool isLoadingMore;
+  final bool isLoadingTotalCall;
   final int nextPage;
+  final int totalCall;
+  final int total;
+  final List<GroupedBookingInfo?> groupedBookingInfoList;
 
   @override
   WidgetState fromJson(json) {
@@ -15,7 +19,20 @@ class UpcomingState extends WidgetState {
           ? BasicStatusFToastState.fromJson(mapJson['basicStatusFToastState'])
           : null,
       isLoadingMore: mapJson['isLoadingMore'] as bool? ?? false,
+      isLoadingTotalCall: mapJson['isLoadingTotalCall'] as bool? ?? false,
       nextPage: mapJson['nextPage'] as int? ?? 1,
+      totalCall: mapJson['totalLearn'] as int? ?? 0,
+      total: mapJson['total'] as int? ?? 0,
+      groupedBookingInfoList: mapJson['groupedBookingInfoList'] != null
+          ? (mapJson['groupedBookingInfoList'] as List).map(GroupedBookingInfo.fromJson).toList()
+          : [null, null, null],
+      // groupedBookingInfoList: mapJson['groupedBookingInfoList'] != null
+      //     ? (mapJson['groupedBookingInfoList'] as List<dynamic>)
+      //         .map((e) => (e as List<dynamic>)
+      //             .map((e) => e != null ? BookingInfo.fromJson(e) : null)
+      //             .toList())
+      //         .toList()
+      //     : const <List<BookingInfo?>?>[null, null, null],
     );
   }
 
@@ -28,7 +45,13 @@ class UpcomingState extends WidgetState {
       map['basicStatusFToastState'] = basicStatusFToastState?.toJson();
     }
     map['isLoadingMore'] = isLoadingMore;
+    map['isLoadingTotalCall'] = isLoadingTotalCall;
     map['nextPage'] = nextPage;
+    map['totalLearn'] = totalCall;
+    map['total'] = total;
+    map['groupedBookingInfoList'] = groupedBookingInfoList
+        .map((e) => e?.bookingInfoList?.map((e) => e?.toJson()).toList())
+        .toList();
     return map;
   }
 
@@ -38,7 +61,11 @@ class UpcomingState extends WidgetState {
     super.needNavigateToLogin,
     super.basicStatusFToastState,
     this.isLoadingMore = false,
+    this.isLoadingTotalCall = false,
     this.nextPage = 1,
+    this.totalCall = 0,
+    this.total = 0,
+    this.groupedBookingInfoList = const <GroupedBookingInfo?>[null, null, null],
   });
 
   @override
@@ -50,7 +77,11 @@ class UpcomingState extends WidgetState {
           needNavigateToLogin == other.needNavigateToLogin &&
           basicStatusFToastState == other.basicStatusFToastState &&
           isLoadingMore == other.isLoadingMore &&
-          nextPage == other.nextPage);
+          isLoadingTotalCall == other.isLoadingTotalCall &&
+          nextPage == other.nextPage &&
+          totalCall == other.totalCall &&
+          total == other.total &&
+          listEquals(groupedBookingInfoList, other.groupedBookingInfoList));
 
   @override
   int get hashCode =>
@@ -58,7 +89,11 @@ class UpcomingState extends WidgetState {
       needNavigateToLogin.hashCode ^
       basicStatusFToastState.hashCode ^
       isLoadingMore.hashCode ^
-      nextPage.hashCode;
+      isLoadingTotalCall.hashCode ^
+      nextPage.hashCode ^
+      totalCall.hashCode ^
+      total.hashCode ^
+      groupedBookingInfoList.hashCode;
 
   @override
   String toString() {
@@ -67,7 +102,11 @@ class UpcomingState extends WidgetState {
         ' needNavigateToLogin: $needNavigateToLogin,'
         ' basicStatusFToastState: $basicStatusFToastState,'
         ' isLoadingMore: $isLoadingMore,'
-        ' page: $nextPage,'
+        ' isLoadingTotalCall: $isLoadingTotalCall,'
+        ' nextPage: $nextPage,'
+        ' totalLearn: $totalCall,'
+        ' total: $total,'
+        ' groupedBookingInfoList: $groupedBookingInfoList,'
         ' }';
   }
 
@@ -76,14 +115,22 @@ class UpcomingState extends WidgetState {
     bool? needNavigateToLogin,
     BasicStatusFToastState? basicStatusFToastState,
     bool? isLoadingMore,
+    bool? isLoadingTotalCall,
     int? nextPage,
+    int? totalCall,
+    int? total,
+    List<GroupedBookingInfo?>? groupedBookingInfoList,
   }) {
     return UpcomingState(
       isLoading: isLoading ?? this.isLoading,
       needNavigateToLogin: needNavigateToLogin ?? this.needNavigateToLogin,
       basicStatusFToastState: basicStatusFToastState ?? this.basicStatusFToastState,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
+      isLoadingTotalCall: isLoadingTotalCall ?? this.isLoadingTotalCall,
       nextPage: nextPage ?? this.nextPage,
+      totalCall: totalCall ?? this.totalCall,
+      total: total ?? this.total,
+      groupedBookingInfoList: groupedBookingInfoList ?? this.groupedBookingInfoList,
     );
   }
 
@@ -93,7 +140,13 @@ class UpcomingState extends WidgetState {
       'needNavigateToLogin': needNavigateToLogin,
       'basicStatusFToastState': basicStatusFToastState?.toMap(),
       'isLoadingMore': isLoadingMore,
+      'isLoadingTotalCall': isLoadingTotalCall,
       'nextPage': nextPage,
+      'totalLearn': totalCall,
+      'total': total,
+      'groupedBookingInfoList': groupedBookingInfoList.map(
+        (e) => e?.bookingInfoList?.map((e) => e?.toMap()).toList(),
+      ).toList(),
     };
   }
 
@@ -105,7 +158,22 @@ class UpcomingState extends WidgetState {
           ? BasicStatusFToastState.fromMap(map['basicStatusFToastState'] as Map<String, dynamic>)
           : null,
       isLoadingMore: map['isLoadingMore'] as bool? ?? false,
+      isLoadingTotalCall: map['isLoadingTotalCall'] as bool? ?? false,
       nextPage: map['nextPage'] as int? ?? 1,
+      totalCall: map['totalLearn'] as int? ?? 0,
+      total: map['total'] as int? ?? 0,
+      groupedBookingInfoList: map['groupedBookingInfoList'] != null
+          ? (map['groupedBookingInfoList'] as List).map(
+        (e) => GroupedBookingInfo.fromMap(e as Map<String, dynamic>),
+      ).toList()
+          : [null, null, null],
+      // groupedBookingInfoList: map['groupedBookingInfoList'] != null
+      //     ? (map['groupedBookingInfoList'] as List<dynamic>)
+      //         .map((e) => (e as List<dynamic>)
+      //             .map((e) => e != null ? BookingInfo.fromMap(e as Map<String, dynamic>) : null)
+      //             .toList())
+      //         .toList()
+      //     : const <List<BookingInfo?>?>[null, null, null],
     );
   }
 
