@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
+import 'package:one_one_learn/configs/stylings/app_styles.dart';
 import 'package:one_one_learn/presentations/screens/course_information/course_information_screen.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/bloc/courses_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/widgets/course_card.dart';
@@ -42,10 +43,10 @@ class ListCourses extends StatelessWidget {
                 isLoading: true,
                 firstChild: ClipRRect(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(15),
-                    topRight: Radius.circular(15),
+                    topLeft: Radius.circular(AppStyles.defaultCardBorderRadiusValue),
+                    topRight: Radius.circular(AppStyles.defaultCardBorderRadiusValue),
                   ),
-                  child: AppFadeShimmer(radius: 15,),
+                  child: AppFadeShimmer(radius: AppStyles.defaultCardBorderRadiusValue,),
                 ),
                 name: 'name',
                 description: 'description',
@@ -66,8 +67,8 @@ class ListCourses extends StatelessWidget {
               padding: EdgeInsets.zero,
               firstChild: ClipRRect(
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
+                  topLeft: Radius.circular(AppStyles.defaultCardBorderRadiusValue),
+                  topRight: Radius.circular(AppStyles.defaultCardBorderRadiusValue),
                 ),
                 child: SimpleNetworkImage(
                   url: item.imageUrl ?? '',

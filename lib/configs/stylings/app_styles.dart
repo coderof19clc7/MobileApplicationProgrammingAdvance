@@ -36,4 +36,6 @@ class AppStyles {
       side: const BorderSide(color: Colors.black26),
     ),
   );
+
+  static const defaultCardBorderRadiusValue = 15.0;
 }

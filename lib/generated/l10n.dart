@@ -310,11 +310,61 @@ class S {
     );
   }
 
+  /// `Use "Cancel" button to cancel a class.\nThis button only appears if the class's start time is far more than 2 hours`
+  String get cancelClassHint {
+    return Intl.message(
+      'Use "Cancel" button to cancel a class.\nThis button only appears if the class\'s start time is far more than 2 hours',
+      name: 'cancelClassHint',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Join`
   String get enterRoom {
     return Intl.message(
       'Join',
       name: 'enterRoom',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Expand`
+  String get expand {
+    return Intl.message(
+      'Expand',
+      name: 'expand',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Collapse`
+  String get collapse {
+    return Intl.message(
+      'Collapse',
+      name: 'collapse',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Edit`
+  String get edit {
+    return Intl.message(
+      'Edit',
+      name: 'edit',
       desc: '',
       args: [],
     );

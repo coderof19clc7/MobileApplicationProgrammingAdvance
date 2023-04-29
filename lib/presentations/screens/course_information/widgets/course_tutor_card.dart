@@ -14,7 +14,6 @@ class CourseTutorCard extends BaseCard {
     super.onTap,
     super.direction = CardDirection.column,
     super.firstChildAspectRatio,
-    super.boxShadows,
     required this.name,
   });
 

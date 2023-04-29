@@ -43,10 +43,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "books": MessageLookupByLibrary.simpleMessage("Sách"),
         "businessEnglish":
             MessageLookupByLibrary.simpleMessage("Tiếng Anh cho công việc"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
+        "cancelClassHint": MessageLookupByLibrary.simpleMessage(
+            "Dùng nút \"Hủy\" để buổi học.\nNút này chỉ xuất hiện nếu buổi học còn cách 2 tiếng nữa mới bắt đầu"),
         "categories": MessageLookupByLibrary.simpleMessage("Danh mục"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
         "chat": MessageLookupByLibrary.simpleMessage("Nhắn tin"),
+        "collapse": MessageLookupByLibrary.simpleMessage("Thu gọn"),
         "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
             "Bạn có chắc chắn muốn hủy lớp này?"),
         "confirmPassword":
@@ -64,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "doSomethingsSuccess": m1,
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
+        "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "englishForBeginners":
             MessageLookupByLibrary.simpleMessage("Tiếng Anh cơ bản"),
@@ -72,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "englishForTraveling":
             MessageLookupByLibrary.simpleMessage("Tiếng Anh du lịch"),
         "enterRoom": MessageLookupByLibrary.simpleMessage("Vào lớp"),
+        "expand": MessageLookupByLibrary.simpleMessage("Mở rộng"),
         "experience": MessageLookupByLibrary.simpleMessage("Kinh nghiệm"),
         "filter": MessageLookupByLibrary.simpleMessage("Lọc"),
         "flyers": MessageLookupByLibrary.simpleMessage("FLYERS"),

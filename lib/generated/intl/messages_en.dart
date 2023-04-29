@@ -46,10 +46,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "books": MessageLookupByLibrary.simpleMessage("Books"),
         "businessEnglish":
             MessageLookupByLibrary.simpleMessage("English for business"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "cancelClassHint": MessageLookupByLibrary.simpleMessage(
+            "Use \"Cancel\" button to cancel a class.\nThis button only appears if the class\'s start time is far more than 2 hours"),
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
+        "collapse": MessageLookupByLibrary.simpleMessage("Collapse"),
         "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
             "Are you sure you want to cancel this class?"),
         "confirmPassword":
@@ -67,6 +71,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "doSomethingsSuccess": m1,
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
+        "edit": MessageLookupByLibrary.simpleMessage("Edit"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "englishForBeginners":
             MessageLookupByLibrary.simpleMessage("English for beginners"),
@@ -75,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "englishForTraveling":
             MessageLookupByLibrary.simpleMessage("English for traveling"),
         "enterRoom": MessageLookupByLibrary.simpleMessage("Join"),
+        "expand": MessageLookupByLibrary.simpleMessage("Expand"),
         "experience": MessageLookupByLibrary.simpleMessage("Experience"),
         "filter": MessageLookupByLibrary.simpleMessage("Filter"),
         "flyers": MessageLookupByLibrary.simpleMessage("FLYERS"),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
+import 'package:one_one_learn/configs/stylings/app_styles.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/tutor_card.dart';
@@ -39,7 +40,7 @@ class ListTutors extends StatelessWidget {
               }
               return const TutorCard(
                 isLoading: true,
-                firstChild: AppFadeShimmer(radius: 15),
+                firstChild: AppFadeShimmer(radius: AppStyles.defaultCardBorderRadiusValue),
                 nationality: 'nationality',
                 name: 'name',
                 description:'description',
@@ -51,7 +52,7 @@ class ListTutors extends StatelessWidget {
                 Navigator.of(context).pushNamed(RouteNames.tutorInformation);
               },
               firstChild: ClipRRect(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(AppStyles.defaultCardBorderRadiusValue),
                 child: SimpleNetworkImage(
                   url: item.avatar ?? '',
                 ),

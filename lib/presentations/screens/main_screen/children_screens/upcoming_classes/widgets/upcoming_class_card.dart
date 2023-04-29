@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:one_one_learn/configs/constants/date_formats.dart';
+import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -13,84 +15,139 @@ class UpcomingClassCard extends BaseCard {
     super.key,
     super.isLoading = false,
     super.firstChild,
+    super.firstSecondDistance = 7,
     super.secondChildItemsDistance = 10,
     super.margin,
     super.crossAxisAlignment,
-    required this.onButtonTap,
+    super.decoration,
+    this.isExpand = false,
     required this.tutorName,
     required this.buttonLabel,
-    required this.lessonDateTime,
-    required this.lessonEndTime,
-    required this.lessonDateFormat,
-    required this.lessonDurationFormat,
+    this.lessonDateTime,
+    this.lessonEndTime,
+    this.lessonDateFormat = AppDateFormats.eeeMMMdyyyy,
+    this.lessonDurationFormat = AppDateFormats.tHHmm,
+    this.onButtonTap,
+    this.onExpandCollapseButtonTap,
   });
 
-  final Function() onButtonTap;
+  final bool isExpand;
   final String tutorName, buttonLabel;
-  final DateTime lessonDateTime, lessonEndTime;
+  final DateTime? lessonDateTime, lessonEndTime;
   final String lessonDateFormat, lessonDurationFormat;
+  final Function()? onButtonTap;
+  final Function()? onExpandCollapseButtonTap;
 
   @override
   Widget buildSecondChild(BuildContext context) {
-    final startTime = DateFormat(lessonDurationFormat).format(lessonDateTime);
-    final endTime = DateFormat(lessonDurationFormat).format(lessonEndTime);
+    final dateTime = lessonDateTime != null
+        ? DateFormat(lessonDateFormat).format(lessonDateTime!)
+        : '__';
+    final startTime = lessonDateTime != null
+        ? DateFormat(lessonDurationFormat).format(lessonDateTime!)
+        : '__';
+    final endTime = lessonEndTime != null
+        ? DateFormat(lessonDurationFormat).format(lessonEndTime!)
+        : '__';
 
     return Expanded(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              buildInformationRow(
-                context: context,
-                icon: Icons.calendar_month_rounded,
-                text: DateFormat(lessonDateFormat).format(lessonDateTime),
-                isPilled: false,
-              ),
-              EmptyProportionalSpace(height: secondChildItemsDistance),
-              buildInformationRow(
-                context: context,
-                icon: Icons.access_time_rounded,
-                text: '$startTime - $endTime',
-                isPilled: true,
-              ),
-              EmptyProportionalSpace(height: secondChildItemsDistance),
-              buildInformationRow(
-                context: context,
-                icon: Icons.person_rounded,
-                text: tutorName,
-                isPilled: false,
-              ),
-            ],
-          ),
-          SizedBox(
-            child: PrimaryFillButton(
-              width: Dimens.getProportionalWidth(context, 88),
-              borderRadiusValue: Dimens.getProportionalWidth(context, 12),
-              paddingVertical: Dimens.getProportionalHeight(context, 10),
-              onTap: onTap,
-              boxShadow: [Effects.normalShadowXS],
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.login_rounded,
-                    color: context.theme.colorScheme.onPrimary,
-                    size: Dimens.getProportionalWidth(context, 16),
+          Expanded(
+            flex: 2,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                isLoading ? Padding(
+                  padding: EdgeInsets.only(
+                    top: Dimens.getProportionalHeight(context, 4),
                   ),
-                  SizedBox(
-                    width: Dimens.getProportionalWidth(context, 5),
+                  child: buildSimpleRectangleShimmer(context),
+                )
+                    : buildInformationRow(
+                  context: context,
+                  icon: Icons.calendar_month_rounded,
+                  text: dateTime,
+                  isPilled: false,
+                ),
+                if (!isLoading) ...[
+                  EmptyProportionalSpace(height: secondChildItemsDistance),
+                  buildInformationRow(
+                    context: context,
+                    icon: Icons.access_time_rounded,
+                    text: '$startTime - $endTime',
+                    isPilled: true,
                   ),
-                  Text(
-                    buttonLabel,
-                    style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                      color: context.theme.colorScheme.onPrimary,
-                      fontSize: Dimens.getProportionalWidth(context, 12),
-                    ),
-                  )
+                  EmptyProportionalSpace(height: secondChildItemsDistance),
+                  buildInformationRow(
+                    context: context,
+                    icon: Icons.person_rounded,
+                    text: tutorName,
+                    isPilled: false,
+                  ),
                 ],
-              ),
+              ],
+            ),
+          ),
+          Flexible(
+            child: isLoading
+                ? const SizedBox.shrink()
+                : Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                PrimaryFillButton(
+                  width: Dimens.getProportionalWidth(context, 88),
+                  borderRadiusValue: Dimens.getProportionalWidth(context, 12),
+                  paddingVertical: Dimens.getProportionalHeight(context, 10),
+                  onTap: onTap,
+                  boxShadow: [Effects.normalShadowXS],
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.login_rounded,
+                        color: context.theme.colorScheme.onPrimary,
+                        size: Dimens.getProportionalWidth(context, 16),
+                      ),
+                      SizedBox(
+                        width: Dimens.getProportionalWidth(context, 5),
+                      ),
+                      Text(
+                        buttonLabel,
+                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+                          color: context.theme.colorScheme.onPrimary,
+                          fontSize: Dimens.getProportionalWidth(context, 12),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const EmptyProportionalSpace(height: 7),
+                Material(
+                  color: AppColors.transparent,
+                  child: InkWell(
+                    onTap: () {
+                      onExpandCollapseButtonTap?.call();
+                    },
+                    child: Container(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: Dimens.getProportionalWidth(context, 5),
+                        vertical: Dimens.getProportionalHeight(context, 3),
+                      ),
+                      child: Text(
+                        isExpand ? S.current.collapse : S.current.expand,
+                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+                          color: context.theme.colorScheme.primary,
+                          fontSize: Dimens.getProportionalWidth(context, 14),
+                          decoration: TextDecoration.underline,
+                          decorationThickness: 1.5,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -116,7 +173,7 @@ class UpcomingClassCard extends BaseCard {
         text,
         style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
           color: isPilled ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onBackground,
-          fontSize: Dimens.getProportionalWidth(context, 12),
+          fontSize: Dimens.getProportionalWidth(context, 15),
         ),
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/stylings/app_styles.dart';
 import 'package:one_one_learn/presentations/widgets/shimmers/fade_shimmer.dart';
 import 'package:one_one_learn/presentations/widgets/shimmers/linear_shimmer.dart';
+import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -20,7 +22,7 @@ abstract class BaseCard extends StatelessWidget {
     this.direction = CardDirection.row,
     this.crossAxisAlignment,
     this.firstChildAspectRatio,
-    this.boxShadows,
+    this.decoration,
     this.onTap,
   });
 
@@ -32,7 +34,7 @@ abstract class BaseCard extends StatelessWidget {
   final CardDirection direction;
   final CrossAxisAlignment? crossAxisAlignment;
   final double? firstChildAspectRatio;
-  final List<BoxShadow>? boxShadows;
+  final BoxDecoration? decoration;
   final Function()? onTap;
 
   Widget buildFirstChild(BuildContext context) {
@@ -42,7 +44,7 @@ abstract class BaseCard extends StatelessWidget {
         aspectRatio: firstChildAspectRatio ?? ( direction == CardDirection.row ? 1 : 2),
         child: firstChild ?? Container(
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
+                borderRadius: BorderRadius.circular(AppStyles.defaultCardBorderRadiusValue),
                 color: AppColors.neutralBlue500,
               ),
             ),
@@ -75,12 +77,7 @@ abstract class BaseCard extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.start,
       children: [
         buildFirstChild(context),
-        SizedBox(
-          width: Dimens.getProportionalWidth(
-            context,
-            firstSecondDistance,
-          ),
-        ),
+        EmptyProportionalSpace(width: firstSecondDistance),
         buildSecondChild(context),
       ],
     );
@@ -91,11 +88,7 @@ abstract class BaseCard extends StatelessWidget {
       crossAxisAlignment: crossAxisAlignment ?? CrossAxisAlignment.stretch,
       children: [
         buildFirstChild(context),
-        SizedBox(
-            height: Dimens.getProportionalHeight(
-          context,
-          firstSecondDistance,
-        )),
+        EmptyProportionalSpace(height: firstSecondDistance),
         buildSecondChild(context),
       ],
     );
@@ -115,12 +108,12 @@ abstract class BaseCard extends StatelessWidget {
               bottom: Dimens.getProportionalHeight(context, 15),
             ),
         width: width ?? Dimens.getScreenWidth(context),
-        decoration: BoxDecoration(
+        decoration: decoration ?? BoxDecoration(
           border: Border.all(
             color: AppColors.neutralBlue300,
           ),
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: boxShadows ?? [
+          borderRadius: BorderRadius.circular(AppStyles.defaultCardBorderRadiusValue),
+          boxShadow: [
             Effects.normalShadowXS,
           ],
           color: context.theme.colorScheme.surface,

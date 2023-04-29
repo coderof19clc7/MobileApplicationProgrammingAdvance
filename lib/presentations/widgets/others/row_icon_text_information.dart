@@ -26,19 +26,21 @@ class RowIconTextInformation extends StatelessWidget {
       children: [
         icon,
         EmptyProportionalSpace(width: betweenSpace),
-        Container(
-          decoration: isPilled
-              ? BoxDecoration(
-            borderRadius: BorderRadius.circular(4),
-            color: AppColors.primaryBlue400,
-          )
-              : null,
-          padding: isPilled
-              ? EdgeInsets.symmetric(
-            horizontal: Dimens.getProportionalWidth(context, 3),
-          )
-              : null,
-          child: text,
+        Flexible(
+          child: Container(
+            decoration: isPilled
+                ? BoxDecoration(
+              borderRadius: BorderRadius.circular(4),
+              color: AppColors.primaryBlue400,
+            )
+                : null,
+            padding: isPilled
+                ? EdgeInsets.symmetric(
+              horizontal: Dimens.getProportionalWidth(context, 3),
+            )
+                : null,
+            child: text,
+          ),
         )
       ],
     );

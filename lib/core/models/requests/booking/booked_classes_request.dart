@@ -46,10 +46,10 @@ class BookedClassesRequest extends BaseRequest {
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     if (page != null) {
-      map['startTimestamp'] = page;
+      map['page'] = page;
     }
     if (perPage != null) {
-      map['endTimestamp'] = perPage;
+      map['perPage'] = perPage;
     }
     if (dateTimeGte != null) {
       map['dateTimeGte'] = dateTimeGte;

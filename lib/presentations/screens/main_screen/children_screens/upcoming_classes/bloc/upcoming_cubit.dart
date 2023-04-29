@@ -78,15 +78,17 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
     ) {
       final firstClassEndTime = firstClass?.scheduleDetailInfo?.endPeriodTimestamp;
       final secondClassStartTime = secondClass?.scheduleDetailInfo?.startPeriodTimestamp;
-      result = (firstClassEndTime ?? 0) + (5 * 60 * 1000) <= (secondClassStartTime ?? 0);
+      result = (secondClassStartTime ?? 0) - (firstClassEndTime ?? 0) <= (5 * 60 * 1000);
     }
 
     return result;
   }
 
-  List<List<BookingInfo?>?> convert1DListTo2DList(List<BookingInfo?> list1D) {
+  List<List<BookingInfo?>?> convert1DListTo2DList(List<BookingInfo?> list1D, int nextPage) {
     final dataAmount = list1D.length;
     final result = <List<BookingInfo?>?>[];
+
+    print('nextPage inside converter: $nextPage');
 
     for (var i = 0; i < dataAmount; i++) {
       if (i == 0) {
@@ -108,6 +110,8 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
     emit(state.copyWith(isLoadingMore: true));
 
     // search list by the filters amd page number
+    print('state.nextPage: ${state.nextPage}');
+    print('now: ${DateTime.now().millisecondsSinceEpoch}');
     final bookedClassesResponse = await fetchApi<BookedClassesResponse>(
           () => bookingRepository.getBookedClasses(query: BookedClassesRequest(
             page: state.nextPage,
@@ -133,7 +137,7 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
         final newListBookingInfo = bookedClassesResponse.data?.rows ?? <BookingInfo?>[];
 
         // convert into grouped list
-        final list2DVersion = convert1DListTo2DList(newListBookingInfo);
+        final list2DVersion = convert1DListTo2DList(newListBookingInfo, nextPage);
         final newGroupedBookingInfoList = list2DVersion.map((e) {
           return e != null ? GroupedBookingInfo.fromBookingInfoList(e) : null;
         }).toList();
@@ -178,6 +182,18 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
     }
 
     emit(state.copyWith(isLoadingMore: false));
+  }
+
+  void toggleExpandCollapse(int index) {
+    final currentList = [...state.groupedBookingInfoList];
+    if (index < 0 || index >= currentList.length) {
+      return;
+    }
+    final currentGroupedItem = currentList[index];
+    if (currentGroupedItem != null) {
+      currentList[index] = currentGroupedItem.copyWith(isExpanded: !currentGroupedItem.isExpanded);
+      emit(state.copyWith(groupedBookingInfoList: currentList));
+    }
   }
 
   @override

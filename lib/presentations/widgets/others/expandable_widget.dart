@@ -34,6 +34,7 @@ class ExpandableWidget extends StatefulWidget {
     this.controlIconAnimation,
     this.headerPadding = EdgeInsets.zero,
     this.childrenPadding = EdgeInsets.zero,
+    this.margin,
     this.defaultControlIconSize = 24,
     this.headerBodyDistance = 8,
     this.headerBodyDistanceAffectOutsideWidget = true,
@@ -63,6 +64,7 @@ class ExpandableWidget extends StatefulWidget {
   final bool willAutoDisposeController;
   final EdgeInsetsGeometry headerPadding;
   final EdgeInsetsGeometry childrenPadding;
+  final EdgeInsetsGeometry? margin;
 
   final void Function(bool isExpanded)? onExpansionChanged;
 
@@ -253,7 +255,8 @@ class _ExpandableWidgetState extends State<ExpandableWidget> with SingleTickerPr
       _animationController.value = _isExpanded ? 1 : 0;
     }
 
-    return DecoratedBox(
+    return Container(
+      margin: widget.margin,
       decoration: widget.decoration ??
           BoxDecoration(
             color: context.theme.colorScheme.surface,

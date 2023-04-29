@@ -278,9 +278,6 @@ class CourseBody extends StatelessWidget {
                   bottom: Dimens.getProportionalHeight(context, 10),
                 ),
                 width: Dimens.getScreenWidth(context) * 0.3,
-                boxShadows: [
-                  Effects.normalShadowSM,
-                ],
                 firstChildAspectRatio: 1,
                 firstChild: ClipRRect(
                   borderRadius: BorderRadius.circular(imageWidth),
