@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/constants/map_constants.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
+import 'package:one_one_learn/presentations/screens/course_information/course_information_screen.dart';
+import 'package:one_one_learn/presentations/screens/tutor_information/bloc/tutor_information_cubit.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
@@ -13,93 +18,110 @@ class SpecialInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final courses = ['Life in the Internet Age', 'Basic Conversation Topics'];
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        // about field
-        buildTitle(context, S.current.about),
-        const EmptyProportionalSpace(height: 15),
-        buildTextContent(
-          context,
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat. Suspendissepotenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci. Mauris ac ex viverra, facilisis augue sit amet, sollicitudin dolor.',
-        ),
-        const EmptyProportionalSpace(height: 20),
+    return BlocBuilder<TutorInformationCubit, TutorInformationState>(
+      builder: (context, state) {
+        final tutorInformation = state.tutorInformation;
+        if (state.isLoadingData || tutorInformation == null) {
+          return const SizedBox();
+        }
+        
+        final listLanguages = (tutorInformation.languages ?? '').split(',').map((e) {
+          return MapConstants.languages[e]?['name'] ?? '';
+        }).toList();
+        final specialties = (tutorInformation.specialties ?? '').split(',').map((e) {
+          return MapConstants.specialtiesMap[e] ?? '';
+        }).toList();
+        final courses = tutorInformation.User?.courses ?? [];
 
-        // language field
-        buildTitle(context, S.current.language),
-        const EmptyProportionalSpace(height: 15),
-        buildFakeChipContent(context, ['English', 'Dutch']),
-        const EmptyProportionalSpace(height: 20),
-
-        // specialties field
-        buildTitle(context, S.current.specialties),
-        const EmptyProportionalSpace(height: 15),
-        buildFakeChipContent(context, ['Machine Learning', 'A.I', 'Statistics']),
-        const EmptyProportionalSpace(height: 20),
-
-        // interest field
-        buildTitle(context, S.current.interest),
-        const EmptyProportionalSpace(height: 15),
-        buildTextContent(
-          context,
-          'Mauris ac ex viverra, facilisis augue sit amet, sollicitudin dolor.',
-        ),
-        const EmptyProportionalSpace(height: 20),
-
-        // experience field
-        buildTitle(context, S.current.experience),
-        const EmptyProportionalSpace(height: 15),
-        buildTextContent(
-          context,
-          'Maecenas vitae faucibus erat. Suspendissepotenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci.',
-        ),
-        const EmptyProportionalSpace(height: 20),
-
-        // courses field
-        buildTitle(context, S.current.suggestedCourses),
-        const EmptyProportionalSpace(height: 15),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: courses.map((topic) {
-            return BoxButton(
-              circleText: (courses.indexOf(topic) + 1).toString(),
-              title: topic,
-              onTap: () {},
-            );
-          }).toList(),
-        ),
-        const EmptyProportionalSpace(height: 20),
-
-        Row(
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: buildTitle(context, S.current.review),
-            ),
-            InkWell(
-              onTap: () {
-                NormalBottomSheetDialog.show(
-                  context,
-                  leftPadding: Dimens.getProportionalWidth(context, 16),
-                  rightPadding: Dimens.getProportionalWidth(context, 16),
-                  initialChildSize: 0.501,
-                  title: S.current.review,
-                  titleAlignment: CrossAxisAlignment.start,
-                  body: const TutorReviewsBottomSheet(),
-                );
-              },
-              child: Text(
-                S.current.viewAll,
-                style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                  fontSize: Dimens.getProportionalWidth(context, 16),
-                  color: context.theme.colorScheme.onSurfaceVariant,
-                ),
+            // about field
+            buildTitle(context, S.current.about),
+            const EmptyProportionalSpace(height: 15),
+            buildTextContent(context, tutorInformation.bio ?? ''),
+            const EmptyProportionalSpace(height: 20),
+
+            // language field
+            buildTitle(context, S.current.language),
+            const EmptyProportionalSpace(height: 15),
+            buildFakeChipContent(context, listLanguages),
+            const EmptyProportionalSpace(height: 20),
+
+            // specialties field
+            buildTitle(context, S.current.specialties),
+            const EmptyProportionalSpace(height: 15),
+            buildFakeChipContent(context, specialties),
+            const EmptyProportionalSpace(height: 20),
+
+            // interest field
+            buildTitle(context, S.current.interest),
+            const EmptyProportionalSpace(height: 15),
+            buildTextContent(context, tutorInformation.interests ?? ''),
+            const EmptyProportionalSpace(height: 20),
+
+            // experience field
+            buildTitle(context, S.current.experience),
+            const EmptyProportionalSpace(height: 15),
+            buildTextContent(context, tutorInformation.experience ?? ''),
+            const EmptyProportionalSpace(height: 20),
+
+            // courses field
+            buildTitle(context, S.current.suggestedCourses),
+            const EmptyProportionalSpace(height: 15),
+            if (courses.isEmpty)
+              buildTextContent(context, S.current.noHaveSomethingsSuggested(S.current.courses))
+            else
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: courses.map((topic) {
+                  return BoxButton(
+                    circleText: (courses.indexOf(topic) + 1).toString(),
+                    title: topic.name ?? '',
+                    onTap: () {
+                      Navigator.of(context).pushNamed(
+                        RouteNames.courseInformation,
+                        arguments: CourseInformationArguments(
+                          courseId: topic.id ?? '', categories: [],
+                        )
+                      );
+                    },
+                  );
+                }).toList(),
               ),
+            const EmptyProportionalSpace(height: 20),
+
+            Row(
+              children: [
+                Expanded(
+                  child: buildTitle(context, S.current.review),
+                ),
+                InkWell(
+                  onTap: () {
+                    NormalBottomSheetDialog.show(
+                      context,
+                      leftPadding: Dimens.getProportionalWidth(context, 16),
+                      rightPadding: Dimens.getProportionalWidth(context, 16),
+                      initialChildSize: 0.501,
+                      title: S.current.review,
+                      titleAlignment: CrossAxisAlignment.start,
+                      body: const TutorReviewsBottomSheet(),
+                    );
+                  },
+                  child: Text(
+                    S.current.viewAll,
+                    style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+                      fontSize: Dimens.getProportionalWidth(context, 16),
+                      color: context.theme.colorScheme.onSurfaceVariant,
+                    ),
+                  ),
+                ),
+              ],
             ),
+            const EmptyProportionalSpace(height: 20),
           ],
-        ),
-        const EmptyProportionalSpace(height: 20),
-      ],
+        );
+      },
     );
   }
 

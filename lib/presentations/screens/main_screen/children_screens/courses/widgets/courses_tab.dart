@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/constants/map_constants.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/bloc/courses_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/widgets/list_courses.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/widgets/tutors_courses_search_field.dart';
@@ -38,12 +39,12 @@ class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMi
 
                   // data1Map: context.read<CoursesCubit>().categoriesMap.values.toList(),
                   // data1RenderValues: context.read<CoursesCubit>().categoriesMap.keys.toList(),
-                  data1Map: context.read<CoursesCubit>().categoriesMap,
+                  data1Map: MapConstants.categoriesMap,
                   data1CurrentFilter: context.read<CoursesCubit>().getCurrentCategories(),
 
                   // data2Map: context.read<CoursesCubit>().levelsMap.values.toList(),
                   // data2RenderValues: context.read<CoursesCubit>().levelsMap.keys.toList(),
-                  data2Map: context.read<CoursesCubit>().levelsMap,
+                  data2Map: MapConstants.levelsMap,
                   data2CurrentFilter: context.read<CoursesCubit>().getCurrentLevelValues(),
 
                   // data3Map: context.read<CoursesCubit>().sortMap.values.toList(),

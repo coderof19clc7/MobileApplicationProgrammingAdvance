@@ -6,6 +6,8 @@ class SimpleNetworkImage extends StatelessWidget {
     super.key,
     this.url,
     this.fit = BoxFit.cover,
+    this.width,
+    this.height,
     this.errorIconSize,
     this.loadingBuilder,
     this.errorBuilder,
@@ -13,6 +15,7 @@ class SimpleNetworkImage extends StatelessWidget {
 
   final String? url;
   final BoxFit fit;
+  final double? width, height;
   final double? errorIconSize;
   final Widget Function(BuildContext, Widget, ImageChunkEvent?)? loadingBuilder;
   final Widget Function(BuildContext, Object, StackTrace?)? errorBuilder;
@@ -21,6 +24,8 @@ class SimpleNetworkImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.network(
       url ?? '',
+      width: width,
+      height: height,
       fit: fit,
       loadingBuilder: loadingBuilder ?? (context, child, loadingProgress) {
         if (loadingProgress == null) {

@@ -4,16 +4,16 @@ import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/settings_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/upcoming_classes_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/tabs/main_courses_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/tabs/tutors_tab.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/tabs/upcoming_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/widgets/bottom_nav_bar.dart';
 import 'package:one_one_learn/presentations/widgets/base_widgets/base_screen.dart';
 
 const listScreens = <Widget>[
   TutorsTab(),
   Center(child: Text('This is Chat screen')),
-  UpcomingClassesPage(),
+  UpcomingTab(),
   MainCoursesTab(key: PageStorageKey('CoursesPage')),
   SettingsPage(),
 ];

@@ -24,9 +24,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(somethings) => "${somethings} thành công";
 
-  static String m2(somethings) => "${somethings} là bắt buộc";
+  static String m2(somethings) => "Không có ${somethings} tham khảo";
 
-  static String m5(nationality) => "Gia sư ${nationality}";
+  static String m3(somethings) => "${somethings} là bắt buộc";
+
+  static String m4(somethings) => "Từ ${somethings} cao";
+
+  static String m5(somethings) => "Từ ${somethings} thấp";
+
+  static String m6(nationality) => "Gia sư ${nationality}";
+
+  static String m7(somethings) => "${somethings} không xác định";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -61,13 +69,14 @@ class MessageLookup extends MessageLookupByLibrary {
             "Vui lòng xác nhận lại mật khẩu"),
         "conversationalEnglish":
             MessageLookupByLibrary.simpleMessage("Tiếng Anh giao tiếp"),
+        "country": MessageLookupByLibrary.simpleMessage("Quốc gia"),
         "courses": MessageLookupByLibrary.simpleMessage("Khoá học"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
         "doSomethingsFailed": m0,
         "doSomethingsSuccess": m1,
         "dontHaveAccount":
-            MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
+            MessageLookupByLibrary.simpleMessage("Không có tài khoản?"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "englishForBeginners":
@@ -137,7 +146,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tài khoản của bạn chưa được kích hoạt.\nVui lòng kiểm tra email để kích hoạt."),
         "needActivateHeader": MessageLookupByLibrary.simpleMessage(
             "Thông báo kích hoạt tài khoản"),
-        "no": MessageLookupByLibrary.simpleMessage("Đéch"),
+        "no": MessageLookupByLibrary.simpleMessage("Không"),
+        "noHaveSomethingsSuggested": m2,
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
@@ -180,9 +190,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Email đã được sử dụng"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Trình độ"),
-        "somethingRequiredError": m2,
+        "somethingRequiredError": m3,
         "sortNameFromAtoZ":
             MessageLookupByLibrary.simpleMessage("Từ tên A đến Z"),
+        "sortSomethingsFromHigh": m4,
+        "sortSomethingsFromLow": m5,
         "sorting": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
         "speaking": MessageLookupByLibrary.simpleMessage("Khả năng nói"),
         "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),
@@ -199,10 +211,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "tutor": MessageLookupByLibrary.simpleMessage("gia sư"),
         "tutorReview":
             MessageLookupByLibrary.simpleMessage("Nhận xét từ gia sư"),
-        "tutorWithNationality": m5,
+        "tutorWithNationality": m6,
         "tutoring": MessageLookupByLibrary.simpleMessage("Giảng dạy"),
+        "unknownSomethings": m7,
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("bắt đầu sau"),
+        "videoNotAvailable":
+            MessageLookupByLibrary.simpleMessage("Video không khả dụng"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Việt Nam"),
         "viewAll": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Từ vựng"),

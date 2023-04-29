@@ -1,16 +1,22 @@
+import 'dart:developer';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:one_one_learn/generated/l10n.dart';
 import 'package:video_player/video_player.dart';
 
 class DemoVideoPopup extends StatefulWidget {
-  const DemoVideoPopup({super.key});
+  const DemoVideoPopup({super.key, required this.videoUrl});
+
+  final String videoUrl;
 
   @override
   State<DemoVideoPopup> createState() => _DemoVideoPopupState();
 }
 
 class _DemoVideoPopupState extends State<DemoVideoPopup> {
+  bool isInitializing = true;
   late VideoPlayerController videoPlayerController;
   double? videoWidth;
   double? videoHeight;
@@ -24,19 +30,27 @@ class _DemoVideoPopupState extends State<DemoVideoPopup> {
   }
 
   Future<void> initializePlayer() async {
-    videoPlayerController =
-        VideoPlayerController.network('https://assets.mixkit.co/videos/preview/mixkit-daytime-city-traffic-aerial-view-56-large.mp4');
-    await videoPlayerController.initialize();
-    chewieController = ChewieController(
-      videoPlayerController: videoPlayerController,
-      autoPlay: true,
-      deviceOrientationsOnEnterFullScreen: [DeviceOrientation.portraitUp],
-      deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
-    );
-    setState(() {
-      videoWidth = videoPlayerController.value.size.width;
-      videoHeight = videoPlayerController.value.size.height;
-    });
+    try {
+      videoPlayerController =
+          VideoPlayerController.network(widget.videoUrl);
+      await videoPlayerController.initialize();
+      chewieController = ChewieController(
+        videoPlayerController: videoPlayerController,
+        autoPlay: true,
+        deviceOrientationsOnEnterFullScreen: [DeviceOrientation.portraitUp],
+        deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitUp],
+      );
+      setState(() {
+        videoWidth = videoPlayerController.value.size.width;
+        videoHeight = videoPlayerController.value.size.height;
+      });
+    } catch(e) {
+      log('init video player controller and chewie controller error: $e');
+    } finally {
+      setState(() {
+        isInitializing = false;
+      });
+    }
   }
 
   @override
@@ -58,6 +72,11 @@ class _DemoVideoPopupState extends State<DemoVideoPopup> {
     if (chewieController != null && chewieController!.videoPlayerController.value.isInitialized) {
       return Chewie(controller: chewieController!);
     }
+
+    if (!isInitializing) {
+      return Center(child: Text(S.current.videoNotAvailable));
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: const [CircularProgressIndicator()],

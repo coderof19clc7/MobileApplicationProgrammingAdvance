@@ -4,11 +4,23 @@ part of 'courses_cubit.dart';
 class CoursesState extends WidgetState {
   final int nextPage;
   final int total;
-  final String? coursesSearchText;
+  final String coursesSearchText;
   final List<CourseInformation?> listCourses;
   final List<String> listCategoriesId;
   final List<int> listLevelValues;
   final int sortValue;
+
+  @override
+  List<Object?> get props => [
+        ...super.props,
+        nextPage,
+        total,
+        coursesSearchText,
+        listCourses,
+        listCategoriesId,
+        listLevelValues,
+        sortValue,
+      ];
 
   @override
   WidgetState fromJson(json) {
@@ -21,7 +33,7 @@ class CoursesState extends WidgetState {
           : null,
       nextPage: mapJson['nextPage'] as int? ?? 1,
       total: mapJson['total'] as int? ?? 0,
-      coursesSearchText: mapJson['coursesSearchText'] as String?,
+      coursesSearchText: mapJson['coursesSearchText'] as String? ?? '',
       listCourses: mapJson['listCourses'] != null
           ? (mapJson['listCourses'] as List).map((e) {
               return e != null ? CourseInformation.fromJson(e) : null;
@@ -60,7 +72,7 @@ class CoursesState extends WidgetState {
     super.basicStatusFToastState,
     this.nextPage = 1,
     this.total = 0,
-    this.coursesSearchText,
+    this.coursesSearchText = '',
     this.listCourses = const <CourseInformation?>[null, null, null],
     this.listCategoriesId = const <String>[],
     this.listLevelValues = const <int>[],
@@ -78,9 +90,9 @@ class CoursesState extends WidgetState {
           nextPage == other.nextPage &&
           total == other.total &&
           coursesSearchText == other.coursesSearchText &&
-          listCourses == other.listCourses &&
-          listCategoriesId == other.listCategoriesId &&
-          listLevelValues == other.listLevelValues &&
+          listEquals(listCourses, other.listCourses) &&
+          listEquals(listCategoriesId, other.listCategoriesId) &&
+          listEquals(listLevelValues, other.listLevelValues) &&
           sortValue == other.sortValue);
 
   @override
@@ -162,7 +174,7 @@ class CoursesState extends WidgetState {
           : null,
       nextPage: map['nextPage'] as int? ?? 1,
       total: map['total'] as int? ?? 0,
-      coursesSearchText: map['coursesSearchText'] as String?,
+      coursesSearchText: map['coursesSearchText'] as String? ?? '',
       listCourses: map['listCourses'] != null
           ? (map['listCourses'] as List).map((e) {
             return e != null ? CourseInformation.fromMap(e as Map<String, dynamic>) : null;

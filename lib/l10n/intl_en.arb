@@ -186,5 +186,27 @@
         "example": "Vietnamese"
       }
     }
+  },
+  "unknownSomethings": "Unknown {somethings}",
+  "@unknownSomethings": {
+    "description": "Somethings that does not known",
+    "placeholders": {
+      "somethings": {
+        "type": "String",
+        "example": "Country"
+      }
+    }
+  },
+  "country": "Country",
+  "videoNotAvailable": "Video not available",
+  "noHaveSomethingsSuggested": "No suggested {somethings}",
+  "@noHaveSomethingsSuggested": {
+    "description": "No suggested somethings",
+    "placeholders": {
+      "somethings": {
+        "type": "String",
+        "example": "Tutors"
+      }
+    }
   }
 }

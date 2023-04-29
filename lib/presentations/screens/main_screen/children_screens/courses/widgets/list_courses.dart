@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/map_constants.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/configs/stylings/app_styles.dart';
 import 'package:one_one_learn/presentations/screens/course_information/course_information_screen.dart';
@@ -9,6 +10,7 @@ import 'package:one_one_learn/presentations/screens/main_screen/children_screens
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/courses/widgets/course_card.dart';
 import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
 import 'package:one_one_learn/presentations/widgets/shimmers/fade_shimmer.dart';
+import 'package:one_one_learn/utils/extensions/string_extensions.dart';
 
 class ListCourses extends StatelessWidget {
   const ListCourses({super.key});
@@ -25,6 +27,7 @@ class ListCourses extends StatelessWidget {
         }
 
         return ListView.builder(
+          controller: context.read<CoursesCubit>().scrollController,
           padding: EdgeInsets.zero,
           shrinkWrap: true,
           itemCount: listCourses.length,
@@ -54,13 +57,17 @@ class ListCourses extends StatelessWidget {
               );
             }
 
+            final categories = item.categories?.map((e) {
+              return MapConstants.categoriesMap[e.id?.trim() ?? ''] ?? '';
+            }).toList() ?? [];
+
             return CourseCard(
               onTap: () {
                 Navigator.of(context).pushNamed(
                   RouteNames.courseInformation,
                   arguments: CourseInformationArguments(
                     courseId: item.id ?? '',
-                    categories: item.categories?.map((e) => e.title ?? '').toList() ?? [],
+                    categories: categories,
                   ),
                 );
               },
@@ -77,8 +84,8 @@ class ListCourses extends StatelessWidget {
               ),
               name: item.name ?? '',
               description: item.description ?? '',
-              categories: item.categories?.map((e) => e.title ?? '').toList() ?? [],
-              level: item.level ?? '',
+              categories: categories,
+              level: MapConstants.levelsMap[(item.level ?? '-1').toInt()] ?? '',
               lessons: item.topics?.length ?? 0,
             );
           },

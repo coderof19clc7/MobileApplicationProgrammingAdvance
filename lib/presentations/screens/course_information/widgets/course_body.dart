@@ -2,18 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/map_constants.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/core/models/responses/user/user_info.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/course_detail/course_detail_screen.dart';
 import 'package:one_one_learn/presentations/screens/course_information/bloc/course_information_cubit.dart';
 import 'package:one_one_learn/presentations/screens/course_information/widgets/course_tutor_card.dart';
+import 'package:one_one_learn/presentations/screens/tutor_information/tutor_information_screen.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/box_button.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
+import 'package:one_one_learn/utils/extensions/string_extensions.dart';
 
 class CourseBody extends StatelessWidget {
   const CourseBody({super.key});
@@ -47,12 +50,12 @@ class CourseBody extends StatelessWidget {
                 // categories
                 buildCategories(context, [...state.categories]),
 
-                const EmptyProportionalSpace(height: 15),
+                EmptyProportionalSpace(height: state.categories.isEmpty ? 0 : 15),
 
                 buildLeadingInformation(
                   context,
                   Icons.signal_cellular_alt_rounded,
-                  courseInfo?.level ?? '',
+                  MapConstants.levelsMap[(courseInfo?.level ?? '-1').toInt()] ?? '',
                 ),
                 const EmptyProportionalSpace(height: 10),
 
@@ -270,7 +273,12 @@ class CourseBody extends StatelessWidget {
             itemBuilder: (context, index) {
               return CourseTutorCard(
                 onTap: () {
-                  Navigator.of(context).pushNamed(RouteNames.tutorInformation);
+                  Navigator.of(context).pushNamed(
+                    RouteNames.tutorInformation,
+                    arguments: TutorInformationArguments(
+                      tutorId: tutorsList[0].id ?? '',
+                    ),
+                  );
                 },
                 margin: EdgeInsets.only(
                   left: Dimens.getProportionalHeight(context, index == 0 ? 0 : 20),

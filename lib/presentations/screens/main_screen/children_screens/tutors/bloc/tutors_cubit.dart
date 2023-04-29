@@ -14,38 +14,25 @@ import 'package:one_one_learn/generated/l10n.dart';
 part 'tutors_state.dart';
 
 class TutorsCubit extends WidgetCubit<TutorsState> {
-  TutorsCubit._() : super(widgetState: const TutorsState());
+  TutorsCubit._() : super(widgetState: TutorsState(filters: Filters.defaultFilters()));
 
   final numTutorsPerPage = 12;
   final tutorRepository = injector<TutorRepository>();
   final userRepository = injector<UserRepository>();
   TextEditingController? tutorsTextEditingController;
+  ScrollController? tutorsScrollController;
 
   // constants
-  final specialtiesMap = {
-    S.current.all: 'all',
-    S.current.englishForKids: 'english-for-kids',
-    S.current.businessEnglish: 'business-english',
-    S.current.conversationalEnglish: 'conversational-english',
-    S.current.starters: 'starters',
-    S.current.movers: 'movers',
-    S.current.flyers: 'flyers',
-    S.current.ket: 'ket',
-    S.current.pet: 'pet',
-    S.current.ielts: 'ielts',
-    S.current.toefl: 'toefl',
-    S.current.toeic: 'toeic',
-  };
   final nationalitiesMap = {
-    S.current.all: 0,
-    S.current.foreign: 1,
-    S.current.vietnamese: 2,
-    S.current.nativeEnglish: 3,
+    0: S.current.all,
+    1: S.current.foreign,
+    2: S.current.vietnamese,
+    3: S.current.nativeEnglish,
   };
   final sortMap = {
-    S.current.sortNameFromAtoZ: 0,
-    S.current.sortSomethingsFromLow(S.current.rating.toLowerCase()): 1,
-    S.current.sortSomethingsFromHigh(S.current.rating.toLowerCase()): -1,
+    0: S.current.sortNameFromAtoZ,
+    1: S.current.sortSomethingsFromLow(S.current.rating.toLowerCase()),
+    -1: S.current.sortSomethingsFromHigh(S.current.rating.toLowerCase()),
   };
 
   static TutorsCubit? _instance;
@@ -67,6 +54,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       }
       _instance = TutorsCubit._();
       _instance?.tutorsTextEditingController = TextEditingController();
+      _instance?.tutorsScrollController = ScrollController();
     }
     return _instance!;
   }
@@ -143,10 +131,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
   }
 
   Future<void> searchListTutors({bool reloadAllCurrentList = false}) async {
-    emit(state.copyWith(
-      isLoadingMore: true,
-      filters: state.filters ?? Filters.defaultFilters(),
-    ));
+    emit(state.copyWith(isLoadingMore: true));
 
     // search list by the filters amd page number
     final tutorSearchResponse = await fetchApi<TutorSearchResponse>(
@@ -294,6 +279,10 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       );
     }
 
+    if (tutorsScrollController?.hasClients == true) {
+      tutorsScrollController?.jumpTo(0);
+    }
+
     emit(state.copyWith(
       nextPage: 1, total: 0,
       listTutors: initialLoadMoreAbleList,
@@ -305,6 +294,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
   Future<void> onTutorFavouriteStatusChanged(String tutorId, {
     int index = -1,
+    void Function(bool newStatus)? onCompleted,
   }) async {
     changeLoadingState(isLoading: true);
     final userManageFavouriteTutorResponse = await fetchApi<UserManageFavoriteTutorResponse>(
@@ -325,6 +315,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
             listTutors: sortList(newList, sortValue: state.sortValue),
           ));
         }
+        onCompleted?.call(userManageFavouriteTutorResponse.result is! int);
       }
     }
     changeLoadingState(isLoading: false);
@@ -333,6 +324,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
   @override
   Future<void> close() async {
     tutorsTextEditingController?.dispose();
+    tutorsScrollController?.dispose();
     super.close();
     if (_instance?.isClosed == true) {
       if (kDebugMode) {

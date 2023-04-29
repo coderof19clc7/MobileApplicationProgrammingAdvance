@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/map_constants.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
@@ -75,7 +76,7 @@ class TutorsPage extends StatelessWidget {
 
                               // data1Map: context.read<TutorsCubit>().specialtiesMap.values.toList(),
                               // data1RenderValues: context.read<TutorsCubit>().specialtiesMap.keys.toList(),
-                              data1Map: context.read<TutorsCubit>().specialtiesMap,
+                              data1Map: MapConstants.specialtiesMap,
                               data1CurrentFilter: context.read<TutorsCubit>().getCurrentSpecialties(),
 
                               // data2Map: context.read<TutorsCubit>().nationalitiesMap.values.toList(),

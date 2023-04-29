@@ -57,11 +57,14 @@ class AppRouter {
           alignment: Alignment.center,
         );
       case RouteNames.tutorInformation:
-        return PageTransition(
-          child: const TutorInformationScreen(),
-          type: PageTransitionType.rightToLeft,
-          alignment: Alignment.center,
-        );
+        if (args != null && args is TutorInformationArguments) {
+          return PageTransition(
+            child: TutorInformationScreen(args: args),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center,
+          );
+        }
+        return _errRoute();
       case RouteNames.tutorBooking:
         if (args != null && args is BookingArguments) {
           return PageTransition(

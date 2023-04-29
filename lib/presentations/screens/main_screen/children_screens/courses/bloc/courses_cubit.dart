@@ -17,42 +17,13 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
   final courseRepository = injector<CourseRepository>();
   final size = 10;
   final initialLoadMoreAbleList = <CourseInformation?>[null, null, null];
+  final scrollController = ScrollController();
 
-  final categoriesMap = {
-    'all': S.current.all,
-    S.current.forStudyingAboard: '968e7e18-10c0-4742-9ec6-6f5c71c517f5',
-    S.current.englishForTraveling: 'd95b69f7-b810-4cdf-b11d-49faaa71ff4b',
-    S.current.conversationalEnglish: 'c4e7f418-4006-40f2-ba13-cbade54c1fd0',
-    S.current.englishForBeginners: '488cc5f8-a5b1-45cd-8d3a-47e690f9298e',
-    S.current.businessEnglish: 'f01cf003-25d1-432f-aaab-bf0e8390e14f',
-    S.current.starters: '975f83f6-30c5-465d-8d98-65e4182369ba',
-    S.current.englishForKids: 'fb92cf24-1736-4cd7-a042-fa3c37921cf8',
-    S.current.pet: '0b89ead7-0e92-4aec-abce-ecfeba10dea5',
-    S.current.ket: '248ca9f5-b46d-4a55-b81c-abafebff5876',
-    S.current.movers: '534a94f1-579b-497d-b891-47d8e28e1b2c',
-    S.current.flyers: 'df9bd876-c631-413c-9228-cc3d6a5c34fa',
-    S.current.toefl: 'd87de7ba-bd4c-442c-8d58-957acb298f57',
-    S.current.toeic: '1e662753-b305-47ad-a319-fa52340f5532',
-    S.current.ielts: '255c96b6-fd6f-4f43-8dbd-fec766e361e0',
-  };
-  final levelsMap = {
-    S.current.all: -1,
-    'Any Level': 0,
-    'Beginner': 1,
-    'Upper Beginner': 2,
-    'Pre-Intermediate': 3,
-    'Intermediate': 4,
-    'Upper-Intermediate': 5,
-    'Pre-Advance': 6,
-    'Advance': 7,
-    'Very-Advance': 8,
-  };
   final sortMap = {
-    S.current.sortNameFromAtoZ: 0,
-    S.current.sortSomethingsFromLow(S.current.level.toLowerCase()): 1,
-    S.current.sortSomethingsFromHigh(S.current.level.toLowerCase()): -1,
+    0: S.current.sortNameFromAtoZ,
+    1: S.current.sortSomethingsFromLow(S.current.level.toLowerCase()),
+    -1: S.current.sortSomethingsFromHigh(S.current.level.toLowerCase()),
   };
-
 
   @override
   void onWidgetCreated() {}
@@ -161,6 +132,10 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
       return;
     }
 
+    if (scrollController.hasClients) {
+      scrollController.jumpTo(0);
+    }
+
     emit(state.copyWith(
       nextPage: 1, total: 0,
       listCourses: initialLoadMoreAbleList,
@@ -168,5 +143,11 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
       listLevelValues: newLevelValues,
       sortValue: newSortValue,
     ));
+  }
+
+  @override
+  Future<void> close() {
+    scrollController.dispose();
+    return super.close();
   }
 }

@@ -43,6 +43,6 @@ void initNetwork() {
     ..registerLazySingleton<TutorRepository>(TutorRepository.new)
     ..registerLazySingleton<ScheduleRepository>(ScheduleRepository.new)
     ..registerLazySingleton<CourseRepository>(CourseRepository.new)
-    ..registerLazySingleton(BookingRepository.new)
-    ..registerLazySingleton(CallRepository.new);
+    ..registerLazySingleton<BookingRepository>(BookingRepository.new)
+    ..registerLazySingleton<CallRepository>(CallRepository.new);
 }

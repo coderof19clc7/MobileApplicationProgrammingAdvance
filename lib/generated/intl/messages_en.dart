@@ -24,13 +24,17 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m1(somethings) => "${somethings} successfully";
 
-  static String m2(somethings) => "${somethings} is required";
+  static String m2(somethings) => "No suggested ${somethings}";
 
-  static String m3(somethings) => "From high ${somethings}";
+  static String m3(somethings) => "${somethings} is required";
 
-  static String m4(somethings) => "From low ${somethings}";
+  static String m4(somethings) => "From high ${somethings}";
 
-  static String m5(nationality) => "${nationality} tutor";
+  static String m5(somethings) => "From low ${somethings}";
+
+  static String m6(nationality) => "${nationality} tutor";
+
+  static String m7(somethings) => "Unknown ${somethings}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -64,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Please confirm your password"),
         "conversationalEnglish":
             MessageLookupByLibrary.simpleMessage("Conversational English"),
+        "country": MessageLookupByLibrary.simpleMessage("Country"),
         "courses": MessageLookupByLibrary.simpleMessage("Courses"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
@@ -141,6 +146,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "needActivateHeader":
             MessageLookupByLibrary.simpleMessage("Account activation notify"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
+        "noHaveSomethingsSuggested": m2,
         "noReviewGiven": MessageLookupByLibrary.simpleMessage("No comment"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "orContinueWith":
@@ -184,10 +190,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Skill level"),
-        "somethingRequiredError": m2,
+        "somethingRequiredError": m3,
         "sortNameFromAtoZ": MessageLookupByLibrary.simpleMessage("From A to Z"),
-        "sortSomethingsFromHigh": m3,
-        "sortSomethingsFromLow": m4,
+        "sortSomethingsFromHigh": m4,
+        "sortSomethingsFromLow": m5,
         "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
@@ -203,10 +209,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "toeic": MessageLookupByLibrary.simpleMessage("TOEIC"),
         "tutor": MessageLookupByLibrary.simpleMessage("tutor"),
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
-        "tutorWithNationality": m5,
+        "tutorWithNationality": m6,
         "tutoring": MessageLookupByLibrary.simpleMessage("Tutoring"),
+        "unknownSomethings": m7,
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("in"),
+        "videoNotAvailable":
+            MessageLookupByLibrary.simpleMessage("Video not available"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),

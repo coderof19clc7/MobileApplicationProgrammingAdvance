@@ -21,7 +21,7 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
   static UpcomingCubit? _instance;
   static UpcomingCubit getInstance() {
     if (kDebugMode) {
-      print('TutorsCubit _instance?.isClosed: ${_instance?.isClosed}');
+      print('UpcomingCubit _instance?.isClosed: ${_instance?.isClosed}');
     }
     if (_instance == null || _instance?.isClosed == true) {
       if (kDebugMode) {

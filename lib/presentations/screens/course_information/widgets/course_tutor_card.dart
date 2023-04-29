@@ -28,7 +28,7 @@ class CourseTutorCard extends BaseCard {
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
       style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-        fontWeight: FontWeight.w600
+        fontWeight: FontWeight.w600,
       ),
     );
   }

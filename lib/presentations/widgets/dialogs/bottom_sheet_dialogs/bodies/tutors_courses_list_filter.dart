@@ -26,9 +26,9 @@ class TutorsCoursesListFilterBottomSheet extends StatefulWidget {
   final String label1, label2;
   final Map<String, String> data1Map;
   final List<String> data1CurrentFilter;
-  final Map<String, int> data2Map;
+  final Map<int, String> data2Map;
   final List<int> data2CurrentFilter;
-  final Map<String, int> data3Map;
+  final Map<int, String> data3Map;
   final int data3CurrentFilter;
   final Function(List<String>, List<int>, int)? onApplyFilters;
 
@@ -41,8 +41,8 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
   late ScrollController _scrollController2;
 
   late final List<MapEntry<String, String>> data1ListMap;
-  late final List<MapEntry<String, int>> data2ListMap;
-  late final List<MapEntry<String, int>> data3ListMap;
+  late final List<MapEntry<int, String>> data2ListMap;
+  late final List<MapEntry<int, String>> data3ListMap;
   late final List<int> data3ListMapValues;
 
   late List<String> newData1Filter;
@@ -58,7 +58,7 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
     data1ListMap = widget.data1Map.entries.toList();
     data2ListMap = widget.data2Map.entries.toList();
     data3ListMap = widget.data3Map.entries.toList();
-    data3ListMapValues = widget.data3Map.values.toList();
+    data3ListMapValues = widget.data3Map.keys.toList();
 
     newData1Filter = [...widget.data1CurrentFilter];
     newData2Filter = [...widget.data2CurrentFilter];
@@ -111,10 +111,10 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                           ),
                         ),
                         child: BaseChoiceChip(
-                          label: toBeginningOfSentenceCase(item.key)!,
+                          label: toBeginningOfSentenceCase(item.value)!,
                           isSelected: index == 0
                               ? newData1Filter.isEmpty == true
-                              : newData1Filter.contains(data1ListMap[index].value) == true,
+                              : newData1Filter.contains(data1ListMap[index].key) == true,
                           onSelected: (value) {
                             // update specialities list
                             setState(() {
@@ -125,13 +125,13 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                                 // add or remove speciality
                                 final curData1Filter = [...newData1Filter];
                                 if (value) {
-                                  newData1Filter = [...curData1Filter, item.value];
+                                  newData1Filter = [...curData1Filter, item.key];
                                   if (newData1Filter.length == widget.data1Map.length - 1) {
                                     newData1Filter = <String>[];
                                   }
                                   newData1Filter.sort();
                                 } else {
-                                  newData1Filter = [...curData1Filter]..remove(item.value);
+                                  newData1Filter = [...curData1Filter]..remove(item.key);
                                 }
                               }
                             });
@@ -169,10 +169,10 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                           ),
                         ),
                         child: BaseChoiceChip(
-                          label: toBeginningOfSentenceCase(item.key)!,
+                          label: toBeginningOfSentenceCase(item.value)!,
                           isSelected: index == 0
                               ? newData2Filter.isEmpty == true
-                              : newData2Filter.contains(data2ListMap[index].value) == true,
+                              : newData2Filter.contains(data2ListMap[index].key) == true,
                           onSelected: (value) {
                             // update specialities list
                             setState(() {
@@ -183,13 +183,13 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                                 // add or remove speciality
                                 final curData2Filter = [...newData2Filter];
                                 if (value) {
-                                  newData2Filter = [...curData2Filter, item.value];
+                                  newData2Filter = [...curData2Filter, item.key];
                                   if (newData2Filter.length == widget.data2Map.length - 1) {
                                     newData2Filter = <int>[];
                                   }
                                   newData2Filter.sort();
                                 } else {
-                                  newData2Filter = [...curData2Filter]..remove(item.value);
+                                  newData2Filter = [...curData2Filter]..remove(item.key);
                                 }
                               }
                             });
@@ -219,7 +219,7 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                     if (index < 0) {
                       index = 0;
                     }
-                    final text = data3ListMap[index].key;
+                    final text = data3ListMap[index].value;
                     return DropdownMenuItem<int>(
                       value: item,
                       child: Text(

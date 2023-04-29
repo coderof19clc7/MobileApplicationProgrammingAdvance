@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:one_one_learn/configs/constants/map_constants.dart';
+import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
+import 'package:one_one_learn/presentations/screens/tutor_information/bloc/tutor_information_cubit.dart';
+import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
+import 'package:one_one_learn/presentations/widgets/shimmers/linear_shimmer.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
@@ -9,6 +16,7 @@ import 'package:one_one_learn/presentations/screens/tutor_information/widgets/de
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
+import 'package:one_one_learn/utils/extensions/string_extensions.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class GeneralInformation extends StatelessWidget {
@@ -21,60 +29,100 @@ class GeneralInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: Dimens.getScreenWidth(context),
-      child: Column(
-        children: [
-          const EmptyProportionalSpace(height: 10),
-          // avatar & favorite
-          Stack(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(
-                  Dimens.getScreenWidth(context) * 0.34871795,
-                ),
-                child: Image.network(
-                  'https://api.app.lettutor.com/avatar/4d54d3d7-d2a9-42e5-97a2-5ed38af5789aavatar1627913015850.00',
-                  width: Dimens.getScreenWidth(context) * 0.34871795,
-                  height: Dimens.getScreenWidth(context) * 0.34871795,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              Positioned(
-                right: 0,
-                bottom: 0,
-                child: SvgPicture.string(
-                  SvgIcons.getIcon(
-                    SvgIconEnum.favorite,
-                    fillColor: isFavorite ? context.theme.colorScheme.primary : context.theme.colorScheme.background,
-                  ),
-                  width: Dimens.getProportionalHeight(context, 40),
-                  height: Dimens.getProportionalHeight(context, 40),
-                ),
-              ),
-            ],
-          ),
-          const EmptyProportionalSpace(height: 20),
+    final avatarSize = Dimens.getScreenWidth(context) * 0.34871795;
+    return BlocProvider.value(
+      value: TutorsCubit.getInstance(),
+      child: BlocBuilder<TutorsCubit, TutorsState>(
+        builder: (contextTutors, stateTutors) {
+          return BlocBuilder<TutorInformationCubit, TutorInformationState>(
+            builder: (context, state) {
+              final isLoadingData = state.isLoadingData;
+              final tutorInformation = state.tutorInformation;
+              return SizedBox(
+                width: Dimens.getScreenWidth(context),
+                child: Column(
+                  children: [
+                    const EmptyProportionalSpace(height: 10),
+                    // avatar & favorite
+                    Stack(
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(avatarSize),
+                          child: SizedBox(
+                            width: avatarSize,
+                            height: avatarSize,
+                            child: isLoadingData
+                                ? LinearShimmer(radius: avatarSize)
+                                : SimpleNetworkImage(
+                              url: tutorInformation?.User?.avatar,
+                            ),
+                          ),
+                        ),
+                        if (!isLoadingData && tutorInformation != null)
+                          Positioned(
+                            right: 0,
+                            bottom: 0,
+                            child: GestureDetector(
+                              onTap: () {
+                                context.read<TutorsCubit>().onTutorFavouriteStatusChanged(
+                                  state.tutorId,
+                                  onCompleted: (newStatus) {
+                                    context.read<TutorInformationCubit>().updateFavoriteStatus(
+                                      isFavorite: newStatus,
+                                    );
+                                  },
+                                );
+                              },
+                              child: SvgPicture.string(
+                                SvgIcons.getIcon(
+                                  SvgIconEnum.favorite,
+                                  fillColor: tutorInformation.isFavorite ?? false
+                                      ? context.theme.colorScheme.primary
+                                      : context.theme.colorScheme.background,
+                                ),
+                                width: Dimens.getProportionalHeight(context, 40),
+                                height: Dimens.getProportionalHeight(context, 40),
+                              ),
+                            ),
+                          ),
+                      ],
+                    ),
+                    const EmptyProportionalSpace(height: 20),
 
-          // public information field
-          buildPublicInformation(context),
-          const EmptyProportionalSpace(height: 20),
+                    if (!isLoadingData && tutorInformation != null)...[
+                      // public information field
+                      buildPublicInformation(context, tutorInformation),
+                      const EmptyProportionalSpace(height: 20),
 
-          // 4 buttons field
-          buildButtonField(context),
-          const EmptyProportionalSpace(height: 10),
-        ],
+                      // 4 buttons field
+                      buildButtonField(context, tutorInformation),
+                      const EmptyProportionalSpace(height: 10),
+                    ],
+                  ],
+                ),
+              );
+            },
+          );
+        },
       ),
     );
   }
 
-  Widget buildPublicInformation(BuildContext context) {
+  Widget buildPublicInformation(BuildContext context, TutorInfo tutorInformation) {
+    var fractionDigits = 2;
+    final ratingString = (tutorInformation.avgRating ?? 0).toStringAsFixed(2);
+    final ratingFixedString = ratingString.split('.')[1];
+    if (ratingFixedString.toInt() == 0) {
+      fractionDigits = 0;
+    } else if (ratingFixedString.toInt() % 10 == 0) {
+      fractionDigits = 1;
+    }
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         // name
         Text(
-          'Haylee Caillier',
+          tutorInformation.User?.name ?? '',
           textAlign: TextAlign.center,
           style: Dimens.getProportionalFont(context, context.theme.textTheme.titleLarge).copyWith(
             fontSize: Dimens.getProportionalWidth(context, 20),
@@ -87,14 +135,15 @@ class GeneralInformation extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-              UIHelper.getIconFromNationalityCode('DE'),
+              UIHelper.getIconFromNationalityCode(tutorInformation.User?.country),
               style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                 fontSize: Dimens.getProportionalWidth(context, 16),
               ),
             ),
             const EmptyProportionalSpace(width: 8),
             Text(
-              'Netherlands',
+              MapConstants.countries[tutorInformation.User?.country ?? '']
+                  ?? S.current.unknownSomethings(S.current.country),
               style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 fontSize: Dimens.getProportionalWidth(context, 16),
               ),
@@ -114,7 +163,7 @@ class GeneralInformation extends StatelessWidget {
             ),
             const EmptyProportionalSpace(width: 4),
             Text(
-              '4.5/5',
+              '${(tutorInformation.avgRating ?? 0).toStringAsFixed(fractionDigits)}/5',
               style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 color: context.theme.colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w700,
@@ -130,7 +179,7 @@ class GeneralInformation extends StatelessWidget {
             ),
             const EmptyProportionalSpace(width: 8),
             Text(
-              '23,000 ${S.current.review}'.toLowerCase(),
+              '${tutorInformation.totalFeedback ?? 0} ${S.current.review}'.toLowerCase(),
               style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 fontSize: Dimens.getProportionalWidth(context, 15),
               ),
@@ -141,45 +190,21 @@ class GeneralInformation extends StatelessWidget {
     );
   }
 
-  Widget buildButtonField(BuildContext context) {
-    const iconSize = 16.0, verticalSpace = 4.0, buttonVerticalPadding = 7.0;
-    const fontSize = 12.0, fontWeight = FontWeight.w600;
+  Widget buildButtonField(BuildContext context, TutorInfo tutorInformation) {
     return SizedBox(
       width: Dimens.getScreenWidth(context) * 0.75,
       child: Column(
         children: [
           // booking button
-          PrimaryFillButton(
+          buildSingleButton(
+            context,
             onTap: () {
               Navigator.of(context).pushNamed(RouteNames.tutorBooking);
             },
-            width: Dimens.getScreenWidth(context),
-            borderRadiusValue: Dimens.getScreenWidth(context),
-            paddingVertical: Dimens.getProportionalHeight(
-              context,
-              buttonVerticalPadding,
-            ),
-            child: Column(
-              children: [
-                Icon(
-                  Icons.calendar_today_rounded,
-                  color: context.theme.colorScheme.onPrimary,
-                  size: Dimens.getProportionalWidth(context, iconSize),
-                ),
-                const EmptyProportionalSpace(height: verticalSpace),
-                Text(
-                  S.current.bookClass,
-                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                    color: context.theme.colorScheme.onPrimary,
-                    fontWeight: fontWeight,
-                    fontSize: Dimens.getProportionalWidth(
-                      context,
-                      fontSize + 2,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            isFill: true,
+            icon: Icons.calendar_today_rounded,
+            text:  S.current.bookClass,
+            fontSizeBonus: 2,
           ),
 
           const EmptyProportionalSpace(height: 20),
@@ -189,40 +214,11 @@ class GeneralInformation extends StatelessWidget {
             children: [
               // report button
               Flexible(
-                child: PrimaryOutlineButton(
-                  borderRadiusValue: Dimens.getScreenWidth(context),
-                  paddingVertical: Dimens.getProportionalHeight(
-                    context,
-                    buttonVerticalPadding,
-                  ),
+                child: buildSingleButton(
+                  context,
                   onTap: () {},
-                  preferGradient: false,
-                  borderColor: context.theme.colorScheme.onSurfaceVariant,
-                  bodyColor: context.theme.colorScheme.background,
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.report_rounded,
-                        color: context.theme.colorScheme.onSurfaceVariant,
-                        size: Dimens.getProportionalWidth(
-                          context,
-                          iconSize,
-                        ),
-                      ),
-                      const EmptyProportionalSpace(height: verticalSpace),
-                      Text(
-                        S.current.report,
-                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                          color: context.theme.colorScheme.onSurfaceVariant,
-                          fontWeight: fontWeight,
-                          fontSize: Dimens.getProportionalWidth(
-                            context,
-                            fontSize,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  icon: Icons.report_rounded,
+                  text: S.current.report,
                 ),
               ),
 
@@ -230,48 +226,23 @@ class GeneralInformation extends StatelessWidget {
 
               // watch tutor demo button
               Flexible(
-                child: PrimaryOutlineButton(
-                  borderRadiusValue: Dimens.getScreenWidth(context),
-                  paddingVertical: Dimens.getProportionalHeight(
-                    context,
-                    buttonVerticalPadding,
-                  ),
+                child: buildSingleButton(
+                  context,
                   onTap: () {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return const Dialog(
-                          child: DemoVideoPopup(),
+                        return Dialog(
+                          child: DemoVideoPopup(
+                            videoUrl: tutorInformation.video ?? '',
+                          ),
                         );
                       },
                     );
                   },
-                  preferGradient: false,
-                  borderColor: context.theme.colorScheme.onSurfaceVariant,
-                  bodyColor: context.theme.colorScheme.background,
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.videocam_rounded,
-                        color: context.theme.colorScheme.onSurfaceVariant,
-                        size: Dimens.getProportionalWidth(
-                          context,
-                          iconSize + 4,
-                        ),
-                      ),
-                      Text(
-                        S.current.demo,
-                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                          color: context.theme.colorScheme.onSurfaceVariant,
-                          fontWeight: fontWeight,
-                          fontSize: Dimens.getProportionalWidth(
-                            context,
-                            fontSize,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  icon: Icons.videocam_rounded,
+                  iconSizeBonus: 4,
+                  text: S.current.demo,
                 ),
               ),
 
@@ -279,46 +250,69 @@ class GeneralInformation extends StatelessWidget {
 
               // chat button
               Flexible(
-                child: PrimaryOutlineButton(
-                  borderRadiusValue: Dimens.getScreenWidth(context),
-                  paddingVertical: Dimens.getProportionalHeight(
-                    context,
-                    buttonVerticalPadding,
-                  ),
+                child: buildSingleButton(
+                  context,
                   onTap: () {},
-                  preferGradient: false,
-                  borderColor: context.theme.colorScheme.onSurfaceVariant,
-                  bodyColor: context.theme.colorScheme.background,
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.message_rounded,
-                        color: context.theme.colorScheme.onSurfaceVariant,
-                        size: Dimens.getProportionalWidth(
-                          context,
-                          iconSize,
-                        ),
-                      ),
-                      const EmptyProportionalSpace(height: verticalSpace),
-                      Text(
-                        S.current.chat,
-                        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                          color: context.theme.colorScheme.onSurfaceVariant,
-                          fontWeight: fontWeight,
-                          fontSize: Dimens.getProportionalWidth(
-                            context,
-                            fontSize,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  icon: Icons.message_rounded,
+                  text: S.current.chat,
                 ),
               ),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  Widget buildSingleButton(BuildContext context, {
+    bool isFill = false,
+    double? width,
+    double iconSizeBonus = 0,
+    double fontSizeBonus = 0,
+    required IconData icon,
+    required String text,
+    required Function() onTap,
+  }) {
+    final color = isFill
+        ? context.theme.colorScheme.onPrimary
+        : context.theme.colorScheme.onSurfaceVariant;
+    final child = Column(
+      children: [
+        Icon(
+          icon, color: color,
+          size: Dimens.getProportionalWidth(context, 16.0 + iconSizeBonus),
+        ),
+        const EmptyProportionalSpace(height: 4),
+        Text(
+          text,
+          style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+            color: color,
+            fontWeight: FontWeight.w600,
+            fontSize: Dimens.getProportionalWidth(context, 12.0 + fontSizeBonus),
+          ),
+        ),
+      ],
+    );
+
+    if (isFill) {
+      return PrimaryFillButton(
+        onTap: onTap,
+        width: width,
+        borderRadiusValue: Dimens.getScreenWidth(context),
+        paddingVertical: Dimens.getProportionalHeight(context, 7),
+        child: child,
+      );
+    }
+
+    return PrimaryOutlineButton(
+      onTap: onTap,
+      width: width,
+      borderRadiusValue: Dimens.getScreenWidth(context),
+      paddingVertical: Dimens.getProportionalHeight(context, 7),
+      preferGradient: false,
+      borderColor: context.theme.colorScheme.onSurfaceVariant,
+      bodyColor: context.theme.colorScheme.background,
+      child: child,
     );
   }
 }

@@ -2,53 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/tutor/feed_back.dart';
 import 'package:one_one_learn/core/models/responses/user/user_info.dart';
 
-/// level : "PROFICIENCY"
-/// email : "teacher@lettutor.com"
-/// google : null
-/// facebook : null
-/// apple : null
-/// avatar : "https://api.app.lettutor.com/avatar/4d54d3d7-d2a9-42e5-97a2-5ed38af5789aavatar1627913015850.00"
-/// name : "Keegan"
-/// country : "VN"
-/// phone : "84356030876"
-/// language : "Ukrainian"
-/// birthday : "1999-06-07"
-/// requestPassword : true
-/// isActivated : true
-/// isPhoneActivated : null
-/// requireNote : null
-/// timezone : 7
-/// phoneAuth : null
-/// isPhoneAuthActivated : false
-/// studySchedule : ""
-/// canSendMessage : false
-/// isPublicRecord : false
-/// caredByStaffId : null
-/// createdAt : "2021-08-02T14:03:36.320Z"
-/// updatedAt : "2023-02-19T06:06:59.444Z"
-/// deletedAt : null
-/// studentGroupId : null
-/// feedbacks : []
-/// id : "6ca5c092-76ea-4e72-9c6e-05e2239aa33b"
-/// userId : "4d54d3d7-d2a9-42e5-97a2-5ed38af5789a"
-/// video : "https://api.app.lettutor.com/video/4d54d3d7-d2a9-42e5-97a2-5ed38af5789avideo1627913015871.mp4"
-/// bio : "I am passionate about running and fitness, I often compete in trail/mountain running events and I love pushing myself. I am training to one day take part in ultra-endurance events. I also enjoy watching rugby on the weekends, reading and watching podcasts on Youtube. My most memorable life experience would be living in and traveling around Southeast Asia."
-/// education : "BA"
-/// experience : "I have more than 10 years of teaching english experience"
-/// profession : "English teacher"
-/// accent : null
-/// targetStudent : "Advanced"
-/// interests : " I loved the weather, the scenery and the laid-back lifestyle of the locals."
-/// languages : "en"
-/// specialties : "business-english,conversational-english,english-for-kids,ielts,toeic"
-/// resume : null
-/// rating : 4.2272727272727275
-/// isNative : null
-/// User : null
-/// schedulestimes : "1"
-/// isfavoritetutor : "1"
-/// isOnline : true
-/// price : 50000
 class TutorInfo {
 //<editor-fold desc="Data Methods">
   TutorInfo({
@@ -93,12 +46,15 @@ class TutorInfo {
     this.specialties,
     this.resume,
     this.rating,
+    this.avgRating,
     this.isNative,
     this.User,
     this.schedulestimes,
     this.isfavoritetutor,
+    this.isFavorite,
     this.isOnline,
     this.price,
+    this.totalFeedback,
   });
 
   factory TutorInfo.fromJson(dynamic json) {
@@ -147,12 +103,15 @@ class TutorInfo {
       specialties: mapJson['specialties'] as String?,
       resume: mapJson['resume'],
       rating: mapJson['rating'] as num?,
+      avgRating: mapJson['avgRating'] as num?,
       isNative: mapJson['isNative'],
       User: mapJson['User'] != null ? UserInfo.fromJson(mapJson['User']) : null,
       schedulestimes: mapJson['schedulestimes']as String?,
       isfavoritetutor: mapJson['isfavoritetutor'] as String?,
+      isFavorite: mapJson['isFavorite'] as bool?,
       isOnline: mapJson['isOnline'] as bool?,
       price: mapJson['price'] as num?,
+      totalFeedback: mapJson['totalFeedback'] as num?,
     );
   }
 
@@ -197,12 +156,15 @@ class TutorInfo {
   final String? specialties;
   final dynamic resume;
   final num? rating;
+  final num? avgRating;
   final dynamic isNative;
   final UserInfo? User;
   final String? schedulestimes;
   final String? isfavoritetutor;
+  final bool? isFavorite;
   final bool? isOnline;
   final num? price;
+  final num? totalFeedback;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -247,12 +209,15 @@ class TutorInfo {
     map['specialties'] = specialties;
     map['resume'] = resume;
     map['rating'] = rating;
+    map['avgRating'] = avgRating;
     map['isNative'] = isNative;
     map['User'] = User?.toJson();
     map['schedulestimes'] = schedulestimes;
     map['isfavoritetutor'] = isfavoritetutor;
+    map['isFavorite'] = isFavorite;
     map['isOnline'] = isOnline;
     map['price'] = price;
+    map['totalFeedback'] = totalFeedback;
     return map;
   }
 
@@ -302,12 +267,15 @@ class TutorInfo {
           specialties == other.specialties &&
           resume == other.resume &&
           rating == other.rating &&
+          avgRating == other.avgRating &&
           isNative == other.isNative &&
           User == other.User &&
           schedulestimes == other.schedulestimes &&
           isfavoritetutor == other.isfavoritetutor &&
+          isFavorite == other.isFavorite &&
           isOnline == other.isOnline &&
-          price == other.price);
+          price == other.price &&
+          totalFeedback == other.totalFeedback);
 
   @override
   int get hashCode =>
@@ -352,12 +320,15 @@ class TutorInfo {
       specialties.hashCode ^
       resume.hashCode ^
       rating.hashCode ^
+      avgRating.hashCode ^
       isNative.hashCode ^
       User.hashCode ^
       schedulestimes.hashCode ^
       isfavoritetutor.hashCode ^
+      isFavorite.hashCode ^
       isOnline.hashCode ^
-      price.hashCode;
+      price.hashCode ^
+      totalFeedback.hashCode;
 
   @override
   String toString() {
@@ -403,12 +374,15 @@ class TutorInfo {
         ' specialties: $specialties,'
         ' resume: $resume,'
         ' rating: $rating,'
+        ' avgRating: $avgRating,'
         ' isNative: $isNative,'
         ' User: $User,'
         ' schedulestimes: $schedulestimes,'
         ' isfavoritetutor: $isfavoritetutor,'
+        ' isFavorite: $isFavorite,'
         ' isOnline: $isOnline,'
         ' price: $price,'
+        ' totalFeedback: $totalFeedback,'
         ' }';
   }
 
@@ -454,12 +428,15 @@ class TutorInfo {
     String? specialties,
     dynamic resume,
     num? rating,
+    num? avgRating,
     dynamic isNative,
     UserInfo? User,
     String? schedulestimes,
     String? isfavoritetutor,
+    bool? isFavorite,
     bool? isOnline,
     num? price,
+    num? totalFeedback,
   }) {
     return TutorInfo(
       level: level ?? this.level,
@@ -503,12 +480,15 @@ class TutorInfo {
       specialties: specialties ?? this.specialties,
       resume: resume ?? this.resume,
       rating: rating ?? this.rating,
+      avgRating: avgRating ?? this.avgRating,
       isNative: isNative ?? this.isNative,
       User: User ?? this.User,
       schedulestimes: schedulestimes ?? this.schedulestimes,
       isfavoritetutor: isfavoritetutor ?? this.isfavoritetutor,
+      isFavorite: isFavorite ?? this.isFavorite,
       isOnline: isOnline ?? this.isOnline,
       price: price ?? this.price,
+      totalFeedback: totalFeedback ?? this.totalFeedback,
     );
   }
 
@@ -555,12 +535,15 @@ class TutorInfo {
       'specialties': specialties,
       'resume': resume,
       'rating': rating,
+      'avgRating': avgRating,
       'isNative': isNative,
       'User': User?.toMap(),
       'schedulestimes': schedulestimes,
       'isfavoritetutor': isfavoritetutor,
+      'isFavorite': isFavorite,
       'isOnline': isOnline,
       'price': price,
+      'totalFeedback': totalFeedback,
     };
   }
 
@@ -610,14 +593,17 @@ class TutorInfo {
       specialties: map['specialties'] as String?,
       resume: map['resume'] as dynamic,
       rating: map['rating'] as num?,
+      avgRating: map['avgRating'] as num?,
       isNative: map['isNative'] as dynamic,
       User: map['User'] != null
           ? UserInfo.fromMap(map['User'] as Map<String, dynamic>)
           : null,
       schedulestimes: map['schedulestimes'] as String?,
       isfavoritetutor: map['isfavoritetutor'] as String?,
+      isFavorite: map['isFavorite'] as bool?,
       isOnline: map['isOnline'] as bool?,
       price: map['price'] as num?,
+      totalFeedback: map['totalFeedback'] as num?,
     );
   }
 

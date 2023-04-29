@@ -1389,6 +1389,46 @@ class S {
       args: [nationality],
     );
   }
+
+  /// `Unknown {somethings}`
+  String unknownSomethings(String somethings) {
+    return Intl.message(
+      'Unknown $somethings',
+      name: 'unknownSomethings',
+      desc: 'Somethings that does not known',
+      args: [somethings],
+    );
+  }
+
+  /// `Country`
+  String get country {
+    return Intl.message(
+      'Country',
+      name: 'country',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Video not available`
+  String get videoNotAvailable {
+    return Intl.message(
+      'Video not available',
+      name: 'videoNotAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No suggested {somethings}`
+  String noHaveSomethingsSuggested(String somethings) {
+    return Intl.message(
+      'No suggested $somethings',
+      name: 'noHaveSomethingsSuggested',
+      desc: 'No suggested somethings',
+      args: [somethings],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
