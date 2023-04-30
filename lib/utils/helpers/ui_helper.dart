@@ -4,6 +4,7 @@ import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
+import 'package:one_one_learn/utils/extensions/string_extensions.dart';
 
 class UIHelper {
   static void hideKeyboard(BuildContext context) {
@@ -87,5 +88,17 @@ class UIHelper {
         ),
       ],
     );
+  }
+
+  static String doubleToStringAsFixed(double value, {int fixedNumber = 2}) {
+    var fractionDigits = fixedNumber;
+    final valueString = value.toStringAsFixed(fractionDigits);
+    final valueFixedString = valueString.split('.')[1];
+    if (valueFixedString.toInt() == 0) {
+      fractionDigits = 0;
+    } else if (valueFixedString.toInt() % (10 * (fixedNumber - 1)) == 0) {
+      fractionDigits = fixedNumber - 1;
+    }
+    return value.toStringAsFixed(fractionDigits);
   }
 }

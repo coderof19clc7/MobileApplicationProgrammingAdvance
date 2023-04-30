@@ -16,7 +16,6 @@ import 'package:one_one_learn/presentations/screens/tutor_information/widgets/de
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
-import 'package:one_one_learn/utils/extensions/string_extensions.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class GeneralInformation extends StatelessWidget {
@@ -109,14 +108,6 @@ class GeneralInformation extends StatelessWidget {
   }
 
   Widget buildPublicInformation(BuildContext context, TutorInfo tutorInformation) {
-    var fractionDigits = 2;
-    final ratingString = (tutorInformation.avgRating ?? 0).toStringAsFixed(2);
-    final ratingFixedString = ratingString.split('.')[1];
-    if (ratingFixedString.toInt() == 0) {
-      fractionDigits = 0;
-    } else if (ratingFixedString.toInt() % 10 == 0) {
-      fractionDigits = 1;
-    }
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -163,7 +154,7 @@ class GeneralInformation extends StatelessWidget {
             ),
             const EmptyProportionalSpace(width: 4),
             Text(
-              '${(tutorInformation.avgRating ?? 0).toStringAsFixed(fractionDigits)}/5',
+              '${UIHelper.doubleToStringAsFixed((tutorInformation.avgRating ?? 0).toDouble())}/5',
               style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
                 color: context.theme.colorScheme.onSurfaceVariant,
                 fontWeight: FontWeight.w700,

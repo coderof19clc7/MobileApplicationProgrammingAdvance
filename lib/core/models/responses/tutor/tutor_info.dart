@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:one_one_learn/core/models/responses/tutor/feed_back.dart';
+import 'package:one_one_learn/core/models/responses/feedback/feed_back.dart';
 import 'package:one_one_learn/core/models/responses/user/user_info.dart';
 
 class TutorInfo {

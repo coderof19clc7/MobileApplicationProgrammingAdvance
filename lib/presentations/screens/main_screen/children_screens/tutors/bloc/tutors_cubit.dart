@@ -147,15 +147,19 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     );
 
     // handle the response
-    print('currentListLength: ${
+    if (kDebugMode) {
+      print('currentListLength: ${
       canListTutorsLoadMore() ? state.listTutors.length - 3 : state.listTutors.length
     }');
+    }
     if (tutorSearchResponse != null) {
       if (tutorSearchResponse.statusCode == ApiStatusCode.success) {
         var newPage = state.nextPage;
         final newListTutors = tutorSearchResponse.rows ?? <TutorInfo?>[];
         var finalNewListTutors = <TutorInfo?>[];
-        print('newListTutors: ${newListTutors.length}');
+        if (kDebugMode) {
+          print('newListTutors: ${newListTutors.length}');
+        }
         if (reloadAllCurrentList) {
           // reload all current list --> replace current list with new list
           finalNewListTutors = sortList(newListTutors, sortValue: state.sortValue);
@@ -173,7 +177,9 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
             )..addAll([null, null, null]);
           }
         }
-        print('finalNewListTutors: ${finalNewListTutors.length}');
+        if (kDebugMode) {
+          print('finalNewListTutors: ${finalNewListTutors.length}');
+        }
 
         emit(state.copyWith(
           nextPage: newPage,
@@ -260,15 +266,15 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       if (newNationalityValues != getCurrentNationalities()) {
         if (newNationalityValues.isEmpty) {
           currentNationality = Nationality();
-        } else if (newNationalityValues.contains(nationalitiesMap[S.current.foreign])) {
+        } else if (newNationalityValues.contains(1)) {
           currentNationality = Nationality(
-            isVietNamese: newNationalityValues.contains(nationalitiesMap[S.current.vietnamese]) ? null : false,
-            isNative: newNationalityValues.contains(nationalitiesMap[S.current.nativeEnglish]) ? null : false,
+            isVietNamese: newNationalityValues.contains(2) ? null : false,
+            isNative: newNationalityValues.contains(3) ? null : false,
           );
         } else {
           currentNationality = Nationality(
-            isVietNamese: newNationalityValues.contains(nationalitiesMap[S.current.vietnamese]) ? true : null,
-            isNative: newNationalityValues.contains(nationalitiesMap[S.current.nativeEnglish]) ? true : null,
+            isVietNamese: newNationalityValues.contains(2) ? true : null,
+            isNative: newNationalityValues.contains(3) ? true : null,
           );
         }
       }
@@ -315,7 +321,10 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
             listTutors: sortList(newList, sortValue: state.sortValue),
           ));
         }
-        onCompleted?.call(userManageFavouriteTutorResponse.result is! int);
+
+        if (onCompleted != null && userManageFavouriteTutorResponse.result != null) {
+          onCompleted.call(userManageFavouriteTutorResponse.result is! int);
+        }
       }
     }
     changeLoadingState(isLoading: false);

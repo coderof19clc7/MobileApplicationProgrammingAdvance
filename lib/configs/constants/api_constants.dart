@@ -4,6 +4,7 @@ class ApiServices {
   static const auth = 'auth';
   static const user = 'user';
   static const tutor = 'tutor';
+  static const feedback = 'feedback/v2';
   static const schedule = 'schedule';
   static const booking = 'booking';
   static const call = 'call';

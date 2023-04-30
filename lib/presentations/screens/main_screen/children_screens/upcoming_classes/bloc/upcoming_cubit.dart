@@ -110,8 +110,10 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
     emit(state.copyWith(isLoadingMore: true));
 
     // search list by the filters amd page number
-    print('state.nextPage: ${state.nextPage}');
-    print('now: ${DateTime.now().millisecondsSinceEpoch}');
+    if (kDebugMode) {
+      print('state.nextPage: ${state.nextPage}');
+      print('now: ${DateTime.now().millisecondsSinceEpoch}');
+    }
     final bookedClassesResponse = await fetchApi<BookedClassesResponse>(
           () => bookingRepository.getBookedClasses(query: BookedClassesRequest(
             page: state.nextPage,

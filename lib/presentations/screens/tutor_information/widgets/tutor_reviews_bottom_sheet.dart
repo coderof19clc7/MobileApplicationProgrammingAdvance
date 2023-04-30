@@ -1,97 +1,64 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/utils/extensions/app_extensions.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
+import 'package:one_one_learn/presentations/screens/tutor_information/bloc/tutor_information_cubit.dart';
+import 'package:one_one_learn/presentations/screens/tutor_information/widgets/tutor_review_card.dart';
 
 class TutorReviewsBottomSheet extends StatelessWidget {
-  const TutorReviewsBottomSheet({super.key});
+  const TutorReviewsBottomSheet({
+    super.key, required this.cubit,
+  });
+
+  final TutorInformationCubit cubit;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          child: ListView.builder(
-            itemCount: 10,
+    return BlocProvider.value(
+      value: cubit,
+      child: BlocBuilder<TutorInformationCubit, TutorInformationState>(
+        builder: (context, state) {
+          final listFeedback = state.feedbackList;
+          if (listFeedback.isEmpty) {
+            return const Center(
+              child: Text('No reviews'),
+            );
+          }
+
+          return ListView.builder(
+            itemCount: listFeedback.length,
             itemBuilder: (context, index) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // avatar name rating
-                  Row(
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(
-                          Dimens.getScreenWidth(context) * 0.1820512,
-                        ),
-                        child: Image.network(
-                          'https://media.discordapp.net/attachments/395257786696728577/1084081501525774457/connor6drake.png',
-                          width: Dimens.getScreenWidth(context) * 0.1538461,
-                          height: Dimens.getScreenWidth(context) * 0.1538461,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      const EmptyProportionalSpace(width: 10),
-                      Expanded(
-                        child: Text(
-                          'Daniella Bulluck Daniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella BulluckDaniella Bulluck',
-                          textAlign: TextAlign.left,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                            fontSize: Dimens.getProportionalWidth(context, 16),
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ),
-                      const EmptyProportionalSpace(width: 3.5),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.star_rounded,
-                            color: context.theme.colorScheme.onSurfaceVariant,
-                            size: Dimens.getProportionalWidth(context, 17),
-                          ),
-                          const EmptyProportionalSpace(width: 4),
-                          Text(
-                            '4.5/5',
-                            style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                              color: context.theme.colorScheme.onSurfaceVariant,
-                              fontWeight: FontWeight.w700,
-                              fontSize: Dimens.getProportionalWidth(context, 15),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const EmptyProportionalSpace(height: 12),
-                  // text
-                  Text(
-                    'Sed tempor vulputate mauris, ac viverra arcu sagittis vel. Morbi eu velit nec sem cursus molestie nec id dui.',
-                    style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                      fontSize: Dimens.getProportionalWidth(context, 14),
-                    ),
-                  ),
-                  const EmptyProportionalSpace(height: 12),
-                  // datetime
-                  Text(
-                    'Wed, Mar 10, 2023 at 10:53',
-                    style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                      fontSize: Dimens.getProportionalWidth(context, 13),
-                    ),
-                  ),
-                  const EmptyProportionalSpace(height: 30),
-                ],
+              final item = listFeedback[index];
+
+              if (item == null
+                  && index == listFeedback.length - 3
+                  && !state.isLoadingMoreFeedback
+              ) {
+                if (kDebugMode) {
+                  print('call api to get more feedback at index: $index');
+                }
+                context.read<TutorInformationCubit>().getListFeedback();
+              }
+
+              return TutorReviewCard(
+                firstChild: const SizedBox.shrink(),
+                padding: EdgeInsets.all(
+                  Dimens.getProportionalWidth(context, 7),
+                ),
+                isLoading: item == null,
+                name: item?.firstInfo?.name ?? '',
+                avatar: item?.firstInfo?.avatar ?? '',
+                content: item?.content ?? '',
+                updateAt: item?.updatedAt ?? '',
+                decoration: const BoxDecoration(
+                  color: AppColors.transparent,
+                ),
               );
             },
-          ),
-        ),
-      ],
+          );
+        },
+      ),
     );
   }
 }

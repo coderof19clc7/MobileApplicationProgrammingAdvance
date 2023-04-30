@@ -1,14 +1,5 @@
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 
-/// id : "bc8bf0ce-d8f1-48c2-9b7e-5ee4cb51a53e"
-/// bookingId : "e776a9b9-0280-4aba-95a6-fcbfc83a00e1"
-/// firstId : "f569c202-7bbf-4620-af77-ecc1419a6b28"
-/// secondId : "4d54d3d7-d2a9-42e5-97a2-5ed38af5789a"
-/// rating : 4
-/// content : "qua tuyet voi"
-/// createdAt : "2022-12-15T14:45:13.464Z"
-/// updatedAt : "2022-12-15T14:45:13.464Z"
-/// firstInfo : {"level":"INTERMEDIATE","email":"student@lettutor.com","google":null,"facebook":null,"apple":null,"avatar":"https://sandbox.api.lettutor.com/avatar/f569c202-7bbf-4620-af77-ecc1419a6b28avatar1681646155405.png","name":"Phhai","country":"VN","phone":"842499996508","language":"Albanian","birthday":"1999-06-01","requestPassword":true,"isActivated":true,"isPhoneActivated":true,"requireNote":"","timezone":7,"phoneAuth":null,"isPhoneAuthActivated":false,"studySchedule":"Thứ 2 3 test","canSendMessage":false,"isPublicRecord":false,"caredByStaffId":null,"createdAt":"2021-10-19T13:08:04.242Z","updatedAt":"2023-04-16T11:55:55.413Z","deletedAt":null,"studentGroupId":null}
 class FeedBack {
 //<editor-fold desc="Data Methods">
   FeedBack({

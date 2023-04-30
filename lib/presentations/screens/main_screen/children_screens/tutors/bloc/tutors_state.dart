@@ -27,7 +27,7 @@ class TutorsState extends WidgetState {
           ? (mapJson['listTutors'] as List).map((e) {
             return e != null ? TutorInfo.fromJson(e) : null;
       }).toList()
-          : <TutorInfo>[],
+          : const <TutorInfo?>[null, null, null],
       filters: mapJson['filters'] != null
           ? Filters.fromJson(mapJson['filters'])
           : null,
@@ -189,7 +189,7 @@ class TutorsState extends WidgetState {
           ? (map['listTutors'] as List).map((e) {
             return e != null ? TutorInfo.fromMap(e as Map<String, dynamic>) : null;
           }).toList()
-          : <TutorInfo>[],
+          : const <TutorInfo?>[null, null, null],
       filters: map['filters'] != null
           ? Filters.fromMap(map['filters'] as Map<String, dynamic>)
           : null,

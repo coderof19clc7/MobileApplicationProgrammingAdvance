@@ -2,11 +2,12 @@ import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
+import 'package:one_one_learn/core/models/responses/feedback/feed_back.dart';
+import 'package:one_one_learn/core/models/responses/feedback/feedback_list_response.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info_response.dart';
-import 'package:one_one_learn/core/models/responses/user/user_manage_favorite_tutor_response.dart';
+import 'package:one_one_learn/core/network/repositories/feedback_repository.dart';
 import 'package:one_one_learn/core/network/repositories/tutor_repository.dart';
-import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 
 part 'tutor_information_state.dart';
 
@@ -15,7 +16,10 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
       : super(widgetState: TutorInformationState(tutorId: tutorId));
 
   final _tutorRepository = injector<TutorRepository>();
-  final _userRepository = injector<UserRepository>();
+  final _feedbackRepository = injector<FeedbackRepository>();
+  final int feedBackPerPage = 12;
+
+  List<FeedBack?> get initialLoadMoreAbleFeedBackList => <FeedBack?>[null, null, null];
 
   @override
   void onWidgetCreated() {}
@@ -28,9 +32,7 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
     );
 
     if (tutorInfoResponse != null) {
-      if (tutorInfoResponse.statusCode == ApiStatusCode.success
-          && tutorInfoResponse.data != null
-      ) {
+      if (tutorInfoResponse.statusCode == ApiStatusCode.success) {
         emit(state.copyWith(tutorInformation: tutorInfoResponse.data));
       }
     }
@@ -43,25 +45,66 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
     ));
   }
 
-  Future<void> onTutorFavouriteStatusChanged(String tutorId, {
-    Future<void> Function()? onManageFavouriteStatusSuccess,
-  }) async {
-    changeLoadingState(isLoading: true);
-    final userManageFavouriteTutorResponse = await fetchApi<UserManageFavoriteTutorResponse>(
-          () => _userRepository.manageFavoriteTutor(tutorId),
+  bool canListFeedbackLoadMore() {
+    return state.feedbackList.last == null;
+  }
+
+  List<FeedBack?> getRealCurrentFeedbackList() {
+    return canListFeedbackLoadMore()
+        ? state.feedbackList.sublist(0, state.feedbackList.length - 3)
+        : state.feedbackList;
+  }
+
+  Future<void> getListFeedback() async {
+    emit(state.copyWith(isLoadingMoreFeedback: true));
+    if (kDebugMode) {
+      print('nextPage: ${state.feedbackNextPage}');
+    }
+    final feedbackListResponse = await fetchApi<FeedbackListResponse>(
+      () async => _feedbackRepository.getListFeedback(
+        tutorId: state.tutorId,
+        page: state.feedbackNextPage,
+        perPage: feedBackPerPage,
+      ),
       showLoading: false,
     );
 
-    if (userManageFavouriteTutorResponse != null) {
-      if (userManageFavouriteTutorResponse.statusCode == ApiStatusCode.success) {
-        await onManageFavouriteStatusSuccess?.call();
-        emit(state.copyWith(
-          tutorInformation: state.tutorInformation?.copyWith(
-            isFavorite: !(state.tutorInformation?.isFavorite ?? false),
-          ),
-        ));
-      }
+    if (kDebugMode) {
+      print('currentFeedbackListLength: ${
+          canListFeedbackLoadMore() ? state.feedbackList.length - 3 : state.feedbackList.length
+      }');
     }
-    changeLoadingState(isLoading: false);
+    if (feedbackListResponse != null) {
+      if (feedbackListResponse.statusCode == ApiStatusCode.success) {
+        final newFeedbackList = feedbackListResponse.data?.rows ?? <FeedBack?>[];
+        if (kDebugMode) {
+          print('newFeedbackList: ${newFeedbackList.length}');
+        }
+        var finalNewFeedbackList = <FeedBack?>[];
+
+        // combine current list and new list
+        final newPage = state.feedbackNextPage + (newFeedbackList.isEmpty ? 0 : 1);
+        final currentList = getRealCurrentFeedbackList();
+        finalNewFeedbackList = newFeedbackList.isEmpty ? [...currentList] : [...currentList, ...newFeedbackList];
+        if (finalNewFeedbackList.length != currentList.length) {
+          finalNewFeedbackList.addAll([null, null, null]);
+        }
+        if (kDebugMode) {
+          print('finalNewFeedbackList: ${finalNewFeedbackList.length}');
+        }
+
+        emit(state.copyWith(
+          feedbackNextPage: newPage,
+          feedbackTotal: feedbackListResponse.data?.count?.toInt() ?? 0,
+          feedbackList: [...finalNewFeedbackList],
+        ));
+      } else {
+        emit(state.copyWith(feedbackList: [...getRealCurrentFeedbackList()]));
+      }
+    } else {
+      emit(state.copyWith(feedbackList: [...getRealCurrentFeedbackList()]));
+    }
+
+    emit(state.copyWith(isLoadingMoreFeedback: false));
   }
 }

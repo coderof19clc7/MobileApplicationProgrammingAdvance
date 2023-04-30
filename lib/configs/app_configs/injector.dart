@@ -5,6 +5,7 @@ import 'package:one_one_learn/core/network/network_manager.dart';
 import 'package:one_one_learn/core/network/repositories/auth_repository.dart';
 import 'package:one_one_learn/core/network/repositories/booking_repository.dart';
 import 'package:one_one_learn/core/network/repositories/call_repository.dart';
+import 'package:one_one_learn/core/network/repositories/feedback_repository.dart';
 import 'package:one_one_learn/core/network/repositories/tutor_repository.dart';
 import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 import 'package:one_one_learn/core/network/repositories/course_repository.dart';
@@ -44,5 +45,6 @@ void initNetwork() {
     ..registerLazySingleton<ScheduleRepository>(ScheduleRepository.new)
     ..registerLazySingleton<CourseRepository>(CourseRepository.new)
     ..registerLazySingleton<BookingRepository>(BookingRepository.new)
-    ..registerLazySingleton<CallRepository>(CallRepository.new);
+    ..registerLazySingleton<CallRepository>(CallRepository.new)
+    ..registerLazySingleton<FeedbackRepository>(FeedbackRepository.new);
 }

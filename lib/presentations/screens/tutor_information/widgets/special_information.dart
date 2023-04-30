@@ -13,18 +13,27 @@ import 'package:one_one_learn/presentations/widgets/choice_chips/fake_chip.dart'
 import 'package:one_one_learn/presentations/widgets/dialogs/bottom_sheet_dialogs/normal_bottom_sheet_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
-class SpecialInformation extends StatelessWidget {
+class SpecialInformation extends StatefulWidget {
   const SpecialInformation({super.key});
+
+  @override
+  State<SpecialInformation> createState() => _SpecialInformationState();
+}
+
+class _SpecialInformationState extends State<SpecialInformation> {
+  NormalBottomSheetDialogController?  normalBottomSheetDialogController;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TutorInformationCubit, TutorInformationState>(
       builder: (context, state) {
+        normalBottomSheetDialogController ??= NormalBottomSheetDialogController(context);
+
         final tutorInformation = state.tutorInformation;
         if (state.isLoadingData || tutorInformation == null) {
           return const SizedBox();
         }
-        
+
         final listLanguages = (tutorInformation.languages ?? '').split(',').map((e) {
           return MapConstants.languages[e]?['name'] ?? '';
         }).toList();
@@ -98,14 +107,15 @@ class SpecialInformation extends StatelessWidget {
                 ),
                 InkWell(
                   onTap: () {
-                    NormalBottomSheetDialog.show(
-                      context,
+                    normalBottomSheetDialogController?.show(
                       leftPadding: Dimens.getProportionalWidth(context, 16),
                       rightPadding: Dimens.getProportionalWidth(context, 16),
-                      initialChildSize: 0.501,
+                      initialChildSize: 0.7,
                       title: S.current.review,
                       titleAlignment: CrossAxisAlignment.start,
-                      body: const TutorReviewsBottomSheet(),
+                      body: TutorReviewsBottomSheet(
+                        cubit: context.read<TutorInformationCubit>(),
+                      ),
                     );
                   },
                   child: Text(
