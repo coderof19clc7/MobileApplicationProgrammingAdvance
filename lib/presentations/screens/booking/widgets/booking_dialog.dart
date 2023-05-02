@@ -261,16 +261,6 @@ class _BookingDialogState extends State<BookingDialog> {
       ),
       child: child,
     );
-    return PrimaryFillButton(
-      alignment: alignment ?? Alignment.centerLeft,
-      width: Dimens.getScreenWidth(context),
-      preferGradient: false,
-      hasShadow: false,
-      borderRadiusValue: 5,
-      bgColor: bgColor ?? context.theme.colorScheme.inverseSurface.withOpacity(0.3),
-      paddingVertical: Dimens.getProportionalHeight(context, padding ?? 12),
-      child: child,
-    );
   }
 
   Widget buildBoxItem(BuildContext context, {
