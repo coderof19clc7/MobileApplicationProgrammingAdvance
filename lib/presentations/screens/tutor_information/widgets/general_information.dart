@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:one_one_learn/configs/constants/map_constants.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
+import 'package:one_one_learn/presentations/screens/booking/booking_screen.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
 import 'package:one_one_learn/presentations/screens/tutor_information/bloc/tutor_information_cubit.dart';
+import 'package:one_one_learn/presentations/screens/tutor_information/widgets/tutor_report_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
 import 'package:one_one_learn/presentations/widgets/shimmers/linear_shimmer.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
@@ -26,44 +28,61 @@ class GeneralInformation extends StatelessWidget {
 
   final bool isFavorite;
 
+  void showReportDialog(BuildContext contextCubit, {required String tutorName}) {
+    showDialog(
+      context: contextCubit,
+      barrierDismissible: false,
+      builder: (context) {
+        return TutorReportDialog(
+          tutorName: tutorName,
+          onReportButtonTap: (content) async {
+            await Future.delayed(const Duration(seconds: 1), () async {
+              await contextCubit.read<TutorInformationCubit>().sendReportTutor(content);
+            });
+          },
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final avatarSize = Dimens.getScreenWidth(context) * 0.34871795;
     return BlocProvider.value(
       value: TutorsCubit.getInstance(),
-      child: BlocBuilder<TutorsCubit, TutorsState>(
-        builder: (contextTutors, stateTutors) {
-          return BlocBuilder<TutorInformationCubit, TutorInformationState>(
-            builder: (context, state) {
-              final isLoadingData = state.isLoadingData;
-              final tutorInformation = state.tutorInformation;
-              return SizedBox(
-                width: Dimens.getScreenWidth(context),
-                child: Column(
+      child: BlocBuilder<TutorInformationCubit, TutorInformationState>(
+        builder: (context, state) {
+          final isLoadingData = state.isLoadingData;
+          final tutorInformation = state.tutorInformation;
+          return SizedBox(
+            width: Dimens.getScreenWidth(context),
+            child: Column(
+              children: [
+                const EmptyProportionalSpace(height: 10),
+                // avatar & favorite
+                Stack(
                   children: [
-                    const EmptyProportionalSpace(height: 10),
-                    // avatar & favorite
-                    Stack(
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(avatarSize),
-                          child: SizedBox(
-                            width: avatarSize,
-                            height: avatarSize,
-                            child: isLoadingData
-                                ? LinearShimmer(radius: avatarSize)
-                                : SimpleNetworkImage(
-                              url: tutorInformation?.User?.avatar,
-                            ),
-                          ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(avatarSize),
+                      child: SizedBox(
+                        width: avatarSize,
+                        height: avatarSize,
+                        child: isLoadingData
+                            ? LinearShimmer(radius: avatarSize)
+                            : SimpleNetworkImage(
+                          url: tutorInformation?.User?.avatar,
                         ),
-                        if (!isLoadingData && tutorInformation != null)
-                          Positioned(
-                            right: 0,
-                            bottom: 0,
-                            child: GestureDetector(
+                      ),
+                    ),
+                    if (!isLoadingData && tutorInformation != null)
+                      Positioned(
+                        right: 0,
+                        bottom: 0,
+                        child: BlocBuilder<TutorsCubit, TutorsState>(
+                          builder: (contextTutors, stateTutors) {
+                            return GestureDetector(
                               onTap: () {
-                                context.read<TutorsCubit>().onTutorFavouriteStatusChanged(
+                                contextTutors.read<TutorsCubit>().onTutorFavouriteStatusChanged(
                                   state.tutorId,
                                   onCompleted: (newStatus) {
                                     context.read<TutorInformationCubit>().updateFavoriteStatus(
@@ -82,25 +101,25 @@ class GeneralInformation extends StatelessWidget {
                                 width: Dimens.getProportionalHeight(context, 40),
                                 height: Dimens.getProportionalHeight(context, 40),
                               ),
-                            ),
-                          ),
-                      ],
-                    ),
-                    const EmptyProportionalSpace(height: 20),
-
-                    if (!isLoadingData && tutorInformation != null)...[
-                      // public information field
-                      buildPublicInformation(context, tutorInformation),
-                      const EmptyProportionalSpace(height: 20),
-
-                      // 4 buttons field
-                      buildButtonField(context, tutorInformation),
-                      const EmptyProportionalSpace(height: 10),
-                    ],
+                            );
+                          }
+                        ),
+                      ),
                   ],
                 ),
-              );
-            },
+                const EmptyProportionalSpace(height: 20),
+
+                if (!isLoadingData && tutorInformation != null)...[
+                  // public information field
+                  buildPublicInformation(context, tutorInformation),
+                  const EmptyProportionalSpace(height: 20),
+
+                  // 4 buttons field
+                  buildButtonsField(context, tutorInformation),
+                  const EmptyProportionalSpace(height: 10),
+                ],
+              ],
+            ),
           );
         },
       ),
@@ -181,7 +200,7 @@ class GeneralInformation extends StatelessWidget {
     );
   }
 
-  Widget buildButtonField(BuildContext context, TutorInfo tutorInformation) {
+  Widget buildButtonsField(BuildContext context, TutorInfo tutorInformation) {
     return SizedBox(
       width: Dimens.getScreenWidth(context) * 0.75,
       child: Column(
@@ -190,7 +209,13 @@ class GeneralInformation extends StatelessWidget {
           buildSingleButton(
             context,
             onTap: () {
-              Navigator.of(context).pushNamed(RouteNames.tutorBooking);
+              Navigator.of(context).pushNamed(
+                RouteNames.tutorBooking,
+                arguments: BookingArguments(
+                  tutorId: tutorInformation.User?.id ?? '',
+                  tutorName: tutorInformation.User?.name ?? '',
+                ),
+              );
             },
             isFill: true,
             icon: Icons.calendar_today_rounded,
@@ -207,7 +232,11 @@ class GeneralInformation extends StatelessWidget {
               Flexible(
                 child: buildSingleButton(
                   context,
-                  onTap: () {},
+                  onTap: () {
+                    showReportDialog(
+                      context, tutorName: tutorInformation.User?.name ?? '',
+                    );
+                  },
                   icon: Icons.report_rounded,
                   text: S.current.report,
                 ),
@@ -223,10 +252,8 @@ class GeneralInformation extends StatelessWidget {
                     showDialog(
                       context: context,
                       builder: (context) {
-                        return Dialog(
-                          child: DemoVideoPopup(
-                            videoUrl: tutorInformation.video ?? '',
-                          ),
+                        return DemoVideoPopup(
+                          videoUrl: tutorInformation.video ?? '',
                         );
                       },
                     );

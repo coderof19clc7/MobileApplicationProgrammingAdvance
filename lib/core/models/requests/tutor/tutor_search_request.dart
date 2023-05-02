@@ -1,10 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/requests/base_request.dart';
 
-/// filters : {"specialties":["starters"],"nationality":{"isVietNamese":true,"isNative":true},"date":null,"tutoringTimeAvailable":[null,null]}
-/// search : "teacher name"
-/// page : "1"
-/// perPage : 12
 class TutorSearchRequest extends BaseRequest {
 
   @override

@@ -9,25 +9,19 @@ class BookingScreen extends BaseScreen<BookingCubit, BookingState> {
   final BookingArguments args;
 
   @override
-  Widget buildWidget(BuildContext context) {
-    return const BookingPage();
+  BookingCubit provideBloc(BuildContext context) {
+    return BookingCubit(tutorId: args.tutorId, tutorName: args.tutorName);
   }
 
   @override
-  BookingCubit provideBloc(BuildContext context) {
-    final now = DateTime.now();
-    final currentDate = DateTime(now.year, now.month, now.day);
-    return BookingCubit(
-      tutorId: args.tutorId,
-    )..getScheduleOfTutor(
-        currentDate,
-        currentDate.add(const Duration(days: 6)),
-      );
+  Widget buildWidget(BuildContext context) {
+    return const BookingPage();
   }
 }
 
 class BookingArguments {
-  const BookingArguments({required this.tutorId});
+  const BookingArguments({required this.tutorId, required this.tutorName});
 
   final String tutorId;
+  final String tutorName;
 }

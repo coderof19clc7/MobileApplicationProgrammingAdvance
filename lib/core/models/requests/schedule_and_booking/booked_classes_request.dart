@@ -68,7 +68,7 @@ class BookedClassesRequest extends BaseRequest {
 
   @override
   String toString() {
-    return 'ScheduleQueryRequest{'
+    return 'BookedClassesRequest{'
         ' page: $page,'
         ' perPage: $perPage'
         ' dateTimeGte: $dateTimeGte,'

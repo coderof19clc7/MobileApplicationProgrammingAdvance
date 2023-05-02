@@ -2,11 +2,14 @@ import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
+import 'package:one_one_learn/core/models/requests/report/report_tutor_request.dart';
 import 'package:one_one_learn/core/models/responses/feedback/feed_back.dart';
 import 'package:one_one_learn/core/models/responses/feedback/feedback_list_response.dart';
+import 'package:one_one_learn/core/models/responses/report/report_tutor_response.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info_response.dart';
 import 'package:one_one_learn/core/network/repositories/feedback_repository.dart';
+import 'package:one_one_learn/core/network/repositories/report_repository.dart';
 import 'package:one_one_learn/core/network/repositories/tutor_repository.dart';
 
 part 'tutor_information_state.dart';
@@ -17,6 +20,7 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
 
   final _tutorRepository = injector<TutorRepository>();
   final _feedbackRepository = injector<FeedbackRepository>();
+  final _reportRepository = injector<ReportRepository>();
   final int feedBackPerPage = 12;
 
   List<FeedBack?> get initialLoadMoreAbleFeedBackList => <FeedBack?>[null, null, null];
@@ -106,5 +110,22 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
     }
 
     emit(state.copyWith(isLoadingMoreFeedback: false));
+  }
+
+  Future<void> sendReportTutor(String content) async {
+    final reportTutorResponse = await fetchApi<ReportTutorResponse>(
+      () async => _reportRepository.sendReportTutor(
+        reportTutorRequest: ReportTutorRequest(
+          tutorId: state.tutorId, content: content,
+        ),
+      ),
+      showLoading: false,
+    );
+
+    if (reportTutorResponse != null) {
+      if (reportTutorResponse.statusCode == ApiStatusCode.success) {
+        showSuccessToast(reportTutorResponse.message);
+      }
+    }
   }
 }

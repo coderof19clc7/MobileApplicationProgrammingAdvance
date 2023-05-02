@@ -62,9 +62,11 @@ class _DemoVideoPopupState extends State<DemoVideoPopup> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: (videoWidth != null && videoHeight != null) ? (videoWidth! / videoHeight!) : 16 / 9,
-      child: buildVideoPlayer(),
+    return Dialog(
+      child: AspectRatio(
+        aspectRatio: (videoWidth != null && videoHeight != null) ? (videoWidth! / videoHeight!) : 16 / 9,
+        child: buildVideoPlayer(),
+      ),
     );
   }
 

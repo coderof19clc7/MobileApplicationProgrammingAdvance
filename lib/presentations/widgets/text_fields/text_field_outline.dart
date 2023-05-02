@@ -7,6 +7,8 @@ class TextFieldOutline extends StatefulWidget {
   const TextFieldOutline({
     super.key,
     this.textController,
+    this.minLines,
+    this.maxLines = 1,
     this.hintText,
     this.errorText,
     this.leftWidget,
@@ -15,10 +17,13 @@ class TextFieldOutline extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.enable = true,
     this.canTextBeObscured = false,
+    this.onChanged,
     this.onSubmitted,
   });
 
   final TextEditingController? textController;
+  final int? minLines;
+  final int maxLines;
   final String? hintText;
   final String? errorText;
   final Widget? leftWidget;
@@ -28,6 +33,7 @@ class TextFieldOutline extends StatefulWidget {
   final bool enable;
   // true means the text field is used for password
   final bool canTextBeObscured;
+  final Function(String)? onChanged;
   final Function(String)? onSubmitted;
 
   @override
@@ -46,6 +52,11 @@ class _TextFieldOutlineState extends State<TextFieldOutline> {
   Widget build(BuildContext context) {
     return TextField(
       controller: widget.textController,
+      minLines: widget.minLines,
+      maxLines: widget.maxLines,
+      onChanged: (value) {
+        widget.onChanged?.call(value);
+      },
       onSubmitted: (value) {
         UIHelper.hideKeyboard(context);
         widget.onSubmitted?.call(value);

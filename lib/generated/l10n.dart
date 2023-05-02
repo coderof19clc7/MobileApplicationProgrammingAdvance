@@ -520,6 +520,16 @@ class S {
     );
   }
 
+  /// `Reserved`
+  String get reserved {
+    return Intl.message(
+      'Reserved',
+      name: 'reserved',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Report`
   String get report {
     return Intl.message(
@@ -1427,6 +1437,156 @@ class S {
       name: 'noHaveSomethingsSuggested',
       desc: 'No suggested somethings',
       args: [somethings],
+    );
+  }
+
+  /// `Today`
+  String get today {
+    return Intl.message(
+      'Today',
+      name: 'today',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking`
+  String get booking {
+    return Intl.message(
+      'Booking',
+      name: 'booking',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking detail`
+  String get bookingDetail {
+    return Intl.message(
+      'Booking detail',
+      name: 'bookingDetail',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Booking time`
+  String get bookingTime {
+    return Intl.message(
+      'Booking time',
+      name: 'bookingTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Balance`
+  String get balance {
+    return Intl.message(
+      'Balance',
+      name: 'balance',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Price`
+  String get price {
+    return Intl.message(
+      'Price',
+      name: 'price',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notes`
+  String get notes {
+    return Intl.message(
+      'Notes',
+      name: 'notes',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Session`
+  String get classSession {
+    return Intl.message(
+      'Session',
+      name: 'classSession',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `You have {n} session left`
+  String youHaveNSessionLeft(int n) {
+    return Intl.message(
+      'You have $n session left',
+      name: 'youHaveNSessionLeft',
+      desc: 'You have n session left',
+      args: [n],
+    );
+  }
+
+  /// `Schedule of tutor {tutor}`
+  String scheduleOfTutorA(String tutor) {
+    return Intl.message(
+      'Schedule of tutor $tutor',
+      name: 'scheduleOfTutorA',
+      desc: 'Schedule of tutor',
+      args: [tutor],
+    );
+  }
+
+  /// `Help us understand what is happening`
+  String get reportTutorRequirement {
+    return Intl.message(
+      'Help us understand what is happening',
+      name: 'reportTutorRequirement',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other issues`
+  String get otherIssues {
+    return Intl.message(
+      'Other issues',
+      name: 'otherIssues',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This tutor is annoying me`
+  String get tutorAnnoyingIssue {
+    return Intl.message(
+      'This tutor is annoying me',
+      name: 'tutorAnnoyingIssue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This profile is pretending be someone or is fake`
+  String get tutorFakeProfileIssue {
+    return Intl.message(
+      'This profile is pretending be someone or is fake',
+      name: 'tutorFakeProfileIssue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Inappropriate profile photo`
+  String get tutorPhotoInappropriateIssue {
+    return Intl.message(
+      'Inappropriate profile photo',
+      name: 'tutorPhotoInappropriateIssue',
+      desc: '',
+      args: [],
     );
   }
 }

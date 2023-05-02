@@ -5,4 +5,6 @@ class LocalConstants {
   static const String accessExpires = 'accessExpires';
   static const String tokens = 'tokens';
   static const String userInfo = 'userInfo';
+
+  static const int priceOfSession = 100000;
 }

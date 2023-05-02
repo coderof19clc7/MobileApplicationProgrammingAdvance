@@ -309,21 +309,27 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     );
 
     if (userManageFavouriteTutorResponse != null) {
-      if (userManageFavouriteTutorResponse.statusCode == ApiStatusCode.success) {
-        if (index == -1) {
+      if (userManageFavouriteTutorResponse.statusCode == ApiStatusCode.success
+        && userManageFavouriteTutorResponse.result != null
+      ) {
+        final isNowFavorite = userManageFavouriteTutorResponse.result is! int;
+        var trueIndex = index;
+        if (trueIndex == -1) {
+          trueIndex = state.listTutors.indexWhere((element) => element?.id == tutorId);
+        }
+        if (trueIndex == -1) {
           await searchListTutors(reloadAllCurrentList: true);
         } else {
           final newList = [...state.listTutors];
           newList[index] = newList[index]?.copyWith(
-            isfavoritetutor: newList[index]?.isfavoritetutor == '1' ? '0' : '1',
+            isfavoritetutor: !isNowFavorite ? '0' : '1',
           );
           emit(state.copyWith(
             listTutors: sortList(newList, sortValue: state.sortValue),
           ));
         }
-
-        if (onCompleted != null && userManageFavouriteTutorResponse.result != null) {
-          onCompleted.call(userManageFavouriteTutorResponse.result is! int);
+        if (onCompleted != null) {
+          onCompleted.call(isNowFavorite);
         }
       }
     }

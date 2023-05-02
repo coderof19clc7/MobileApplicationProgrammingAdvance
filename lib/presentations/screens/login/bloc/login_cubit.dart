@@ -61,11 +61,13 @@ class LoginCubit extends WidgetCubit<LoginState> {
   }
 
   Future<void> onLoginSucceeded(AuthResponse loginResponse) async {
+    final localManager = injector<LocalManager>();
     // update user information in this session
     userRepository.userInfo = loginResponse.user ?? const UserInfo();
+    localManager.saveUserInfo(userRepository.userInfo);
 
     // save access and refresh token to local
-    await injector<LocalManager>().saveTokens(loginResponse.tokens!);
+    await localManager.saveTokens(loginResponse.tokens!);
 
     // re-init private dio with new access token
     injector<NetworkManager>().initPrivateDio();

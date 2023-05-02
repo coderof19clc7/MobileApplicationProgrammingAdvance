@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
-import 'package:one_one_learn/core/models/requests/booking/booked_classes_request.dart';
+import 'package:one_one_learn/core/models/requests/schedule_and_booking/booked_classes_request.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booked_classes_response.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booking_info.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/grouped_booking_info.dart';
@@ -116,8 +116,10 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
     }
     final bookedClassesResponse = await fetchApi<BookedClassesResponse>(
           () => bookingRepository.getBookedClasses(query: BookedClassesRequest(
-            page: state.nextPage,
-            perPage: perPage,
+            page: reloadAllCurrentList ? 1 : state.nextPage,
+            perPage: reloadAllCurrentList
+                ? (state.currentTotal >= perPage ? state.currentTotal : perPage)
+                : perPage,
             dateTimeGte: DateTime.now().millisecondsSinceEpoch,
             orderBy: 'meeting',
             sortBy: 'asc',
@@ -136,10 +138,12 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
     if (bookedClassesResponse != null) {
       if (bookedClassesResponse.statusCode == ApiStatusCode.success) {
         var nextPage = state.nextPage;
+        var currentTotal = state.currentTotal;
         final newListBookingInfo = bookedClassesResponse.data?.rows ?? <BookingInfo?>[];
 
         // convert into grouped list
         final list2DVersion = convert1DListTo2DList(newListBookingInfo, nextPage);
+        final newListTotal = list2DVersion.length;
         final newGroupedBookingInfoList = list2DVersion.map((e) {
           return e != null ? GroupedBookingInfo.fromBookingInfoList(e) : null;
         }).toList();
@@ -150,11 +154,13 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
         var finalNewGroupedList = <GroupedBookingInfo?>[];
         if (reloadAllCurrentList) {
           finalNewGroupedList = [...newGroupedBookingInfoList];
+          currentTotal = newListTotal;
           if (canListBookingInfoLoadMore()) {
             finalNewGroupedList.addAll([null, null, null]);
           }
         } else {
           nextPage = state.nextPage + (newGroupedBookingInfoList.isEmpty ? 0 : 1);
+          currentTotal += newListTotal;
           final currentList = [...getRealCurrentList()];
           finalNewGroupedList = newGroupedBookingInfoList.isEmpty
               ? [...currentList]
@@ -170,6 +176,7 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
         emit(state.copyWith(
           nextPage: nextPage,
           total: bookedClassesResponse.data?.count?.toInt() ?? 0,
+          currentTotal: currentTotal,
           groupedBookingInfoList: finalNewGroupedList,
         ));
       } else {

@@ -6,6 +6,7 @@ import 'package:one_one_learn/core/network/repositories/auth_repository.dart';
 import 'package:one_one_learn/core/network/repositories/booking_repository.dart';
 import 'package:one_one_learn/core/network/repositories/call_repository.dart';
 import 'package:one_one_learn/core/network/repositories/feedback_repository.dart';
+import 'package:one_one_learn/core/network/repositories/report_repository.dart';
 import 'package:one_one_learn/core/network/repositories/tutor_repository.dart';
 import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 import 'package:one_one_learn/core/network/repositories/course_repository.dart';
@@ -37,14 +38,22 @@ Future<void> initializeDependencies() async {
 }
 
 void initNetwork() {
+  injector.registerSingleton<NetworkManager>(NetworkManager());
+
+  final userRepository = UserRepository();
+  final userInfo = injector<LocalManager>().getUserInfo();
+  if (userInfo != null) {
+    userRepository.userInfo = userInfo;
+  }
+
   injector
-    ..registerSingleton<NetworkManager>(NetworkManager())
     ..registerLazySingleton<AuthRepository>(AuthRepository.new)
-    ..registerLazySingleton<UserRepository>(UserRepository.new)
+    ..registerLazySingleton<UserRepository>(() => userRepository)
     ..registerLazySingleton<TutorRepository>(TutorRepository.new)
     ..registerLazySingleton<ScheduleRepository>(ScheduleRepository.new)
     ..registerLazySingleton<CourseRepository>(CourseRepository.new)
     ..registerLazySingleton<BookingRepository>(BookingRepository.new)
     ..registerLazySingleton<CallRepository>(CallRepository.new)
-    ..registerLazySingleton<FeedbackRepository>(FeedbackRepository.new);
+    ..registerLazySingleton<FeedbackRepository>(FeedbackRepository.new)
+    ..registerLazySingleton(ReportRepository.new);
 }

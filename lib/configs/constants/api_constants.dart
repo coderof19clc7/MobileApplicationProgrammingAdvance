@@ -10,6 +10,7 @@ class ApiServices {
   static const call = 'call';
   static const payment = 'payment';
   static const course = 'course';
+  static const report = 'report';
 }
 
 class ApiEndpoints {

@@ -64,6 +64,7 @@
   "bookClass": "Book class",
   "bookSchedule": "Book",
   "booked": "Booked",
+  "reserved": "Reserved",
   "report": "Report",
   "demo": "Demo",
   "chat": "Chat",
@@ -208,5 +209,38 @@
         "example": "Tutors"
       }
     }
-  }
+  },
+  "today": "Today",
+  "booking": "Booking",
+  "bookingDetail": "Booking detail",
+  "bookingTime": "Booking time",
+  "balance": "Balance",
+  "price": "Price",
+  "notes": "Notes",
+  "classSession": "Session",
+  "youHaveNSessionLeft": "You have {n} session left",
+  "@youHaveNSessionLeft": {
+    "description": "You have n session left",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "2"
+      }
+    }
+  },
+  "scheduleOfTutorA": "Schedule of tutor {tutor}",
+  "@scheduleOfTutorA": {
+    "description": "Schedule of tutor",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Keegan"
+      }
+    }
+  },
+  "reportTutorRequirement": "Help us understand what is happening",
+  "otherIssues": "Other issues",
+  "tutorAnnoyingIssue": "This tutor is annoying me",
+  "tutorFakeProfileIssue": "This profile is pretending be someone or is fake",
+  "tutorPhotoInappropriateIssue": "Inappropriate profile photo"
 }

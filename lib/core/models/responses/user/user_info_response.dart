@@ -2,16 +2,16 @@ import 'package:one_one_learn/core/models/responses/base_response.dart';
 import 'package:one_one_learn/core/models/responses/user/user_info.dart';
 
 class UserInfoResponse extends BaseResponse {
-  final UserInfo? data;
+  final UserInfo? user;
 
   @override
-  List<Object?> get props => [...super.props, data];
+  List<Object?> get props => [...super.props, user];
 
-//<editor-fold desc="Data Methods">
+//<editor-fold desc="user Methods">
   const UserInfoResponse({
     super.statusCode,
     super.message,
-    this.data,
+    this.user,
   });
 
   @override
@@ -23,8 +23,8 @@ class UserInfoResponse extends BaseResponse {
     if (message != null) {
       map['message'] = message;
     }
-    if (data != null) {
-      map['data'] = data!.toJson();
+    if (user != null) {
+      map['user'] = user!.toJson();
     }
     return map;
   }
@@ -34,7 +34,7 @@ class UserInfoResponse extends BaseResponse {
     return UserInfoResponse(
       statusCode: mapJson['statusCode'] as int?,
       message: mapJson['message'] as String?,
-      data: mapJson['data'] != null ? UserInfo.fromJson(mapJson['data']) : null,
+      user: mapJson['user'] != null ? UserInfo.fromJson(mapJson['user']) : null,
     );
   }
 
@@ -43,19 +43,19 @@ class UserInfoResponse extends BaseResponse {
     return 'UserInfoResponse{'
         ' statusCode: $statusCode,'
         ' message: $message,'
-        ' data: $data,'
+        ' user: $user,'
         ' }';
   }
 
   UserInfoResponse copyWith({
     int? statusCode,
     String? message,
-    UserInfo? data,
+    UserInfo? user,
   }) {
     return UserInfoResponse(
       statusCode: statusCode ?? this.statusCode,
       message: message ?? this.message,
-      data: data ?? this.data,
+      user: user ?? this.user,
     );
   }
 
@@ -67,8 +67,8 @@ class UserInfoResponse extends BaseResponse {
     if (message != null) {
       map['message'] = message;
     }
-    if (data != null) {
-      map['data'] = data!.toMap();
+    if (user != null) {
+      map['user'] = user!.toMap();
     }
     return map;
   }
@@ -77,8 +77,8 @@ class UserInfoResponse extends BaseResponse {
     return UserInfoResponse(
       statusCode: map['statusCode'] as int?,
       message: map['message'] as String?,
-      data: map['data'] != null ? UserInfo.fromMap(
-        map['data'] as Map<String, dynamic>,
+      user: map['user'] != null ? UserInfo.fromMap(
+        map['user'] as Map<String, dynamic>,
       ) : null,
     );
   }

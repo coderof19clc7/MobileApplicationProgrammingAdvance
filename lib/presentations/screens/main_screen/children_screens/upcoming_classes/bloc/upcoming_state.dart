@@ -4,9 +4,7 @@ part of 'upcoming_cubit.dart';
 class UpcomingState extends WidgetState {
   final bool isLoadingMore;
   final bool isLoadingTotalCall;
-  final int nextPage;
-  final int totalCall;
-  final int total;
+  final int nextPage, totalCall, total, currentTotal;
   final List<GroupedBookingInfo?> groupedBookingInfoList;
 
   @override
@@ -23,6 +21,7 @@ class UpcomingState extends WidgetState {
       nextPage: mapJson['nextPage'] as int? ?? 1,
       totalCall: mapJson['totalLearn'] as int? ?? 0,
       total: mapJson['total'] as int? ?? 0,
+      currentTotal: mapJson['currentTotal'] as int? ?? 0,
       groupedBookingInfoList: mapJson['groupedBookingInfoList'] != null
           ? (mapJson['groupedBookingInfoList'] as List).map(GroupedBookingInfo.fromJson).toList()
           : [null, null, null],
@@ -49,6 +48,7 @@ class UpcomingState extends WidgetState {
     map['nextPage'] = nextPage;
     map['totalLearn'] = totalCall;
     map['total'] = total;
+    map['currentTotal'] = currentTotal;
     map['groupedBookingInfoList'] = groupedBookingInfoList
         .map((e) => e?.bookingInfoList?.map((e) => e?.toJson()).toList())
         .toList();
@@ -65,6 +65,7 @@ class UpcomingState extends WidgetState {
     this.nextPage = 1,
     this.totalCall = 0,
     this.total = 0,
+    this.currentTotal = 0,
     this.groupedBookingInfoList = const <GroupedBookingInfo?>[null, null, null],
   });
 
@@ -81,6 +82,7 @@ class UpcomingState extends WidgetState {
           nextPage == other.nextPage &&
           totalCall == other.totalCall &&
           total == other.total &&
+          currentTotal == other.currentTotal &&
           listEquals(groupedBookingInfoList, other.groupedBookingInfoList));
 
   @override
@@ -93,6 +95,7 @@ class UpcomingState extends WidgetState {
       nextPage.hashCode ^
       totalCall.hashCode ^
       total.hashCode ^
+      currentTotal.hashCode ^
       groupedBookingInfoList.hashCode;
 
   @override
@@ -106,6 +109,7 @@ class UpcomingState extends WidgetState {
         ' nextPage: $nextPage,'
         ' totalLearn: $totalCall,'
         ' total: $total,'
+        ' currentTotal: $currentTotal,'
         ' groupedBookingInfoList: $groupedBookingInfoList,'
         ' }';
   }
@@ -119,6 +123,7 @@ class UpcomingState extends WidgetState {
     int? nextPage,
     int? totalCall,
     int? total,
+    int? currentTotal,
     List<GroupedBookingInfo?>? groupedBookingInfoList,
   }) {
     return UpcomingState(
@@ -130,6 +135,7 @@ class UpcomingState extends WidgetState {
       nextPage: nextPage ?? this.nextPage,
       totalCall: totalCall ?? this.totalCall,
       total: total ?? this.total,
+      currentTotal: currentTotal ?? this.currentTotal,
       groupedBookingInfoList: groupedBookingInfoList ?? this.groupedBookingInfoList,
     );
   }
@@ -144,6 +150,7 @@ class UpcomingState extends WidgetState {
       'nextPage': nextPage,
       'totalLearn': totalCall,
       'total': total,
+      'currentTotal': currentTotal,
       'groupedBookingInfoList': groupedBookingInfoList.map(
         (e) => e?.bookingInfoList?.map((e) => e?.toMap()).toList(),
       ).toList(),
@@ -162,6 +169,7 @@ class UpcomingState extends WidgetState {
       nextPage: map['nextPage'] as int? ?? 1,
       totalCall: map['totalLearn'] as int? ?? 0,
       total: map['total'] as int? ?? 0,
+      currentTotal: map['currentTotal'] as int? ?? 0,
       groupedBookingInfoList: map['groupedBookingInfoList'] != null
           ? (map['groupedBookingInfoList'] as List).map(
         (e) => GroupedBookingInfo.fromMap(e as Map<String, dynamic>),

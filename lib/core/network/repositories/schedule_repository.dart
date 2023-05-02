@@ -13,6 +13,9 @@ class ScheduleRepository extends BaseRepository {
       method: ApiMethods.get,
       path: '',
       queryParameters: query,
+      headers: {
+        ApiConstants.contentType: ApiConstants.textPlain,
+      },
     ));
   }
 }
