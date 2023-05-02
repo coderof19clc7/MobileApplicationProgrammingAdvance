@@ -41,8 +41,6 @@
   "labelTopics": "Danh sách chủ đề",
   "labelWhyTakeCourse": "Tại sao bạn nên học khóa học này",
   "labelWhatAbleDo": "Bạn có thể làm gì",
-  "isMarked": "Đã chấm điểm",
-  "isNotMarked": "Chưa chấm điểm",
   "bookClass": "Đặt lịch",
   "bookSchedule": "Đặt lịch",
   "booked": "Đã đặt",
@@ -68,6 +66,8 @@
   "record": "Bản ghi",
   "requestForClass": "Yêu cầu lớp học",
   "tutorReview": "Nhận xét từ gia sư",
+  "isReviewed": "Đã có nhận xét",
+  "isNotReviewed": "Chưa có nhận xét",
   "lessonStatus": "Tiến độ bài học",
   "behavior": "Thái độ",
   "listening": "Khả năng nghe",
@@ -151,5 +151,7 @@
   "otherIssues": "Vấn đề khác",
   "tutorAnnoyingIssue": "Gia sư này làm phiền tôi",
   "tutorFakeProfileIssue": "Hồ sơ này là giả mạo",
-  "tutorPhotoInappropriateIssue": "Ảnh hồ sơ không phù hợp"
+  "tutorPhotoInappropriateIssue": "Ảnh hồ sơ không phù hợp",
+  "noRequest": "Không có yêu cầu",
+  "session": "Buổi"
 }

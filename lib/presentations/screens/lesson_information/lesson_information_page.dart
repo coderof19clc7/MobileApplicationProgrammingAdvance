@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/screens/lesson_information/widgets/lesson_information.dart';
+import 'package:one_one_learn/presentations/screens/lesson_information/widgets/tutor_reviews.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
 
 class LessonInformationPage extends StatelessWidget {
@@ -18,8 +19,10 @@ class LessonInformationPage extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               LessonInformation(),
+              TutorReviews(),
             ],
           ),
         ),

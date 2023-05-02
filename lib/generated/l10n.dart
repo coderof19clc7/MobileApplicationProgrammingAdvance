@@ -470,26 +470,6 @@ class S {
     );
   }
 
-  /// `Marked`
-  String get isMarked {
-    return Intl.message(
-      'Marked',
-      name: 'isMarked',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `Not marked`
-  String get isNotMarked {
-    return Intl.message(
-      'Not marked',
-      name: 'isNotMarked',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `Book class`
   String get bookClass {
     return Intl.message(
@@ -735,6 +715,26 @@ class S {
     return Intl.message(
       'Tutor\'s review',
       name: 'tutorReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reviewed`
+  String get isReviewed {
+    return Intl.message(
+      'Reviewed',
+      name: 'isReviewed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Not reviewed`
+  String get isNotReviewed {
+    return Intl.message(
+      'Not reviewed',
+      name: 'isNotReviewed',
       desc: '',
       args: [],
     );
@@ -1585,6 +1585,26 @@ class S {
     return Intl.message(
       'Inappropriate profile photo',
       name: 'tutorPhotoInappropriateIssue',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `No request`
+  String get noRequest {
+    return Intl.message(
+      'No request',
+      name: 'noRequest',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Session`
+  String get session {
+    return Intl.message(
+      'Session',
+      name: 'session',
       desc: '',
       args: [],
     );

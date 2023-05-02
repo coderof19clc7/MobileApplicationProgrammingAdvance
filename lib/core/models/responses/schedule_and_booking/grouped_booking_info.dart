@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booking_info.dart';
+import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 
 @immutable
 class GroupedBookingInfo {
   final bool isExpanded;
+  final bool isReviewed;
   final String? id;
-  final String? tutorId;
-  final String? tutorName;
-  final String? tutorAvatar;
+  final TutorInfo? tutorInfo;
   final DateTime? startTimestamp;
   final DateTime? endTimestamp;
   final int classDuration;
@@ -19,10 +19,9 @@ class GroupedBookingInfo {
 //<editor-fold desc="Data Methods">
   const GroupedBookingInfo({
     this.isExpanded = false,
+    this.isReviewed = false,
     this.id,
-    this.tutorId,
-    this.tutorName,
-    this.tutorAvatar,
+    this.tutorInfo,
     this.startTimestamp,
     this.endTimestamp,
     this.classDuration = 0,
@@ -42,11 +41,17 @@ class GroupedBookingInfo {
         requestList.add(info?.studentRequest ?? '');
       }
     }
+    var firstIndexOfReviewedSession = -1;
+    for (var i = 0; i < infoList.length; i++) {
+      if (infoList[i]?.classReview != null) {
+        firstIndexOfReviewedSession = i;
+        break;
+      }
+    }
     return GroupedBookingInfo(
+      isReviewed: firstIndexOfReviewedSession != -1,
       id: infoList[0]?.id,
-      tutorId: infoList[0]?.scheduleDetailInfo?.scheduleInfo?.tutorId,
-      tutorName: infoList[0]?.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.name,
-      tutorAvatar: infoList[0]?.scheduleDetailInfo?.scheduleInfo?.tutorInfo?.avatar,
+      tutorInfo: infoList[0]?.scheduleDetailInfo?.scheduleInfo?.tutorInfo,
       startTimestamp: startTimeStampInt != null
           ? DateTime.fromMillisecondsSinceEpoch(startTimeStampInt, isUtc: true).toLocal()
           : null,
@@ -78,10 +83,11 @@ class GroupedBookingInfo {
 
     return GroupedBookingInfo(
       isExpanded: mapJson['isExpanded'] as bool? ?? false,
+      isReviewed: mapJson['isReviewed'] as bool? ?? false,
       id: mapJson['id'] as String?,
-      tutorId: mapJson['tutorId'] as String?,
-      tutorName: mapJson['tutorName'] as String?,
-      tutorAvatar: mapJson['tutorAvatar'] as String?,
+      tutorInfo: mapJson['tutorInfo'] != null
+          ? TutorInfo.fromJson(mapJson['tutorInfo'])
+          : null,
       startTimestamp: mapJson['startTimestamp'] as DateTime?,
       endTimestamp: mapJson['endTimestamp'] as DateTime?,
       classDuration: mapJson['classDuration'] as int? ?? 0,
@@ -98,10 +104,9 @@ class GroupedBookingInfo {
     final map = <String, dynamic>{};
 
     map['isExpanded'] = isExpanded;
+    map['isReviewed'] = isReviewed;
     map['id'] = id;
-    map['tutorId'] = tutorId;
-    map['tutorName'] = tutorName;
-    map['tutorAvatar'] = tutorAvatar;
+    map['tutorInfo'] = tutorInfo?.toJson();
     map['startTimestamp'] = startTimestamp;
     map['endTimestamp'] = endTimestamp;
     map['classDuration'] = classDuration;
@@ -121,10 +126,9 @@ class GroupedBookingInfo {
           other is GroupedBookingInfo &&
               runtimeType == other.runtimeType &&
               isExpanded == other.isExpanded &&
+              isReviewed == other.isReviewed &&
               id == other.id &&
-              tutorId == other.tutorId &&
-              tutorName == other.tutorName &&
-              tutorAvatar == other.tutorAvatar &&
+              tutorInfo == other.tutorInfo &&
               startTimestamp == other.startTimestamp &&
               endTimestamp == other.endTimestamp &&
               classDuration == other.classDuration &&
@@ -136,10 +140,9 @@ class GroupedBookingInfo {
   @override
   int get hashCode =>
       isExpanded.hashCode ^
+      isReviewed.hashCode ^
       id.hashCode ^
-      tutorId.hashCode ^
-      tutorName.hashCode ^
-      tutorAvatar.hashCode ^
+      tutorInfo.hashCode ^
       startTimestamp.hashCode ^
       endTimestamp.hashCode ^
       classDuration.hashCode ^
@@ -152,10 +155,9 @@ class GroupedBookingInfo {
   String toString() {
     return 'GroupedBookingInfo{'
         ' isExpanded: $isExpanded,'
+        ' isReviewed: $isReviewed,'
         ' id: $id,'
-        ' tutorId: $tutorId,'
-        ' tutorName: $tutorName,'
-        ' tutorAvatar: $tutorAvatar,'
+        ' tutorInfo: $tutorInfo,'
         ' startTimestamp: $startTimestamp,'
         ' endTimestamp: $endTimestamp,'
         ' classDuration: $classDuration,'
@@ -168,10 +170,9 @@ class GroupedBookingInfo {
 
   GroupedBookingInfo copyWith({
     bool? isExpanded,
+    bool? isReviewed,
     String? id,
-    String? tutorId,
-    String? tutorName,
-    String? tutorAvatar,
+    TutorInfo? tutorInfo,
     DateTime? startTimestamp,
     DateTime? endTimestamp,
     int? classDuration,
@@ -183,10 +184,9 @@ class GroupedBookingInfo {
 
     return GroupedBookingInfo(
       isExpanded: isExpanded ?? this.isExpanded,
+      isReviewed: isReviewed ?? this.isReviewed,
       id: id ?? this.id,
-      tutorId: tutorId ?? this.tutorId,
-      tutorName: tutorName ?? this.tutorName,
-      tutorAvatar: tutorAvatar ?? this.tutorAvatar,
+      tutorInfo: tutorInfo ?? this.tutorInfo,
       startTimestamp: startTimestamp ?? this.startTimestamp,
       endTimestamp: endTimestamp ?? this.endTimestamp,
       classDuration: classDuration ?? this.classDuration,
@@ -200,8 +200,9 @@ class GroupedBookingInfo {
   Map<String, dynamic> toMap() {
     return {
       'isExpanded': isExpanded,
+      'isReviewed': isReviewed,
       'id': id,
-      'tutorId': tutorId,
+      'tutorInfo': tutorInfo?.toMap(),
       'startTimestamp': startTimestamp,
       'endTimestamp': endTimestamp,
       'classDuration': classDuration,
@@ -228,8 +229,11 @@ class GroupedBookingInfo {
 
     return GroupedBookingInfo(
       isExpanded: map['isExpanded'] as bool? ?? false,
+      isReviewed: map['isReviewed'] as bool? ?? false,
       id: map['id'] as String?,
-      tutorId: map['tutorId'] as String?,
+      tutorInfo: map['tutorInfo'] != null
+          ? TutorInfo.fromMap(map['tutorInfo'] as Map<String, dynamic>)
+          : null,
       startTimestamp: map['startTimestamp'] as DateTime?,
       endTimestamp: map['endTimestamp'] as DateTime?,
       classDuration: map['classDuration'] as int? ?? 0,

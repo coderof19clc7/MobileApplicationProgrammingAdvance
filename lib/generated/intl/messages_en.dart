@@ -115,8 +115,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Improve yourself with great tutors!"),
         "invalid": MessageLookupByLibrary.simpleMessage("Invalid"),
-        "isMarked": MessageLookupByLibrary.simpleMessage("Marked"),
-        "isNotMarked": MessageLookupByLibrary.simpleMessage("Not marked"),
+        "isNotReviewed": MessageLookupByLibrary.simpleMessage("Not reviewed"),
+        "isReviewed": MessageLookupByLibrary.simpleMessage("Reviewed"),
         "ket": MessageLookupByLibrary.simpleMessage("KET"),
         "labelAbout": MessageLookupByLibrary.simpleMessage("About"),
         "labelTopics": MessageLookupByLibrary.simpleMessage("Topics"),
@@ -156,6 +156,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Account activation notify"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noHaveSomethingsSuggested": m2,
+        "noRequest": MessageLookupByLibrary.simpleMessage("No request"),
         "noReviewGiven": MessageLookupByLibrary.simpleMessage("No comment"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
@@ -198,6 +199,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendResetPasswordRequest":
             MessageLookupByLibrary.simpleMessage("Send reset password request"),
         "server": MessageLookupByLibrary.simpleMessage("Server"),
+        "session": MessageLookupByLibrary.simpleMessage("Session"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),

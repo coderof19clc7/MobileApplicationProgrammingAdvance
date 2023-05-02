@@ -59,8 +59,6 @@
   "labelTopics": "Topics",
   "labelWhyTakeCourse": "Why should you take this course?",
   "labelWhatAbleDo": "What will you be able to do?",
-  "isMarked": "Marked",
-  "isNotMarked": "Not marked",
   "bookClass": "Book class",
   "bookSchedule": "Book",
   "booked": "Booked",
@@ -86,6 +84,8 @@
   "record": "Record",
   "requestForClass": "Request for class",
   "tutorReview": "Tutor's review",
+  "isReviewed": "Reviewed",
+  "isNotReviewed": "Not reviewed",
   "lessonStatus": "Lesson status",
   "behavior": "Behavior",
   "listening": "Listening",
@@ -242,5 +242,7 @@
   "otherIssues": "Other issues",
   "tutorAnnoyingIssue": "This tutor is annoying me",
   "tutorFakeProfileIssue": "This profile is pretending be someone or is fake",
-  "tutorPhotoInappropriateIssue": "Inappropriate profile photo"
+  "tutorPhotoInappropriateIssue": "Inappropriate profile photo",
+  "noRequest": "No request",
+  "session": "Session"
 }

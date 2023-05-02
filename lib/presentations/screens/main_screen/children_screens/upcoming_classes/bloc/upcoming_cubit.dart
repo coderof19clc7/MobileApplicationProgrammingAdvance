@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
-import 'package:one_one_learn/core/models/requests/schedule_and_booking/booked_classes_request.dart';
+import 'package:one_one_learn/core/models/requests/schedule_and_booking/booking_list_request.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booked_classes_response.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booking_info.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/grouped_booking_info.dart';
@@ -115,7 +115,7 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
       print('now: ${DateTime.now().millisecondsSinceEpoch}');
     }
     final bookedClassesResponse = await fetchApi<BookedClassesResponse>(
-          () => bookingRepository.getBookedClasses(query: BookedClassesRequest(
+          () => bookingRepository.getBookedClasses(query: BookingListRequest(
             page: reloadAllCurrentList ? 1 : state.nextPage,
             perPage: reloadAllCurrentList
                 ? (state.currentTotal >= perPage ? state.currentTotal : perPage)

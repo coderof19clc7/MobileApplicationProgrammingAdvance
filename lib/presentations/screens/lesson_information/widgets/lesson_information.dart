@@ -1,11 +1,15 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:one_one_learn/configs/constants/date_formats.dart';
+import 'package:one_one_learn/configs/constants/map_constants.dart';
+import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
+import 'package:one_one_learn/presentations/screens/lesson_information/bloc/lesson_information_cubit.dart';
+import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/widgets/buttons/box_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
@@ -16,155 +20,34 @@ class LessonInformation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const lessonDateFormat = 'EEE, MMM d, yyyy';
-    const lessonTimeFormat = 'HH:mm';
-
-    final time = DateTime.now().add(
-      Duration(
-        days: Random().nextInt(5),
-        hours: Random().nextInt(5),
-        minutes: Random().nextInt(5),
-      ),
-    );
-    final endTime = time.add(const Duration(hours: 2));
-
-    final lessonStartTime = DateFormat(lessonTimeFormat).format(time);
-    final lessonEndTime = DateFormat(lessonTimeFormat).format(endTime);
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        // tutor information
-        buildTutorInformation(context),
-        const EmptyProportionalSpace(height: 20),
-        // schedule information
-        buildScheduleInformation(
-          context: context,
-          time: time,
-          dateFormat: lessonDateFormat,
-          startTime: lessonStartTime,
-          endTime: lessonEndTime,
-        ),
-        const EmptyProportionalSpace(height: 20),
-        // button set
-        buildButtonSet(context),
-        const EmptyProportionalSpace(height: 25),
-        // request field
-        buildTitle(context, S.current.requestForClass),
-        const EmptyProportionalSpace(height: 15),
-        buildTextContent(
-          context,
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat. Suspendissepotenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci. Mauris ac ex viverra, facilisis augue sit amet, sollicitudin dolor.',
-        ),
-        const EmptyProportionalSpace(height: 15),
-        // learned book field
-        buildTitle(context, S.current.learnedBook),
-        const EmptyProportionalSpace(height: 15),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
+    return BlocBuilder<LessonInformationCubit, LessonInformationState>(
+      builder: (context, state) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Row(
-              children: [Expanded(child: BoxButton(title: 'Career Path Unit 5', circleText: '0', onTap: () {}))],
+            // tutor information
+            buildTutorInformation(context, state.groupedBookingInfo.tutorInfo),
+            const EmptyProportionalSpace(height: 20),
+
+            // schedule information
+            ...buildScheduleInformation(
+              context: context,
+              startTime: state.groupedBookingInfo.startTimestamp ?? DateTime.now(),
+              endTime: state.groupedBookingInfo.endTimestamp ?? DateTime.now(),
             ),
+            const EmptyProportionalSpace(height: 20),
+
+            // button set
+            buildButtonSet(context),
+            const EmptyProportionalSpace(height: 25),
+
+            // request field
+            ...buildRequest(context, state.groupedBookingInfo.requestList.join('\n').trim()),
+            const EmptyProportionalSpace(height: 15),
           ],
-        ),
-        const EmptyProportionalSpace(height: 15),
-        // tutor's review
-        buildTitle(context, S.current.tutorReview),
-        const EmptyProportionalSpace(height: 15),
-        // lesson status field
-        buildReviewInformation(
-          context,
-          subheading: S.current.lessonStatus,
-          text: 'The student was absent.',
-        ),
-        // behavior field
-        buildReviewInformation(
-          context,
-          subheading: S.current.behavior,
-          text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat. Suspendissepotenti. Nam accumsan, ipsum sed malesuada tristique, eros nisi porta lorem, a semper nulla enim sit amet orci.',
-          extraText: '4/5',
-        ),
-        // listening field
-        buildReviewInformation(
-          context,
-          subheading: S.current.listening,
-          text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat.',
-          extraText: '4/5',
-        ),
-        // speaking field
-        buildReviewInformation(
-          context,
-          subheading: S.current.speaking,
-          text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-          extraText: '4/5',
-        ),
-        // vocabulary field
-        buildReviewInformation(
-          context,
-          subheading: S.current.speaking,
-          text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod.',
-          extraText: '4/5',
-        ),
-        // overall field
-        buildReviewInformation(
-          context,
-          subheading: S.current.overallComment,
-          text:
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit.Vivamus pulvinar ante non lectus vestibulum, quis scelerisque nisl euismod. Maecenas vitae faucibus erat.',
-        ),
-        // homework field
-        buildReviewInformation(
-          context,
-          subheading: S.current.homework,
-          text: 'Maecenas vitae faucibus erat.',
-        ),
-        const EmptyProportionalSpace(height: 30),
-      ],
-    );
-  }
-
-  Widget buildReviewInformation(
-    BuildContext context, {
-    required String subheading,
-    String? text,
-    String? extraText,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        buildSubheading(
-          context,
-          subheading,
-          extraInformation: extraText != null ? buildRowIconTextInformation(context, extraText) : null,
-        ),
-        if (text != null && text.isNotEmpty) const EmptyProportionalSpace(height: 10),
-        if (text != null && text.isNotEmpty) buildTextContent(context, text),
-        const EmptyProportionalSpace(height: 15),
-      ],
-    );
-  }
-
-  RowIconTextInformation buildRowIconTextInformation(BuildContext context, String text) {
-    return RowIconTextInformation(
-      context: context,
-      icon: Icon(
-        Icons.stars_rounded,
-        color: context.theme.colorScheme.primary,
-        size: Dimens.getProportionalWidth(context, 15),
-      ),
-      text: Text(
-        text,
-        style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-          color: context.theme.colorScheme.primary,
-          fontSize: Dimens.getProportionalWidth(context, 17),
-        ),
-      ),
+        );
+      }
     );
   }
 
@@ -215,8 +98,7 @@ class LessonInformation extends StatelessWidget {
       child: PrimaryOutlineButton(
         borderRadiusValue: Dimens.getScreenWidth(context),
         paddingVertical: Dimens.getProportionalHeight(
-          context,
-          buttonVerticalPadding,
+          context, buttonVerticalPadding,
         ),
         onTap: () {},
         preferGradient: false,
@@ -227,21 +109,17 @@ class LessonInformation extends StatelessWidget {
             Icon(
               icon,
               color: context.theme.colorScheme.onSurfaceVariant,
-              size: Dimens.getProportionalWidth(
-                context,
-                iconSize,
-              ),
+              size: Dimens.getProportionalWidth(context, iconSize),
             ),
             const EmptyProportionalSpace(height: verticalSpace),
             Text(
               label,
-              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
+              style: Dimens.getProportionalFont(
+                context, context.theme.textTheme.bodyMedium,
+              ).copyWith(
                 color: context.theme.colorScheme.onSurfaceVariant,
                 fontWeight: fontWeight,
-                fontSize: Dimens.getProportionalWidth(
-                  context,
-                  fontSize,
-                ),
+                fontSize: Dimens.getProportionalWidth(context, fontSize),
               ),
             ),
           ],
@@ -250,50 +128,55 @@ class LessonInformation extends StatelessWidget {
     );
   }
 
-  Widget buildScheduleInformation({
+  List<Widget> buildScheduleInformation({
     required BuildContext context,
-    required DateTime time,
-    required String dateFormat,
-    required String startTime,
-    required String endTime,
+    required DateTime startTime,
+    required DateTime endTime,
   }) {
-    return Row(
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              DateFormat(dateFormat).format(time),
-              textAlign: TextAlign.center,
-              style: Dimens.getProportionalFont(context, context.theme.textTheme.headlineSmall).copyWith(
-                fontSize: Dimens.getProportionalWidth(context, 21),
-              ),
-            ),
-            const EmptyProportionalSpace(height: 10),
-            buildScheduleTime(
-              context: context,
-              icon: Icons.access_time_rounded,
-              text: '$startTime - $endTime',
-            ),
-          ],
-        )
-      ],
-    );
+    final dateString = DateFormat(AppDateFormats.eeeMMMdyyyy).format(startTime);
+    final startTimeString = DateFormat(AppDateFormats.tHHmm).format(startTime);
+    final endTimeString = DateFormat(AppDateFormats.tHHmm).format(endTime);
+    return [
+      Text(
+        dateString,
+        textAlign: TextAlign.center,
+        style: Dimens.getProportionalFont(context, context.theme.textTheme.headlineSmall).copyWith(
+          fontSize: Dimens.getProportionalWidth(context, 21),
+        ),
+      ),
+      const EmptyProportionalSpace(height: 10),
+      RowIconTextInformation(
+        context: context,
+        icon: Icon(
+          Icons.access_time_rounded,
+          size: Dimens.getProportionalWidth(context, 23),
+          color: context.theme.colorScheme.primary,
+        ),
+        text: Text(
+          '$startTimeString - $endTimeString',
+          style: Dimens.getProportionalFont(
+            context, context.theme.textTheme.bodyMedium,
+          ).copyWith(
+            color: context.theme.colorScheme.primary,
+            fontSize: Dimens.getProportionalWidth(context, 20),
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ),
+    ];
   }
 
-  Widget buildTutorInformation(BuildContext context) {
+  Widget buildTutorInformation(BuildContext context, TutorInfo? tutorInfo) {
+    final avatarSize = Dimens.getScreenWidth(context) * 0.2;
     return Row(
       children: [
         // avatar
         ClipRRect(
-          borderRadius: BorderRadius.circular(
-            Dimens.getScreenWidth(context) * 0.1820512,
-          ),
-          child: Image.network(
-            'https://api.app.lettutor.com/avatar/4d54d3d7-d2a9-42e5-97a2-5ed38af5789aavatar1627913015850.00',
-            width: Dimens.getScreenWidth(context) * 0.1820512,
-            height: Dimens.getScreenWidth(context) * 0.1820512,
-            fit: BoxFit.cover,
+          borderRadius: BorderRadius.circular(avatarSize),
+          child: SimpleNetworkImage(
+            url: tutorInfo?.avatar,
+            width:avatarSize,
+            height: avatarSize,
           ),
         ),
         const EmptyProportionalSpace(width: 10),
@@ -304,29 +187,27 @@ class LessonInformation extends StatelessWidget {
           children: [
             // name
             Text(
-              'Haylee Caillier',
-              textAlign: TextAlign.center,
-              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                fontSize: Dimens.getProportionalWidth(context, 16),
-                fontWeight: FontWeight.w500,
-              ),
+              tutorInfo?.name ?? '',
+              style: Dimens.getProportionalFont(
+                context, context.theme.textTheme.displayLarge,
+              ).copyWith(fontWeight: FontWeight.w600),
             ),
-            const EmptyProportionalSpace(height: 10),
+            const EmptyProportionalSpace(height: 7),
             // nationality
             Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  UIHelper.getIconFromNationalityCode('DE'),
-                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                    fontSize: Dimens.getProportionalWidth(context, 16),
+                  UIHelper.getIconFromNationalityCode(tutorInfo?.country),
+                  style: Dimens.getProportionalFont(
+                    context, context.theme.textTheme.displayMedium,
                   ),
                 ),
-                const EmptyProportionalSpace(width: 8),
+                const EmptyProportionalSpace(width: 4),
                 Text(
-                  'Netherlands',
-                  style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                    fontSize: Dimens.getProportionalWidth(context, 14),
+                  MapConstants.countries[tutorInfo?.country ?? ''] ?? '',
+                  style: Dimens.getProportionalFont(
+                    context, context.theme.textTheme.displayMedium,
                   ),
                 ),
               ],
@@ -370,34 +251,27 @@ class LessonInformation extends StatelessWidget {
     );
   }
 
-  Widget buildTextContent(BuildContext context, String content) {
-    return Text(
-      content,
-      style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-        fontSize: Dimens.getProportionalWidth(context, 14),
-        fontWeight: FontWeight.w400,
-      ),
-    );
-  }
-
-  Widget buildSubheading(
-    BuildContext context,
-    String subheading, {
-    Widget? extraInformation,
-  }) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          subheading,
-          style: Dimens.getProportionalFont(context, context.theme.textTheme.titleMedium).copyWith(
-            fontSize: Dimens.getProportionalWidth(context, 17),
-            fontWeight: FontWeight.w600,
-          ),
+  List<Widget> buildRequest(BuildContext context, String request) {
+    return [
+      Text(
+        S.current.requestForClass,
+        style: Dimens.getProportionalFont(
+          context, context.theme.textTheme.titleMedium,
+        ).copyWith(
+          fontSize: Dimens.getProportionalWidth(context, 22),
+          fontWeight: FontWeight.w600,
         ),
-        const EmptyProportionalSpace(width: 10),
-        extraInformation != null ? Flexible(child: extraInformation) : const SizedBox.shrink(),
-      ],
-    );
+      ),
+      const EmptyProportionalSpace(height: 7),
+      Text(
+        request.isEmpty ? S.current.noRequest : request,
+        style: Dimens.getProportionalFont(
+          context, context.theme.textTheme.bodyMedium,
+        ).copyWith(
+          fontSize: Dimens.getProportionalWidth(context, 14),
+          fontWeight: FontWeight.w400,
+        ),
+      ),
+    ];
   }
 }

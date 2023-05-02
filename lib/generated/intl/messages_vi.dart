@@ -117,8 +117,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "introducingText": MessageLookupByLibrary.simpleMessage(
             "Cải thiện bản thân với các gia sư tuyệt vời"),
         "invalid": MessageLookupByLibrary.simpleMessage("Không hợp lệ"),
-        "isMarked": MessageLookupByLibrary.simpleMessage("Đã chấm điểm"),
-        "isNotMarked": MessageLookupByLibrary.simpleMessage("Chưa chấm điểm"),
+        "isNotReviewed":
+            MessageLookupByLibrary.simpleMessage("Chưa có nhận xét"),
+        "isReviewed": MessageLookupByLibrary.simpleMessage("Đã có nhận xét"),
         "ket": MessageLookupByLibrary.simpleMessage("KET"),
         "labelAbout": MessageLookupByLibrary.simpleMessage("Tổng quan"),
         "labelTopics": MessageLookupByLibrary.simpleMessage("Danh sách chủ đề"),
@@ -159,6 +160,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Thông báo kích hoạt tài khoản"),
         "no": MessageLookupByLibrary.simpleMessage("Không"),
         "noHaveSomethingsSuggested": m2,
+        "noRequest": MessageLookupByLibrary.simpleMessage("Không có yêu cầu"),
         "notes": MessageLookupByLibrary.simpleMessage("Ghi chú"),
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "orContinueWith":
@@ -201,6 +203,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "sendResetPasswordRequest": MessageLookupByLibrary.simpleMessage(
             "Gửi yêu cầu đặt lại mật khẩu"),
         "server": MessageLookupByLibrary.simpleMessage("Máy chủ"),
+        "session": MessageLookupByLibrary.simpleMessage("Buổi"),
         "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "signOut": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),

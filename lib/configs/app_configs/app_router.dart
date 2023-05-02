@@ -117,11 +117,14 @@ class AppRouter {
           alignment: Alignment.center,
         );
       case RouteNames.lessonInformation:
-        return PageTransition(
-          child: const LessonInformationScreen(),
-          type: PageTransitionType.rightToLeft,
-          alignment: Alignment.center,
-        );
+        if (args != null && args is LessonInformationArgs) {
+          return PageTransition(
+            child: LessonInformationScreen(args: args),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center,
+          );
+        }
+        return _errRoute();
       case RouteNames.settings:
         return PageTransition(
           child: const MainScreen(), // navigate to main and change index of visible tab index to 4

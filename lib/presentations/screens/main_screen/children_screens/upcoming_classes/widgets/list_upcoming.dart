@@ -39,7 +39,6 @@ class ListUpcoming extends StatelessWidget {
           shrinkWrap: true,
           itemCount: listGrouped.length,
           itemBuilder: (context, index) {
-            // tutor card
             final item = listGrouped[index];
 
             if (item == null) {
@@ -98,12 +97,12 @@ class ListUpcoming extends StatelessWidget {
         firstChild: ClipRRect(
           borderRadius: BorderRadius.circular(AppStyles.defaultCardBorderRadiusValue),
           child: SimpleNetworkImage(
-            url: item.tutorAvatar,
+            url: item.tutorInfo?.avatar,
           ),
         ),
         isExpand: item.isExpanded,
         crossAxisAlignment: CrossAxisAlignment.center,
-        tutorName: item.tutorName ?? '',
+        tutorName: item.tutorInfo?.name ?? '',
         buttonLabel: S.current.enterRoom,
         lessonDateTime: item.startTimestamp,
         lessonEndTime: item.endTimestamp,

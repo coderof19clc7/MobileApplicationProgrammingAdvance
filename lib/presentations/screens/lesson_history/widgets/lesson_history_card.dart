@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -18,67 +19,85 @@ class LessonHistoryCard extends BaseCard {
     super.margin,
     super.crossAxisAlignment,
     required this.tutorName,
-    required this.lessonDateTime,
-    required this.lessonEndTime,
-    required this.lessonDateFormat,
-    required this.lessonDurationFormat,
+    this.lessonDateTime,
+    this.lessonEndTime,
+    this.lessonDateFormat = AppDateFormats.eeeMMMdyyyy,
+    this.lessonDurationFormat = AppDateFormats.tHHmm,
     required this.buttonLabel,
-    required this.isMarked,
-    required this.onButtonTap,
+    required this.isReviewed,
+    this.onButtonTap,
   });
 
   final String tutorName;
-  final DateTime lessonDateTime, lessonEndTime;
+  final DateTime? lessonDateTime, lessonEndTime;
   final String lessonDateFormat, lessonDurationFormat, buttonLabel;
-  final bool isMarked;
-  final Function() onButtonTap;
+  final bool isReviewed;
+  final Function()? onButtonTap;
 
   @override
   Widget buildSecondChild(BuildContext context) {
-    final startTime = DateFormat(lessonDurationFormat).format(lessonDateTime);
-    final endTime = DateFormat(lessonDurationFormat).format(lessonEndTime);
+    final dateTime = lessonDateTime != null
+        ? DateFormat(lessonDateFormat).format(lessonDateTime!)
+        : '__';
+    final startTime = lessonDateTime != null
+        ? DateFormat(lessonDurationFormat).format(lessonDateTime!)
+        : '__';
+    final endTime = lessonEndTime != null
+        ? DateFormat(lessonDurationFormat).format(lessonEndTime!)
+        : '__';
 
     return Expanded(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
+            flex: 2,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                buildInformationRow(
+                isLoading ? Padding(
+                  padding: EdgeInsets.only(
+                    top: Dimens.getProportionalHeight(context, 4),
+                  ),
+                  child: buildSimpleRectangleShimmer(context),
+                )
+                    : buildInformationRow(
                   context: context,
                   icon: Icons.calendar_month_rounded,
-                  text: DateFormat(lessonDateFormat).format(lessonDateTime),
+                  text: dateTime,
                   isPilled: false,
                 ),
-                EmptyProportionalSpace(height: secondChildItemsDistance),
-                buildInformationRow(
-                  context: context,
-                  icon: Icons.access_time_rounded,
-                  text: '$startTime - $endTime',
-                  isPilled: true,
-                ),
-                EmptyProportionalSpace(height: secondChildItemsDistance),
-                buildInformationRow(
-                  context: context,
-                  icon: Icons.person_rounded,
-                  text: tutorName,
-                  isPilled: false,
-                ),
-                EmptyProportionalSpace(height: secondChildItemsDistance),
-                buildInformationRow(
-                  context: context,
-                  icon: Icons.stars_rounded,
-                  text: isMarked ? S.current.isMarked : S.current.isNotMarked,
-                  isPilled: false,
-                ),
+                if (!isLoading) ...[
+                  EmptyProportionalSpace(height: secondChildItemsDistance),
+                  buildInformationRow(
+                    context: context,
+                    icon: Icons.access_time_rounded,
+                    text: '$startTime - $endTime',
+                    isPilled: true,
+                  ),
+                  EmptyProportionalSpace(height: secondChildItemsDistance),
+                  buildInformationRow(
+                    context: context,
+                    icon: Icons.person_rounded,
+                    text: tutorName,
+                    isPilled: false,
+                  ),
+                  EmptyProportionalSpace(height: secondChildItemsDistance),
+                  buildInformationRow(
+                    context: context,
+                    icon: Icons.stars_rounded,
+                    text: isReviewed ? S.current.isReviewed : S.current.isNotReviewed,
+                    isPilled: false,
+                  ),
+                ],
               ],
             ),
           ),
           // buttonSet,
-          SizedBox(
-            child: PrimaryFillButton(
+          Flexible(
+            child: isLoading
+                ? const SizedBox.shrink()
+                : PrimaryFillButton(
               width: Dimens.getProportionalWidth(context, 88),
               borderRadiusValue: Dimens.getProportionalWidth(context, 12),
               paddingVertical: Dimens.getProportionalHeight(context, 10),
@@ -127,9 +146,10 @@ class LessonHistoryCard extends BaseCard {
       ),
       text: Text(
         text,
+        softWrap: true,
         style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
           color: isPilled ? context.theme.colorScheme.onPrimary : context.theme.colorScheme.onBackground,
-          fontSize: Dimens.getProportionalWidth(context, 12),
+          fontSize: Dimens.getProportionalWidth(context, 15),
         ),
       ),
     );

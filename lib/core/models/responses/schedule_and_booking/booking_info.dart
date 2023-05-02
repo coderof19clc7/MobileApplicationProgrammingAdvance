@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:one_one_learn/core/models/responses/schedule_and_booking/class_review.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/schedule_detail.dart';
 
 @immutable
@@ -22,7 +23,7 @@ class BookingInfo {
   final String? calendarId;
   final bool? isDeleted;
   final ScheduleDetail? scheduleDetailInfo;
-  final String? classReview;
+  final ClassReview? classReview;
   final bool? showRecordUrl;
   final List<String>? studentMaterials;
   final List<String>? feedbacks;
@@ -79,7 +80,9 @@ class BookingInfo {
           : null,
       cancelNote: mapJson['cancelNote'] as String?,
       calendarId: mapJson['calendarId'] as String?,
-      classReview: mapJson['classReview'] as String?,
+      classReview: mapJson['classReview'] != null
+          ? ClassReview.fromJson(mapJson['classReview'])
+          : null,
       showRecordUrl: mapJson['showRecordUrl'] as bool?,
       studentMaterials: mapJson['studentMaterials'] != null
           ? (mapJson['studentMaterials'] as List).map((e) => e as String).toList()
@@ -112,7 +115,7 @@ class BookingInfo {
     map['lessonPlanId'] = lessonPlanId;
     map['isDeleted'] = isDeleted;
     map['scheduleDetailInfo'] = scheduleDetailInfo?.toJson();
-    map['classReview'] = classReview;
+    map['classReview'] = classReview?.toJson();
     map['showRecordUrl'] = showRecordUrl;
     map['studentMaterials'] = studentMaterials;
     map['feedbacks'] = feedbacks;
@@ -224,7 +227,7 @@ class BookingInfo {
     String? calendarId,
     bool? isDeleted,
     ScheduleDetail? scheduleDetailInfo,
-    String? classReview,
+    ClassReview? classReview,
     bool? showRecordUrl,
     List<String>? studentMaterials,
     List<String>? feedbacks,
@@ -277,7 +280,7 @@ class BookingInfo {
       'calendarId': calendarId,
       'isDeleted': isDeleted,
       'scheduleDetailInfo': scheduleDetailInfo?.toMap(),
-      'classReview': classReview,
+      'classReview': classReview?.toMap(),
       'showRecordUrl': showRecordUrl,
       'studentMaterials': studentMaterials,
       'feedbacks': feedbacks,
@@ -307,7 +310,9 @@ class BookingInfo {
       scheduleDetailInfo: map['scheduleDetailInfo'] != null
           ? ScheduleDetail.fromMap(map['scheduleDetailInfo'] as Map<String, dynamic>)
           : null,
-      classReview: map['classReview'] as String?,
+      classReview: map['classReview'] != null
+          ? ClassReview.fromMap(map['classReview'] as Map<String, dynamic>)
+          : null,
       showRecordUrl: map['showRecordUrl'] as bool?,
       studentMaterials: map['studentMaterials'] != null
           ? (map['studentMaterials'] as List).map((e) => e as String).toList()
