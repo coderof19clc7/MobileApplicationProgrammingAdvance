@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/list_upcoming.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/total_lesson_time_banner.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/widgets/top_banner_tutors_upcoming.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
@@ -12,32 +12,11 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
-class UpcomingClassesPage extends StatefulWidget {
+class UpcomingClassesPage extends StatelessWidget {
   const UpcomingClassesPage({super.key});
 
   @override
-  State<UpcomingClassesPage> createState() => _UpcomingClassesPageState();
-}
-
-class _UpcomingClassesPageState extends State<UpcomingClassesPage>
-    with AutomaticKeepAliveClientMixin<UpcomingClassesPage> {
-  var tempList = [
-    'Raymond Sanft',
-    'Haylee Caillier',
-    'Danny Seipel',
-    'Rodney Francis',
-    'Phillips Seine',
-    'Johnny Lains',
-    'Heinrich Grey',
-    'Lemund Eddie',
-    'Pellins Wellfone',
-    'Boris Frank'
-  ];
-
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
-
     return Scaffold(
       body: SizedBox(
         width: Dimens.getScreenWidth(context),
@@ -56,12 +35,12 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
                   final minute = state.totalCall % 60;
                   text = '$hour ${S.current.hours} $minute ${S.current.minutes}';
                 }
-                return TotalLessonTimeBanner(
+                return TopBannerTutorsUpcoming(
                   isLoading: state.isLoadingTotalCall,
                   showLabel: learned,
                   width: Dimens.getScreenWidth(context),
                   topLabel: S.current.labelTotalLessonTime,
-                  topContentWidget: Text(
+                  contentWidget: Text(
                     text, textAlign: TextAlign.center,
                     style: Dimens.getProportionalFont(
                       context, context.theme.textTheme.bodyMedium,
@@ -72,6 +51,11 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
                     ),
                   ),
                   buttonLabel: S.current.lessonHistory,
+                  buttonIcon: Icon(
+                    Icons.menu_book_rounded,
+                    color: AppColors.primaryBlue500,
+                    size: Dimens.getProportionalWidth(context, 17),
+                  ),
                   onTap: () {
                     Navigator.pushNamed(context, RouteNames.lessonHistory);
                   },
@@ -109,7 +93,4 @@ class _UpcomingClassesPageState extends State<UpcomingClassesPage>
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

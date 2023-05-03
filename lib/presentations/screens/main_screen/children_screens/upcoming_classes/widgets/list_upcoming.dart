@@ -211,69 +211,89 @@ class ListUpcoming extends StatelessWidget {
   }
 
   Widget buildRequestRow(BuildContext context, String request) {
+    final hasRequest = request.isNotEmpty;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          S.current.requestForClass,
-          style: Dimens.getProportionalFont(
-            context, context.theme.textTheme.titleSmall,
-          ).copyWith(
-            fontSize: Dimens.getProportionalWidth(context, 16),
-            color: context.theme.colorScheme.onSurface,
-            fontStyle: FontStyle.italic,
-          ),
-        ),
-        const EmptyProportionalSpace(height: 7),
         Row(
           children: [
-            Expanded(
-              child: Container(
-                constraints: BoxConstraints(
-                  minHeight: Dimens.getScreenHeight(context) * 0.15,
-                ),
-                padding: EdgeInsets.symmetric(
-                  horizontal: Dimens.getProportionalWidth(context, 12),
-                  vertical: Dimens.getProportionalHeight(context, 10),
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: AppColors.neutralBlue200),
-                  borderRadius: BorderRadius.circular(15),
-                  color: context.theme.colorScheme.background
-                ),
+            Text(
+              S.current.requestForClass,
+              style: Dimens.getProportionalFont(
+                context, context.theme.textTheme.titleSmall,
+              ).copyWith(
+                fontSize: Dimens.getProportionalWidth(context, 16),
+                color: context.theme.colorScheme.onSurface,
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+            if (request.isEmpty)
+              Expanded(
                 child: Text(
-                  request,
-                  softWrap: true,
+                  S.current.noRequest,
+                  textAlign: TextAlign.end,
                   style: Dimens.getProportionalFont(
-                    context,
-                    context.theme.textTheme.bodySmall?.copyWith(
-                      fontSize: Dimens.getProportionalWidth(context, 16),
-                      color: context.theme.colorScheme.onBackground,
-                    ),
+                    context, context.theme.textTheme.bodySmall,
+                  ).copyWith(
+                    fontSize: Dimens.getProportionalWidth(context, 17),
+                    color: context.theme.colorScheme.onSurface,
+                    fontStyle: FontStyle.italic,
                   ),
-                )
+                ),
               ),
-            ),
-            const EmptyProportionalSpace(width: 10),
-            PrimaryFillButton(
-              onTap: () {
-
-              },
-              hasShadow: false,
-              preferGradient: false,
-              width: Dimens.getScreenWidth(context) * 0.2,
-              paddingVertical: Dimens.getProportionalHeight(context, 8),
-              child: Text(
-                S.current.edit,
-                style: Dimens.getProportionalFont(
-                    context, context.theme.textTheme.titleSmall?.copyWith(
-                  fontSize: 14,
-                  color: context.theme.colorScheme.onPrimary,
-                )),
-              ),
-            ),
           ],
         ),
+        const EmptyProportionalSpace(height: 7),
+        if (hasRequest)
+          Row(
+            children: [
+              Expanded(
+                child: Container(
+                    constraints: BoxConstraints(
+                      minHeight: Dimens.getScreenHeight(context) * 0.15,
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: Dimens.getProportionalWidth(context, 12),
+                      vertical: Dimens.getProportionalHeight(context, 10),
+                    ),
+                    decoration: BoxDecoration(
+                        border: Border.all(color: AppColors.neutralBlue200),
+                        borderRadius: BorderRadius.circular(15),
+                        color: context.theme.colorScheme.background
+                    ),
+                    child: Text(
+                      request,
+                      softWrap: true,
+                      style: Dimens.getProportionalFont(
+                        context,
+                        context.theme.textTheme.bodySmall?.copyWith(
+                          fontSize: Dimens.getProportionalWidth(context, 16),
+                          color: context.theme.colorScheme.onBackground,
+                        ),
+                      ),
+                    )
+                ),
+              ),
+              const EmptyProportionalSpace(width: 10),
+              PrimaryFillButton(
+                onTap: () {
+
+                },
+                hasShadow: false,
+                preferGradient: false,
+                width: Dimens.getScreenWidth(context) * 0.2,
+                paddingVertical: Dimens.getProportionalHeight(context, 8),
+                child: Text(
+                  S.current.edit,
+                  style: Dimens.getProportionalFont(
+                      context, context.theme.textTheme.titleSmall?.copyWith(
+                    fontSize: 14,
+                    color: context.theme.colorScheme.onPrimary,
+                  )),
+                ),
+              ),
+            ],
+          ),
       ],
     );
   }

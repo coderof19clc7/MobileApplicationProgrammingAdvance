@@ -161,6 +161,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "noHaveSomethingsSuggested": m2,
         "noRequest": MessageLookupByLibrary.simpleMessage("No request"),
         "noReviewGiven": MessageLookupByLibrary.simpleMessage("No comment"),
+        "noUpcomingSession": MessageLookupByLibrary.simpleMessage(
+            "You don\'t have any upcoming session"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "orContinueWith":

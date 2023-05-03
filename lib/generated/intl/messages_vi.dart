@@ -66,7 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tiếng Anh cho công việc"),
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
         "cancelClassHint": MessageLookupByLibrary.simpleMessage(
-            "Dùng nút \"Hủy\" để buổi học.\nNút này chỉ xuất hiện nếu buổi học còn cách 2 tiếng nữa mới bắt đầu"),
+            "Dùng nút \"Hủy\" để hủy buổi học.\nNút này chỉ xuất hiện nếu buổi học còn cách 2 tiếng nữa mới bắt đầu"),
         "categories": MessageLookupByLibrary.simpleMessage("Danh mục"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
@@ -164,6 +164,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "no": MessageLookupByLibrary.simpleMessage("Không"),
         "noHaveSomethingsSuggested": m2,
         "noRequest": MessageLookupByLibrary.simpleMessage("Không có yêu cầu"),
+        "noUpcomingSession": MessageLookupByLibrary.simpleMessage(
+            "Bạn không có buổi học nào sắp diễn ra"),
         "notes": MessageLookupByLibrary.simpleMessage("Ghi chú"),
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "orContinueWith":

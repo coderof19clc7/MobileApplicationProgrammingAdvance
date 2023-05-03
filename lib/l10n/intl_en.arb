@@ -246,5 +246,6 @@
   "noRequest": "No request",
   "session": "Session",
   "assistant": "Assistant",
-  "assistantInputHint": "Type your question here"
+  "assistantInputHint": "Type your question here",
+  "noUpcomingSession": "You don't have any upcoming session"
 }

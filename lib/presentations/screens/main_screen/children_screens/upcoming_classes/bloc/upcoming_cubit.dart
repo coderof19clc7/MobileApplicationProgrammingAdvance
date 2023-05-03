@@ -42,7 +42,11 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
 
   @override
   void onWidgetCreated() {
-    getListStudentBookedClasses();
+    refreshUpcomingScreen(isInitializeScreen: true);
+  }
+
+  Future<void> refreshUpcomingScreen({bool isInitializeScreen = false}) async {
+    getListStudentBookedClasses(reloadAllCurrentList: !isInitializeScreen);
     getTotalLearningTime();
   }
 

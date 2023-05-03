@@ -25,7 +25,7 @@
   "minutes": "phút",
   "lessonHistory": "Lịch sử buổi học",
   "swipeToCancelClass": "Vuốt trái để hủy buổi học",
-  "cancelClassHint": "Dùng nút \"Hủy\" để buổi học.\nNút này chỉ xuất hiện nếu buổi học còn cách 2 tiếng nữa mới bắt đầu",
+  "cancelClassHint": "Dùng nút \"Hủy\" để hủy buổi học.\nNút này chỉ xuất hiện nếu buổi học còn cách 2 tiếng nữa mới bắt đầu",
   "enterRoom": "Vào lớp",
   "expand": "Mở rộng",
   "collapse": "Thu gọn",
@@ -155,5 +155,6 @@
   "noRequest": "Không có yêu cầu",
   "session": "Buổi",
   "assistant": "Trợ lý",
-  "assistantInputHint": "Nhập câu hỏi của bạn tại đây"
+  "assistantInputHint": "Nhập câu hỏi của bạn tại đây",
+  "noUpcomingSession": "Bạn không có buổi học nào sắp diễn ra"
 }

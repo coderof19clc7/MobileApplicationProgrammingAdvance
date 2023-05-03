@@ -1629,6 +1629,16 @@ class S {
       args: [],
     );
   }
+
+  /// `You don't have any upcoming session`
+  String get noUpcomingSession {
+    return Intl.message(
+      'You don\'t have any upcoming session',
+      name: 'noUpcomingSession',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
