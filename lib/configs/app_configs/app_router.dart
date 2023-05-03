@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
+import 'package:one_one_learn/presentations/screens/assistant/assistant_screen.dart';
 import 'package:one_one_learn/presentations/screens/booking/booking_screen.dart';
 import 'package:one_one_learn/presentations/screens/course_detail/course_detail_screen.dart';
 import 'package:one_one_learn/presentations/screens/course_information/course_information_screen.dart';
@@ -106,7 +107,7 @@ class AppRouter {
         );
       case RouteNames.upcomingClasses:
         return PageTransition(
-          child: const MainScreen(), // navigate to main and change index of visible tab index to 2
+          child: const MainScreen(), // navigate to main and change index of visible tab index to 1
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
         );
@@ -142,6 +143,11 @@ class AppRouter {
           child: const VideoCallScreen(),
           type: PageTransitionType.rightToLeft,
           alignment: Alignment.center,
+        );
+      case RouteNames.assistant:
+        return PageTransition(
+          child: const AssistantScreen(),
+          type: PageTransitionType.bottomToTop,
         );
       default:
         return _errRoute();

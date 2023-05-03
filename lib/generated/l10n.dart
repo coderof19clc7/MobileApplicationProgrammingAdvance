@@ -420,10 +420,10 @@ class S {
     );
   }
 
-  /// `tutor`
+  /// `Tutor`
   String get tutor {
     return Intl.message(
-      'tutor',
+      'Tutor',
       name: 'tutor',
       desc: '',
       args: [],
@@ -1605,6 +1605,26 @@ class S {
     return Intl.message(
       'Session',
       name: 'session',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Assistant`
+  String get assistant {
+    return Intl.message(
+      'Assistant',
+      name: 'assistant',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Type your question here`
+  String get assistantInputHint {
+    return Intl.message(
+      'Type your question here',
+      name: 'assistantInputHint',
       desc: '',
       args: [],
     );

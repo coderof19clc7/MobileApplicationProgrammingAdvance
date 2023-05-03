@@ -72,6 +72,11 @@ class ListCourses extends StatelessWidget {
                 );
               },
               padding: EdgeInsets.zero,
+              margin: index == listCourses.length - 1
+                  ? EdgeInsets.only(
+                bottom: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 1.75,
+              )
+                  : null,
               firstChild: ClipRRect(
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(AppStyles.defaultCardBorderRadiusValue),

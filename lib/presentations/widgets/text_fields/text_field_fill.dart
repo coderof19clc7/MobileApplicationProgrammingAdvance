@@ -6,6 +6,8 @@ class TextFieldFill extends StatefulWidget {
   const TextFieldFill({
     super.key,
     this.textController,
+    this.minLines,
+    this.maxLines = 1,
     this.hintText,
     this.errorText,
     this.leftWidget,
@@ -13,9 +15,13 @@ class TextFieldFill extends StatefulWidget {
     this.contentPadding,
     this.keyboardType = TextInputType.text,
     this.canTextBeObscured = false,
+    this.onChanged,
+    this.onSubmitted,
   });
 
   final TextEditingController? textController;
+  final int? minLines;
+  final int maxLines;
   final String? hintText;
   final String? errorText;
   final Widget? leftWidget;
@@ -24,6 +30,8 @@ class TextFieldFill extends StatefulWidget {
   final TextInputType? keyboardType;
   // true means the text field is used for password
   final bool canTextBeObscured;
+  final void Function(String)? onChanged;
+  final void Function(String)? onSubmitted;
 
   @override
   State<TextFieldFill> createState() => _TextFieldFillState();
@@ -42,6 +50,10 @@ class _TextFieldFillState extends State<TextFieldFill> {
     // build widget textfield  has background radius and icon left email
     return TextField(
       controller: widget.textController,
+      onChanged: widget.onChanged,
+      onSubmitted: widget.onSubmitted,
+      minLines: widget.minLines,
+      maxLines: widget.maxLines,
       obscureText: _obscureText,
       keyboardType: widget.keyboardType,
       decoration: InputDecoration(

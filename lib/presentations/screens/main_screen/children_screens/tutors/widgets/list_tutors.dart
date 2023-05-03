@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/map_constants.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/configs/stylings/app_styles.dart';
@@ -67,6 +68,11 @@ class ListTutors extends StatelessWidget {
                   url: item.avatar ?? '',
                 ),
               ),
+              margin: index == listTutors.length - 1
+                  ? EdgeInsets.only(
+                bottom: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 1.75,
+              )
+                  : null,
               nationality: UIHelper.getIconFromNationalityCode(item.country ?? 'unknown'),
               name: item.name ?? '',
               rating: item.rating?.toDouble() ?? 0,

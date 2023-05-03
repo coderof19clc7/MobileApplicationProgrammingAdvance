@@ -35,6 +35,7 @@ class TutorsPage extends StatelessWidget {
         UIHelper.hideKeyboard(context);
       },
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         body: SizedBox(
           width: Dimens.getScreenWidth(context),
           height: Dimens.getScreenHeight(context),

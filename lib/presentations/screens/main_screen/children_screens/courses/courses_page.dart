@@ -18,6 +18,7 @@ class CoursesPage extends StatelessWidget {
       child: DefaultTabController(
         length: 2,
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           body: Container(
             padding: EdgeInsets.only(
               top: Dimens.getTopSafeAreaHeight(context),

@@ -36,7 +36,7 @@
   "no": "Không",
   "searchHintCourse": "Tìm khóa học",
   "lesson": "bài học",
-  "tutor": "gia sư",
+  "tutor": "Gia sư",
   "labelAbout": "Tổng quan",
   "labelTopics": "Danh sách chủ đề",
   "labelWhyTakeCourse": "Tại sao bạn nên học khóa học này",
@@ -153,5 +153,7 @@
   "tutorFakeProfileIssue": "Hồ sơ này là giả mạo",
   "tutorPhotoInappropriateIssue": "Ảnh hồ sơ không phù hợp",
   "noRequest": "Không có yêu cầu",
-  "session": "Buổi"
+  "session": "Buổi",
+  "assistant": "Trợ lý",
+  "assistantInputHint": "Nhập câu hỏi của bạn tại đây"
 }

@@ -46,6 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
         "app": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
+        "assistant": MessageLookupByLibrary.simpleMessage("Trợ lý"),
+        "assistantInputHint": MessageLookupByLibrary.simpleMessage(
+            "Nhập câu hỏi của bạn tại đây"),
         "balance": MessageLookupByLibrary.simpleMessage("Số dư"),
         "becomeATutor":
             MessageLookupByLibrary.simpleMessage("Đăng kí làm giảng viên"),
@@ -230,7 +233,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "today": MessageLookupByLibrary.simpleMessage("Hôm nay"),
         "toefl": MessageLookupByLibrary.simpleMessage("TOEFL"),
         "toeic": MessageLookupByLibrary.simpleMessage("TOEIC"),
-        "tutor": MessageLookupByLibrary.simpleMessage("gia sư"),
+        "tutor": MessageLookupByLibrary.simpleMessage("Gia sư"),
         "tutorAnnoyingIssue":
             MessageLookupByLibrary.simpleMessage("Gia sư này làm phiền tôi"),
         "tutorFakeProfileIssue":

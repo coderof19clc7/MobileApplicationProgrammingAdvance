@@ -61,14 +61,16 @@ class ListUpcoming extends StatelessWidget {
               );
             }
 
-            return buildExpandableCard(context, item, index);
+            return buildExpandableCard(context, item, index, isLast: index == listGrouped.length - 1);
           },
         );
       },
     );
   }
 
-  Widget buildExpandableCard(BuildContext context, GroupedBookingInfo item, int index) {
+  Widget buildExpandableCard(BuildContext context, GroupedBookingInfo item, int index, {
+    bool isLast = false,
+  }) {
     final horizontalPadding = Dimens.getProportionalWidth(context, 14);
     final bottomPadding = Dimens.getProportionalHeight(context, 10);
     final request = item.requestList.join('\n');
@@ -76,7 +78,9 @@ class ListUpcoming extends StatelessWidget {
     final marginPadding = EdgeInsets.only(
       left: horizontalPadding,
       right: horizontalPadding,
-      bottom: bottomPadding,
+      bottom: isLast
+          ? Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 1.75
+          : bottomPadding,
     );
 
     return ExpandableWidget(

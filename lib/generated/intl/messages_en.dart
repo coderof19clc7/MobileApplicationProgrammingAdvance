@@ -46,6 +46,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "account": MessageLookupByLibrary.simpleMessage("Account"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
         "app": MessageLookupByLibrary.simpleMessage("App"),
+        "assistant": MessageLookupByLibrary.simpleMessage("Assistant"),
+        "assistantInputHint":
+            MessageLookupByLibrary.simpleMessage("Type your question here"),
         "balance": MessageLookupByLibrary.simpleMessage("Balance"),
         "becomeATutor": MessageLookupByLibrary.simpleMessage("Become a tutor"),
         "behavior": MessageLookupByLibrary.simpleMessage("Behavior"),
@@ -226,7 +229,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "toefl": MessageLookupByLibrary.simpleMessage("TOEFL"),
         "toeic": MessageLookupByLibrary.simpleMessage("TOEIC"),
-        "tutor": MessageLookupByLibrary.simpleMessage("tutor"),
+        "tutor": MessageLookupByLibrary.simpleMessage("Tutor"),
         "tutorAnnoyingIssue":
             MessageLookupByLibrary.simpleMessage("This tutor is annoying me"),
         "tutorFakeProfileIssue": MessageLookupByLibrary.simpleMessage(

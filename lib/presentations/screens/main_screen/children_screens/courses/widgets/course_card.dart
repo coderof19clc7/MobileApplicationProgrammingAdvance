@@ -14,6 +14,7 @@ class CourseCard extends BaseCard {
     super.firstChild,
     super.direction = CardDirection.column,
     super.padding,
+    super.margin,
     super.firstSecondDistance = 12,
     super.onTap,
     required this.name,

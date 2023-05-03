@@ -37,5 +37,6 @@ class AppStyles {
     ),
   );
 
+  static const floatingActionButtonSizePercentage = 0.15;
   static const defaultCardBorderRadiusValue = 15.0;
 }

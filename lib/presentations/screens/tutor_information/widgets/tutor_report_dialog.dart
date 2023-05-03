@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/debounces.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/configs/constants/local.dart';
-import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
@@ -71,11 +68,6 @@ class _TutorReportDialogState extends State<TutorReportDialog> {
     });
   }
 
-  int getBalanceSessionLeft() {
-    final balanceSessionLeft = int.parse(injector<UserRepository>().userInfo.walletInfo?.amount ?? '0');
-    return balanceSessionLeft ~/ LocalConstants.priceOfSession;
-  }
-
   @override
   Widget build(BuildContext context) {
     const distanceBetweenField = 20.0, distanceBetweenItem = 5.0;
@@ -133,7 +125,6 @@ class _TutorReportDialogState extends State<TutorReportDialog> {
                     child: CheckboxListTile(
                       value: checkboxReportContents.contains(checkboxValueList[i]),
                       onChanged: (value) {
-                        print('value: $value');
                         onCheckboxStatusChange(checkboxValueList[i], value: value ?? false);
                       },
                       activeColor: context.theme.colorScheme.primary,

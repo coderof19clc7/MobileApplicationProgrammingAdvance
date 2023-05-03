@@ -54,7 +54,7 @@
   "no": "No",
   "searchHintCourse": "Find a course",
   "lesson": "lesson",
-  "tutor": "tutor",
+  "tutor": "Tutor",
   "labelAbout": "About",
   "labelTopics": "Topics",
   "labelWhyTakeCourse": "Why should you take this course?",
@@ -244,5 +244,7 @@
   "tutorFakeProfileIssue": "This profile is pretending be someone or is fake",
   "tutorPhotoInappropriateIssue": "Inappropriate profile photo",
   "noRequest": "No request",
-  "session": "Session"
+  "session": "Session",
+  "assistant": "Assistant",
+  "assistantInputHint": "Type your question here"
 }

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
+import 'package:one_one_learn/configs/stylings/app_styles.dart';
+import 'package:one_one_learn/presentations/screens/assistant/bloc/assistant_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/settings_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
@@ -12,8 +16,8 @@ import 'package:one_one_learn/presentations/widgets/base_widgets/base_screen.dar
 
 const listScreens = <Widget>[
   TutorsTab(),
-  Center(child: Text('This is Chat screen')),
   UpcomingTab(),
+  Center(child: Text('This is Chat screen')),
   MainCoursesTab(key: PageStorageKey('CoursesPage')),
   SettingsPage(),
 ];
@@ -36,6 +40,10 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
         ),
         BlocProvider<UpcomingCubit>(
           create: (context) => UpcomingCubit.getInstance(),
+          lazy: false,
+        ),
+        BlocProvider<AssistantCubit>(
+          create: (context) => AssistantCubit.getInstance(),
           lazy: false,
         ),
       ],
@@ -98,8 +106,54 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
                   );
                 },
               ),
+              BlocListener<AssistantCubit, AssistantState>(
+                listenWhen: (previous, current) => previous.isLoading != current.isLoading,
+                listener: (context, state) {
+                  context.read<MainCubit>().changeLoadingState(isLoading: state.isLoading);
+                },
+              ),
+              BlocListener<AssistantCubit, AssistantState>(
+                listenWhen: (previous, current) {
+                  return previous.needNavigateToLogin != current.needNavigateToLogin;
+                },
+                listener: (context, state) {
+                  context.read<MainCubit>().navigateToNextBusinessLogic();
+                },
+              ),
+              BlocListener<AssistantCubit, AssistantState>(
+                listenWhen: (previous, current) {
+                  return previous.basicStatusFToastState != current.basicStatusFToastState;
+                },
+                listener: (context, state) {
+                  context.read<MainCubit>().showStatusToast(
+                    state.basicStatusFToastState?.message,
+                    state.basicStatusFToastState?.statusToastType,
+                  );
+                },
+              ),
             ],
             child: Scaffold(
+              resizeToAvoidBottomInset: false,
+              floatingActionButton: SizedBox(
+                width: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage,
+                height: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage,
+                child: FittedBox(
+                  child: FloatingActionButton(
+                    onPressed: () {},
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(RouteNames.assistant);
+                      },
+                      child: Icon(
+                        Icons.chat_bubble_outline,
+                        color: Colors.white,
+                        size: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 2,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
               body: PageView.builder(
                 controller: context.read<MainCubit>().pageController,
                 physics: const NeverScrollableScrollPhysics(),
