@@ -175,6 +175,7 @@ class TutorReviews extends StatelessWidget {
       }) {
     return Row(
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.end,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
@@ -185,7 +186,7 @@ class TutorReviews extends StatelessWidget {
           ),
         ),
         extraText != null
-            ? Flexible(child: buildRowIconTextInformation(context, extraText))
+            ? buildRowIconTextInformation(context, extraText)
             : const SizedBox.shrink(),
         if (text != null && text.isNotEmpty)
           Flexible(child: buildTextContent(context, text)),
