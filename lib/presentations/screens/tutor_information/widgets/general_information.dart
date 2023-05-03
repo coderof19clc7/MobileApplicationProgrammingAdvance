@@ -48,81 +48,74 @@ class GeneralInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final avatarSize = Dimens.getScreenWidth(context) * 0.34871795;
-    return BlocProvider.value(
-      value: TutorsCubit.getInstance(),
-      child: BlocBuilder<TutorInformationCubit, TutorInformationState>(
-        builder: (context, state) {
-          final isLoadingData = state.isLoadingData;
-          final tutorInformation = state.tutorInformation;
-          return SizedBox(
-            width: Dimens.getScreenWidth(context),
-            child: Column(
-              children: [
-                const EmptyProportionalSpace(height: 10),
-                // avatar & favorite
-                Stack(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(avatarSize),
-                      child: SizedBox(
-                        width: avatarSize,
-                        height: avatarSize,
-                        child: isLoadingData
-                            ? LinearShimmer(radius: avatarSize)
-                            : SimpleNetworkImage(
-                          url: tutorInformation?.User?.avatar,
+    return BlocBuilder<TutorInformationCubit, TutorInformationState>(
+      builder: (context, state) {
+        final isLoadingData = state.isLoadingData;
+        final tutorInformation = state.tutorInformation;
+        return SizedBox(
+          width: Dimens.getScreenWidth(context),
+          child: Column(
+            children: [
+              const EmptyProportionalSpace(height: 10),
+              // avatar & favorite
+              Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(avatarSize),
+                    child: SizedBox(
+                      width: avatarSize,
+                      height: avatarSize,
+                      child: isLoadingData
+                          ? LinearShimmer(radius: avatarSize)
+                          : SimpleNetworkImage(
+                        url: tutorInformation?.User?.avatar,
+                      ),
+                    ),
+                  ),
+                  if (!isLoadingData && tutorInformation != null)
+                    Positioned(
+                      right: 0,
+                      bottom: 0,
+                      child: GestureDetector(
+                        onTap: () {
+                          TutorsCubit.getInstance().onTutorFavouriteStatusChanged(
+                            state.tutorId,
+                            onCompleted: (newStatus) {
+                              context.read<TutorInformationCubit>().updateFavoriteStatus(
+                                isFavorite: newStatus,
+                              );
+                            },
+                          );
+                        },
+                        child: SvgPicture.string(
+                          SvgIcons.getIcon(
+                            SvgIconEnum.favorite,
+                            fillColor: tutorInformation.isFavorite ?? false
+                                ? context.theme.colorScheme.primary
+                                : context.theme.colorScheme.background,
+                          ),
+                          width: Dimens.getProportionalHeight(context, 40),
+                          height: Dimens.getProportionalHeight(context, 40),
                         ),
                       ),
                     ),
-                    if (!isLoadingData && tutorInformation != null)
-                      Positioned(
-                        right: 0,
-                        bottom: 0,
-                        child: BlocBuilder<TutorsCubit, TutorsState>(
-                          builder: (contextTutors, stateTutors) {
-                            return GestureDetector(
-                              onTap: () {
-                                contextTutors.read<TutorsCubit>().onTutorFavouriteStatusChanged(
-                                  state.tutorId,
-                                  onCompleted: (newStatus) {
-                                    context.read<TutorInformationCubit>().updateFavoriteStatus(
-                                      isFavorite: newStatus,
-                                    );
-                                  },
-                                );
-                              },
-                              child: SvgPicture.string(
-                                SvgIcons.getIcon(
-                                  SvgIconEnum.favorite,
-                                  fillColor: tutorInformation.isFavorite ?? false
-                                      ? context.theme.colorScheme.primary
-                                      : context.theme.colorScheme.background,
-                                ),
-                                width: Dimens.getProportionalHeight(context, 40),
-                                height: Dimens.getProportionalHeight(context, 40),
-                              ),
-                            );
-                          }
-                        ),
-                      ),
-                  ],
-                ),
+                ],
+              ),
+              const EmptyProportionalSpace(height: 20),
+
+              if (!isLoadingData && tutorInformation != null)...[
+                // public information field
+                buildPublicInformation(context, tutorInformation),
                 const EmptyProportionalSpace(height: 20),
 
-                if (!isLoadingData && tutorInformation != null)...[
-                  // public information field
-                  buildPublicInformation(context, tutorInformation),
-                  const EmptyProportionalSpace(height: 20),
-
-                  // 4 buttons field
-                  buildButtonsField(context, tutorInformation),
-                  const EmptyProportionalSpace(height: 10),
-                ],
+                // 4 buttons field
+                buildButtonsField(context, tutorInformation),
+                const EmptyProportionalSpace(height: 10),
               ],
-            ),
-          );
-        },
-      ),
+            ],
+          ),
+        );
+      },
     );
   }
 
