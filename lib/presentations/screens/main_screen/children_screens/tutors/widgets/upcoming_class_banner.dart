@@ -44,6 +44,7 @@ class _UpcomingClassBannerState extends State<UpcomingClassBanner> {
   void dispose() {
     if (_timer != null && _timer?.isActive == true) {
       _timer?.cancel();
+      _timer = null;
     }
     super.dispose();
   }
