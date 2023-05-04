@@ -139,11 +139,14 @@ class AppRouter {
           alignment: Alignment.center,
         );
       case RouteNames.videoCall:
-        return PageTransition(
-          child: const VideoCallScreen(),
-          type: PageTransitionType.rightToLeft,
-          alignment: Alignment.center,
-        );
+        if (args != null && args is VideoCallArguments) {
+          return PageTransition(
+            child: VideoCallScreen(args: args),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center,
+          );
+        }
+        return _errRoute();
       case RouteNames.assistant:
         return PageTransition(
           child: const AssistantScreen(),

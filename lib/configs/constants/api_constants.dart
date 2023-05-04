@@ -65,6 +65,8 @@ class ApiConstants {
   static const levels = 'level[]';
   static const order = 'order[]';
   static const orderBy = 'orderBy[]';
+
+  static const meetingServerLink = 'https://meet.lettutor.com';
 }
 
 class ApiMethods {

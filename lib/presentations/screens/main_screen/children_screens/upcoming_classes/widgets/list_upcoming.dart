@@ -5,12 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/configs/stylings/app_styles.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booking_info.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/grouped_booking_info.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/upcoming_class_card.dart';
+import 'package:one_one_learn/presentations/screens/video_call/video_call_screen.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/others/expandable_widget.dart';
@@ -61,7 +63,10 @@ class ListUpcoming extends StatelessWidget {
               );
             }
 
-            return buildExpandableCard(context, item, index, isLast: index == listGrouped.length - 1);
+            return buildExpandableCard(
+              context, item, index, isLast: index == listGrouped.length - 1,
+              isJoining: state.isJoiningASession,
+            );
           },
         );
       },
@@ -69,7 +74,7 @@ class ListUpcoming extends StatelessWidget {
   }
 
   Widget buildExpandableCard(BuildContext context, GroupedBookingInfo item, int index, {
-    bool isLast = false,
+    bool isLast = false, bool isJoining = false,
   }) {
     final horizontalPadding = Dimens.getProportionalWidth(context, 14);
     final bottomPadding = Dimens.getProportionalHeight(context, 10);
@@ -105,6 +110,7 @@ class ListUpcoming extends StatelessWidget {
           ),
         ),
         isExpand: item.isExpanded,
+        canJoin: !isJoining && index == 0,
         crossAxisAlignment: CrossAxisAlignment.center,
         tutorName: item.tutorInfo?.name ?? '',
         buttonLabel: S.current.enterRoom,
@@ -112,6 +118,14 @@ class ListUpcoming extends StatelessWidget {
         lessonEndTime: item.endTimestamp,
         onExpandCollapseButtonTap: () {
           context.read<UpcomingCubit>().toggleExpandCollapse(index);
+        },
+        onJoinButtonTap: () {
+          Navigator.of(context).pushNamed(
+            RouteNames.videoCall,
+            arguments: VideoCallArguments(
+              bookingInfo: item.bookingInfoList?.first,
+            ),
+          );
         },
       ),
       decoration: BoxDecoration(

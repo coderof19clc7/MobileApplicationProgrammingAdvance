@@ -1649,6 +1649,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Waiting time`
+  String get waitingTime {
+    return Intl.message(
+      'Waiting time',
+      name: 'waitingTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open meeting`
+  String get openMeeting {
+    return Intl.message(
+      'Open meeting',
+      name: 'openMeeting',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

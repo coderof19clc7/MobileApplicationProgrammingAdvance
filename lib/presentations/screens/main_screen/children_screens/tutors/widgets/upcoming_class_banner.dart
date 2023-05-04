@@ -72,7 +72,7 @@ class _UpcomingClassBannerState extends State<UpcomingClassBanner> {
     }
 
     if (!isCountDown) {
-      if (widget.endTime.difference(DateTime.now()).inMilliseconds <= 0) {
+      if (widget.endTime.difference(DateTime.now()).inMilliseconds < 0) {
         widget.onClassSessionEnded?.call();
       }
     }

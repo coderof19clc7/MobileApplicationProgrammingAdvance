@@ -8,6 +8,7 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/booking/bloc/booking_cubit.dart';
 import 'package:one_one_learn/presentations/screens/booking/widgets/booking_dialog.dart';
 import 'package:one_one_learn/presentations/screens/booking/widgets/multiple_scroll_direction_board2.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
@@ -106,9 +107,14 @@ class ScheduleBoard extends StatelessWidget {
                         scheduleId: cell?.scheduleDetails?[0].id ?? '',
                         bookingTime: bookingTime,
                         onBookingComplete: () async {
-                          await UpcomingCubit.getInstance().getListStudentBookedClasses(
-                            reloadAllCurrentList: true,
-                          );
+                          await Future.wait([
+                            UpcomingCubit.getInstance().getListStudentBookedClasses(
+                              reloadAllCurrentList: true,
+                            ),
+                            MainCubit.getInstance().getUserInformation(
+                              showLoading: false,
+                            ),
+                          ]);
                         },
                       );
                     },

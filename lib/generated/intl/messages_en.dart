@@ -165,6 +165,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "You don\'t have any upcoming session"),
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
+        "openMeeting": MessageLookupByLibrary.simpleMessage("Open meeting"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Or continue with"),
         "otherIssues": MessageLookupByLibrary.simpleMessage("Other issues"),
@@ -251,6 +252,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),
+        "waitingTime": MessageLookupByLibrary.simpleMessage("Waiting time"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
         "youHaveNSessionLeft": m9
       };

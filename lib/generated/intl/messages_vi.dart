@@ -168,6 +168,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Bạn không có buổi học nào sắp diễn ra"),
         "notes": MessageLookupByLibrary.simpleMessage("Ghi chú"),
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
+        "openMeeting": MessageLookupByLibrary.simpleMessage("Mở cuộc họp"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
         "otherIssues": MessageLookupByLibrary.simpleMessage("Vấn đề khác"),
@@ -256,6 +257,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "vietnamese": MessageLookupByLibrary.simpleMessage("Việt Nam"),
         "viewAll": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Từ vựng"),
+        "waitingTime": MessageLookupByLibrary.simpleMessage("Thời gian chờ"),
         "yes": MessageLookupByLibrary.simpleMessage("Có"),
         "youHaveNSessionLeft": m9
       };

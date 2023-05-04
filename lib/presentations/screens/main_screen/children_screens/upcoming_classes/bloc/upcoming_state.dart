@@ -2,8 +2,7 @@ part of 'upcoming_cubit.dart';
 
 @immutable
 class UpcomingState extends WidgetState {
-  final bool isLoadingMore;
-  final bool isLoadingTotalCall;
+  final bool isLoadingMore, isLoadingTotalCall, isJoiningASession;
   final int nextPage, totalCall, total, currentTotal;
   final List<GroupedBookingInfo?> groupedBookingInfoList;
 
@@ -14,6 +13,7 @@ class UpcomingState extends WidgetState {
     basicStatusFToastState,
     isLoadingMore,
     isLoadingTotalCall,
+    isJoiningASession,
     nextPage,
     totalCall,
     total,
@@ -32,6 +32,7 @@ class UpcomingState extends WidgetState {
           : null,
       isLoadingMore: mapJson['isLoadingMore'] as bool? ?? false,
       isLoadingTotalCall: mapJson['isLoadingTotalCall'] as bool? ?? false,
+      isJoiningASession: mapJson['isJoiningASession'] as bool? ?? false,
       nextPage: mapJson['nextPage'] as int? ?? 1,
       totalCall: mapJson['totalLearn'] as int? ?? 0,
       total: mapJson['total'] as int? ?? 0,
@@ -61,6 +62,7 @@ class UpcomingState extends WidgetState {
     }
     map['isLoadingMore'] = isLoadingMore;
     map['isLoadingTotalCall'] = isLoadingTotalCall;
+    map['isJoiningASession'] = isJoiningASession;
     map['nextPage'] = nextPage;
     map['totalLearn'] = totalCall;
     map['total'] = total;
@@ -78,6 +80,7 @@ class UpcomingState extends WidgetState {
     super.basicStatusFToastState,
     this.isLoadingMore = false,
     this.isLoadingTotalCall = false,
+    this.isJoiningASession = false,
     this.nextPage = 1,
     this.totalCall = 0,
     this.total = 0,
@@ -95,6 +98,7 @@ class UpcomingState extends WidgetState {
           basicStatusFToastState == other.basicStatusFToastState &&
           isLoadingMore == other.isLoadingMore &&
           isLoadingTotalCall == other.isLoadingTotalCall &&
+          isJoiningASession == other.isJoiningASession &&
           nextPage == other.nextPage &&
           totalCall == other.totalCall &&
           total == other.total &&
@@ -108,6 +112,7 @@ class UpcomingState extends WidgetState {
       basicStatusFToastState.hashCode ^
       isLoadingMore.hashCode ^
       isLoadingTotalCall.hashCode ^
+      isJoiningASession.hashCode ^
       nextPage.hashCode ^
       totalCall.hashCode ^
       total.hashCode ^
@@ -122,6 +127,7 @@ class UpcomingState extends WidgetState {
         ' basicStatusFToastState: $basicStatusFToastState,'
         ' isLoadingMore: $isLoadingMore,'
         ' isLoadingTotalCall: $isLoadingTotalCall,'
+        ' isJoiningASession: $isJoiningASession,'
         ' nextPage: $nextPage,'
         ' totalLearn: $totalCall,'
         ' total: $total,'
@@ -136,6 +142,7 @@ class UpcomingState extends WidgetState {
     BasicStatusFToastState? basicStatusFToastState,
     bool? isLoadingMore,
     bool? isLoadingTotalCall,
+    bool? isJoiningASession,
     int? nextPage,
     int? totalCall,
     int? total,
@@ -148,6 +155,7 @@ class UpcomingState extends WidgetState {
       basicStatusFToastState: basicStatusFToastState ?? this.basicStatusFToastState,
       isLoadingMore: isLoadingMore ?? this.isLoadingMore,
       isLoadingTotalCall: isLoadingTotalCall ?? this.isLoadingTotalCall,
+      isJoiningASession: isJoiningASession ?? this.isJoiningASession,
       nextPage: nextPage ?? this.nextPage,
       totalCall: totalCall ?? this.totalCall,
       total: total ?? this.total,
@@ -163,6 +171,7 @@ class UpcomingState extends WidgetState {
       'basicStatusFToastState': basicStatusFToastState?.toMap(),
       'isLoadingMore': isLoadingMore,
       'isLoadingTotalCall': isLoadingTotalCall,
+      'isJoiningASession': isJoiningASession,
       'nextPage': nextPage,
       'totalLearn': totalCall,
       'total': total,
@@ -182,6 +191,7 @@ class UpcomingState extends WidgetState {
           : null,
       isLoadingMore: map['isLoadingMore'] as bool? ?? false,
       isLoadingTotalCall: map['isLoadingTotalCall'] as bool? ?? false,
+      isJoiningASession: map['isJoiningASession'] as bool? ?? false,
       nextPage: map['nextPage'] as int? ?? 1,
       totalCall: map['totalLearn'] as int? ?? 0,
       total: map['total'] as int? ?? 0,

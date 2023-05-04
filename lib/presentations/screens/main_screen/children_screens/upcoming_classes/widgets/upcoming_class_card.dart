@@ -21,21 +21,22 @@ class UpcomingClassCard extends BaseCard {
     super.crossAxisAlignment,
     super.decoration,
     this.isExpand = false,
+    this.canJoin = false,
     required this.tutorName,
     required this.buttonLabel,
     this.lessonDateTime,
     this.lessonEndTime,
     this.lessonDateFormat = AppDateFormats.eeeMMMdyyyy,
     this.lessonDurationFormat = AppDateFormats.tHHmm,
-    this.onButtonTap,
+    this.onJoinButtonTap,
     this.onExpandCollapseButtonTap,
   });
 
-  final bool isExpand;
+  final bool isExpand, canJoin;
   final String tutorName, buttonLabel;
   final DateTime? lessonDateTime, lessonEndTime;
   final String lessonDateFormat, lessonDurationFormat;
-  final Function()? onButtonTap;
+  final Function()? onJoinButtonTap;
   final Function()? onExpandCollapseButtonTap;
 
   @override
@@ -100,7 +101,9 @@ class UpcomingClassCard extends BaseCard {
                   width: Dimens.getProportionalWidth(context, 88),
                   borderRadiusValue: Dimens.getProportionalWidth(context, 12),
                   paddingVertical: Dimens.getProportionalHeight(context, 10),
-                  onTap: onTap,
+                  preferGradient: canJoin,
+                  bgColor: canJoin ? null : AppColors.neutralBlue200,
+                  onTap: canJoin ? onJoinButtonTap : null,
                   boxShadow: [Effects.normalShadowXS],
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

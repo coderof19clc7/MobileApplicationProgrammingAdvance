@@ -27,7 +27,7 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
 
   @override
   MainCubit provideBloc(BuildContext context) {
-    return MainCubit()..getUserInformation();
+    return MainCubit.getInstance()..getUserInformation();
   }
 
   @override
@@ -50,7 +50,7 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
       child: BlocConsumer<MainCubit, MainState>(
         listenWhen: (previous, current) => previous.currentIndex != current.currentIndex,
         listener: (context, state) {
-          context.read<MainCubit>().pageController.jumpToPage(state.currentIndex);
+          context.read<MainCubit>().pageController?.jumpToPage(state.currentIndex);
         },
         buildWhen: (previous, current) => previous.currentIndex != current.currentIndex,
         builder: (context, state) {

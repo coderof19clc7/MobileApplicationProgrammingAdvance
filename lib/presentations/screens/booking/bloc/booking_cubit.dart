@@ -150,13 +150,6 @@ class BookingCubit extends WidgetCubit<BookingState> {
     onChangeStartDateTime(newStartDateTime);
   }
 
-  Future<void> reloadUserInfo() async {
-    await fetchApi<UserInfoResponse>(
-      () async => userRepository.getUserInfo(),
-      showLoading: false,
-    );
-  }
-
   Future<void> bookingSchedule(String scheduleId, String notes, {
     Future<void> Function()? onBookingComplete,
   }) async {
@@ -176,7 +169,6 @@ class BookingCubit extends WidgetCubit<BookingState> {
         state.currentEndDateTime ?? getToDayDate().add(const Duration(days: 6)),
         showLoading: false,
       ),
-      reloadUserInfo(),
     ];
 
     var needShowSuccessToast = false;

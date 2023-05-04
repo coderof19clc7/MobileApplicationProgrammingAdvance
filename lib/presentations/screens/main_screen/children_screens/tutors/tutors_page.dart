@@ -15,6 +15,7 @@ import 'package:one_one_learn/presentations/screens/main_screen/children_screens
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/widgets/top_banner_tutors_upcoming.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/widgets/tutors_courses_search_field.dart';
+import 'package:one_one_learn/presentations/screens/video_call/video_call_screen.dart';
 import 'package:one_one_learn/presentations/widgets/dialogs/bottom_sheet_dialogs/bodies/tutors_courses_list_filter.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
@@ -74,7 +75,7 @@ class TutorsPage extends StatelessWidget {
                       ).toLocal(),
                       upcomingDateFormat: AppDateFormats.eeeMMMdyyyy,
                       upcomingTimeFormat: AppDateFormats.tHHmm,
-                      onClassSessionEnded: () {
+                      onClassSessionEnded: () async {
                         contextUpcoming.read<UpcomingCubit>().refreshUpcomingScreen();
                       },
                     )
@@ -95,7 +96,12 @@ class TutorsPage extends StatelessWidget {
                       size: Dimens.getProportionalWidth(context, 17),
                     ),
                     onTap: () {
-                      Navigator.of(context).pushNamed(RouteNames.videoCall);
+                      Navigator.of(context).pushNamed(
+                        RouteNames.videoCall,
+                        arguments: VideoCallArguments(
+                          bookingInfo: upcomingClass?.bookingInfoList?.first,
+                        ),
+                      );
                     },
                   );
                 },

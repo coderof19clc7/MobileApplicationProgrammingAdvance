@@ -1,19 +1,15 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
-import 'package:one_one_learn/configs/constants/map_constants.dart';
-import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 import 'package:one_one_learn/presentations/screens/lesson_information/bloc/lesson_information_cubit.dart';
-import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
+import 'package:one_one_learn/presentations/widgets/others/simple_tutor_information.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
-import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class LessonInformation extends StatelessWidget {
   const LessonInformation({super.key});
@@ -27,7 +23,10 @@ class LessonInformation extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             // tutor information
-            buildTutorInformation(context, state.groupedBookingInfo.tutorInfo),
+            SimpleTutorInformation(
+              tutorInfo: state.groupedBookingInfo.tutorInfo,
+              avatarSize: Dimens.getScreenWidth(context) * 0.2,
+            ),
             const EmptyProportionalSpace(height: 20),
 
             // schedule information
@@ -164,58 +163,6 @@ class LessonInformation extends StatelessWidget {
         ),
       ),
     ];
-  }
-
-  Widget buildTutorInformation(BuildContext context, TutorInfo? tutorInfo) {
-    final avatarSize = Dimens.getScreenWidth(context) * 0.2;
-    return Row(
-      children: [
-        // avatar
-        ClipRRect(
-          borderRadius: BorderRadius.circular(avatarSize),
-          child: SimpleNetworkImage(
-            url: tutorInfo?.avatar,
-            width:avatarSize,
-            height: avatarSize,
-          ),
-        ),
-        const EmptyProportionalSpace(width: 10),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // name
-            Text(
-              tutorInfo?.name ?? '',
-              style: Dimens.getProportionalFont(
-                context, context.theme.textTheme.displayLarge,
-              ).copyWith(fontWeight: FontWeight.w600),
-            ),
-            const EmptyProportionalSpace(height: 7),
-            // nationality
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  UIHelper.getIconFromNationalityCode(tutorInfo?.country),
-                  style: Dimens.getProportionalFont(
-                    context, context.theme.textTheme.displayMedium,
-                  ),
-                ),
-                const EmptyProportionalSpace(width: 4),
-                Text(
-                  MapConstants.countries[tutorInfo?.country ?? ''] ?? '',
-                  style: Dimens.getProportionalFont(
-                    context, context.theme.textTheme.displayMedium,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ],
-    );
   }
 
   Widget buildScheduleTime({

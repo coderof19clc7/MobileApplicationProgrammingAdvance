@@ -157,5 +157,7 @@
   "session": "Buổi",
   "assistant": "Trợ lý",
   "assistantInputHint": "Nhập câu hỏi của bạn tại đây",
-  "noUpcomingSession": "Bạn không có buổi học nào sắp diễn ra"
+  "noUpcomingSession": "Bạn không có buổi học nào sắp diễn ra",
+  "waitingTime": "Thời gian chờ",
+  "openMeeting": "Mở cuộc họp"
 }
