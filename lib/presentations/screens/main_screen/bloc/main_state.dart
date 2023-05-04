@@ -3,6 +3,7 @@ part of 'main_cubit.dart';
 @immutable
 class MainState extends WidgetState {
   final int currentIndex;
+  final UserInfo? userInfo;
 
   @override
   WidgetState fromJson(json) {
@@ -14,6 +15,9 @@ class MainState extends WidgetState {
           ? BasicStatusFToastState.fromJson(mapJson['basicStatusFToastState'])
           : null,
       currentIndex: mapJson['currentIndex'] as int? ?? 0,
+      userInfo: mapJson['userInfo'] != null
+          ? UserInfo.fromJson(mapJson['userInfo'])
+          : null,
     );
   }
 
@@ -24,6 +28,7 @@ class MainState extends WidgetState {
     map['needNavigateToLogin'] = needNavigateToLogin;
     map['basicStatusFToastState'] = basicStatusFToastState?.toJson();
     map['currentIndex'] = currentIndex;
+    map['userInfo'] = userInfo?.toJson();
     return map;
   }
 
@@ -31,6 +36,7 @@ class MainState extends WidgetState {
   List<Object?> get props => [
     ...super.props,
     currentIndex,
+    userInfo,
   ];
 
 //<editor-fold desc="Data Methods">
@@ -39,6 +45,7 @@ class MainState extends WidgetState {
     super.needNavigateToLogin = false,
     super.basicStatusFToastState,
     this.currentIndex = 0,
+    this.userInfo,
   });
 
   @override
@@ -48,6 +55,7 @@ class MainState extends WidgetState {
         ' needNavigateToLogin: $needNavigateToLogin,'
         ' basicStatusFToastState: $basicStatusFToastState,'
         ' currentIndex: $currentIndex,'
+        ' userInfo: $userInfo,'
         ' }';
   }
 
@@ -56,12 +64,14 @@ class MainState extends WidgetState {
     bool? needNavigateToLogin,
     BasicStatusFToastState? basicStatusFToastState,
     int? currentIndex,
+    UserInfo? userInfo,
   }) {
     return MainState(
       isLoading: isLoading ?? this.isLoading,
       needNavigateToLogin: needNavigateToLogin ?? this.needNavigateToLogin,
       basicStatusFToastState: basicStatusFToastState ?? this.basicStatusFToastState,
       currentIndex: currentIndex ?? this.currentIndex,
+      userInfo: userInfo ?? this.userInfo,
     );
   }
 
@@ -71,6 +81,7 @@ class MainState extends WidgetState {
       'needNavigateToLogin': needNavigateToLogin,
       'basicStatusFToastState': basicStatusFToastState?.toMap(),
       'currentIndex': currentIndex,
+      'userInfo': userInfo?.toMap(),
     };
   }
 
@@ -82,6 +93,9 @@ class MainState extends WidgetState {
           ? BasicStatusFToastState.fromMap(map['basicStatusFToastState'] as Map<String, dynamic>)
           : null,
       currentIndex: map['currentIndex'] as int? ?? 0,
+      userInfo: map['userInfo'] != null
+          ? UserInfo.fromMap(map['userInfo'] as Map<String, dynamic>)
+          : null,
     );
   }
 

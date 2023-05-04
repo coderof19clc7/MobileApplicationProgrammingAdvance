@@ -38,17 +38,10 @@ Future<void> initializeDependencies() async {
 }
 
 void initNetwork() {
-  injector.registerSingleton<NetworkManager>(NetworkManager());
-
-  final userRepository = UserRepository();
-  final userInfo = injector<LocalManager>().getUserInfo();
-  if (userInfo != null) {
-    userRepository.userInfo = userInfo;
-  }
-
   injector
+    ..registerSingleton<NetworkManager>(NetworkManager())
     ..registerLazySingleton<AuthRepository>(AuthRepository.new)
-    ..registerLazySingleton<UserRepository>(() => userRepository)
+    ..registerLazySingleton<UserRepository>(UserRepository.new)
     ..registerLazySingleton<TutorRepository>(TutorRepository.new)
     ..registerLazySingleton<ScheduleRepository>(ScheduleRepository.new)
     ..registerLazySingleton<CourseRepository>(CourseRepository.new)

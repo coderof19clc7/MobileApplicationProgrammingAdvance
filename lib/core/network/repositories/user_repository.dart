@@ -12,8 +12,6 @@ import 'package:one_one_learn/core/network/repositories/base_repository.dart';
 class UserRepository extends BaseRepository {
   UserRepository() : super(ApiServices.user);
 
-  var userInfo = const UserInfo();
-
   Future<BaseResponse> sendForgotPasswordRequest(String email) async {
     return BaseResponse.fromJson(await request(
       method: ApiMethods.post,
@@ -39,14 +37,6 @@ class UserRepository extends BaseRepository {
         ApiConstants.contentType: ApiConstants.textPlain,
       }
     ));
-
-    if (userInfoResponse.statusCode == ApiStatusCode.success) {
-      final newUserInfo = userInfoResponse.user;
-      if (newUserInfo != null) {
-        userInfo = newUserInfo;
-        await injector<LocalManager>().saveUserInfo(userInfo);
-      }
-    }
 
     return userInfoResponse;
   }

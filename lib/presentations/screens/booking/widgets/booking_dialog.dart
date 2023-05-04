@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/local.dart';
-import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 import 'package:one_one_learn/generated/l10n.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
@@ -49,7 +48,7 @@ class _BookingDialogState extends State<BookingDialog> {
   }
 
   int getBalanceSessionLeft() {
-    final balanceSessionLeft = int.parse(injector<UserRepository>().userInfo.walletInfo?.amount ?? '0');
+    final balanceSessionLeft = int.parse(MainCubit.getInstance().state.userInfo?.walletInfo?.amount ?? '0');
     return balanceSessionLeft ~/ LocalConstants.priceOfSession;
   }
 

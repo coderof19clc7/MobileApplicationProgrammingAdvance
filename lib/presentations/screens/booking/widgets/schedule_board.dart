@@ -148,7 +148,7 @@ class ScheduleBoard extends StatelessWidget {
                   : AppColors.green800;
               if (scheduleDetail?.bookingInfo?.isNotEmpty == true) {
                 if (scheduleDetail?.bookingInfo?.last.userId
-                    != context.read<BookingCubit>().userRepository.userInfo.id
+                    != MainCubit.getInstance().state.userInfo?.id
                 ) {
                   text = S.current.reserved;
                   color = context.theme.colorScheme.onBackground;

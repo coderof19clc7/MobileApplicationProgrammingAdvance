@@ -27,7 +27,7 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
 
   @override
   MainCubit provideBloc(BuildContext context) {
-    return MainCubit.getInstance()..getUserInformation();
+    return MainCubit.getInstance();
   }
 
   @override

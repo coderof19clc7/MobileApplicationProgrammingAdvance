@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
-import 'package:one_one_learn/core/managers/local_manager.dart';
 import 'package:one_one_learn/core/models/responses/auth/auth_response.dart';
-import 'package:one_one_learn/core/models/responses/auth/tokens.dart';
 import 'package:one_one_learn/core/models/responses/user/user_info.dart';
 import 'package:one_one_learn/core/network/network_manager.dart';
 import 'package:one_one_learn/core/network/repositories/auth_repository.dart';
-import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/utils/extensions/string_extensions.dart';
 
@@ -20,7 +17,6 @@ class LoginCubit extends WidgetCubit<LoginState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final authRepository = injector<AuthRepository>();
-  final userRepository = injector<UserRepository>();
 
   @override
   void onWidgetCreated() {}
@@ -61,10 +57,8 @@ class LoginCubit extends WidgetCubit<LoginState> {
   }
 
   Future<void> onLoginSucceeded(AuthResponse loginResponse) async {
-    final localManager = injector<LocalManager>();
     // update user information in this session
-    userRepository.userInfo = loginResponse.user ?? const UserInfo();
-    localManager.saveUserInfo(userRepository.userInfo);
+    localManager.saveUserInfo(loginResponse.user ?? const UserInfo());
 
     // save access and refresh token to local
     await localManager.saveTokens(loginResponse.tokens!);

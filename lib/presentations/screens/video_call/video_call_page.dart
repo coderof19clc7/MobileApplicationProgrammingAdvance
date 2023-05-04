@@ -6,12 +6,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:omni_jitsi_meet/jitsi_meet.dart';
-import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
-import 'package:one_one_learn/core/network/repositories/user_repository.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
 import 'package:one_one_learn/presentations/widgets/others/simple_tutor_information.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 // import 'package:jitsi_meet_wrapper/jitsi_meet_wrapper.dart';
@@ -189,15 +188,15 @@ class _VideoCallPageState extends State<VideoCallPage> {
 
   JitsiMeetingOptions getJitsiMeetingOptions(Map<FeatureFlagEnum, Object> featureFlags) {
     final roomAndToken = decodeMeetingUrl();
-    final userInfo = injector<UserRepository>().userInfo;
+    final userInfo = MainCubit.getInstance().state.userInfo;
     return JitsiMeetingOptions(
       serverURL: ApiConstants.meetingServerLink,
       room: roomAndToken[0],
       featureFlags: featureFlags,
       token: roomAndToken[1],
-      userAvatarURL: userInfo.avatar,
-      userDisplayName: userInfo.name,
-      userEmail: userInfo.email,
+      userAvatarURL: userInfo?.avatar,
+      userDisplayName: userInfo?.name,
+      userEmail: userInfo?.email,
     );
   }
 

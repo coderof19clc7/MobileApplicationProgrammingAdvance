@@ -4,7 +4,7 @@ import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/configs/constants/local.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
-import 'package:one_one_learn/core/managers/local_manager.dart';
+import 'package:one_one_learn/core/models/responses/user/user_info.dart';
 import 'package:one_one_learn/core/models/responses/user/user_info_response.dart';
 import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 
@@ -40,17 +40,37 @@ class MainCubit extends WidgetCubit<MainState> {
   }
 
   @override
-  void onWidgetCreated() {}
+  void onWidgetCreated() {
+    final userInfoLocal = localManager.getUserInfo();
+    emit(state.copyWith(userInfo: userInfoLocal));
+    getUserInformation();
+  }
 
   Future<void> getUserInformation({bool showLoading = true}) async {
+    if (showLoading) {
+      emit(state.copyWith(isLoading: true));
+    }
+
     final userInfoResponse = await fetchApi<UserInfoResponse>(
       () async => userRepository.getUserInfo(),
-      showLoading: showLoading,
+      showLoading: false,
     );
     if (userInfoResponse == null
         || userInfoResponse.statusCode != ApiStatusCode.success
     ) {
       emit(state.copyWith(needNavigateToLogin: true));
+    } else {
+      final newUserInfo = userInfoResponse.user;
+      if (newUserInfo == null) {
+        emit(state.copyWith(needNavigateToLogin: true));
+      } else {
+        await localManager.saveUserInfo(newUserInfo);
+        emit(state.copyWith(userInfo: newUserInfo));
+      }
+    }
+
+    if (showLoading) {
+      emit(state.copyWith(isLoading: false));
     }
   }
 
@@ -59,11 +79,8 @@ class MainCubit extends WidgetCubit<MainState> {
   }
 
   Future<void> logout() async {
-    final localManager = injector<LocalManager>();
-    await Future.wait([
-      localManager.clearKey(LocalConstants.tokens),
-      localManager.clearKey(LocalConstants.userInfo),
-    ]);
+    await localManager.clearDataLocalLogout();
+    emit(state.copyWith(needNavigateToLogin: true));
   }
 
   @override
