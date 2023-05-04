@@ -50,7 +50,7 @@ class TutorsPage extends StatelessWidget {
               BlocBuilder<UpcomingCubit, UpcomingState>(
                 builder: (contextUpcoming, stateUpcoming) {
                   var hasUpcomingClass = stateUpcoming.groupedBookingInfoList.isNotEmpty;
-                  GroupedBookingInfo? upcomingClass;;
+                  GroupedBookingInfo? upcomingClass;
                   if (hasUpcomingClass) {
                     upcomingClass = stateUpcoming.groupedBookingInfoList.first;
                     if (upcomingClass == null) {
@@ -65,10 +65,12 @@ class TutorsPage extends StatelessWidget {
                     contentWidget: hasUpcomingClass
                         ? UpcomingClassBanner(
                       startTime: DateTime.fromMillisecondsSinceEpoch(
-                        upcomingClass?.bookingInfoList?.first?.scheduleDetailInfo?.startPeriodTimestamp ?? 0, isUtc: true,
+                        upcomingClass?.bookingInfoList?.first?.scheduleDetailInfo?.startPeriodTimestamp ?? 0,
+                        isUtc: true,
                       ).toLocal(),
                       endTime: DateTime.fromMillisecondsSinceEpoch(
-                        upcomingClass?.bookingInfoList?.first?.scheduleDetailInfo?.endPeriodTimestamp ?? 0, isUtc: true,
+                        upcomingClass?.bookingInfoList?.first?.scheduleDetailInfo?.endPeriodTimestamp ?? 0,
+                        isUtc: true,
                       ).toLocal(),
                       upcomingDateFormat: AppDateFormats.eeeMMMdyyyy,
                       upcomingTimeFormat: AppDateFormats.tHHmm,

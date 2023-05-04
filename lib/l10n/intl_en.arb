@@ -115,6 +115,7 @@
   "upcoming": "Upcoming",
   "settings": "Settings",
   "upcomingIn": "in",
+  "sessionProgressIn": "going on for",
   "refreshTokenError": "Your session has expired. Please login again.",
   "somethingRequiredError": "{somethings} is required",
   "@somethingRequiredError": {

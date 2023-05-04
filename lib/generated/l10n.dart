@@ -1030,6 +1030,16 @@ class S {
     );
   }
 
+  /// `going on for`
+  String get sessionProgressIn {
+    return Intl.message(
+      'going on for',
+      name: 'sessionProgressIn',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Your session has expired. Please login again.`
   String get refreshTokenError {
     return Intl.message(

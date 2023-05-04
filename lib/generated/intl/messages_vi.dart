@@ -209,6 +209,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Gửi yêu cầu đặt lại mật khẩu"),
         "server": MessageLookupByLibrary.simpleMessage("Máy chủ"),
         "session": MessageLookupByLibrary.simpleMessage("Buổi"),
+        "sessionProgressIn":
+            MessageLookupByLibrary.simpleMessage("diễn ra được"),
         "settings": MessageLookupByLibrary.simpleMessage("Cài đặt"),
         "signOut": MessageLookupByLibrary.simpleMessage("Đăng xuất"),
         "signUp": MessageLookupByLibrary.simpleMessage("Đăng ký"),

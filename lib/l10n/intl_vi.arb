@@ -96,6 +96,7 @@
   "upcoming": "Upcoming",
   "settings": "Cài đặt",
   "upcomingIn": "bắt đầu sau",
+  "sessionProgressIn": "diễn ra được",
   "refreshTokenError": "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.",
   "somethingRequiredError": "{somethings} là bắt buộc",
   "confirmPasswordRequired": "Vui lòng xác nhận lại mật khẩu",

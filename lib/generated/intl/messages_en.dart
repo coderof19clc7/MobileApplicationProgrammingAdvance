@@ -205,6 +205,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Send reset password request"),
         "server": MessageLookupByLibrary.simpleMessage("Server"),
         "session": MessageLookupByLibrary.simpleMessage("Session"),
+        "sessionProgressIn":
+            MessageLookupByLibrary.simpleMessage("going on for"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "signOut": MessageLookupByLibrary.simpleMessage("Sign out"),
         "signUp": MessageLookupByLibrary.simpleMessage("Sign Up"),

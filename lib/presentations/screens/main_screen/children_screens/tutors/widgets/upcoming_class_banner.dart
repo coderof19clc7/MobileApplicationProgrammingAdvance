@@ -29,7 +29,7 @@ class UpcomingClassBanner extends StatefulWidget {
 class _UpcomingClassBannerState extends State<UpcomingClassBanner> {
   Timer? _timer;
   Color? textColor;
-  var durationText = '00:00:00';
+  var durationText = '(${S.current.upcomingIn} 00:00:00)';
 
   @override
   void initState() {
@@ -58,18 +58,19 @@ class _UpcomingClassBannerState extends State<UpcomingClassBanner> {
         textColor = isCountDown
             ? context.theme.colorScheme.onPrimary
             : AppColors.green400;
+        final textHeader = isCountDown ? S.current.upcomingIn : S.current.sessionProgressIn;
 
         final days = newDuration.inDays.remainder(24).toString().padLeft(2, '0');
         final hours = newDuration.inHours.remainder(60).toString().padLeft(2, '0');
         final minutes = newDuration.inMinutes.remainder(60).toString().padLeft(2, '0');
         final seconds = newDuration.inSeconds.remainder(60).toString().padLeft(2, '0');
         durationText = days == '00'
-            ? '(${S.current.upcomingIn} $hours:$minutes:$seconds)'
-            : '(${S.current.upcomingIn} $days:$hours:$minutes:$seconds)';
+            ? '($textHeader $hours:$minutes:$seconds)'
+            : '($textHeader $days:$hours:$minutes:$seconds)';
       });
     }
 
-    if (isCountDown) {
+    if (!isCountDown) {
       if (widget.endTime.difference(DateTime.now()).inMilliseconds <= 0) {
         widget.onClassSessionEnded?.call();
       }
