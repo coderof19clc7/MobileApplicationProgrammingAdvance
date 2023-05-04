@@ -85,6 +85,9 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
   bool canListTutorsLoadMore() {
     // return state.listTutors.length < state.total;
+    if (state.listTutors.isEmpty) {
+      return false;
+    }
     return state.listTutors.last == null;
   }
 
@@ -124,7 +127,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
 
   List<TutorInfo?> getRealCurrentList() {
     final currentList = [...state.listTutors];
-    if (currentList.last == null) {
+    if (canListTutorsLoadMore()) {
       currentList.removeRange(state.listTutors.length - 3, state.listTutors.length);
     }
     return currentList;
@@ -219,6 +222,10 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
   void onSearchTextSubmitted2(String value) {
     if (value == state.searchText) {
       return;
+    }
+
+    if (tutorsScrollController?.hasClients == true) {
+      tutorsScrollController?.jumpTo(0);
     }
 
     emit(state.copyWith(

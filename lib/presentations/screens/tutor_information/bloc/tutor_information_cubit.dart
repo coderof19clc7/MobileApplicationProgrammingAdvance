@@ -50,6 +50,9 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
   }
 
   bool canListFeedbackLoadMore() {
+    if (state.feedbackList.isEmpty) {
+      return false;
+    }
     return state.feedbackList.last == null;
   }
 

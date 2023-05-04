@@ -49,12 +49,15 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
 
   bool canListCoursesLoadMore() {
     // return state.listCourses.length < state.total;
+    if (state.listCourses.isEmpty) {
+      return false;
+    }
     return state.listCourses.last == null;
   }
 
   List<CourseInformation?> getRealCurrentList() {
     final currentList = [...state.listCourses];
-    if (currentList.last == null) {
+    if (canListCoursesLoadMore()) {
       currentList.removeRange(state.listCourses.length - 3, state.listCourses.length);
     }
     return currentList;
@@ -114,6 +117,10 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
   void onSearchTextSubmitted(String qText) {
     if (qText == state.coursesSearchText) {
       return;
+    }
+
+    if (scrollController.hasClients) {
+      scrollController.jumpTo(0);
     }
 
     emit(state.copyWith(

@@ -21,12 +21,15 @@ class HistoriesCubit extends WidgetCubit<HistoriesState> {
 
   bool canListHistoryBookingInfoLoadMore() {
     // return state.listCourses.length < state.total;
+    if (state.groupedHistoryBookingInfoList.isEmpty) {
+      return false;
+    }
     return state.groupedHistoryBookingInfoList.last == null;
   }
 
   List<GroupedBookingInfo?> getRealCurrentList() {
     final currentGroupedList = [...state.groupedHistoryBookingInfoList];
-    if (currentGroupedList.last == null) {
+    if (canListHistoryBookingInfoLoadMore()) {
       currentGroupedList.removeRange(
         state.groupedHistoryBookingInfoList.length - 3, state.groupedHistoryBookingInfoList.length,
       );
@@ -49,24 +52,32 @@ class HistoriesCubit extends WidgetCubit<HistoriesState> {
   }
 
   List<List<BookingInfo?>?> convert1DListTo2DList(List<BookingInfo?> list1D, int nextPage) {
-    final dataAmount = list1D.length;
-    final result = <List<BookingInfo?>?>[];
+    var result = <List<BookingInfo?>?>[];
+    if (list1D.isNotEmpty) {
+      final dataAmount = list1D.length;
+      final hasCurrentList = getRealCurrentList().isNotEmpty;
+      if (hasCurrentList) {
+        result = [getRealCurrentList().last?.bookingInfoList];
+        state.groupedHistoryBookingInfoList.removeLast();
+      }
 
-    print('nextPage inside converter: $nextPage');
+      print('nextPage inside converter: $nextPage');
 
-    for (var i = 0; i < dataAmount; i++) {
-      if (i == 0) {
-        result.add([list1D[i]]);
-      } else {
-        final currentList = result.last;
-        final currentItem = list1D[i];
-        if (is2ClassesContinuously(currentList?.first, currentItem)) {
-          currentList?.insert(0, currentItem);
+      for (var i = 0; i < dataAmount; i++) {
+        if (i == 0 && result.isEmpty) {
+          result.add([list1D[i]]);
         } else {
-          result.add([currentItem]);
+          final currentList = result.last;
+          final currentItem = list1D[i];
+          if (is2ClassesContinuously(currentList?.first, currentItem)) {
+            currentList?.insert(0, currentItem);
+          } else {
+            result.add([currentItem]);
+          }
         }
       }
     }
+
     return result;
   }
 
@@ -77,6 +88,7 @@ class HistoriesCubit extends WidgetCubit<HistoriesState> {
     if (kDebugMode) {
       print('state.nextPage: ${state.nextPage}');
       print('now: ${DateTime.now().millisecondsSinceEpoch}');
+      print('currentTotal: ${state.currentTotal}');
     }
     final bookedClassesResponse = await fetchApi<BookedClassesResponse>(
           () => bookingRepository.getBookedClasses(query: BookingListRequest(
@@ -107,7 +119,7 @@ class HistoriesCubit extends WidgetCubit<HistoriesState> {
 
         // convert into grouped list
         final list2DVersion = convert1DListTo2DList(newListHistoryBookingInfo, nextPage);
-        final newListTotal = list2DVersion.length;
+        final newListTotal = newListHistoryBookingInfo.length;
         final newHistoryGroupedBookingInfoList = list2DVersion.map((e) {
           return e != null ? GroupedBookingInfo.fromBookingInfoList(e) : null;
         }).toList();
