@@ -51,8 +51,6 @@ class NetworkManager {
       headers: {
         ApiConstants.accept: ApiConstants.applicationJson,
         ApiConstants.contentType: ApiConstants.applicationJson,
-        'origin': 'https://sandbox.app.lettutor.com/',
-        'referer': 'https://sandbox.app.lettutor.com/'
       },
       validateStatus: (status) => true,
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/widgets/icon_text_icon.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
@@ -146,7 +147,7 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
         ],
       ),
       onTap: () {
-        Navigator.of(context).pushNamedAndRemoveUntil(RouteNames.login, (route) => false);
+        MainCubit.getInstance().logout();
       },
     );
   }
