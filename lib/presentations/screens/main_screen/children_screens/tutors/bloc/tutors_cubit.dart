@@ -165,10 +165,8 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         }
         if (reloadAllCurrentList) {
           // reload all current list --> replace current list with new list
-          finalNewListTutors = sortList(newListTutors, sortValue: state.sortValue);
-          if (canListTutorsLoadMore()) {
-            finalNewListTutors.addAll([null, null, null]);
-          }
+          finalNewListTutors = sortList(newListTutors, sortValue: state.sortValue)
+          ..addAll([null, null, null]);
         } else {
           // load more --> combine current list and new list
           newPage = state.nextPage + (newListTutors.isEmpty ? 0 : 1);

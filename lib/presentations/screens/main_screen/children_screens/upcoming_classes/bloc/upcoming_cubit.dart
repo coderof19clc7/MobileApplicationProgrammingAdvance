@@ -169,11 +169,10 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
 
         var finalNewGroupedList = <GroupedBookingInfo?>[];
         if (reloadAllCurrentList) {
-          finalNewGroupedList = [...newGroupedBookingInfoList];
+          finalNewGroupedList = [
+            ...newGroupedBookingInfoList, ...[null, null, null],
+          ];
           currentTotal = newListTotal;
-          if (canListBookingInfoLoadMore()) {
-            finalNewGroupedList.addAll([null, null, null]);
-          }
         } else {
           nextPage = state.nextPage + (newGroupedBookingInfoList.isEmpty ? 0 : 1);
           currentTotal += newListTotal;

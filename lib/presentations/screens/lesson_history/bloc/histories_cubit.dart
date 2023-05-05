@@ -129,11 +129,10 @@ class HistoriesCubit extends WidgetCubit<HistoriesState> {
 
         var finalNewHistoryGroupedList = <GroupedBookingInfo?>[];
         if (reloadAllCurrentList) {
-          finalNewHistoryGroupedList = [...newHistoryGroupedBookingInfoList];
+          finalNewHistoryGroupedList = [
+            ...newHistoryGroupedBookingInfoList, ...[null, null, null],
+          ];
           currentTotal = newListTotal;
-          if (canListHistoryBookingInfoLoadMore()) {
-            finalNewHistoryGroupedList.addAll([null, null, null]);
-          }
         } else {
           nextPage = state.nextPage + (newHistoryGroupedBookingInfoList.isEmpty ? 0 : 1);
           currentTotal += newListTotal;
