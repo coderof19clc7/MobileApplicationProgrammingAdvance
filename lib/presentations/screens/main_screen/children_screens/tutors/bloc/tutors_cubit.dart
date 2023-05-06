@@ -159,7 +159,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       if (tutorSearchResponse.statusCode == ApiStatusCode.success) {
         var newPage = state.nextPage;
         final newListTutors = tutorSearchResponse.rows ?? <TutorInfo?>[];
-        if (newListTutors.isNotEmpty) {
+        if (!reloadAllCurrentList && newListTutors.isNotEmpty) {
           final removeRange = newPage * numTutorsPerPage - getRealCurrentList().length;
           newListTutors.removeRange(
             0, removeRange < numTutorsPerPage ? numTutorsPerPage - removeRange : 0,

@@ -116,7 +116,7 @@ class HistoriesCubit extends WidgetCubit<HistoriesState> {
         var nextPage = state.nextPage;
         var currentTotal = state.currentTotal;
         final newListHistoryBookingInfo = bookedClassesResponse.data?.rows ?? <BookingInfo?>[];
-        if (newListHistoryBookingInfo.isNotEmpty) {
+        if (!reloadAllCurrentList && newListHistoryBookingInfo.isNotEmpty) {
           final removeRange = nextPage * perPage - currentTotal;
           newListHistoryBookingInfo.removeRange(
             0, removeRange < perPage ? perPage - removeRange : 0,
