@@ -33,6 +33,7 @@ class ApiEndpoints {
   // booking
   static const listStudent = 'list/student';
   static const studentRequest = 'student-request';
+  static const scheduleDetail = 'schedule-detail';
 
   // call
   static const total = 'total';

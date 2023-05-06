@@ -3,11 +3,16 @@ import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
 import 'package:one_one_learn/core/models/requests/schedule_and_booking/booking_list_request.dart';
+import 'package:one_one_learn/core/models/requests/schedule_and_booking/cancel_schedule_request.dart';
+import 'package:one_one_learn/core/models/requests/schedule_and_booking/edit_request_request.dart';
+import 'package:one_one_learn/core/models/responses/base_response.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booked_classes_response.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booking_info.dart';
+import 'package:one_one_learn/core/models/responses/schedule_and_booking/edit_request_response.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/grouped_booking_info.dart';
 import 'package:one_one_learn/core/network/repositories/booking_repository.dart';
 import 'package:one_one_learn/core/network/repositories/call_repository.dart';
+import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 
 part 'upcoming_state.dart';
 
@@ -196,6 +201,10 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
         }
         if (currentTotal >= nextPage * perPage) {
           nextPage += 1;
+        } else {
+          while (nextPage * perPage - currentTotal > perPage) {
+            nextPage -= 1;
+          }
         }
 
         emit(state.copyWith(
@@ -216,6 +225,40 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
     }
 
     emit(state.copyWith(isLoadingMore: false));
+  }
+
+  Future<void> editStudentRequestForBookingInfo(String bookingInfoId, String newNote) async {
+    final editRequestResponse = await fetchApi<EditRequestResponse>(
+      () => bookingRepository.editRequestOfBookingInfo(
+        bookingInfoId: bookingInfoId,
+        editRequestRequest: EditRequestRequest(studentRequest: newNote),
+      ),
+      showLoading: false,
+    );
+
+    if (editRequestResponse != null && editRequestResponse.statusCode == ApiStatusCode.success) {
+      editRequestResponse.message?.let(showSuccessToast);
+    }
+
+    await getListStudentBookedClasses(reloadAllCurrentList: true);
+  }
+
+  Future<void> cancelScheduleDetail(String scheduleDetailId, int cancelReasonId, String note) async {
+    final cancelScheduleResponse = await fetchApi<BaseResponse>(
+          () => bookingRepository.cancelScheduleDetail(
+        cancelScheduleRequest: CancelScheduleRequest(
+          scheduleDetailId: scheduleDetailId,
+          cancelInfo: CancelInfo(cancelReasonId: cancelReasonId, note: note)
+        )
+      ),
+      showLoading: false,
+    );
+
+    if (cancelScheduleResponse != null && cancelScheduleResponse.statusCode == ApiStatusCode.success) {
+      cancelScheduleResponse.message?.let(showSuccessToast);
+    }
+
+    await getListStudentBookedClasses(reloadAllCurrentList: true);
   }
 
   void toggleExpandCollapse(int index) {

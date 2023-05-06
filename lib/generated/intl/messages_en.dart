@@ -20,25 +20,27 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(somethings) => "${somethings} failed";
+  static String m0(somethings) => "${somethings} cannot be empty";
 
-  static String m1(somethings) => "${somethings} successfully";
+  static String m1(somethings) => "${somethings} failed";
 
-  static String m2(somethings) => "No suggested ${somethings}";
+  static String m2(somethings) => "${somethings} successfully";
 
-  static String m3(tutor) => "Schedule of tutor ${tutor}";
+  static String m3(somethings) => "No suggested ${somethings}";
 
-  static String m4(somethings) => "${somethings} is required";
+  static String m4(tutor) => "Schedule of tutor ${tutor}";
 
-  static String m5(somethings) => "From high ${somethings}";
+  static String m5(somethings) => "${somethings} is required";
 
-  static String m6(somethings) => "From low ${somethings}";
+  static String m6(somethings) => "From high ${somethings}";
 
-  static String m7(nationality) => "${nationality} tutor";
+  static String m7(somethings) => "From low ${somethings}";
 
-  static String m8(somethings) => "Unknown ${somethings}";
+  static String m8(nationality) => "${nationality} tutor";
 
-  static String m9(n) => "You have ${n} session left";
+  static String m9(somethings) => "Unknown ${somethings}";
+
+  static String m10(n) => "You have ${n} session left";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -64,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Cancel"),
         "cancelClassHint": MessageLookupByLibrary.simpleMessage(
             "Use \"Cancel\" button to cancel a class.\nThis button only appears if the class\'s start time is far more than 2 hours"),
+        "cannotEmpty": m0,
         "categories": MessageLookupByLibrary.simpleMessage("Categories"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Change password"),
@@ -84,8 +87,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "courses": MessageLookupByLibrary.simpleMessage("Courses"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
-        "doSomethingsFailed": m0,
-        "doSomethingsSuccess": m1,
+        "doSomethingsFailed": m1,
+        "doSomethingsSuccess": m2,
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Don\'t have an account?"),
         "edit": MessageLookupByLibrary.simpleMessage("Edit"),
@@ -138,6 +141,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lesson": MessageLookupByLibrary.simpleMessage("lesson"),
         "lessonHistory": MessageLookupByLibrary.simpleMessage("Lesson History"),
         "lessonStatus": MessageLookupByLibrary.simpleMessage("Lesson status"),
+        "lessonTime": MessageLookupByLibrary.simpleMessage("Lesson time"),
         "level": MessageLookupByLibrary.simpleMessage("Level"),
         "listening": MessageLookupByLibrary.simpleMessage("Listening"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading"),
@@ -158,7 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "needActivateHeader":
             MessageLookupByLibrary.simpleMessage("Account activation notify"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
-        "noHaveSomethingsSuggested": m2,
+        "noHaveSomethingsSuggested": m3,
         "noRequest": MessageLookupByLibrary.simpleMessage("No request"),
         "noReviewGiven": MessageLookupByLibrary.simpleMessage("No comment"),
         "noUpcomingSession": MessageLookupByLibrary.simpleMessage(
@@ -181,6 +185,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "price": MessageLookupByLibrary.simpleMessage("Price"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "rating": MessageLookupByLibrary.simpleMessage("Rating"),
+        "reasonCancel1":
+            MessageLookupByLibrary.simpleMessage("Reschedule at another time"),
+        "reasonCancel2":
+            MessageLookupByLibrary.simpleMessage("Busy at that time"),
+        "reasonCancel3": MessageLookupByLibrary.simpleMessage("Asked by tutor"),
+        "reasonCancel4": MessageLookupByLibrary.simpleMessage("Other"),
+        "reasonCancelQuestion": MessageLookupByLibrary.simpleMessage(
+            "What was the reason you cancel this booking?"),
         "record": MessageLookupByLibrary.simpleMessage("Record"),
         "refreshTokenError": MessageLookupByLibrary.simpleMessage(
             "Your session has expired. Please login again."),
@@ -198,7 +210,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Enter the email associated with your account to reset password."),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
-        "scheduleOfTutorA": m3,
+        "scheduleOfTutorA": m4,
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Find a course"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Find a tutor"),
@@ -216,10 +228,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Skill level"),
-        "somethingRequiredError": m4,
+        "somethingRequiredError": m5,
         "sortNameFromAtoZ": MessageLookupByLibrary.simpleMessage("From A to Z"),
-        "sortSomethingsFromHigh": m5,
-        "sortSomethingsFromLow": m6,
+        "sortSomethingsFromHigh": m6,
+        "sortSomethingsFromLow": m7,
         "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
@@ -242,9 +254,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tutorPhotoInappropriateIssue":
             MessageLookupByLibrary.simpleMessage("Inappropriate profile photo"),
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
-        "tutorWithNationality": m7,
+        "tutorWithNationality": m8,
         "tutoring": MessageLookupByLibrary.simpleMessage("Tutoring"),
-        "unknownSomethings": m8,
+        "unknownSomethings": m9,
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("in"),
         "videoNotAvailable":
@@ -254,6 +266,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Waiting time"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
-        "youHaveNSessionLeft": m9
+        "youHaveNSessionLeft": m10
       };
 }

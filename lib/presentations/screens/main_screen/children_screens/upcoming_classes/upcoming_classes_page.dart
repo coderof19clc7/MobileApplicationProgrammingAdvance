@@ -18,6 +18,7 @@ class UpcomingClassesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: SizedBox(
         width: Dimens.getScreenWidth(context),
         height: Dimens.getScreenHeight(context),

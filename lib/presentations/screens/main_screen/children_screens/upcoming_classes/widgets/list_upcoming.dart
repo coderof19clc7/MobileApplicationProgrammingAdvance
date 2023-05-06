@@ -5,12 +5,16 @@ import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/configs/constants/map_constants.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/configs/stylings/app_styles.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booking_info.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/grouped_booking_info.dart';
+import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/edit_student_request_dialog.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/remove_report_schedule_dialog.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/upcoming_class_card.dart';
 import 'package:one_one_learn/presentations/screens/video_call/video_call_screen.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
@@ -23,6 +27,54 @@ import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 
 class ListUpcoming extends StatelessWidget {
   const ListUpcoming({super.key});
+
+  void showEditRequestDialog(BuildContext contextCubit, {
+    required String bookingInfoId,
+    required String currentNote,
+  }) {
+    showDialog(
+      context: contextCubit,
+      barrierDismissible: false,
+      builder: (context) {
+        return EditStudentRequestDialog(
+          currentRequest: currentNote,
+          onEditButtonTap: (note) async {
+            await Future.delayed(const Duration(seconds: 1), () async {
+              await contextCubit.read<UpcomingCubit>().editStudentRequestForBookingInfo(
+                bookingInfoId, note,
+              );
+            });
+          },
+        );
+      },
+    );
+  }
+
+  void showCancelDialog(BuildContext contextCubit, {
+    required String bookingInfoId,
+    TutorInfo? tutorInfo,
+    required String dateSession,
+  }) {
+    showDialog(
+      context: contextCubit,
+      barrierDismissible: false,
+      builder: (context) {
+        return RemoveReportScheduleDialog(
+          tutorAva: tutorInfo?.avatar ?? '',
+          tutorName: tutorInfo?.name ?? '',
+          dateTimeString: dateSession,
+          dropDownData: MapConstants.removeScheduleReasons,
+          onEditButtonTap: (reasonId, note) async {
+            await Future.delayed(const Duration(seconds: 1), () async {
+              await contextCubit.read<UpcomingCubit>().cancelScheduleDetail(
+                bookingInfoId, reasonId, note,
+              );
+            });
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,7 +191,7 @@ class ListUpcoming extends StatelessWidget {
       children: [
         buildListSessionRow(context, listBookingInfo),
         const EmptyProportionalSpace(height: 20),
-        buildRequestRow(context, request),
+        buildRequestRow(context,listBookingInfo[0]?.id ?? '', request),
       ],
     );
   }
@@ -159,19 +211,6 @@ class ListUpcoming extends StatelessWidget {
           physics: const ClampingScrollPhysics(),
           itemCount: listBookingInfo.length,
           itemBuilder: (context, index) {
-            final bookingInfo = listBookingInfo[index];
-            final startTime = bookingInfo?.scheduleDetailInfo?.startPeriodTimestamp ?? 0;
-            final endTime = bookingInfo?.scheduleDetailInfo?.endPeriodTimestamp ?? 0;
-            final startTimeString = bookingInfo != null
-                ? DateFormat(AppDateFormats.tHHmm).format(
-              DateTime.fromMillisecondsSinceEpoch(startTime, isUtc: true).toLocal(),
-            )
-                : '__';
-            final endTimeString = bookingInfo != null
-                ? DateFormat(AppDateFormats.tHHmm).format(
-              DateTime.fromMillisecondsSinceEpoch(endTime, isUtc: true).toLocal(),
-            )
-                : '__';
             return Container(
               margin: EdgeInsets.only(
                 bottom: Dimens.getProportionalHeight(
@@ -179,9 +218,7 @@ class ListUpcoming extends StatelessWidget {
                 ),
               ),
               child: buildSessionRow(
-                context,
-                startTimeString: startTimeString,
-                endTimeString: endTimeString,
+                context, bookingInfo: listBookingInfo[index],
               ),
             );
           },
@@ -191,9 +228,27 @@ class ListUpcoming extends StatelessWidget {
   }
 
   Widget buildSessionRow(BuildContext context, {
-    required String startTimeString,
-    required String endTimeString,
+    BookingInfo? bookingInfo,
   }) {
+    final startTimestamp = bookingInfo?.scheduleDetailInfo?.startPeriodTimestamp;
+    final endTimestamp = bookingInfo?.scheduleDetailInfo?.endPeriodTimestamp;
+
+    final startTime = DateTime.fromMillisecondsSinceEpoch(startTimestamp ?? 0, isUtc: true).toLocal();
+    final differenceTime = startTime.difference(DateTime.now());
+    final showCancelButton = differenceTime.inMilliseconds > 2 * 3600 * 1000;
+
+    final dateSession = startTimestamp != null
+        ? DateFormat(AppDateFormats.eeeMMMdyyyyhhmm).format(startTime)
+        : '__';
+    final startTimeString = startTimestamp != null
+        ? DateFormat(AppDateFormats.tHHmm).format(startTime)
+        : '__';
+    final endTimeString = endTimestamp != null
+        ? DateFormat(AppDateFormats.tHHmm).format(
+      DateTime.fromMillisecondsSinceEpoch(endTimestamp, isUtc: true).toLocal(),
+    )
+        : '__';
+
     return Row(
       children: [
         Expanded(
@@ -201,30 +256,36 @@ class ListUpcoming extends StatelessWidget {
             '$startTimeString - $endTimeString',
           ),
         ),
-        PrimaryOutlineButton(
-          onTap: () {
-
-          },
-          preferGradient: false,
-          width: Dimens.getScreenWidth(context) * 0.2,
-          paddingVertical: Dimens.getProportionalHeight(context, 8),
-          borderColor: context.theme.colorScheme.onErrorContainer,
-          splashColor: context.theme.colorScheme.errorContainer,
-          highlightColor: context.theme.colorScheme.errorContainer,
-          child: Text(
-            S.current.cancel,
-            style: Dimens.getProportionalFont(
-                context, context.theme.textTheme.titleSmall?.copyWith(
-              fontSize: 14,
-              color: context.theme.colorScheme.onErrorContainer,
-            )),
+        if (showCancelButton)
+          PrimaryOutlineButton(
+            onTap: () {
+              showCancelDialog(
+                context,
+                bookingInfoId: bookingInfo?.id ?? '',
+                tutorInfo: bookingInfo?.scheduleDetailInfo?.scheduleInfo?.tutorInfo,
+                dateSession: dateSession,
+              );
+            },
+            preferGradient: false,
+            width: Dimens.getScreenWidth(context) * 0.2,
+            paddingVertical: Dimens.getProportionalHeight(context, 8),
+            borderColor: context.theme.colorScheme.onErrorContainer,
+            splashColor: context.theme.colorScheme.errorContainer,
+            highlightColor: context.theme.colorScheme.errorContainer,
+            child: Text(
+              S.current.cancel,
+              style: Dimens.getProportionalFont(
+                  context, context.theme.textTheme.titleSmall?.copyWith(
+                fontSize: 14,
+                color: context.theme.colorScheme.onErrorContainer,
+              )),
+            ),
           ),
-        ),
       ],
     );
   }
 
-  Widget buildRequestRow(BuildContext context, String request) {
+  Widget buildRequestRow(BuildContext context, String firstBookingInfoId, String request) {
     final hasRequest = request.isNotEmpty;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -291,7 +352,11 @@ class ListUpcoming extends StatelessWidget {
               const EmptyProportionalSpace(width: 10),
               PrimaryFillButton(
                 onTap: () {
-
+                  showEditRequestDialog(
+                    context,
+                    bookingInfoId: firstBookingInfoId,
+                    currentNote: request.split('\n')[0],
+                  );
                 },
                 hasShadow: false,
                 preferGradient: false,

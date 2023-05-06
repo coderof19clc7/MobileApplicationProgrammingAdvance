@@ -67,9 +67,7 @@ class UpcomingState extends WidgetState {
     map['totalLearn'] = totalCall;
     map['total'] = total;
     map['currentTotal'] = currentTotal;
-    map['groupedBookingInfoList'] = groupedBookingInfoList
-        .map((e) => e?.bookingInfoList?.map((e) => e?.toJson()).toList())
-        .toList();
+    map['groupedBookingInfoList'] = groupedBookingInfoList.map((e) => e?.toJson()).toList();
     return map;
   }
 
@@ -176,9 +174,7 @@ class UpcomingState extends WidgetState {
       'totalLearn': totalCall,
       'total': total,
       'currentTotal': currentTotal,
-      'groupedBookingInfoList': groupedBookingInfoList.map(
-        (e) => e?.bookingInfoList?.map((e) => e?.toMap()).toList(),
-      ).toList(),
+      'groupedBookingInfoList': groupedBookingInfoList.map((e) => e?.toMap()).toList(),
     };
   }
 

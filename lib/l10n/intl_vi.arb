@@ -159,5 +159,12 @@
   "assistantInputHint": "Nhập câu hỏi của bạn tại đây",
   "noUpcomingSession": "Bạn không có buổi học nào sắp diễn ra",
   "waitingTime": "Thời gian chờ",
-  "openMeeting": "Mở cuộc họp"
+  "openMeeting": "Mở cuộc họp",
+  "cannotEmpty": "{somethings} không được để trống",
+  "lessonTime": "Thời gian học",
+  "reasonCancelQuestion": "Lý do bạn hủy buổi học này là gì?",
+  "reasonCancel1": "Đặt lịch ở giờ khác",
+  "reasonCancel2": "Bận vào thời gian học",
+  "reasonCancel3": "Giảng viên yêu cầu",
+  "reasonCancel4": "Khác"
 }

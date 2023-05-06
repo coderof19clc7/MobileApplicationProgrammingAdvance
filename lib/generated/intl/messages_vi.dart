@@ -20,25 +20,27 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'vi';
 
-  static String m0(somethings) => "${somethings} thất bại";
+  static String m0(somethings) => "${somethings} không được để trống";
 
-  static String m1(somethings) => "${somethings} thành công";
+  static String m1(somethings) => "${somethings} thất bại";
 
-  static String m2(somethings) => "Không có ${somethings} tham khảo";
+  static String m2(somethings) => "${somethings} thành công";
 
-  static String m3(tutor) => "Lịch học của giảng viên ${tutor}";
+  static String m3(somethings) => "Không có ${somethings} tham khảo";
 
-  static String m4(somethings) => "${somethings} là bắt buộc";
+  static String m4(tutor) => "Lịch học của giảng viên ${tutor}";
 
-  static String m5(somethings) => "Từ ${somethings} cao";
+  static String m5(somethings) => "${somethings} là bắt buộc";
 
-  static String m6(somethings) => "Từ ${somethings} thấp";
+  static String m6(somethings) => "Từ ${somethings} cao";
 
-  static String m7(nationality) => "Gia sư ${nationality}";
+  static String m7(somethings) => "Từ ${somethings} thấp";
 
-  static String m8(somethings) => "${somethings} không xác định";
+  static String m8(nationality) => "Gia sư ${nationality}";
 
-  static String m9(n) => "Bạn còn ${n} buổi học";
+  static String m9(somethings) => "${somethings} không xác định";
+
+  static String m10(n) => "Bạn còn ${n} buổi học";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -67,6 +69,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Hủy"),
         "cancelClassHint": MessageLookupByLibrary.simpleMessage(
             "Dùng nút \"Hủy\" để hủy buổi học.\nNút này chỉ xuất hiện nếu buổi học còn cách 2 tiếng nữa mới bắt đầu"),
+        "cannotEmpty": m0,
         "categories": MessageLookupByLibrary.simpleMessage("Danh mục"),
         "changePassword":
             MessageLookupByLibrary.simpleMessage("Thay đổi mật khẩu"),
@@ -87,8 +90,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "courses": MessageLookupByLibrary.simpleMessage("Khoá học"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
-        "doSomethingsFailed": m0,
-        "doSomethingsSuccess": m1,
+        "doSomethingsFailed": m1,
+        "doSomethingsSuccess": m2,
         "dontHaveAccount":
             MessageLookupByLibrary.simpleMessage("Không có tài khoản?"),
         "edit": MessageLookupByLibrary.simpleMessage("Chỉnh sửa"),
@@ -141,6 +144,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lessonHistory":
             MessageLookupByLibrary.simpleMessage("Lịch sử buổi học"),
         "lessonStatus": MessageLookupByLibrary.simpleMessage("Tiến độ bài học"),
+        "lessonTime": MessageLookupByLibrary.simpleMessage("Thời gian học"),
         "level": MessageLookupByLibrary.simpleMessage("Độ khó"),
         "listening": MessageLookupByLibrary.simpleMessage("Khả năng nghe"),
         "loading": MessageLookupByLibrary.simpleMessage("Đang tải"),
@@ -162,7 +166,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "needActivateHeader": MessageLookupByLibrary.simpleMessage(
             "Thông báo kích hoạt tài khoản"),
         "no": MessageLookupByLibrary.simpleMessage("Không"),
-        "noHaveSomethingsSuggested": m2,
+        "noHaveSomethingsSuggested": m3,
         "noRequest": MessageLookupByLibrary.simpleMessage("Không có yêu cầu"),
         "noUpcomingSession": MessageLookupByLibrary.simpleMessage(
             "Bạn không có buổi học nào sắp diễn ra"),
@@ -184,6 +188,15 @@ class MessageLookup extends MessageLookupByLibrary {
         "price": MessageLookupByLibrary.simpleMessage("Giá"),
         "profile": MessageLookupByLibrary.simpleMessage("Hồ sơ"),
         "rating": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
+        "reasonCancel1":
+            MessageLookupByLibrary.simpleMessage("Đặt lịch ở giờ khác"),
+        "reasonCancel2":
+            MessageLookupByLibrary.simpleMessage("Bận vào thời gian học"),
+        "reasonCancel3":
+            MessageLookupByLibrary.simpleMessage("Giảng viên yêu cầu"),
+        "reasonCancel4": MessageLookupByLibrary.simpleMessage("Khác"),
+        "reasonCancelQuestion": MessageLookupByLibrary.simpleMessage(
+            "Lý do bạn hủy buổi học này là gì?"),
         "record": MessageLookupByLibrary.simpleMessage("Bản ghi"),
         "refreshTokenError": MessageLookupByLibrary.simpleMessage(
             "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại."),
@@ -202,7 +215,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Điền email ứng với tài khoản muốn đặt lại mật khẩu."),
         "review": MessageLookupByLibrary.simpleMessage("Đánh giá"),
-        "scheduleOfTutorA": m3,
+        "scheduleOfTutorA": m4,
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Tìm khóa học"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Tìm gia sư"),
@@ -219,11 +232,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Email đã được sử dụng"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Trình độ"),
-        "somethingRequiredError": m4,
+        "somethingRequiredError": m5,
         "sortNameFromAtoZ":
             MessageLookupByLibrary.simpleMessage("Từ tên A đến Z"),
-        "sortSomethingsFromHigh": m5,
-        "sortSomethingsFromLow": m6,
+        "sortSomethingsFromHigh": m6,
+        "sortSomethingsFromLow": m7,
         "sorting": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
         "speaking": MessageLookupByLibrary.simpleMessage("Khả năng nói"),
         "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),
@@ -247,9 +260,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ảnh hồ sơ không phù hợp"),
         "tutorReview":
             MessageLookupByLibrary.simpleMessage("Nhận xét từ gia sư"),
-        "tutorWithNationality": m7,
+        "tutorWithNationality": m8,
         "tutoring": MessageLookupByLibrary.simpleMessage("Giảng dạy"),
-        "unknownSomethings": m8,
+        "unknownSomethings": m9,
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("bắt đầu sau"),
         "videoNotAvailable":
@@ -259,6 +272,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "vocabulary": MessageLookupByLibrary.simpleMessage("Từ vựng"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Thời gian chờ"),
         "yes": MessageLookupByLibrary.simpleMessage("Có"),
-        "youHaveNSessionLeft": m9
+        "youHaveNSessionLeft": m10
       };
 }

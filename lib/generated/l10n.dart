@@ -1669,6 +1669,76 @@ class S {
       args: [],
     );
   }
+
+  /// `{somethings} cannot be empty`
+  String cannotEmpty(Object somethings) {
+    return Intl.message(
+      '$somethings cannot be empty',
+      name: 'cannotEmpty',
+      desc: '',
+      args: [somethings],
+    );
+  }
+
+  /// `Lesson time`
+  String get lessonTime {
+    return Intl.message(
+      'Lesson time',
+      name: 'lessonTime',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What was the reason you cancel this booking?`
+  String get reasonCancelQuestion {
+    return Intl.message(
+      'What was the reason you cancel this booking?',
+      name: 'reasonCancelQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Reschedule at another time`
+  String get reasonCancel1 {
+    return Intl.message(
+      'Reschedule at another time',
+      name: 'reasonCancel1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Busy at that time`
+  String get reasonCancel2 {
+    return Intl.message(
+      'Busy at that time',
+      name: 'reasonCancel2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Asked by tutor`
+  String get reasonCancel3 {
+    return Intl.message(
+      'Asked by tutor',
+      name: 'reasonCancel3',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Other`
+  String get reasonCancel4 {
+    return Intl.message(
+      'Other',
+      name: 'reasonCancel4',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

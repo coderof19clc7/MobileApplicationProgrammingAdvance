@@ -250,5 +250,12 @@
   "assistantInputHint": "Type your question here",
   "noUpcomingSession": "You don't have any upcoming session",
   "waitingTime": "Waiting time",
-  "openMeeting": "Open meeting"
+  "openMeeting": "Open meeting",
+  "cannotEmpty": "{somethings} cannot be empty",
+  "lessonTime": "Lesson time",
+  "reasonCancelQuestion": "What was the reason you cancel this booking?",
+  "reasonCancel1": "Reschedule at another time",
+  "reasonCancel2": "Busy at that time",
+  "reasonCancel3": "Asked by tutor",
+  "reasonCancel4": "Other"
 }

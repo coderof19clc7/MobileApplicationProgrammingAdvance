@@ -33,6 +33,7 @@ class MapConstants {
     '1e662753-b305-47ad-a319-fa52340f5532': S.current.toeic,
     '255c96b6-fd6f-4f43-8dbd-fec766e361e0': S.current.ielts,
   };
+
   static final levelsMap = {
     -1: S.current.all,
     0: 'Any Level',
@@ -44,6 +45,13 @@ class MapConstants {
     6: 'Pre-Advance',
     7: 'Advance',
     8: 'Very-Advance',
+  };
+
+  static final removeScheduleReasons = {
+    1: S.current.reasonCancel1,
+    2: S.current.reasonCancel2,
+    3: S.current.reasonCancel3,
+    4: S.current.reasonCancel4,
   };
 
   static const countries = <String, String>{

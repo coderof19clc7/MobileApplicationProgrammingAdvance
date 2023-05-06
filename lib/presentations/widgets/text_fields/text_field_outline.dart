@@ -8,6 +8,7 @@ class TextFieldOutline extends StatefulWidget {
     super.key,
     this.textController,
     this.minLines,
+    this.maxLength,
     this.maxLines = 1,
     this.hintText,
     this.errorText,
@@ -22,7 +23,7 @@ class TextFieldOutline extends StatefulWidget {
   });
 
   final TextEditingController? textController;
-  final int? minLines;
+  final int? minLines, maxLength;
   final int maxLines;
   final String? hintText;
   final String? errorText;
@@ -54,6 +55,7 @@ class _TextFieldOutlineState extends State<TextFieldOutline> {
       controller: widget.textController,
       minLines: widget.minLines,
       maxLines: widget.maxLines,
+      maxLength: widget.maxLength,
       onChanged: (value) {
         widget.onChanged?.call(value);
       },

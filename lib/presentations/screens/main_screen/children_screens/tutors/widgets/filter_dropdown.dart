@@ -47,24 +47,27 @@ class FilterDropDown<T> extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               leadingIcon ?? const SizedBox.shrink(),
-              DropdownButton<T>(
-                value: value,
-                isDense: true,
-                selectedItemBuilder: selectedItemBuilder,
-                icon: Container(
-                  margin: EdgeInsets.only(
-                    left: Dimens.getProportionalWidth(context, 7),
+              Expanded(
+                child: DropdownButton<T>(
+                  value: value,
+                  isDense: true,
+                  isExpanded: true,
+                  selectedItemBuilder: selectedItemBuilder,
+                  icon: Container(
+                    margin: EdgeInsets.only(
+                      left: Dimens.getProportionalWidth(context, 7),
+                    ),
+                    child: SvgPicture.string(SvgIcons.getIcon(
+                      SvgIconEnum.downArrow,
+                      fillColor: context.theme.iconTheme.color,
+                    )),
                   ),
-                  child: SvgPicture.string(SvgIcons.getIcon(
-                    SvgIconEnum.downArrow,
-                    fillColor: context.theme.iconTheme.color,
-                  )),
+                  menuMaxHeight: Dimens.getProportionalHeight(context, 150),
+                  alignment: alignment,
+                  items: data.map(itemBuilder).toList(),
+                  underline: const SizedBox.shrink(),
+                  onChanged: onChanged,
                 ),
-                menuMaxHeight: Dimens.getProportionalHeight(context, 150),
-                alignment: alignment,
-                items: data.map(itemBuilder).toList(),
-                underline: const SizedBox.shrink(),
-                onChanged: onChanged,
               ),
             ],
           ),
