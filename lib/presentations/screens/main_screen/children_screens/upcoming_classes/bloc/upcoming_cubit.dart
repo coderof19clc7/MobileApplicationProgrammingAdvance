@@ -91,17 +91,17 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
     return result;
   }
 
-  List<List<BookingInfo?>?> convert1DListTo2DList(List<BookingInfo?> list1D, int nextPage) {
+  List<List<BookingInfo?>?> convert1DListTo2DList(List<BookingInfo?> list1D, {
+    bool isReloadCurrentList = false,
+  }) {
     var result = <List<BookingInfo?>?>[];
     if (list1D.isNotEmpty) {
       final dataAmount = list1D.length;
       final hasCurrentList = getRealCurrentList().isNotEmpty;
-      if (hasCurrentList) {
+      if (!isReloadCurrentList && hasCurrentList) {
         result = [getRealCurrentList().last?.bookingInfoList];
         state.groupedBookingInfoList.removeLast();
       }
-
-      print('nextPage inside converter: $nextPage');
 
       for (var i = 0; i < dataAmount; i++) {
         if (i == 0 && result.isEmpty) {
@@ -134,7 +134,7 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
           () => bookingRepository.getBookedClasses(query: BookingListRequest(
             page: reloadAllCurrentList ? 1 : state.nextPage,
             perPage: reloadAllCurrentList
-                ? (state.currentTotal >= perPage ? state.currentTotal + 1 : perPage)
+                ? state.nextPage * perPage
                 : perPage,
             dateTimeGte: DateTime.now().millisecondsSinceEpoch,
             orderBy: 'meeting',
@@ -156,9 +156,17 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
         var nextPage = state.nextPage;
         var currentTotal = state.currentTotal;
         final newListBookingInfo = bookedClassesResponse.data?.rows ?? <BookingInfo?>[];
+        if (!reloadAllCurrentList && newListBookingInfo.isNotEmpty) {
+          final removeRange = nextPage * perPage - currentTotal;
+          newListBookingInfo.removeRange(
+            0, removeRange < perPage ? perPage - removeRange : 0,
+          );
+        }
 
         // convert into grouped list
-        final list2DVersion = convert1DListTo2DList(newListBookingInfo, nextPage);
+        final list2DVersion = convert1DListTo2DList(
+          newListBookingInfo, isReloadCurrentList: reloadAllCurrentList,
+        );
         final newListTotal = newListBookingInfo.length;
         final newGroupedBookingInfoList = list2DVersion.map((e) {
           return e != null ? GroupedBookingInfo.fromBookingInfoList(e) : null;
@@ -174,7 +182,6 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
           ];
           currentTotal = newListTotal;
         } else {
-          nextPage = state.nextPage + (newGroupedBookingInfoList.isEmpty ? 0 : 1);
           currentTotal += newListTotal;
           final currentList = [...getRealCurrentList()];
           finalNewGroupedList = newGroupedBookingInfoList.isEmpty
@@ -186,6 +193,9 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
           if (kDebugMode) {
             print('finalNewGroupedList: ${finalNewGroupedList.length}');
           }
+        }
+        if (currentTotal >= nextPage * perPage) {
+          nextPage += 1;
         }
 
         emit(state.copyWith(

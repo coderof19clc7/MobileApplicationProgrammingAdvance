@@ -83,14 +83,20 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
     }
     if (feedbackListResponse != null) {
       if (feedbackListResponse.statusCode == ApiStatusCode.success) {
+        var newPage = state.feedbackNextPage;
         final newFeedbackList = feedbackListResponse.data?.rows ?? <FeedBack?>[];
+        if (newFeedbackList.isNotEmpty) {
+          final removeRange = newPage * feedBackPerPage - getRealCurrentFeedbackList().length;
+          newFeedbackList.removeRange(
+            0, removeRange < feedBackPerPage ? feedBackPerPage - removeRange : 0,
+          );
+        }
         if (kDebugMode) {
           print('newFeedbackList: ${newFeedbackList.length}');
         }
         var finalNewFeedbackList = <FeedBack?>[];
 
         // combine current list and new list
-        final newPage = state.feedbackNextPage + (newFeedbackList.isEmpty ? 0 : 1);
         final currentList = getRealCurrentFeedbackList();
         finalNewFeedbackList = newFeedbackList.isEmpty ? [...currentList] : [...currentList, ...newFeedbackList];
         if (finalNewFeedbackList.length != currentList.length) {
@@ -98,6 +104,9 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
         }
         if (kDebugMode) {
           print('finalNewFeedbackList: ${finalNewFeedbackList.length}');
+        }
+        if (finalNewFeedbackList.length >= newPage * feedBackPerPage) {
+          newPage += 1;
         }
 
         emit(state.copyWith(

@@ -143,7 +143,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         search: state.searchText,
         page: '${reloadAllCurrentList ? 1 : state.nextPage}',
         perPage: reloadAllCurrentList
-            ? state.listTutors.length - (canListTutorsLoadMore() ? 3 : 0)
+            ? state.nextPage * numTutorsPerPage
             : numTutorsPerPage,
       )),
       showLoading: false,
@@ -159,6 +159,12 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       if (tutorSearchResponse.statusCode == ApiStatusCode.success) {
         var newPage = state.nextPage;
         final newListTutors = tutorSearchResponse.rows ?? <TutorInfo?>[];
+        if (newListTutors.isNotEmpty) {
+          final removeRange = newPage * numTutorsPerPage - getRealCurrentList().length;
+          newListTutors.removeRange(
+            0, removeRange < numTutorsPerPage ? numTutorsPerPage - removeRange : 0,
+          );
+        }
         var finalNewListTutors = <TutorInfo?>[];
         if (kDebugMode) {
           print('newListTutors: ${newListTutors.length}');
@@ -169,7 +175,6 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
           ..addAll([null, null, null]);
         } else {
           // load more --> combine current list and new list
-          newPage = state.nextPage + (newListTutors.isEmpty ? 0 : 1);
           final currentList = getRealCurrentList();
           finalNewListTutors = newListTutors.isEmpty ? [...currentList] : [...currentList, ...newListTutors];
           if (finalNewListTutors.length != currentList.length) {
@@ -180,6 +185,9 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         }
         if (kDebugMode) {
           print('finalNewListTutors: ${finalNewListTutors.length}');
+        }
+        if (finalNewListTutors.length >= newPage * numTutorsPerPage) {
+          newPage += 1;
         }
 
         emit(state.copyWith(

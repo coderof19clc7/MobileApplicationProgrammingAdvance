@@ -78,18 +78,28 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
     }');
     if (coursesListResponse != null) {
       if (coursesListResponse.statusCode == ApiStatusCode.success) {
+        var newPage = state.nextPage;
         final newListCourses = coursesListResponse.data?.rows ?? <CourseInformation?>[];
+        if (newListCourses.isNotEmpty) {
+          final removeRange = newPage * size - getRealCurrentList().length;
+          newListCourses.removeRange(
+            0, removeRange < size ? size - removeRange : 0,
+          );
+        }
         var finalNewListCourses = <CourseInformation?>[];
         print('newListCourses: ${newListCourses.length}');
 
         // combine current list and new list
-        final newPage = state.nextPage + (newListCourses.isEmpty ? 0 : 1);
         final currentList = getRealCurrentList();
         finalNewListCourses = newListCourses.isEmpty ? [...currentList] : [...currentList, ...newListCourses];
         if (finalNewListCourses.length != currentList.length) {
           finalNewListCourses.addAll([null, null, null]);
         }
         print('finalNewListCourses: ${finalNewListCourses.length}');
+
+        if (finalNewListCourses.length >= newPage * size) {
+          newPage += 1;
+        }
 
         emit(state.copyWith(
           nextPage: newPage,
