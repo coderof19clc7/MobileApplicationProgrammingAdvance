@@ -161,6 +161,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Your account is not activated.\nPlease check your email to activate it."),
         "needActivateHeader":
             MessageLookupByLibrary.simpleMessage("Account activation notify"),
+        "networkUnstable":
+            MessageLookupByLibrary.simpleMessage("Network unstable"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noHaveSomethingsSuggested": m3,
         "noRequest": MessageLookupByLibrary.simpleMessage("No request"),
@@ -172,6 +174,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openMeeting": MessageLookupByLibrary.simpleMessage("Open meeting"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Or continue with"),
+        "other": MessageLookupByLibrary.simpleMessage("Other"),
         "otherIssues": MessageLookupByLibrary.simpleMessage("Other issues"),
         "overallComment":
             MessageLookupByLibrary.simpleMessage("Overall comment"),
@@ -190,13 +193,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "reasonCancel2":
             MessageLookupByLibrary.simpleMessage("Busy at that time"),
         "reasonCancel3": MessageLookupByLibrary.simpleMessage("Asked by tutor"),
-        "reasonCancel4": MessageLookupByLibrary.simpleMessage("Other"),
         "reasonCancelQuestion": MessageLookupByLibrary.simpleMessage(
             "What was the reason you cancel this booking?"),
+        "reasonReportQuestion": MessageLookupByLibrary.simpleMessage(
+            "What was the reason you report this lesson?"),
         "record": MessageLookupByLibrary.simpleMessage("Record"),
         "refreshTokenError": MessageLookupByLibrary.simpleMessage(
             "Your session has expired. Please login again."),
         "report": MessageLookupByLibrary.simpleMessage("Report"),
+        "reportSchedule1":
+            MessageLookupByLibrary.simpleMessage("Tutor was late"),
+        "reportSchedule2":
+            MessageLookupByLibrary.simpleMessage("Tutor was absent"),
         "reportTutorRequirement": MessageLookupByLibrary.simpleMessage(
             "Help us understand what is happening"),
         "requestForClass":

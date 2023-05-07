@@ -17,6 +17,7 @@ import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 class RemoveReportScheduleDialog extends StatefulWidget {
   const RemoveReportScheduleDialog({
     super.key,
+    this.dropdownTitle = '',
     required this.tutorAva,
     required this.tutorName,
     required this.dateTimeString,
@@ -24,7 +25,7 @@ class RemoveReportScheduleDialog extends StatefulWidget {
     this.onEditButtonTap,
   });
 
-  final String tutorAva, tutorName, dateTimeString;
+  final String dropdownTitle, tutorAva, tutorName, dateTimeString;
   final Map<int, String> dropDownData;
   final Future<void> Function(int reasonId, String note)? onEditButtonTap;
 
@@ -109,7 +110,7 @@ class _RemoveReportScheduleDialogState extends State<RemoveReportScheduleDialog>
                     const EmptyProportionalSpace(width: 3),
                     Flexible(
                       child: Text(
-                        S.current.reasonCancelQuestion,
+                        widget.dropdownTitle,
                         softWrap: true,
                         style: Dimens.getProportionalFont(
                           context, context.theme.textTheme.titleLarge,

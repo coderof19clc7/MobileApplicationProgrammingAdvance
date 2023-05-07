@@ -51,6 +51,7 @@ class UpcomingClassesPage extends StatelessWidget {
                       fontSize: Dimens.getProportionalWidth(context, fontSize),
                     ),
                   ),
+                  showButton: learned,
                   buttonLabel: S.current.lessonHistory,
                   buttonIcon: Icon(
                     Icons.menu_book_rounded,

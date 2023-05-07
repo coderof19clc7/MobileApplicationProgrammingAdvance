@@ -166,5 +166,9 @@
   "reasonCancel1": "Đặt lịch ở giờ khác",
   "reasonCancel2": "Bận vào thời gian học",
   "reasonCancel3": "Giảng viên yêu cầu",
-  "reasonCancel4": "Khác"
+  "other": "Khác",
+  "reportSchedule1": "Giảng viên vào muộn",
+  "reportSchedule2": "Giảng viên không tham dự",
+  "networkUnstable": "Mạng không ổn định",
+  "reasonReportQuestion": "Lý do bạn báo cáo bài học này là gì?"
 }

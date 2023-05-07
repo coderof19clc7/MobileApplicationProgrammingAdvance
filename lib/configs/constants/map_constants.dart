@@ -51,7 +51,14 @@ class MapConstants {
     1: S.current.reasonCancel1,
     2: S.current.reasonCancel2,
     3: S.current.reasonCancel3,
-    4: S.current.reasonCancel4,
+    4: S.current.other,
+  };
+
+  static final reportScheduleReasons = {
+    1: S.current.reportSchedule1,
+    2: S.current.reportSchedule2,
+    3: S.current.networkUnstable,
+    4: S.current.other,
   };
 
   static const countries = <String, String>{

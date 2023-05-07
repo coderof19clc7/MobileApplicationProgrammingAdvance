@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
+import 'package:one_one_learn/configs/constants/map_constants.dart';
 import 'package:one_one_learn/presentations/screens/lesson_information/bloc/lesson_information_cubit.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/remove_report_schedule_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/others/simple_tutor_information.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -13,6 +15,41 @@ import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_sp
 
 class LessonInformation extends StatelessWidget {
   const LessonInformation({super.key});
+
+  void showReportScheduleDialog(BuildContext contextCubit) {
+    showDialog(
+      context: contextCubit,
+      builder: (context) {
+        final bookingInfo = contextCubit.read<LessonInformationCubit>()
+            .state.groupedBookingInfo.bookingInfoList?.first;
+        final startTimestamp = bookingInfo?.scheduleDetailInfo?.startPeriodTimestamp;
+        final endTimestamp = bookingInfo?.scheduleDetailInfo?.endPeriodTimestamp;
+
+        final startTime = DateTime.fromMillisecondsSinceEpoch(startTimestamp ?? 0, isUtc: true).toLocal();
+        final dateSession = startTimestamp != null
+            ? DateFormat(AppDateFormats.eeeMMMdyyyy).format(startTime)
+            : '__';
+        final startTimeString = startTimestamp != null
+            ? DateFormat(AppDateFormats.tHHmm).format(startTime)
+            : '__';
+        final endTimeString = endTimestamp != null
+            ? DateFormat(AppDateFormats.tHHmm).format(
+          DateTime.fromMillisecondsSinceEpoch(endTimestamp, isUtc: true).toLocal(),
+        )
+            : '__';
+        return RemoveReportScheduleDialog(
+          dropdownTitle: S.current.reasonReportQuestion,
+          tutorAva: contextCubit.read<LessonInformationCubit>().state.groupedBookingInfo.tutorInfo?.avatar ?? '',
+          tutorName: contextCubit.read<LessonInformationCubit>().state.groupedBookingInfo.tutorInfo?.name ?? '',
+          dateTimeString: '$dateSession, $startTimeString - $endTimeString',
+          dropDownData: MapConstants.reportScheduleReasons,
+          onEditButtonTap: (reasonId, note) async {
+            await Future.delayed(const Duration(seconds: 1), () async {});
+          },
+        );
+      }
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +97,9 @@ class LessonInformation extends StatelessWidget {
               context: context,
               icon: Icons.report_rounded,
               label: S.current.report,
+              onTap: () {
+                showReportScheduleDialog(context);
+              }
             ),
             const EmptyProportionalSpace(width: 7),
             buildButton(
@@ -89,6 +129,7 @@ class LessonInformation extends StatelessWidget {
     required BuildContext context,
     required IconData icon,
     required String label,
+    Function()? onTap,
   }) {
     const iconSize = 16.0, verticalSpace = 4.0, buttonVerticalPadding = 7.0;
     const fontSize = 12.0, fontWeight = FontWeight.w600;
@@ -99,7 +140,7 @@ class LessonInformation extends StatelessWidget {
         paddingVertical: Dimens.getProportionalHeight(
           context, buttonVerticalPadding,
         ),
-        onTap: () {},
+        onTap: onTap,
         preferGradient: false,
         borderColor: context.theme.colorScheme.onSurfaceVariant,
         bodyColor: context.theme.colorScheme.background,

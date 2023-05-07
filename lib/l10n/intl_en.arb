@@ -257,5 +257,9 @@
   "reasonCancel1": "Reschedule at another time",
   "reasonCancel2": "Busy at that time",
   "reasonCancel3": "Asked by tutor",
-  "reasonCancel4": "Other"
+  "other": "Other",
+  "reportSchedule1": "Tutor was late",
+  "reportSchedule2": "Tutor was absent",
+  "networkUnstable": "Network unstable",
+  "reasonReportQuestion": "What was the reason you report this lesson?"
 }

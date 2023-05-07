@@ -60,6 +60,7 @@ class ListUpcoming extends StatelessWidget {
       barrierDismissible: false,
       builder: (context) {
         return RemoveReportScheduleDialog(
+          dropdownTitle: S.current.reasonCancelQuestion,
           tutorAva: tutorInfo?.avatar ?? '',
           tutorName: tutorInfo?.name ?? '',
           dateTimeString: dateSession,
@@ -238,7 +239,7 @@ class ListUpcoming extends StatelessWidget {
     final showCancelButton = differenceTime.inMilliseconds > 2 * 3600 * 1000;
 
     final dateSession = startTimestamp != null
-        ? DateFormat(AppDateFormats.eeeMMMdyyyyhhmm).format(startTime)
+        ? DateFormat(AppDateFormats.eeeMMMdyyyy).format(startTime)
         : '__';
     final startTimeString = startTimestamp != null
         ? DateFormat(AppDateFormats.tHHmm).format(startTime)
@@ -263,7 +264,7 @@ class ListUpcoming extends StatelessWidget {
                 context,
                 bookingInfoId: bookingInfo?.id ?? '',
                 tutorInfo: bookingInfo?.scheduleDetailInfo?.scheduleInfo?.tutorInfo,
-                dateSession: dateSession,
+                dateSession: '$dateSession, $startTimeString - $endTimeString',
               );
             },
             preferGradient: false,

@@ -165,6 +165,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Tài khoản của bạn chưa được kích hoạt.\nVui lòng kiểm tra email để kích hoạt."),
         "needActivateHeader": MessageLookupByLibrary.simpleMessage(
             "Thông báo kích hoạt tài khoản"),
+        "networkUnstable":
+            MessageLookupByLibrary.simpleMessage("Mạng không ổn định"),
         "no": MessageLookupByLibrary.simpleMessage("Không"),
         "noHaveSomethingsSuggested": m3,
         "noRequest": MessageLookupByLibrary.simpleMessage("Không có yêu cầu"),
@@ -175,6 +177,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "openMeeting": MessageLookupByLibrary.simpleMessage("Mở cuộc họp"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
+        "other": MessageLookupByLibrary.simpleMessage("Khác"),
         "otherIssues": MessageLookupByLibrary.simpleMessage("Vấn đề khác"),
         "overallComment":
             MessageLookupByLibrary.simpleMessage("Đánh giá chung"),
@@ -194,13 +197,18 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Bận vào thời gian học"),
         "reasonCancel3":
             MessageLookupByLibrary.simpleMessage("Giảng viên yêu cầu"),
-        "reasonCancel4": MessageLookupByLibrary.simpleMessage("Khác"),
         "reasonCancelQuestion": MessageLookupByLibrary.simpleMessage(
             "Lý do bạn hủy buổi học này là gì?"),
+        "reasonReportQuestion": MessageLookupByLibrary.simpleMessage(
+            "Lý do bạn báo cáo bài học này là gì?"),
         "record": MessageLookupByLibrary.simpleMessage("Bản ghi"),
         "refreshTokenError": MessageLookupByLibrary.simpleMessage(
             "Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại."),
         "report": MessageLookupByLibrary.simpleMessage("Báo cáo"),
+        "reportSchedule1":
+            MessageLookupByLibrary.simpleMessage("Giảng viên vào muộn"),
+        "reportSchedule2":
+            MessageLookupByLibrary.simpleMessage("Giảng viên không tham dự"),
         "reportTutorRequirement":
             MessageLookupByLibrary.simpleMessage("Bạn gặp phải vấn đề gì"),
         "requestForClass":

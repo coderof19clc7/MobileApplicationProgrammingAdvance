@@ -1731,10 +1731,50 @@ class S {
   }
 
   /// `Other`
-  String get reasonCancel4 {
+  String get other {
     return Intl.message(
       'Other',
-      name: 'reasonCancel4',
+      name: 'other',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tutor was late`
+  String get reportSchedule1 {
+    return Intl.message(
+      'Tutor was late',
+      name: 'reportSchedule1',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Tutor was absent`
+  String get reportSchedule2 {
+    return Intl.message(
+      'Tutor was absent',
+      name: 'reportSchedule2',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network unstable`
+  String get networkUnstable {
+    return Intl.message(
+      'Network unstable',
+      name: 'networkUnstable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What was the reason you report this lesson?`
+  String get reasonReportQuestion {
+    return Intl.message(
+      'What was the reason you report this lesson?',
+      name: 'reasonReportQuestion',
       desc: '',
       args: [],
     );
