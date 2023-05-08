@@ -11,6 +11,7 @@ class ApiServices {
   static const payment = 'payment';
   static const course = 'course';
   static const report = 'report';
+  static const lessonReport = 'lesson-report';
 }
 
 class ApiEndpoints {
@@ -37,6 +38,9 @@ class ApiEndpoints {
 
   // call
   static const total = 'total';
+
+  // lesson-report
+  static const saveReportLesson = 'save-report';
 }
 
 class ApiConstants {

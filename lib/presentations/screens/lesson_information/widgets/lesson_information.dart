@@ -44,7 +44,11 @@ class LessonInformation extends StatelessWidget {
           dateTimeString: '$dateSession, $startTimeString - $endTimeString',
           dropDownData: MapConstants.reportScheduleReasons,
           onEditButtonTap: (reasonId, note) async {
-            await Future.delayed(const Duration(seconds: 1), () async {});
+            await Future.delayed(const Duration(seconds: 1), () async {
+              await contextCubit.read<LessonInformationCubit>().reportBooking(
+                bookingInfo?.id ?? '', reasonId, note,
+              );
+            });
           },
         );
       }

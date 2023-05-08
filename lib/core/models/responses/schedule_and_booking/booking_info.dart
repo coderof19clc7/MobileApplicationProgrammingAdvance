@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:one_one_learn/core/models/responses/feedback/feed_back.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/class_review.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/schedule_detail.dart';
 
@@ -26,7 +27,7 @@ class BookingInfo {
   final ClassReview? classReview;
   final bool? showRecordUrl;
   final List<String>? studentMaterials;
-  final List<String>? feedbacks;
+  final List<FeedBack>? feedbacks;
 
 //<editor-fold desc="Data Methods">
   const BookingInfo({
@@ -88,7 +89,7 @@ class BookingInfo {
           ? (mapJson['studentMaterials'] as List).map((e) => e as String).toList()
           : null,
       feedbacks: mapJson['feedbacks'] != null
-          ? (mapJson['feedbacks'] as List).map((e) => e as String).toList()
+          ? (mapJson['feedbacks'] as List).map(FeedBack.fromJson).toList()
           : null,
     );
   }
@@ -118,7 +119,7 @@ class BookingInfo {
     map['classReview'] = classReview?.toJson();
     map['showRecordUrl'] = showRecordUrl;
     map['studentMaterials'] = studentMaterials;
-    map['feedbacks'] = feedbacks;
+    map['feedbacks'] = feedbacks?.map((e) => e.toJson()).toList();
 
     return map;
   }
@@ -230,7 +231,7 @@ class BookingInfo {
     ClassReview? classReview,
     bool? showRecordUrl,
     List<String>? studentMaterials,
-    List<String>? feedbacks,
+    List<FeedBack>? feedbacks,
   }) {
     return BookingInfo(
       id: id ?? this.id,
@@ -283,7 +284,7 @@ class BookingInfo {
       'classReview': classReview?.toMap(),
       'showRecordUrl': showRecordUrl,
       'studentMaterials': studentMaterials,
-      'feedbacks': feedbacks,
+      'feedbacks': feedbacks?.map((e) => e.toMap()).toList(),
     };
   }
 
@@ -318,7 +319,7 @@ class BookingInfo {
           ? (map['studentMaterials'] as List).map((e) => e as String).toList()
           : null,
       feedbacks: map['feedbacks'] != null
-          ? (map['feedbacks'] as List).map((e) => e as String).toList()
+          ? (map['feedbacks'] as List).map((e) => FeedBack.fromMap(e as Map<String, dynamic>)).toList()
           : null,
     );
   }

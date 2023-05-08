@@ -1,8 +1,8 @@
 import 'package:one_one_learn/core/models/responses/base_response.dart';
-import 'package:one_one_learn/core/models/responses/report/report_tutor_info.dart';
+import 'package:one_one_learn/core/models/responses/report/save_report_lesson_info.dart';
 
-class ReportTutorResponse extends BaseResponse {
-  const ReportTutorResponse({
+class SaveReportLessonResponse extends BaseResponse {
+  const SaveReportLessonResponse({
     super.statusCode,
     super.message,
     this.data,
@@ -11,24 +11,26 @@ class ReportTutorResponse extends BaseResponse {
   @override
   List<Object?> get props => [...super.props, data];
 
-  factory ReportTutorResponse.fromJson(dynamic json) {
+  factory SaveReportLessonResponse.fromJson(dynamic json) {
     final mapJson = json as Map<String, dynamic>;
-    return ReportTutorResponse(
+    SaveReportLessonInfo? data;
+    if (mapJson['data'] != null && mapJson['data'] !is List<int>) {
+      data = SaveReportLessonInfo.fromJson(mapJson['data']);
+    }
+    return SaveReportLessonResponse(
       statusCode: mapJson['statusCode'] as int?,
       message: mapJson['message'] as String?,
-      data: mapJson['data'] != null
-          ? ReportTutorInfo.fromJson(mapJson['data'])
-          : null,
+      data: data,
     );
 
   }
-  final ReportTutorInfo? data;
+  final SaveReportLessonInfo? data;
 
-  ReportTutorResponse copyWith({
+  SaveReportLessonResponse copyWith({
     int? statusCode,
     String? message,
-    ReportTutorInfo? data,
-  }) => ReportTutorResponse(
+    SaveReportLessonInfo? data,
+  }) => SaveReportLessonResponse(
     statusCode: statusCode ?? this.statusCode,
     message: message ?? this.message,
     data: data ?? this.data,
@@ -36,7 +38,7 @@ class ReportTutorResponse extends BaseResponse {
 
   @override
   String toString() {
-    return 'ReportTutorResponse{'
+    return 'SaveReportLessonResponse{'
         ' statusCode: $statusCode,'
         ' message: $message,'
         ' data: $data'
@@ -62,13 +64,13 @@ class ReportTutorResponse extends BaseResponse {
     };
   }
 
-  factory ReportTutorResponse.fromMap(Map<String, dynamic> map) {
-    return ReportTutorResponse(
-      statusCode: map['statusCode'] as int?,
-      message: map['message'] as String?,
-      data: map['data'] != null
-          ? ReportTutorInfo.fromMap(map['data'] as Map<String, dynamic>)
-          : null
+  factory SaveReportLessonResponse.fromMap(Map<String, dynamic> map) {
+    return SaveReportLessonResponse(
+        statusCode: map['statusCode'] as int?,
+        message: map['message'] as String?,
+        data: map['data'] != null
+            ? SaveReportLessonInfo.fromMap(map['data'] as Map<String, dynamic>)
+            : null
     );
   }
 }
