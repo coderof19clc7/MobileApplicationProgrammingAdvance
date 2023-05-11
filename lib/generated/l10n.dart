@@ -840,6 +840,16 @@ class S {
     );
   }
 
+  /// `Name`
+  String get name {
+    return Intl.message(
+      'Name',
+      name: 'name',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Date of Birth`
   String get dateOfBirth {
     return Intl.message(
@@ -885,6 +895,16 @@ class S {
     return Intl.message(
       'Preferred schedule',
       name: 'preferredSchedule',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Note the time of the week you want to sturdy`
+  String get preferredScheduleHint {
+    return Intl.message(
+      'Note the time of the week you want to sturdy',
+      name: 'preferredScheduleHint',
       desc: '',
       args: [],
     );
@@ -1775,6 +1795,26 @@ class S {
     return Intl.message(
       'What was the reason you report this lesson?',
       name: 'reasonReportQuestion',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Search for a country`
+  String get searchHintCountry {
+    return Intl.message(
+      'Search for a country',
+      name: 'searchHintCountry',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save changes`
+  String get saveChanges {
+    return Intl.message(
+      'Save changes',
+      name: 'saveChanges',
       desc: '',
       args: [],
     );

@@ -158,6 +158,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "minutes": MessageLookupByLibrary.simpleMessage("phút"),
         "more": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "movers": MessageLookupByLibrary.simpleMessage("MOVERS"),
+        "name": MessageLookupByLibrary.simpleMessage("Tên"),
         "nationality": MessageLookupByLibrary.simpleMessage("Quốc gia"),
         "nativeEnglish":
             MessageLookupByLibrary.simpleMessage("Tiếng Anh bản địa"),
@@ -188,6 +189,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Lịch học mong muốn"),
+        "preferredScheduleHint": MessageLookupByLibrary.simpleMessage(
+            "Ghi chú thời gian trong tuần mà bạn muốn học"),
         "price": MessageLookupByLibrary.simpleMessage("Giá"),
         "profile": MessageLookupByLibrary.simpleMessage("Hồ sơ"),
         "rating": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
@@ -223,7 +226,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Điền email ứng với tài khoản muốn đặt lại mật khẩu."),
         "review": MessageLookupByLibrary.simpleMessage("Đánh giá"),
+        "saveChanges": MessageLookupByLibrary.simpleMessage("Lưu thay đổi"),
         "scheduleOfTutorA": m4,
+        "searchHintCountry":
+            MessageLookupByLibrary.simpleMessage("Tìm quốc gia"),
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Tìm khóa học"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Tìm gia sư"),

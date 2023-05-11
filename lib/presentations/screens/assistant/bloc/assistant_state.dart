@@ -13,6 +13,20 @@ class AssistantState extends WidgetState {
   final String currentLocaleId;
 
   @override
+  List<Object?> get props => [
+    ...super.props,
+    sttInitializedStatus,
+    locale,
+    isWaitingNewMessage,
+    messageHistory,
+    isAutoplay,
+    playingIndex,
+    lastWords,
+    soundLevel,
+    currentLocaleId,
+  ];
+
+  @override
   WidgetState fromJson(json) {
     // TODO: implement fromJson
     throw UnimplementedError();

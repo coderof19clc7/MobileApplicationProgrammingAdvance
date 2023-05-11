@@ -4,7 +4,7 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/debounces.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/filter_dropdown.dart';
+import 'package:one_one_learn/presentations/widgets/others/app_dropdown.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
@@ -120,7 +120,7 @@ class _RemoveReportScheduleDialogState extends State<RemoveReportScheduleDialog>
                   ],
                 ),
                 EmptyProportionalSpace(height: distanceBetweenField / 2),
-                FilterDropDown(
+                AppDropDown(
                   onChanged: isExecutingCallback ? null : changeMainReasonId,
                   value: mainReasonId,
                   data: widget.dropDownData.keys.toList(),

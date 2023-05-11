@@ -15,6 +15,21 @@ class MapConstants {
     'toefl': S.current.toefl,
     'toeic': S.current.toeic,
   };
+  static final learnTopicsMap = {
+    'english-for-kids': {'id': '3', 'name': S.current.englishForKids},
+    'business-english': {'id': '4', 'name': S.current.businessEnglish},
+    'conversational-english': {'id': '5', 'name': S.current.conversationalEnglish},
+  };
+  static final testPreparationsMap = {
+    'starters': {'id': '1' , 'name': S.current.starters},
+    'movers': {'id': '2' , 'name': S.current.movers},
+    'flyers': {'id': '3' , 'name': S.current.flyers},
+    'ket': {'id': '4' , 'name': S.current.ket},
+    'pet': {'id': '5' , 'name': S.current.pet},
+    'ielts': {'id': '6' , 'name': S.current.ielts},
+    'toefl': {'id': '7' , 'name': S.current.toefl},
+    'toeic': {'id': '8' , 'name': S.current.toeic},
+  };
 
   static final categoriesMap = {
     'all': S.current.all,
@@ -45,6 +60,16 @@ class MapConstants {
     6: 'Pre-Advance',
     7: 'Advance',
     8: 'Very-Advance',
+  };
+
+  static final userLevels = {
+    'BEGINNER': 'Pre A1 (Beginner)',
+    'HIGHER BEGINNER': 'A1 (Higher Beginner)',
+    'PRE_INTERMEDIATE': 'A2 (Pre-Intermediate)',
+    'INTERMEDIATE': 'B1 (Intermediate)',
+    'UPPER_INTERMEDIATE': 'B2 (Upper-Intermediate)',
+    'ADVANCE': 'C1 (Advance)',
+    'PROFICIENCY': 'C2 (Proficiency)',
   };
 
   static final removeScheduleReasons = {

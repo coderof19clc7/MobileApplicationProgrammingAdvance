@@ -155,6 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "movers": MessageLookupByLibrary.simpleMessage("MOVERS"),
+        "name": MessageLookupByLibrary.simpleMessage("Name"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
         "nativeEnglish": MessageLookupByLibrary.simpleMessage("Native English"),
         "needActivateContent": MessageLookupByLibrary.simpleMessage(
@@ -185,6 +186,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Preferred schedule"),
+        "preferredScheduleHint": MessageLookupByLibrary.simpleMessage(
+            "Note the time of the week you want to sturdy"),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "rating": MessageLookupByLibrary.simpleMessage("Rating"),
@@ -218,7 +221,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "resetPasswordRequirement": MessageLookupByLibrary.simpleMessage(
             "Enter the email associated with your account to reset password."),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
+        "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
         "scheduleOfTutorA": m4,
+        "searchHintCountry":
+            MessageLookupByLibrary.simpleMessage("Search for a country"),
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Find a course"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Find a tutor"),

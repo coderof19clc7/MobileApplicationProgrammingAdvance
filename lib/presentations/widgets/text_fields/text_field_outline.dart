@@ -16,10 +16,12 @@ class TextFieldOutline extends StatefulWidget {
     this.rightWidget,
     this.contentPadding,
     this.keyboardType = TextInputType.text,
+    this.readOnly = false,
     this.enable = true,
     this.canTextBeObscured = false,
     this.onChanged,
     this.onSubmitted,
+    this.onTap,
   });
 
   final TextEditingController? textController;
@@ -31,11 +33,12 @@ class TextFieldOutline extends StatefulWidget {
   final Widget? rightWidget;
   final EdgeInsetsGeometry? contentPadding;
   final TextInputType? keyboardType;
-  final bool enable;
+  final bool readOnly, enable;
   // true means the text field is used for password
   final bool canTextBeObscured;
   final Function(String)? onChanged;
   final Function(String)? onSubmitted;
+  final Function()? onTap;
 
   @override
   State<TextFieldOutline> createState() => _TextFieldOutlineState();
@@ -63,12 +66,16 @@ class _TextFieldOutlineState extends State<TextFieldOutline> {
         UIHelper.hideKeyboard(context);
         widget.onSubmitted?.call(value);
       },
+      onTap: () {
+        widget.onTap?.call();
+      },
       obscureText: _obscureText,
       keyboardType: widget.keyboardType,
       style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium,
       ).copyWith(
         fontSize: Dimens.getProportionalHeight(context, 15),
       ),
+      readOnly: widget.readOnly,
       enabled: widget.enable,
       decoration: InputDecoration(
         hintText: widget.hintText,

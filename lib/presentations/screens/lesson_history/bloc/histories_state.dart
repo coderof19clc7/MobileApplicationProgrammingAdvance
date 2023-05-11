@@ -8,9 +8,7 @@ class HistoriesState extends WidgetState {
 
   @override
   List<Object?> get props => [
-    isLoading,
-    needNavigateToLogin,
-    basicStatusFToastState,
+    ...super.props,
     isLoadingMore,
     nextPage,
     total,

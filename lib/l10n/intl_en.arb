@@ -17,13 +17,13 @@
   "sortNameFromAtoZ": "From A to Z",
   "sortSomethingsFromHigh": "From high {somethings}",
   "@sortSomethingsFromHigh": {
-      "description": "A description for option sort something from highest",
-      "placeholders": {
-      "somethings": {
-          "type": "String",
-          "example": "rating"
+    "description": "A description for option sort something from highest",
+    "placeholders": {
+    "somethings": {
+        "type": "String",
+        "example": "rating"
       }
-      }
+    }
   },
   "sortSomethingsFromLow": "From low {somethings}",
   "@sortSomethingsFromLow": {
@@ -96,11 +96,13 @@
   "learnedBook": "Learned book",
   "noReviewGiven": "No comment",
   "more": "More",
+  "name": "Name",
   "dateOfBirth": "Date of Birth",
   "phoneNumber": "Phone Number",
   "learningInterests": "Learning interests",
   "skillLevel": "Skill level",
   "preferredSchedule": "Preferred schedule",
+  "preferredScheduleHint": "Note the time of the week you want to sturdy",
   "account": "Account",
   "profile": "Profile",
   "changePassword": "Change password",
@@ -261,5 +263,7 @@
   "reportSchedule1": "Tutor was late",
   "reportSchedule2": "Tutor was absent",
   "networkUnstable": "Network unstable",
-  "reasonReportQuestion": "What was the reason you report this lesson?"
+  "reasonReportQuestion": "What was the reason you report this lesson?",
+  "searchHintCountry": "Search for a country",
+  "saveChanges": "Save changes"
 }

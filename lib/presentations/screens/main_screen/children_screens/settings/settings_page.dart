@@ -8,20 +8,13 @@ import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/widgets/info_current.dart';
 
-import 'widgets/info_current.dart';
-
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   @override
-  State<SettingsPage> createState() => _SettingsPageState();
-}
-
-class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClientMixin<SettingsPage> {
-  @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Container(
@@ -50,28 +43,21 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
   Widget accountWidget(BuildContext context) {
     return InfoCurrentWidget(
       title: S.current.account,
-      bodyWidget: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: Dimens.getProportionalWidth(context, 10),
-          horizontal: Dimens.getProportionalWidth(context, 14),
-        ),
-        child: Column(
-          children: [
-            IconTextIconWidget(
-              leftIcon: Icons.account_circle,
-              text: S.current.profile,
-              onTap: () {
-                Navigator.pushNamed(context, RouteNames.profile);
-              },
-            ),
-            const EmptyProportionalSpace(height: 19),
-            IconTextIconWidget(
-              leftIcon: Icons.lock,
-              text: S.current.changePassword,
-              onTap: () {},
-            ),
-          ],
-        ),
+      bodyWidget: Column(
+        children: [
+          IconTextIconWidget(
+            leftIcon: Icons.account_circle,
+            text: S.current.profile,
+            onTap: () {
+              Navigator.pushNamed(context, RouteNames.profile);
+            },
+          ),
+          IconTextIconWidget(
+            leftIcon: Icons.lock,
+            text: S.current.changePassword,
+            onTap: () {},
+          ),
+        ],
       ),
     );
   }
@@ -79,20 +65,14 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
   Widget tutoringWidget(BuildContext context) {
     return InfoCurrentWidget(
       title: S.current.tutoring,
-      bodyWidget: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: Dimens.getProportionalWidth(context, 10),
-          horizontal: Dimens.getProportionalWidth(context, 14),
-        ),
-        child: Column(
-          children: [
-            IconTextIconWidget(
-              leftIcon: Icons.school_rounded,
-              text: S.current.becomeATutor,
-              onTap: () {},
-            ),
-          ],
-        ),
+      bodyWidget: Column(
+        children: [
+          IconTextIconWidget(
+            leftIcon: Icons.school_rounded,
+            text: S.current.becomeATutor,
+            onTap: () {},
+          ),
+        ],
       ),
     );
   }
@@ -100,26 +80,19 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
   Widget appWidget(BuildContext context) {
     return InfoCurrentWidget(
       title: S.current.app,
-      bodyWidget: Container(
-        padding: EdgeInsets.symmetric(
-          vertical: Dimens.getProportionalWidth(context, 10),
-          horizontal: Dimens.getProportionalWidth(context, 14),
-        ),
-        child: Column(
-          children: [
-            IconTextIconWidget(
-              leftIcon: Icons.language_rounded,
-              text: S.current.language,
-              onTap: () {},
-            ),
-            const EmptyProportionalSpace(height: 19),
-            IconTextIconWidget(
-              leftIcon: Icons.lightbulb_outline_rounded,
-              text: S.current.theme,
-              onTap: () {},
-            ),
-          ],
-        ),
+      bodyWidget: Column(
+        children: [
+          IconTextIconWidget(
+            leftIcon: Icons.language_rounded,
+            text: S.current.language,
+            onTap: () {},
+          ),
+          IconTextIconWidget(
+            leftIcon: Icons.lightbulb_outline_rounded,
+            text: S.current.theme,
+            onTap: () {},
+          ),
+        ],
       ),
     );
   }
@@ -151,7 +124,4 @@ class _SettingsPageState extends State<SettingsPage> with AutomaticKeepAliveClie
       },
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 }

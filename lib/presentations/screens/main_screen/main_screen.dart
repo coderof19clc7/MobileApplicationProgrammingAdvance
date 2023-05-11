@@ -5,10 +5,10 @@ import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/configs/stylings/app_styles.dart';
 import 'package:one_one_learn/presentations/screens/assistant/bloc/assistant_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/settings_page.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/tabs/main_courses_tab.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/tabs/settings_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/tabs/tutors_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/tabs/upcoming_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/widgets/bottom_nav_bar.dart';
@@ -19,7 +19,7 @@ const listScreens = <Widget>[
   UpcomingTab(),
   Center(child: Text('This is Chat screen')),
   MainCoursesTab(key: PageStorageKey('CoursesPage')),
-  SettingsPage(),
+  SettingsTab(),
 ];
 
 class MainScreen extends BaseScreen<MainCubit, MainState> {

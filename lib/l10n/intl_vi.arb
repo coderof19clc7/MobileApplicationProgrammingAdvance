@@ -77,11 +77,13 @@
   "homework": "Bài tập về nhà",
   "learnedBook": "Sách đã học",
   "more": "Chi tiết",
+  "name": "Tên",
   "dateOfBirth": "Ngày sinh",
   "phoneNumber": "Số điện thoại",
   "learningInterests": "Muốn học",
   "skillLevel": "Trình độ",
   "preferredSchedule": "Lịch học mong muốn",
+  "preferredScheduleHint": "Ghi chú thời gian trong tuần mà bạn muốn học",
   "account": "Tài khoản",
   "profile": "Hồ sơ",
   "changePassword": "Thay đổi mật khẩu",
@@ -170,5 +172,7 @@
   "reportSchedule1": "Giảng viên vào muộn",
   "reportSchedule2": "Giảng viên không tham dự",
   "networkUnstable": "Mạng không ổn định",
-  "reasonReportQuestion": "Lý do bạn báo cáo bài học này là gì?"
+  "reasonReportQuestion": "Lý do bạn báo cáo bài học này là gì?",
+  "searchHintCountry": "Tìm quốc gia",
+  "saveChanges": "Lưu thay đổi"
 }

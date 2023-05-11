@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:one_one_learn/core/models/requests/tutor/tutor_search_request.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/filter_dropdown.dart';
+import 'package:one_one_learn/presentations/widgets/others/app_dropdown.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
@@ -163,7 +163,7 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
                 ).copyWith(fontWeight: FontWeight.w500),
               ),
               const EmptyProportionalSpace(height: 15),
-              FilterDropDown<int>(
+              AppDropDown<int>(
                 value: newNationalityValue,
                 data: nationalityValues,
                 alignment: AlignmentDirectional.centerStart,
@@ -208,7 +208,7 @@ class _TutorFilterBottomSheetState extends State<TutorFilterBottomSheet> {
                 ).copyWith(fontWeight: FontWeight.w500),
               ),
               const EmptyProportionalSpace(height: 15),
-              FilterDropDown<int>(
+              AppDropDown<int>(
                 value: newSortValue,
                 data: sortValues,
                 leadingIcon: const Icon(Icons.sort_rounded),

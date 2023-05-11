@@ -28,25 +28,31 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
     });
   }
 
+  void emitNewState(StateType newState) {
+    if (!isClosed) {
+      emit(newState);
+    }
+  }
+
   final localManager = injector<LocalManager>();
   Timer? timer;
   
   void changeLoadingState({required bool isLoading}) {
     if (isLoading) {
-      emit(state.showLoading() as StateType);
+      emitNewState(state.showLoading() as StateType);
     } else {
-      emit(state.hideLoading() as StateType);
+      emitNewState(state.hideLoading() as StateType);
     }
   }
   
   void navigateToNextBusinessLogic() {
     Future.delayed(const Duration(milliseconds: 500), () {
-      emit(state.navigateToLogin() as StateType);
+      emitNewState(state.navigateToLogin() as StateType);
     });
   }
 
   void resetStatusToast() {
-    emit(state.hideToast() as StateType);
+    emitNewState(state.hideToast() as StateType);
   }
 
   // void showToast(String? message, {
@@ -123,7 +129,7 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
 
   void showStatusToast(String? message, StatusToastType? statusToastType) {
     if (message?.isNotEmpty == true) {
-      emit(state.showToast(
+      emitNewState(state.showToast(
         message!, statusToastType ?? StatusToastType.info,
       ) as StateType);
     }
@@ -223,7 +229,7 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
       await localManager.clearDataLocalLogout();
       if (!isClosed) {
         ApiConstants.refreshTokenError.let(showErrorToast);
-        emit(state.navigateToLogin() as StateType);
+        emitNewState(state.navigateToLogin() as StateType);
         // await close();
       }
       return;

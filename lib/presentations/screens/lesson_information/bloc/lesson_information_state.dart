@@ -13,9 +13,7 @@ class LessonInformationState extends WidgetState {
 
   @override
   List<Object?> get props => [
-    isLoading,
-    needNavigateToLogin,
-    basicStatusFToastState,
+    ...super.props,
     groupedBookingInfo,
   ];
 

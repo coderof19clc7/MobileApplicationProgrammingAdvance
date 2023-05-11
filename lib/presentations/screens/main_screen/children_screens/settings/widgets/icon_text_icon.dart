@@ -19,23 +19,29 @@ class IconTextIconWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Row(
-        children: [
-          Icon(leftIcon),
-         const EmptyProportionalSpace(width: 10),
-          Expanded(
-            child: Text(
-              text,
-              style: Dimens.getProportionalFont(
-                context, context.theme.textTheme.bodyLarge,
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          vertical: Dimens.getProportionalWidth(context, 10),
+          horizontal: Dimens.getProportionalWidth(context, 14),
+        ),
+        child: Row(
+          children: [
+            Icon(leftIcon),
+           const EmptyProportionalSpace(width: 10),
+            Expanded(
+              child: Text(
+                text,
+                style: Dimens.getProportionalFont(
+                  context, context.theme.textTheme.bodyLarge,
+                ),
               ),
             ),
-          ),
-          Icon(
-            Icons.arrow_forward_ios,
-            size: Dimens.getProportionalWidth(context, 20),
-          ),
-        ],
+            Icon(
+              Icons.arrow_forward_ios,
+              size: Dimens.getProportionalWidth(context, 20),
+            ),
+          ],
+        ),
       ),
     );
   }

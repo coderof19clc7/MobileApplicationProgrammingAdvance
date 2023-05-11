@@ -4,4 +4,5 @@ class AppDateFormats {
   static const String eee = 'EEE';
   static const String tEEEddMM = 'EEE\ndd/MM';
   static const String tMMMyyyy = 'MMM yyyy';
+  static const String yyyy_MM_dd = 'yyyy-MM-dd';
 }

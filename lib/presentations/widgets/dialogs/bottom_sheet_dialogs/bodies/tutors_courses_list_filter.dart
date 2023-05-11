@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/filter_dropdown.dart';
+import 'package:one_one_learn/presentations/widgets/others/app_dropdown.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/generated/l10n.dart';
@@ -211,9 +211,10 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                   ).copyWith(fontWeight: FontWeight.w500),
                 ),
                 const EmptyProportionalSpace(height: 15),
-                FilterDropDown<int>(
+                AppDropDown<int>(
                   value: newData3Filter,
                   data: data3ListMapValues,
+                  width: Dimens.getScreenWidth(context) * 0.5,
                   itemBuilder: (item) {
                     var index = data3ListMapValues.indexOf(item);
                     if (index < 0) {
