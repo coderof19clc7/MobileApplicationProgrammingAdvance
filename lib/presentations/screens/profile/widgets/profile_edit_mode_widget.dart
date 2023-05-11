@@ -39,6 +39,12 @@ class ProfileEditModeWidget extends StatelessWidget {
                 AvatarWidget(
                   isEditAvt: true,
                   currentUrl: state.userInfo?.avatar,
+                  path: state.avatarPath,
+                  onSelectedAva: (path) {
+                    context.read<ProfileCubit>().emitNewState(
+                      state.copyWith(avatarPath: path),
+                    );
+                  },
                 ),
                 const EmptyProportionalSpace(height: itemDistance - 5),
                 Text(
@@ -56,6 +62,12 @@ class ProfileEditModeWidget extends StatelessWidget {
                 const EmptyProportionalSpace(height: itemDistance / 4),
                 TextFieldOutline(
                   textController: context.read<ProfileCubit>().nameController,
+                  onChanged: (value) {
+                    context.read<ProfileCubit>().onAFieldChanged(
+                      value, 'name', text: S.current.name,
+                    );
+                  },
+                  errorText: state.errorsMap['name'],
                 ),
                 const EmptyProportionalSpace(height: itemDistance),
 
@@ -81,6 +93,12 @@ class ProfileEditModeWidget extends StatelessWidget {
                     });
                   },
                   textController: context.read<ProfileCubit>().dateOfBirthController,
+                  onChanged: (value) {
+                    context.read<ProfileCubit>().onAFieldChanged(
+                      value, 'dob', text: S.current.dateOfBirth,
+                    );
+                  },
+                  errorText: state.errorsMap['dob'],
                   readOnly: true,
                   rightWidget: Icon(
                     Icons.calendar_today_outlined,
@@ -130,13 +148,17 @@ class ProfileEditModeWidget extends StatelessWidget {
                     );
                   },
                   onChanged: (value) {
+                    context.read<ProfileCubit>().onAFieldChanged(
+                      value ?? '', 'country', text: S.current.country,
+                    );
                     if (value == null || value == state.userInfo?.country) return;
                     context.read<ProfileCubit>().emitNewState(
-                        state.copyWith(
-                          userInfo: state.userInfo?.copyWith(country: value),
-                        )
+                      state.copyWith(
+                        userInfo: state.userInfo?.copyWith(country: value),
+                      ),
                     );
                   },
+                  errorText: state.errorsMap['country'],
                   dropdownSearchData: DropdownSearchData(
                     searchController: context.read<ProfileCubit>().countrySearchController,
                     searchInnerWidgetHeight: 50,
@@ -198,6 +220,9 @@ class ProfileEditModeWidget extends StatelessWidget {
                     );
                   },
                   onChanged: (value) {
+                    context.read<ProfileCubit>().onAFieldChanged(
+                      value ?? '', 'level', text: S.current.skillLevel,
+                    );
                     if (value == null || value == state.userInfo?.level) return;
                     context.read<ProfileCubit>().emitNewState(
                       state.copyWith(
@@ -205,11 +230,25 @@ class ProfileEditModeWidget extends StatelessWidget {
                       )
                     );
                   },
+                  errorText: state.errorsMap['level'],
                 ),
                 const EmptyProportionalSpace(height: itemDistance),
 
                 // want to learn
                 buildTitle(context, S.current.learningInterests),
+                const EmptyProportionalSpace(height: itemDistance / 6),
+                if (state.errorsMap['wantToLearn'] != null)
+                  SizedBox(
+                    width: Dimens.getScreenWidth(context),
+                    child: Text(state.errorsMap['wantToLearn'] ?? '',
+                      style: Dimens.getProportionalFont(
+                        context, context.theme.textTheme.bodyMedium,
+                      ).copyWith(
+                        color: context.theme.colorScheme.error,
+                        fontSize: Dimens.getProportionalHeight(context, 15),
+                      ),
+                    ),
+                  ),
                 const EmptyProportionalSpace(height: itemDistance / 4),
                 WantToSturdySubjectAndTest(
                   isEdit: true,
@@ -257,7 +296,7 @@ class ProfileEditModeWidget extends StatelessWidget {
                     Expanded(
                       child: PrimaryFillButton(
                         onTap: () {
-                          // submit changes to server
+                          context.read<ProfileCubit>().onUploadUserInfoChanges();
                         },
                         paddingVertical: Dimens.getProportionalHeight(context, 12),
                         preferGradient: false,

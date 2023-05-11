@@ -11,12 +11,16 @@ class ProfileState extends WidgetState {
     this.userInfo,
     this.selectedLearnTopics = const [],
     this.selectedTestPreparations = const [],
+    this.errorsMap = const {},
+    this.avatarPath = '',
   });
 
   final bool isInitial, isEdit;
   final UserInfo? userInfo;
   final List<String> selectedLearnTopics;
   final List<String> selectedTestPreparations;
+  final Map<String, String> errorsMap;
+  final String avatarPath;
 
   @override
   List<Object?> get props => [
@@ -26,6 +30,8 @@ class ProfileState extends WidgetState {
     userInfo,
     selectedLearnTopics,
     selectedTestPreparations,
+    errorsMap,
+    avatarPath,
   ];
 
   @override
@@ -48,6 +54,10 @@ class ProfileState extends WidgetState {
       selectedTestPreparations: mapJson['selectedTestPreparations'] != null
           ? (mapJson['selectedTestPreparations'] as List).map((e) => e.toString()).toList()
           : const [],
+      errorsMap: mapJson['errorsMap'] != null
+          ? (mapJson['errorsMap'] as Map).map((key, value) => MapEntry(key.toString(), value.toString()))
+          : const {},
+      avatarPath: mapJson['avatarPath'] as String? ?? '',
     );
   }
 
@@ -66,6 +76,8 @@ class ProfileState extends WidgetState {
     }
     map['selectedWantToSturdy'] = selectedLearnTopics;
     map['selectedTestPreparations'] = selectedTestPreparations;
+    map['errorsMap'] = errorsMap;
+    map['avatarPath'] = avatarPath;
     return map;
   }
 
@@ -78,6 +90,8 @@ class ProfileState extends WidgetState {
     UserInfo? userInfo,
     List<String>? selectedLearnTopics,
     List<String>? selectedTestPreparations,
+    Map<String, String>? errorsMap,
+    String? avatarPath,
   }) {
     return ProfileState(
       isLoading: isLoading ?? this.isLoading,
@@ -88,6 +102,8 @@ class ProfileState extends WidgetState {
       userInfo: userInfo ?? this.userInfo,
       selectedLearnTopics: selectedLearnTopics ?? this.selectedLearnTopics,
       selectedTestPreparations: selectedTestPreparations ?? this.selectedTestPreparations,
+      errorsMap: errorsMap ?? this.errorsMap,
+      avatarPath: avatarPath ?? this.avatarPath,
     );
   }
 
@@ -104,7 +120,9 @@ class ProfileState extends WidgetState {
           isEdit == other.isEdit &&
           userInfo == other.userInfo &&
           listEquals(selectedLearnTopics, other.selectedLearnTopics) &&
-          listEquals(selectedTestPreparations, other.selectedTestPreparations);
+          listEquals(selectedTestPreparations, other.selectedTestPreparations) &&
+          mapEquals(errorsMap, other.errorsMap) &&
+          avatarPath == other.avatarPath;
 
   @override
   int get hashCode =>
@@ -116,7 +134,9 @@ class ProfileState extends WidgetState {
       isEdit.hashCode ^
       userInfo.hashCode ^
       selectedLearnTopics.hashCode ^
-      selectedTestPreparations.hashCode;
+      selectedTestPreparations.hashCode ^
+      errorsMap.hashCode ^
+      avatarPath.hashCode;
 
   @override
   String toString() {
@@ -129,6 +149,8 @@ class ProfileState extends WidgetState {
         ' userInfo: $userInfo,'
         ' selectedWantToSturdy: $selectedLearnTopics,'
         ' selectedTestPreparations: $selectedTestPreparations,'
+        ' errorsMap: $errorsMap,'
+        ' avatarPath: $avatarPath,'
         ' }';
   }
 
@@ -142,6 +164,8 @@ class ProfileState extends WidgetState {
       'userInfo': userInfo?.toMap(),
       'selectedWantToSturdy': selectedLearnTopics,
       'selectedTestPreparations': selectedTestPreparations,
+      'errorsMap': errorsMap,
+      'avatarPath': avatarPath,
     };
   }
 
@@ -163,6 +187,10 @@ class ProfileState extends WidgetState {
       selectedTestPreparations: map['selectedTestPreparations'] != null
           ? (map['selectedTestPreparations'] as List).map((e) => e.toString()).toList()
           : const [],
+      errorsMap: map['errorsMap'] != null
+          ? (map['errorsMap'] as Map).map((key, value) => MapEntry(key.toString(), value.toString()))
+          : const {},
+      avatarPath: map['avatarPath'] as String? ?? '',
     );
   }
 }

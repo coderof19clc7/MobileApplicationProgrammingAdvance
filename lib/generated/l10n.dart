@@ -1819,6 +1819,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Update profile`
+  String get updateProfile {
+    return Intl.message(
+      'Update profile',
+      name: 'updateProfile',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload avatar`
+  String get uploadAvatar {
+    return Intl.message(
+      'Upload avatar',
+      name: 'uploadAvatar',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Upload user's information`
+  String get uploadUserInfo {
+    return Intl.message(
+      'Upload user\'s information',
+      name: 'uploadUserInfo',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please input {somethings}`
+  String pleaseInputSomethings(String somethings) {
+    return Intl.message(
+      'Please input $somethings',
+      name: 'pleaseInputSomethings',
+      desc: 'A message to notify user to input some required field',
+      args: [somethings],
+    );
+  }
+
+  /// `Please choose at least 1 option`
+  String get wantToStudyRequired {
+    return Intl.message(
+      'Please choose at least 1 option',
+      name: 'wantToStudyRequired',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

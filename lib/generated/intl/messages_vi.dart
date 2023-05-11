@@ -28,19 +28,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(somethings) => "Không có ${somethings} tham khảo";
 
-  static String m4(tutor) => "Lịch học của giảng viên ${tutor}";
+  static String m4(somethings) => "Vui lòng điền ${somethings}";
 
-  static String m5(somethings) => "${somethings} là bắt buộc";
+  static String m5(tutor) => "Lịch học của giảng viên ${tutor}";
 
-  static String m6(somethings) => "Từ ${somethings} cao";
+  static String m6(somethings) => "${somethings} là bắt buộc";
 
-  static String m7(somethings) => "Từ ${somethings} thấp";
+  static String m7(somethings) => "Từ ${somethings} cao";
 
-  static String m8(nationality) => "Gia sư ${nationality}";
+  static String m8(somethings) => "Từ ${somethings} thấp";
 
-  static String m9(somethings) => "${somethings} không xác định";
+  static String m9(nationality) => "Gia sư ${nationality}";
 
-  static String m10(n) => "Bạn còn ${n} buổi học";
+  static String m10(somethings) => "${somethings} không xác định";
+
+  static String m11(n) => "Bạn còn ${n} buổi học";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -187,6 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt"),
         "pet": MessageLookupByLibrary.simpleMessage("PET"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
+        "pleaseInputSomethings": m4,
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Lịch học mong muốn"),
         "preferredScheduleHint": MessageLookupByLibrary.simpleMessage(
@@ -227,7 +230,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Điền email ứng với tài khoản muốn đặt lại mật khẩu."),
         "review": MessageLookupByLibrary.simpleMessage("Đánh giá"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Lưu thay đổi"),
-        "scheduleOfTutorA": m4,
+        "scheduleOfTutorA": m5,
         "searchHintCountry":
             MessageLookupByLibrary.simpleMessage("Tìm quốc gia"),
         "searchHintCourse":
@@ -246,11 +249,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Email đã được sử dụng"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Trình độ"),
-        "somethingRequiredError": m5,
+        "somethingRequiredError": m6,
         "sortNameFromAtoZ":
             MessageLookupByLibrary.simpleMessage("Từ tên A đến Z"),
-        "sortSomethingsFromHigh": m6,
-        "sortSomethingsFromLow": m7,
+        "sortSomethingsFromHigh": m7,
+        "sortSomethingsFromLow": m8,
         "sorting": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
         "speaking": MessageLookupByLibrary.simpleMessage("Khả năng nói"),
         "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),
@@ -274,18 +277,25 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ảnh hồ sơ không phù hợp"),
         "tutorReview":
             MessageLookupByLibrary.simpleMessage("Nhận xét từ gia sư"),
-        "tutorWithNationality": m8,
+        "tutorWithNationality": m9,
         "tutoring": MessageLookupByLibrary.simpleMessage("Giảng dạy"),
-        "unknownSomethings": m9,
+        "unknownSomethings": m10,
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("bắt đầu sau"),
+        "updateProfile": MessageLookupByLibrary.simpleMessage("Cập nhật hồ sơ"),
+        "uploadAvatar":
+            MessageLookupByLibrary.simpleMessage("Cập nhật ảnh đại diện"),
+        "uploadUserInfo":
+            MessageLookupByLibrary.simpleMessage("Cập nhật thông tin cá nhân"),
         "videoNotAvailable":
             MessageLookupByLibrary.simpleMessage("Video không khả dụng"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Việt Nam"),
         "viewAll": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Từ vựng"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Thời gian chờ"),
+        "wantToStudyRequired":
+            MessageLookupByLibrary.simpleMessage("Vui lòng chọn ít nhất 1 mục"),
         "yes": MessageLookupByLibrary.simpleMessage("Có"),
-        "youHaveNSessionLeft": m10
+        "youHaveNSessionLeft": m11
       };
 }

@@ -28,19 +28,21 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(somethings) => "No suggested ${somethings}";
 
-  static String m4(tutor) => "Schedule of tutor ${tutor}";
+  static String m4(somethings) => "Please input ${somethings}";
 
-  static String m5(somethings) => "${somethings} is required";
+  static String m5(tutor) => "Schedule of tutor ${tutor}";
 
-  static String m6(somethings) => "From high ${somethings}";
+  static String m6(somethings) => "${somethings} is required";
 
-  static String m7(somethings) => "From low ${somethings}";
+  static String m7(somethings) => "From high ${somethings}";
 
-  static String m8(nationality) => "${nationality} tutor";
+  static String m8(somethings) => "From low ${somethings}";
 
-  static String m9(somethings) => "Unknown ${somethings}";
+  static String m9(nationality) => "${nationality} tutor";
 
-  static String m10(n) => "You have ${n} session left";
+  static String m10(somethings) => "Unknown ${somethings}";
+
+  static String m11(n) => "You have ${n} session left";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -184,6 +186,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character"),
         "pet": MessageLookupByLibrary.simpleMessage("PET"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
+        "pleaseInputSomethings": m4,
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Preferred schedule"),
         "preferredScheduleHint": MessageLookupByLibrary.simpleMessage(
@@ -222,7 +225,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter the email associated with your account to reset password."),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
-        "scheduleOfTutorA": m4,
+        "scheduleOfTutorA": m5,
         "searchHintCountry":
             MessageLookupByLibrary.simpleMessage("Search for a country"),
         "searchHintCourse":
@@ -242,10 +245,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Skill level"),
-        "somethingRequiredError": m5,
+        "somethingRequiredError": m6,
         "sortNameFromAtoZ": MessageLookupByLibrary.simpleMessage("From A to Z"),
-        "sortSomethingsFromHigh": m6,
-        "sortSomethingsFromLow": m7,
+        "sortSomethingsFromHigh": m7,
+        "sortSomethingsFromLow": m8,
         "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
@@ -268,18 +271,24 @@ class MessageLookup extends MessageLookupByLibrary {
         "tutorPhotoInappropriateIssue":
             MessageLookupByLibrary.simpleMessage("Inappropriate profile photo"),
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
-        "tutorWithNationality": m8,
+        "tutorWithNationality": m9,
         "tutoring": MessageLookupByLibrary.simpleMessage("Tutoring"),
-        "unknownSomethings": m9,
+        "unknownSomethings": m10,
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("in"),
+        "updateProfile": MessageLookupByLibrary.simpleMessage("Update profile"),
+        "uploadAvatar": MessageLookupByLibrary.simpleMessage("Upload avatar"),
+        "uploadUserInfo":
+            MessageLookupByLibrary.simpleMessage("Upload user\'s information"),
         "videoNotAvailable":
             MessageLookupByLibrary.simpleMessage("Video not available"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Waiting time"),
+        "wantToStudyRequired": MessageLookupByLibrary.simpleMessage(
+            "Please choose at least 1 option"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
-        "youHaveNSessionLeft": m10
+        "youHaveNSessionLeft": m11
       };
 }

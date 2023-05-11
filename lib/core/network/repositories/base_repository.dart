@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/core/models/requests/base_request.dart';
@@ -43,23 +44,29 @@ abstract class BaseRepository {
     return result;
   }
 
-  // Future<Map<String, dynamic>?>? requestFormData({
-  //   required String method,
-  //   required String path,
-  //   BaseRequest? queryParameters,
-  //   // FormData? data,
-  //   Map<String, dynamic>? headers,
-  //   Map<String, dynamic>? extra,
-  // }) async {
-  //   final api = getApi(path);
-  //   final result = await _networkManager.requestFormData(method.toUpperCase(), api,
-  //       queryParameters: queryParameters?.toJson(), data: data, headers: headers, extra: extra);
-  //
-  //   if (kDebugMode) {
-  //     print(inspect(result));
-  //     print('log api:${'/$api'}');
-  //   }
-  //
-  //   return result;
-  // }
+  Future<Map<String, dynamic>?> requestFormData({
+    required String method,
+    required String path,
+    BaseRequest? queryParameters,
+    FormData? data,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+  }) async {
+    final api = getApi(path);
+    final result = await _networkManager.requestFormData(
+      method.toUpperCase(),
+      api,
+      queryParameters: queryParameters?.toJson(),
+      data: data,
+      headers: headers,
+      extra: extra,
+    );
+
+    if (kDebugMode) {
+      print(inspect(result));
+      print('log api:${'/$api'}');
+    }
+
+    return result;
+  }
 }

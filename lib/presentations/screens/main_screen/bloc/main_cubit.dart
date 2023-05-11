@@ -48,29 +48,25 @@ class MainCubit extends WidgetCubit<MainState> {
 
   Future<void> getUserInformation({bool showLoading = true}) async {
     if (showLoading) {
-      emit(state.copyWith(isLoading: true));
+      changeLoadingState(isLoading: true);
     }
 
     final userInfoResponse = await fetchApi<UserInfoResponse>(
       () async => userRepository.getUserInfo(),
       showLoading: false,
     );
-    if (userInfoResponse == null
-        || userInfoResponse.statusCode != ApiStatusCode.success
-    ) {
-      emit(state.copyWith(needNavigateToLogin: true));
-    } else {
-      final newUserInfo = userInfoResponse.user;
-      if (newUserInfo == null) {
-        emit(state.copyWith(needNavigateToLogin: true));
-      } else {
-        await localManager.saveUserInfo(newUserInfo);
-        emit(state.copyWith(userInfo: newUserInfo));
+    if (userInfoResponse != null) {
+      if (userInfoResponse.statusCode == ApiStatusCode.success) {
+        final newUserInfo = userInfoResponse.user;
+        if (newUserInfo != null) {
+          await localManager.saveUserInfo(newUserInfo);
+          emit(state.copyWith(userInfo: newUserInfo));
+        }
       }
     }
 
     if (showLoading) {
-      emit(state.copyWith(isLoading: false));
+      changeLoadingState(isLoading: false);
     }
   }
 

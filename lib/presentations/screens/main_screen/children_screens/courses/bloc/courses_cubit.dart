@@ -64,7 +64,7 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
   }
 
   Future<void> searchListCourses() async {
-    emit(state.copyWith(isLoading: true));
+    changeLoadingState(isLoading: true);
 
     // search list by the filters amd page number
     final coursesListResponse = await fetchApi<CoursesListResponse>(
@@ -121,7 +121,7 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
     // emit(state.copyWith(
     //   isRefreshing: false,
     // ));
-    emit(state.copyWith(isLoading: false));
+    changeLoadingState(isLoading: false);
   }
 
   void onSearchTextSubmitted(String qText) {

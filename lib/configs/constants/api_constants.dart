@@ -26,6 +26,7 @@ class ApiEndpoints {
   static const info = 'info';
   static const feedbackTutor ='feedbackTutor';
   static const manageFavoriteTutor = 'manageFavoriteTutor';
+  static const uploadAvatar = 'uploadAvatar';
 
   // tutor
   static const more = 'more';
@@ -49,6 +50,7 @@ class ApiConstants {
   static const accept = 'Accept';
   static const textPlain = 'text/plain';
   static const applicationJson = 'application/json';
+  static const multipartFormData = 'multipart/form-data';
   static const authorization = 'Authorization';
   static const statusCode = 'statusCode';
   static const message = 'message';

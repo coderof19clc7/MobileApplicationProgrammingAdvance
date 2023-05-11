@@ -29,9 +29,7 @@ class ProfilePage extends StatelessWidget {
                 ),
                 child: GestureDetector(
                   onTap: () {
-                    context.read<ProfileCubit>().emitNewState(
-                      state.copyWith(isEdit: true),
-                    );
+                    context.read<ProfileCubit>().onChangeMode(isEditMode: true);
                   },
                   child: Icon(
                     Icons.edit,

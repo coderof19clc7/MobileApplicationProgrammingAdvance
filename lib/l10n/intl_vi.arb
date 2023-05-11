@@ -174,5 +174,10 @@
   "networkUnstable": "Mạng không ổn định",
   "reasonReportQuestion": "Lý do bạn báo cáo bài học này là gì?",
   "searchHintCountry": "Tìm quốc gia",
-  "saveChanges": "Lưu thay đổi"
+  "saveChanges": "Lưu thay đổi",
+  "updateProfile": "Cập nhật hồ sơ",
+  "uploadAvatar": "Cập nhật ảnh đại diện",
+  "uploadUserInfo": "Cập nhật thông tin cá nhân",
+  "pleaseInputSomethings": "Vui lòng điền {somethings}",
+  "wantToStudyRequired": "Vui lòng chọn ít nhất 1 mục"
 }

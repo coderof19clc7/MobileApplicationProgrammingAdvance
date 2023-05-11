@@ -272,10 +272,10 @@ class NetworkManager {
         // due to access token is expired
         item.options.headers[ApiConstants.authorization] = 'Bearer $_accessToken';
 
-        // if (item.options.data is FormData) {
-        //   //Clone a new formData to prevent Bad state: Can't finalize a finalized MultipartFile
-        //   item.options.data = _cloneFormData(item.options);
-        // }
+        if (item.options.data is FormData) {
+          // clone a new formData to prevent Bad state: Can't finalize a finalized MultipartFile
+          item.options.data = _cloneFormData(item.options);
+        }
 
         // executed it again with new access token
         item.requestHandler?.next(item.options);
@@ -295,10 +295,10 @@ class NetworkManager {
     // update options to prepare for recall
     options.headers[ApiConstants.authorization] = 'Bearer $_accessToken';
 
-    // if (options.data is FormData) {
-    //   //Clone a new formData to prevent Bad state: Can't finalize a finalized MultipartFile
-    //   options.data = _cloneFormData(options);
-    // }
+    if (options.data is FormData) {
+      // clone a new formData to prevent Bad state: Can't finalize a finalized MultipartFile
+      options.data = _cloneFormData(options);
+    }
 
     // ensure base options contains valid access token
     _privateDio?.options.headers[ApiConstants.authorization] = 'Bearer $_accessToken';
@@ -341,6 +341,57 @@ class NetworkManager {
       // _dioCacheManager?.delete(path);
     }
     return result?.data as Map<String, dynamic>;
+  }
+
+  Future<Map<String, dynamic>?> requestFormData(String method, String path, {
+    Map<String, dynamic>? queryParameters,
+    FormData? data,
+    Map<String, dynamic>? headers,
+    Map<String, dynamic>? extra,
+  }) async {
+    if (kDebugMode) {
+      print(_privateDio?.options.headers);
+      log('url : $path');
+      log('queryParameters: $queryParameters');
+      log('data: ${inspect(data)}');
+      log('data: $data');
+      log('headers: $headers');
+      log('extra: $extra');
+    }
+    // var _data = data;
+    // if (data is FormData) {
+    //   final formData = FormData();
+    //   formData.fields.addAll(data.fields);
+    //   for (final mapFile in data.files) {
+    //     formData.files.add(MapEntry(mapFile.key, mapFile.value));
+    //   }
+    //   _data = formData;
+    // }
+
+    final result = await _privateDio?.request(path,
+      queryParameters: queryParameters ?? <String, dynamic>{},
+      options: Options(
+        method: method,
+        headers: {
+          ApiConstants.contentType: ApiConstants.multipartFormData,
+          ...headers ?? <String, dynamic>{},
+        },
+        extra: extra,
+      ),
+      data: data,
+      cancelToken: CancelToken(),
+    );
+    return result?.data as Map<String, dynamic>?;
+  }
+
+  FormData _cloneFormData(RequestOptions options) {
+    final data = options.data as FormData;
+    final newFormData = FormData();
+    newFormData.fields.addAll(data.fields);
+    for (final mapFile in data.files) {
+      newFormData.files.add(MapEntry(mapFile.key, mapFile.value));
+    }
+    return newFormData;
   }
 
   Future<void> _updateNewToken(SingleToken? newToken, String? newRefreshExpires) async {

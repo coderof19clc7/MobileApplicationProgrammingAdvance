@@ -265,5 +265,19 @@
   "networkUnstable": "Network unstable",
   "reasonReportQuestion": "What was the reason you report this lesson?",
   "searchHintCountry": "Search for a country",
-  "saveChanges": "Save changes"
+  "saveChanges": "Save changes",
+  "updateProfile": "Update profile",
+  "uploadAvatar": "Upload avatar",
+  "uploadUserInfo": "Upload user's information",
+  "pleaseInputSomethings": "Please input {somethings}",
+  "@pleaseInputSomethings": {
+    "description": "A message to notify user to input some required field",
+    "placeholders": {
+      "somethings": {
+        "type": "String",
+        "example": "username"
+      }
+    }
+  },
+  "wantToStudyRequired": "Please choose at least 1 option"
 }
