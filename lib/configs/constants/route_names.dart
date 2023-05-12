@@ -18,4 +18,5 @@ class RouteNames {
   static const profile = '/profile';
   static const videoCall = '/video-call';
   static const assistant = '/assistant';
+  static const settingsApp = '/settings-app';
 }

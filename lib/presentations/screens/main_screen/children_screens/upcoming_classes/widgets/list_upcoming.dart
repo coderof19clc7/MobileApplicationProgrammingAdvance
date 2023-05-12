@@ -80,7 +80,7 @@ class ListUpcoming extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UpcomingCubit, UpcomingState>(
-      builder: (context, state) {
+      builder: (contextCubit, state) {
         final listGrouped = <GroupedBookingInfo?>[...state.groupedBookingInfoList];
 
         if (listGrouped.isEmpty) {
@@ -101,7 +101,7 @@ class ListUpcoming extends StatelessWidget {
                 if (kDebugMode) {
                   print('call api to get more courses at index: $index and nextPage is: ${state.nextPage}');
                 }
-                context.read<UpcomingCubit>().getListStudentBookedClasses();
+                contextCubit.read<UpcomingCubit>().getListStudentBookedClasses();
               }
               return UpcomingClassCard(
                 margin: EdgeInsets.only(
@@ -112,13 +112,14 @@ class ListUpcoming extends StatelessWidget {
                 isLoading: true,
                 firstChild: const AppFadeShimmer(radius: AppStyles.defaultCardBorderRadiusValue),
                 tutorName: 'tutorName',
-                buttonLabel: 'buttonLabel',
               );
             }
 
             return buildExpandableCard(
-              context, item, index, isLast: index == listGrouped.length - 1,
+              contextCubit, item, index,
+              isLast: index == listGrouped.length - 1,
               isJoining: state.isJoiningASession,
+              bgColor: contextCubit.theme.colorScheme.surface,
             );
           },
         );
@@ -127,7 +128,7 @@ class ListUpcoming extends StatelessWidget {
   }
 
   Widget buildExpandableCard(BuildContext context, GroupedBookingInfo item, int index, {
-    bool isLast = false, bool isJoining = false,
+    bool isLast = false, bool isJoining = false, required Color bgColor,
   }) {
     final horizontalPadding = Dimens.getProportionalWidth(context, 14);
     final bottomPadding = Dimens.getProportionalHeight(context, 10);
@@ -154,7 +155,7 @@ class ListUpcoming extends StatelessWidget {
         margin: EdgeInsets.zero,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(AppStyles.defaultCardBorderRadiusValue),
-          color: context.theme.colorScheme.surface,
+          color: bgColor,
         ),
         firstChild: ClipRRect(
           borderRadius: BorderRadius.circular(AppStyles.defaultCardBorderRadiusValue),
@@ -166,7 +167,6 @@ class ListUpcoming extends StatelessWidget {
         canJoin: !isJoining && index == 0,
         crossAxisAlignment: CrossAxisAlignment.center,
         tutorName: item.tutorInfo?.name ?? '',
-        buttonLabel: S.current.enterRoom,
         lessonDateTime: item.startTimestamp,
         lessonEndTime: item.endTimestamp,
         onExpandCollapseButtonTap: () {
@@ -184,7 +184,7 @@ class ListUpcoming extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: AppColors.neutralBlue200),
         borderRadius: BorderRadius.circular(AppStyles.defaultCardBorderRadiusValue),
-        color: context.theme.colorScheme.surface,
+        color: bgColor,
         boxShadow: [
           Effects.normalShadowXS,
         ],
@@ -270,6 +270,7 @@ class ListUpcoming extends StatelessWidget {
             preferGradient: false,
             width: Dimens.getScreenWidth(context) * 0.2,
             paddingVertical: Dimens.getProportionalHeight(context, 8),
+            bodyColor: context.theme.colorScheme.tertiaryContainer,
             borderColor: context.theme.colorScheme.onErrorContainer,
             splashColor: context.theme.colorScheme.errorContainer,
             highlightColor: context.theme.colorScheme.errorContainer,
@@ -287,93 +288,82 @@ class ListUpcoming extends StatelessWidget {
   }
 
   Widget buildRequestRow(BuildContext context, String firstBookingInfoId, String request) {
-    final hasRequest = request.isNotEmpty;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          children: [
-            Text(
-              S.current.requestForClass,
-              style: Dimens.getProportionalFont(
-                context, context.theme.textTheme.titleSmall,
-              ).copyWith(
-                fontSize: Dimens.getProportionalWidth(context, 16),
-                color: context.theme.colorScheme.onSurface,
-                fontStyle: FontStyle.italic,
-              ),
-            ),
-            if (request.isEmpty)
-              Expanded(
-                child: Text(
-                  S.current.noRequest,
-                  textAlign: TextAlign.end,
-                  style: Dimens.getProportionalFont(
-                    context, context.theme.textTheme.bodySmall,
-                  ).copyWith(
-                    fontSize: Dimens.getProportionalWidth(context, 17),
-                    color: context.theme.colorScheme.onSurface,
-                    fontStyle: FontStyle.italic,
-                  ),
-                ),
-              ),
-          ],
+        Text(
+          S.current.requestForClass,
+          style: Dimens.getProportionalFont(
+            context, context.theme.textTheme.titleSmall,
+          ).copyWith(
+            fontSize: Dimens.getProportionalWidth(context, 16),
+            fontStyle: FontStyle.italic,
+          ),
         ),
         const EmptyProportionalSpace(height: 7),
-        if (hasRequest)
-          Row(
-            children: [
-              Expanded(
-                child: Container(
-                    constraints: BoxConstraints(
-                      minHeight: Dimens.getScreenHeight(context) * 0.15,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      horizontal: Dimens.getProportionalWidth(context, 12),
-                      vertical: Dimens.getProportionalHeight(context, 10),
-                    ),
-                    decoration: BoxDecoration(
-                        border: Border.all(color: AppColors.neutralBlue200),
-                        borderRadius: BorderRadius.circular(15),
-                        color: context.theme.colorScheme.background
-                    ),
-                    child: Text(
-                      request,
-                      softWrap: true,
-                      style: Dimens.getProportionalFont(
-                        context,
-                        context.theme.textTheme.bodySmall?.copyWith(
-                          fontSize: Dimens.getProportionalWidth(context, 16),
-                          color: context.theme.colorScheme.onBackground,
-                        ),
+        Row(
+          children: [
+            Expanded(
+              child: request.isEmpty
+                  ? Text(
+                S.current.noRequest,
+                style: Dimens.getProportionalFont(
+                  context, context.theme.textTheme.bodySmall,
+                ).copyWith(
+                  fontSize: Dimens.getProportionalWidth(context, 17),
+                  fontStyle: FontStyle.italic,
+                ),
+              )
+                  : Container(
+                  constraints: BoxConstraints(
+                    minHeight: Dimens.getScreenHeight(context) * 0.15,
+                  ),
+                  padding: EdgeInsets.symmetric(
+                    horizontal: Dimens.getProportionalWidth(context, 12),
+                    vertical: Dimens.getProportionalHeight(context, 10),
+                  ),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: AppColors.neutralBlue200),
+                      borderRadius: BorderRadius.circular(15),
+                      color: context.theme.colorScheme.tertiaryContainer
+                  ),
+                  child: Text(
+                    request,
+                    softWrap: true,
+                    style: Dimens.getProportionalFont(
+                      context,
+                      context.theme.textTheme.bodySmall?.copyWith(
+                        fontSize: Dimens.getProportionalWidth(context, 16),
+                        color: context.theme.colorScheme.onBackground,
                       ),
-                    )
-                ),
+                    ),
+                  )
               ),
-              const EmptyProportionalSpace(width: 10),
-              PrimaryFillButton(
-                onTap: () {
-                  showEditRequestDialog(
-                    context,
-                    bookingInfoId: firstBookingInfoId,
-                    currentNote: request.split('\n')[0],
-                  );
-                },
-                hasShadow: false,
-                preferGradient: false,
-                width: Dimens.getScreenWidth(context) * 0.2,
-                paddingVertical: Dimens.getProportionalHeight(context, 8),
-                child: Text(
-                  S.current.edit,
-                  style: Dimens.getProportionalFont(
-                      context, context.theme.textTheme.titleSmall?.copyWith(
-                    fontSize: 14,
-                    color: context.theme.colorScheme.onPrimary,
-                  )),
-                ),
+            ),
+            const EmptyProportionalSpace(width: 10),
+            PrimaryFillButton(
+              onTap: () {
+                showEditRequestDialog(
+                  context,
+                  bookingInfoId: firstBookingInfoId,
+                  currentNote: request.split('\n')[0],
+                );
+              },
+              hasShadow: false,
+              preferGradient: false,
+              width: Dimens.getScreenWidth(context) * 0.2,
+              paddingVertical: Dimens.getProportionalHeight(context, 8),
+              child: Text(
+                S.current.edit,
+                style: Dimens.getProportionalFont(
+                    context, context.theme.textTheme.titleSmall?.copyWith(
+                  fontSize: 14,
+                  color: context.theme.colorScheme.onPrimary,
+                )),
               ),
-            ],
-          ),
+            ),
+          ],
+        ),
       ],
     );
   }

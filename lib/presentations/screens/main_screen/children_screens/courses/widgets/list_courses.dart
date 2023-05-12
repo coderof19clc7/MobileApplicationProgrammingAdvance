@@ -58,7 +58,7 @@ class ListCourses extends StatelessWidget {
             }
 
             final categories = item.categories?.map((e) {
-              return MapConstants.categoriesMap[e.id?.trim() ?? ''] ?? '';
+              return MapConstants.getCategoriesMap(context)[e.id?.trim() ?? ''] ?? '';
             }).toList() ?? [];
 
             return CourseCard(
@@ -90,7 +90,7 @@ class ListCourses extends StatelessWidget {
               name: item.name ?? '',
               description: item.description ?? '',
               categories: categories,
-              level: MapConstants.levelsMap[(item.level ?? '-1').toInt()] ?? '',
+              level: MapConstants.getLevelsMap(context)[(item.level ?? '-1').toInt()] ?? '',
               lessons: item.topics?.length ?? 0,
             );
           },

@@ -279,5 +279,11 @@
       }
     }
   },
-  "wantToStudyRequired": "Please choose at least 1 option"
+  "wantToStudyRequired": "Please choose at least 1 option",
+  "system": "System",
+  "light": "Light",
+  "dark": "Dark",
+  "systemThemeModeNote": "If you choose \"System\", the application will follow the system theme mode on the device",
+  "englishLanguage": "English",
+  "vietnameseLanguage": "Vietnamese"
 }

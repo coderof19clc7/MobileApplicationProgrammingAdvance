@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
@@ -10,7 +8,6 @@ import 'package:one_one_learn/core/models/responses/schedule_and_booking/grouped
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/list_tutors.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/search_field.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/widgets/upcoming_class_banner.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/widgets/top_banner_tutors_upcoming.dart';
@@ -26,15 +23,6 @@ class TutorsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final startTime = DateTime.now().add(
-      Duration(
-        days: Random().nextInt(5),
-        hours: Random().nextInt(5),
-        minutes: Random().nextInt(5),
-      ),
-    );
-    final endTime = startTime.add(const Duration(minutes: 55));
-
     return GestureDetector(
       onTap: () {
         UIHelper.hideKeyboard(context);
@@ -128,7 +116,7 @@ class TutorsPage extends StatelessWidget {
 
                               // data1Map: context.read<TutorsCubit>().specialtiesMap.values.toList(),
                               // data1RenderValues: context.read<TutorsCubit>().specialtiesMap.keys.toList(),
-                              data1Map: MapConstants.specialtiesMap,
+                              data1Map: MapConstants.getSpecialtiesMap(context),
                               data1CurrentFilter: context.read<TutorsCubit>().getCurrentSpecialties(),
 
                               // data2Map: context.read<TutorsCubit>().nationalitiesMap.values.toList(),

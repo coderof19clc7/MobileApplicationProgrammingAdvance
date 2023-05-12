@@ -38,7 +38,7 @@ class _SpecialInformationState extends State<SpecialInformation> {
           return MapConstants.languages[e]?['name'] ?? '';
         }).toList();
         final specialties = (tutorInformation.specialties ?? '').split(',').map((e) {
-          return MapConstants.specialtiesMap[e] ?? '';
+          return MapConstants.getSpecialtiesMap(context)[e] ?? '';
         }).toList();
         final courses = tutorInformation.User?.courses ?? [];
 

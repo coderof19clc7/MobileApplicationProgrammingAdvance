@@ -11,6 +11,7 @@ import 'package:one_one_learn/presentations/screens/login/login_screen.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/main_screen.dart';
 import 'package:one_one_learn/presentations/screens/on_boarding/on_boarding_screen.dart';
 import 'package:one_one_learn/presentations/screens/profile/profile_screen.dart';
+import 'package:one_one_learn/presentations/screens/settings_app/settings_app_screen.dart';
 import 'package:one_one_learn/presentations/screens/sign_up/sign_up_screen.dart';
 import 'package:one_one_learn/presentations/screens/tutor_information/tutor_information_screen.dart';
 import 'package:one_one_learn/presentations/screens/video_call/video_call_screen.dart';
@@ -152,6 +153,15 @@ class AppRouter {
           child: const AssistantScreen(),
           type: PageTransitionType.bottomToTop,
         );
+      case RouteNames.settingsApp:
+        if (args != null && args is SettingsAppArgs) {
+          return PageTransition(
+            child: SettingsAppScreen(args: args),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center,
+          );
+        }
+        return _errRoute();
       default:
         return _errRoute();
     }

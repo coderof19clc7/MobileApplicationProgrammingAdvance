@@ -23,7 +23,6 @@ class UpcomingClassCard extends BaseCard {
     this.isExpand = false,
     this.canJoin = false,
     required this.tutorName,
-    required this.buttonLabel,
     this.lessonDateTime,
     this.lessonEndTime,
     this.lessonDateFormat = AppDateFormats.eeeMMMdyyyy,
@@ -33,7 +32,7 @@ class UpcomingClassCard extends BaseCard {
   });
 
   final bool isExpand, canJoin;
-  final String tutorName, buttonLabel;
+  final String tutorName;
   final DateTime? lessonDateTime, lessonEndTime;
   final String lessonDateFormat, lessonDurationFormat;
   final Function()? onJoinButtonTap;
@@ -117,7 +116,7 @@ class UpcomingClassCard extends BaseCard {
                         width: Dimens.getProportionalWidth(context, 5),
                       ),
                       Text(
-                        buttonLabel,
+                        S.current.enterRoom,
                         style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
                           color: context.theme.colorScheme.onPrimary,
                           fontSize: Dimens.getProportionalWidth(context, 12),

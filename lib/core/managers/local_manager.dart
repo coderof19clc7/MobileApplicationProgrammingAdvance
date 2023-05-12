@@ -31,7 +31,12 @@ class LocalManager {
   }
 
   Future<void> clearDataLocalLogout() async {
-    await _preferences!.clear();
+    await Future.wait([
+      clearKey(LocalConstants.accessToken),
+      clearKey(LocalConstants.refreshToken),
+      clearKey(LocalConstants.userInfo),
+      clearKey(LocalConstants.chatBotMessageHistory),
+    ]);
   }
 
   Future<bool> setString(String key, String value) async {

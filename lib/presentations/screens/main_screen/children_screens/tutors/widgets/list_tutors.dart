@@ -17,7 +17,6 @@ class ListTutors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('building');
     return BlocBuilder<TutorsCubit, TutorsState>(
       builder: (context, state) {
         final listTutors = <TutorInfo?>[...state.listTutors];
@@ -52,7 +51,7 @@ class ListTutors extends StatelessWidget {
             }
 
             final categories = (item.specialties?.split(',') ?? <String>[]).map((e) {
-              return MapConstants.specialtiesMap[e.trim()] ?? '';
+              return MapConstants.getSpecialtiesMap(context)[e.trim()] ?? '';
             }).toList();
 
             return TutorCard(

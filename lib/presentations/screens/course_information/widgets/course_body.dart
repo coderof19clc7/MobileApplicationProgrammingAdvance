@@ -55,7 +55,7 @@ class CourseBody extends StatelessWidget {
                 buildLeadingInformation(
                   context,
                   Icons.signal_cellular_alt_rounded,
-                  MapConstants.levelsMap[(courseInfo?.level ?? '-1').toInt()] ?? '',
+                  MapConstants.getLevelsMap(context)[(courseInfo?.level ?? '-1').toInt()] ?? '',
                 ),
                 const EmptyProportionalSpace(height: 10),
 

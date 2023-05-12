@@ -23,13 +23,13 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
   ScrollController? tutorsScrollController;
 
   // constants
-  final nationalitiesMap = {
+  Map<int, String> get nationalitiesMap => {
     0: S.current.all,
     1: S.current.foreign,
     2: S.current.vietnamese,
     3: S.current.nativeEnglish,
   };
-  final sortMap = {
+  Map<int, String> get sortMap => {
     0: S.current.sortNameFromAtoZ,
     1: S.current.sortSomethingsFromLow(S.current.rating.toLowerCase()),
     -1: S.current.sortSomethingsFromHigh(S.current.rating.toLowerCase()),

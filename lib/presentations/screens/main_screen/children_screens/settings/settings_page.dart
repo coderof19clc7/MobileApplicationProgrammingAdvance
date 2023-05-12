@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/widgets/icon_text_icon.dart';
+import 'package:one_one_learn/presentations/screens/settings_app/settings_app_page.dart';
+import 'package:one_one_learn/presentations/screens/settings_app/settings_app_page.dart';
+import 'package:one_one_learn/presentations/screens/settings_app/settings_app_screen.dart';
+import 'package:one_one_learn/presentations/screens/settings_app/settings_app_screen.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -81,16 +85,33 @@ class SettingsPage extends StatelessWidget {
     return InfoCurrentWidget(
       title: S.current.app,
       bodyWidget: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           IconTextIconWidget(
             leftIcon: Icons.language_rounded,
             text: S.current.language,
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                  RouteNames.settingsApp,
+                  arguments: const SettingsAppArgs(
+                    settingsType: SettingsAppType.locale,
+                  ),
+              );
+            },
           ),
           IconTextIconWidget(
             leftIcon: Icons.lightbulb_outline_rounded,
             text: S.current.theme,
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                RouteNames.settingsApp,
+                arguments: const SettingsAppArgs(
+                  settingsType: SettingsAppType.themeMode,
+                ),
+              );
+            },
           ),
         ],
       ),

@@ -19,7 +19,7 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
   final initialLoadMoreAbleList = <CourseInformation?>[null, null, null];
   final scrollController = ScrollController();
 
-  final sortMap = {
+  Map<int, String> get sortMap => {
     0: S.current.sortNameFromAtoZ,
     1: S.current.sortSomethingsFromLow(S.current.level.toLowerCase()),
     -1: S.current.sortSomethingsFromHigh(S.current.level.toLowerCase()),

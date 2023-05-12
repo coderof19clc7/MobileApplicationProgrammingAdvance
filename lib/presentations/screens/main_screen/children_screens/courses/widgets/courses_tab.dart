@@ -39,12 +39,12 @@ class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMi
 
                   // data1Map: context.read<CoursesCubit>().categoriesMap.values.toList(),
                   // data1RenderValues: context.read<CoursesCubit>().categoriesMap.keys.toList(),
-                  data1Map: MapConstants.categoriesMap,
+                  data1Map: MapConstants.getCategoriesMap(context),
                   data1CurrentFilter: context.read<CoursesCubit>().getCurrentCategories(),
 
                   // data2Map: context.read<CoursesCubit>().levelsMap.values.toList(),
                   // data2RenderValues: context.read<CoursesCubit>().levelsMap.keys.toList(),
-                  data2Map: MapConstants.levelsMap,
+                  data2Map: MapConstants.getLevelsMap(context),
                   data2CurrentFilter: context.read<CoursesCubit>().getCurrentLevelValues(),
 
                   // data3Map: context.read<CoursesCubit>().sortMap.values.toList(),

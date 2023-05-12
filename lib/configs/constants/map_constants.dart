@@ -1,26 +1,27 @@
+import 'package:flutter/material.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 
 class MapConstants {
-  static final specialtiesMap = {
-    'all': S.current.all,
-    'english-for-kids': S.current.englishForKids,
-    'business-english': S.current.businessEnglish,
-    'conversational-english': S.current.conversationalEnglish,
-    'starters': S.current.starters,
-    'movers': S.current.movers,
-    'flyers': S.current.flyers,
-    'ket': S.current.ket,
-    'pet': S.current.pet,
-    'ielts': S.current.ielts,
-    'toefl': S.current.toefl,
-    'toeic': S.current.toeic,
+  static Map<String, String> getSpecialtiesMap(BuildContext context) => {
+    'all': S.of(context).all,
+    'english-for-kids': S.of(context).englishForKids,
+    'business-english': S.of(context).businessEnglish,
+    'conversational-english': S.of(context).conversationalEnglish,
+    'starters': S.of(context).starters,
+    'movers': S.of(context).movers,
+    'flyers': S.of(context).flyers,
+    'ket': S.of(context).ket,
+    'pet': S.of(context).pet,
+    'ielts': S.of(context).ielts,
+    'toefl': S.of(context).toefl,
+    'toeic': S.of(context).toeic,
   };
-  static final learnTopicsMap = {
+  static Map<String, Map<String, String>> get learnTopicsMap => {
     'english-for-kids': {'id': '3', 'name': S.current.englishForKids},
     'business-english': {'id': '4', 'name': S.current.businessEnglish},
     'conversational-english': {'id': '5', 'name': S.current.conversationalEnglish},
   };
-  static final testPreparationsMap = {
+  static Map<String, Map<String, String>> get testPreparationsMap => {
     'starters': {'id': '1' , 'name': S.current.starters},
     'movers': {'id': '2' , 'name': S.current.movers},
     'flyers': {'id': '3' , 'name': S.current.flyers},
@@ -31,26 +32,26 @@ class MapConstants {
     'toeic': {'id': '8' , 'name': S.current.toeic},
   };
 
-  static final categoriesMap = {
-    'all': S.current.all,
-    '968e7e18-10c0-4742-9ec6-6f5c71c517f5': S.current.forStudyingAboard,
-    'd95b69f7-b810-4cdf-b11d-49faaa71ff4b': S.current.englishForTraveling,
-    'c4e7f418-4006-40f2-ba13-cbade54c1fd0': S.current.conversationalEnglish,
-    '488cc5f8-a5b1-45cd-8d3a-47e690f9298e': S.current.englishForBeginners,
-    'f01cf003-25d1-432f-aaab-bf0e8390e14f': S.current.businessEnglish,
-    '975f83f6-30c5-465d-8d98-65e4182369ba': S.current.starters,
-    'fb92cf24-1736-4cd7-a042-fa3c37921cf8': S.current.englishForKids,
-    '0b89ead7-0e92-4aec-abce-ecfeba10dea5': S.current.pet,
-    '248ca9f5-b46d-4a55-b81c-abafebff5876': S.current.ket,
-    '534a94f1-579b-497d-b891-47d8e28e1b2c': S.current.movers,
-    'df9bd876-c631-413c-9228-cc3d6a5c34fa': S.current.flyers,
-    'd87de7ba-bd4c-442c-8d58-957acb298f57': S.current.toefl,
-    '1e662753-b305-47ad-a319-fa52340f5532': S.current.toeic,
-    '255c96b6-fd6f-4f43-8dbd-fec766e361e0': S.current.ielts,
+  static Map<String, String> getCategoriesMap(BuildContext context) => {
+    'all': S.of(context).all,
+    '968e7e18-10c0-4742-9ec6-6f5c71c517f5': S.of(context).forStudyingAboard,
+    'd95b69f7-b810-4cdf-b11d-49faaa71ff4b': S.of(context).englishForTraveling,
+    'c4e7f418-4006-40f2-ba13-cbade54c1fd0': S.of(context).conversationalEnglish,
+    '488cc5f8-a5b1-45cd-8d3a-47e690f9298e': S.of(context).englishForBeginners,
+    'f01cf003-25d1-432f-aaab-bf0e8390e14f': S.of(context).businessEnglish,
+    '975f83f6-30c5-465d-8d98-65e4182369ba': S.of(context).starters,
+    'fb92cf24-1736-4cd7-a042-fa3c37921cf8': S.of(context).englishForKids,
+    '0b89ead7-0e92-4aec-abce-ecfeba10dea5': S.of(context).pet,
+    '248ca9f5-b46d-4a55-b81c-abafebff5876': S.of(context).ket,
+    '534a94f1-579b-497d-b891-47d8e28e1b2c': S.of(context).movers,
+    'df9bd876-c631-413c-9228-cc3d6a5c34fa': S.of(context).flyers,
+    'd87de7ba-bd4c-442c-8d58-957acb298f57': S.of(context).toefl,
+    '1e662753-b305-47ad-a319-fa52340f5532': S.of(context).toeic,
+    '255c96b6-fd6f-4f43-8dbd-fec766e361e0': S.of(context).ielts,
   };
 
-  static final levelsMap = {
-    -1: S.current.all,
+  static Map<int, String> getLevelsMap(BuildContext context) => {
+    -1: S.of(context).all,
     0: 'Any Level',
     1: 'Beginner',
     2: 'Upper Beginner',
@@ -62,7 +63,7 @@ class MapConstants {
     8: 'Very-Advance',
   };
 
-  static final userLevels = {
+  static Map<String, String> get userLevels => {
     'BEGINNER': 'Pre A1 (Beginner)',
     'HIGHER_BEGINNER': 'A1 (Higher Beginner)',
     'PRE_INTERMEDIATE': 'A2 (Pre-Intermediate)',
@@ -72,21 +73,31 @@ class MapConstants {
     'PROFICIENCY': 'C2 (Proficiency)',
   };
 
-  static final removeScheduleReasons = {
+  static Map<int, String> get removeScheduleReasons => {
     1: S.current.reasonCancel1,
     2: S.current.reasonCancel2,
     3: S.current.reasonCancel3,
     4: S.current.other,
   };
 
-  static final reportScheduleReasons = {
+  static Map<int, String> get reportScheduleReasons => {
     1: S.current.reportSchedule1,
     2: S.current.reportSchedule2,
     3: S.current.networkUnstable,
     4: S.current.other,
   };
 
-  static const countries = <String, String>{
+  static List<Map<String, Object>> get listThemeModeTitle => [
+    {'title': S.current.system, 'themeMode': ThemeMode.system.index},
+    {'title': S.current.light, 'themeMode': ThemeMode.light.index},
+    {'title': S.current.dark, 'themeMode': ThemeMode.dark.index},
+  ];
+  static List<Map<String, String>> get listLocaleTitle => [
+    {'title': S.current.englishLanguage, 'languageCode': 'en', 'countryCode': ''},
+    {'title': S.current.vietnameseLanguage, 'languageCode': 'vi', 'countryCode': ''},
+  ];
+
+  static Map<String, String> get countries => {
     "AF": "Afghanistan",
     "AL": "Albania",
     "DZ": "Algeria",
@@ -338,7 +349,7 @@ class MapConstants {
     "AX": "Åland Islands"
   };
 
-  static const languages = {
+  static Map<String, Map<String, String>> get languages => {
     "ab": {"name": "Abkhaz", "nativeName": "аҧсуа"},
     "aa": {"name": "Afar", "nativeName": "Afaraf"},
     "af": {"name": "Afrikaans", "nativeName": "Afrikaans"},

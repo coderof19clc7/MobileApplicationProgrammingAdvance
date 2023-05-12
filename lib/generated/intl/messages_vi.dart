@@ -90,6 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tiếng Anh giao tiếp"),
         "country": MessageLookupByLibrary.simpleMessage("Quốc gia"),
         "courses": MessageLookupByLibrary.simpleMessage("Khoá học"),
+        "dark": MessageLookupByLibrary.simpleMessage("Tối"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
         "doSomethingsFailed": m1,
@@ -104,6 +105,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tiếng Anh cho trẻ em"),
         "englishForTraveling":
             MessageLookupByLibrary.simpleMessage("Tiếng Anh du lịch"),
+        "englishLanguage": MessageLookupByLibrary.simpleMessage("Tiếng Anh"),
         "enterRoom": MessageLookupByLibrary.simpleMessage("Vào lớp"),
         "expand": MessageLookupByLibrary.simpleMessage("Mở rộng"),
         "experience": MessageLookupByLibrary.simpleMessage("Kinh nghiệm"),
@@ -148,6 +150,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lessonStatus": MessageLookupByLibrary.simpleMessage("Tiến độ bài học"),
         "lessonTime": MessageLookupByLibrary.simpleMessage("Thời gian học"),
         "level": MessageLookupByLibrary.simpleMessage("Độ khó"),
+        "light": MessageLookupByLibrary.simpleMessage("Sáng"),
         "listening": MessageLookupByLibrary.simpleMessage("Khả năng nghe"),
         "loading": MessageLookupByLibrary.simpleMessage("Đang tải"),
         "login": MessageLookupByLibrary.simpleMessage("Đăng nhập"),
@@ -264,6 +267,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Gia sư tham khảo"),
         "swipeToCancelClass":
             MessageLookupByLibrary.simpleMessage("Vuốt trái để hủy buổi học"),
+        "system": MessageLookupByLibrary.simpleMessage("Hệ thống"),
+        "systemThemeModeNote": MessageLookupByLibrary.simpleMessage(
+            "Nếu bạn chọn \"Hệ thống\", ứng dụng sẽ tự động điều chỉnh theo chế độ trên thiết bị"),
         "theme": MessageLookupByLibrary.simpleMessage("Chủ đề"),
         "today": MessageLookupByLibrary.simpleMessage("Hôm nay"),
         "toefl": MessageLookupByLibrary.simpleMessage("TOEFL"),
@@ -290,6 +296,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "videoNotAvailable":
             MessageLookupByLibrary.simpleMessage("Video không khả dụng"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Việt Nam"),
+        "vietnameseLanguage":
+            MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "viewAll": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Từ vựng"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Thời gian chờ"),

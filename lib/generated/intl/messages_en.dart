@@ -87,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Conversational English"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
         "courses": MessageLookupByLibrary.simpleMessage("Courses"),
+        "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
         "doSomethingsFailed": m1,
@@ -101,6 +102,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("English for kids"),
         "englishForTraveling":
             MessageLookupByLibrary.simpleMessage("English for traveling"),
+        "englishLanguage": MessageLookupByLibrary.simpleMessage("English"),
         "enterRoom": MessageLookupByLibrary.simpleMessage("Join"),
         "expand": MessageLookupByLibrary.simpleMessage("Expand"),
         "experience": MessageLookupByLibrary.simpleMessage("Experience"),
@@ -145,6 +147,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "lessonStatus": MessageLookupByLibrary.simpleMessage("Lesson status"),
         "lessonTime": MessageLookupByLibrary.simpleMessage("Lesson time"),
         "level": MessageLookupByLibrary.simpleMessage("Level"),
+        "light": MessageLookupByLibrary.simpleMessage("Light"),
         "listening": MessageLookupByLibrary.simpleMessage("Listening"),
         "loading": MessageLookupByLibrary.simpleMessage("Loading"),
         "login": MessageLookupByLibrary.simpleMessage("Login"),
@@ -259,6 +262,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Suggested tutors"),
         "swipeToCancelClass": MessageLookupByLibrary.simpleMessage(
             "Swipe left to cancel a class"),
+        "system": MessageLookupByLibrary.simpleMessage("System"),
+        "systemThemeModeNote": MessageLookupByLibrary.simpleMessage(
+            "If you choose \"System\", the application will follow the system theme mode on the device"),
         "theme": MessageLookupByLibrary.simpleMessage("Theme"),
         "today": MessageLookupByLibrary.simpleMessage("Today"),
         "toefl": MessageLookupByLibrary.simpleMessage("TOEFL"),
@@ -283,6 +289,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "videoNotAvailable":
             MessageLookupByLibrary.simpleMessage("Video not available"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
+        "vietnameseLanguage":
+            MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Waiting time"),

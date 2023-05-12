@@ -5,7 +5,9 @@ import 'package:one_one_learn/configs/stylings/app_styles.dart';
 
 class AppThemes {
   static final lightTheme = ThemeData(
+    brightness: Brightness.light,
     colorScheme: ColorScheme.fromSwatch().copyWith(
+      brightness: Brightness.light,
       primary: AppColors.primaryBlue400,
       onPrimary: AppColors.white, // text on primary
       // primaryContainer: ,
@@ -58,7 +60,9 @@ class AppThemes {
   );
 
   static final darkTheme = ThemeData(
+    brightness: Brightness.dark,
     colorScheme: ColorScheme.fromSwatch().copyWith(
+      brightness: Brightness.dark,
       primary: AppColors.primaryBlue500,
       onPrimary: AppColors.white, // text on primary
       secondary: AppColors.primaryBlue200, // button on primary

@@ -42,14 +42,14 @@ class CoursesPage extends StatelessWidget {
                   tabs: [
                     Tab(
                       icon: const Icon(Icons.menu_book_rounded),
-                      text: S.current.courses,
+                      text: S.of(context).courses,
                       iconMargin: EdgeInsets.only(
                         bottom: Dimens.getProportionalHeight(context, 5),
                       ),
                     ),
                     Tab(
                       icon: const Icon(Icons.book_rounded),
-                      text: S.current.books,
+                      text: S.of(context).books,
                       iconMargin: EdgeInsets.only(
                         bottom: Dimens.getProportionalHeight(context, 5),
                       ),

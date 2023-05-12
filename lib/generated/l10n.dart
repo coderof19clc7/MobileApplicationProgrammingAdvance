@@ -1869,6 +1869,66 @@ class S {
       args: [],
     );
   }
+
+  /// `System`
+  String get system {
+    return Intl.message(
+      'System',
+      name: 'system',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Light`
+  String get light {
+    return Intl.message(
+      'Light',
+      name: 'light',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark`
+  String get dark {
+    return Intl.message(
+      'Dark',
+      name: 'dark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `If you choose "System", the application will follow the system theme mode on the device`
+  String get systemThemeModeNote {
+    return Intl.message(
+      'If you choose "System", the application will follow the system theme mode on the device',
+      name: 'systemThemeModeNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get englishLanguage {
+    return Intl.message(
+      'English',
+      name: 'englishLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Vietnamese`
+  String get vietnameseLanguage {
+    return Intl.message(
+      'Vietnamese',
+      name: 'vietnameseLanguage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

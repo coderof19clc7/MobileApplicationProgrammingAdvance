@@ -179,5 +179,11 @@
   "uploadAvatar": "Cập nhật ảnh đại diện",
   "uploadUserInfo": "Cập nhật thông tin cá nhân",
   "pleaseInputSomethings": "Vui lòng điền {somethings}",
-  "wantToStudyRequired": "Vui lòng chọn ít nhất 1 mục"
+  "wantToStudyRequired": "Vui lòng chọn ít nhất 1 mục",
+  "system": "Hệ thống",
+  "light": "Sáng",
+  "dark": "Tối",
+  "systemThemeModeNote": "Nếu bạn chọn \"Hệ thống\", ứng dụng sẽ tự động điều chỉnh theo chế độ trên thiết bị",
+  "englishLanguage": "Tiếng Anh",
+  "vietnameseLanguage": "Tiếng Việt"
 }
