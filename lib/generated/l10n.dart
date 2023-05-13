@@ -1929,6 +1929,36 @@ class S {
       args: [],
     );
   }
+
+  /// `Not found any {somethings}`
+  String notFoundSomethings(String somethings) {
+    return Intl.message(
+      'Not found any $somethings',
+      name: 'notFoundSomethings',
+      desc: 'Not found somethings',
+      args: [somethings],
+    );
+  }
+
+  /// `No review for this tutor yet`
+  String get noReviewForTutor {
+    return Intl.message(
+      'No review for this tutor yet',
+      name: 'noReviewForTutor',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `item`
+  String get item {
+    return Intl.message(
+      'item',
+      name: 'item',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -27,6 +27,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/down_arrow.svg
   SvgGenImage get downArrow => const SvgGenImage('assets/icons/down_arrow.svg');
 
+  /// File path: assets/icons/empty.svg
+  SvgGenImage get empty => const SvgGenImage('assets/icons/empty.svg');
+
   /// File path: assets/icons/facebook_colorfull.svg
   SvgGenImage get facebookColorfull =>
       const SvgGenImage('assets/icons/facebook_colorfull.svg');
@@ -41,6 +44,9 @@ class $AssetsIconsGen {
   /// File path: assets/icons/logo.svg
   SvgGenImage get logo => const SvgGenImage('assets/icons/logo.svg');
 
+  /// File path: assets/icons/notfound.svg
+  SvgGenImage get notfound => const SvgGenImage('assets/icons/notfound.svg');
+
   /// File path: assets/icons/right_arrow.svg
   SvgGenImage get rightArrow =>
       const SvgGenImage('assets/icons/right_arrow.svg');
@@ -48,10 +54,12 @@ class $AssetsIconsGen {
   /// List of all assets
   List<SvgGenImage> get values => [
         downArrow,
+        empty,
         facebookColorfull,
         favorite,
         googleColorfull,
         logo,
+        notfound,
         rightArrow
       ];
 }

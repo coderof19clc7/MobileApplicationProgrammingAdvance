@@ -139,7 +139,7 @@ class TutorsPage extends StatelessWidget {
                           );
                         },
                       ),
-                      const EmptyProportionalSpace(height: 30),
+
                       // tutors list
                       const Expanded(child: ListTutors()),
                     ],

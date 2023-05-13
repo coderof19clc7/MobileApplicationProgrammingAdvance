@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
+import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/tutor_information/bloc/tutor_information_cubit.dart';
 import 'package:one_one_learn/presentations/screens/tutor_information/widgets/tutor_review_card.dart';
+import 'package:one_one_learn/presentations/widgets/others/list_empty_widget.dart';
 
 class TutorReviewsBottomSheet extends StatelessWidget {
   const TutorReviewsBottomSheet({
@@ -21,8 +23,9 @@ class TutorReviewsBottomSheet extends StatelessWidget {
         builder: (context, state) {
           final listFeedback = state.feedbackList;
           if (listFeedback.isEmpty) {
-            return const Center(
-              child: Text('No reviews'),
+            return ListEmptyWidget(
+              type: EmptyImageType.empty,
+              text: S.current.noReviewForTutor,
             );
           }
 

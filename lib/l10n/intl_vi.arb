@@ -185,5 +185,8 @@
   "dark": "Tối",
   "systemThemeModeNote": "Nếu bạn chọn \"Hệ thống\", ứng dụng sẽ tự động điều chỉnh theo chế độ trên thiết bị",
   "englishLanguage": "Tiếng Anh",
-  "vietnameseLanguage": "Tiếng Việt"
+  "vietnameseLanguage": "Tiếng Việt",
+  "notFoundSomethings": "Không tìm thấy {somethings} nào",
+  "noReviewForTutor": "Chưa có đánh giá nào cho giảng viên này",
+  "item": "Mục"
 }

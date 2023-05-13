@@ -285,5 +285,17 @@
   "dark": "Dark",
   "systemThemeModeNote": "If you choose \"System\", the application will follow the system theme mode on the device",
   "englishLanguage": "English",
-  "vietnameseLanguage": "Vietnamese"
+  "vietnameseLanguage": "Vietnamese",
+  "notFoundSomethings": "Not found any {somethings}",
+  "@notFoundSomethings": {
+    "description": "Not found somethings",
+    "placeholders": {
+      "somethings": {
+        "type": "String",
+        "example": "Tutors"
+      }
+    }
+  },
+  "noReviewForTutor": "No review for this tutor yet",
+  "item": "item"
 }

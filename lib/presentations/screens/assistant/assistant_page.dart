@@ -93,7 +93,7 @@ class _AssistantPageState extends State<AssistantPage> {
             return Container(
               width: Dimens.getScreenWidth(context),
               height: Dimens.getScreenHeight(context),
-              color: Colors.white,
+              color: context.theme.colorScheme.background,
               child: Column(
                 children: [
                   Expanded(
@@ -125,7 +125,8 @@ class _AssistantPageState extends State<AssistantPage> {
                     )
                         : const SizedBox.shrink(),
                   ),
-                  if (state.isWaitingNewMessage == true) const Loading3DotsIndicator(),
+                  if (state.isWaitingNewMessage == true)
+                    const Loading3DotsIndicator(),
                   const InputField(),
                 ],
               ),

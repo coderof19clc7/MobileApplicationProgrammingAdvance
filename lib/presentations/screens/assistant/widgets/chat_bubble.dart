@@ -5,6 +5,7 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/screens/assistant/widgets/chat_bubble_painter.dart';
 import 'package:one_one_learn/presentations/screens/assistant/widgets/markdown_content.dart';
+import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 
 class ChatBubble extends StatefulWidget {
   const ChatBubble({
@@ -98,7 +99,10 @@ class _ChatBubbleState extends State<ChatBubble> {
             child: CustomPaint(
               painter: ChatBubblePainter(
                 scrollable: Scrollable.of(context),
-                colors: [AppColors.neutralBlue300, AppColors.neutralBlue300],
+                colors: [
+                  context.theme.colorScheme.inverseSurface,
+                  context.theme.colorScheme.inverseSurface,
+                ],
                 bubbleContext: context,
               ),
               child: messageWidget(),

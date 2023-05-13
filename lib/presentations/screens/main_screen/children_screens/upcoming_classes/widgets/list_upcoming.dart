@@ -20,6 +20,7 @@ import 'package:one_one_learn/presentations/screens/video_call/video_call_screen
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_outline_button.dart';
 import 'package:one_one_learn/presentations/widgets/others/expandable_widget.dart';
+import 'package:one_one_learn/presentations/widgets/others/list_empty_widget.dart';
 import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
 import 'package:one_one_learn/presentations/widgets/shimmers/fade_shimmer.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
@@ -84,8 +85,9 @@ class ListUpcoming extends StatelessWidget {
         final listGrouped = <GroupedBookingInfo?>[...state.groupedBookingInfoList];
 
         if (listGrouped.isEmpty) {
-          return const Center(
-            child: Text('Nothing here'),
+          return ListEmptyWidget(
+            type: EmptyImageType.empty,
+            text: S.current.noUpcomingSession,
           );
         }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:one_one_learn/presentations/widgets/choice_chips/simple_list_fake_chips.dart';
 import 'package:one_one_learn/presentations/widgets/others/app_dropdown.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -41,9 +42,9 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
   late ScrollController _scrollController2;
 
   late final List<MapEntry<String, String>> data1ListMap;
-  late final List<MapEntry<int, String>> data2ListMap;
-  late final List<MapEntry<int, String>> data3ListMap;
-  late final List<int> data3ListMapValues;
+  late final List<int> data2ListMapKeys;
+  late final Map<int, void Function(void Function())> data2MenuSetStateMap;
+  late final List<int> data3ListMapKeys;
 
   late List<String> newData1Filter;
   late List<int> newData2Filter;
@@ -56,9 +57,9 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
     _scrollController2 = ScrollController();
 
     data1ListMap = widget.data1Map.entries.toList();
-    data2ListMap = widget.data2Map.entries.toList();
-    data3ListMap = widget.data3Map.entries.toList();
-    data3ListMapValues = widget.data3Map.keys.toList();
+    data2ListMapKeys = widget.data2Map.keys.toList();
+    data2MenuSetStateMap = {};
+    data3ListMapKeys = widget.data3Map.keys.toList();
 
     newData1Filter = [...widget.data1CurrentFilter];
     newData2Filter = [...widget.data2CurrentFilter];
@@ -70,6 +71,66 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
     _scrollController1.dispose();
     _scrollController2.dispose();
     super.dispose();
+  }
+
+  void onNewFilterData1Changed({
+    required MapEntry<String, String> item, required bool isSelected,
+  }) {
+    final isFirst = (item.key == data1ListMap.first.key)
+        && (item.value == data1ListMap.first.value);
+    setState(() {
+      if (isFirst) {
+        // clear all specialities list
+        newData1Filter = <String>[];
+      } else {
+        // add or remove speciality
+        final curData1Filter = [...newData1Filter];
+        if (isSelected) {
+          newData1Filter = [...curData1Filter, item.key];
+          if (newData1Filter.length == widget.data1Map.length - 1) {
+            newData1Filter = <String>[];
+          }
+          newData1Filter.sort();
+        } else {
+          newData1Filter = [...curData1Filter]..remove(item.key);
+        }
+      }
+    });
+  }
+
+  void onNewFilterData2Changed({required int item, required bool isSelected}) {
+    // update new data2 filter
+    var needClearAll = false;
+    if (item == data2ListMapKeys.first) {
+      // clear all specialities list
+      newData2Filter = <int>[];
+      needClearAll = true;
+    } else {
+      // add or remove speciality
+      final curData2Filter = [...newData2Filter];
+      if (isSelected) {
+        newData2Filter = [...curData2Filter, item];
+        if (newData2Filter.length == widget.data2Map.length - 1) {
+          newData2Filter = <int>[];
+          needClearAll = true;
+        }
+        newData2Filter.sort();
+      } else {
+        newData2Filter = [...curData2Filter]..remove(item);
+      }
+    }
+
+    // re-render UI
+    setState(() {});
+    if (needClearAll) {
+      final listMenuSetStateFunction = data2MenuSetStateMap.values.toList();
+      for (final menuSetStateFunction in listMenuSetStateFunction) {
+        menuSetStateFunction(() {});
+      }
+    } else {
+      data2MenuSetStateMap[item]?.call(() {});
+      data2MenuSetStateMap[data2ListMapKeys.first]?.call(() {});
+    }
   }
 
   @override
@@ -94,53 +155,24 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                     context, context.theme.textTheme.displayMedium,
                   ).copyWith(fontWeight: FontWeight.w500),
                 ),
-                const EmptyProportionalSpace(height: 15),
-                SizedBox(
-                  height: Dimens.getScreenHeight(context) * 0.045,
-                  child: ListView.builder(
-                    controller: _scrollController1,
-                    scrollDirection: Axis.horizontal,
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: widget.data1Map.length,
-                    itemBuilder: (context, index) {
-                      final item = data1ListMap[index];
-                      return Container(
-                        margin: EdgeInsets.only(
-                          right: Dimens.getProportionalWidth(
-                            context, (index == widget.data1Map.length - 1) ? 0 : 10,
-                          ),
-                        ),
-                        child: BaseChoiceChip(
-                          label: toBeginningOfSentenceCase(item.value)!,
-                          isSelected: index == 0
-                              ? newData1Filter.isEmpty == true
-                              : newData1Filter.contains(data1ListMap[index].key) == true,
-                          onSelected: (value) {
-                            // update specialities list
-                            setState(() {
-                              if (index == 0) {
-                                // clear all specialities list
-                                newData1Filter = <String>[];
-                              } else {
-                                // add or remove speciality
-                                final curData1Filter = [...newData1Filter];
-                                if (value) {
-                                  newData1Filter = [...curData1Filter, item.key];
-                                  if (newData1Filter.length == widget.data1Map.length - 1) {
-                                    newData1Filter = <String>[];
-                                  }
-                                  newData1Filter.sort();
-                                } else {
-                                  newData1Filter = [...curData1Filter]..remove(item.key);
-                                }
-                              }
-                            });
-                          },
-                          unselectedBorderColor: context.theme.colorScheme.outlineVariant,
-                        ),
-                      );
-                    },
-                  ),
+                const EmptyProportionalSpace(height: 5),
+                Wrap(
+                  clipBehavior: Clip.hardEdge,
+                  spacing: Dimens.getProportionalWidth(context, 8),
+                  children: data1ListMap.map((item) {
+                    final isFirst = (item.key == data1ListMap[0].key)
+                        && (item.value == data1ListMap[0].value);
+                    return BaseChoiceChip(
+                      label: toBeginningOfSentenceCase(item.value)!,
+                      isSelected: isFirst
+                          ? newData1Filter.isEmpty == true
+                          : newData1Filter.contains(item.key) == true,
+                      onSelected: (value) {
+                        onNewFilterData1Changed(item: item, isSelected: value);
+                      },
+                      unselectedBorderColor: context.theme.colorScheme.outlineVariant,
+                    );
+                  }).toList(),
                 ),
 
                 const EmptyProportionalSpace(height: 20),
@@ -153,53 +185,80 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                   ).copyWith(fontWeight: FontWeight.w500),
                 ),
                 const EmptyProportionalSpace(height: 15),
-                SizedBox(
-                  height: Dimens.getScreenHeight(context) * 0.045,
-                  child: ListView.builder(
-                    controller: _scrollController2,
-                    scrollDirection: Axis.horizontal,
-                    physics: const ClampingScrollPhysics(),
-                    itemCount: widget.data2Map.length,
-                    itemBuilder: (context, index) {
-                      final item = data2ListMap[index];
-                      return Container(
-                        margin: EdgeInsets.only(
-                          right: Dimens.getProportionalWidth(
-                            context, (index == widget.data2Map.length - 1) ? 0 : 10,
-                          ),
-                        ),
-                        child: BaseChoiceChip(
-                          label: toBeginningOfSentenceCase(item.value)!,
-                          isSelected: index == 0
-                              ? newData2Filter.isEmpty == true
-                              : newData2Filter.contains(data2ListMap[index].key) == true,
-                          onSelected: (value) {
-                            // update specialities list
-                            setState(() {
-                              if (index == 0) {
-                                // clear all specialities list
-                                newData2Filter = <int>[];
-                              } else {
-                                // add or remove speciality
-                                final curData2Filter = [...newData2Filter];
-                                if (value) {
-                                  newData2Filter = [...curData2Filter, item.key];
-                                  if (newData2Filter.length == widget.data2Map.length - 1) {
-                                    newData2Filter = <int>[];
-                                  }
-                                  newData2Filter.sort();
-                                } else {
-                                  newData2Filter = [...curData2Filter]..remove(item.key);
+                AppDropDown<int>(
+                  value: newData2Filter.isEmpty ? data2ListMapKeys.first : newData2Filter.last,
+                  data: data2ListMapKeys,
+                  width: Dimens.getScreenWidth(context) * 0.5,
+                  itemBuilder: (item) {
+                    final text = widget.data2Map[item] ?? '';
+                    return DropdownMenuItem<int>(
+                      value: item,
+                      enabled: false,
+                      child: StatefulBuilder(
+                        builder: (context, menuSetState) {
+                          data2MenuSetStateMap[item] = menuSetState;
+                          var isSelected = false;
+                          if (newData2Filter.isEmpty) {
+                            isSelected = item == data2ListMapKeys.first;
+                          } else {
+                            isSelected = newData2Filter.contains(item);
+                          }
+
+                          return ListTileTheme(
+                            horizontalTitleGap: 0,
+                            child: CheckboxListTile(
+                              value: isSelected,
+                              onChanged: (value) {
+                                if (value != null) {
+                                  onNewFilterData2Changed(item: item, isSelected: value);
                                 }
-                              }
-                            });
-                          },
-                          unselectedBorderColor: context.theme.colorScheme.outlineVariant,
+                              },
+                              activeColor: context.theme.colorScheme.primary,
+                              controlAffinity: ListTileControlAffinity.leading,
+                              contentPadding: EdgeInsets.zero,
+                              dense: true,
+                              title: Text(
+                                text,
+                                style: Dimens.getProportionalFont(
+                                  context, context.theme.textTheme.bodyMedium,
+                                ).copyWith(
+                                  color: context.theme.colorScheme.onTertiaryContainer,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  },
+                  selectedItemBuilder: (context) {
+                    return data2ListMapKeys.map((item) {
+                      final count = item == data2ListMapKeys.first
+                          ? data2ListMapKeys.length - 1
+                          : newData2Filter.length;
+                      return Text(
+                        '$count ${S.current.item.toLowerCase()}',
+                        style: Dimens.getProportionalFont(
+                          context, context.theme.textTheme.bodyMedium,
+                        ).copyWith(
+                          color: context.theme.colorScheme.onTertiaryContainer,
                         ),
-                      );
-                    },
-                  ),
+                      );},
+                    ).toList();
+                  },
+                  onChanged: (value) {},
                 ),
+                const EmptyProportionalSpace(height: 7),
+                SimpleListFakeChips(
+                  listData: newData2Filter.isEmpty
+                      ? ([...data2ListMapKeys]..removeAt(0)).map((e) {
+                    return widget.data2Map[e] ?? '';
+                  }).toList()
+                      : newData2Filter.map((e) {
+                    return widget.data2Map[e] ?? '';
+                  }).toList(),
+                ),
+
 
                 const EmptyProportionalSpace(height: 20),
 
@@ -213,14 +272,10 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                 const EmptyProportionalSpace(height: 15),
                 AppDropDown<int>(
                   value: newData3Filter,
-                  data: data3ListMapValues,
+                  data: data3ListMapKeys,
                   width: Dimens.getScreenWidth(context) * 0.5,
                   itemBuilder: (item) {
-                    var index = data3ListMapValues.indexOf(item);
-                    if (index < 0) {
-                      index = 0;
-                    }
-                    final text = data3ListMap[index].value;
+                    final text = widget.data3Map[item] ?? '';
                     return DropdownMenuItem<int>(
                       value: item,
                       child: Text(
@@ -277,8 +332,8 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                       newData3Filter = 0;
                     });
                   },
-                  width: Dimens.getScreenWidth(context) * 0.21282,
-                  paddingVertical: Dimens.getProportionalHeight(context, 5),
+                  width: Dimens.getScreenWidth(context) * 0.25,
+                  paddingVertical: Dimens.getProportionalHeight(context, 10),
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   preferGradient: false,
                   child: Text(
@@ -287,6 +342,7 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                       context, context.theme.textTheme.bodyMedium,
                     ).copyWith(
                       color: context.theme.colorScheme.onSurfaceVariant,
+                      fontSize: Dimens.getProportionalWidth(context, 16),
                     ),
                   ),
                 ),
@@ -296,8 +352,8 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                     Navigator.pop(context);
                     widget.onApplyFilters?.call(newData1Filter, newData2Filter, newData3Filter);
                   },
-                  width: Dimens.getScreenWidth(context) * 0.21282,
-                  paddingVertical: Dimens.getProportionalHeight(context, 5),
+                  width: Dimens.getScreenWidth(context) * 0.25,
+                  paddingVertical: Dimens.getProportionalHeight(context, 10),
                   borderRadiusValue: Dimens.getScreenWidth(context),
                   preferGradient: false,
                   hasShadow: false,
@@ -307,6 +363,7 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                       context, context.theme.textTheme.bodyMedium,
                     ).copyWith(
                       color: context.theme.colorScheme.onPrimary,
+                      fontSize: Dimens.getProportionalWidth(context, 16),
                     ),
                   ),
                 ),

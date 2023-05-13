@@ -11,6 +11,7 @@ import 'package:one_one_learn/presentations/screens/lesson_history/bloc/historie
 import 'package:one_one_learn/presentations/screens/lesson_history/widgets/lesson_history_card.dart';
 import 'package:one_one_learn/presentations/screens/lesson_information/lesson_information_screen.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
+import 'package:one_one_learn/presentations/widgets/others/list_empty_widget.dart';
 import 'package:one_one_learn/presentations/widgets/others/simple_network_image.dart';
 import 'package:one_one_learn/presentations/widgets/shimmers/fade_shimmer.dart';
 
@@ -35,8 +36,9 @@ class LessonHistoryPage extends StatelessWidget {
                   final listGrouped = <GroupedBookingInfo?>[...state.groupedHistoryBookingInfoList];
 
                   if (listGrouped.isEmpty) {
-                    return const Center(
-                      child: Text('Nothing here'),
+                    return ListEmptyWidget(
+                      type: EmptyImageType.empty,
+                      text: S.current.notFoundSomethings(S.current.haveNotLearnAnyLesson),
                     );
                   }
 

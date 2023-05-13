@@ -28,21 +28,23 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m3(somethings) => "No suggested ${somethings}";
 
-  static String m4(somethings) => "Please input ${somethings}";
+  static String m4(somethings) => "Not found any ${somethings}";
 
-  static String m5(tutor) => "Schedule of tutor ${tutor}";
+  static String m5(somethings) => "Please input ${somethings}";
 
-  static String m6(somethings) => "${somethings} is required";
+  static String m6(tutor) => "Schedule of tutor ${tutor}";
 
-  static String m7(somethings) => "From high ${somethings}";
+  static String m7(somethings) => "${somethings} is required";
 
-  static String m8(somethings) => "From low ${somethings}";
+  static String m8(somethings) => "From high ${somethings}";
 
-  static String m9(nationality) => "${nationality} tutor";
+  static String m9(somethings) => "From low ${somethings}";
 
-  static String m10(somethings) => "Unknown ${somethings}";
+  static String m10(nationality) => "${nationality} tutor";
 
-  static String m11(n) => "You have ${n} session left";
+  static String m11(somethings) => "Unknown ${somethings}";
+
+  static String m12(n) => "You have ${n} session left";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -127,6 +129,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "invalid": MessageLookupByLibrary.simpleMessage("Invalid"),
         "isNotReviewed": MessageLookupByLibrary.simpleMessage("Not reviewed"),
         "isReviewed": MessageLookupByLibrary.simpleMessage("Reviewed"),
+        "item": MessageLookupByLibrary.simpleMessage("item"),
         "ket": MessageLookupByLibrary.simpleMessage("KET"),
         "labelAbout": MessageLookupByLibrary.simpleMessage("About"),
         "labelTopics": MessageLookupByLibrary.simpleMessage("Topics"),
@@ -172,9 +175,12 @@ class MessageLookup extends MessageLookupByLibrary {
         "no": MessageLookupByLibrary.simpleMessage("No"),
         "noHaveSomethingsSuggested": m3,
         "noRequest": MessageLookupByLibrary.simpleMessage("No request"),
+        "noReviewForTutor": MessageLookupByLibrary.simpleMessage(
+            "No review for this tutor yet"),
         "noReviewGiven": MessageLookupByLibrary.simpleMessage("No comment"),
         "noUpcomingSession": MessageLookupByLibrary.simpleMessage(
             "You don\'t have any upcoming session"),
+        "notFoundSomethings": m4,
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "openMeeting": MessageLookupByLibrary.simpleMessage("Open meeting"),
@@ -189,7 +195,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character"),
         "pet": MessageLookupByLibrary.simpleMessage("PET"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
-        "pleaseInputSomethings": m4,
+        "pleaseInputSomethings": m5,
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Preferred schedule"),
         "preferredScheduleHint": MessageLookupByLibrary.simpleMessage(
@@ -228,7 +234,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter the email associated with your account to reset password."),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
-        "scheduleOfTutorA": m5,
+        "scheduleOfTutorA": m6,
         "searchHintCountry":
             MessageLookupByLibrary.simpleMessage("Search for a country"),
         "searchHintCourse":
@@ -248,10 +254,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Skill level"),
-        "somethingRequiredError": m6,
+        "somethingRequiredError": m7,
         "sortNameFromAtoZ": MessageLookupByLibrary.simpleMessage("From A to Z"),
-        "sortSomethingsFromHigh": m7,
-        "sortSomethingsFromLow": m8,
+        "sortSomethingsFromHigh": m8,
+        "sortSomethingsFromLow": m9,
         "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
@@ -277,9 +283,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tutorPhotoInappropriateIssue":
             MessageLookupByLibrary.simpleMessage("Inappropriate profile photo"),
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
-        "tutorWithNationality": m9,
+        "tutorWithNationality": m10,
         "tutoring": MessageLookupByLibrary.simpleMessage("Tutoring"),
-        "unknownSomethings": m10,
+        "unknownSomethings": m11,
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("in"),
         "updateProfile": MessageLookupByLibrary.simpleMessage("Update profile"),
@@ -297,6 +303,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "wantToStudyRequired": MessageLookupByLibrary.simpleMessage(
             "Please choose at least 1 option"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
-        "youHaveNSessionLeft": m11
+        "youHaveNSessionLeft": m12
       };
 }

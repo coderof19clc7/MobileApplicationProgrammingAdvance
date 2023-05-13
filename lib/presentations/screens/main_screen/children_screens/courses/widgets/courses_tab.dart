@@ -63,9 +63,6 @@ class _CoursesTabState extends State<CoursesTab> with AutomaticKeepAliveClientMi
             },
           ),
 
-
-          SizedBox(height: Dimens.getProportionalHeight(context, 30)),
-
           // courses list
           const Expanded(child: ListCourses()),
         ],

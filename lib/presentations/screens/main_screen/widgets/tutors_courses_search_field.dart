@@ -40,7 +40,7 @@ class TutorsCoursesSearchField extends StatelessWidget {
               context,
               leftPadding: 0,
               rightPadding: 0,
-              initialChildSize: 0.5018,
+              initialChildSize: 0.6,
               body: listFilterBodyBottomSheet,
             );
           },

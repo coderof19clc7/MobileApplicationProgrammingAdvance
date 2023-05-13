@@ -14,7 +14,7 @@ class AppDropDown<T> extends StatelessWidget {
     required this.itemBuilder,
     this.leadingIcon,
     this.errorText,
-    this.alignment = Alignment.center,
+    this.alignment = Alignment.centerLeft,
     this.width,
     this.verticalPadding,
     this.buttonStyleData,
