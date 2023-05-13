@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/core/models/requests/base_request.dart';
@@ -9,6 +10,7 @@ import 'package:one_one_learn/core/network/network_manager.dart';
 abstract class BaseRepository {
   final String _serviceName;
   final _networkManager = injector<NetworkManager>();
+  final firebaseAnalytics = injector<FirebaseAnalytics>();
 
   BaseRepository(this._serviceName);
 

@@ -1,4 +1,6 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
+import 'package:one_one_learn/configs/constants/firebase_constants.dart';
 import 'package:one_one_learn/core/models/requests/schedule_and_booking/booking_list_request.dart';
 import 'package:one_one_learn/core/models/requests/schedule_and_booking/booking_schedule_request.dart';
 import 'package:one_one_learn/core/models/requests/schedule_and_booking/cancel_schedule_request.dart';
@@ -28,11 +30,26 @@ class BookingRepository extends BaseRepository {
   Future<BookingScheduleResponse> bookingSchedule({
     required BookingScheduleRequest bookingScheduleRequest,
   }) async {
-    return BookingScheduleResponse.fromJson(await request(
+    final bookingScheduleResponse = BookingScheduleResponse.fromJson(await request(
       method: ApiMethods.post,
       path: '',
       data: bookingScheduleRequest,
     ));
+
+    firebaseAnalytics.logPurchase(
+      transactionId: bookingScheduleRequest.scheduleDetailIds?.first,
+      items: bookingScheduleResponse.data
+          ?.map(
+            (e) => AnalyticsEventItem(
+          itemId: e.scheduleDetailId,
+          itemName: FirebaseAnalyticsConstants.bookASession,
+          currency: FirebaseAnalyticsConstants.bookingCurrency,
+          price: 1,
+        ),
+      ).toList(),
+    );
+
+    return bookingScheduleResponse;
   }
 
   Future<EditRequestResponse> editRequestOfBookingInfo({
@@ -49,10 +66,16 @@ class BookingRepository extends BaseRepository {
   Future<BaseResponse> cancelScheduleDetail({
     required CancelScheduleRequest cancelScheduleRequest,
   }) async {
-    return EditRequestResponse.fromJson(await request(
+    final baseResponse = BaseResponse.fromJson(await request(
       method: ApiMethods.delete,
       path: ApiEndpoints.scheduleDetail,
       data: cancelScheduleRequest,
     ));
+
+    firebaseAnalytics.logRefund(
+      transactionId: cancelScheduleRequest.scheduleDetailId,
+    );
+
+    return baseResponse;
   }
 }

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "415407565980",
+    "project_id": "one-one-learn",
+    "storage_bucket": "one-one-learn.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:415407565980:android:2082658ac5a44008809159",
+        "android_client_info": {
+          "package_name": "com.hcmus.mobile.one_one_learn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "415407565980-9fb67ctfnhsggv8u0hlnauj424p9ensv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLvE6Elxk7Iw1d9yOO86mzxMqB6LFtlB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "415407565980-9fb67ctfnhsggv8u0hlnauj424p9ensv.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "415407565980-1r5ntulj3p5l0gut2edv3i70r517desf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.oneOneLearn"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

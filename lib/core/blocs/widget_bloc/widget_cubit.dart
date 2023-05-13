@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,8 +35,15 @@ abstract class WidgetCubit<StateType extends WidgetState> extends Cubit<StateTyp
     }
   }
 
+  final firebaseAnalytics = injector<FirebaseAnalytics>();
   final localManager = injector<LocalManager>();
   Timer? timer;
+
+  void logWhenVisitScreen(String screenName, String screenClass) {
+    firebaseAnalytics.logScreenView(
+      screenName: screenName, screenClass: screenClass,
+    );
+  }
   
   void changeLoadingState({required bool isLoading}) {
     if (isLoading) {

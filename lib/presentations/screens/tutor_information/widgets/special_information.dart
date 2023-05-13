@@ -92,7 +92,7 @@ class _SpecialInformationState extends State<SpecialInformation> {
                         RouteNames.courseInformation,
                         arguments: CourseInformationArguments(
                           courseId: topic.id ?? '', categories: [],
-                        )
+                        ),
                       );
                     },
                   );

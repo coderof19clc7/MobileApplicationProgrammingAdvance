@@ -220,6 +220,9 @@ class ProfileCubit extends WidgetCubit<ProfileState> {
     changeLoadingState(isLoading: true);
 
     final resultsList = await Future.wait(listUploadFunctions);
+    if (resultsList.length < 2) {
+      resultsList.insert(0, 1);
+    }
 
     var isSuccessful = true;
     var message = S.current.updateProfile;
