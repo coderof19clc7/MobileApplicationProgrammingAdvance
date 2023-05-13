@@ -259,7 +259,6 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                   }).toList(),
                 ),
 
-
                 const EmptyProportionalSpace(height: 20),
 
                 // data3 (sorting) filters
@@ -298,12 +297,10 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
           ),
 
           const EmptyProportionalSpace(height: 25),
-
           Divider(
             height: Dimens.getProportionalHeight(context, 2),
             color: context.theme.colorScheme.onInverseSurface,
           ),
-
           const EmptyProportionalSpace(height: 25),
 
           // buttons field
