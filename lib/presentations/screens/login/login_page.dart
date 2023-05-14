@@ -176,7 +176,13 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         PrimaryOutlineButton(
                           onTap: () {
-                            UIHelper.hideKeyboard(context);
+                            DebounceHelper.runDisable(
+                              DebounceConstants.googleLoginButton,
+                              callback: () {
+                                UIHelper.hideKeyboard(context);
+                                // contextCubit.read<LoginCubit>().onGoogleSignInButtonTapped();
+                              },
+                            );
                           },
                           width: Dimens.getProportionalWidth(context, 87),
                           paddingVertical: Dimens.getProportionalHeight(context, 17),

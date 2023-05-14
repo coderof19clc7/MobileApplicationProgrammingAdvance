@@ -17,6 +17,8 @@ class ApiServices {
 class ApiEndpoints {
   // auth
   static const login = 'login';
+  static const google = 'google';
+  static const facebook = 'facebook';
   static const register = 'register';
   static const changePassword = 'change-password';
   static const refreshToken = 'refresh-token';

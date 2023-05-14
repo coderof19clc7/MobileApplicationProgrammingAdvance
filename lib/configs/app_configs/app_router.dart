@@ -29,11 +29,14 @@ class AppRouter {
           alignment: Alignment.center,
         );
       case RouteNames.login:
-        return PageTransition(
-          child: const LoginScreen(),
-          type: PageTransitionType.rightToLeft,
-          alignment: Alignment.center,
-        );
+        if (args != null && args is LoginArguments) {
+          return PageTransition(
+            child: LoginScreen(args: args),
+            type: PageTransitionType.rightToLeft,
+            alignment: Alignment.center,
+          );
+        }
+        return _errRoute();
       case RouteNames.signUp:
         return PageTransition(
           child: const SignUpScreen(),

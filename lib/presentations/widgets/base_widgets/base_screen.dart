@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
+import 'package:one_one_learn/presentations/screens/login/login_screen.dart';
 import 'package:one_one_learn/presentations/widgets/dialogs/popup_dialogs/simple_loading_dialog.dart';
 import 'package:one_one_learn/utils/helpers/toast_helper.dart';
 
@@ -35,6 +36,7 @@ abstract class BaseScreen<T extends WidgetCubit<S>, S extends WidgetState> exten
   void onListenerNeedNavigateToLogin(BuildContext context, S state) {
     Navigator.of(context).pushNamedAndRemoveUntil(
       RouteNames.login, (route) => false,
+      arguments: const LoginArguments(navigateFromLogout: true),
     );
   }
 

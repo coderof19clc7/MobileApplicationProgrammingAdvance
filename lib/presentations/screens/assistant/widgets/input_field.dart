@@ -177,7 +177,7 @@ class _InputFieldState extends State<InputField> {
           ),
           width: Dimens.getScreenWidth(context),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: context.theme.colorScheme.background,
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
@@ -233,6 +233,7 @@ class _InputFieldState extends State<InputField> {
                 child: (state.isWaitingNewMessage)
                     ? const Loading3DotsIndicator() // is waiting new message
                     : Material(
+                  color: AppColors.transparent,
                   child: InkResponse(
                     onTap: enableSendButton
                         ? () {

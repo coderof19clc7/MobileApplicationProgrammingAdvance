@@ -45,17 +45,17 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions web = FirebaseOptions(
     apiKey: 'AIzaSyD2TbtmykWudSYO9JjFcKIyhR8sCPR7WGw',
-    appId: '1:415407565980:web:fc73b4a573fc515e809159',
+    appId: '1:415407565980:web:6ec8d4fdde4be71c809159',
     messagingSenderId: '415407565980',
     projectId: 'one-one-learn',
     authDomain: 'one-one-learn.firebaseapp.com',
     storageBucket: 'one-one-learn.appspot.com',
-    measurementId: 'G-N7NYXDYZ0E',
+    measurementId: 'G-C4YS375VS0',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCLvE6Elxk7Iw1d9yOO86mzxMqB6LFtlB4',
-    appId: '1:415407565980:android:2082658ac5a44008809159',
+    appId: '1:415407565980:android:09e68068ff0df3fa809159',
     messagingSenderId: '415407565980',
     projectId: 'one-one-learn',
     storageBucket: 'one-one-learn.appspot.com',
@@ -63,7 +63,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBPRAc-3SHRb0TUE5rOT9J-kHD--xqVQo0',
-    appId: '1:415407565980:ios:574b98425ea8d7f4809159',
+    appId: '1:415407565980:ios:00306b2a3c91a557809159',
     messagingSenderId: '415407565980',
     projectId: 'one-one-learn',
     storageBucket: 'one-one-learn.appspot.com',
@@ -73,7 +73,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions macos = FirebaseOptions(
     apiKey: 'AIzaSyBPRAc-3SHRb0TUE5rOT9J-kHD--xqVQo0',
-    appId: '1:415407565980:ios:574b98425ea8d7f4809159',
+    appId: '1:415407565980:ios:00306b2a3c91a557809159',
     messagingSenderId: '415407565980',
     projectId: 'one-one-learn',
     storageBucket: 'one-one-learn.appspot.com',

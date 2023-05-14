@@ -61,7 +61,16 @@ class _AssistantPageState extends State<AssistantPage> {
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(S.current.assistant),
+          title: Text(
+            S.current.assistant,
+            style: Dimens.getProportionalFont(
+              context, context.theme.textTheme.headlineMedium,
+            ).copyWith(
+              color: context.theme.colorScheme.onPrimary,
+              fontWeight: FontWeight.w600,
+              fontSize: Dimens.getProportionalWidth(context, 20),
+            ),
+          ),
           leading: GestureDetector(
             onTap: () {
               Navigator.pop(context);
@@ -69,6 +78,7 @@ class _AssistantPageState extends State<AssistantPage> {
             child: Icon(
               Icons.keyboard_arrow_down_rounded,
               size: Dimens.getProportionalWidth(context, 40),
+              color: context.theme.colorScheme.onPrimary,
             ),
           ),
           centerTitle: true,

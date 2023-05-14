@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
-import 'package:one_one_learn/configs/constants/local.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
 import 'package:one_one_learn/core/models/responses/user/user_info.dart';
 import 'package:one_one_learn/core/models/responses/user/user_info_response.dart';

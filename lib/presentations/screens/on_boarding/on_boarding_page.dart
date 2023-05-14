@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:one_one_learn/presentations/screens/login/login_screen.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
@@ -35,7 +36,9 @@ class OnBoardingPage extends StatelessWidget {
             SizedBox(height: Dimens.getProportionalHeight(context, 40)),
             PrimaryFillButton(
               onTap: () {
-                Navigator.of(context).pushReplacementNamed(RouteNames.login);
+                Navigator.of(context).pushReplacementNamed(
+                  RouteNames.login, arguments: const LoginArguments(),
+                );
               },
               width: Dimens.getScreenWidth(context) - Dimens.getProportionalWidth(context, 100),
               paddingVertical: Dimens.getProportionalHeight(context, 16),

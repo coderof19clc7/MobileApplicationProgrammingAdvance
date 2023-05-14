@@ -5,11 +5,13 @@ import 'package:one_one_learn/presentations/screens/login/login_page.dart';
 import 'package:one_one_learn/presentations/widgets/base_widgets/base_screen.dart';
 
 class LoginScreen extends BaseScreen<LoginCubit, LoginState> {
-  const LoginScreen({super.key});
+  const LoginScreen({super.key, required this.args});
+
+  final LoginArguments args;
 
   @override
   LoginCubit provideBloc(BuildContext context) {
-    return LoginCubit();
+    return LoginCubit(needSignOutSocial: args.navigateFromLogout);
   }
 
   @override
@@ -29,4 +31,10 @@ class LoginScreen extends BaseScreen<LoginCubit, LoginState> {
       RouteNames.main, (route) => false,
     );
   }
+}
+
+class LoginArguments {
+  final bool navigateFromLogout;
+
+  const LoginArguments({this.navigateFromLogout = false});
 }
