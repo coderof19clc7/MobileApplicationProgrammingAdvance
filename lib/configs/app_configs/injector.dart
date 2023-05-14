@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:one_one_learn/configs/app_configs/app_configs.dart';
 import 'package:one_one_learn/configs/firebase_configs/firebase_options.dart';
 import 'package:one_one_learn/core/managers/local_manager.dart';
@@ -27,6 +28,9 @@ Future<void> initializeDependencies() async {
   // init local manager (shared preferences) and firebase
   await Future.wait([LocalManager.init(), initFirebase()]);
   injector..registerSingleton<LocalManager>(LocalManager.instance)
+
+  // social login instances
+  ..registerSingleton<GoogleSignIn>(GoogleSignIn())
 
   // init app configs
   ..registerSingleton<AppConfig>(AppConfig.getInstance());

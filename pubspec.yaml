@@ -41,19 +41,19 @@ dependencies:
   equatable: ^2.0.5
 
   # svg lib
-  flutter_svg: 1.1.6
+  flutter_svg: ^2.0.5
 
   # page-transition (custom page route) libs
   page_transition: ^2.0.9
 
   # pdf viewer lib
-  syncfusion_flutter_pdfviewer: ^21.1.38
+  syncfusion_flutter_pdfviewer: ^21.2.4
 
   # stop_watch_timer (count down) lib:
   stop_watch_timer: ^2.0.0
 
   # video player libs (chewie is controller of video_player)
-  chewie: ^1.4.0
+  chewie: ^1.5.0
   video_player: ^2.6.1
 
   # meeting lib
@@ -65,16 +65,16 @@ dependencies:
       path: omni_jitsi_meet
 
   # dio (calling api) lib
-  dio: ^5.1.1
+  dio: ^5.1.2
 
   # bloc (logic business handler) lib
   flutter_bloc: ^8.1.2
 
   # get_it (singleton handler) lib
-  get_it: ^7.2.0
+  get_it: ^7.6.0
 
   # shared_preferences (local storage) lib
-  shared_preferences: ^2.1.0
+  shared_preferences: ^2.1.1
 
   # show toast lib
   fluttertoast: ^8.2.1
@@ -93,10 +93,10 @@ dependencies:
   loading_indicator: ^3.1.0
 
   # dropdown button lib:
-  dropdown_button2: ^2.1.0
+  dropdown_button2: ^2.1.2
 
   # image picker lib:
-  image_picker: ^0.8.7+4
+  image_picker: ^0.8.7+5
 
   # firebase lib:
   firebase_core: ^2.12.0
@@ -120,7 +120,7 @@ dev_dependencies:
     sdk: flutter
 
   build_runner:
-  flutter_gen_runner: 5.0.3
+  flutter_gen_runner:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
