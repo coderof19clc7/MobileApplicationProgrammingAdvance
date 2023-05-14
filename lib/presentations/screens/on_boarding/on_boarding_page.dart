@@ -25,12 +25,17 @@ class OnBoardingPage extends StatelessWidget {
               height: Dimens.getScreenWidth(context) / 2,
             ),
             SizedBox(height: Dimens.getProportionalHeight(context, 40)),
-            Text(
-              S.current.introducingText,
-              textAlign: TextAlign.center,
-              style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
-                fontSize: Dimens.getProportionalWidth(context, 32),
-                fontWeight: FontWeight.w600,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: Dimens.getProportionalWidth(context, 16),
+              ),
+              child: Text(
+                S.current.introducingText,
+                textAlign: TextAlign.center,
+                style: Dimens.getProportionalFont(context, context.theme.textTheme.displayLarge).copyWith(
+                  fontSize: Dimens.getProportionalWidth(context, 32),
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             SizedBox(height: Dimens.getProportionalHeight(context, 40)),
