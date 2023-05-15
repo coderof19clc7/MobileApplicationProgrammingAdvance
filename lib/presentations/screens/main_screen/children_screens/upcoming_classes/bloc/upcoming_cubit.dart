@@ -162,9 +162,10 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
         var currentTotal = state.currentTotal;
         final newListBookingInfo = bookedClassesResponse.data?.rows ?? <BookingInfo?>[];
         if (!reloadAllCurrentList && newListBookingInfo.isNotEmpty) {
-          final removeRange = nextPage * perPage - currentTotal;
+          final newLength = newListBookingInfo.length;
+          final removeRange = perPage - (nextPage * perPage - currentTotal);
           newListBookingInfo.removeRange(
-            0, removeRange < perPage ? perPage - removeRange : 0,
+            0, removeRange <= newLength ? removeRange : newLength,
           );
         }
 

@@ -30,21 +30,24 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(somethings) => "Not found any ${somethings}";
 
-  static String m5(somethings) => "Please input ${somethings}";
+  static String m5(somethings) =>
+      "Application wants to access ${somethings}.\nWould you like to open settings to grant?";
 
-  static String m6(tutor) => "Schedule of tutor ${tutor}";
+  static String m6(somethings) => "Please input ${somethings}";
 
-  static String m7(somethings) => "${somethings} is required";
+  static String m7(tutor) => "Schedule of tutor ${tutor}";
 
-  static String m8(somethings) => "From high ${somethings}";
+  static String m8(somethings) => "${somethings} is required";
 
-  static String m9(somethings) => "From low ${somethings}";
+  static String m9(somethings) => "From high ${somethings}";
 
-  static String m10(nationality) => "${nationality} tutor";
+  static String m10(somethings) => "From low ${somethings}";
 
-  static String m11(somethings) => "Unknown ${somethings}";
+  static String m11(nationality) => "${nationality} tutor";
 
-  static String m12(n) => "You have ${n} session left";
+  static String m12(somethings) => "Unknown ${somethings}";
+
+  static String m13(n) => "You have ${n} session left";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -92,6 +95,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dark": MessageLookupByLibrary.simpleMessage("Dark"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Date of Birth"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
+        "denied": MessageLookupByLibrary.simpleMessage("Denied"),
         "doSomethingsFailed": m1,
         "doSomethingsSuccess": m2,
         "dontHaveAccount":
@@ -117,6 +121,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Forgot Password"),
         "forgotPasswordFailedWithEmailNotExists":
             MessageLookupByLibrary.simpleMessage("Email does not exist"),
+        "gallery": MessageLookupByLibrary.simpleMessage("Gallery"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "haveNotLearnAnyLesson": MessageLookupByLibrary.simpleMessage(
             "You have not learned any lesson yet"),
@@ -184,6 +189,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "openMeeting": MessageLookupByLibrary.simpleMessage("Open meeting"),
+        "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Or continue with"),
         "other": MessageLookupByLibrary.simpleMessage("Other"),
@@ -193,9 +199,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordRule": MessageLookupByLibrary.simpleMessage(
             "Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character"),
+        "permissionNeedOpenSettingsDialogContent": m5,
+        "permissionNeedOpenSettingsDialogTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Permission(s) need to be granted in settings"),
         "pet": MessageLookupByLibrary.simpleMessage("PET"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
-        "pleaseInputSomethings": m5,
+        "pleaseInputSomethings": m6,
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Preferred schedule"),
         "preferredScheduleHint": MessageLookupByLibrary.simpleMessage(
@@ -234,7 +244,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter the email associated with your account to reset password."),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
-        "scheduleOfTutorA": m6,
+        "scheduleOfTutorA": m7,
         "searchHintCountry":
             MessageLookupByLibrary.simpleMessage("Search for a country"),
         "searchHintCourse":
@@ -254,10 +264,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Skill level"),
-        "somethingRequiredError": m7,
+        "somethingRequiredError": m8,
         "sortNameFromAtoZ": MessageLookupByLibrary.simpleMessage("From A to Z"),
-        "sortSomethingsFromHigh": m8,
-        "sortSomethingsFromLow": m9,
+        "sortSomethingsFromHigh": m9,
+        "sortSomethingsFromLow": m10,
         "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
@@ -283,9 +293,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tutorPhotoInappropriateIssue":
             MessageLookupByLibrary.simpleMessage("Inappropriate profile photo"),
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
-        "tutorWithNationality": m10,
+        "tutorWithNationality": m11,
         "tutoring": MessageLookupByLibrary.simpleMessage("Tutoring"),
-        "unknownSomethings": m11,
+        "unknownSomethings": m12,
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("in"),
         "updateProfile": MessageLookupByLibrary.simpleMessage("Update profile"),
@@ -303,6 +313,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "wantToStudyRequired": MessageLookupByLibrary.simpleMessage(
             "Please choose at least 1 option"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
-        "youHaveNSessionLeft": m12
+        "youHaveNSessionLeft": m13
       };
 }

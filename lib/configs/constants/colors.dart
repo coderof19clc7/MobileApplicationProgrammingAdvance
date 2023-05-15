@@ -34,6 +34,8 @@ class AppColors {
   static final primaryBlue800 = HexColor.fromHex('#26394D');
   static final primaryBlue900 = HexColor.fromHex('#213344');
 
+  static final orangeYellow = HexColor.fromHex('#FFC929');
+
   static final neutralBlue50 = HexColor.fromHex('#F9F9FB');
   static final neutralBlue100 = HexColor.fromHex('#EDEEF0');
   static final neutralBlue200 = HexColor.fromHex('#E4E6E9');

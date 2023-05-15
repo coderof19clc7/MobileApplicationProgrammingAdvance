@@ -188,5 +188,10 @@
   "vietnameseLanguage": "Tiếng Việt",
   "notFoundSomethings": "Không tìm thấy {somethings} nào",
   "noReviewForTutor": "Chưa có đánh giá nào cho giảng viên này",
-  "item": "Mục"
+  "item": "Mục",
+  "denied": "Từ chối",
+  "openSettings": "Mở cài đặt",
+  "permissionNeedOpenSettingsDialogTitle": "Quyền cần được mở trong cài đặt",
+  "permissionNeedOpenSettingsDialogContent": "Ứng dụng muốn truy cập vào {somethings}.\nBạn có muốn mở cài đặt và cho phép?",
+  "gallery": "Thư viện"
 }

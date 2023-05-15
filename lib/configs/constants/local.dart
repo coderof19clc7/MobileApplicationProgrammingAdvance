@@ -8,6 +8,7 @@ class LocalConstants {
   static const String chatBotMessageHistory = 'chatBotMessageHistory';
   static const String appThemeModeIndex = 'appThemeIndex';
   static const String appLocale = 'appLocale';
+  static const String isPermissionAskedBefore = 'isPermissionAskedBefore';
 
   static const int priceOfSession = 100000;
 }

@@ -50,14 +50,17 @@ class _UpcomingClassBannerState extends State<UpcomingClassBanner> {
   }
 
   void updateDurationText() {
-    final isCountDown = widget.startTime.difference(DateTime.now()).inMilliseconds > 0;
+    final differenceTime = widget.startTime.difference(DateTime.now()).inMilliseconds;
+    final isCountDown = differenceTime > 0;
     if (mounted) {
       setState(() {
         final newDuration = isCountDown
             ? widget.startTime.difference(DateTime.now())
             : DateTime.now().difference(widget.startTime);
         textColor = isCountDown
+            ? (differenceTime > 5 * 60 * 1000
             ? context.theme.colorScheme.onPrimary
+            : AppColors.orangeYellow)
             : AppColors.green400;
         final textHeader = isCountDown ? S.current.upcomingIn : S.current.sessionProgressIn;
 

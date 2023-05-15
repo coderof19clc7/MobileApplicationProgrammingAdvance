@@ -297,5 +297,19 @@
     }
   },
   "noReviewForTutor": "No review for this tutor yet",
-  "item": "item"
+  "item": "item",
+  "denied": "Denied",
+  "openSettings": "Open settings",
+  "permissionNeedOpenSettingsDialogTitle": "Permission(s) need to be granted in settings",
+  "permissionNeedOpenSettingsDialogContent": "Application wants to access {somethings}.\nWould you like to open settings to grant?",
+  "@permissionNeedOpenSettingsDialogContent": {
+    "description": "Permission need to be granted in settings dialog content",
+    "placeholders": {
+      "somethings": {
+        "type": "String",
+        "example": "camera"
+      }
+    }
+  },
+  "gallery": "Gallery"
 }

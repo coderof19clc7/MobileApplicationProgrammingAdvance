@@ -152,10 +152,9 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
                         onTap: () {
                           Navigator.of(context).pushNamed(RouteNames.assistant);
                         },
-                        child: Icon(
-                          Icons.chat_bubble_outline,
-                          color: Colors.white,
-                          size: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 2,
+                        child: Assets.images.assistant.image(
+                          width: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 1.7,
+                          height: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 1.7,
                         ),
                       ),
                     ),

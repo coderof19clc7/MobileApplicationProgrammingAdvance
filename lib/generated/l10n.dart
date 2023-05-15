@@ -1959,6 +1959,56 @@ class S {
       args: [],
     );
   }
+
+  /// `Denied`
+  String get denied {
+    return Intl.message(
+      'Denied',
+      name: 'denied',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Open settings`
+  String get openSettings {
+    return Intl.message(
+      'Open settings',
+      name: 'openSettings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Permission(s) need to be granted in settings`
+  String get permissionNeedOpenSettingsDialogTitle {
+    return Intl.message(
+      'Permission(s) need to be granted in settings',
+      name: 'permissionNeedOpenSettingsDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Application wants to access {somethings}.\nWould you like to open settings to grant?`
+  String permissionNeedOpenSettingsDialogContent(String somethings) {
+    return Intl.message(
+      'Application wants to access $somethings.\nWould you like to open settings to grant?',
+      name: 'permissionNeedOpenSettingsDialogContent',
+      desc: 'Permission need to be granted in settings dialog content',
+      args: [somethings],
+    );
+  }
+
+  /// `Gallery`
+  String get gallery {
+    return Intl.message(
+      'Gallery',
+      name: 'gallery',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

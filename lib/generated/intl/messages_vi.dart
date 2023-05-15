@@ -30,21 +30,24 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m4(somethings) => "Không tìm thấy ${somethings} nào";
 
-  static String m5(somethings) => "Vui lòng điền ${somethings}";
+  static String m5(somethings) =>
+      "Ứng dụng muốn truy cập vào ${somethings}.\nBạn có muốn mở cài đặt và cho phép?";
 
-  static String m6(tutor) => "Lịch học của giảng viên ${tutor}";
+  static String m6(somethings) => "Vui lòng điền ${somethings}";
 
-  static String m7(somethings) => "${somethings} là bắt buộc";
+  static String m7(tutor) => "Lịch học của giảng viên ${tutor}";
 
-  static String m8(somethings) => "Từ ${somethings} cao";
+  static String m8(somethings) => "${somethings} là bắt buộc";
 
-  static String m9(somethings) => "Từ ${somethings} thấp";
+  static String m9(somethings) => "Từ ${somethings} cao";
 
-  static String m10(nationality) => "Gia sư ${nationality}";
+  static String m10(somethings) => "Từ ${somethings} thấp";
 
-  static String m11(somethings) => "${somethings} không xác định";
+  static String m11(nationality) => "Gia sư ${nationality}";
 
-  static String m12(n) => "Bạn còn ${n} buổi học";
+  static String m12(somethings) => "${somethings} không xác định";
+
+  static String m13(n) => "Bạn còn ${n} buổi học";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -95,6 +98,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dark": MessageLookupByLibrary.simpleMessage("Tối"),
         "dateOfBirth": MessageLookupByLibrary.simpleMessage("Ngày sinh"),
         "demo": MessageLookupByLibrary.simpleMessage("Demo"),
+        "denied": MessageLookupByLibrary.simpleMessage("Từ chối"),
         "doSomethingsFailed": m1,
         "doSomethingsSuccess": m2,
         "dontHaveAccount":
@@ -119,6 +123,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "forgotPassword": MessageLookupByLibrary.simpleMessage("Quên mật khẩu"),
         "forgotPasswordFailedWithEmailNotExists":
             MessageLookupByLibrary.simpleMessage("Email không tồn tại"),
+        "gallery": MessageLookupByLibrary.simpleMessage("Thư viện"),
         "getStarted": MessageLookupByLibrary.simpleMessage("Bắt Đầu"),
         "haveNotLearnAnyLesson": MessageLookupByLibrary.simpleMessage(
             "Bạn chưa tham gia buổi học nào"),
@@ -187,6 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notes": MessageLookupByLibrary.simpleMessage("Ghi chú"),
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
         "openMeeting": MessageLookupByLibrary.simpleMessage("Mở cuộc họp"),
+        "openSettings": MessageLookupByLibrary.simpleMessage("Mở cài đặt"),
         "orContinueWith":
             MessageLookupByLibrary.simpleMessage("Hoặc tiếp tục với"),
         "other": MessageLookupByLibrary.simpleMessage("Khác"),
@@ -196,9 +202,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "password": MessageLookupByLibrary.simpleMessage("Mật khẩu"),
         "passwordRule": MessageLookupByLibrary.simpleMessage(
             "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt"),
+        "permissionNeedOpenSettingsDialogContent": m5,
+        "permissionNeedOpenSettingsDialogTitle":
+            MessageLookupByLibrary.simpleMessage(
+                "Quyền cần được mở trong cài đặt"),
         "pet": MessageLookupByLibrary.simpleMessage("PET"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Số điện thoại"),
-        "pleaseInputSomethings": m5,
+        "pleaseInputSomethings": m6,
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Lịch học mong muốn"),
         "preferredScheduleHint": MessageLookupByLibrary.simpleMessage(
@@ -239,7 +249,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Điền email ứng với tài khoản muốn đặt lại mật khẩu."),
         "review": MessageLookupByLibrary.simpleMessage("Đánh giá"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Lưu thay đổi"),
-        "scheduleOfTutorA": m6,
+        "scheduleOfTutorA": m7,
         "searchHintCountry":
             MessageLookupByLibrary.simpleMessage("Tìm quốc gia"),
         "searchHintCourse":
@@ -258,11 +268,11 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Email đã được sử dụng"),
         "signUpTitle": MessageLookupByLibrary.simpleMessage("Tạo tài khoản"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Trình độ"),
-        "somethingRequiredError": m7,
+        "somethingRequiredError": m8,
         "sortNameFromAtoZ":
             MessageLookupByLibrary.simpleMessage("Từ tên A đến Z"),
-        "sortSomethingsFromHigh": m8,
-        "sortSomethingsFromLow": m9,
+        "sortSomethingsFromHigh": m9,
+        "sortSomethingsFromLow": m10,
         "sorting": MessageLookupByLibrary.simpleMessage("Sắp xếp"),
         "speaking": MessageLookupByLibrary.simpleMessage("Khả năng nói"),
         "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),
@@ -289,9 +299,9 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Ảnh hồ sơ không phù hợp"),
         "tutorReview":
             MessageLookupByLibrary.simpleMessage("Nhận xét từ gia sư"),
-        "tutorWithNationality": m10,
+        "tutorWithNationality": m11,
         "tutoring": MessageLookupByLibrary.simpleMessage("Giảng dạy"),
-        "unknownSomethings": m11,
+        "unknownSomethings": m12,
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("bắt đầu sau"),
         "updateProfile": MessageLookupByLibrary.simpleMessage("Cập nhật hồ sơ"),
@@ -310,6 +320,6 @@ class MessageLookup extends MessageLookupByLibrary {
         "wantToStudyRequired":
             MessageLookupByLibrary.simpleMessage("Vui lòng chọn ít nhất 1 mục"),
         "yes": MessageLookupByLibrary.simpleMessage("Có"),
-        "youHaveNSessionLeft": m12
+        "youHaveNSessionLeft": m13
       };
 }
