@@ -17,6 +17,7 @@ import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_sp
 import 'package:one_one_learn/presentations/widgets/text_fields/text_field_outline.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/utils/helpers/debounce_helper.dart';
+import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class AssistantSettingsWidget extends StatefulWidget {
   const AssistantSettingsWidget({
@@ -102,104 +103,112 @@ class _AssistantSettingsWidgetState extends State<AssistantSettingsWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: Dimens.getProportionalWidth(context, widget.horizontalPadding),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // auto play message status field
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return GestureDetector(
+      onTap: () {
+        UIHelper.hideKeyboard(context);
+      },
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: Dimens.getProportionalWidth(context, widget.horizontalPadding),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                child: buildTitle(context, S.current.autoPlayNewMessage),
+              // auto play message status field
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: buildTitle(context, S.current.autoPlayNewMessage),
+                  ),
+                  AdvancedSwitch(
+                    controller: _autoplayController,
+                    activeColor: context.theme.colorScheme.primary,
+                    inactiveColor: context.theme.colorScheme.scrim,
+                    activeChild: Text(S.current.on),
+                    inactiveChild: Text(S.current.off),
+                    borderRadius: BorderRadius.circular(15),
+                    width: Dimens.getProportionalWidth(context, 74),
+                    height: Dimens.getProportionalHeight(context, 40),
+                  ),
+                ],
               ),
-              AdvancedSwitch(
-                controller: _autoplayController,
-                activeColor: context.theme.colorScheme.primary,
-                inactiveColor: context.theme.colorScheme.scrim,
-                activeChild: Text(S.current.on),
-                inactiveChild: Text(S.current.off),
-                borderRadius: BorderRadius.circular(15),
-                width: Dimens.getProportionalWidth(context, 74),
-                height: Dimens.getProportionalHeight(context, 40),
+              const EmptyProportionalSpace(height: 20),
+
+              // private api key input field
+              buildTitle(context, S.current.cannotEmpty(S.current.privateApiKey)),
+              const EmptyProportionalSpace(height: 7),
+              TextFieldOutline(
+                textController: _privateApiKeyController,
+                onChanged: (value) {
+                  DebounceHelper.runWait(
+                    DebounceConstants.privateApiKeyTextField,
+                    duration: const Duration(milliseconds: 300),
+                    callback: () {
+                      setState(() {});
+                    },
+                  );
+                },
+              ),
+              const EmptyProportionalSpace(height: 15),
+              PrimaryFillButton(
+                onTap: checkEnableActivePrivateApiKey()
+                    ? () {
+                  DebounceHelper.runDisable(
+                    DebounceConstants.activePrivateApiKeyBtn,
+                    callback: () async {
+                      UIHelper.hideKeyboard(context);
+                      isPrivateApiKey = true;
+                      currentApiKey = _privateApiKeyController.text.trim();
+                      await Future.wait([
+                        localManager.setBool(
+                          LocalConstants.isPrivateApiKey, isPrivateApiKey,
+                        ),
+                        localManager.setString(
+                          LocalConstants.gptApiKey,
+                          currentApiKey.isEmpty
+                              ? LocalConstants.defaultApiKey
+                              : currentApiKey,
+                        ),
+                      ]);
+                      setState(() {});
+                    }
+                  );
+                }
+                    : null,
+                paddingVertical: Dimens.getProportionalHeight(context, 15),
+                width: Dimens.getScreenWidth(context),
+                hasShadow: false,
+                bgColor: checkEnableActivePrivateApiKey()
+                    ? context.theme.colorScheme.primary
+                    : context.theme.colorScheme.scrim,
+                preferGradient: false,
+                child: Text(
+                  S.current.activeKey,
+                  style: Dimens.getProportionalFont(
+                    context, context.theme.textTheme.bodyMedium,
+                  ).copyWith(
+                    color: Theme.of(context).colorScheme.onPrimary,
+                    fontWeight: FontWeight.w500,
+                    fontSize: Dimens.getProportionalWidth(context, 17),
+                  ),
+                ),
+              ),
+              const EmptyProportionalSpace(height: 10),
+              Text(
+                S.current.privateApiKeyNote,
+                style: Dimens.getProportionalFont(
+                  context, context.theme.textTheme.bodyMedium,
+                ).copyWith(
+                  color: Theme.of(context).colorScheme.onInverseSurface,
+                  fontWeight: FontWeight.w500,
+                  fontSize: Dimens.getProportionalWidth(context, 16),
+                ),
               ),
             ],
           ),
-          const EmptyProportionalSpace(height: 20),
-
-          // private api key input field
-          buildTitle(context, S.current.cannotEmpty(S.current.privateApiKey)),
-          const EmptyProportionalSpace(height: 7),
-          TextFieldOutline(
-            textController: _privateApiKeyController,
-            onChanged: (value) {
-              DebounceHelper.runWait(
-                DebounceConstants.privateApiKeyTextField,
-                duration: const Duration(milliseconds: 300),
-                callback: () {
-                  setState(() {});
-                },
-              );
-            },
-          ),
-          const EmptyProportionalSpace(height: 15),
-          PrimaryFillButton(
-            onTap: checkEnableActivePrivateApiKey()
-                ? () {
-              DebounceHelper.runDisable(
-                DebounceConstants.activePrivateApiKeyBtn,
-                callback: () async {
-                  isPrivateApiKey = true;
-                  currentApiKey = _privateApiKeyController.text.trim();
-                  await Future.wait([
-                    localManager.setBool(
-                      LocalConstants.isPrivateApiKey, isPrivateApiKey,
-                    ),
-                    localManager.setString(
-                      LocalConstants.gptApiKey,
-                      currentApiKey.isEmpty
-                          ? LocalConstants.defaultApiKey
-                          : currentApiKey,
-                    ),
-                  ]);
-                  setState(() {});
-                }
-              );
-            }
-                : null,
-            paddingVertical: Dimens.getProportionalHeight(context, 15),
-            width: Dimens.getScreenWidth(context),
-            hasShadow: false,
-            bgColor: checkEnableActivePrivateApiKey()
-                ? context.theme.colorScheme.primary
-                : context.theme.colorScheme.scrim,
-            preferGradient: false,
-            child: Text(
-              S.current.activeKey,
-              style: Dimens.getProportionalFont(
-                context, context.theme.textTheme.bodyMedium,
-              ).copyWith(
-                color: Theme.of(context).colorScheme.onPrimary,
-                fontWeight: FontWeight.w500,
-                fontSize: Dimens.getProportionalWidth(context, 17),
-              ),
-            ),
-          ),
-          const EmptyProportionalSpace(height: 10),
-          Text(
-            S.current.privateApiKeyNote,
-            style: Dimens.getProportionalFont(
-              context, context.theme.textTheme.bodyMedium,
-            ).copyWith(
-              color: Theme.of(context).colorScheme.onInverseSurface,
-              fontWeight: FontWeight.w500,
-              fontSize: Dimens.getProportionalWidth(context, 16),
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

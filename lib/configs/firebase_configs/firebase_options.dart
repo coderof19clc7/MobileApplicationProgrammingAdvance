@@ -67,6 +67,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '415407565980',
     projectId: 'one-one-learn',
     storageBucket: 'one-one-learn.appspot.com',
+    androidClientId: '415407565980-2o1p1a9bgf59iqhjbec93mslmsd7du6t.apps.googleusercontent.com',
     iosClientId: '415407565980-1r5ntulj3p5l0gut2edv3i70r517desf.apps.googleusercontent.com',
     iosBundleId: 'com.example.oneOneLearn',
   );
@@ -77,6 +78,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '415407565980',
     projectId: 'one-one-learn',
     storageBucket: 'one-one-learn.appspot.com',
+    androidClientId: '415407565980-2o1p1a9bgf59iqhjbec93mslmsd7du6t.apps.googleusercontent.com',
     iosClientId: '415407565980-1r5ntulj3p5l0gut2edv3i70r517desf.apps.googleusercontent.com',
     iosBundleId: 'com.example.oneOneLearn',
   );

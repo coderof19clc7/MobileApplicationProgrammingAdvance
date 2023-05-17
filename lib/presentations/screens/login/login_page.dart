@@ -180,7 +180,7 @@ class _LoginPageState extends State<LoginPage> {
                               DebounceConstants.googleLoginButton,
                               callback: () {
                                 UIHelper.hideKeyboard(context);
-                                // contextCubit.read<LoginCubit>().onGoogleSignInButtonTapped();
+                                contextCubit.read<LoginCubit>().onGoogleSignInButtonTapped();
                               },
                             );
                           },
