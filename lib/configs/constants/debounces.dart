@@ -6,4 +6,6 @@ class DebounceConstants {
   static const String favoriteIconTap = 'favoriteIconTap';
   static const String reportOtherIssueOnChanged = 'reportOtherIssueOnChanged';
   static const String upcomingRequestOnChanged = 'upcomingRequestOnChanged';
+  static const String privateApiKeyTextField = 'privateApiKeyTextField';
+  static const String activePrivateApiKeyBtn = 'activePrivateApiKeyBtn';
 }

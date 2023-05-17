@@ -18,6 +18,7 @@ class TextFieldOutline extends StatefulWidget {
     this.keyboardType = TextInputType.text,
     this.readOnly = false,
     this.enable = true,
+    this.isDense = true,
     this.canTextBeObscured = false,
     this.onChanged,
     this.onSubmitted,
@@ -33,7 +34,7 @@ class TextFieldOutline extends StatefulWidget {
   final Widget? rightWidget;
   final EdgeInsetsGeometry? contentPadding;
   final TextInputType? keyboardType;
-  final bool readOnly, enable;
+  final bool readOnly, enable, isDense;
   // true means the text field is used for password
   final bool canTextBeObscured;
   final Function(String)? onChanged;
@@ -91,7 +92,7 @@ class _TextFieldOutlineState extends State<TextFieldOutline> {
           borderSide: BorderSide(color: context.theme.colorScheme.error),
         ),
         errorText: widget.errorText?.isNotEmpty == true ? widget.errorText : null,
-        isDense: true,
+        isDense: widget.isDense,
         border: OutlineInputBorder(
           borderSide: BorderSide(color: context.theme.colorScheme.outline),
           borderRadius: BorderRadius.circular(5),

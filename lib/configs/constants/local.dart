@@ -9,6 +9,10 @@ class LocalConstants {
   static const String appThemeModeIndex = 'appThemeIndex';
   static const String appLocale = 'appLocale';
   static const String isPermissionAskedBefore = 'isPermissionAskedBefore';
+  static const String autoPlayNewMessage = 'autoPlayNewMessage';
+  static const String gptApiKey = 'gptApiKey';
+  static const String isPrivateApiKey = 'isPrivateApiKey';
+  static const String defaultApiKey = 'noneValidAvailableKey';
 
   static const int priceOfSession = 100000;
 }

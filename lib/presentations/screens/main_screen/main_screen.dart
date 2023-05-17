@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/configs/constants/route_names.dart';
 import 'package:one_one_learn/configs/stylings/app_styles.dart';
-import 'package:one_one_learn/generated/assets.gen.dart';
 import 'package:one_one_learn/presentations/screens/assistant/bloc/assistant_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/tutors/bloc/tutors_cubit.dart';
@@ -15,6 +13,7 @@ import 'package:one_one_learn/presentations/screens/main_screen/tabs/tutors_tab.
 import 'package:one_one_learn/presentations/screens/main_screen/tabs/upcoming_tab.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/widgets/bottom_nav_bar.dart';
 import 'package:one_one_learn/presentations/widgets/base_widgets/base_screen.dart';
+import 'package:one_one_learn/presentations/widgets/others/assistant_icon_widget.dart';
 
 const listScreens = <Widget>[
   TutorsTab(),
@@ -141,22 +140,12 @@ class MainScreen extends BaseScreen<MainCubit, MainState> {
                 height: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage,
                 child: FittedBox(
                   child: FloatingActionButton(
-                    onPressed: () {},
-                    child: Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        gradient: AppColors.primaryGradient,
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(RouteNames.assistant);
-                        },
-                        child: Assets.images.assistant.image(
-                          width: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 1.7,
-                          height: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 1.7,
-                        ),
-                      ),
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(RouteNames.assistant);
+                    },
+                    child: AssistantIconWidget(
+                      width: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 1.7,
+                      height: Dimens.getScreenWidth(context) * AppStyles.floatingActionButtonSizePercentage / 1.7,
                     ),
                   ),
                 ),

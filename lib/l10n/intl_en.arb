@@ -311,5 +311,22 @@
       }
     }
   },
-  "gallery": "Gallery"
+  "gallery": "Gallery",
+  "microphone": "Microphone",
+  "voiceRecognition": "Voice recognition",
+  "sttInitializationFailed": "Can not start \"Speech to text\" feature.\n",
+  "sttInitializationFailedMessageAndroid": "Please ensure that microphone permission is granted.",
+  "sttInitializationFailedMessageIos": "Please ensure that microphone and vocie recognition permission are granted.",
+  "sendErrorTitle": "Send failed",
+  "notApiKeySendError": "An error occurred. Do you want to send again?",
+  "apiKeySendError": "There is no valid API key available on cloudat the moment.\nPlease wait until there is a new valid api key available on cloud or you can provide your own api key at \"Settings\" > \"Assistant\".",
+  "priApiKeySendError": "Your private api key is not valid anymore.\nPlease provide a new one at \"Settings\" > \"Assistant\" or you can try using our public api key.",
+  "privateApiKey": "Private api key",
+  "yourApiKey": "Your api key",
+  "activeKey": "Active key",
+  "usePublicApiKey": "Use public api key",
+  "autoPlayNewMessage": "Auto play new message",
+  "on": "On",
+  "off": "Off",
+  "privateApiKeyNote": "The private api key will only be used on this device. This will help your experience with \"Assistant\" feature better."
 }

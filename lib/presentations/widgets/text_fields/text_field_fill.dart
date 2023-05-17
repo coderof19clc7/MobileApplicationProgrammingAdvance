@@ -14,6 +14,7 @@ class TextFieldFill extends StatefulWidget {
     this.rightWidget,
     this.contentPadding,
     this.keyboardType = TextInputType.text,
+    this.isDense = false,
     this.canTextBeObscured = false,
     this.onChanged,
     this.onSubmitted,
@@ -29,7 +30,7 @@ class TextFieldFill extends StatefulWidget {
   final EdgeInsetsGeometry? contentPadding;
   final TextInputType? keyboardType;
   // true means the text field is used for password
-  final bool canTextBeObscured;
+  final bool isDense, canTextBeObscured;
   final void Function(String)? onChanged;
   final void Function(String)? onSubmitted;
 
@@ -68,6 +69,7 @@ class _TextFieldFillState extends State<TextFieldFill> {
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide.none,
         ),
+        isDense: widget.isDense,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(

@@ -53,11 +53,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("About"),
         "account": MessageLookupByLibrary.simpleMessage("Account"),
+        "activeKey": MessageLookupByLibrary.simpleMessage("Active key"),
         "all": MessageLookupByLibrary.simpleMessage("All"),
+        "apiKeySendError": MessageLookupByLibrary.simpleMessage(
+            "There is no valid API key available on cloudat the moment.\nPlease wait until there is a new valid api key available on cloud or you can provide your own api key at \"Settings\" > \"Assistant\"."),
         "app": MessageLookupByLibrary.simpleMessage("App"),
         "assistant": MessageLookupByLibrary.simpleMessage("Assistant"),
         "assistantInputHint":
             MessageLookupByLibrary.simpleMessage("Type your question here"),
+        "autoPlayNewMessage":
+            MessageLookupByLibrary.simpleMessage("Auto play new message"),
         "balance": MessageLookupByLibrary.simpleMessage("Balance"),
         "becomeATutor": MessageLookupByLibrary.simpleMessage("Become a tutor"),
         "behavior": MessageLookupByLibrary.simpleMessage("Behavior"),
@@ -165,6 +170,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Email or password is incorrect"),
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Login to your account"),
+        "microphone": MessageLookupByLibrary.simpleMessage("Microphone"),
         "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "movers": MessageLookupByLibrary.simpleMessage("MOVERS"),
@@ -185,9 +191,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "noReviewGiven": MessageLookupByLibrary.simpleMessage("No comment"),
         "noUpcomingSession": MessageLookupByLibrary.simpleMessage(
             "You don\'t have any upcoming session"),
+        "notApiKeySendError": MessageLookupByLibrary.simpleMessage(
+            "An error occurred. Do you want to send again?"),
         "notFoundSomethings": m4,
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
+        "off": MessageLookupByLibrary.simpleMessage("Off"),
+        "on": MessageLookupByLibrary.simpleMessage("On"),
         "openMeeting": MessageLookupByLibrary.simpleMessage("Open meeting"),
         "openSettings": MessageLookupByLibrary.simpleMessage("Open settings"),
         "orContinueWith":
@@ -210,7 +220,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Preferred schedule"),
         "preferredScheduleHint": MessageLookupByLibrary.simpleMessage(
             "Note the time of the week you want to sturdy"),
+        "priApiKeySendError": MessageLookupByLibrary.simpleMessage(
+            "Your private api key is not valid anymore.\nPlease provide a new one at \"Settings\" > \"Assistant\" or you can try using our public api key."),
         "price": MessageLookupByLibrary.simpleMessage("Price"),
+        "privateApiKey":
+            MessageLookupByLibrary.simpleMessage("Private api key"),
+        "privateApiKeyNote": MessageLookupByLibrary.simpleMessage(
+            "The private api key will only be used on this device. This will help your experience with \"Assistant\" feature better."),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "rating": MessageLookupByLibrary.simpleMessage("Rating"),
         "reasonCancel1":
@@ -250,6 +266,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Find a course"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Find a tutor"),
+        "sendErrorTitle": MessageLookupByLibrary.simpleMessage("Send failed"),
         "sendResetPasswordRequest":
             MessageLookupByLibrary.simpleMessage("Send reset password request"),
         "server": MessageLookupByLibrary.simpleMessage("Server"),
@@ -272,6 +289,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
         "starters": MessageLookupByLibrary.simpleMessage("STARTERS"),
+        "sttInitializationFailed": MessageLookupByLibrary.simpleMessage(
+            "Can not start \"Speech to text\" feature.\n"),
+        "sttInitializationFailedMessageAndroid":
+            MessageLookupByLibrary.simpleMessage(
+                "Please ensure that microphone permission is granted."),
+        "sttInitializationFailedMessageIos": MessageLookupByLibrary.simpleMessage(
+            "Please ensure that microphone and vocie recognition permission are granted."),
         "suggestedCourses":
             MessageLookupByLibrary.simpleMessage("Suggested courses"),
         "suggestedTutors":
@@ -302,6 +326,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "uploadAvatar": MessageLookupByLibrary.simpleMessage("Upload avatar"),
         "uploadUserInfo":
             MessageLookupByLibrary.simpleMessage("Upload user\'s information"),
+        "usePublicApiKey":
+            MessageLookupByLibrary.simpleMessage("Use public api key"),
         "videoNotAvailable":
             MessageLookupByLibrary.simpleMessage("Video not available"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),
@@ -309,10 +335,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Vietnamese"),
         "viewAll": MessageLookupByLibrary.simpleMessage("View all"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Vocabulary"),
+        "voiceRecognition":
+            MessageLookupByLibrary.simpleMessage("Voice recognition"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Waiting time"),
         "wantToStudyRequired": MessageLookupByLibrary.simpleMessage(
             "Please choose at least 1 option"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
-        "youHaveNSessionLeft": m13
+        "youHaveNSessionLeft": m13,
+        "yourApiKey": MessageLookupByLibrary.simpleMessage("Your api key")
       };
 }

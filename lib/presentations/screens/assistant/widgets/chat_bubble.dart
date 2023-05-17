@@ -5,19 +5,23 @@ import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/screens/assistant/widgets/chat_bubble_painter.dart';
 import 'package:one_one_learn/presentations/screens/assistant/widgets/markdown_content.dart';
+import 'package:one_one_learn/presentations/widgets/others/assistant_icon_widget.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 
 class ChatBubble extends StatefulWidget {
   const ChatBubble({
     super.key,
     this.isMe = true,
+    this.isPlaying = false,
     this.message = '',
     required this.index,
+    this.onPlayTap
   });
 
-  final bool isMe;
+  final bool isMe, isPlaying;
   final String message;
   final int index;
+  final Future<void> Function()? onPlayTap;
 
   @override
   State<ChatBubble> createState() => _ChatBubbleState();
@@ -82,16 +86,10 @@ class _ChatBubbleState extends State<ChatBubble> {
   Widget buildPartnerMessage() {
     return Row(
       children: [
-        // ClipRRect(
-        //   borderRadius: BorderRadius.all(
-        //     Radius.circular(Dimens.getScreenWidth(context)),
-        //   ),
-        //   child: Image.asset(
-        //     'assets/images/logo_512.png',
-        //     width: Dimens.getScreenWidth(context) * 0.09,
-        //     height: Dimens.getScreenWidth(context) * 0.09,
-        //   ),
-        // ),
+        AssistantIconWidget(
+          width: Dimens.getScreenWidth(context) * 0.055,
+          height: Dimens.getScreenWidth(context) * 0.055,
+        ),
         const SizedBox(width: 5),
         Flexible(
           child: ClipRRect(
@@ -100,8 +98,8 @@ class _ChatBubbleState extends State<ChatBubble> {
               painter: ChatBubblePainter(
                 scrollable: Scrollable.of(context),
                 colors: [
-                  context.theme.colorScheme.inverseSurface,
-                  context.theme.colorScheme.inverseSurface,
+                  context.theme.colorScheme.outlineVariant,
+                  context.theme.colorScheme.outlineVariant,
                 ],
                 bubbleContext: context,
               ),
@@ -110,18 +108,14 @@ class _ChatBubbleState extends State<ChatBubble> {
           ),
         ),
         const SizedBox(width: 5),
-        // GestureDetector(
-        //   onTap: () async {
-        //     if (context.read<ChatCubit>().state.playingIndex == widget.index) {
-        //       await context.read<ChatCubit>().stopSpeaking();
-        //     } else {
-        //       await context.read<ChatCubit>().startSpeaking(widget.message, widget.index);
-        //     }
-        //   },
-        //   child: context.read<ChatCubit>().state.playingIndex == widget.index
-        //       ? const Icon(Icons.pause_circle_outline_rounded)
-        //       : const Icon(Icons.play_circle_outline_rounded),
-        // ),
+        GestureDetector(
+          onTap: () async {
+            await widget.onPlayTap?.call();
+          },
+          child: widget.isPlaying
+              ? const Icon(Icons.pause_circle_outline_rounded)
+              : const Icon(Icons.play_circle_outline_rounded),
+        ),
       ],
     );
   }
@@ -137,7 +131,6 @@ class _ChatBubbleState extends State<ChatBubble> {
         maxWidth: Dimens.getScreenWidth(context) * 0.7,
       ),
       decoration: BoxDecoration(
-        color: widget.isMe ? Colors.transparent : AppColors.neutralBlue400,
         borderRadius: BorderRadius.circular(widget.isMe ? 0 : 10),
       ),
       child: SelectableRegion(
@@ -159,7 +152,7 @@ class _ChatBubbleState extends State<ChatBubble> {
 
   Widget buildContentParts(int index, int maxIndex, String messagePart) {
     // prepare text to render by trying to remove new lines from start and end
-    final textColor = widget.isMe ? Colors.white : Colors.black;
+    final textColor = widget.isMe ? AppColors.white : context.theme.colorScheme.onBackground;
     final length = messagePart.length;
     var firstIndex = 0, finalLength = length;
     for (var i = 0; i < length; i++) {
@@ -176,7 +169,7 @@ class _ChatBubbleState extends State<ChatBubble> {
     }
     final messageToRender = messagePart.substring(firstIndex, finalLength);
 
-    if (index % 2 == 0) {
+    if (index.isEven) {
       if (messageToRender.isNotEmpty && (index == 0 || index == maxIndex)) {
         return Text(
           messageToRender,

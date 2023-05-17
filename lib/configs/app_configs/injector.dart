@@ -19,6 +19,8 @@ import 'package:one_one_learn/core/network/repositories/user_repository.dart';
 import 'package:one_one_learn/core/network/repositories/course_repository.dart';
 import 'package:one_one_learn/core/network/repositories/schedule_repository.dart';
 import 'package:one_one_learn/utils/helpers/remote_config_helper.dart';
+import 'package:one_one_learn/utils/helpers/stt_helper.dart';
+import 'package:one_one_learn/utils/helpers/tts_helper.dart';
 
 final injector = GetIt.instance;
 
@@ -33,7 +35,11 @@ Future<void> initializeDependencies() async {
   ..registerSingleton<GoogleSignIn>(GoogleSignIn())
 
   // init app configs
-  ..registerSingleton<AppConfig>(AppConfig.getInstance());
+  ..registerSingleton<AppConfig>(AppConfig.getInstance())
+
+  // stt and tts
+  ..registerSingleton<TextToSpeechHelper>(TextToSpeechHelper.getInstance())
+  ..registerSingleton<SpeechToTextHelper>(SpeechToTextHelper.getInstance());
 
   // network
   initNetwork();

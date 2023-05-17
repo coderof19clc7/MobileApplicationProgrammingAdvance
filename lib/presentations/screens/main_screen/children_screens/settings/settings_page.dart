@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/generated/assets.gen.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/settings/widgets/icon_text_icon.dart';
 import 'package:one_one_learn/presentations/screens/settings_app/settings_app_page.dart';
@@ -109,6 +110,24 @@ class SettingsPage extends StatelessWidget {
                 RouteNames.settingsApp,
                 arguments: const SettingsAppArgs(
                   settingsType: SettingsAppType.themeMode,
+                ),
+              );
+            },
+          ),
+          IconTextIconWidget(
+            leftWidget: Assets.images.assistant.image(
+              width: Dimens.getProportionalWidth(context, 28),
+              height: Dimens.getProportionalWidth(context, 28),
+              color: context.theme.colorScheme.primary,
+              colorBlendMode: BlendMode.srcIn,
+            ),
+            text: S.current.assistant,
+            onTap: () {
+              Navigator.pushNamed(
+                context,
+                RouteNames.settingsApp,
+                arguments: const SettingsAppArgs(
+                  settingsType: SettingsAppType.assistant,
                 ),
               );
             },

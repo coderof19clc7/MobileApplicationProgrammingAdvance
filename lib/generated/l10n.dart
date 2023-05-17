@@ -2009,6 +2009,176 @@ class S {
       args: [],
     );
   }
+
+  /// `Microphone`
+  String get microphone {
+    return Intl.message(
+      'Microphone',
+      name: 'microphone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Voice recognition`
+  String get voiceRecognition {
+    return Intl.message(
+      'Voice recognition',
+      name: 'voiceRecognition',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can not start "Speech to text" feature.\n`
+  String get sttInitializationFailed {
+    return Intl.message(
+      'Can not start "Speech to text" feature.\n',
+      name: 'sttInitializationFailed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please ensure that microphone permission is granted.`
+  String get sttInitializationFailedMessageAndroid {
+    return Intl.message(
+      'Please ensure that microphone permission is granted.',
+      name: 'sttInitializationFailedMessageAndroid',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Please ensure that microphone and vocie recognition permission are granted.`
+  String get sttInitializationFailedMessageIos {
+    return Intl.message(
+      'Please ensure that microphone and vocie recognition permission are granted.',
+      name: 'sttInitializationFailedMessageIos',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Send failed`
+  String get sendErrorTitle {
+    return Intl.message(
+      'Send failed',
+      name: 'sendErrorTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An error occurred. Do you want to send again?`
+  String get notApiKeySendError {
+    return Intl.message(
+      'An error occurred. Do you want to send again?',
+      name: 'notApiKeySendError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `There is no valid API key available on cloudat the moment.\nPlease wait until there is a new valid api key available on cloud or you can provide your own api key at "Settings" > "Assistant".`
+  String get apiKeySendError {
+    return Intl.message(
+      'There is no valid API key available on cloudat the moment.\nPlease wait until there is a new valid api key available on cloud or you can provide your own api key at "Settings" > "Assistant".',
+      name: 'apiKeySendError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your private api key is not valid anymore.\nPlease provide a new one at "Settings" > "Assistant" or you can try using our public api key.`
+  String get priApiKeySendError {
+    return Intl.message(
+      'Your private api key is not valid anymore.\nPlease provide a new one at "Settings" > "Assistant" or you can try using our public api key.',
+      name: 'priApiKeySendError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Private api key`
+  String get privateApiKey {
+    return Intl.message(
+      'Private api key',
+      name: 'privateApiKey',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Your api key`
+  String get yourApiKey {
+    return Intl.message(
+      'Your api key',
+      name: 'yourApiKey',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Active key`
+  String get activeKey {
+    return Intl.message(
+      'Active key',
+      name: 'activeKey',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Use public api key`
+  String get usePublicApiKey {
+    return Intl.message(
+      'Use public api key',
+      name: 'usePublicApiKey',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Auto play new message`
+  String get autoPlayNewMessage {
+    return Intl.message(
+      'Auto play new message',
+      name: 'autoPlayNewMessage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `On`
+  String get on {
+    return Intl.message(
+      'On',
+      name: 'on',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Off`
+  String get off {
+    return Intl.message(
+      'Off',
+      name: 'off',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `The private api key will only be used on this device. This will help your experience with "Assistant" feature better.`
+  String get privateApiKeyNote {
+    return Intl.message(
+      'The private api key will only be used on this device. This will help your experience with "Assistant" feature better.',
+      name: 'privateApiKeyNote',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

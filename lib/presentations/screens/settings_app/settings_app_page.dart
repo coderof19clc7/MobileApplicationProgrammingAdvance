@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
-import 'package:one_one_learn/generated/l10n.dart';
-import 'package:one_one_learn/presentations/screens/settings_app/widgets/change_settings_app_widget.dart';
+import 'package:one_one_learn/presentations/screens/settings_app/widgets/assistant_settings_widget.dart';
+import 'package:one_one_learn/presentations/screens/settings_app/widgets/change_app_theme_or_language_widget.dart';
 import 'package:one_one_learn/presentations/widgets/app_bar/simple_app_bar.dart';
-import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
-import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 
-enum SettingsAppType { themeMode, locale }
+enum SettingsAppType { themeMode, locale, assistant }
 
 class SettingsAppPage extends StatelessWidget {
   const SettingsAppPage({super.key, required this.settingsType});
@@ -24,35 +22,23 @@ class SettingsAppPage extends StatelessWidget {
           right: Dimens.getProportionalWidth(context, horizontalPadding),
           top: Dimens.getProportionalHeight(context, 20),
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ChangeSettingsAppWidget(
-              settingsType: settingsType,
-              horizontalPadding: horizontalPadding,
-            ),
-
-            if (settingsType == SettingsAppType.themeMode)...[
-              const EmptyProportionalSpace(height: 10),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Dimens.getProportionalWidth(context, horizontalPadding),
-                ),
-                child: Text(
-                  S.current.systemThemeModeNote,
-                  style: Dimens.getProportionalFont(
-                    context, context.theme.textTheme.bodyMedium,
-                  ).copyWith(
-                    color: Theme.of(context).colorScheme.onInverseSurface,
-                    fontWeight: FontWeight.w500,
-                    fontSize: Dimens.getProportionalWidth(context, 16),
-                  ),
-                ),
-              ),
-            ],
-          ],
-        ),
+        child: buildChild(horizontalPadding),
       ),
+    );
+  }
+
+  Widget buildChild(double horizontalPadding) {
+    if (settingsType == SettingsAppType.themeMode
+        || settingsType == SettingsAppType.locale) {
+      return ChangeAppThemeOrLanguageWidget(
+        settingsType: settingsType,
+        horizontalPadding: horizontalPadding,
+      );
+    }
+
+    return AssistantSettingsWidget(
+      settingsType: settingsType,
+      horizontalPadding: horizontalPadding,
     );
   }
 }

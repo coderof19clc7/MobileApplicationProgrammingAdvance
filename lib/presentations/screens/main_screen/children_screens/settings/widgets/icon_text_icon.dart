@@ -4,13 +4,15 @@ import 'package:one_one_learn/configs/constants/dimens.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
 
 class IconTextIconWidget extends StatelessWidget {
-  final IconData leftIcon;
+  final IconData? leftIcon;
+  final Widget? leftWidget;
   final String text;
   final Function() onTap;
 
   const IconTextIconWidget({
     super.key,
-    required this.leftIcon,
+    this.leftIcon,
+    this.leftWidget,
     required this.text,
     required this.onTap,
   });
@@ -26,8 +28,8 @@ class IconTextIconWidget extends StatelessWidget {
         ),
         child: Row(
           children: [
-            Icon(leftIcon),
-           const EmptyProportionalSpace(width: 10),
+            leftWidget != null ? (leftWidget ?? const SizedBox()) : Icon(leftIcon),
+            const EmptyProportionalSpace(width: 10),
             Expanded(
               child: Text(
                 text,

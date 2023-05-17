@@ -53,11 +53,16 @@ class MessageLookup extends MessageLookupByLibrary {
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "about": MessageLookupByLibrary.simpleMessage("Về tôi"),
         "account": MessageLookupByLibrary.simpleMessage("Tài khoản"),
+        "activeKey": MessageLookupByLibrary.simpleMessage("Kích hoạt key"),
         "all": MessageLookupByLibrary.simpleMessage("Tất cả"),
+        "apiKeySendError": MessageLookupByLibrary.simpleMessage(
+            "Hiện không có api key hợp lệ nào khả dụng trên cloud.\nVui lòng đợi cho đến khi có api key hợp lệ mới khả dụng hoặc bạn có thể cung cấp api key của riêng bạn tại \"Cài đặt\" > \"Trợ lý\"."),
         "app": MessageLookupByLibrary.simpleMessage("Ứng dụng"),
         "assistant": MessageLookupByLibrary.simpleMessage("Trợ lý"),
         "assistantInputHint": MessageLookupByLibrary.simpleMessage(
             "Nhập câu hỏi của bạn tại đây"),
+        "autoPlayNewMessage":
+            MessageLookupByLibrary.simpleMessage("Tự động phát tin nhắn mới"),
         "balance": MessageLookupByLibrary.simpleMessage("Số dư"),
         "becomeATutor":
             MessageLookupByLibrary.simpleMessage("Đăng kí làm giảng viên"),
@@ -168,6 +173,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Email hoặc mật khẩu không đúng"),
         "loginTitle":
             MessageLookupByLibrary.simpleMessage("Đăng nhập tài khoản"),
+        "microphone": MessageLookupByLibrary.simpleMessage("Micro"),
         "minutes": MessageLookupByLibrary.simpleMessage("phút"),
         "more": MessageLookupByLibrary.simpleMessage("Chi tiết"),
         "movers": MessageLookupByLibrary.simpleMessage("MOVERS"),
@@ -188,9 +194,13 @@ class MessageLookup extends MessageLookupByLibrary {
             "Chưa có đánh giá nào cho giảng viên này"),
         "noUpcomingSession": MessageLookupByLibrary.simpleMessage(
             "Bạn không có buổi học nào sắp diễn ra"),
+        "notApiKeySendError": MessageLookupByLibrary.simpleMessage(
+            "Có lỗi xảy ra. Bạn có muốn gửi lại không?"),
         "notFoundSomethings": m4,
         "notes": MessageLookupByLibrary.simpleMessage("Ghi chú"),
         "notification": MessageLookupByLibrary.simpleMessage("Thông báo"),
+        "off": MessageLookupByLibrary.simpleMessage("Tắt"),
+        "on": MessageLookupByLibrary.simpleMessage("Bật"),
         "openMeeting": MessageLookupByLibrary.simpleMessage("Mở cuộc họp"),
         "openSettings": MessageLookupByLibrary.simpleMessage("Mở cài đặt"),
         "orContinueWith":
@@ -213,7 +223,12 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Lịch học mong muốn"),
         "preferredScheduleHint": MessageLookupByLibrary.simpleMessage(
             "Ghi chú thời gian trong tuần mà bạn muốn học"),
+        "priApiKeySendError": MessageLookupByLibrary.simpleMessage(
+            "Api key của riêng bạn hiện không còn hợp lệ.\nVui lòng cung cấp api key mới tại \"Cài đặt\" > \"Trợ lý\" hoặc bạn có thể sử dụng api key chung trên cloud."),
         "price": MessageLookupByLibrary.simpleMessage("Giá"),
+        "privateApiKey": MessageLookupByLibrary.simpleMessage("Api key riêng"),
+        "privateApiKeyNote": MessageLookupByLibrary.simpleMessage(
+            "Api key riêng sẽ chỉ được sử dụng trên thiết bị này. Điều này sẽ giúp bạn có trải nghiệm tốt hơn với tính năng \"Trợ lý\"."),
         "profile": MessageLookupByLibrary.simpleMessage("Hồ sơ"),
         "rating": MessageLookupByLibrary.simpleMessage("Xếp hạng"),
         "reasonCancel1":
@@ -255,6 +270,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "searchHintCourse":
             MessageLookupByLibrary.simpleMessage("Tìm khóa học"),
         "searchHintTutor": MessageLookupByLibrary.simpleMessage("Tìm gia sư"),
+        "sendErrorTitle":
+            MessageLookupByLibrary.simpleMessage("Gửi không thành công"),
         "sendResetPasswordRequest": MessageLookupByLibrary.simpleMessage(
             "Gửi yêu cầu đặt lại mật khẩu"),
         "server": MessageLookupByLibrary.simpleMessage("Máy chủ"),
@@ -277,6 +294,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "speaking": MessageLookupByLibrary.simpleMessage("Khả năng nói"),
         "specialties": MessageLookupByLibrary.simpleMessage("Chuyên môn"),
         "starters": MessageLookupByLibrary.simpleMessage("STARTERS"),
+        "sttInitializationFailed": MessageLookupByLibrary.simpleMessage(
+            "Không bắt đầu tính năng \"lời nói thành văn bản\".\n"),
+        "sttInitializationFailedMessageAndroid":
+            MessageLookupByLibrary.simpleMessage(
+                "Vui lòng đảm bảo quyền micro được cho phép."),
+        "sttInitializationFailedMessageIos": MessageLookupByLibrary.simpleMessage(
+            "Vui lòng đảm bảo quyền micro và nhận dạng giọng nói được cho phép."),
         "suggestedCourses":
             MessageLookupByLibrary.simpleMessage("Khóa học tham khảo"),
         "suggestedTutors":
@@ -309,6 +333,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cập nhật ảnh đại diện"),
         "uploadUserInfo":
             MessageLookupByLibrary.simpleMessage("Cập nhật thông tin cá nhân"),
+        "usePublicApiKey":
+            MessageLookupByLibrary.simpleMessage("Sử dụng api key chung"),
         "videoNotAvailable":
             MessageLookupByLibrary.simpleMessage("Video không khả dụng"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Việt Nam"),
@@ -316,10 +342,13 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Tiếng Việt"),
         "viewAll": MessageLookupByLibrary.simpleMessage("Xem tất cả"),
         "vocabulary": MessageLookupByLibrary.simpleMessage("Từ vựng"),
+        "voiceRecognition":
+            MessageLookupByLibrary.simpleMessage("Nhận dạng giọng nói"),
         "waitingTime": MessageLookupByLibrary.simpleMessage("Thời gian chờ"),
         "wantToStudyRequired":
             MessageLookupByLibrary.simpleMessage("Vui lòng chọn ít nhất 1 mục"),
         "yes": MessageLookupByLibrary.simpleMessage("Có"),
-        "youHaveNSessionLeft": m13
+        "youHaveNSessionLeft": m13,
+        "yourApiKey": MessageLookupByLibrary.simpleMessage("API key của bạn")
       };
 }

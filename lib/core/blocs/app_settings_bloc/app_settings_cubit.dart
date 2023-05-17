@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:one_one_learn/configs/app_configs/injector.dart';
 import 'package:one_one_learn/configs/constants/local.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
+import 'package:one_one_learn/utils/helpers/tts_helper.dart';
 
 part 'app_settings_state.dart';
 
@@ -8,6 +10,8 @@ class AppSettingsCubit extends WidgetCubit<AppSettingsState> {
   AppSettingsCubit() : super(widgetState: const AppSettingsState()) {
     loadThemeModeAndLocaleInStorage();
   }
+
+  final _ttsHelper = injector<TextToSpeechHelper>();
 
   @override
   void onWidgetCreated() {}
@@ -18,10 +22,12 @@ class AppSettingsCubit extends WidgetCubit<AppSettingsState> {
   }
 
   Future<void> changeLocale(String newLanguageCode, String? newCountryCode) async {
-    await localManager.setString(
-      LocalConstants.appLocale,
-      '${newLanguageCode}_${newCountryCode ?? ''}',
-    );
+    await Future.wait([
+      localManager.setString(
+        LocalConstants.appLocale, '${newLanguageCode}_${newCountryCode ?? ''}',
+      ),
+      _ttsHelper.changeLanguage(newLanguageCode),
+    ]);
     emitNewState(state.copyWith(locale: Locale(newLanguageCode, newCountryCode)));
   }
 

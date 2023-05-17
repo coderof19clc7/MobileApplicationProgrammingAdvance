@@ -1,16 +1,20 @@
 part of 'assistant_cubit.dart';
 
+enum SendErrorType {none, notApiKey, apiKey, priApiKey}
+
 @immutable
 class AssistantState extends WidgetState {
   final int sttInitializedStatus;
   final Locale? locale;
   final bool isWaitingNewMessage;
+  final bool usingPrivateApiKey;
   final List<ChatMessageModel>? messageHistory;
   final bool isAutoplay;
   final int playingIndex;
   final String lastWords;
   final double soundLevel;
   final String currentLocaleId;
+  final SendErrorType sendErrorType;
 
   @override
   List<Object?> get props => [
@@ -18,6 +22,7 @@ class AssistantState extends WidgetState {
     sttInitializedStatus,
     locale,
     isWaitingNewMessage,
+    usingPrivateApiKey,
     messageHistory,
     isAutoplay,
     playingIndex,
@@ -28,14 +33,43 @@ class AssistantState extends WidgetState {
 
   @override
   WidgetState fromJson(json) {
-    // TODO: implement fromJson
-    throw UnimplementedError();
+    final mapJson = json as Map<String, dynamic>;
+    return AssistantState(
+      isLoading: mapJson['isLoading'] as bool? ?? false,
+      needNavigateToLogin: mapJson['needNavigateToLogin'] as bool? ?? false,
+      basicStatusFToastState: mapJson['basicStatusFToastState'] as BasicStatusFToastState?,
+      sttInitializedStatus: mapJson['sttInitializedStatus'] as int? ?? 0,
+      locale: mapJson['locale'] as Locale?,
+      isWaitingNewMessage: mapJson['isWaitingNewMessage'] as bool? ?? false,
+      usingPrivateApiKey: mapJson['usingPrivateApiKey'] as bool? ?? false,
+      messageHistory: mapJson['messageHistory'] as List<ChatMessageModel>?,
+      isAutoplay: mapJson['isAutoplay'] as bool? ?? true,
+      playingIndex: mapJson['playingIndex'] as int? ?? -1,
+      lastWords: mapJson['lastWords'] as String? ?? '',
+      soundLevel: mapJson['soundLevel'] as double? ?? 0,
+      currentLocaleId: mapJson['currentLocaleId'] as String? ?? '',
+      sendErrorType: SendErrorType.values[mapJson['sendErrorType'] as int? ?? 0],
+    );
   }
 
   @override
   Map<String, dynamic> toJson() {
-    // TODO: implement toJson
-    throw UnimplementedError();
+    final map = <String, dynamic>{};
+    map['isLoading'] = isLoading;
+    map['needNavigateToLogin'] = needNavigateToLogin;
+    map['basicStatusFToastState'] = basicStatusFToastState;
+    map['sttInitializedStatus'] = sttInitializedStatus;
+    map['locale'] = locale;
+    map['isWaitingNewMessage'] = isWaitingNewMessage;
+    map['usingPrivateApiKey'] = usingPrivateApiKey;
+    map['messageHistory'] = messageHistory;
+    map['isAutoplay'] = isAutoplay;
+    map['playingIndex'] = playingIndex;
+    map['lastWords'] = lastWords;
+    map['soundLevel'] = soundLevel;
+    map['currentLocaleId'] = currentLocaleId;
+    map['sendErrorType'] = sendErrorType.index;
+    return map;
   }
 
 //<editor-fold desc="Data Methods">
@@ -46,12 +80,14 @@ class AssistantState extends WidgetState {
     this.sttInitializedStatus = 0,
     this.locale,
     this.isWaitingNewMessage = false,
+    this.usingPrivateApiKey = false,
     this.messageHistory,
     this.isAutoplay = true,
     this.playingIndex = -1,
     this.lastWords = '',
     this.soundLevel = 0.0,
     this.currentLocaleId = '',
+    this.sendErrorType = SendErrorType.none,
   });
 
   @override
@@ -65,12 +101,14 @@ class AssistantState extends WidgetState {
               sttInitializedStatus == other.sttInitializedStatus &&
               locale == other.locale &&
               isWaitingNewMessage == other.isWaitingNewMessage &&
-              messageHistory == other.messageHistory &&
+              usingPrivateApiKey == other.usingPrivateApiKey &&
+              listEquals(messageHistory, other.messageHistory) &&
               isAutoplay == other.isAutoplay &&
               playingIndex == other.playingIndex &&
               lastWords == other.lastWords &&
               soundLevel == other.soundLevel &&
-              currentLocaleId == other.currentLocaleId);
+              currentLocaleId == other.currentLocaleId &&
+              sendErrorType == other.sendErrorType);
 
   @override
   int get hashCode =>
@@ -80,12 +118,14 @@ class AssistantState extends WidgetState {
       sttInitializedStatus.hashCode ^
       locale.hashCode ^
       isWaitingNewMessage.hashCode ^
+      usingPrivateApiKey.hashCode ^
       messageHistory.hashCode ^
       isAutoplay.hashCode ^
       playingIndex.hashCode ^
       lastWords.hashCode ^
       soundLevel.hashCode ^
-      currentLocaleId.hashCode;
+      currentLocaleId.hashCode ^
+      sendErrorType.hashCode;
 
   @override
   String toString() {
@@ -96,12 +136,14 @@ class AssistantState extends WidgetState {
         ' sttInitializedStatus: $sttInitializedStatus,'
         ' locale: $locale,'
         ' isWaitingNewMessage: $isWaitingNewMessage,'
+        ' usingPrivateApiKey: $usingPrivateApiKey,'
         ' messageHistory: $messageHistory,'
         ' isAutoplay: $isAutoplay,'
         ' playingIndex: $playingIndex,'
         ' lastWords: $lastWords,'
         ' soundLevel: $soundLevel,'
         ' currentLocaleId: $currentLocaleId,'
+        ' sendErrorType: $sendErrorType,'
         ' }';
   }
 
@@ -112,12 +154,14 @@ class AssistantState extends WidgetState {
     int? sttInitializedStatus,
     Locale? locale,
     bool? isWaitingNewMessage,
+    bool? usingPrivateApiKey,
     List<ChatMessageModel>? messageHistory,
     bool? isAutoplay,
     int? playingIndex,
     String? lastWords,
     double? soundLevel,
     String? currentLocaleId,
+    SendErrorType? sendErrorType,
   }) {
     return AssistantState(
       isLoading: isLoading ?? this.isLoading,
@@ -126,12 +170,14 @@ class AssistantState extends WidgetState {
       sttInitializedStatus: sttInitializedStatus ?? this.sttInitializedStatus,
       locale: locale ?? this.locale,
       isWaitingNewMessage: isWaitingNewMessage ?? this.isWaitingNewMessage,
+      usingPrivateApiKey: usingPrivateApiKey ?? this.usingPrivateApiKey,
       messageHistory: messageHistory ?? this.messageHistory,
       isAutoplay: isAutoplay ?? this.isAutoplay,
       playingIndex: playingIndex ?? this.playingIndex,
       lastWords: lastWords ?? this.lastWords,
       soundLevel: soundLevel ?? this.soundLevel,
       currentLocaleId: currentLocaleId ?? this.currentLocaleId,
+      sendErrorType: sendErrorType ?? this.sendErrorType,
     );
   }
 
@@ -143,29 +189,33 @@ class AssistantState extends WidgetState {
       'sttInitializedStatus': sttInitializedStatus,
       'locale': locale,
       'isWaitingNewMessage': isWaitingNewMessage,
+      'usingPrivateApiKey': usingPrivateApiKey,
       'messageHistory': messageHistory,
       'isAutoplay': isAutoplay,
       'playingIndex': playingIndex,
       'lastWords': lastWords,
       'soundLevel': soundLevel,
       'currentLocaleId': currentLocaleId,
+      'sendErrorType': sendErrorType.index,
     };
   }
 
   factory AssistantState.fromMap(Map<String, dynamic> map) {
     return AssistantState(
-      isLoading: map['isLoading'] as bool,
-      needNavigateToLogin: map['needNavigateToLogin'] as bool,
+      isLoading: map['isLoading'] as bool? ?? false,
+      needNavigateToLogin: map['needNavigateToLogin'] as bool? ?? false,
       basicStatusFToastState: map['basicStatusFToastState'] as BasicStatusFToastState,
-      sttInitializedStatus: map['sttInitializedStatus'] as int,
-      locale: map['locale'] as Locale,
-      isWaitingNewMessage: map['isWaitingNewMessage'] as bool,
+      sttInitializedStatus: map['sttInitializedStatus'] as int? ?? 0,
+      locale: map['locale'] as Locale?,
+      isWaitingNewMessage: map['isWaitingNewMessage'] as bool? ?? false,
+      usingPrivateApiKey: map['usingPrivateApiKey'] as bool? ?? false,
       messageHistory: map['messageHistory'] as List<ChatMessageModel>,
-      isAutoplay: map['isAutoplay'] as bool,
-      playingIndex: map['playingIndex'] as int,
-      lastWords: map['lastWords'] as String,
-      soundLevel: map['soundLevel'] as double,
-      currentLocaleId: map['currentLocaleId'] as String,
+      isAutoplay: map['isAutoplay'] as bool? ?? true,
+      playingIndex: map['playingIndex'] as int? ?? -1,
+      lastWords: map['lastWords'] as String? ?? '',
+      soundLevel: map['soundLevel'] as double? ?? 0,
+      currentLocaleId: map['currentLocaleId'] as String? ?? '',
+      sendErrorType: SendErrorType.values[map['sendErrorType'] as int? ?? 0],
     );
   }
 

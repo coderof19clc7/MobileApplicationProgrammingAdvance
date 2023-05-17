@@ -193,5 +193,22 @@
   "openSettings": "Mở cài đặt",
   "permissionNeedOpenSettingsDialogTitle": "Quyền cần được mở trong cài đặt",
   "permissionNeedOpenSettingsDialogContent": "Ứng dụng muốn truy cập vào {somethings}.\nBạn có muốn mở cài đặt và cho phép?",
-  "gallery": "Thư viện"
+  "gallery": "Thư viện",
+  "microphone": "Micro",
+  "voiceRecognition": "Nhận dạng giọng nói",
+  "sttInitializationFailed": "Không bắt đầu tính năng \"lời nói thành văn bản\".\n",
+  "sttInitializationFailedMessageAndroid": "Vui lòng đảm bảo quyền micro được cho phép.",
+  "sttInitializationFailedMessageIos": "Vui lòng đảm bảo quyền micro và nhận dạng giọng nói được cho phép.",
+  "sendErrorTitle": "Gửi không thành công",
+  "notApiKeySendError": "Có lỗi xảy ra. Bạn có muốn gửi lại không?",
+  "apiKeySendError": "Hiện không có api key hợp lệ nào khả dụng trên cloud.\nVui lòng đợi cho đến khi có api key hợp lệ mới khả dụng hoặc bạn có thể cung cấp api key của riêng bạn tại \"Cài đặt\" > \"Trợ lý\".",
+  "priApiKeySendError": "Api key của riêng bạn hiện không còn hợp lệ.\nVui lòng cung cấp api key mới tại \"Cài đặt\" > \"Trợ lý\" hoặc bạn có thể sử dụng api key chung trên cloud.",
+  "privateApiKey": "Api key riêng",
+  "yourApiKey": "API key của bạn",
+  "activeKey": "Kích hoạt key",
+  "usePublicApiKey": "Sử dụng api key chung",
+  "autoPlayNewMessage": "Tự động phát tin nhắn mới",
+  "on": "Bật",
+  "off": "Tắt",
+  "privateApiKeyNote": "Api key riêng sẽ chỉ được sử dụng trên thiết bị này. Điều này sẽ giúp bạn có trải nghiệm tốt hơn với tính năng \"Trợ lý\"."
 }

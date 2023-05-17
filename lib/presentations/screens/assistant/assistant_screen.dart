@@ -9,7 +9,7 @@ class AssistantScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
-      value: AssistantCubit.getInstance(),
+      value: AssistantCubit.getInstance()..initAssistantUtils(),
       child: const AssistantPage(),
     );
   }
