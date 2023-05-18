@@ -83,6 +83,18 @@
   "filter": "Filter",
   "record": "Record",
   "requestForClass": "Request for class",
+  "yourReview": "Your review",
+  "nReviews": "{n} reviews",
+  "@nReviews": {
+    "description": "A description for number of reviews",
+    "placeholders": {
+      "n": {
+        "type": "int",
+        "example": "5"
+      }
+    }
+  },
+  "haveNotReviewed": "Haven't reviewed",
   "tutorReview": "Tutor's review",
   "isReviewed": "Reviewed",
   "isNotReviewed": "Not reviewed",
@@ -131,7 +143,7 @@
   },
   "confirmPasswordRequired": "Please confirm your password",
   "confirmPasswordNotMatch": "Confirm password does not match",
-  "passwordRule": "Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character",
+  "passwordRule": "Password must be at least 6 characters long",
   "invalid": "Invalid",
   "doSomethingsSuccess": "{somethings} successfully",
   "@doSomethingsSuccess": {
@@ -328,5 +340,16 @@
   "autoPlayNewMessage": "Auto play new message",
   "on": "On",
   "off": "Off",
-  "privateApiKeyNote": "The private api key will only be used on this device. This will help your experience with \"Assistant\" feature better."
+  "privateApiKeyNote": "The private api key will only be used on this device. This will help your experience with \"Assistant\" feature better.",
+  "ratingScheduleDialogQuestion": "What is your rating for {tutor}?",
+  "@ratingScheduleDialogQuestion": {
+    "description": "Rating schedule dialog question",
+    "placeholders": {
+      "tutor": {
+        "type": "String",
+        "example": "Keegan"
+      }
+    }
+  },
+  "content": "Content"
 }

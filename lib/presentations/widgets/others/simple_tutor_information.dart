@@ -45,43 +45,46 @@ class SimpleTutorInformation extends StatelessWidget {
           ),
         ),
         const EmptyProportionalSpace(width: 10),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // name
-            Text(
-              tutorInfo?.name ?? '',
-              textAlign: nameAlign,
-              maxLines: maxLines,
-              overflow: TextOverflow.ellipsis,
-              style: nameStyle ?? Dimens.getProportionalFont(
-                context, context.theme.textTheme.displayLarge,
-              ).copyWith(fontWeight: FontWeight.w600),
-            ),
-            const EmptyProportionalSpace(height: 7),
-            // nationality
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  UIHelper.getIconFromNationalityCode(tutorInfo?.country),
-                  style: countryFlagStyle ?? Dimens.getProportionalFont(
-                    context, context.theme.textTheme.displayMedium,
+        Flexible(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // name
+              Text(
+                tutorInfo?.name ?? '',
+                textAlign: nameAlign,
+                maxLines: maxLines,
+                overflow: TextOverflow.ellipsis,
+                style: nameStyle ?? Dimens.getProportionalFont(
+                  context, context.theme.textTheme.displayLarge,
+                ).copyWith(fontWeight: FontWeight.w600),
+              ),
+              const EmptyProportionalSpace(height: 7),
+              // nationality
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    UIHelper.getIconFromNationalityCode(tutorInfo?.country),
+                    style: countryFlagStyle ?? Dimens.getProportionalFont(
+                      context, context.theme.textTheme.displayMedium,
+                    ),
                   ),
-                ),
-                const EmptyProportionalSpace(width: 4),
-                Text(
-                  MapConstants.countries[tutorInfo?.country ?? ''] ?? '',
-                  overflow: TextOverflow.ellipsis,
-                  style: countryNameStyle ?? Dimens.getProportionalFont(
-                    context, context.theme.textTheme.displayMedium,
+                  const EmptyProportionalSpace(width: 4),
+                  Flexible(
+                    child: Text(
+                      MapConstants.countries[tutorInfo?.country ?? ''] ?? '',
+                      style: countryNameStyle ?? Dimens.getProportionalFont(
+                        context, context.theme.textTheme.displayMedium,
+                      ),
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ],
     );

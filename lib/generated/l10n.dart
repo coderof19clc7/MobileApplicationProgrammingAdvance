@@ -710,6 +710,36 @@ class S {
     );
   }
 
+  /// `Your review`
+  String get yourReview {
+    return Intl.message(
+      'Your review',
+      name: 'yourReview',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{n} reviews`
+  String nReviews(int n) {
+    return Intl.message(
+      '$n reviews',
+      name: 'nReviews',
+      desc: 'A description for number of reviews',
+      args: [n],
+    );
+  }
+
+  /// `Haven't reviewed`
+  String get haveNotReviewed {
+    return Intl.message(
+      'Haven\'t reviewed',
+      name: 'haveNotReviewed',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Tutor's review`
   String get tutorReview {
     return Intl.message(
@@ -1100,10 +1130,10 @@ class S {
     );
   }
 
-  /// `Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character`
+  /// `Password must be at least 6 characters long`
   String get passwordRule {
     return Intl.message(
-      'Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character',
+      'Password must be at least 6 characters long',
       name: 'passwordRule',
       desc: '',
       args: [],
@@ -2175,6 +2205,26 @@ class S {
     return Intl.message(
       'The private api key will only be used on this device. This will help your experience with "Assistant" feature better.',
       name: 'privateApiKeyNote',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `What is your rating for {tutor}?`
+  String ratingScheduleDialogQuestion(String tutor) {
+    return Intl.message(
+      'What is your rating for $tutor?',
+      name: 'ratingScheduleDialogQuestion',
+      desc: 'Rating schedule dialog question',
+      args: [tutor],
+    );
+  }
+
+  /// `Content`
+  String get content {
+    return Intl.message(
+      'Content',
+      name: 'content',
       desc: '',
       args: [],
     );

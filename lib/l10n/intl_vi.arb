@@ -65,6 +65,9 @@
   "filter": "Lọc",
   "record": "Bản ghi",
   "requestForClass": "Yêu cầu lớp học",
+  "yourReview": "Đánh giá của bạn",
+  "nReviews": "{n} đánh giá",
+  "haveNotReviewed": "Chưa đánh giá",
   "tutorReview": "Nhận xét từ gia sư",
   "isReviewed": "Đã có nhận xét",
   "isNotReviewed": "Chưa có nhận xét",
@@ -103,7 +106,7 @@
   "somethingRequiredError": "{somethings} là bắt buộc",
   "confirmPasswordRequired": "Vui lòng xác nhận lại mật khẩu",
   "confirmPasswordNotMatch": "Xác nhận mật khẩu không khớp",
-  "passwordRule": "Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt",
+  "passwordRule": "Mật khẩu phải có ít nhất 6 ký tự",
   "invalid": "Không hợp lệ",
   "doSomethingsSuccess": "{somethings} thành công",
   "doSomethingsFailed": "{somethings} thất bại",
@@ -210,5 +213,7 @@
   "autoPlayNewMessage": "Tự động phát tin nhắn mới",
   "on": "Bật",
   "off": "Tắt",
-  "privateApiKeyNote": "Api key riêng sẽ chỉ được sử dụng trên thiết bị này. Điều này sẽ giúp bạn có trải nghiệm tốt hơn với tính năng \"Trợ lý\"."
+  "privateApiKeyNote": "Api key riêng sẽ chỉ được sử dụng trên thiết bị này. Điều này sẽ giúp bạn có trải nghiệm tốt hơn với tính năng \"Trợ lý\".",
+  "ratingScheduleDialogQuestion": "Bạn đánh giá gì cho {tutor}",
+  "content": "Nội dung"
 }

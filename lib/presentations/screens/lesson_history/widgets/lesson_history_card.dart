@@ -15,7 +15,7 @@ class LessonHistoryCard extends BaseCard {
     super.key,
     super.isLoading = false,
     super.firstChild,
-    super.secondChildItemsDistance = 10,
+    super.secondChildItemsDistance = 5,
     super.margin,
     super.crossAxisAlignment,
     required this.tutorName,
@@ -24,13 +24,15 @@ class LessonHistoryCard extends BaseCard {
     this.lessonDateFormat = AppDateFormats.eeeMMMdyyyy,
     this.lessonDurationFormat = AppDateFormats.tHHmm,
     required this.buttonLabel,
-    required this.isReviewed,
+    this.numberOfFeedbacks = 0,
+    this.isReviewed = false,
     this.onButtonTap,
   });
 
   final String tutorName;
   final DateTime? lessonDateTime, lessonEndTime;
   final String lessonDateFormat, lessonDurationFormat, buttonLabel;
+  final int numberOfFeedbacks;
   final bool isReviewed;
   final Function()? onButtonTap;
 
@@ -80,6 +82,15 @@ class LessonHistoryCard extends BaseCard {
                     context: context,
                     icon: Icons.person_rounded,
                     text: tutorName,
+                    isPilled: false,
+                  ),
+                  EmptyProportionalSpace(height: secondChildItemsDistance),
+                  buildInformationRow(
+                    context: context,
+                    icon: Icons.star_rounded,
+                    text: numberOfFeedbacks > 0
+                        ? S.current.nReviews(numberOfFeedbacks)
+                        : S.current.haveNotReviewed,
                     isPilled: false,
                   ),
                   EmptyProportionalSpace(height: secondChildItemsDistance),

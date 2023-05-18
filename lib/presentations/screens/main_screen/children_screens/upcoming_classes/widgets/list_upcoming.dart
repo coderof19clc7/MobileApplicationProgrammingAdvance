@@ -14,7 +14,7 @@ import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/bloc/upcoming_cubit.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/edit_student_request_dialog.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/remove_report_schedule_dialog.dart';
+import 'package:one_one_learn/presentations/widgets/dialogs/popup_dialogs/remove_report_rating_schedule_dialog.dart';
 import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/upcoming_class_card.dart';
 import 'package:one_one_learn/presentations/screens/video_call/video_call_screen.dart';
 import 'package:one_one_learn/presentations/widgets/buttons/primary_fill_button.dart';
@@ -60,7 +60,7 @@ class ListUpcoming extends StatelessWidget {
       context: contextCubit,
       barrierDismissible: false,
       builder: (context) {
-        return RemoveReportScheduleDialog(
+        return RemoveReportRatingScheduleDialog(
           dropdownTitle: S.current.reasonCancelQuestion,
           tutorAva: tutorInfo?.avatar ?? '',
           tutorName: tutorInfo?.name ?? '',

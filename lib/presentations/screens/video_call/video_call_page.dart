@@ -330,62 +330,64 @@ class _VideoCallPageState extends State<VideoCallPage> {
                     topRight: Radius.circular(20),
                   ),
                 ),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // meeting session's information
-                    Text(
-                      DateFormat(AppDateFormats.eeeMMMdyyyy).format(widget.startTime),
-                      textAlign: TextAlign.center,
-                      style: Dimens.getProportionalFont(
-                        context, context.theme.textTheme.titleLarge,
-                      ).copyWith(
-                        fontSize: Dimens.getProportionalWidth(context, 35),
-                        color: context.theme.colorScheme.onBackground,
-                      ),
-                    ),
-                    EmptyProportionalSpace(height: itemDistance),
-                    Text(
-                      sessionText,
-                      textAlign: TextAlign.center,
-                      style: Dimens.getProportionalFont(
-                        context, context.theme.textTheme.displayLarge,
-                      ).copyWith(
-                        fontSize: Dimens.getProportionalWidth(context, 20),
-                        fontWeight: FontWeight.bold,
-                        color: context.theme.colorScheme.onBackground,
-                      ),
-                    ),
-                    EmptyProportionalSpace(height: itemDistance * 3),
-
-                    // tutor's information
-                    SimpleTutorInformation(
-                      tutorInfo: widget.tutorInfo,
-                      avatarSize: Dimens.getScreenWidth(context) * 0.2,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      nameStyle: tutorInfoTextStyle.copyWith(fontWeight: FontWeight.bold),
-                      countryFlagStyle: tutorInfoTextStyle,
-                      countryNameStyle: tutorInfoTextStyle,
-                    ),
-                    EmptyProportionalSpace(height: itemDistance * 3),
-
-                    PrimaryFillButton(
-                      onTap: enableButton
-                          ? onOpenMeetingButtonClick
-                        : null,
-                      paddingVertical: Dimens.getProportionalWidth(context, 20),
-                      preferGradient: enableButton,
-                      bgColor: AppColors.neutralBlue500,
-                      child: Text(
-                        S.current.openMeeting,
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      // meeting session's information
+                      Text(
+                        DateFormat(AppDateFormats.eeeMMMdyyyy).format(widget.startTime),
+                        textAlign: TextAlign.center,
                         style: Dimens.getProportionalFont(
-                          context, context.theme.textTheme.headlineLarge,
+                          context, context.theme.textTheme.titleLarge,
                         ).copyWith(
-                          color: context.theme.colorScheme.onPrimary,
+                          fontSize: Dimens.getProportionalWidth(context, 35),
+                          color: context.theme.colorScheme.onBackground,
                         ),
                       ),
-                    ),
-                  ],
+                      EmptyProportionalSpace(height: itemDistance),
+                      Text(
+                        sessionText,
+                        textAlign: TextAlign.center,
+                        style: Dimens.getProportionalFont(
+                          context, context.theme.textTheme.displayLarge,
+                        ).copyWith(
+                          fontSize: Dimens.getProportionalWidth(context, 20),
+                          fontWeight: FontWeight.bold,
+                          color: context.theme.colorScheme.onBackground,
+                        ),
+                      ),
+                      EmptyProportionalSpace(height: itemDistance * 3),
+
+                      // tutor's information
+                      SimpleTutorInformation(
+                        tutorInfo: widget.tutorInfo,
+                        avatarSize: Dimens.getScreenWidth(context) * 0.2,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        nameStyle: tutorInfoTextStyle.copyWith(fontWeight: FontWeight.bold),
+                        countryFlagStyle: tutorInfoTextStyle,
+                        countryNameStyle: tutorInfoTextStyle,
+                      ),
+                      EmptyProportionalSpace(height: itemDistance * 3),
+
+                      PrimaryFillButton(
+                        onTap: enableButton
+                            ? onOpenMeetingButtonClick
+                          : null,
+                        paddingVertical: Dimens.getProportionalWidth(context, 20),
+                        preferGradient: enableButton,
+                        bgColor: AppColors.neutralBlue500,
+                        child: Text(
+                          S.current.openMeeting,
+                          style: Dimens.getProportionalFont(
+                            context, context.theme.textTheme.headlineLarge,
+                          ).copyWith(
+                            color: context.theme.colorScheme.onPrimary,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

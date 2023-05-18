@@ -1,10 +1,12 @@
 import 'package:dio/dio.dart';
 import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/core/models/requests/user/put_user_info_request.dart';
+import 'package:one_one_learn/core/models/requests/user/user_feedback_tutor_request.dart';
 import 'package:one_one_learn/core/models/requests/user/user_manage_favorite_tutor_request.dart';
 import 'package:one_one_learn/core/models/requests/user/user_forgot_password.dart';
 import 'package:one_one_learn/core/models/requests/user/user_upload_avatar_request.dart';
 import 'package:one_one_learn/core/models/responses/base_response.dart';
+import 'package:one_one_learn/core/models/responses/user/user_feedback_tutor_response.dart';
 import 'package:one_one_learn/core/models/responses/user/user_info_response.dart';
 import 'package:one_one_learn/core/models/responses/user/user_manage_favorite_tutor_response.dart';
 import 'package:one_one_learn/core/network/repositories/base_repository.dart';
@@ -65,6 +67,16 @@ class UserRepository extends BaseRepository {
       method: ApiMethods.post,
       path: ApiEndpoints.uploadAvatar,
       data: FormData.fromMap(userUploadAvatarRequest.toJson()),
+    ));
+  }
+
+  Future<UserFeedbackTutorResponse> feedbackTutor({
+    required UserFeedbackTutorRequest userFeedbackTutorRequest,
+  }) async {
+    return UserFeedbackTutorResponse.fromJson(await request(
+      method: ApiMethods.post,
+      path: ApiEndpoints.feedbackTutor,
+      data: userFeedbackTutorRequest,
     ));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:one_one_learn/configs/constants/colors.dart';
 import 'package:one_one_learn/configs/constants/debounces.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -14,9 +15,10 @@ import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/utils/helpers/debounce_helper.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
-class RemoveReportScheduleDialog extends StatefulWidget {
-  const RemoveReportScheduleDialog({
+class RemoveReportRatingScheduleDialog extends StatefulWidget {
+  const RemoveReportRatingScheduleDialog({
     super.key,
+    this.isRatingDialog = false,
     this.dropdownTitle = '',
     required this.tutorAva,
     required this.tutorName,
@@ -25,20 +27,21 @@ class RemoveReportScheduleDialog extends StatefulWidget {
     this.onEditButtonTap,
   });
 
+  final bool isRatingDialog;
   final String dropdownTitle, tutorAva, tutorName, dateTimeString;
   final Map<int, String> dropDownData;
   final Future<void> Function(int reasonId, String note)? onEditButtonTap;
 
   @override
-  State<RemoveReportScheduleDialog> createState() => _RemoveReportScheduleDialogState();
+  State<RemoveReportRatingScheduleDialog> createState() => _RemoveReportRatingScheduleDialogState();
 }
 
-class _RemoveReportScheduleDialogState extends State<RemoveReportScheduleDialog> {
+class _RemoveReportRatingScheduleDialogState extends State<RemoveReportRatingScheduleDialog> {
   final distanceBetweenField = 15.0;
   late final TextEditingController _noteController;
   late final List<int> listKeys;
   late final List<MapEntry<int, String>> listMapEntries;
-  int? mainReasonId;
+  int? mainValue;
   var isExecutingCallback = false;
 
   @override
@@ -62,9 +65,9 @@ class _RemoveReportScheduleDialogState extends State<RemoveReportScheduleDialog>
   }
 
   void changeMainReasonId(int? newId) {
-    if (newId == mainReasonId) return;
+    if (newId == mainValue) return;
     setState(() {
-      mainReasonId = newId;
+      mainValue = newId;
     });
   }
 
@@ -120,28 +123,7 @@ class _RemoveReportScheduleDialogState extends State<RemoveReportScheduleDialog>
                   ],
                 ),
                 EmptyProportionalSpace(height: distanceBetweenField / 2),
-                AppDropDown(
-                  onChanged: isExecutingCallback ? null : changeMainReasonId,
-                  value: mainReasonId,
-                  data: widget.dropDownData.keys.toList(),
-                  itemBuilder: (item) {
-                    var index = listKeys.indexOf(item);
-                    if (index < 0) {
-                      index = 0;
-                    }
-                    final text = listMapEntries[index].value;
-                    return DropdownMenuItem<int>(
-                      value: item,
-                      child: Text(
-                        text, style: Dimens.getProportionalFont(
-                        context, context.theme.textTheme.bodyMedium,
-                      ).copyWith(
-                        color: context.theme.colorScheme.onTertiaryContainer,
-                      ),
-                      ),
-                    );
-                  },
-                ),
+                bodyMainPart(context),
                 EmptyProportionalSpace(height: distanceBetweenField),
 
                 Text(
@@ -189,12 +171,12 @@ class _RemoveReportScheduleDialogState extends State<RemoveReportScheduleDialog>
                     Expanded(
                       flex: 2,
                       child: PrimaryFillButton(
-                        onTap: (isExecutingCallback || mainReasonId == null)
+                        onTap: (isExecutingCallback || mainValue == null)
                             ? null
                             : () {
                           changeIsEditing();
                           widget.onEditButtonTap?.call(
-                            mainReasonId ?? 0, _noteController.text.trim(),
+                            mainValue ?? 0, _noteController.text.trim(),
                           ).then((value) {
                             changeIsEditing();
                             Navigator.of(context).pop();
@@ -205,7 +187,7 @@ class _RemoveReportScheduleDialogState extends State<RemoveReportScheduleDialog>
                         ),
                         preferGradient: false,
                         hasShadow: false,
-                        bgColor: mainReasonId == null
+                        bgColor: mainValue == null
                             ? AppColors.neutralBlue100 : null,
                         child: isExecutingCallback
                             ? CupertinoActivityIndicator(
@@ -267,6 +249,52 @@ class _RemoveReportScheduleDialogState extends State<RemoveReportScheduleDialog>
           ),
         ],
       ),
+    );
+  }
+
+  Widget bodyMainPart(BuildContext context) {
+    if (widget.isRatingDialog) {
+      return Column(
+        children: [
+          SizedBox(width: Dimens.getScreenWidth(context)),
+          RatingBar(
+            onRatingUpdate: (rating) {
+              setState(() {
+                mainValue = rating.toInt();
+              });
+            },
+            ratingWidget: RatingWidget(
+              full: const Icon(Icons.star_rounded),
+              half: const Icon(Icons.star_rounded),
+              empty: const Icon(Icons.star_outline_rounded),
+            ),
+            itemSize: Dimens.getProportionalWidth(context, 30),
+          ),
+        ],
+      );
+    }
+
+    return AppDropDown(
+      onChanged: isExecutingCallback ? null : changeMainReasonId,
+      value: mainValue,
+      data: widget.dropDownData.keys.toList(),
+      itemBuilder: (item) {
+        var index = listKeys.indexOf(item);
+        if (index < 0) {
+          index = 0;
+        }
+        final text = listMapEntries[index].value;
+        return DropdownMenuItem<int>(
+          value: item,
+          child: Text(
+            text, style: Dimens.getProportionalFont(
+            context, context.theme.textTheme.bodyMedium,
+          ).copyWith(
+            color: context.theme.colorScheme.onTertiaryContainer,
+          ),
+          ),
+        );
+      },
     );
   }
 }

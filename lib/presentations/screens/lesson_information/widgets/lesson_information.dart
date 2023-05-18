@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
 import 'package:one_one_learn/configs/constants/map_constants.dart';
+import 'package:one_one_learn/presentations/screens/lesson_history/bloc/histories_cubit.dart';
 import 'package:one_one_learn/presentations/screens/lesson_information/bloc/lesson_information_cubit.dart';
-import 'package:one_one_learn/presentations/screens/main_screen/children_screens/upcoming_classes/widgets/remove_report_schedule_dialog.dart';
+import 'package:one_one_learn/presentations/screens/main_screen/bloc/main_cubit.dart';
+import 'package:one_one_learn/presentations/widgets/dialogs/popup_dialogs/remove_report_rating_schedule_dialog.dart';
 import 'package:one_one_learn/presentations/widgets/others/simple_tutor_information.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/configs/constants/dimens.dart';
@@ -16,7 +18,10 @@ import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_sp
 class LessonInformation extends StatelessWidget {
   const LessonInformation({super.key});
 
-  void showReportScheduleDialog(BuildContext contextCubit) {
+  void showReportOrRatingScheduleDialog(BuildContext contextCubit, {
+    bool isRating = false,
+    Future<void> Function(String bookingInfoId, int value, String note)? onEditButtonTap,
+  }) {
     showDialog(
       context: contextCubit,
       builder: (context) {
@@ -37,17 +42,20 @@ class LessonInformation extends StatelessWidget {
           DateTime.fromMillisecondsSinceEpoch(endTimestamp, isUtc: true).toLocal(),
         )
             : '__';
-        return RemoveReportScheduleDialog(
-          dropdownTitle: S.current.reasonReportQuestion,
-          tutorAva: contextCubit.read<LessonInformationCubit>().state.groupedBookingInfo.tutorInfo?.avatar ?? '',
-          tutorName: contextCubit.read<LessonInformationCubit>().state.groupedBookingInfo.tutorInfo?.name ?? '',
+        final tutorInfo = contextCubit.read<LessonInformationCubit>().state.groupedBookingInfo.tutorInfo;
+
+        return RemoveReportRatingScheduleDialog(
+          isRatingDialog: isRating,
+          dropdownTitle: isRating
+              ? S.current.ratingScheduleDialogQuestion(tutorInfo?.name ?? '')
+              : S.current.reasonReportQuestion,
+          tutorAva: tutorInfo?.avatar ?? '',
+          tutorName: tutorInfo?.name ?? '',
           dateTimeString: '$dateSession, $startTimeString - $endTimeString',
           dropDownData: MapConstants.reportScheduleReasons,
-          onEditButtonTap: (reasonId, note) async {
+          onEditButtonTap: (value, note) async {
             await Future.delayed(const Duration(seconds: 1), () async {
-              await contextCubit.read<LessonInformationCubit>().reportBooking(
-                bookingInfo?.id ?? '', reasonId, note,
-              );
+              await onEditButtonTap?.call(bookingInfo?.id ?? '', value, note);
             });
           },
         );
@@ -102,7 +110,14 @@ class LessonInformation extends StatelessWidget {
               icon: Icons.report_rounded,
               label: S.current.report,
               onTap: () {
-                showReportScheduleDialog(context);
+                showReportOrRatingScheduleDialog(
+                  context,
+                  onEditButtonTap: (bookingInfoId, value, note) async {
+                    await context.read<LessonInformationCubit>().reportBooking(
+                      bookingInfoId, value, note,
+                    );
+                  }
+                );
               }
             ),
             const EmptyProportionalSpace(width: 7),
@@ -122,6 +137,25 @@ class LessonInformation extends StatelessWidget {
               context: context,
               icon: Icons.rate_review_rounded,
               label: S.current.review,
+              onTap: () {
+                showReportOrRatingScheduleDialog(
+                  context,
+                  isRating: true,
+                  onEditButtonTap: (bookingInfoId, value, note) async {
+                    await context.read<LessonInformationCubit>().ratingBooking(
+                      bookingInfoId,
+                      value,
+                      note,
+                      MainCubit.getInstance().state.userInfo?.id ?? '',
+                      onFinishFeedback: () async {
+                        await context.read<HistoriesCubit>().getListStudentHistories(
+                          reloadAllCurrentList: true,
+                        );
+                      }
+                    );
+                  }
+                );
+              }
             ),
           ],
         )

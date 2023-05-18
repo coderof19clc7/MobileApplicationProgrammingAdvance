@@ -69,7 +69,6 @@ class LessonHistoryPage extends StatelessWidget {
                           ),
                           tutorName: 'tutorName',
                           buttonLabel: 'buttonLabel',
-                          isReviewed: false,
                         );
                       }
 
@@ -84,11 +83,15 @@ class LessonHistoryPage extends StatelessWidget {
                         tutorName: item.tutorInfo?.name ?? '',
                         lessonDateTime: item.startTimestamp,
                         lessonEndTime: item.endTimestamp,
+                        numberOfFeedbacks: item.feedbackList.length,
                         isReviewed: item.isReviewed,
                         onButtonTap: () {
                           Navigator.pushNamed(
                             context, RouteNames.lessonInformation,
-                            arguments: LessonInformationArgs(groupedBookingInfo: item),
+                            arguments: LessonInformationArgs(
+                              historiesCubit: context.read<HistoriesCubit>(),
+                              groupedBookingInfo: item,
+                            ),
                           );
                         },
                         buttonLabel: S.current.more,

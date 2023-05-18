@@ -140,15 +140,17 @@ class GeneralInformation extends StatelessWidget {
             Text(
               UIHelper.getIconFromNationalityCode(tutorInformation.User?.country),
               style: Dimens.getProportionalFont(context, context.theme.textTheme.bodyMedium).copyWith(
-                fontSize: Dimens.getProportionalWidth(context, 16),
+                fontSize: Dimens.getProportionalWidth(context, 20),
               ),
             ),
             const EmptyProportionalSpace(width: 8),
-            Text(
-              MapConstants.countries[tutorInformation.User?.country ?? '']
-                  ?? S.current.unknownSomethings(S.current.country),
-              style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
-                fontSize: Dimens.getProportionalWidth(context, 16),
+            Flexible(
+              child: Text(
+                MapConstants.countries[tutorInformation.User?.country ?? '']
+                    ?? S.current.unknownSomethings(S.current.country),
+                style: Dimens.getProportionalFont(context, context.theme.textTheme.bodySmall).copyWith(
+                  fontSize: Dimens.getProportionalWidth(context, 16),
+                ),
               ),
             ),
           ],

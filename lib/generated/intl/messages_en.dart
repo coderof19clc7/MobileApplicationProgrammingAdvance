@@ -26,28 +26,32 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(somethings) => "${somethings} successfully";
 
-  static String m3(somethings) => "No suggested ${somethings}";
+  static String m3(n) => "${n} reviews";
 
-  static String m4(somethings) => "Not found any ${somethings}";
+  static String m4(somethings) => "No suggested ${somethings}";
 
-  static String m5(somethings) =>
+  static String m5(somethings) => "Not found any ${somethings}";
+
+  static String m6(somethings) =>
       "Application wants to access ${somethings}.\nWould you like to open settings to grant?";
 
-  static String m6(somethings) => "Please input ${somethings}";
+  static String m7(somethings) => "Please input ${somethings}";
 
-  static String m7(tutor) => "Schedule of tutor ${tutor}";
+  static String m8(tutor) => "What is your rating for ${tutor}?";
 
-  static String m8(somethings) => "${somethings} is required";
+  static String m9(tutor) => "Schedule of tutor ${tutor}";
 
-  static String m9(somethings) => "From high ${somethings}";
+  static String m10(somethings) => "${somethings} is required";
 
-  static String m10(somethings) => "From low ${somethings}";
+  static String m11(somethings) => "From high ${somethings}";
 
-  static String m11(nationality) => "${nationality} tutor";
+  static String m12(somethings) => "From low ${somethings}";
 
-  static String m12(somethings) => "Unknown ${somethings}";
+  static String m13(nationality) => "${nationality} tutor";
 
-  static String m13(n) => "You have ${n} session left";
+  static String m14(somethings) => "Unknown ${somethings}";
+
+  static String m15(n) => "You have ${n} session left";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -93,6 +97,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Confirm password does not match"),
         "confirmPasswordRequired": MessageLookupByLibrary.simpleMessage(
             "Please confirm your password"),
+        "content": MessageLookupByLibrary.simpleMessage("Content"),
         "conversationalEnglish":
             MessageLookupByLibrary.simpleMessage("Conversational English"),
         "country": MessageLookupByLibrary.simpleMessage("Country"),
@@ -130,6 +135,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "getStarted": MessageLookupByLibrary.simpleMessage("Get Started"),
         "haveNotLearnAnyLesson": MessageLookupByLibrary.simpleMessage(
             "You have not learned any lesson yet"),
+        "haveNotReviewed":
+            MessageLookupByLibrary.simpleMessage("Haven\'t reviewed"),
         "homework": MessageLookupByLibrary.simpleMessage("Homework"),
         "hours": MessageLookupByLibrary.simpleMessage("hours"),
         "ielts": MessageLookupByLibrary.simpleMessage("IELTS"),
@@ -174,6 +181,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "minutes": MessageLookupByLibrary.simpleMessage("minutes"),
         "more": MessageLookupByLibrary.simpleMessage("More"),
         "movers": MessageLookupByLibrary.simpleMessage("MOVERS"),
+        "nReviews": m3,
         "name": MessageLookupByLibrary.simpleMessage("Name"),
         "nationality": MessageLookupByLibrary.simpleMessage("Nationality"),
         "nativeEnglish": MessageLookupByLibrary.simpleMessage("Native English"),
@@ -184,7 +192,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "networkUnstable":
             MessageLookupByLibrary.simpleMessage("Network unstable"),
         "no": MessageLookupByLibrary.simpleMessage("No"),
-        "noHaveSomethingsSuggested": m3,
+        "noHaveSomethingsSuggested": m4,
         "noRequest": MessageLookupByLibrary.simpleMessage("No request"),
         "noReviewForTutor": MessageLookupByLibrary.simpleMessage(
             "No review for this tutor yet"),
@@ -193,7 +201,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "You don\'t have any upcoming session"),
         "notApiKeySendError": MessageLookupByLibrary.simpleMessage(
             "An error occurred. Do you want to send again?"),
-        "notFoundSomethings": m4,
+        "notFoundSomethings": m5,
         "notes": MessageLookupByLibrary.simpleMessage("Notes"),
         "notification": MessageLookupByLibrary.simpleMessage("Notification"),
         "off": MessageLookupByLibrary.simpleMessage("Off"),
@@ -208,14 +216,14 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Overall comment"),
         "password": MessageLookupByLibrary.simpleMessage("Password"),
         "passwordRule": MessageLookupByLibrary.simpleMessage(
-            "Password must be at least 8 characters long and contain at least one number, one uppercase, one lowercase letter and one special character"),
-        "permissionNeedOpenSettingsDialogContent": m5,
+            "Password must be at least 6 characters long"),
+        "permissionNeedOpenSettingsDialogContent": m6,
         "permissionNeedOpenSettingsDialogTitle":
             MessageLookupByLibrary.simpleMessage(
                 "Permission(s) need to be granted in settings"),
         "pet": MessageLookupByLibrary.simpleMessage("PET"),
         "phoneNumber": MessageLookupByLibrary.simpleMessage("Phone Number"),
-        "pleaseInputSomethings": m6,
+        "pleaseInputSomethings": m7,
         "preferredSchedule":
             MessageLookupByLibrary.simpleMessage("Preferred schedule"),
         "preferredScheduleHint": MessageLookupByLibrary.simpleMessage(
@@ -229,6 +237,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "The private api key will only be used on this device. This will help your experience with \"Assistant\" feature better."),
         "profile": MessageLookupByLibrary.simpleMessage("Profile"),
         "rating": MessageLookupByLibrary.simpleMessage("Rating"),
+        "ratingScheduleDialogQuestion": m8,
         "reasonCancel1":
             MessageLookupByLibrary.simpleMessage("Reschedule at another time"),
         "reasonCancel2":
@@ -260,7 +269,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "Enter the email associated with your account to reset password."),
         "review": MessageLookupByLibrary.simpleMessage("Review"),
         "saveChanges": MessageLookupByLibrary.simpleMessage("Save changes"),
-        "scheduleOfTutorA": m7,
+        "scheduleOfTutorA": m9,
         "searchHintCountry":
             MessageLookupByLibrary.simpleMessage("Search for a country"),
         "searchHintCourse":
@@ -281,10 +290,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "signUpTitle":
             MessageLookupByLibrary.simpleMessage("Create your account"),
         "skillLevel": MessageLookupByLibrary.simpleMessage("Skill level"),
-        "somethingRequiredError": m8,
+        "somethingRequiredError": m10,
         "sortNameFromAtoZ": MessageLookupByLibrary.simpleMessage("From A to Z"),
-        "sortSomethingsFromHigh": m9,
-        "sortSomethingsFromLow": m10,
+        "sortSomethingsFromHigh": m11,
+        "sortSomethingsFromLow": m12,
         "sorting": MessageLookupByLibrary.simpleMessage("Sorting"),
         "speaking": MessageLookupByLibrary.simpleMessage("Speaking"),
         "specialties": MessageLookupByLibrary.simpleMessage("Specialties"),
@@ -317,9 +326,9 @@ class MessageLookup extends MessageLookupByLibrary {
         "tutorPhotoInappropriateIssue":
             MessageLookupByLibrary.simpleMessage("Inappropriate profile photo"),
         "tutorReview": MessageLookupByLibrary.simpleMessage("Tutor\'s review"),
-        "tutorWithNationality": m11,
+        "tutorWithNationality": m13,
         "tutoring": MessageLookupByLibrary.simpleMessage("Tutoring"),
-        "unknownSomethings": m12,
+        "unknownSomethings": m14,
         "upcoming": MessageLookupByLibrary.simpleMessage("Upcoming"),
         "upcomingIn": MessageLookupByLibrary.simpleMessage("in"),
         "updateProfile": MessageLookupByLibrary.simpleMessage("Update profile"),
@@ -341,7 +350,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "wantToStudyRequired": MessageLookupByLibrary.simpleMessage(
             "Please choose at least 1 option"),
         "yes": MessageLookupByLibrary.simpleMessage("Yes"),
-        "youHaveNSessionLeft": m13,
-        "yourApiKey": MessageLookupByLibrary.simpleMessage("Your api key")
+        "youHaveNSessionLeft": m15,
+        "yourApiKey": MessageLookupByLibrary.simpleMessage("Your api key"),
+        "yourReview": MessageLookupByLibrary.simpleMessage("Your review")
       };
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:one_one_learn/core/models/responses/feedback/feed_back.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booking_info.dart';
 import 'package:one_one_learn/core/models/responses/tutor/tutor_info.dart';
 
@@ -14,6 +15,7 @@ class GroupedBookingInfo {
   final String? tutorMeetingLink;
   final String? studentMeetingLink;
   final List<String> requestList;
+  final List<FeedBack> feedbackList;
   final List<BookingInfo?>? bookingInfoList;
 
 //<editor-fold desc="Data Methods">
@@ -28,6 +30,7 @@ class GroupedBookingInfo {
     this.tutorMeetingLink,
     this.studentMeetingLink,
     this.requestList = const [],
+    this.feedbackList = const [],
     this.bookingInfoList,
   });
 
@@ -36,19 +39,23 @@ class GroupedBookingInfo {
     final endTimeStampInt = infoList.last?.scheduleDetailInfo?.endPeriodTimestamp;
     final classDuration = (endTimeStampInt ?? 0) - (startTimeStampInt ?? 0);
     final requestList = <String>[];
-    for (final info in infoList) {
+    final feedbackList = <FeedBack>[];
+    var firstIndexOfReviewedSession = -1;
+    for (var i = 0; i < infoList.length; i++) {
+      final info = infoList[i];
       if (info?.studentRequest != null && info?.studentRequest?.isNotEmpty == true) {
         requestList.add(info?.studentRequest ?? '');
       }
-    }
-    var firstIndexOfReviewedSession = -1;
-    for (var i = 0; i < infoList.length; i++) {
-      if (infoList[i]?.classReview != null) {
+      if (info?.feedbacks != null) {
+        feedbackList.addAll([...info?.feedbacks ?? <FeedBack>[]]);
+      }
+      if (info?.classReview != null && firstIndexOfReviewedSession == -1) {
         firstIndexOfReviewedSession = i;
-        break;
       }
     }
+
     return GroupedBookingInfo(
+      feedbackList: feedbackList,
       isReviewed: firstIndexOfReviewedSession != -1,
       id: infoList[0]?.id,
       tutorInfo: infoList[0]?.scheduleDetailInfo?.scheduleInfo?.tutorInfo,
@@ -96,6 +103,9 @@ class GroupedBookingInfo {
       requestList: mapJson['requestList'] != null
           ? (mapJson['requestList'] as List).map((v) => v as String? ?? '').toList()
           : [],
+      feedbackList: mapJson['feedbackList'] != null
+          ? (mapJson['feedbackList'] as List).map(FeedBack.fromJson).toList()
+          : [],
       bookingInfoList: mapJson['bookingInfoList'] != null ? bookingInfoList : null,
     );
   }
@@ -113,6 +123,7 @@ class GroupedBookingInfo {
     map['tutorMeetingLink'] = tutorMeetingLink;
     map['studentMeetingLink'] = studentMeetingLink;
     map['requestList'] = requestList;
+    map['feedbackList'] = feedbackList.map((e) => e.toJson()).toList();
 
     if (bookingInfoList != null) {
       map['bookingInfoList'] = bookingInfoList?.map((v) => v?.toJson()).toList();
@@ -135,6 +146,7 @@ class GroupedBookingInfo {
               tutorMeetingLink == other.tutorMeetingLink &&
               studentMeetingLink == other.studentMeetingLink &&
               listEquals(requestList, other.requestList) &&
+              listEquals(feedbackList, other.feedbackList) &&
               listEquals(bookingInfoList, other.bookingInfoList);
 
   @override
@@ -149,6 +161,7 @@ class GroupedBookingInfo {
       tutorMeetingLink.hashCode ^
       studentMeetingLink.hashCode ^
       requestList.hashCode ^
+      feedbackList.hashCode ^
       bookingInfoList.hashCode;
 
   @override
@@ -164,6 +177,7 @@ class GroupedBookingInfo {
         ' tutorMeetingLink: $tutorMeetingLink,'
         ' studentMeetingLink: $studentMeetingLink,'
         ' requestList: $requestList,'
+        ' feedbackList: $feedbackList,'
         ' bookingInfoList: $bookingInfoList,'
         ' }';
   }
@@ -179,6 +193,7 @@ class GroupedBookingInfo {
     String? tutorMeetingLink,
     String? studentMeetingLink,
     List<String>? requestList,
+    List<FeedBack>? feedbackList,
     List<BookingInfo?>? bookingInfoList,
   }) {
 
@@ -193,6 +208,7 @@ class GroupedBookingInfo {
       tutorMeetingLink: tutorMeetingLink ?? this.tutorMeetingLink,
       studentMeetingLink: studentMeetingLink ?? this.studentMeetingLink,
       requestList: requestList ?? this.requestList,
+      feedbackList: feedbackList ?? this.feedbackList,
       bookingInfoList: bookingInfoList ?? this.bookingInfoList,
     );
   }
@@ -209,6 +225,7 @@ class GroupedBookingInfo {
       'tutorMeetingLink': tutorMeetingLink,
       'studentMeetingLink': studentMeetingLink,
       'requestList': requestList,
+      'feedbackList': feedbackList.map((x) => x.toMap()).toList(),
       'bookingInfoList': bookingInfoList?.map((x) => x?.toMap()).toList(),
     };
   }
@@ -241,6 +258,9 @@ class GroupedBookingInfo {
       studentMeetingLink: map['studentMeetingLink'] as String?,
       requestList: map['requestList'] != null
           ? (map['requestList'] as List).map((v) => v as String? ?? '').toList()
+          : [],
+      feedbackList: map['feedbackList'] != null
+          ? (map['feedbackList'] as List).map((v) => FeedBack.fromMap(v as Map<String, dynamic>)).toList()
           : [],
       bookingInfoList: bookingInfoList,
     );
