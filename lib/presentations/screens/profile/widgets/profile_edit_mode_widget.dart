@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:one_one_learn/configs/constants/date_formats.dart';
+import 'package:one_one_learn/configs/constants/debounces.dart';
 import 'package:one_one_learn/configs/constants/map_constants.dart';
 import 'package:one_one_learn/configs/constants/svg_icons.dart';
 import 'package:one_one_learn/presentations/screens/profile/bloc/profile_cubit.dart';
@@ -17,6 +18,7 @@ import 'package:one_one_learn/generated/l10n.dart';
 import 'package:one_one_learn/presentations/screens/profile/widgets/avatar_widget.dart';
 import 'package:one_one_learn/presentations/screens/profile/widgets/want_to_sturdy_subject_and_test.dart';
 import 'package:one_one_learn/presentations/widgets/spaces/empty_proportional_space.dart';
+import 'package:one_one_learn/utils/helpers/debounce_helper.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
 class ProfileEditModeWidget extends StatelessWidget {
@@ -280,6 +282,7 @@ class ProfileEditModeWidget extends StatelessWidget {
                     Expanded(
                       child: PrimaryOutlineButton(
                         onTap: () {
+                          UIHelper.hideKeyboard(context);
                           context.read<ProfileCubit>().onChangeMode(isEditMode: false);
                         },
                         paddingVertical: Dimens.getProportionalHeight(context, 12),
@@ -296,7 +299,13 @@ class ProfileEditModeWidget extends StatelessWidget {
                     Expanded(
                       child: PrimaryFillButton(
                         onTap: () {
-                          context.read<ProfileCubit>().onUploadUserInfoChanges();
+                          DebounceHelper.runDisable(
+                            DebounceConstants.profileSaveButton,
+                            callback: () {
+                              UIHelper.hideKeyboard(context);
+                              context.read<ProfileCubit>().onUploadUserInfoChanges();
+                            },
+                          );
                         },
                         paddingVertical: Dimens.getProportionalHeight(context, 12),
                         preferGradient: false,

@@ -67,13 +67,16 @@ class _TextFieldFillState extends State<TextFieldFill> {
         contentPadding: widget.contentPadding,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide.none,
+          borderSide: widget.errorText?.isNotEmpty == true
+              ? BorderSide(color: context.theme.colorScheme.error)
+              : BorderSide.none,
         ),
         isDense: widget.isDense,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
           borderSide: BorderSide(
             color: context.theme.colorScheme.error,
+            width: 2,
           ),
         ),
         errorText: widget.errorText?.isNotEmpty == true ? widget.errorText : null,

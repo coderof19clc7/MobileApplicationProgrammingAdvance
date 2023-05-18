@@ -69,7 +69,7 @@ class MapConstants {
     'PRE_INTERMEDIATE': 'A2 (Pre-Intermediate)',
     'INTERMEDIATE': 'B1 (Intermediate)',
     'UPPER_INTERMEDIATE': 'B2 (Upper-Intermediate)',
-    'ADVANCE': 'C1 (Advance)',
+    'ADVANCED': 'C1 (Advanced)',
     'PROFICIENCY': 'C2 (Proficiency)',
   };
 

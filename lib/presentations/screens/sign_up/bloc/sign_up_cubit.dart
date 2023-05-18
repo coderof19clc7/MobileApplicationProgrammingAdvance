@@ -20,6 +20,46 @@ class SignUpCubit extends WidgetCubit<SignUpState> {
   @override
   void onWidgetCreated() {}
 
+  void onAFieldChanged(String newValue, String fieldName) {
+
+    if (fieldName == 'email') {
+      var emailError = '';
+      if (newValue.isEmpty) {
+        emailError = S.current.somethingRequiredError('Email');
+      } else if (!newValue.isValidEmail()) {
+        emailError = '${S.current.invalid} email';
+      }
+      emitNewState(state.copyWith(emailError: emailError));
+    } else if (fieldName == 'password') {
+      var passwordError = '';
+      String? confirmPasswordError;
+      if (newValue.isEmpty) {
+        passwordError = S.current.somethingRequiredError(S.current.password);
+      } else if (!newValue.isValidPassword()) {
+        passwordError = '${S.current.invalid} ${S.current.password.toLowerCase()}';
+      }
+      if (confirmPasswordController.text.isNotEmpty) {
+        if (!confirmPasswordController.text.isValidConfirmPassword(newValue)){
+          confirmPasswordError = S.current.confirmPasswordNotMatch;
+        } else {
+          confirmPasswordError = '';
+        }
+      }
+      emitNewState(state.copyWith(
+        passwordError: passwordError,
+        confirmPasswordError: confirmPasswordError,
+      ));
+    } else if (fieldName == 'confirmPassword') {
+      var confirmPasswordError = '';
+      if (newValue.isEmpty) {
+        confirmPasswordError = S.current.confirmPasswordRequired;
+      } else if (!newValue.isValidConfirmPassword(passwordController.text)) {
+        confirmPasswordError = S.current.confirmPasswordNotMatch;
+      }
+      emitNewState(state.copyWith(confirmPasswordError: confirmPasswordError));
+    }
+  }
+
   bool validateInput() {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();

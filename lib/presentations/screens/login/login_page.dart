@@ -102,6 +102,15 @@ class _LoginPageState extends State<LoginPage> {
                         color: context.theme.colorScheme.onInverseSurface,
                         size: Dimens.getProportionalWidth(context, 24),
                       ),
+                      onChanged: (newValue) {
+                        var emailError = '';
+                        if (newValue.isEmpty) {
+                          emailError = S.current.somethingRequiredError(S.current.email);
+                        }
+                        contextCubit.read<LoginCubit>().emitNewState(state.copyWith(
+                          emailError: emailError,
+                        ));
+                      },
                     ),
                     SizedBox(height: Dimens.getScreenHeight(context) * 0.0474),
                     TextFieldFill(
@@ -114,6 +123,15 @@ class _LoginPageState extends State<LoginPage> {
                         size: Dimens.getProportionalWidth(context, 24),
                       ),
                       canTextBeObscured: true,
+                      onChanged: (newValue) {
+                        var passwordError = '';
+                        if (newValue.isEmpty) {
+                          passwordError = S.current.somethingRequiredError(S.current.password);
+                        }
+                        contextCubit.read<LoginCubit>().emitNewState(state.copyWith(
+                          passwordError: passwordError,
+                        ));
+                      },
                     ),
                     SizedBox(height: Dimens.getScreenHeight(context) * 0.0474),
                     PrimaryFillButton(

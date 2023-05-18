@@ -38,6 +38,7 @@ class SignUpPage extends StatelessWidget {
                 width: Dimens.getScreenWidth(context),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // sign in title field
                     SizedBox(
@@ -64,6 +65,11 @@ class SignUpPage extends StatelessWidget {
                         color: context.theme.colorScheme.onInverseSurface,
                         size: Dimens.getProportionalWidth(context, 24),
                       ),
+                      onChanged: (newValue) {
+                        context.read<SignUpCubit>().onAFieldChanged(
+                          newValue, 'email',
+                        );
+                      },
                     ),
                     const EmptyProportionalPercentSpace(
                       percentHeight: textFieldsSpaceBetweenPercent,
@@ -78,6 +84,11 @@ class SignUpPage extends StatelessWidget {
                         size: Dimens.getProportionalWidth(context, 24),
                       ),
                       canTextBeObscured: true,
+                      onChanged: (newValue) {
+                        context.read<SignUpCubit>().onAFieldChanged(
+                          newValue, 'password',
+                        );
+                      },
                     ),
                     const EmptyProportionalSpace(height: 7),
                     Text(
@@ -102,6 +113,11 @@ class SignUpPage extends StatelessWidget {
                         size: Dimens.getProportionalWidth(context, 24),
                       ),
                       canTextBeObscured: true,
+                      onChanged: (newValue) {
+                        context.read<SignUpCubit>().onAFieldChanged(
+                          newValue, 'confirmPassword',
+                        );
+                      },
                     ),
                     const EmptyProportionalPercentSpace(
                       percentHeight: textFieldsSpaceBetweenPercent,

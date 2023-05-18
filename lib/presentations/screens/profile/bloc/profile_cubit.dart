@@ -67,10 +67,12 @@ class ProfileCubit extends WidgetCubit<ProfileState> {
   }
 
   void onChangeMode({required bool isEditMode}) {
+    final errorsMap = {...state.errorsMap};
     if (state.isEdit && !isEditMode) {
       resetUserInfo();
+      errorsMap.clear();
     }
-    emitNewState(state.copyWith(isEdit: isEditMode));
+    emitNewState(state.copyWith(isEdit: isEditMode, errorsMap: errorsMap));
   }
 
   void onAFieldChanged(String newValue, String fieldName, {
@@ -174,17 +176,17 @@ class ProfileCubit extends WidgetCubit<ProfileState> {
     }
     if (dateOfBirthController.text.trim().isEmpty) {
       isValid = false;
-      errorsMap['dateOfBirth'] = S.current.pleaseInputSomethings(S.current.dateOfBirth);
+      errorsMap['dob'] = S.current.pleaseInputSomethings(S.current.dateOfBirth);
     } else {
-      errorsMap.remove('dateOfBirth');
+      errorsMap.remove('dob');
     }
-    if (state.userInfo?.country?.trim().isEmpty == true) {
+    if (state.userInfo?.country?.trim().isNotEmpty != true) {
       isValid = false;
       errorsMap['country'] = S.current.pleaseInputSomethings(S.current.country);
     } else {
       errorsMap.remove('country');
     }
-    if (state.userInfo?.level?.trim().isEmpty == true) {
+    if (state.userInfo?.level?.trim().isNotEmpty != true) {
       isValid = false;
       errorsMap['level'] = S.current.pleaseInputSomethings(S.current.level);
     } else {

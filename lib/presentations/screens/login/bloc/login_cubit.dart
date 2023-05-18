@@ -49,7 +49,7 @@ class LoginCubit extends WidgetCubit<LoginState> {
         emailError = S.current.somethingRequiredError('Email');
       }
       if (password.isEmpty) {
-        passwordError = S.current.somethingRequiredError('Password');
+        passwordError = S.current.somethingRequiredError(S.current.password);
       }
     } else if (!email.isValidEmail() || !password.isValidPassword()) {
       result = -1;

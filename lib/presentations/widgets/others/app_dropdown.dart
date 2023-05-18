@@ -64,7 +64,9 @@ class AppDropDown<T> extends StatelessWidget {
           errorText: errorText?.isNotEmpty == true ? errorText : null,
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(5),
-            borderSide: BorderSide(color: context.theme.colorScheme.error),
+            borderSide: BorderSide(
+              color: context.theme.colorScheme.error, width: 2,
+            ),
           ),
         ),
         buttonStyleData: buttonStyleData ?? const ButtonStyleData(

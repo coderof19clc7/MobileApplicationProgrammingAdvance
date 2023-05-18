@@ -8,4 +8,5 @@ class DebounceConstants {
   static const String upcomingRequestOnChanged = 'upcomingRequestOnChanged';
   static const String privateApiKeyTextField = 'privateApiKeyTextField';
   static const String activePrivateApiKeyBtn = 'activePrivateApiKeyBtn';
+  static const String profileSaveButton = 'profileSaveButton';
 }

@@ -89,12 +89,17 @@ class _TextFieldOutlineState extends State<TextFieldOutline> {
         contentPadding: widget.contentPadding,
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8),
-          borderSide: BorderSide(color: context.theme.colorScheme.error),
+          borderSide: BorderSide(
+            color: context.theme.colorScheme.error,
+            width: 2,
+          ),
         ),
         errorText: widget.errorText?.isNotEmpty == true ? widget.errorText : null,
         isDense: widget.isDense,
         border: OutlineInputBorder(
-          borderSide: BorderSide(color: context.theme.colorScheme.outline),
+          borderSide: widget.errorText?.isNotEmpty == true
+              ? BorderSide(color: context.theme.colorScheme.error)
+              : BorderSide(color: context.theme.colorScheme.outline),
           borderRadius: BorderRadius.circular(5),
         ),
         prefixIcon: widget.leftWidget,
