@@ -21,7 +21,6 @@ class SignUpCubit extends WidgetCubit<SignUpState> {
   void onWidgetCreated() {}
 
   void onAFieldChanged(String newValue, String fieldName) {
-
     if (fieldName == 'email') {
       var emailError = '';
       if (newValue.isEmpty) {
