@@ -206,19 +206,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     emitNewState(state.copyWith(isLoadingMore: false));
   }
 
-  void onSearchTextSubmitted() {
-    if (tutorsTextEditingController?.text == state.searchText) {
-      return;
-    }
-
-    emitNewState(state.copyWith(
-      searchText: tutorsTextEditingController?.text,
-      nextPage: 1, total: 0,
-      listTutors: initialLoadMoreAbleList,
-    ));
-  }
-
-  void onSearchTextSubmitted2(String value) {
+  void onSearchTextSubmitted(String value) {
     if (value == state.searchText) {
       return;
     }
@@ -234,27 +222,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
     ));
   }
 
-  void onApplyFilters(Filters newFilters, int newSortValue) {
-    // only apply new filters if they are different from the current ones
-    if (newFilters == state.filters && newSortValue == state.sortValue) {
-      return;
-    }
-    if (newFilters != state.filters) {
-      emitNewState(state.copyWith(
-        nextPage: 1, total: 0,
-        listTutors: initialLoadMoreAbleList,
-        filters: newFilters,
-        sortValue: newSortValue,
-      ));
-    } else if (newSortValue != state.sortValue) {
-      emitNewState(state.copyWith(
-        listTutors: sortList([...state.listTutors], sortValue: newSortValue),
-        sortValue: newSortValue,
-      ));
-    }
-  }
-
-  void onApplyFilters2(List<String> newSpecialities, List<int> newNationalityValues, int newSortValue) {
+  void onApplyFilters(List<String> newSpecialities, List<int> newNationalityValues, int newSortValue) {
     // only apply new filters if they are different from the current ones
     if (listEquals(newSpecialities, getCurrentSpecialties())
         && listEquals(newNationalityValues, getCurrentNationalities())

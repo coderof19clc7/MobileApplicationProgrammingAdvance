@@ -130,11 +130,11 @@ class TutorsPage extends StatelessWidget {
                               data3CurrentFilter: state.sortValue,
 
                               onApplyFilters: (data1, data2, data3) {
-                                context.read<TutorsCubit>().onApplyFilters2(data1, data2, data3);
+                                context.read<TutorsCubit>().onApplyFilters(data1, data2, data3);
                               },
                             ),
                             onSubmitted: (value) {
-                              context.read<TutorsCubit>().onSearchTextSubmitted2(value);
+                              context.read<TutorsCubit>().onSearchTextSubmitted(value);
                             },
                           );
                         },

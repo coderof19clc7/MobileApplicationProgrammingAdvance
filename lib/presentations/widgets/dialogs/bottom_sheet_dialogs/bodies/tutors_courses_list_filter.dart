@@ -38,9 +38,6 @@ class TutorsCoursesListFilterBottomSheet extends StatefulWidget {
 }
 
 class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFilterBottomSheet> {
-  late ScrollController _scrollController1;
-  late ScrollController _scrollController2;
-
   late final List<MapEntry<String, String>> data1ListMap;
   late final List<int> data2ListMapKeys;
   late final Map<int, void Function(void Function())> data2MenuSetStateMap;
@@ -53,8 +50,6 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
   @override
   void initState() {
     super.initState();
-    _scrollController1 = ScrollController();
-    _scrollController2 = ScrollController();
 
     data1ListMap = widget.data1Map.entries.toList();
     data2ListMapKeys = widget.data2Map.keys.toList();
@@ -68,8 +63,6 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
 
   @override
   void dispose() {
-    _scrollController1.dispose();
-    _scrollController2.dispose();
     super.dispose();
   }
 
@@ -314,16 +307,6 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
                 PrimaryOutlineButton(
                   onTap: () {
                     setState(() {
-                      _scrollController1.animateTo(
-                        0,
-                        duration: const Duration(milliseconds: 250),
-                        curve: Curves.easeInOut,
-                      );
-                      _scrollController2.animateTo(
-                        0,
-                        duration: const Duration(milliseconds: 250),
-                        curve: Curves.easeInOut,
-                      );
                       newData1Filter = <String>[];
                       newData2Filter = <int>[];
                       newData3Filter = 0;
