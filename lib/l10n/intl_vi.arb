@@ -210,6 +210,7 @@
   "yourApiKey": "API key của bạn",
   "activeKey": "Kích hoạt key",
   "usePublicApiKey": "Sử dụng api key chung",
+  "usingPublicApiKey": "Đang sử dụng api key chung",
   "autoPlayNewMessage": "Tự động phát tin nhắn mới",
   "on": "Bật",
   "off": "Tắt",

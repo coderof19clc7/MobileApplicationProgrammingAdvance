@@ -34,9 +34,7 @@ class UserFeedbackTutorRequest extends BaseRequest {
     if (rating != null) {
       map['rating'] = rating;
     }
-    if (content?.isNotEmpty == true) {
-      map['content'] = content;
-    }
+    map['content'] = content ?? '';
     if (bookingId?.isNotEmpty == true) {
       map['bookingId'] = bookingId;
     }

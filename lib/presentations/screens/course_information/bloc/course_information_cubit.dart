@@ -33,7 +33,7 @@ class CourseInformationCubit extends WidgetCubit<CourseInformationState> {
       if (courseInfoResponse.statusCode == ApiStatusCode.success
           && courseInfoResponse.data != null
       ) {
-        emit(state.copyWith(courseInformation: courseInfoResponse.data));
+        emitNewState(state.copyWith(courseInformation: courseInfoResponse.data));
       }
     }
   }

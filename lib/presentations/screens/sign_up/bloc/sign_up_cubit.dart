@@ -66,7 +66,7 @@ class SignUpCubit extends WidgetCubit<SignUpState> {
     var emailError = '', passwordError = '', confirmPasswordError = '';
 
     // clear error before validate
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       emailError: emailError,
       passwordError: passwordError,
       confirmPasswordError: confirmPasswordError,
@@ -89,7 +89,7 @@ class SignUpCubit extends WidgetCubit<SignUpState> {
     }
 
     // update error
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       emailError: emailError,
       passwordError: passwordError,
       confirmPasswordError: confirmPasswordError,

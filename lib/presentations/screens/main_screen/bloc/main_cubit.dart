@@ -41,7 +41,7 @@ class MainCubit extends WidgetCubit<MainState> {
   @override
   void onWidgetCreated() {
     final userInfoLocal = localManager.getUserInfo();
-    emit(state.copyWith(userInfo: userInfoLocal));
+    emitNewState(state.copyWith(userInfo: userInfoLocal));
     getUserInformation();
   }
 
@@ -59,7 +59,7 @@ class MainCubit extends WidgetCubit<MainState> {
         final newUserInfo = userInfoResponse.user;
         if (newUserInfo != null) {
           await localManager.saveUserInfo(newUserInfo);
-          emit(state.copyWith(userInfo: newUserInfo));
+          emitNewState(state.copyWith(userInfo: newUserInfo));
         }
       }
     }
@@ -70,12 +70,12 @@ class MainCubit extends WidgetCubit<MainState> {
   }
 
   void onChangeIndex(int index) {
-    emit(state.copyWith(currentIndex: index));
+    emitNewState(state.copyWith(currentIndex: index));
   }
 
   Future<void> logout() async {
     await localManager.clearDataLocalLogout();
-    emit(state.copyWith(needNavigateToLogin: true));
+    emitNewState(state.copyWith(needNavigateToLogin: true));
   }
 
   @override

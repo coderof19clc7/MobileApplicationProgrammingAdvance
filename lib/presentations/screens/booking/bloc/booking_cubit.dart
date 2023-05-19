@@ -59,7 +59,7 @@ class BookingCubit extends WidgetCubit<BookingState> {
 
   void onChangeStartDateTime(DateTime newStartDateTime) {
     final newEndDateTime = newStartDateTime.add(const Duration(days: 6));
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       currentStartDateTime: newStartDateTime,
       currentEndDateTime: newEndDateTime,
     ));
@@ -87,7 +87,7 @@ class BookingCubit extends WidgetCubit<BookingState> {
         break;
       }
     }
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       scheduleTable: ScheduleTable(days: dayTimes),
     ));
   }
@@ -138,8 +138,8 @@ class BookingCubit extends WidgetCubit<BookingState> {
         }
       }
     }
-    
-    emit(state.copyWith(scheduleTable: scheduleTable));
+
+    emitNewState(state.copyWith(scheduleTable: scheduleTable));
   }
 
   void onChangeWeekButtonTap(int action) {

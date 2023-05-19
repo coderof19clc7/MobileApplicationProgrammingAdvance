@@ -38,7 +38,7 @@ class LoginCubit extends WidgetCubit<LoginState> {
     var emailError = '', passwordError = '';
 
     // clear error before validate
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       emailError: emailError,
       passwordError: passwordError,
     ));
@@ -58,7 +58,7 @@ class LoginCubit extends WidgetCubit<LoginState> {
     }
 
     // update error
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       emailError: emailError,
       passwordError: passwordError,
     ));
@@ -157,7 +157,7 @@ class LoginCubit extends WidgetCubit<LoginState> {
   }
 
   void onChangeShowActivateDialog({required bool value}) {
-    emit(state.copyWith(needShowActivateDialog: value));
+    emitNewState(state.copyWith(needShowActivateDialog: value));
   }
 
   @override

@@ -18,28 +18,37 @@ class ForgotPasswordCubit extends WidgetCubit<ForgotPasswordState> {
   final emailController = TextEditingController();
   final userRepository = injector<UserRepository>();
 
+  void emailOnChanged(String newValue) {
+    var emailError = '';
+
+    if (newValue.trim().isEmpty) {
+      emailError = S.current.somethingRequiredError('Email');
+    }
+
+    // update error
+    emitNewState(state.copyWith(emailError: emailError));
+  }
+
   int validateInput() {
     var result = 1;
     final email = emailController.text.trim();
     var emailError = '';
 
     // clear error before validate
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       emailError: emailError,
     ));
 
     if (email.isEmpty) {
       result = 0;
-      if (email.isEmpty) {
-        emailError = S.current.somethingRequiredError('Email');
-      }
+      emailError = S.current.somethingRequiredError('Email');
     } else if (!email.isValidEmail()) {
       result = -1;
       emailError = '';
     }
 
     // update error
-    emit(state.copyWith(emailError: emailError));
+    emitNewState(state.copyWith(emailError: emailError));
 
     return result;
   }
@@ -81,7 +90,7 @@ class ForgotPasswordCubit extends WidgetCubit<ForgotPasswordState> {
   }
 
   void onChangeShowActivateDialog({required bool value}) {
-    emit(state.copyWith(needShowCheckMailDialog: value));
+    emitNewState(state.copyWith(needShowCheckMailDialog: value));
   }
 
   @override

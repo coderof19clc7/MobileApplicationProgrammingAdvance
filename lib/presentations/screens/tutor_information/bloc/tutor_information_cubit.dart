@@ -29,7 +29,7 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
   void onWidgetCreated() {}
 
   Future<void> getTutorInformation() async {
-    emit(state.copyWith(isLoadingData: true));
+    emitNewState(state.copyWith(isLoadingData: true));
     final tutorInfoResponse = await fetchApi<TutorInfoResponse>(
       () async => _tutorRepository.getTutorInfoById(state.tutorId),
       showLoading: false,
@@ -37,14 +37,14 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
 
     if (tutorInfoResponse != null) {
       if (tutorInfoResponse.statusCode == ApiStatusCode.success) {
-        emit(state.copyWith(tutorInformation: tutorInfoResponse.data));
+        emitNewState(state.copyWith(tutorInformation: tutorInfoResponse.data));
       }
     }
-    emit(state.copyWith(isLoadingData: false));
+    emitNewState(state.copyWith(isLoadingData: false));
   }
 
   void updateFavoriteStatus({required bool isFavorite}) {
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       tutorInformation: state.tutorInformation?.copyWith(isFavorite: isFavorite),
     ));
   }
@@ -63,7 +63,7 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
   }
 
   Future<void> getListFeedback() async {
-    emit(state.copyWith(isLoadingMoreFeedback: true));
+    emitNewState(state.copyWith(isLoadingMoreFeedback: true));
     if (kDebugMode) {
       print('nextPage: ${state.feedbackNextPage}');
     }
@@ -109,19 +109,19 @@ class TutorInformationCubit extends WidgetCubit<TutorInformationState> {
           newPage += 1;
         }
 
-        emit(state.copyWith(
+        emitNewState(state.copyWith(
           feedbackNextPage: newPage,
           feedbackTotal: feedbackListResponse.data?.count?.toInt() ?? 0,
           feedbackList: [...finalNewFeedbackList],
         ));
       } else {
-        emit(state.copyWith(feedbackList: [...getRealCurrentFeedbackList()]));
+        emitNewState(state.copyWith(feedbackList: [...getRealCurrentFeedbackList()]));
       }
     } else {
-      emit(state.copyWith(feedbackList: [...getRealCurrentFeedbackList()]));
+      emitNewState(state.copyWith(feedbackList: [...getRealCurrentFeedbackList()]));
     }
 
-    emit(state.copyWith(isLoadingMoreFeedback: false));
+    emitNewState(state.copyWith(isLoadingMoreFeedback: false));
   }
 
   Future<void> sendReportTutor(String content) async {

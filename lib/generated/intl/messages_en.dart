@@ -337,6 +337,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Upload user\'s information"),
         "usePublicApiKey":
             MessageLookupByLibrary.simpleMessage("Use public api key"),
+        "usingPublicApiKey":
+            MessageLookupByLibrary.simpleMessage("Using public api key"),
         "videoNotAvailable":
             MessageLookupByLibrary.simpleMessage("Video not available"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Vietnamese"),

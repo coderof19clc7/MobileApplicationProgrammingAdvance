@@ -33,7 +33,7 @@ class AssistantCubit extends WidgetCubit<AssistantState> {
   final defaultApikey = LocalConstants.defaultApiKey;
   var currentApiKey = 'noneValidAvailableKey';
   var openAI = OpenAI.instance.build(
-    token: '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',
+    token: 'noneValidAvailableKey',
     baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 50)),
   );
   void buildOpenAI(String token) {

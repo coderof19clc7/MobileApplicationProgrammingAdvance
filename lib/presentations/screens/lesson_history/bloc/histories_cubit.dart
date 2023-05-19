@@ -82,7 +82,7 @@ class HistoriesCubit extends WidgetCubit<HistoriesState> {
   }
 
   Future<void> getListStudentHistories({bool reloadAllCurrentList = false}) async {
-    emit(state.copyWith(isLoadingMore: true));
+    emitNewState(state.copyWith(isLoadingMore: true));
 
     // search list by the filters amd page number
     if (kDebugMode) {
@@ -159,23 +159,23 @@ class HistoriesCubit extends WidgetCubit<HistoriesState> {
           nextPage += 1;
         }
 
-        emit(state.copyWith(
+        emitNewState(state.copyWith(
           nextPage: nextPage,
           total: bookedClassesResponse.data?.count?.toInt() ?? 0,
           currentTotal: currentTotal,
           groupedHistoryBookingInfoList: finalNewHistoryGroupedList,
         ));
       } else {
-        emit(state.copyWith(
+        emitNewState(state.copyWith(
           groupedHistoryBookingInfoList: [...getRealCurrentList()],
         ));
       }
     } else {
-      emit(state.copyWith(
+      emitNewState(state.copyWith(
         groupedHistoryBookingInfoList: [...getRealCurrentList()],
       ));
     }
 
-    emit(state.copyWith(isLoadingMore: false));
+    emitNewState(state.copyWith(isLoadingMore: false));
   }
 }

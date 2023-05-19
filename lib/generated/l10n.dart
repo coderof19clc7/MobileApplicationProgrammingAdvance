@@ -2170,6 +2170,16 @@ class S {
     );
   }
 
+  /// `Using public api key`
+  String get usingPublicApiKey {
+    return Intl.message(
+      'Using public api key',
+      name: 'usingPublicApiKey',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Auto play new message`
   String get autoPlayNewMessage {
     return Intl.message(

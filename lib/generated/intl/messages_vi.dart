@@ -344,6 +344,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Cập nhật thông tin cá nhân"),
         "usePublicApiKey":
             MessageLookupByLibrary.simpleMessage("Sử dụng api key chung"),
+        "usingPublicApiKey":
+            MessageLookupByLibrary.simpleMessage("Đang sử dụng api key chung"),
         "videoNotAvailable":
             MessageLookupByLibrary.simpleMessage("Video không khả dụng"),
         "vietnamese": MessageLookupByLibrary.simpleMessage("Việt Nam"),

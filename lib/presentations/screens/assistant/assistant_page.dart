@@ -9,6 +9,7 @@ import 'package:one_one_learn/presentations/screens/assistant/widgets/chat_bubbl
 import 'package:one_one_learn/presentations/screens/assistant/widgets/dialogs/not_api_key_error_dialog.dart';
 import 'package:one_one_learn/presentations/screens/assistant/widgets/input_field.dart';
 import 'package:one_one_learn/presentations/screens/assistant/widgets/loading_3_dots_indicator.dart';
+import 'package:one_one_learn/presentations/widgets/others/row_icon_text_information.dart';
 import 'package:one_one_learn/utils/extensions/app_extensions.dart';
 import 'package:one_one_learn/utils/helpers/ui_helper.dart';
 
@@ -118,6 +119,32 @@ class _AssistantPageState extends State<AssistantPage> {
                 color: context.theme.colorScheme.background,
                 child: Column(
                   children: [
+                    if (!state.usingPrivateApiKey)
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: Dimens.getProportionalWidth(context, 7),
+                          vertical: Dimens.getProportionalHeight(context, 7),
+                        ),
+                        width: Dimens.getScreenWidth(context),
+                        color: context.theme.colorScheme.outlineVariant,
+                        child: RowIconTextInformation(
+                          context: context,
+                          icon: Icon(
+                            Icons.info_outline_rounded,
+                            color: context.theme.colorScheme.onInverseSurface,
+                            size: Dimens.getProportionalWidth(context, 20),
+                          ),
+                          text: Text(
+                            S.current.usingPublicApiKey,
+                            style: Dimens.getProportionalFont(
+                              context, context.theme.textTheme.bodySmall,
+                            ).copyWith(
+                              fontSize: Dimens.getProportionalWidth(context, 16),
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ),
                     Expanded(
                       child: (state.messageHistory != null)
                           ? Column(

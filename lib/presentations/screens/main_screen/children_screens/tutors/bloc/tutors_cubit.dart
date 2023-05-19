@@ -60,15 +60,12 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
   }
 
   @override
-  Future<void> onWidgetCreated() async {
-    // emit(state.copyWith(filters: Filters.defaultFilters()));
-    // refreshList();
-  }
+  Future<void> onWidgetCreated() async {}
 
   List<TutorInfo?> get initialLoadMoreAbleList => <TutorInfo?>[null, null, null];
 
   void refreshList() {
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       nextPage: 1,
       total: 0,
       listTutors: [],
@@ -134,7 +131,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
   }
 
   Future<void> searchListTutors({bool reloadAllCurrentList = false}) async {
-    emit(state.copyWith(isLoadingMore: true));
+    emitNewState(state.copyWith(isLoadingMore: true));
 
     // search list by the filters amd page number
     final tutorSearchResponse = await fetchApi<TutorSearchResponse>(
@@ -190,27 +187,23 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
           newPage += 1;
         }
 
-        emit(state.copyWith(
+        emitNewState(state.copyWith(
           nextPage: newPage,
           total: tutorSearchResponse.count?.toInt() ?? 0,
           listTutors: [...finalNewListTutors],
         ));
       } else {
-        emit(state.copyWith(
+        emitNewState(state.copyWith(
           listTutors: [...getRealCurrentList()],
         ));
       }
     } else {
-      emit(state.copyWith(
+      emitNewState(state.copyWith(
         listTutors: [...getRealCurrentList()],
       ));
     }
 
-    // // turn off new list loading state no matter what
-    // emit(state.copyWith(
-    //   isRefreshing: false,
-    // ));
-    emit(state.copyWith(isLoadingMore: false));
+    emitNewState(state.copyWith(isLoadingMore: false));
   }
 
   void onSearchTextSubmitted() {
@@ -218,7 +211,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       return;
     }
 
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       searchText: tutorsTextEditingController?.text,
       nextPage: 1, total: 0,
       listTutors: initialLoadMoreAbleList,
@@ -234,7 +227,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       tutorsScrollController?.jumpTo(0);
     }
 
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       searchText: value,
       nextPage: 1, total: 0,
       listTutors: initialLoadMoreAbleList,
@@ -247,14 +240,14 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       return;
     }
     if (newFilters != state.filters) {
-      emit(state.copyWith(
+      emitNewState(state.copyWith(
         nextPage: 1, total: 0,
         listTutors: initialLoadMoreAbleList,
         filters: newFilters,
         sortValue: newSortValue,
       ));
     } else if (newSortValue != state.sortValue) {
-      emit(state.copyWith(
+      emitNewState(state.copyWith(
         listTutors: sortList([...state.listTutors], sortValue: newSortValue),
         sortValue: newSortValue,
       ));
@@ -302,7 +295,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
       tutorsScrollController?.jumpTo(0);
     }
 
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       nextPage: 1, total: 0,
       listTutors: initialLoadMoreAbleList,
       filters: newFilters,
@@ -337,7 +330,7 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
           newList[index] = newList[index]?.copyWith(
             isfavoritetutor: !isNowFavorite ? '0' : '1',
           );
-          emit(state.copyWith(
+          emitNewState(state.copyWith(
             listTutors: sortList(newList, sortValue: state.sortValue),
           ));
         }

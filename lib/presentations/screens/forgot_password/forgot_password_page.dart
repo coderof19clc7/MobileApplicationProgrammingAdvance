@@ -84,6 +84,9 @@ class ForgotPasswordPage extends StatelessWidget {
                         color: context.theme.colorScheme.onInverseSurface,
                         size: Dimens.getProportionalWidth(context, 24),
                       ),
+                      onChanged: (value) {
+                        contextCubit.read<ForgotPasswordCubit>().emailOnChanged(value);
+                      },
                     ),
                     SizedBox(height: Dimens.getScreenHeight(context) * 0.0355),
                     PrimaryFillButton(

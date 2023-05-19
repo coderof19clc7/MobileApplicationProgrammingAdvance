@@ -337,6 +337,7 @@
   "yourApiKey": "Your api key",
   "activeKey": "Active key",
   "usePublicApiKey": "Use public api key",
+  "usingPublicApiKey": "Using public api key",
   "autoPlayNewMessage": "Auto play new message",
   "on": "On",
   "off": "Off",

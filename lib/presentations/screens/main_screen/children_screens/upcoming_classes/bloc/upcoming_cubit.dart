@@ -6,6 +6,7 @@ import 'package:one_one_learn/core/models/requests/schedule_and_booking/booking_
 import 'package:one_one_learn/core/models/requests/schedule_and_booking/cancel_schedule_request.dart';
 import 'package:one_one_learn/core/models/requests/schedule_and_booking/edit_request_request.dart';
 import 'package:one_one_learn/core/models/responses/base_response.dart';
+import 'package:one_one_learn/core/models/responses/call/call_total_response.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booked_classes_response.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/booking_info.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/edit_request_response.dart';
@@ -56,12 +57,20 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
   }
 
   Future<void> getTotalLearningTime() async {
-    emit(state.copyWith(isLoadingTotalCall: true));
-    final totalLearningTime = await callRepository.getTotalCallMinute();
-    if (kDebugMode) {
-      print('totalLearningTime: $totalLearningTime');
+    emitNewState(state.copyWith(isLoadingTotalCall: true));
+    final callTotalResponse = await fetchApi<CallTotalResponse>(
+      callRepository.getTotalCallMinute,
+      showLoading: false,
+    );
+
+    int? newTotal;
+    if (callTotalResponse != null) {
+      if (kDebugMode) {
+        print('callTotalResponse: $callTotalResponse');
+      }
+      newTotal = callTotalResponse.total ?? 0;
     }
-    emit(state.copyWith(isLoadingTotalCall: false, totalCall: totalLearningTime));
+    emitNewState(state.copyWith(isLoadingTotalCall: false, totalCall: newTotal));
   }
 
   bool canListBookingInfoLoadMore() {
@@ -127,7 +136,7 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
   }
 
   Future<void> getListStudentBookedClasses({bool reloadAllCurrentList = false}) async {
-    emit(state.copyWith(isLoadingMore: true));
+    emitNewState(state.copyWith(isLoadingMore: true));
 
     // search list by the filters amd page number
     if (kDebugMode) {
@@ -208,24 +217,24 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
           }
         }
 
-        emit(state.copyWith(
+        emitNewState(state.copyWith(
           nextPage: nextPage,
           total: bookedClassesResponse.data?.count?.toInt() ?? 0,
           currentTotal: currentTotal,
           groupedBookingInfoList: finalNewGroupedList,
         ));
       } else {
-        emit(state.copyWith(
+        emitNewState(state.copyWith(
           groupedBookingInfoList: [...getRealCurrentList()],
         ));
       }
     } else {
-      emit(state.copyWith(
+      emitNewState(state.copyWith(
         groupedBookingInfoList: [...getRealCurrentList()],
       ));
     }
 
-    emit(state.copyWith(isLoadingMore: false));
+    emitNewState(state.copyWith(isLoadingMore: false));
   }
 
   Future<void> editStudentRequestForBookingInfo(String bookingInfoId, String newNote) async {
@@ -270,7 +279,7 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
     final currentGroupedItem = currentList[index];
     if (currentGroupedItem != null) {
       currentList[index] = currentGroupedItem.copyWith(isExpanded: !currentGroupedItem.isExpanded);
-      emit(state.copyWith(groupedBookingInfoList: currentList));
+      emitNewState(state.copyWith(groupedBookingInfoList: currentList));
     }
   }
 

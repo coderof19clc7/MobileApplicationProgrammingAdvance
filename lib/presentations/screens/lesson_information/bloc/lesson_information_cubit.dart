@@ -4,6 +4,7 @@ import 'package:one_one_learn/configs/constants/api_constants.dart';
 import 'package:one_one_learn/core/blocs/widget_bloc/widget_cubit.dart';
 import 'package:one_one_learn/core/models/requests/report/save_report_lesson_request.dart';
 import 'package:one_one_learn/core/models/requests/user/user_feedback_tutor_request.dart';
+import 'package:one_one_learn/core/models/responses/feedback/feed_back.dart';
 import 'package:one_one_learn/core/models/responses/report/save_report_lesson_resposne.dart';
 import 'package:one_one_learn/core/models/responses/schedule_and_booking/grouped_booking_info.dart';
 import 'package:one_one_learn/core/models/responses/user/user_feedback_tutor_response.dart';
@@ -56,15 +57,25 @@ class LessonInformationCubit extends WidgetCubit<LessonInformationState> {
       showLoading: false,
     );
 
+    var shouldShowSuccessToast = false;
     if (userFeedbackTutorResponse != null && userFeedbackTutorResponse.statusCode == ApiStatusCode.success) {
-      userFeedbackTutorResponse.message?.let(showSuccessToast);
+      shouldShowSuccessToast = true;
       if (userFeedbackTutorResponse.data != null) {
         final listBookingInfo = state.groupedBookingInfo.bookingInfoList;
         if (listBookingInfo?.first != null) {
           listBookingInfo?.first?.feedbacks?.add(userFeedbackTutorResponse.data!);
+          final length = listBookingInfo?.length ?? 0;
+          final newFeedbackList = <FeedBack>[];
+          for (var i = 0; i < length; i++) {
+            final info = listBookingInfo?[i];
+            if (info?.feedbacks != null) {
+              newFeedbackList.addAll([...info?.feedbacks ?? <FeedBack>[]]);
+            }
+          }
           emitNewState(state.copyWith(
             groupedBookingInfo: state.groupedBookingInfo.copyWith(
               bookingInfoList: listBookingInfo,
+              feedbackList: newFeedbackList,
             ),
           ));
         }
@@ -72,5 +83,9 @@ class LessonInformationCubit extends WidgetCubit<LessonInformationState> {
     }
 
     await onFinishFeedback?.call();
+
+    if (shouldShowSuccessToast) {
+      userFeedbackTutorResponse?.message?.let(showSuccessToast);
+    }
   }
 }

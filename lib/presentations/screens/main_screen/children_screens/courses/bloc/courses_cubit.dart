@@ -101,26 +101,22 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
           newPage += 1;
         }
 
-        emit(state.copyWith(
+        emitNewState(state.copyWith(
           nextPage: newPage,
           total: coursesListResponse.data?.count?.toInt() ?? 0,
           listCourses: [...finalNewListCourses],
         ));
       } else {
-        emit(state.copyWith(
+        emitNewState(state.copyWith(
           listCourses: [...getRealCurrentList()],
         ));
       }
     } else {
-      emit(state.copyWith(
+      emitNewState(state.copyWith(
         listCourses: [...getRealCurrentList()],
       ));
     }
 
-    // // turn off new list loading state no matter what
-    // emit(state.copyWith(
-    //   isRefreshing: false,
-    // ));
     changeLoadingState(isLoading: false);
   }
 
@@ -133,7 +129,7 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
       scrollController.jumpTo(0);
     }
 
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       coursesSearchText: qText,
       nextPage: 1, total: 0,
       listCourses: initialLoadMoreAbleList,
@@ -153,7 +149,7 @@ class CoursesCubit extends WidgetCubit<CoursesState> {
       scrollController.jumpTo(0);
     }
 
-    emit(state.copyWith(
+    emitNewState(state.copyWith(
       nextPage: 1, total: 0,
       listCourses: initialLoadMoreAbleList,
       listCategoriesId: newCategories,
