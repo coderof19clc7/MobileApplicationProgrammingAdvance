@@ -49,6 +49,20 @@ class AvatarWidget extends StatelessWidget {
             url: currentUrl,
             width: avaSize,
             height: avaSize,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                width: avaSize,
+                height: avaSize,
+                decoration: BoxDecoration(
+                  color: AppColors.grey,
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(
+                  Icons.error,
+                  size: avaSize / 3,
+                ),
+              );
+            }
           )
               : Image.file(
             File(path),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:one_one_learn/presentations/widgets/choice_chips/simple_list_fake_chips.dart';
@@ -114,15 +116,23 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
     }
 
     // re-render UI
-    setState(() {});
-    if (needClearAll) {
-      final listMenuSetStateFunction = data2MenuSetStateMap.values.toList();
-      for (final menuSetStateFunction in listMenuSetStateFunction) {
-        menuSetStateFunction(() {});
+    try {
+      setState(() {});
+      if (needClearAll) {
+        final listMenuSetStateFunction = data2MenuSetStateMap.values.toList();
+        for (final menuSetStateFunction in listMenuSetStateFunction) {
+          try {
+            menuSetStateFunction(() {});
+          } catch (e) {
+            break;
+          }
+        }
+      } else {
+        data2MenuSetStateMap[item]?.call(() {});
+        data2MenuSetStateMap[data2ListMapKeys.first]?.call(() {});
       }
-    } else {
-      data2MenuSetStateMap[item]?.call(() {});
-      data2MenuSetStateMap[data2ListMapKeys.first]?.call(() {});
+    } catch (e) {
+      log('Somethings wrong happens when trying to re-render UI', error: e);
     }
   }
 

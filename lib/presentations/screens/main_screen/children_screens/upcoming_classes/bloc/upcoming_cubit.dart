@@ -68,7 +68,7 @@ class UpcomingCubit extends WidgetCubit<UpcomingState> {
       if (kDebugMode) {
         print('callTotalResponse: $callTotalResponse');
       }
-      newTotal = callTotalResponse.total ?? 0;
+      newTotal = callTotalResponse.total;
     }
     emitNewState(state.copyWith(isLoadingTotalCall: false, totalCall: newTotal));
   }

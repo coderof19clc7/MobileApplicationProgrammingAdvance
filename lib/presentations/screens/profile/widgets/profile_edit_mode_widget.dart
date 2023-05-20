@@ -79,27 +79,31 @@ class ProfileEditModeWidget extends StatelessWidget {
                 TextFieldOutline(
                   onTap: () async {
                     UIHelper.hideKeyboard(context);
-                    final currentDoB = DateFormat(AppDateFormats.yyyy_MM_dd).parse(
-                      context.read<ProfileCubit>().dateOfBirthController.text,
-                    );
+                    var currentDoB = DateTime.now();
+                    try {
+                      currentDoB = DateFormat(AppDateFormats.yyyy_MM_dd).parse(
+                        context.read<ProfileCubit>().dateOfBirthController.text,
+                      );
+                    } catch (e) {
+                      currentDoB = DateTime.now();
+                    }
+                    final lastYear = (DateTime.now().year ~/ 100) * 100 + 100;
                     showDatePicker(
                       context: context,
                       initialDate: currentDoB,
                       firstDate: DateTime(1900),
-                      lastDate: DateTime(2100, 0, 0),
+                      lastDate: DateTime(lastYear),
                     ).then((newDoB) {
                       if (newDoB != null) {
-                        context.read<ProfileCubit>().dateOfBirthController.text =
-                        DateFormat(AppDateFormats.yyyy_MM_dd).format(newDoB);
+                        final newDoBText = DateFormat(AppDateFormats.yyyy_MM_dd).format(newDoB);
+                        context.read<ProfileCubit>().dateOfBirthController.text = newDoBText;
+                        context.read<ProfileCubit>().onAFieldChanged(
+                          newDoBText, 'dob', text: S.current.dateOfBirth,
+                        );
                       }
                     });
                   },
                   textController: context.read<ProfileCubit>().dateOfBirthController,
-                  onChanged: (value) {
-                    context.read<ProfileCubit>().onAFieldChanged(
-                      value, 'dob', text: S.current.dateOfBirth,
-                    );
-                  },
                   errorText: state.errorsMap['dob'],
                   readOnly: true,
                   rightWidget: Icon(
@@ -150,14 +154,14 @@ class ProfileEditModeWidget extends StatelessWidget {
                     );
                   },
                   onChanged: (value) {
-                    context.read<ProfileCubit>().onAFieldChanged(
-                      value ?? '', 'country', text: S.current.country,
-                    );
                     if (value == null || value == state.userInfo?.country) return;
                     context.read<ProfileCubit>().emitNewState(
                       state.copyWith(
                         userInfo: state.userInfo?.copyWith(country: value),
                       ),
+                    );
+                    context.read<ProfileCubit>().onAFieldChanged(
+                      value, 'country', text: S.current.country,
                     );
                   },
                   errorText: state.errorsMap['country'],
@@ -222,14 +226,14 @@ class ProfileEditModeWidget extends StatelessWidget {
                     );
                   },
                   onChanged: (value) {
-                    context.read<ProfileCubit>().onAFieldChanged(
-                      value ?? '', 'level', text: S.current.skillLevel,
-                    );
                     if (value == null || value == state.userInfo?.level) return;
                     context.read<ProfileCubit>().emitNewState(
                       state.copyWith(
                         userInfo: state.userInfo?.copyWith(level: value),
-                      )
+                      ),
+                    );
+                    context.read<ProfileCubit>().onAFieldChanged(
+                      value , 'level', text: S.current.skillLevel,
                     );
                   },
                   errorText: state.errorsMap['level'],

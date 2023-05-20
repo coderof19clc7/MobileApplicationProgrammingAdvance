@@ -64,7 +64,12 @@ class TutorsPage extends StatelessWidget {
                       upcomingDateFormat: AppDateFormats.eeeMMMdyyyy,
                       upcomingTimeFormat: AppDateFormats.tHHmm,
                       onClassSessionEnded: () async {
-                        contextUpcoming.read<UpcomingCubit>().refreshUpcomingScreen();
+                        Future.delayed(
+                          const Duration(seconds: 2),
+                          () async {
+                            contextUpcoming.read<UpcomingCubit>().refreshUpcomingScreen();
+                          },
+                        );
                       },
                     )
                         : Text(
