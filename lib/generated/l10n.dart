@@ -370,11 +370,11 @@ class S {
     );
   }
 
-  /// `Are you sure you want to cancel this class?`
-  String get confirmCancelClass {
+  /// `Confirm cancel`
+  String get confirmCancel {
     return Intl.message(
-      'Are you sure you want to cancel this class?',
-      name: 'confirmCancelClass',
+      'Confirm cancel',
+      name: 'confirmCancel',
       desc: '',
       args: [],
     );

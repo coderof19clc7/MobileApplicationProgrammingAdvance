@@ -49,7 +49,7 @@
   "collapse": "Collapse",
   "cancel": "Cancel",
   "edit": "Edit",
-  "confirmCancelClass": "Are you sure you want to cancel this class?",
+  "confirmCancel": "Confirm cancel",
   "yes": "Yes",
   "no": "No",
   "searchHintCourse": "Find a course",

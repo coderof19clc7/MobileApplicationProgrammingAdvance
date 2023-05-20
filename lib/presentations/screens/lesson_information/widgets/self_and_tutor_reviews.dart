@@ -141,10 +141,10 @@ class _SelfAndTutorReviewsState extends State<SelfAndTutorReviews> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        buildHeader(isNoSelfReview ? S.current.haveNotReviewed : S.current.tutorReview),
+        buildHeader(isNoSelfReview ? S.current.yourReview : S.current.tutorReview),
         const EmptyProportionalSpace(height: 7),
         Text(
-          S.current.isNotReviewed,
+          isNoSelfReview ? S.current.haveNotReviewed : S.current.isNotReviewed,
           style: Dimens.getProportionalFont(
             context, context.theme.textTheme.bodyMedium,
           ).copyWith(

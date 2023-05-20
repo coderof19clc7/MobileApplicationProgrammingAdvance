@@ -24,11 +24,12 @@ class RemoveReportRatingScheduleDialog extends StatefulWidget {
     required this.tutorName,
     required this.dateTimeString,
     required this.dropDownData,
+    required this.submitBtnText,
     this.onEditButtonTap,
   });
 
   final bool isRatingDialog;
-  final String dropdownTitle, tutorAva, tutorName, dateTimeString;
+  final String dropdownTitle, tutorAva, tutorName, dateTimeString, submitBtnText;
   final Map<int, String> dropDownData;
   final Future<void> Function(int reasonId, String note)? onEditButtonTap;
 
@@ -169,7 +170,7 @@ class _RemoveReportRatingScheduleDialogState extends State<RemoveReportRatingSch
                     ),
                     const EmptyProportionalSpace(width: 7),
                     Expanded(
-                      flex: 2,
+                      flex: widget.submitBtnText == S.current.confirmCancel ? 3 : 2,
                       child: PrimaryFillButton(
                         onTap: (isExecutingCallback || mainValue == null)
                             ? null
@@ -194,7 +195,7 @@ class _RemoveReportRatingScheduleDialogState extends State<RemoveReportRatingSch
                           color: context.theme.colorScheme.onPrimary,
                         )
                             : Text(
-                          S.current.report,
+                          widget.submitBtnText,
                           style: Dimens.getProportionalFont(
                             context, context.theme.textTheme.bodyMedium,
                           ).copyWith(

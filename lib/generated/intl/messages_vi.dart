@@ -92,8 +92,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chat": MessageLookupByLibrary.simpleMessage("Nhắn tin"),
         "classSession": MessageLookupByLibrary.simpleMessage("Buổi học"),
         "collapse": MessageLookupByLibrary.simpleMessage("Thu gọn"),
-        "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
-            "Bạn có chắc chắn muốn hủy lớp này?"),
+        "confirmCancel": MessageLookupByLibrary.simpleMessage("Xác nhận hủy"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Xác nhận mật khẩu"),
         "confirmPasswordNotMatch": MessageLookupByLibrary.simpleMessage(

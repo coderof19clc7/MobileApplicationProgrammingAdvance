@@ -31,7 +31,7 @@
   "collapse": "Thu gọn",
   "cancel": "Hủy",
   "edit": "Chỉnh sửa",
-  "confirmCancelClass": "Bạn có chắc chắn muốn hủy lớp này?",
+  "confirmCancel": "Xác nhận hủy",
   "yes": "Có",
   "no": "Không",
   "searchHintCourse": "Tìm khóa học",

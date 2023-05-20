@@ -124,7 +124,7 @@ class _TutorsCoursesListFilterBottomSheetState extends State<TutorsCoursesListFi
           try {
             menuSetStateFunction(() {});
           } catch (e) {
-            break;
+            continue;
           }
         }
       } else {

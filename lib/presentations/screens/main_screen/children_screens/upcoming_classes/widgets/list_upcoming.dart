@@ -66,6 +66,7 @@ class ListUpcoming extends StatelessWidget {
           tutorName: tutorInfo?.name ?? '',
           dateTimeString: dateSession,
           dropDownData: MapConstants.removeScheduleReasons,
+          submitBtnText: S.current.confirmCancel,
           onEditButtonTap: (reasonId, note) async {
             await Future.delayed(const Duration(seconds: 1), () async {
               await contextCubit.read<UpcomingCubit>().cancelScheduleDetail(

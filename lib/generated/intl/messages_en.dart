@@ -89,8 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "chat": MessageLookupByLibrary.simpleMessage("Chat"),
         "classSession": MessageLookupByLibrary.simpleMessage("Session"),
         "collapse": MessageLookupByLibrary.simpleMessage("Collapse"),
-        "confirmCancelClass": MessageLookupByLibrary.simpleMessage(
-            "Are you sure you want to cancel this class?"),
+        "confirmCancel": MessageLookupByLibrary.simpleMessage("Confirm cancel"),
         "confirmPassword":
             MessageLookupByLibrary.simpleMessage("Confirm Password"),
         "confirmPasswordNotMatch": MessageLookupByLibrary.simpleMessage(

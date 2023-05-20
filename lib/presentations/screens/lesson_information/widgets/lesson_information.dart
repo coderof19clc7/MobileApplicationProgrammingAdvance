@@ -53,6 +53,7 @@ class LessonInformation extends StatelessWidget {
           tutorName: tutorInfo?.name ?? '',
           dateTimeString: '$dateSession, $startTimeString - $endTimeString',
           dropDownData: MapConstants.reportScheduleReasons,
+          submitBtnText: isRating ? S.current.review : S.current.report,
           onEditButtonTap: (value, note) async {
             await Future.delayed(const Duration(seconds: 1), () async {
               await onEditButtonTap?.call(bookingInfo?.id ?? '', value, note);
