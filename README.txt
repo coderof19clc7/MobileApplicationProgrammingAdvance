@@ -12,5 +12,3 @@ This repository is used for learning at course Moble Application Programming Adv
 ### Milestone 3
 
 - [Video Demo](https://youtu.be/uO5K7HtHcU8)
-
-...
