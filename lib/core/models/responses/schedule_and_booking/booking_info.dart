@@ -19,7 +19,7 @@ class BookingInfo {
   final String? updatedAt;
   final String? recordUrl;
   final int? cancelReasonId;
-  final String? lessonPlanId;
+  final int? lessonPlanId;
   final String? cancelNote;
   final String? calendarId;
   final bool? isDeleted;
@@ -74,7 +74,7 @@ class BookingInfo {
       updatedAt: mapJson['updatedAt'] as String?,
       recordUrl: mapJson['recordUrl'] as String?,
       cancelReasonId: mapJson['cancelReasonId'] as int?,
-      lessonPlanId: mapJson['lessonPlanId'] as String?,
+      lessonPlanId: mapJson['lessonPlanId'] as int?,
       isDeleted: mapJson['isDeleted'] as bool?,
       scheduleDetailInfo: mapJson['scheduleDetailInfo'] != null
           ? ScheduleDetail.fromJson(mapJson['scheduleDetailInfo'])
@@ -224,7 +224,7 @@ class BookingInfo {
     String? recordUrl,
     int? cancelReasonId,
     String? cancelNote,
-    String? lessonPlanId,
+    int? lessonPlanId,
     String? calendarId,
     bool? isDeleted,
     ScheduleDetail? scheduleDetailInfo,
@@ -305,7 +305,7 @@ class BookingInfo {
       recordUrl: map['recordUrl'] as String?,
       cancelReasonId: map['cancelReasonId'] as int?,
       cancelNote: map['cancelNote'] as String?,
-      lessonPlanId: map['lessonPlanId'] as String?,
+      lessonPlanId: map['lessonPlanId'] as int?,
       calendarId: map['calendarId'] as String?,
       isDeleted: map['isDeleted'] as bool?,
       scheduleDetailInfo: map['scheduleDetailInfo'] != null

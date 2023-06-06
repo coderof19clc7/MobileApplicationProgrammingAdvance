@@ -103,10 +103,10 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
         }
 
         // sort by favorite status
-        if (a.isfavoritetutor == '1' && b.isfavoritetutor != '1') {
+        if (a.isFavoriteTutor == true && b.isFavoriteTutor != true) {
           return -1;
         }
-        if (a.isfavoritetutor != '1' && b.isfavoritetutor == '1') {
+        if (a.isFavoriteTutor != true && b.isFavoriteTutor == true) {
           return 1;
         }
 
@@ -295,8 +295,8 @@ class TutorsCubit extends WidgetCubit<TutorsState> {
           await searchListTutors(reloadAllCurrentList: true);
         } else {
           final newList = [...state.listTutors];
-          newList[index] = newList[index]?.copyWith(
-            isfavoritetutor: !isNowFavorite ? '0' : '1',
+          newList[trueIndex] = newList[trueIndex]?.copyWith(
+            isFavoriteTutor: isNowFavorite,
           );
           emitNewState(state.copyWith(
             listTutors: sortList(newList, sortValue: state.sortValue),

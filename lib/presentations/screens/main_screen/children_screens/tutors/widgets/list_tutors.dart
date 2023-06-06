@@ -84,7 +84,7 @@ class ListTutors extends StatelessWidget {
                 rating: item.rating?.toDouble() ?? 0,
                 description: item.bio ?? '',
                 categories: categories,
-                isFavorite:  item.isfavoritetutor == '1',
+                isFavorite:  item.isFavoriteTutor ?? false,
                 onFavoriteIconTap: () {
                   context.read<TutorsCubit>().onTutorFavouriteStatusChanged(
                     item.userId ?? '', index: index,

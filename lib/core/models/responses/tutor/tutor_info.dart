@@ -50,7 +50,7 @@ class TutorInfo {
     this.isNative,
     this.User,
     this.schedulestimes,
-    this.isfavoritetutor,
+    this.isFavoriteTutor,
     this.isFavorite,
     this.isOnline,
     this.price,
@@ -107,7 +107,7 @@ class TutorInfo {
       isNative: mapJson['isNative'],
       User: mapJson['User'] != null ? UserInfo.fromJson(mapJson['User']) : null,
       schedulestimes: mapJson['schedulestimes']as String?,
-      isfavoritetutor: mapJson['isfavoritetutor'] as String?,
+      isFavoriteTutor: mapJson['isFavoriteTutor'] as bool?,
       isFavorite: mapJson['isFavorite'] as bool?,
       isOnline: mapJson['isOnline'] as bool?,
       price: mapJson['price'] as num?,
@@ -160,7 +160,7 @@ class TutorInfo {
   final dynamic isNative;
   final UserInfo? User;
   final String? schedulestimes;
-  final String? isfavoritetutor;
+  final bool? isFavoriteTutor;
   final bool? isFavorite;
   final bool? isOnline;
   final num? price;
@@ -213,7 +213,7 @@ class TutorInfo {
     map['isNative'] = isNative;
     map['User'] = User?.toJson();
     map['schedulestimes'] = schedulestimes;
-    map['isfavoritetutor'] = isfavoritetutor;
+    map['isFavoriteTutor'] = isFavoriteTutor;
     map['isFavorite'] = isFavorite;
     map['isOnline'] = isOnline;
     map['price'] = price;
@@ -271,7 +271,7 @@ class TutorInfo {
           isNative == other.isNative &&
           User == other.User &&
           schedulestimes == other.schedulestimes &&
-          isfavoritetutor == other.isfavoritetutor &&
+          isFavoriteTutor == other.isFavoriteTutor &&
           isFavorite == other.isFavorite &&
           isOnline == other.isOnline &&
           price == other.price &&
@@ -324,7 +324,7 @@ class TutorInfo {
       isNative.hashCode ^
       User.hashCode ^
       schedulestimes.hashCode ^
-      isfavoritetutor.hashCode ^
+      isFavoriteTutor.hashCode ^
       isFavorite.hashCode ^
       isOnline.hashCode ^
       price.hashCode ^
@@ -378,7 +378,7 @@ class TutorInfo {
         ' isNative: $isNative,'
         ' User: $User,'
         ' schedulestimes: $schedulestimes,'
-        ' isfavoritetutor: $isfavoritetutor,'
+        ' isFavoriteTutor: $isFavoriteTutor,'
         ' isFavorite: $isFavorite,'
         ' isOnline: $isOnline,'
         ' price: $price,'
@@ -432,7 +432,7 @@ class TutorInfo {
     dynamic isNative,
     UserInfo? User,
     String? schedulestimes,
-    String? isfavoritetutor,
+    bool? isFavoriteTutor,
     bool? isFavorite,
     bool? isOnline,
     num? price,
@@ -484,7 +484,7 @@ class TutorInfo {
       isNative: isNative ?? this.isNative,
       User: User ?? this.User,
       schedulestimes: schedulestimes ?? this.schedulestimes,
-      isfavoritetutor: isfavoritetutor ?? this.isfavoritetutor,
+      isFavoriteTutor: isFavoriteTutor ?? this.isFavoriteTutor,
       isFavorite: isFavorite ?? this.isFavorite,
       isOnline: isOnline ?? this.isOnline,
       price: price ?? this.price,
@@ -539,7 +539,7 @@ class TutorInfo {
       'isNative': isNative,
       'User': User?.toMap(),
       'schedulestimes': schedulestimes,
-      'isfavoritetutor': isfavoritetutor,
+      'isFavoriteTutor': isFavoriteTutor,
       'isFavorite': isFavorite,
       'isOnline': isOnline,
       'price': price,
@@ -599,7 +599,7 @@ class TutorInfo {
           ? UserInfo.fromMap(map['User'] as Map<String, dynamic>)
           : null,
       schedulestimes: map['schedulestimes'] as String?,
-      isfavoritetutor: map['isfavoritetutor'] as String?,
+      isFavoriteTutor: map['isFavoriteTutor'] as bool?,
       isFavorite: map['isFavorite'] as bool?,
       isOnline: map['isOnline'] as bool?,
       price: map['price'] as num?,
